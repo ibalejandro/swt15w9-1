@@ -1,7 +1,71 @@
-= Aufgabenstellung (grob)
+= Aufgabenstellung
 
 == Ursprünglicher Aufgabentext
 
 Im Rahmen der aktuellen Flüchtlingssituation kann man sich Gedanken machen, wie man diesen vielen Menschen helfen könnte, welche mit rein gar nichts außer den Sachen am eigenen Leibe bei uns ankommen. Wir leben in einer Überflussgesellschaft und ein jeder hat viele Sachen und Dinge, die leicht zu entbehren sind, da diese schon seit Ewigkeiten im Keller oder Boden stehen, welche jedoch den Menschen hier ein menschenwürdiges Leben ermöglichen würden - angefangen von Anzieh- und Spielsachen für Kinder bis hin zu alten Fahrrädern zur Fortbewegung etc.
 Natürlich gibt es bereits viele Hilfsorganisationen, welche Hilfsgüter/Sachspenden sammeln und anschließend verteilen, die man hierfür in Anspruch nehmen kann, allerdings wollen auch viele Menschen einfach direkt selbst helfen, entweder einfach nur in dem man die Hilfsgüter bereitstellt/anbietet oder aber vielleicht auch durch Freizeitangebote um Integrationsmöglichkeiten zu schaffen.
 Hierbei scheitert es jedoch oft an den Fremdsprachenkenntnisse der Beteiligten und an einer geeigneten Plattform, um überhaupt erst in Kontakt treten zu können. Was uns daher vorschwebt ist eine Art eBay-Kleinanzeigen Portal allerdings multi-lingual - ein Art Welcome- Refugee - Portal, wo Menschen mittels einer Textbaustein-dialog-prinzip und mit Unterstützung von Google Translate in der eigenen Landsprache mit Menschen jeglicher Nationen einfach und unkompliziert in Kontakt treten können, damit so einfach Dinge schnell und unkompliziert direkt ohne Umwege über Sammellager von DRK etc. den Weg zu Bedürftigen finden können. Die Plattform soll aber nicht nur ausschließlich dem Austausch von Gegenständen dienen, sondern auch die Möglichkeit bieten, Angebote zur schnellen Integration der Flüchtlingen bei uns anzubieten z.B. durch das Annoncieren von Deutschkursen etc.
+
+
+== Zusätzliche Überlegungen
+
+=== Startseite:
+* Logo: TBD
+* E-Mail & Kennwort für Login
+* Neuanmeldung mit E-Mail Bestätigung Button
+* Kennwort vergessen via E-Mail Kennwort-reset-link mit Verfallsdatum Button
+
+=== Neuanmeldung (Schritt)
+* Vorname, Name
+* E-Mail
+* Derzeitige Unterkunft =
++
+Flüchtling:: Stadtteil/Plz
+Helfender:: Adresse
+* Herkunft
+* Sprache (Mehrfachauswahl + Präferenz/Ranking)
+* ReCaptcha2 für Botdetection
+
+=== Startseite (nach Login):
+
+* Hilfsgüter/Goods Button
+* Angebote/Activities Button
+* Account management
+
+=== Goods (ähnlich wie bei eBay-Kleinanzeigen)
+* Suchfeld + Kategorie Dropdown
+* Umkreis von [in km]
+* Angebot einstellen Button
+
+=== Anzeige (Goods & Activities)
+* Photo (nur bei Goods zweckmäßig)
+* Anbieter, Plz + Ort
+* Einstellungsdatum
+* Attributelist / Tags zu Größe etc.
+** Logisch geordnet: z.B Größen (S, XS, XXL oder “für Kinder geeignet”), Farben (grün etc.), Mengen etc.
+** Vorgegeben (drop-down oder auto-complete-select) mit passenden Übersetzungen.
+* Freitext beschreibung
+* Kontaktaufnahme Button
+
+* Anzeigen löschen/herausnehmen [durch Einsteller + Admin]
+* Anzeigen automatisch löschen/herausnehmen nach optionalen Verfallsdatum
+
+=== Kontaktaufnahme/Dialog
+* Icons/Text eigene Sprache und vom Gegenüber
+* Textbaustein-basierend:
+** Textbausteine logisch nach Art der Konversation geordnet z.B. “Begrüßung”, oder “Termin zur Abholung ausmachen” enthält Textbausteine wie “Ich würde gern den Gegenstand am XX” abholen mit XX verschiedenen Option wie Tag + Uhrzeit + Treffpunkt (open streetmap pop-out?).
+** Alternativ auch Freitext eingabe mit Möglichkeit der Übersetzung durch GoogleTranslate (integriert)
+* Anzeige von vorherigen Gesprächsverlauf ähnlich wie bei Whatsapp u.a. etc.
+
+
+=== Technologien:
+* Bootstrap, Foundation o.ä. Framework für Desktop und Mobile Unterstützung
+* Thymleaf für Templates
+* Spring, Spring+Data mit MySQL Backend, Spring+Security für verschiedene Rollen
+* EclipseLink JPA
+* Lombok
+* ReCaptcha2
+* Log4J
+* Java-Class basierende Konfiguration
+* Maven
+* Git/GitHub
