@@ -1,0 +1,20 @@
+= Protokoll Gruppe 09
+
+__Treffen am 21.10.2015__
+
+__Schriftführer: Friederike Kitzing__
+
+__Nächstes Treffen:__ 22.10.2015
+
+__Teilnehmer: Mario Henze, Kilian Heret, Friederike Kitzing, Ferdinand Lehmann, Lennart Schmidt, Alejandro Sánchez Aristizábal
+__
+
+== Organisatorisches
+* Verteilen der Protokolle; verantwortlich für Protokoll Dienstag, 13.10. ist Alejandro, für Donnerstag 15.10. Mario
+* Wahl von Mario als Scrumleader
+
+
+
+== Aktueller Stand
+* Erstellen der Meilensteine beendet, bis morgen fügt jeder zu einem Meilenstein die Issues hinzu
+* Vorbereiten CR-Karten, OOA und des ersten Meilensteins
