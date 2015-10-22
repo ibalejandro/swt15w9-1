@@ -2,11 +2,11 @@
 
 == Projektname
 
-__Version:__    *0.1*
+__Version:__    *0.2*
 
 __Status:__     *In Arbeit*
 
-__Stand:__      *21.10.2015*
+__Stand:__      *22.10.2015*
 
 == Zusammenfassung
 Eine kurze Beschreibung des Dokuments. Wenige Absätze.
@@ -54,10 +54,78 @@ Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem ein
 == Anforderungen
 
 === Muss-Kriterien
-Was das zu erstellende Programm auf alle Fälle leisten muss.
+
+==== <<neuanmeldung,Nutzermanagement>>
+
+* Erstellen
+* Löschen
+* Modifizieren
+** User sich selbst
+** Admin role alle
+
+* Rollen
++
+Mindestens User und Admin
+
+==== Kategorien
+
+* <<anzeige,Einteilung>> / Tagging der Güter & Activities
+* Vordefinierte Liste an Kategorien
+
+==== <<goods,Item Management>> (Goods & Services)
+
+User mit Zugriff auf eigene + Admin auf alle
+
+* Erstellen
+* Löschen
+* Bearbeiten
+
+==== Dialoge
+
+* Tracking von Dialog Fortschritt
+* Dialogbausteine
+* Priorisierung (Antworten auf zuletzt gewählte Bausteine zuerst)
+* Dynamische Verknüpfungen der Bausteine (Mit verschiedenen entry points je nach Kontext)
+* Modifikation via JSON upload (nicht zwingend notwendig, wenn per GUI implementiert, könnte aber für die GUI das backend sein)
+
+==== Struktur
+
+* Goods
+** Übersicht
+** Suche
+** Anzeige
+*** Foto hochladen
+*** <<attributliste,Vordefinierte Attributliste>>
+* Activities
+** Übersicht
+** Suche
+** Anzeige
+* Mehrsprachiges interface
 
 === Kann-Kriterien
-Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
+
+==== Kategorien
+
+* Erstellen neuer Kategorien
+* Löschen
+* Bearbeiten
+
+==== Dialog Management
+
+* Neue Satzfragmente erstellen (GUI)
+* Satzfragmente bearbeiten (GUI)
+* Vorschläge und Zusammenhänge modifizieren (GUI)
+
+==== Dialog
+
+* Preference based sorting
+* Tagging und Kategorisierung
+
+==== Struktur
+* Activities
+** Auflösung/Schließen von activity nach Datum
+** Periodische Wiederholung
+* Editierbare Übersetzung des Interfaces
 
 == GUI Prototyp
 
@@ -72,6 +140,7 @@ Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur La
 * Neuanmeldung mit E-Mail Bestätigung Button
 * Kennwort vergessen via E-Mail Kennwort-reset-link mit Verfallsdatum Button
 
+[[neuanmeldung]]
 ==== Neuanmeldung (Schritt)
 * Vorname, Name
 * E-Mail
@@ -89,15 +158,19 @@ Helfender:: Adresse
 * Angebote/Activities Button
 * Account management
 
+[[goods]]
 ==== Goods (ähnlich wie bei eBay-Kleinanzeigen)
 * Suchfeld + Kategorie Dropdown
 * Umkreis von [in km]
 * Angebot einstellen Button
 
+[[anzeige]]
 ==== Anzeige (Goods & Activities)
 * Photo (nur bei Goods zweckmäßig)
 * Anbieter, Plz + Ort
 * Einstellungsdatum
+
+[[attributliste]]
 * Attributelist / Tags zu Größe etc.
 ** Logisch geordnet: z.B Größen (S, XS, XXL oder “für Kinder geeignet”), Farben (grün etc.), Mengen etc.
 ** Vorgegeben (drop-down oder auto-complete-select) mit passenden Übersetzungen.
