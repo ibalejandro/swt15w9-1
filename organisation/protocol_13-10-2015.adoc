@@ -1,0 +1,49 @@
+= Protokoll Gruppe 09
+__Treffen am 13.10.2015__
+
+__Schriftführer:__ Alejandro Sánchez Aristizábal
+
+__Nächstes Treffen:__ 15.10.2015
+
+.__Teilnehmer:__
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* Kennenlernen des Teams mit dem Tutor
+* Vorstellung des Projektes durch den Tutor
+* Kommentare zu Git, GitHub, Gitter und Java-Tooling
+* Erläuterung der Spring und SalesPoint Material
+* Absprache der wöchentlichen Termine für Pflichtkonsultation und Gruppentreffen
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|N/A   |N/A     |N/A    |N/A
+|===
+
+
+== Aktueller Stand
+* organisatorische Aspekte
+* kein Sourcecode
+
+== Planung des nächsten Sprints
+* Festlegung der Termine für Pflichtkonsultation und Gruppentreffen
+* Einarbeitung in Git, GitHub und Gitter
+* Gemeinsame Analyse der Aufgabenstellung im Team
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|N/A   |N/A   |N/A          |N/A              |N/A
+|===
