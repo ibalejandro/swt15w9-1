@@ -120,6 +120,7 @@ User mit Zugriff auf eigene + Admin auf alle
 * Goods
 ** Übersicht
 ** Suche
+** Abhängig von der Distanz (erwünschte Maximaldistanz sollte einstellbar sein)
 ** Anzeige
 *** Foto hochladen
 *** <<attributliste,Vordefinierte Attributliste>>
@@ -147,9 +148,23 @@ User mit Zugriff auf eigene + Admin auf alle
 
 * Preference based sorting
 * Tagging und Kategorisierung
+* Chatsystem
 
 ==== Struktur
+
 * Activities
 ** Auflösung/Schließen von activity nach Datum
 ** Periodische Wiederholung
 * Editierbare Übersetzung des Interfaces
+* "Suche folgenden Gegenstand" (Gegenteil des Angebot Inserierens)
+
+==== Security
+
+* Feedback zu Nutzern
+** Report-System (für unerwünschtes Verhalten)
+*** Vulgarität
+*** Weiterverkauf für Geld
+** Bewertungs-System
+*** Hat der Käufer/Verkäufer gemacht was er versprochen hat?
+* Aktivitäten Statistik
+* Wegwerf E-Mail Addressen Blacklisten
