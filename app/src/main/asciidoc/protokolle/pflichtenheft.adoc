@@ -2,11 +2,11 @@
 
 == Projektname
 
-__Version:__    *0.2*
+__Version:__    *0.3*
 
 __Status:__     *In Arbeit*
 
-__Stand:__      *22.10.2015*
+__Stand:__      *28.10.2015*
 
 == Zusammenfassung
 Eine kurze Beschreibung des Dokuments. Wenige Absätze.
@@ -93,6 +93,7 @@ User mit Zugriff auf eigene + Admin auf alle
 * Goods
 ** Übersicht
 ** Suche
+** Abhängig von der Distanz (erwünschte Maximaldistanz sollte einstellbar sein)
 ** Anzeige
 *** Foto hochladen
 *** <<attributliste,Vordefinierte Attributliste>>
@@ -120,12 +121,25 @@ User mit Zugriff auf eigene + Admin auf alle
 
 * Preference based sorting
 * Tagging und Kategorisierung
+* Chatsystem
 
 ==== Struktur
 * Activities
 ** Auflösung/Schließen von activity nach Datum
 ** Periodische Wiederholung
 * Editierbare Übersetzung des Interfaces
+* "Suche folgenden Gegenstand" (Gegenteil des Angebot Inserierens)
+
+==== Security
+
+* Feedback zu Nutzern
+** Report-System (für unerwünschtes Verhalten)
+*** Vulgarität
+*** Weiterverkauf für Geld
+** Bewertungs-System
+*** Hat der Käufer/Verkäufer gemacht was er versprochen hat?
+* Aktivitäten Statistik
+* Wegwerf E-Mail Addressen Blacklisten
 
 == GUI Prototyp
 
