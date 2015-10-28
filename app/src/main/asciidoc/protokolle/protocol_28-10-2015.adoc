@@ -1,0 +1,31 @@
+﻿= Protokoll Gruppe 09
+
+__Treffen am 28.10.2015__
+
+__Schriftführer: Kilian Heret__
+
+__Nächstes Treffen:__ 29.10.2015
+
+__Teilnehmer: Mario Henze, Kilian Heret, Friederike Kitzing, Ferdinand Lehmann, Lennart Schmidt, Alejandro Sánchez Aristizábal
+__
+
+== Organisatorisches
+
+__Prototypen: __
+
+* Alejandro: Artikel speichern, zu Kategorien zuordnen
+* Kilian: Login, Chapta, Bestehtigungsmail
+* Mario: Textbausteine, Dialog
+* Ferdinand: Goods, Properties
+* Lennart: Google Translate
+* Friederike: User Account + Mail
+
+
+== Aktueller Stand
+* Erstellung des Analyseklassen Diagramm und Sequenzdiagramm
+* Erstellung der CRC-Karten
+
+
+== Fragen
+* Spring-Komponenten mit ins Analyseklassen-/Sequenzdiagramm?
+* Abgabe der Prototypen?
