@@ -14,7 +14,7 @@ __
 __Prototypen: __
 
 * Alejandro: Artikel speichern, zu Kategorien zuordnen
-* Kilian: Login, Chapta, Bestehtigungsmail
+* Kilian: Neuanmeldung, Chapta, Bestehtigungsmail
 * Mario: Textbausteine, Dialog
 * Ferdinand: Goods, Properties
 * Lennart: Google Translate
