@@ -1,5 +1,7 @@
+import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 
-public class CreateNewUser {
+@Controller
+public class CreateNewUser {	
 
 }
