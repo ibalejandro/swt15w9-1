@@ -35,11 +35,11 @@ public class CreateNewUser {
 	
 	@RequestMapping({"/reCAPTCHA-TEST"})
 	public String show_reCAPTCHA(){
-      return "reCAPTCHA-TEST";		
+      return "reCAPTCHA";		
 		
 	}
 	
-	@ResponseBody
+	//@ResponseBody
 	@RequestMapping(value = "/create_new_user_temp", method = RequestMethod.GET)
 	public String create_new_user_t(@RequestParam("mail")String aMail, @RequestParam("username")String aUsername, @RequestParam("password")String aPassword, @RequestParam("repassword")String aRePassword) 
 	{
@@ -50,14 +50,64 @@ public class CreateNewUser {
 		
 		if (aMail.isEmpty() ||  aUsername.isEmpty() || aPassword.isEmpty())
 		{
-			return "All fields must not be empty! <br/> <a href=\"./new_user_data\">Back</a> ";
+			return "errorpage0_empty";
 		}
 		
 		if (!aPassword.equals(aRePassword))
 		{
-			return "Passwords was not equal! <br/> <a href=\"./new_user_data\">Back</a> ";
+			return "errorpage0_wrongpw";
 		}
 		
-		return " <br/> <a href=\"./new_user_aboutuser1\">Next</a> ";
+		return "new_user_aboutuser1"; //"index";
+	}
+	
+	@RequestMapping(value = "/submit_userdata1", method = RequestMethod.GET)
+	public String submit_userdata1(@RequestParam("name")String aName, @RequestParam("firstname")String aFirstname, @RequestParam("Adresstyp")String aAdresstyp) 
+	{
+		System.out.println(aName);
+		System.out.println(aFirstname);
+		System.out.println(aAdresstyp);
+		
+		if (aName.isEmpty() ||  aFirstname.isEmpty() || aAdresstyp.isEmpty())
+		{
+			return "errorpage1_empty";
+		}
+		
+		if (!aAdresstyp.equals("Wohnung"))
+		{return "new_user_aboutuser2a";}
+		{return "new_user_aboutuser2b";}
+		
+	}
+	
+	@RequestMapping(value = "/submit_userdata2a", method = RequestMethod.GET)
+	public String submit_userdata2a(@RequestParam("mail")String aMail, @RequestParam("username")String aUsername, @RequestParam("password")String aPassword, @RequestParam("repassword")String aRePassword) 
+	{
+		System.out.println(aMail);
+		System.out.println(aUsername);
+		System.out.println(aPassword);
+		System.out.println(aRePassword);
+		
+		if (aMail.isEmpty() ||  aUsername.isEmpty() || aPassword.isEmpty())
+		{
+			return "errorpage2a_empty";
+		}
+		
+		return "user";
+	}
+	
+	@RequestMapping(value = "/submit_userdata2b", method = RequestMethod.GET)
+	public String submit_userdata2b(@RequestParam("mail")String aMail, @RequestParam("username")String aUsername, @RequestParam("password")String aPassword, @RequestParam("repassword")String aRePassword) 
+	{
+		System.out.println(aMail);
+		System.out.println(aUsername);
+		System.out.println(aPassword);
+		System.out.println(aRePassword);
+		
+		if (aMail.isEmpty() ||  aUsername.isEmpty() || aPassword.isEmpty())
+		{
+			return "errorpage2b_empty";
+		}
+		
+		return "user";
 	}
 }
