@@ -1,0 +1,67 @@
+= Protokoll Gruppe 09
+__Treffen am 29.10.2015__
+
+__Schriftführer:__ Alejandro Sánchez Aristizábal
+
+__Nächstes Treffen:__ 03.11.2015
+
+.__Teilnehmer:__
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* Retrospektive der Arbeit der letzten Woche
+* Feedback vom Tutor zu den Diagrammen
+* Kommentare zum GUI mithilfe Bootstrap bzw. Foundation
+* Retrospektive der Arbeit jedes Mitglieds
+* Kommentare zur Erstellung eigener Branchen für die Prototypen 
+* Diskussion über die Notwendigkeit der User-Unterteilung und der User-Adresse
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe                                   |Status         |Bemerkung
+|#2    |Anlegen der CRC-Karten                    |geschlossen    |N/A
+|#3    |ein kleiner Prototyp pro Teammitglied     |offen          |N/A
+|#4    |Kontextdiagramm, Top-Level-Architektur, 
+        Anwendungsfall-,Klassen-, Sequenzdiagramme|offen          |N/A
+|===
+
+
+== Aktueller Stand
+* CRC-Karten und Diagramme schon erstellt
+* Mit den Prototypen schon angefangen
+
+== Planung des nächsten Sprints
+* Verfeinerung der Diagrammen
+* Ergänzung des Pflichtenhefts
+* Einarbeitung in Thymeleaf und Spring-Roles
+* Abgabe der Prototypen
+
+* Einarbeitung in Git, GitHub und Gitter
+* Gemeinsame Analyse der Aufgabenstellung im Team
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel          |Beschreibung                   |Verantwortlicher |Status
+|#1    |GUI Prototyp   |kleiner GUI Prototyp erstellen |N/A              |offen
+|#3    |Sales-point    |ein kleiner Prototyp pro       |N/A              |offen
+        Prototyp        Teammitglied              
+|#4    |Analysemodell  |Kontextdiagramm,               |N/A              |offen
+                        Top-Level-Architektur, 
+                        Anwendungsfall-,Klassen-,
+                        Sequenzdiagramme 
+|#5    |Pflichtenheft  |N/A                            |N/A              |offen
+|#12   |Entwurfsent-   |N/A                            |N/A              |offen
+        scheidungen
+        treffen
+|===
