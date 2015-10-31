@@ -4,6 +4,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.apache.catalina.core.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 @Controller
 public class CreateNewUser {	
@@ -57,9 +64,28 @@ public class CreateNewUser {
 		{
 			return "errorpage0_wrongpw";
 		}
+				
+		// Mail senden:
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
+		
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo(aMail);
+		msg.setSubject("Aktivation of your Refugees-App Account");
+		msg.setText("Aktivierungslink");
+		
+		try{
+            mailSender.send(msg);
+        }
+        catch (MailException ex) {
+            // simply log it and go on...
+            System.err.println(ex.getMessage());
+        }
 		
 		return "new_user_aboutuser1"; //"index";
 	}
+	
+	
 	
 	@RequestMapping(value = "/submit_userdata1", method = RequestMethod.GET)
 	public String submit_userdata1(@RequestParam("name")String aName, @RequestParam("firstname")String aFirstname, @RequestParam("Adresstyp")String aAdresstyp) 

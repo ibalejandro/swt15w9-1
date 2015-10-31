@@ -63,12 +63,25 @@
 		</dependency>
 		
 		<dependency>
-	<groupId>net.sf.barcode4j</groupId>
-	<artifactId>barcode4j</artifactId>
-	<version>2.1</version>
-</dependency>
+	   <groupId>net.sf.barcode4j</groupId>
+     	<artifactId>barcode4j</artifactId>
+	   <version>2.1</version>
+       </dependency>
 
-		
+		<dependency>
+        <groupId>org.springframework.integration</groupId>
+        <artifactId>spring-integration-mail</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.1.1</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.mail</groupId>
+        <artifactId>mail</artifactId>
+        <version>1.4</version>
+    </dependency>
 		
 		<!-- Test dependencies -->
 
@@ -107,5 +120,20 @@
 			<url>http://www.st.inf.tu-dresden.de/SalesPoint/repository</url>
 		</repository>
 	</repositories>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="username" value="your-username"/>
+    <property name="password" value="your-password"/>
+    <property name="host" value="your-host"/>
+    <property name="port" value="25"/>
+    <property name="javaMailProperties">
+        <props>
+            <prop key="mail.transport.protocol">smtp</prop>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+            <prop key="mail.debug">true</prop>
+        </props>
+    </property>
+</bean>
 
 </project>
