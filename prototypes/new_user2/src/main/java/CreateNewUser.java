@@ -73,21 +73,29 @@ public class CreateNewUser {
 			return "errorpage1_empty";
 		}
 		
-		if (!aAdresstyp.equals("Wohnung"))
-		{return "new_user_aboutuser2a";}
-		{return "new_user_aboutuser2b";}
+		if (aAdresstyp.equals("Refugees_home"))
+		{
+			return "new_user_aboutuser2a";
+		}
+
+		if (aAdresstyp.equals("Wohnung"))
+		{
+			return "new_user_aboutuser2b";
+		}
+		
+		return "dd";
 		
 	}
 	
 	@RequestMapping(value = "/submit_userdata2a", method = RequestMethod.GET)
-	public String submit_userdata2a(@RequestParam("mail")String aMail, @RequestParam("username")String aUsername, @RequestParam("password")String aPassword, @RequestParam("repassword")String aRePassword) 
+	public String submit_userdata2a(@RequestParam("flh_name")String aFlh_name, @RequestParam("citypart")String aCitypart, @RequestParam("postcode")String aPostcode, @RequestParam("city")String aCity) 
 	{
-		System.out.println(aMail);
-		System.out.println(aUsername);
-		System.out.println(aPassword);
-		System.out.println(aRePassword);
+		System.out.println(aFlh_name);
+		System.out.println(aCitypart);
+		System.out.println(aPostcode);
+		System.out.println(aCity);
 		
-		if (aMail.isEmpty() ||  aUsername.isEmpty() || aPassword.isEmpty())
+		if (aFlh_name.isEmpty() ||  aCitypart.isEmpty() || aPostcode.isEmpty() || aCity.isEmpty())
 		{
 			return "errorpage2a_empty";
 		}
@@ -96,14 +104,14 @@ public class CreateNewUser {
 	}
 	
 	@RequestMapping(value = "/submit_userdata2b", method = RequestMethod.GET)
-	public String submit_userdata2b(@RequestParam("mail")String aMail, @RequestParam("username")String aUsername, @RequestParam("password")String aPassword, @RequestParam("repassword")String aRePassword) 
+	public String submit_userdata2b(@RequestParam("street")String aStreet, @RequestParam("housenr")String aHousenr, @RequestParam("postcode")String aPostcode, @RequestParam("city")String aCity) 
 	{
-		System.out.println(aMail);
-		System.out.println(aUsername);
-		System.out.println(aPassword);
-		System.out.println(aRePassword);
+		System.out.println(aStreet);
+		System.out.println(aHousenr);
+		System.out.println(aPostcode);
+		System.out.println(aCity);
 		
-		if (aMail.isEmpty() ||  aUsername.isEmpty() || aPassword.isEmpty())
+		if (aStreet.isEmpty() ||  aHousenr.isEmpty() || aPostcode.isEmpty() || aCity.isEmpty())
 		{
 			return "errorpage2b_empty";
 		}
