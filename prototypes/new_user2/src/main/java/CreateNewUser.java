@@ -47,30 +47,30 @@ public class CreateNewUser {
 	}
 	
 	//@ResponseBody
-	@RequestMapping(value = "/create_new_user_temp", method = RequestMethod.GET)
-	public String create_new_user_t(@RequestParam("mail")String aMail, @RequestParam("username")String aUsername, @RequestParam("password")String aPassword, @RequestParam("repassword")String aRePassword) 
+	@RequestMapping(value = "/create_new_user_temp", method = RequestMethod.POST)
+	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword) 
 	{
-		System.out.println(aMail);
-		System.out.println(aUsername);
-		System.out.println(aPassword);
-		System.out.println(aRePassword);
+		System.out.println(Mail);
+		System.out.println(Username);
+		System.out.println(Password);
+		System.out.println(RePassword);
 		
-		if (aMail.isEmpty() ||  aUsername.isEmpty() || aPassword.isEmpty())
+		if (Mail.isEmpty() ||  Username.isEmpty() || Password.isEmpty())
 		{
 			return "errorpage0_empty";
 		}
 		
-		if (!aPassword.equals(aRePassword))
+		if (!Password.equals(RePassword))
 		{
 			return "errorpage0_wrongpw";
 		}
 				
 		// Mail senden:
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("D:\\Repo\\swt15w9\\prototypes\\new_user2\\context.xml");
 		JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
 		
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(aMail);
+		msg.setTo(Mail);
 		msg.setSubject("Aktivation of your Refugees-App Account");
 		msg.setText("Aktivierungslink");
 		
@@ -88,23 +88,23 @@ public class CreateNewUser {
 	
 	
 	@RequestMapping(value = "/submit_userdata1", method = RequestMethod.GET)
-	public String submit_userdata1(@RequestParam("name")String aName, @RequestParam("firstname")String aFirstname, @RequestParam("Adresstyp")String aAdresstyp) 
+	public String submit_userdata1(@RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp) 
 	{
-		System.out.println(aName);
-		System.out.println(aFirstname);
-		System.out.println(aAdresstyp);
+		System.out.println(Name);
+		System.out.println(Firstname);
+		System.out.println(Adresstyp);
 		
-		if (aName.isEmpty() ||  aFirstname.isEmpty() || aAdresstyp.isEmpty())
+		if (Name.isEmpty() ||  Firstname.isEmpty() || Adresstyp.isEmpty())
 		{
 			return "errorpage1_empty";
 		}
 		
-		if (aAdresstyp.equals("Refugees_home"))
+		if (Adresstyp.equals("Refugees_home"))
 		{
 			return "new_user_aboutuser2a";
 		}
 
-		if (aAdresstyp.equals("Wohnung"))
+		if (Adresstyp.equals("Wohnung"))
 		{
 			return "new_user_aboutuser2b";
 		}
@@ -114,14 +114,14 @@ public class CreateNewUser {
 	}
 	
 	@RequestMapping(value = "/submit_userdata2a", method = RequestMethod.GET)
-	public String submit_userdata2a(@RequestParam("flh_name")String aFlh_name, @RequestParam("citypart")String aCitypart, @RequestParam("postcode")String aPostcode, @RequestParam("city")String aCity) 
+	public String submit_userdata2a(@RequestParam("flh_name")String Flh_name, @RequestParam("citypart")String Citypart, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
 	{
-		System.out.println(aFlh_name);
-		System.out.println(aCitypart);
-		System.out.println(aPostcode);
-		System.out.println(aCity);
+		System.out.println(Flh_name);
+		System.out.println(Citypart);
+		System.out.println(Postcode);
+		System.out.println(City);
 		
-		if (aFlh_name.isEmpty() ||  aCitypart.isEmpty() || aPostcode.isEmpty() || aCity.isEmpty())
+		if (Flh_name.isEmpty() ||  Citypart.isEmpty() || Postcode.isEmpty() || City.isEmpty())
 		{
 			return "errorpage2a_empty";
 		}
@@ -130,14 +130,14 @@ public class CreateNewUser {
 	}
 	
 	@RequestMapping(value = "/submit_userdata2b", method = RequestMethod.GET)
-	public String submit_userdata2b(@RequestParam("street")String aStreet, @RequestParam("housenr")String aHousenr, @RequestParam("postcode")String aPostcode, @RequestParam("city")String aCity) 
+	public String submit_userdata2b(@RequestParam("street")String Street, @RequestParam("housenr")String Housenr, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
 	{
-		System.out.println(aStreet);
-		System.out.println(aHousenr);
-		System.out.println(aPostcode);
-		System.out.println(aCity);
+		System.out.println(Street);
+		System.out.println(Housenr);
+		System.out.println(Postcode);
+		System.out.println(City);
 		
-		if (aStreet.isEmpty() ||  aHousenr.isEmpty() || aPostcode.isEmpty() || aCity.isEmpty())
+		if (Street.isEmpty() ||  Housenr.isEmpty() || Postcode.isEmpty() || City.isEmpty())
 		{
 			return "errorpage2b_empty";
 		}
