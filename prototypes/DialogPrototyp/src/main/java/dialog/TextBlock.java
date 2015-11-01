@@ -11,10 +11,6 @@ public class TextBlock extends MessageElement {
 	private String sentence;
 	private String substitutedSentence;
 	
-	public TextBlock() {
-		this.sentence = null;
-	}
-	
 	public TextBlock(String sentence, List<Substitute> substitutes) {
 		Assert.hasLength(sentence);
 		Assert.notNull(substitutes);
@@ -33,7 +29,21 @@ public class TextBlock extends MessageElement {
 			}
 		}
 		
+		StringBuilder sb = new StringBuilder(sentence);
+		for (Substitute substitute : substitutes) {
+			sb.insert(substitute.getSubstitutePosition(), substitute.getSubstitute());
+		}
+		this.substitutedSentence = sb.toString();
+		
 		this.substitutes = substitutes;
+	}
+	
+	public List<Substitute> getSubstitutes() {
+		return this.substitutes;
+	}
+	
+	public String getSentence() {
+		return this.sentence;
 	}
 	
 	public String getSubstitutedSentence() {
