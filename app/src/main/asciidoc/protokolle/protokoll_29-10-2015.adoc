@@ -17,7 +17,7 @@ __Nächstes Treffen:__ 03.11.2015
 * Feedback vom Tutor zu den Diagrammen
 * Kommentare zum GUI mithilfe Bootstrap bzw. Foundation
 * Retrospektive der Arbeit jedes Mitglieds
-* Kommentare zur Erstellung eigener Branchen für die Prototypen 
+* Kommentare zur Erstellung eigener Branchen für die Prototypen
 * Diskussion über die Notwendigkeit der User-Unterteilung und der User-Adresse
 
 == Retrospektive des letzten Sprints
@@ -29,7 +29,7 @@ __Nächstes Treffen:__ 03.11.2015
 |Issue |Aufgabe                                   |Status         |Bemerkung
 |#2    |Anlegen der CRC-Karten                    |geschlossen    |N/A
 |#3    |ein kleiner Prototyp pro Teammitglied     |offen          |N/A
-|#4    |Kontextdiagramm, Top-Level-Architektur, 
+|#4    |Kontextdiagramm, Top-Level-Architektur,
         Anwendungsfall-,Klassen-, Sequenzdiagramme|offen          |N/A
 |===
 
@@ -54,14 +54,9 @@ __Nächstes Treffen:__ 03.11.2015
 |===
 |Issue |Titel          |Beschreibung                   |Verantwortlicher |Status
 |#1    |GUI Prototyp   |kleiner GUI Prototyp erstellen |N/A              |offen
-|#3    |Sales-point    |ein kleiner Prototyp pro       |N/A              |offen
-        Prototyp        Teammitglied              
-|#4    |Analysemodell  |Kontextdiagramm,               |N/A              |offen
-                        Top-Level-Architektur, 
-                        Anwendungsfall-,Klassen-,
-                        Sequenzdiagramme 
+|#3    |Sales-point Prototyp|ein kleiner Prototyp pro Teammitglied|N/A   |offen
+|#4    |Analysemodell  |Kontextdiagramm, Top-Level-Architektur, Anwendungsfall-,
+Klassen-, Sequenzdiagramme                             |N/A              |offen
 |#5    |Pflichtenheft  |N/A                            |N/A              |offen
-|#12   |Entwurfsent-   |N/A                            |N/A              |offen
-        scheidungen
-        treffen
+|#12   |Entwurfsentscheidungen treffen|N/A             |N/A              |offen
 |===
