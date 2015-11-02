@@ -1,0 +1,17 @@
+.item{
+	margin: 0.125rem 0rem;
+	background-color: silvergray;
+	outline-style: solid;
+	outline-width: 1px; 
+    outline-color: lightgray;
+	height: 12rem;
+}
+
+.item img{
+	float: left;
+	width: 33%;
+	height: 10rem;
+}
+.item p{
+	
+}
