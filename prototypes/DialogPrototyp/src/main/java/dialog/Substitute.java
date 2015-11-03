@@ -9,6 +9,11 @@ public class Substitute implements Comparable<Substitute> {
 	public Substitute(int position, String substitute) {
 		Assert.hasLength(substitute);
 
+		if (position <= 0) {
+			throw new IllegalArgumentException(
+					"Position of substitute must be in the range between 0 and Integer.MAX_VALUE");
+		}
+
 		this.position = position;
 		this.substitute = substitute;
 	}
