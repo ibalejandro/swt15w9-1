@@ -1,17 +1,18 @@
 <!DOCTYPE HTML>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 
-  <head>
-    <title>Dialog Prototype</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/resources/style.css" />
-  </head>
+<head>
+<title>Dialog Prototype</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/style.css" />
+</head>
 
-  <body>
-  	<h1 class="text-center" th:text="#{dialog.title}">Dialog Prototyp</h1>
+<body>
+	<h1 class="text-center" th:text="#{dialog.title}">Dialog Prototyp</h1>
 	<div id="messages">
 		<div th:each="message, it : ${entries}" th:with="index = ${it.count}">
 			<div class="panel panel-default">
@@ -19,11 +20,11 @@
 					<h3>Entry</h3>
 				</div>
 				<div class="panel-body">
-				<blockquote class="entrytext" th:text="${message.text}">h</blockquote>
+					<blockquote class="entrytext" th:text="${message.text}">h</blockquote>
 				</div>
 			</div>
 		</div>
-	</div>  
-  </body>
+	</div>
+</body>
 
 </html>

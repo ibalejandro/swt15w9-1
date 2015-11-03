@@ -14,7 +14,7 @@ public abstract class MessageElement {
 	public MessageElement() {
 		this.date = new Date();
 	}
-	
+
 	public long getId() {
 		return id;
 	}

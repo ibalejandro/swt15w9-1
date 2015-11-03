@@ -10,11 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 	@Autowired
 	private Dialog dialog;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
 	@PostConstruct
 	void initialize() {
 		dialog.save(new FreeText("Hallo"));
