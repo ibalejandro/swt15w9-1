@@ -28,6 +28,7 @@ public class DialogController {
 	@RequestMapping(value = "/dialog", method = RequestMethod.GET)
 	String dialog(Model model) {
 		model.addAttribute("messages", messages.findAll());
+		//model.addAttribute("form", form);
 		return "dialog";
 	}
 }
