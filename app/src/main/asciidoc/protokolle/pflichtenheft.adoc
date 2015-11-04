@@ -2,11 +2,11 @@
 
 == Projektname
 
-__Version:__    *0.3*
+__Version:__    *0.4*
 
 __Status:__     *In Arbeit*
 
-__Stand:__      *28.10.2015*
+__Stand:__      *04.11.2015*
 
 == Zusammenfassung
 Eine kurze Beschreibung des Dokuments. Wenige Absätze.
@@ -24,7 +24,7 @@ Hierbei scheitert es jedoch oft an den Fremdsprachenkenntnisse der Beteiligten u
 == Systemgrenze und Top-Level-Architektur
 
 === Kontextdiagramm
-Das Kontextdiagramm zeigt das geplante Software-System in seiner Umgebung. Zur Umgebung gehören alle Nutzergruppen des Systems und Nachbarsysteme. Die Grafik kann auch informell gehalten sein. Überlegen Sie sich dann geeignete Symbole. Die Grafik kann beispielsweise mit Visio erstellt werden. Wenn nötig, erläutern Sie diese Grafik.
+image::images/Kontextdiagram.jpg[]
 
 === Top-level architecture
 Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm.
@@ -32,17 +32,16 @@ Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm
 == Anwendungsfälle
 
 === Überblick Anwendungsfalldiagramm
-Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt
+image::images/Anwendungsfälle.jpg[]
 
 === Akteure
-
-Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Dokumentieren Sie die Akteure in einer Tabelle. Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz. Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
-
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Name |Beschreibung |
-|…    |…            |
+|Name |Beschreibung
+|Helfer|offeriert Hilfsgüter
+|Flüchtling|meldet sich auf Hilfsgüter
+|Admin|nimmt Verwaltungsaufgaben wahr
 |===
 
 === Anwendungsfallbeschreibungen
@@ -50,6 +49,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle. In dieser Beschreibung m�
 Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
+
+image::images/Sequenzdiagramm_Dialog.png[]
+image::images/Sequenzdiagramm_User_account_erstellen.png[]
 
 == Anforderungen
 
@@ -204,7 +206,7 @@ Helfender:: Adresse
 == Datenmodell
 
 === Überblick: Klassendiagramm
-UML-Analyseklassendiagramm
+image::images/Analyseklassendiagramm.jpg[]
 
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
