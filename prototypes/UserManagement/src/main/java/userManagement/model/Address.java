@@ -1,17 +1,23 @@
 package userManagement.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@SuppressWarnings("serial")
 @Entity
-public class Address implements Location { //<> Flüchtlingsunterkunft
+public class Address implements  Serializable { //<> Flüchtlingsunterkunft
 	
 	private @Id @GeneratedValue long id;
 	
 	private String streetAndNo;
 	private String zipCode;
 	private String city;
+	
+	@SuppressWarnings("unused")
+	private Address() {}
 	
 	public Address(String streetAndNo, String zipCode, String city){
 		this.streetAndNo= streetAndNo;
@@ -50,7 +56,7 @@ public class Address implements Location { //<> Flüchtlingsunterkunft
 	}
 
 
-	@Override
+	//@Override
 	public String getLocation() {
 		return (streetAndNo+", "+zipCode);
 	}

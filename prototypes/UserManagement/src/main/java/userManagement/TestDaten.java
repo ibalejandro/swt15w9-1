@@ -1,8 +1,5 @@
 package userManagement;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -44,24 +41,28 @@ public class TestDaten implements DataInitializer {
 			return;
 		}
 
-		UserAccount bossAccount = userAccountManager.create("boss", "123", new Role("ROLE_BOSS"));
+		UserAccount bossAccount = userAccountManager.create("admin", "123", new Role("ROLE_ADMIN"));
 		userAccountManager.save(bossAccount);
 		
 		Role normalUserRole = new Role("ROLE_NORMAL");
 		UserAccount u1=userAccountManager.create("Lisa", "pw", normalUserRole);
+		u1.setFirstname("Lisa-Marie");
+		u1.setLastname("Maier");
+		u1.setEmail("Maier@gmail.com");
 		userAccountManager.save(u1);
 		UserAccount u2=userAccountManager.create("Peter", "pw", normalUserRole);
+		u2.setFirstname("Peter");
+		u2.setLastname("U.");
+
 		userAccountManager.save(u2);
 		
 		Address address1=new Address("Mittelstraße 1", "11587","Dresden");
-		Set<String> languages1= new HashSet<>();
-		languages1.add("Deutsch");
-		languages1.add("Englisch");
-		Set<String> languages2=languages1;
-		languages2.add("Franz.");
 		
-		User user1= new User(address1, "D",languages1, u1);
-		User user2= new User(address1, "D", languages2, u2);
+		User user1= new User(address1, "D", u1);
+		user1.setLanguage("Deutsch");
+		user1.setOrigin("Deutschland");
+		User user2= new User(address1, "D", u2);
+		user2.setLanguage("Arabisch");
 		userRepository.save(user1);
 		userRepository.save(user2);
 	}

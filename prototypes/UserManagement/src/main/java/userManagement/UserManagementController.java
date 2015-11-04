@@ -1,13 +1,18 @@
 package userManagement;
 
+import java.util.Optional;
+
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import userManagement.model.UserRepository;
 
-@RestController
+@Controller
 public class UserManagementController {
 	
 	private final UserRepository userRepository;
@@ -18,7 +23,7 @@ public class UserManagementController {
 	}
 	
 	
-	@RequestMapping("/index")
+	@RequestMapping({"/","/index"})
 	String index(){
 		return "index";
 	}
@@ -27,5 +32,16 @@ public class UserManagementController {
 	String userDetails(ModelMap map){
 		map.addAttribute("userDetails", userRepository.findAll());
 		return "userDetails";
+	}
+	
+	@RequestMapping("/data")
+	String data(Model model,  @LoggedIn Optional<UserAccount> userAccount){
+		if(userAccount.isPresent()){
+			UserAccount LoggUser=userAccount.get();
+			model.addAttribute("userAccount", LoggUser);
+			return "data";
+		}
+		
+		return "error";
 	}
 }

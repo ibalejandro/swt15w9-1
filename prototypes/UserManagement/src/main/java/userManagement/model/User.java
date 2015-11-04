@@ -1,6 +1,6 @@
 package userManagement.model;
-import java.util.Set;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,33 +10,36 @@ import org.salespointframework.useraccount.UserAccount;
 
 
 	
+@SuppressWarnings("serial")
 @Entity
-public class User {
+public class User implements Serializable{
 	
 	private @Id @GeneratedValue long id;
 	
-	private Location location;
+	private Address location;
 	private String origin;
-	private Set<String> languages;
+	private String PrefferedLanguage;
 	private boolean enabled;
 	@OneToOne private UserAccount userAccount;
 	  
-	 
+	@SuppressWarnings("unused")
+	private User() {} 
 	
-	public User(Location location, String origin, Set<String> languages, UserAccount userAccount) {
+	public User(Address location, String origin, UserAccount userAccount) {
 		super();
 		this.location = location;
 		this.origin = origin;
-		this.languages = languages;
 		this.userAccount = userAccount;
 		this.enabled= userAccount.isEnabled();
 	}
+	
+	
 
-	public Location getLocation() {
+	public Address getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(Address location) {
 		this.location = location;
 	}
 
@@ -47,13 +50,14 @@ public class User {
 	public void setOrigin(String origin) {
 		this.origin = origin;
 	}
-
-	public Set<String> getLanguages() {
-		return languages;
+	
+	
+	public String getLanguage() {
+		return PrefferedLanguage;
 	}
 
-	public void setLanguages(Set<String> languages) {
-		this.languages = languages;
+	public void setLanguage(String language) {
+		this.PrefferedLanguage = language;
 	}
 
 	public UserAccount getUserAccount() {
