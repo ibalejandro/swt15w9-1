@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Offer Good</title>
+    </head>
+    <body>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/saveGood}" method="post">
+        	<h2> Good </h2>
+            <div><label> Name : <input type="text" name="goodName"/> </label></div>
+            <div><label> Description: <input type="text" name="goodDescription"/> </label></div>
+            <div><label> Tag: <input type="text" name="goodTag"/> </label></div>
+            <h2> User </h2>
+            <div><label> First name: <input type="text" name="userFirstName"/> </label></div>
+            <div><label> Last name: <input type="text" name="userLastName"/> </label></div>
+            <div><label> Email: <input type="email" name="userEmail"/> </label></div>
+            <div><label> Origin: <input type="text" name="userOrigin"/> </label></div>
+	        <h2> Address </h2>
+            <div><label> Street: <input type="text" name="addressStreet"/> </label></div>
+            <div><label> Number: <input type="number" name="addressNumber"/> </label></div>
+            <div><label> Postcode: <input type="number" name="addressPostcode"/> </label></div>
+            <div><label> City: <input type="text" name="addressCity"/> </label></div>
+	        <br></br>
+	        <div><input type="submit" value="Offer"/></div>
+        </form>
+    </body>
+</html>
