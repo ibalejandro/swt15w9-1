@@ -8,8 +8,8 @@ Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen
 |===
 |Von   |Bis   |Alejandro  |Ferdinand  |Friederike |Kilian     |Lennart    |Mario      |Meeting
 |13.10 |18.10 |           |           |           |           |           |3h         |3h
-|19.10 |25.10 |           |           |           |           |           |6h 10min   |2h
-|26.10 |01.11 |           |           |           |           |           |23h 20min  |10h 25min
+|19.10 |25.10 |           |           |           |           |4h         |6h 10min   |2h
+|26.10 |01.11 |           |           |           |           |14h        |23h 20min  |10h 25min
 |02.11 |08.11 |           |           |           |           |           |           |
 |09.10 |15.11 |           |           |           |           |           |           |
 |16.11 |22.11 |           |           |           |           |           |           |
