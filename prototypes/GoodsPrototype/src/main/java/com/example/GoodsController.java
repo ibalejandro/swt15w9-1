@@ -2,14 +2,11 @@ package com.example;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.mapping.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +27,7 @@ public class GoodsController {
     }
     
     @RequestMapping(value = "/saveGood", method = RequestMethod.POST)
-    public String savedGood(HttpServletRequest request) {
+    public String savedGood(HttpServletRequest request, Model model) {
     	String addressStreet = request.getParameter("addressStreet");
     	int addressNumber = Integer.parseInt
     					    (request.getParameter("addressNumber"));
@@ -65,11 +62,12 @@ public class GoodsController {
 		}
 		log.info("-------------------------------");
 		
-		return "redirect:/form";
+		model.addAttribute("response", repository.findAll());
+		return "home";
     }
     
     @RequestMapping(value = "/listAllGoods", method = RequestMethod.GET)
-    public String listAllGoods() {
+    public String listAllGoods(Model model) {
 		
     	log.info("");
 		log.info("Goods found with findAll():");
@@ -80,11 +78,12 @@ public class GoodsController {
 		log.info("-------------------------------");
         log.info("");
 		
-		return "redirect:/search";
+        model.addAttribute("response", repository.findAll());
+		return "home";
     }
     
     @RequestMapping(value = "/orderGoodsByTag", method = RequestMethod.GET)
-    public String orderGoodsByTag() {
+    public String orderGoodsByTag(Model model) {
 		
     	log.info("Goods order with findAllByOrderByTagAsc():");
 		log.info("-------------------------------");
@@ -94,37 +93,45 @@ public class GoodsController {
 		log.info("-------------------------------");
 		log.info("");
 		
-		return "redirect:/search";
+		model.addAttribute("response", repository.findAllByOrderByTagAsc());
+		return "home";
     }
     
     @RequestMapping(value = "/searchGoodByName", method = RequestMethod.POST)
-    public String searchGoodByName(HttpServletRequest request) {
+    public String searchGoodByName(HttpServletRequest request, Model model) {
     	
 		String goodName = request.getParameter("goodName");
 		log.info("Goods found by name: '" + goodName + "':");
 		log.info("-------------------------------");
-		for (Good goodFoundByName : repository.findByName(goodName)) {
+		for (Good goodFoundByName : 
+			 repository.findByNameStartingWithIgnoreCase(goodName)) {
 			log.info(goodFoundByName.toString());
 		}
 		log.info("-------------------------------");
 		log.info("");
 		
-		return "redirect:/search";
+		model
+		.addAttribute("response", 
+					  repository.findByNameStartingWithIgnoreCase(goodName));
+		return "home";
     }
     
     @RequestMapping(value = "/searchGoodByTag", method = RequestMethod.POST)
-    public String searchGoodByTag(HttpServletRequest request) {
+    public String searchGoodByTag(HttpServletRequest request, Model model) {
     	
 		String goodTag = request.getParameter("goodTag");
 		log.info("Goods found by tag: '" + goodTag + "':");
 		log.info("-------------------------------");
-		for (Good goodFoundByTag : repository.findByTag(goodTag)) {
+	for (Good goodFoundByTag : 
+		 repository.findByTagStartingWithIgnoreCase(goodTag)) {
 			log.info(goodFoundByTag.toString());
 		}
 		log.info("-------------------------------");
 		log.info("");
 		
-		return "redirect:/search";
+		model.addAttribute("response", 
+						   repository.findByTagStartingWithIgnoreCase(goodTag));
+		return "home";
     }
     
 }

@@ -17,7 +17,7 @@ public class GoodsPrototypeApplication {
         SpringApplication.run(GoodsPrototypeApplication.class, args);
     }
     
-    /*
+    /* This is used to generate content manually.
     @Bean
 	public CommandLineRunner demo(GoodRepository repository) {
 		return (args) -> {
