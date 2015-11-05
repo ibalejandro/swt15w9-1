@@ -1,18 +1,24 @@
 = Pflichtenheft
+:toc:
+:toc-placement!:
 
-== Projektname
+== Refugee App
 
-__Version:__    *0.4*
+__Version:__    *0.5*
 
 __Status:__     *In Arbeit*
 
-__Stand:__      *04.11.2015*
+__Stand:__      *05.11.2015*
 
 == Zusammenfassung
-Eine kurze Beschreibung des Dokuments. Wenige Absätze.
+Dies ist das Pflichtenheft zum Projekt "Refugee App".
+Es legt die grobe Struktur der Software fest und definiert die Kriterien zur erfolgreichen Beendigung des Projektes.
 
 == Inhaltsverzeichnis
 
+toc::[]
+
+:sectnums:
 == Aufgabenstellung und Zielsetzung
 Was uns vorschwebt ist eine Art eBay-Kleinanzeigen Portal allerdings multi-lingual - ein Art Welcome- Refugee - Portal, wo Menschen mittels einer Textbaustein-dialog-prinzip und mit Unterstützung von Google Translate in der eigenen Landsprache mit Menschen jeglicher Nationen einfach und unkompliziert in Kontakt treten können, damit so einfach Dinge schnell und unkompliziert direkt ohne Umwege über Sammellager von DRK etc. den Weg zu Bedürftigen finden können. Die Plattform soll aber nicht nur ausschließlich dem Austausch von Gegenständen dienen, sondern auch die Möglichkeit bieten, Angebote zur schnellen Integration der Flüchtlingen bei uns anzubieten z.B. durch das Annoncieren von Deutschkursen etc.
 
@@ -27,7 +33,7 @@ Hierbei scheitert es jedoch oft an den Fremdsprachenkenntnisse der Beteiligten u
 image::images/Kontextdiagram.jpg[]
 
 === Top-level architecture
-Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm.
+image::images/TopLevel-Architektur.jpg[]
 
 == Anwendungsfälle
 
@@ -214,8 +220,23 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Klasse/Enumeration |Beschreibung |
-|…                  |…            |
+|Klasse/Enumeration|Beschreibung
+|Client|
+|UserManagement|
+|User|
+|GoodsManagement|
+|adress|
+|Language (Enum)|
+|Offer|
+|Activity|
+|Good|
+|Tags (Enum)|
+|Property|
+|Dialog|
+|Message|
+|MessageElement|
+|FreeText|
+|TextBlock|
 |===
 
 == Aktzeptanztestfälle
