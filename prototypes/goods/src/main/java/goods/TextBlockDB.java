@@ -4,15 +4,15 @@ import java.util.Optional;
 
 import org.springframework.data.repository.Repository;
 
-public interface TextBlockDB extends Repository<TextBlock, Long> {
+public interface TextBlockDB extends Repository<TexBlock, Long> {
 	
 	void delete(Long id);
 	
-	TextBlock save(TextBlock textblock);
+	TexBlock save(TexBlock textblock);
 	
-	Optional<TextBlock> findOne(Long id);
+	Optional<TexBlock> findOne(Long id);
 	
-	Iterable<TextBlock> findAll();
+	Iterable<TexBlock> findAll();
 	
 	int count();
 }
