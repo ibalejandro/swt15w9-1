@@ -40,9 +40,15 @@ public class CreateNewUser {
 		
 	}
 	
-	@RequestMapping({"/reCAPTCHA-TEST"})
+	@RequestMapping(value = "/reCAPTCHA-TEST")
 	public String show_reCAPTCHA(){
       return "reCAPTCHA";		
+		
+	}
+	
+	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
+	public String validate_reCAPTCHA(@RequestParam("g-recaptcha-response")String CaptchaResponse){
+      return "";		
 		
 	}
 	
@@ -65,8 +71,8 @@ public class CreateNewUser {
 			return "errorpage0_wrongpw";
 		}
 				
-		// Mail senden:
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("D:\\Repo\\swt15w9\\prototypes\\new_user2\\context.xml");
+	/*	// Mail senden:
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
 		
 		SimpleMailMessage msg = new SimpleMailMessage();
@@ -80,14 +86,14 @@ public class CreateNewUser {
         catch (MailException ex) {
             // simply log it and go on...
             System.err.println(ex.getMessage());
-        }
+        }   */
 		
 		return "new_user_aboutuser1"; //"index";
 	}
 	
 	
 	
-	@RequestMapping(value = "/submit_userdata1", method = RequestMethod.GET)
+	@RequestMapping(value = "/submit_userdata1", method = RequestMethod.POST)
 	public String submit_userdata1(@RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp) 
 	{
 		System.out.println(Name);
@@ -113,7 +119,7 @@ public class CreateNewUser {
 		
 	}
 	
-	@RequestMapping(value = "/submit_userdata2a", method = RequestMethod.GET)
+	@RequestMapping(value = "/submit_userdata2a", method = RequestMethod.POST)
 	public String submit_userdata2a(@RequestParam("flh_name")String Flh_name, @RequestParam("citypart")String Citypart, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
 	{
 		System.out.println(Flh_name);
@@ -129,7 +135,7 @@ public class CreateNewUser {
 		return "user";
 	}
 	
-	@RequestMapping(value = "/submit_userdata2b", method = RequestMethod.GET)
+	@RequestMapping(value = "/submit_userdata2b", method = RequestMethod.POST)
 	public String submit_userdata2b(@RequestParam("street")String Street, @RequestParam("housenr")String Housenr, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
 	{
 		System.out.println(Street);
