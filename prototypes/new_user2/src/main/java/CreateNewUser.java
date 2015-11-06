@@ -5,7 +5,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +44,9 @@ public class CreateNewUser {
 		
 	}
 	
-	@RequestMapping({"/new_user_aboutuser2a"})
-	public String new_user2a(){
-      return "new_user_aboutuser2a";		
-		
+	@RequestMapping({"/new_user_aboutuser2"})
+	public String new_user2(){
+      return "redirect:new_user_aboutuser1";				
 	}
 	
 	@RequestMapping(value = "/reCAPTCHA-TEST")
@@ -50,14 +55,44 @@ public class CreateNewUser {
 		
 	}
 	
-/*	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
-	public String validate_reCAPTCHA(@RequestParam("response")String CaptchaResponse, @RequestParam("secret")String Secret){
+	private String sendPost(String CaptchaResponse, String Secret) throws Exception {
+
+		String url = "https://www.google.com/recaptcha/api/siteverify"+"?response="+CaptchaResponse+"&secret="+Secret;
+		URL obj = new URL(url);
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+		//add reuqest header
+		con.setRequestMethod("POST");
+
+		String urlParameters = "";
 		
-		Secret="6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
-		return Secret;
+		// Send post request
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(urlParameters);
+		wr.flush();
+		wr.close();
+
+		int responseCode = con.getResponseCode();
+		//System.out.println("\nSending 'POST' request to URL : " + url);
+		//System.out.println("Response Code : " + responseCode);
+
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
 		
+		//print result
+		System.out.println(response.toString());
 		
-	}*/
+		return response.toString();
+
+	}
 	
 	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
 	public String recieve_reCAPTCHA(@RequestParam("g-recaptcha-response")String CaptchaResponse){
@@ -70,13 +105,35 @@ public class CreateNewUser {
 		   return "/reCAPTCHA-TEST";	
 		} 
 		else
-		{
-			return "https://www.google.com/recaptcha/api/siteverify";
+		{   
+			//http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
+			
+			String Secret="6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
+			String Returnstring="";
+			
+			System.out.println("## Validate:");
+			System.out.println("https://www.google.com/recaptcha/api/siteverify?response="+CaptchaResponse+"&secret="+Secret);
+			
+			try {
+				Returnstring=sendPost(CaptchaResponse,Secret);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if (Returnstring.equals("{  \"success\": true}"))
+			{
+				return "/validation_success";
+			}
+			else
+			{
+				return "/reCAPTCHA-TEST";	
+			}
 		}
 	}
 	
 	//@ResponseBody
-	@RequestMapping(value = "/create_new_user_temp", method = RequestMethod.POST)
+	@RequestMapping(value = "/new_user_aboutuser1", method = RequestMethod.POST)
 	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword) 
 	{
 		System.out.println(Mail);
@@ -116,7 +173,7 @@ public class CreateNewUser {
 	
 	
 	
-	@RequestMapping(value = "/submit_userdata1", method = RequestMethod.POST)
+	@RequestMapping(value = "/new_user_aboutuser2", method = RequestMethod.POST)
 	public String submit_userdata1(@RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp) 
 	{
 		System.out.println(Name);
