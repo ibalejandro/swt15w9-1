@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 
 <html class="no-js" lang="de">
+
+<!--
+	TODO:
+		- Navigation weiter anpassen
+		- Template mehr zum Template ausbauen
+		-
+		- Variablen hinzufügen
+		- th:href Mapping festlegen.
+		- Kommentare löschen
+-->
+
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Refugge App</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="content-type" content="text/html"/>
 		
-		<link rel="stylesheet" href="css/foundation.css"></link>
-		<link rel="stylesheet" href="css/app.css"></link>
+		<title th:text="${title}">Refugee App</title>
+		
+		<link rel="stylesheet" href="css/foundation.css"/>
+		<link rel="stylesheet" href="css/app.css"/>
 		<script src="js/vendor/modernizr.js"></script>
 	</head>
 	
 	<body>
-		<nav "navigation" class="top-bar" data-topbar >
+		<nav th:fragment="navigation" class="top-bar">
 			<ul class="title-area">
 			<!-- Title Area -->
 				<li class="name">
