@@ -1,0 +1,53 @@
+.item{
+	margin: 1% 0;
+	background-color: silvergray;
+	outline-style: solid;
+	outline-width: 1px; 
+    outline-color: lightgray;
+	overflow: auto;
+}
+.item-title{
+	border-bottom: 1px solid;
+	border-color: lightgray;
+}
+.item-title h1{
+	font-size: 3rem;
+	margin:0;
+}
+a{
+	margin:0;
+}
+
+.item-content{
+	margin-top: 3%;
+}
+
+.item-img{
+}
+
+.item img{
+	float: left;
+	width: 45%;
+	margin: 1%;
+}
+
+.item-description{
+	margin-bottom: 10%;
+}
+
+.item p{
+	clear: right;
+	color: black;
+	margin: 0;
+}
+
+.item-info{
+	position: absolute;
+	height:5%;
+	right: 20px;
+	bottom: 15px;
+}
+
+.item-place{
+	font-size: 0.75rem;
+}
