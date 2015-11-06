@@ -49,9 +49,25 @@ public class CreateNewUser {
       return "redirect:new_user_aboutuser1";				
 	}
 	
+	@RequestMapping({"/new_user_aboutuser2a"})
+	public String new_user2a(){
+      return "/new_user_aboutuser2a";				
+	}
+	
+	@RequestMapping({"/new_user_aboutuser2b"})
+	public String new_user2b(){
+      return "/new_user_aboutuser2b";				
+	}
+	
+	@RequestMapping(value = "/submit_captcha")
+	public String redirect_reCAPTCHA(){
+	      return "redirect:/reCAPTCHA-TEST";		
+			
+		}
+	
 	@RequestMapping(value = "/reCAPTCHA-TEST")
 	public String show_reCAPTCHA(){
-      return "reCAPTCHA";		
+      return "/reCAPTCHA";		
 		
 	}
 	
@@ -102,7 +118,7 @@ public class CreateNewUser {
 		
 		if (CaptchaResponse.isEmpty())
 		{ 
-		   return "/reCAPTCHA-TEST";	
+		   return "redirect:/reCAPTCHA-TEST";	
 		} 
 		else
 		{   
@@ -127,13 +143,13 @@ public class CreateNewUser {
 			}
 			else
 			{
-				return "/reCAPTCHA-TEST";	
+				return "redirect:/reCAPTCHA-TEST";	
 			}
 		}
 	}
 	
 	//@ResponseBody
-	@RequestMapping(value = "/new_user_aboutuser1", method = RequestMethod.POST)
+	@RequestMapping(value = "/create_temp_new_user", method = RequestMethod.POST)
 	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword) 
 	{
 		System.out.println(Mail);
@@ -168,12 +184,12 @@ public class CreateNewUser {
             System.err.println(ex.getMessage());
         }   */
 		
-		return "new_user_aboutuser1"; //"index";
+		return "redirect:/new_user_aboutuser1"; //"index";
 	}
 	
 	
 	
-	@RequestMapping(value = "/new_user_aboutuser2", method = RequestMethod.POST)
+	@RequestMapping(value = "/submit_userdata1", method = RequestMethod.POST)
 	public String submit_userdata1(@RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp) 
 	{
 		System.out.println(Name);
@@ -187,15 +203,15 @@ public class CreateNewUser {
 		
 		if (Adresstyp.equals("Refugees_home"))
 		{
-			return "new_user_aboutuser2a";
+			return "redirect:/new_user_aboutuser2a";
 		}
 
 		if (Adresstyp.equals("Wohnung"))
 		{
-			return "new_user_aboutuser2b";
+			return "redirect:/new_user_aboutuser2b";
 		}
 		
-		return "dd";
+		return "redirect:/new_user_aboutuser1";
 		
 	}
 	
@@ -212,7 +228,7 @@ public class CreateNewUser {
 			return "errorpage2a_empty";
 		}
 		
-		return "user";
+		return "redirect:/user";
 	}
 	
 	@RequestMapping(value = "/submit_userdata2b", method = RequestMethod.POST)
@@ -228,6 +244,6 @@ public class CreateNewUser {
 			return "errorpage2b_empty";
 		}
 		
-		return "user";
+		return "redirect:/user";
 	}
 }
