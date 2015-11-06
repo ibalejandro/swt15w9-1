@@ -4,9 +4,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.net.URI;
+
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpHeaders;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -46,10 +50,29 @@ public class CreateNewUser {
 		
 	}
 	
-	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
-	public String validate_reCAPTCHA(@RequestParam("g-recaptcha-response")String CaptchaResponse){
-      return "";		
+/*	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
+	public String validate_reCAPTCHA(@RequestParam("response")String CaptchaResponse, @RequestParam("secret")String Secret){
 		
+		Secret="6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
+		return Secret;
+		
+		
+	}*/
+	
+	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
+	public String recieve_reCAPTCHA(@RequestParam("g-recaptcha-response")String CaptchaResponse){
+        
+		System.out.println("## CaptchaResponse:");
+		System.out.println(CaptchaResponse);
+		
+		if (CaptchaResponse.isEmpty())
+		{ 
+		   return "/reCAPTCHA-TEST";	
+		} 
+		else
+		{
+			return "https://www.google.com/recaptcha/api/siteverify";
+		}
 	}
 	
 	//@ResponseBody
