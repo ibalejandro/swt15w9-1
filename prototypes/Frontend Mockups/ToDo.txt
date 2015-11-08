@@ -1,0 +1,11 @@
+Für die nächste Woche (06.11.2015 - 12.11.2015)
+ToDo:
+	- Chat Mockup
+	- Angebot Mockup
+	- Angebot erstellen Mockup
+	- Angebot löschen Mockup
+	- Profil bearbeiten Mockup
+	- Überarbeiten der bislangen Mockups
+	- HTML Seiten erstellen
+	- Thymeleaf einarbeiten
+	
