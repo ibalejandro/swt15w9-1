@@ -1,0 +1,52 @@
+= Test-Plan
+
+Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
+
+== Einführung
+Wozu dient das Dokument? Zielgruppe?
+
+== Aufbau der Testbezeichner
+Nach welchem Schema sind die Tests benannt?
+
+*Bsp.*
+
+*U - Unit Test, I - Integrationstest*
+
+*U-1, U-2, I-1*
+
+== Test Gegenstände
+* Nutzererstellung
+* Hilfsgütererstellung
+* Dialogführung
+* Administrationsmöglichkeiten
+
+== Zu testende Funktionalitäten
+* neuer Nutzer nur mit gültigen Eingaben erstellbar
+* Hilfsgut nur mit gültigen Eingaben erstellbar
+* fragwürdige Hilfsgüter können entfernt werden durch Admin
+* Nutzer können durch Admin gesperrt werden
+
+== Nicht zu testende Funktionalitäten
+_z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel)._
+
+== Herangehensweise
+*Bsp.:*
+
+*Klassen werden mit JUnit getestet.*
+
+*Integrationstest nach Bottom-Up Prinzip*
+
+== Umgebungsvoraussetzungen
+* Die Software muss auf einem Webserver laufen
+* Es müssen eine Benutzerliste und eine Hilfsgüterliste bereits eingespeist sein
+* Die Software kommuniziert mit dem Anwender über einen Browser (mobil und Desktop)
+
+== Testfälle und Verantwortlichkeit
+Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
+
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|…  |…              |…              |…       |…
+|===
