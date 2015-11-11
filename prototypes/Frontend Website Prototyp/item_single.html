@@ -18,7 +18,7 @@
 		<script src="js/vendor/modernizr.js"></script>
 	</head>
 	
-	<body>
+	<body th:each="content : ${offers}" >
 		<nav th:include="navigation :: navigation"></nav>
 		
 		<div class="show-for-small-only">
