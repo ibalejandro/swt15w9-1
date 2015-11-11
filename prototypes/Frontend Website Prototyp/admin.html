@@ -20,9 +20,9 @@
 				<th>username</th>
 			</tr>
 			<tr th:each="user : ${users}">
-				<td th:text="${user.firstname}"></td>
-				<td th:text="${user.lastname}"></td>
-				<td th:text="${user.email}"></td>
+				<td th:text="${user.userAccount.firstname}"></td>
+				<td th:text="${user.userAccount.lastname}"></td>
+				<td th:text="${user.userAccount.email}"></td>
 				<td th:text="${user.origin}"></td>
 				<td th:text="${user.username}"></td>
 			</tr>
