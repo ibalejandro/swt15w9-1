@@ -40,7 +40,7 @@ public class GoodEntity {
     	this.userId = userId;
     }
     
-    
+    //This method shows a good in JSON format.
     @Override
     public String toString() {
         return String.format("{\"id\": \"%d\", \"name\": \"%s\", "
@@ -48,5 +48,25 @@ public class GoodEntity {
         					 + "\"userId\": \"%d\"}", id, name, description, 
         					 tags.toString(), userId);
     }
+
+	public long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Set<String> getTags() {
+		return tags;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import com.example.entity.GoodEntity;
 import com.example.model.Good;
 import com.example.repository.GoodRepository;
 
@@ -41,9 +42,11 @@ public class GoodsOfferController {
     	 */
     	long userId = 1L;
     	
-    	repository.save(good.createGoodEntity(userId));
+    	GoodEntity goodEntity = good.createGoodEntity(userId);
+    	
+    	repository.save(goodEntity);
 		
-		model.addAttribute("result", repository.findAll());
+		model.addAttribute("result", goodEntity);
 		return "offeredGood";
     }
 

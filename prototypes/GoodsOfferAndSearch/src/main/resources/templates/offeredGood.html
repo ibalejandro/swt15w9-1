@@ -1,11 +1,30 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title> Offered Goods </title>
-        <meta http-equiv="Content-Type" content="application/json; charset=UTF-8" />
-    </head>
-    <body>
-    	<h2> Goods </h2>
-        <div><p th:text="${result}"/></div>
-    </body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title> Offered good </title>
+	    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div>
+			<h2> You just offered this good: </h2>
+		</div>
+	    <div id="good">			
+			<div class="panel-body">
+				<div>
+					<h4> Name </h4>
+					<p th:text="${result.name}"></p>
+				</div>
+				<div>
+					<div>
+						<h4> Description </h4>
+						<p th:text="${result.description}"></p>
+					</div>
+					<div>
+						<h4> Tags </h4>
+						<p th:text="${result.tags}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
