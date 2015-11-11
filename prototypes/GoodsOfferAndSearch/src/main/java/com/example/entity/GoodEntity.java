@@ -43,9 +43,10 @@ public class GoodEntity {
     
     @Override
     public String toString() {
-        return String.format("Good = [id = %d], [name = %s], [description = %s]"
-                		     + ", [tags = %S], [user_id = %d]", id, name,
-                		     description, tags.toString(), userId);
+        return String.format("{\"id\": \"%d\", \"name\": \"%s\", "
+        					 + "\"description\": \"%s\", \"tags\": \"%s\", "
+        					 + "\"userId\": \"%d\"}", id, name, description, 
+        					 tags.toString(), userId);
     }
 
 }
