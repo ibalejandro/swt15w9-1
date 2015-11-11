@@ -188,19 +188,25 @@
 	outline-color: lightgray;
 	padding: 1%;
 }
-
 .login__header{
 	
 }
-
 .login__header__text{
 	
 }
-
 .login__error{
 	color: red;
 }
-
 .login__label{
 
+}
+
+.create{
+	
+}
+.create__title{
+	
+}
+.create__label{
+	
 }
