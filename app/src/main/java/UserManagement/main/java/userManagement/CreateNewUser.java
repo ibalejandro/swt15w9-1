@@ -185,6 +185,8 @@ public class CreateNewUser {
 		userAccount.setEmail(Mail);
 		userAccountManager.save(userAccount);
 		
+		
+		
 				
 	/*	// Mail senden:
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
@@ -203,7 +205,7 @@ public class CreateNewUser {
             System.err.println(ex.getMessage());
         }   */
 		
-		return "redirect:/new_user_aboutuser1"; //"index";
+		return "redirect:/new_user_aboutuser1?user="+userAccount.getUsername()+"; //"index";
 	}
 	
 	
