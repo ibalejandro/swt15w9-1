@@ -40,6 +40,7 @@
 							<td th:text="${user.userAccount.lastname}">Mueller</td>
 							<td th:text="${user.userAccount.email}">xyz</td>
 							<td th:text="${user.location.getLocation()}">Adresse</td>
+							<td th:text="${user.city}">Stadt</td>
 							<td th:text="${user.getOrigin()}">Herkunft</td>
 							<td th:text="${user.getLanguage()}">Sprache</td>
 							<td><a th:href="@{/modify}">Bearbeiten</a></td>

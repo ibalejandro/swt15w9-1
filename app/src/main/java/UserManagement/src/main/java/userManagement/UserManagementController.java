@@ -28,11 +28,17 @@ public class UserManagementController {
 		return "index";
 	}
 	
-	@RequestMapping("/admin")
+	/*@RequestMapping("/admin")
 	String userDetails(ModelMap map){
 		map.addAttribute("users", userRepository.findAll());
 		//map.addAttribute("offers",GoodRepository.findAll());
 		return "admin";
+	}  */
+	
+	@RequestMapping("/userDetails")
+	String userDetails(ModelMap map){
+		map.addAttribute("userDetails", userRepository.findAll());
+		return "userDetails";
 	}
 	
 	@RequestMapping("/data")
