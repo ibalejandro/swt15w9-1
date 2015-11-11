@@ -1,4 +1,4 @@
-= Zeiterfassung für Gruppe 09
+﻿= Zeiterfassung für Gruppe 09
 
 Notieren Sie die Zeit in Minuten für jeden Entwickler und für Team-Treffen pro Woche.
 Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen mit Teamkollegen und sonstige auf das Praktikum bezogene Aufgaben.
@@ -7,10 +7,10 @@ Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen
 [option="headers"]
 |===
 |Von   |Bis   |Alejandro  |Ferdinand  |Friederike |Kilian     |Lennart    |Mario      |Meeting
-|13.10 |18.10 |3h         |           |           |           |3h         |3h         |3h
-|19.10 |25.10 |6h         |           |           |           |6h         |6h 10min   |2h
-|26.10 |01.11 |20h 30min  |           |           |           |24h  25min |23h 20min  |10h 25min
-|02.11 |08.11 |           |           |           |           |23h  30min |11h 45min  |2h 5min
+|13.10 |18.10 |3h         |           |           |3h         |3h         |3h         |3h
+|19.10 |25.10 |6h         |           |           |6h         |6h         |6h 10min   |2h
+|26.10 |01.11 |20h 30min  |           |           |17h        |24h  25min |23h 20min  |10h 25min
+|02.11 |08.11 |           |           |           |10h        |23h  30min |11h 45min  |2h 5min
 |09.10 |15.11 |           |           |           |           |           |           |
 |16.11 |22.11 |           |           |           |           |           |           |
 |23.11 |29.11 |           |           |           |           |           |           |
