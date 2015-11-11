@@ -15,7 +15,6 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
 		
 		<title th:text="${title}">Refugee App</title>
 		
@@ -25,7 +24,7 @@
 	</head>
 	
 	<body>
-		<nav th:fragment="navigation" class="top-bar">
+		<nav th:fragment="navigation" class="top-bar" data-topbar="topbar">
 			<ul class="title-area">
 			<!-- Title Area -->
 				<li class="name">
@@ -36,7 +35,7 @@
 				<li class="toggle-topbar menu-icon"> <a href="#"> <span>menu</span> </a> </li>
 			</ul>
 
-			<section class="top-bar-section">
+			<section class="top-bar-section" >
 			<!-- Right Nav Section -->
 				<ul class="right">
 					<li class="divider"></li>

@@ -5,7 +5,6 @@
 	TODO:
 		- iterration Object setzen
 		- in navigation.html die Navigation fertig machen
-			und den include wieder "einbauen"
 		- Footer erstellen einfügen und includen.
 		- Kommentare löschen
 -->
@@ -24,11 +23,10 @@
 	</head>
 	
 	<body>
-		<!--
 		<nav th:include="navigation :: navigation"></nav>
-		-->
+
 		<div th:each="content : ${}" class="row">
-			<div class="small-12 colums medium-6 columns end">
+			<div class="small-12 colums medium-6 columns">
 				<div th:include="item :: item">
 				</div>
 			</div>
