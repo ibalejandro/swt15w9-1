@@ -238,15 +238,19 @@ public class CreateNewUser {
 	
 	
 	@RequestMapping(value = "/submit_userdata1/user/{user}", method = RequestMethod.POST)
-	public String submit_userdata1(@PathVariable String user, @LoggedIn Optional<UserAccount> userAccount, @RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp) 
+	public String submit_userdata1(@PathVariable String user, @RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp) 
 	{
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
 		
 		System.out.println(Name);
 		System.out.println(Firstname);
 		System.out.println(Adresstyp);
 		
-	/*	if(userAccount.isPresent()){
-			UserAccount LoggUser=userAccount.get();  */
+	    if(userAccountManager.findByUsername(user).isPresent()){
+			UserAccount LoggUser=userAccountManager.findByUsername(user).get();
 		
 			if (Name.isEmpty() ||  Firstname.isEmpty() || Adresstyp.isEmpty())
 			{
@@ -255,9 +259,9 @@ public class CreateNewUser {
 			
 			System.out.println("user="+user);
 		
-		//	LoggUser.setLastname(Name);
-		//	LoggUser.setFirstname(Firstname);
-		//	userAccountManager.save(LoggUser);
+			LoggUser.setLastname(Name);
+        	LoggUser.setFirstname(Firstname);
+			userAccountManager.save(LoggUser);
 				
 			if (Adresstyp.equals("Refugees_home"))
 			{
@@ -270,22 +274,26 @@ public class CreateNewUser {
 			}
 		
 			return "redirect:/new_user_aboutuser1/user/{user}";
-		//}
-		//return "error";
+		}
+		return "error";
 		
 	}
 	
 	@RequestMapping(value = "/submit_userdata2a/user/{user}", method = RequestMethod.POST)
-	public String submit_userdata2a(@PathVariable String user, @LoggedIn Optional<UserAccount> userAccount,@RequestParam("flh_name")String Flh_name, @RequestParam("citypart")String Citypart, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
+	public String submit_userdata2a(@PathVariable String user, @RequestParam("flh_name")String Flh_name, @RequestParam("citypart")String Citypart, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
 	{
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
+		
 		System.out.println(Flh_name);
 		System.out.println(Citypart);
 		System.out.println(Postcode);
 		System.out.println(City);
 		
-		
-		if(userAccount.isPresent()){
-			UserAccount LoggUser=userAccount.get();
+		if(userAccountManager.findByUsername(user).isPresent()){
+			UserAccount LoggUser=userAccountManager.findByUsername(user).get();
 		
 		//KLASSE FLÜCHTLINGSHEIM UND INTERFACE LOCATION!!!!!!!!!!!!!!
 			if (Flh_name.isEmpty() ||  Citypart.isEmpty() || Postcode.isEmpty() || City.isEmpty())
@@ -302,15 +310,20 @@ public class CreateNewUser {
 	}
 	
 	@RequestMapping(value = "/submit_userdata2b/user/{user}", method = RequestMethod.POST)
-	public String submit_userdata2b(@PathVariable String user, @LoggedIn Optional<UserAccount> userAccount, @RequestParam("street")String Street, @RequestParam("housenr")String Housenr, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
+	public String submit_userdata2b(@PathVariable String user, @RequestParam("street")String Street, @RequestParam("housenr")String Housenr, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
 	{
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
+		
 		System.out.println(Street);
 		System.out.println(Housenr);
 		System.out.println(Postcode);
 		System.out.println(City);
 		
-		if(userAccount.isPresent()){
-			UserAccount LoggUser=userAccount.get();
+		if(userAccountManager.findByUsername(user).isPresent()){
+			UserAccount LoggUser=userAccountManager.findByUsername(user).get();
 		
 			if (Street.isEmpty() ||  Housenr.isEmpty() || Postcode.isEmpty() || City.isEmpty())
 			{
