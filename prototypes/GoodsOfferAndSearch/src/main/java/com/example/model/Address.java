@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 public class Address {
 
@@ -45,6 +45,5 @@ public class Address {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
 	
 }

@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>GoodsPrototype</name>
+	<name>GoodsOfferAndSearch</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -49,6 +49,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>net.minidev</groupId>
+        	<artifactId>json-smart</artifactId>
+        	<version>1.2</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-integration</artifactId>
+        </dependency>
 	</dependencies>
 	
 	<build>
@@ -59,26 +68,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<repositories>
-        <repository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>https://repo.spring.io/libs-release</url>
-        </repository>
-        <repository>
-            <id>org.jboss.repository.releases</id>
-            <name>JBoss Maven Release Repository</name>
-            <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>https://repo.spring.io/libs-release</url>
-        </pluginRepository>
-    </pluginRepositories>	
 
 </project>
