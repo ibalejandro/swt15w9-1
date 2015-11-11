@@ -29,13 +29,15 @@ _Kurzer Überblick über Ihre grundlegenden Entscheidungen und Lösungsansätze,
 * ein Dialog besteht nur aus zwei Personen
 
 == Bausteinsicht
-* Package-Diagramme
+_Package-Diagramme_
+
+image::images/TopLevel-Architektur.jpg[]
 
 == Entwurfsentscheidungen
-* Architektur
-* Verwendete Muster
-* Persistenz
-* Benutzeroberfläche
+_Architektur, Verwendete Muster, Persistenz, Benutzeroberfläche_
+
+* Die Benutzeroberfläche wird durch dynamische Webseiten mithilfe von Spring realisiert
+* Die Software-Architektur orientiert sich an dem Model-View-Controller Pattern
 
 [appendix]
 == Glossar
