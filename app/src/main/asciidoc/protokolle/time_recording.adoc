@@ -1,0 +1,24 @@
+= Zeiterfassung für Gruppe 09
+
+Notieren Sie die Zeit in Minuten für jeden Entwickler und für Team-Treffen pro Woche.
+Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen mit Teamkollegen und sonstige auf das Praktikum bezogene Aufgaben.
+
+// See http://asciidoctor.org/docs/user-manual/#tables
+[option="headers"]
+|===
+|Von   |Bis   |Alejandro  |Ferdinand  |Friederike |Kilian     |Lennart    |Mario      |Meeting
+|13.10 |18.10 |3h         |           |           |           |3h         |3h         |3h
+|19.10 |25.10 |6h         |           |           |           |6h         |6h 10min   |2h
+|26.10 |01.11 |20h 30min  |           |           |           |24h  25min |23h 20min  |10h 25min
+|02.11 |08.11 |           |           |           |           |23h  30min |11h 45min  |2h 5min
+|09.10 |15.11 |           |           |           |           |           |           |
+|16.11 |22.11 |           |           |           |           |           |           |
+|23.11 |29.11 |           |           |           |           |           |           |
+|30.11 |06.12 |           |           |           |           |           |           |
+|07.12 |13.12 |           |           |           |           |           |           |
+|14.12 |20.12 |           |           |           |           |           |           |
+|21.12 |03.01 |           |           |           |           |           |           |
+|04.01 |10.01 |           |           |           |           |           |           |
+|11.01 |15.01 |           |           |           |           |           |           |
+|18.01 |22.01 |           |           |           |           |           |           |
+|===
