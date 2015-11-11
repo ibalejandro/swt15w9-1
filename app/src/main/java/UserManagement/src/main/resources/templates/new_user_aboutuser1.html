@@ -1,7 +1,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <body>
-<form action="/submit_userdata1" method="post">
-  <h3>About You</h3>
+<form th:action="@{/submit_userdata1/user/} + ${user}" method="post">
+  <h3 th:text="@{About You: &nbsp; } + ${user}"> ABOUT</h3>
   <p>Name:</p>
   <p>
     <input name="name" type="text"/>

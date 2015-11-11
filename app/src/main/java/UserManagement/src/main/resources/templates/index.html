@@ -12,7 +12,7 @@
 			<ul>
 				<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/userDetails}" >Kundenliste</a></li>
 				<li sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/data}" > Eigene Daten</a></li>
-				<li sec:authorize="!isAuthenticated()" ><a th:href="@{/login}" >Login</a></li>
+				<li sec:authorize="!isAuthenticated()" ><a th:href="@{/login}" >Login</a> <br/> <a th:href="@{/new_user_data}" >Registrieren</a></li>
 
 				<li sec:authorize="isAuthenticated()">
 					<form th:action="@{/logout}" method="post">

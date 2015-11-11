@@ -6,6 +6,7 @@ import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,9 +57,9 @@ public class CreateNewUser {
 		
 	}
 	
-	@RequestMapping({"/new_user_aboutuser1"})
-	public String new_user1(){
-      return "new_user_aboutuser1";		
+	@RequestMapping({"/new_user_aboutuser1/user/{user}"})
+	public String new_user1(@PathVariable String user){
+      return "new_user_aboutuser1";
 		
 	}
 	
@@ -67,13 +68,13 @@ public class CreateNewUser {
       return "redirect:new_user_aboutuser1";				
 	}
 	
-	@RequestMapping({"/new_user_aboutuser2a"})
-	public String new_user2a(){
+	@RequestMapping({"/new_user_aboutuser2a/user/{user}"})
+	public String new_user2a(@PathVariable String user){
       return "/new_user_aboutuser2a";				
 	}
 	
-	@RequestMapping({"/new_user_aboutuser2b"})
-	public String new_user2b(){
+	@RequestMapping({"/new_user_aboutuser2b/user/{user}"})
+	public String new_user2b(@PathVariable String user){
       return "/new_user_aboutuser2b";				
 	}
 	
@@ -170,6 +171,13 @@ public class CreateNewUser {
 	@RequestMapping(value = "/create_temp_new_user", method = RequestMethod.POST)
 	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword) 
 	{		
+		
+		System.out.println(Mail);
+		System.out.println(Username);
+		System.out.println(Password);
+		System.out.println(RePassword);
+		
+		
 		if (Mail.isEmpty() ||  Username.isEmpty() || Password.isEmpty())
 		{
 			return "errorpage0_empty";
@@ -179,6 +187,25 @@ public class CreateNewUser {
 		{
 			return "errorpage0_wrongpw";
 		}
+		
+		if (Username.equals("new_user"))
+		{
+			String e_descrition = "Invalid Username.";
+			System.out.println("ERROR: "+e_descrition);
+			
+			
+			return "error";
+		}
+		
+		if (userAccountManager.findByUsername(Username).isPresent())
+		{
+			String e_descrition = "Username already in use.";
+			System.out.println("ERROR: "+e_descrition);
+			
+			return "error";
+		}
+		
+		
 		UserAccount userAccount = userAccountManager.create(Username, Password,
 				new Role("ROLE_NORMALE"));
 		userAccountManager.save(userAccount);
@@ -205,45 +232,57 @@ public class CreateNewUser {
             System.err.println(ex.getMessage());
         }   */
 		
-		return "redirect:/new_user_aboutuser1?user="+userAccount.getUsername(); /*"index"; */
+		return "redirect:/new_user_aboutuser1/user/"+userAccount.getUsername(); /*"index"; */
 	}
 	
 	
 	
-	@RequestMapping(value = "/submit_userdata1", method = RequestMethod.POST)
-	public String submit_userdata1(@LoggedIn Optional<UserAccount> userAccount, @RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp) 
+	@RequestMapping(value = "/submit_userdata1/user/{user}", method = RequestMethod.POST)
+	public String submit_userdata1(@PathVariable String user, @LoggedIn Optional<UserAccount> userAccount, @RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp) 
 	{
-		if(userAccount.isPresent()){
-			UserAccount LoggUser=userAccount.get();
+		
+		System.out.println(Name);
+		System.out.println(Firstname);
+		System.out.println(Adresstyp);
+		
+	/*	if(userAccount.isPresent()){
+			UserAccount LoggUser=userAccount.get();  */
 		
 			if (Name.isEmpty() ||  Firstname.isEmpty() || Adresstyp.isEmpty())
 			{
 				return "errorpage1_empty";
 			}
+			
+			System.out.println("user="+user);
 		
-			LoggUser.setLastname(Name);
-			LoggUser.setFirstname(Firstname);
-			userAccountManager.save(LoggUser);
+		//	LoggUser.setLastname(Name);
+		//	LoggUser.setFirstname(Firstname);
+		//	userAccountManager.save(LoggUser);
 				
 			if (Adresstyp.equals("Refugees_home"))
 			{
-				return "redirect:/new_user_aboutuser2a";
+				return "redirect:/new_user_aboutuser2a/user/{user}";
 			}
 
 			if (Adresstyp.equals("Wohnung"))
 			{
-				return "redirect:/new_user_aboutuser2b";
+				return "redirect:/new_user_aboutuser2b/user/{user}";
 			}
 		
-			return "redirect:/new_user_aboutuser1";
-		}
-		return "error";
+			return "redirect:/new_user_aboutuser1/user/{user}";
+		//}
+		//return "error";
 		
 	}
 	
-	@RequestMapping(value = "/submit_userdata2a", method = RequestMethod.POST)
-	public String submit_userdata2a(@LoggedIn Optional<UserAccount> userAccount,@RequestParam("flh_name")String Flh_name, @RequestParam("citypart")String Citypart, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
+	@RequestMapping(value = "/submit_userdata2a/user/{user}", method = RequestMethod.POST)
+	public String submit_userdata2a(@PathVariable String user, @LoggedIn Optional<UserAccount> userAccount,@RequestParam("flh_name")String Flh_name, @RequestParam("citypart")String Citypart, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
 	{
+		System.out.println(Flh_name);
+		System.out.println(Citypart);
+		System.out.println(Postcode);
+		System.out.println(City);
+		
 		
 		if(userAccount.isPresent()){
 			UserAccount LoggUser=userAccount.get();
@@ -254,17 +293,22 @@ public class CreateNewUser {
 				return "errorpage2a_empty";
 			}
 			Address address= new Address(Flh_name, Citypart, Postcode, City);
-			User user=new User(LoggUser, address);
-			userRepository.save(user);
+			User user_1=new User(LoggUser, address);
+			userRepository.save(user_1);
 		
 			return "redirect:/user";
 		}
 		return "error";
 	}
 	
-	@RequestMapping(value = "/submit_userdata2b", method = RequestMethod.POST)
-	public String submit_userdata2b(@LoggedIn Optional<UserAccount> userAccount, @RequestParam("street")String Street, @RequestParam("housenr")String Housenr, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
+	@RequestMapping(value = "/submit_userdata2b/user/{user}", method = RequestMethod.POST)
+	public String submit_userdata2b(@PathVariable String user, @LoggedIn Optional<UserAccount> userAccount, @RequestParam("street")String Street, @RequestParam("housenr")String Housenr, @RequestParam("postcode")String Postcode, @RequestParam("city")String City) 
 	{
+		System.out.println(Street);
+		System.out.println(Housenr);
+		System.out.println(Postcode);
+		System.out.println(City);
+		
 		if(userAccount.isPresent()){
 			UserAccount LoggUser=userAccount.get();
 		
@@ -273,8 +317,8 @@ public class CreateNewUser {
 				return "errorpage2b_empty";
 			}
 			Address address= new Address(Street, Housenr, Postcode, City);
-			User user=new User(LoggUser, address);
-			userRepository.save(user);
+			User user_1=new User(LoggUser, address);
+			userRepository.save(user_1);
 		
 			return "redirect:/user";
 		}
