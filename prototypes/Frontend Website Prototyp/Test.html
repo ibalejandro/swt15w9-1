@@ -1,30 +1,21 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html class="no-js" lang="de">
-
-<!--
-	TODO:
-		- Navigation weiter anpassen
-		- Template mehr zum Template ausbauen
-		-
-		- Variablen hinzufügen
-		- th:href Mapping festlegen.
-		- Kommentare löschen
--->
 
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="content-type" content="text/html"/>
 		
 		<title th:text="${title}">Refugee App</title>
 		
 		<link rel="stylesheet" href="css/foundation.css"/>
 		<link rel="stylesheet" href="css/app.css"/>
 		<script src="js/vendor/modernizr.js"></script>
+		
 	</head>
 	
 	<body>
-		<nav th:fragment="navigation" class="top-bar" data-topbar="topbar">
+				<nav th:fragment="navigation" class="top-bar" data-topbar="topbar">
 			<ul class="title-area">
 			<!-- Title Area -->
 				<li class="name">
@@ -83,11 +74,34 @@
 			</section>
 			
 		</nav>
-
+		
+		<div th:each="content : ${}" class="row">
+			<div class="small-12 colums medium-6 columns">
+				<div th:fragment="item" class="item">
+			<a th:href="@{'/detail/' + ${content.identifier}}" class="item__link" href="#">
+				<div class = "item__title">
+					<h3 th:text="${content.name}" class = "item__title__text">Title</h3>
+				</div>
+				<div class = "item__container">
+					<div class="item__img">
+						<img th:src="@{'img/'+${content.image}}" class="hide-for-small-only" src="img/Koala.jpg"/>
+					</div>
+					<div class= "item__description">
+						<p th:text="${content.desctiption}" class="item__description__text">Ich bin eine Lame Kurzbeschreibung. Der Koala wurde kaum genutzt!</p>
+					</div>
+					<div class="item__info">
+						<p th:text="${content.location}" class="item__info__text">01127-Dresden</p>
+					</div>
+				</div>
+			</a>
+		</div>
+			</div>
+		</div>
 		
 	
 	
 	
+
 		<script src="js/vendor/jquery.js"></script>
 		<script src="js/foundation.min.js"></script>
 		<script>
