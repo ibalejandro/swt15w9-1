@@ -89,7 +89,7 @@ public class GoodsOfferAndSearchApplication {
             log.info("");
 
 			// Fetch founded goods by a name.
-			log.info("Goods found with findByName('Bicycle'):");
+			log.info("Goods found with findByName('biC'):");
 			log.info("-------------------------------");
 			for (GoodEntity good :
 				 repository.findByNameStartingWithIgnoreCase("biC")) {

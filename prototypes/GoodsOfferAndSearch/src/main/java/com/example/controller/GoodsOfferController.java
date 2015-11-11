@@ -25,7 +25,7 @@ public class GoodsOfferController {
 		return "home";
     }
 	
-	@RequestMapping(value = "/saveGood", method = RequestMethod.POST)
+	@RequestMapping(value = "/offeredGood", method = RequestMethod.POST)
     public String saveGood(HttpServletRequest request, Model model) {
 		String name = request.getParameter("name");
     	String description = request.getParameter("description");
