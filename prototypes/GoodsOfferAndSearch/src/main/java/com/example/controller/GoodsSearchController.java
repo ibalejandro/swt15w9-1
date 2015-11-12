@@ -15,7 +15,6 @@ public class GoodsSearchController {
 	
 	@RequestMapping(value = "/searchResultsByName", method = RequestMethod.POST)
     public String searchGoodByName(HttpServletRequest request, Model model) {
-    	
 		String name = request.getParameter("name");
 		
 		/*
@@ -30,7 +29,6 @@ public class GoodsSearchController {
 	
 	@RequestMapping(value = "/searchResultsByTag", method = RequestMethod.POST)
     public String searchGoodByTag(HttpServletRequest request, Model model) {
-    	
 		String tag = request.getParameter("tag");
 		
 		/*
@@ -38,8 +36,8 @@ public class GoodsSearchController {
 		 * user can see which tag he typed.
 		 */
 		model.addAttribute("resultParameter", tag);
-		model.addAttribute("result", repository
-						   .findByAttributeAndValue(tag));
+		model.addAttribute("result",
+						   repository.findByTagsContainingIgnoreCase(tag));
 		return "searchResults";
     }
 
