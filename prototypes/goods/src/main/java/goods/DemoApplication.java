@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DemoApplication {
 
-	public static String[] languages[];
+	public static String languages[];
 	
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -21,17 +21,17 @@ public class DemoApplication {
     
     @PostConstruct
     void startup(){
-    	String[] languages={"Deutsch","English"};
+    	languages=new String[]{"Deutsch","English"};
     	Goods Fahrrad = new Goods();
-    	TexBlock Yellow = new TexBlock(new String[]{"Gelb","Yellow"} );
+    	TexBlock Yellow = new TexBlock(new String[]{"Gelb","Yellow"},new TexBlock[]{});
     	DB.save(Yellow);
-    //	DB.save(new TextBlock(new String[]{"Farbe","Colour"}));
-    //	
-    //	try{System.out.println(DB.findOne(0L).get().getID());
-    //	
-    //	} catch (NoSuchElementException e){
-    //		System.err.println("NoSuchElementException: "+e.getMessage());
-    //	}
+    	TexBlock Colour = new TexBlock(new String[]{"Farbe","Colour"},new TexBlock[]{Yellow});
+    	DB.save(Colour);
+    		
+    	for(TexBlock tex:DB.findAll()){
+    		System.out.println(tex.getTranslation(0));
+    		System.out.println(tex.getTranslation(1));
+    	}
     		
     }
 }
