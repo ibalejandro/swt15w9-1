@@ -13,7 +13,7 @@ public class GoodsSearchController {
 	
 	@Autowired GoodRepository repository;
 	
-	@RequestMapping(value = "/searchResults", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchResultsByName", method = RequestMethod.POST)
     public String searchGoodByName(HttpServletRequest request, Model model) {
     	
 		String name = request.getParameter("name");
@@ -25,6 +25,21 @@ public class GoodsSearchController {
 		model.addAttribute("resultParameter", name);
 		model.addAttribute("result", repository
 						   .findByNameStartingWithIgnoreCase(name));
+		return "searchResults";
+    }
+	
+	@RequestMapping(value = "/searchResultsByTag", method = RequestMethod.POST)
+    public String searchGoodByTag(HttpServletRequest request, Model model) {
+    	
+		String tag = request.getParameter("tag");
+		
+		/*
+		 * The parameter for the search is being sent to the view, so that the
+		 * user can see which tag he typed.
+		 */
+		model.addAttribute("resultParameter", tag);
+		model.addAttribute("result", repository
+						   .findByAttributeAndValue(tag));
 		return "searchResults";
     }
 
