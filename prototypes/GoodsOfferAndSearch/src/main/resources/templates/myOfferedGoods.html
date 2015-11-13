@@ -25,9 +25,14 @@
 								<p th:text="${good.tags}"></p>
 							</div>
 							<br></br>
-							 <form th:action="@{/deletedGood}" method="post">
+							<form th:action="@{/deletedGood}" method="post">
 						    	<input type="hidden" name="id" th:value="${good.id}"/>
 						    	<input type="submit" value="Delete"/>
+						    </form>
+						    <br></br>
+							 <form th:action="@{/update}" method="post">
+						    	<input type="hidden" name="id" th:value="${good.id}"/>
+						    	<input type="submit" value="Update"/>
 						    </form>
 						</div>
 					</div>

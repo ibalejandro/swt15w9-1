@@ -44,9 +44,7 @@ public class GoodsOfferController {
     	
     	GoodEntity goodEntity = good.createGoodEntity(userId);
     	
-    	repository.save(goodEntity);
-		
-		model.addAttribute("result", goodEntity);
+		model.addAttribute("result", repository.save(goodEntity));
 		return "offeredGood";
     }
 

@@ -15,12 +15,14 @@ public class GoodsSearchController {
 	
 	@RequestMapping(value = "/searchResultsByName", method = RequestMethod.POST)
     public String searchGoodByName(HttpServletRequest request, Model model) {
+		String parameterType = "name";
 		String name = request.getParameter("name");
 		
 		/*
-		 * The parameter for the search is being sent to the view, so that the
-		 * user can see which name he typed.
+		 * The type of parameter and the parameter itself for the search are 
+		 * sent to the view, so that the user can see his search criteria.
 		 */
+		model.addAttribute("resultParameterType", parameterType);
 		model.addAttribute("resultParameter", name);
 		model.addAttribute("result", repository
 						   .findByNameStartingWithIgnoreCase(name));
@@ -29,12 +31,14 @@ public class GoodsSearchController {
 	
 	@RequestMapping(value = "/searchResultsByTag", method = RequestMethod.POST)
     public String searchGoodByTag(HttpServletRequest request, Model model) {
+		String parameterType = "tag";
 		String tag = request.getParameter("tag");
 		
 		/*
-		 * The parameter for the search is being sent to the view, so that the
-		 * user can see which tag he typed.
+		 * The type of parameter and the parameter itself for the search are 
+		 * sent to the view, so that the user can see his search criteria.
 		 */
+		model.addAttribute("resultParameterType", parameterType);
 		model.addAttribute("resultParameter", tag);
 		model.addAttribute("result",
 						   repository.findByTagsContainingIgnoreCase(tag));
