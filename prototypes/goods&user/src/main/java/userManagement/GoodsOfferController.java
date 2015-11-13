@@ -46,7 +46,7 @@ public class GoodsOfferController {
 	    	String tagsString = request.getParameter("tags");
 	    	
 	    	//////////////////////////////////////////////////////////////
-	    	if(!userAccount.isPresent()){
+	    	if(!(userAccount.isPresent())){
 	    		return "errorpage0_empty";
 	    	}
 			User user= repositoryUser.findByUserAccount(userAccount.get());
