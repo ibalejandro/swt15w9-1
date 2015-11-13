@@ -1,3 +1,0 @@
-TODO:
-	- style script und weitere verlinkungen überarbeiten
-	- Thyme Leaf ein Bindung über prüfen
