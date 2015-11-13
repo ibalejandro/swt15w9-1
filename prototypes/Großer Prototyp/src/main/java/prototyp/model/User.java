@@ -6,12 +6,15 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.salespointframework.useraccount.UserAccount;
+
+import prototyp.model.GoodEntity;
 
 
 	
@@ -27,6 +30,8 @@ public class User implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL) private Set<Language> languages;
 	private boolean enabled;
 	@OneToOne private UserAccount userAccount;
+	//Einbindung Güter:
+	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
 	  
 	@SuppressWarnings("unused")
 	private User() {} 
@@ -39,7 +44,13 @@ public class User implements Serializable{
 		Set<Language>languages=new HashSet<>();
 	}
 	
+	public void addGood(GoodEntity good){
+		goods.add(good);
+	}
 	
+	public Iterable<GoodEntity> getGoods(){
+		return goods;
+	}
 
 	public Address getLocation() {
 		return location;
