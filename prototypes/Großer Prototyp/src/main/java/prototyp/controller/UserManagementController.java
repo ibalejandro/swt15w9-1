@@ -1,4 +1,4 @@
-package userManagement;
+package prototyp.controller;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import userManagement.model.UserRepository;
+import prototyp.model.UserRepository;
 
 @Controller
 public class UserManagementController {

@@ -1,4 +1,4 @@
-package userManagement.model;
+package prototyp.model;
 
 import org.springframework.data.repository.CrudRepository;
 

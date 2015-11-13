@@ -1,4 +1,4 @@
-package userManagement.model;
+package prototyp.model;
 
 import java.io.Serializable;
 import java.util.HashSet;

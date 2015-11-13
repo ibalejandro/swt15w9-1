@@ -1,4 +1,4 @@
-package userManagement;
+package prototyp.controller;
 
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import userManagement.model.Address;
-import userManagement.model.User;
-import userManagement.model.UserRepository;
+import prototyp.model.Address;
+import prototyp.model.User;
+import prototyp.model.UserRepository;
 
 
 

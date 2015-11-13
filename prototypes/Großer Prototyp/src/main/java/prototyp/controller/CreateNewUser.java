@@ -1,4 +1,4 @@
-package userManagement;
+package prototyp.controller;
 
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -30,9 +30,9 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import userManagement.model.Address;
-import userManagement.model.User;
-import userManagement.model.UserRepository;
+import prototyp.model.Address;
+import prototyp.model.User;
+import prototyp.model.UserRepository;
 
 
 
