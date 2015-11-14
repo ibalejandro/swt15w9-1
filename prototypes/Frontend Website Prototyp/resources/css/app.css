@@ -10,6 +10,51 @@
         height: 1.85rem; } }
 
 
+
+
+.admin{
+	
+}
+.admin__title{
+	
+}
+.admin__table{
+	
+}
+.admin__row{
+	
+}
+.admin__element{
+	
+}
+
+
+.create{
+	
+}
+.create__title{
+	
+}
+.create__label{
+	
+}
+
+
+.data{
+	
+}
+.data__title{
+	
+}
+.data__content{
+	
+}
+.data__link{
+	color = black;
+	margin: 0;
+}
+
+
 .item{
 	margin: 1%;
 	padding: 1%;
@@ -58,6 +103,44 @@
 }
 .item__info__text{
 	font-size: 0.75rem;
+}
+
+
+.login{
+	background-color: silvergray;
+	background-color: silvergray;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+	padding: 1%;
+}
+.login__header{
+	
+}
+.login__header__text{
+	
+}
+.login__error{
+	color: red;
+}
+.login__label{
+
+}
+
+
+.offered{
+	
+}
+.offered__title{
+	
+}
+.offered__label{
+	font-size: 1.5rem;
+	
+}
+.offered__text{
+	margin-left: 2rem;
+	
 }
 
 
@@ -150,86 +233,3 @@
 .single__img--small{
 	
 }
-
-
-.login{
-	background-color: silvergray;
-	background-color: silvergray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-	padding: 1%;
-}
-.login__header{
-	
-}
-.login__header__text{
-	
-}
-.login__error{
-	color: red;
-}
-.login__label{
-
-}
-
-
-.admin{
-	
-}
-.admin__title{
-	
-}
-.admin__table{
-	
-}
-.admin__row{
-	
-}
-.admin__element{
-	
-}
-
-
-.data{
-	
-}
-.data__title{
-	
-}
-.data__content{
-	
-}
-.data__link{
-	color = black;
-	margin: 0;
-}
-
-
-.create{
-	
-}
-.create__title{
-	
-}
-.create__label{
-	
-}
-
-
-.offered{
-	
-}
-.offered__title{
-	
-}
-.offered__label{
-	font-size: 1.5rem;
-	
-}
-.offered__text{
-	margin-left: 2rem;
-	
-}
-
-
