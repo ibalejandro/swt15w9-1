@@ -22,19 +22,28 @@
 	</head>
 	
 	<body>
-		<div th:fragment="item" class="item">
-			<div class = "item__title">
-				<h3 th:text="${good.id}+'. '+${good.name}" class = "item__title__text">Title</h3>
-			</div>
-			<div class = "item__container">
-				<div class= "item__description">
-					<p th:text="${good.description}" class="item__description__text">Ich bin eine Lame Kurzbeschreibung. Der Koala wurde kaum genutzt!</p>
-				</div>
-				<div class= "item__description">
-					<p th:text="${good.tags}" class="item__description__text">Ich bin eine Lame Kurzbeschreibung. Der Koala wurde kaum genutzt!</p>
-				</div>
-				<div class="item__info">
-					<p th:text="${good.userId}" class="item__info__text">01127-Dresden</p>
+		<div th:fragment="item">
+			<div class="small-12 colums medium-6 columns">
+				<div th:fragment="good" th:id="good+${good.id}">
+					<div>
+						<div>
+							<h3 th:text="${good.id}+'. '+${good.name}"></h3>
+						</div>
+						<div>
+							<div>
+								<h4> Description </h4>
+								<p th:text="${good.description}"></p>
+							</div>
+							<div>
+								<h4> Tags </h4>
+								<p th:text="${good.tags}"></p>
+							</div>
+							<div>
+								<h4> User-ID </h4>
+								<p th:text="${good.userId}"></p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
