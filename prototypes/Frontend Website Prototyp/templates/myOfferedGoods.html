@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="content-type" content="text/html"/>
+		
+		<link rel="stylesheet" href="../resources/css/foundation.css"/>
+		<link rel="stylesheet" href="../resources/css/app.css"/>
+		<script src="../resources/js/vendor/modernizr.js"></script>
+		
+	    <title> My offered goods </title>
+	</head>
+	<body>
+	
+		
+		<div>
+			<h2> Goods </h2>
+		</div>
+		<div class="row">
+			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
+				<div th:fragment="good" th:id="good+${good.id}">
+					<div class="small-12 colums medium-6 columns">
+						<div>
+							<h3 th:text="${index}+'. '+${good.name}"></h3>
+						</div>
+						<div>
+							<div>
+								<h4> Description </h4>
+								<p th:text="${good.description}"></p>
+							</div>
+							<div>
+								<h4> Tags </h4>
+								<p th:text="${good.tags}"></p>
+							</div>
+							
+							<div class="row">
+								<div class="small-12 medium-6 colums">
+									<form th:action="@{/deletedGood}" method="post">
+										<input type="hidden" name="id" th:value="${good.id}"/>
+										<input class="button" type="submit" value="Delete"/>
+									</form>
+								</div>
+								<div class="small-12 medium-6 colums">
+									<form th:action="@{/update}" method="post">
+										<input type="hidden" name="id" th:value="${good.id}"/>
+										<input class="button" type="submit" value="Update"/>
+									</form>
+							
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

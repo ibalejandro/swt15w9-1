@@ -14,33 +14,33 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta http-equiv="content-type" content="text/html"/>
 		
-		<title th:text="${title}">Refugee App</title>
-		
 		<link rel="stylesheet" href="../resources/css/foundation.css"/>
 		<link rel="stylesheet" href="../resources/css/app.css"/>
 		<script src="../resources/js/vendor/modernizr.js"></script>
+		
+		<title th:text="${title}">Refugee App</title>
 	</head>
 	
 	<body>
 		<div th:fragment="item">
 			<div class="small-12 colums medium-6 columns">
 				<div th:fragment="good" th:id="good+${good.id}">
-					<div>
-						<div>
-							<h3 th:text="${good.id}+'. '+${good.name}"></h3>
+					<div class="gooditem--multi">
+						<div  class="gooditem__head--multi">
+							<h3 th:text="${good.id}+'. '+${good.name}" class="gooditem__title--multi"></h3>
 						</div>
-						<div>
+						<div class="gooditem__body--multi">
 							<div>
-								<h4> Description </h4>
-								<p th:text="${good.description}"></p>
+								<label class="gooditem__label--multi"> Description </label>
+								<p th:text="${good.description}" class="gooditem__text--multi"></p>
 							</div>
 							<div>
-								<h4> Tags </h4>
-								<p th:text="${good.tags}"></p>
+								<label class="gooditem__label--multi"> Tags </label>
+								<p th:text="${good.tags}" class="gooditem__text--multi"></p>
 							</div>
 							<div>
-								<h4> User-ID </h4>
-								<p th:text="${good.userId}"></p>
+								<label class="gooditem__label--multi"> User-ID </label>
+								<p th:text="${good.userId}" class="gooditem__text--multi"></p>
 							</div>
 						</div>
 					</div>
