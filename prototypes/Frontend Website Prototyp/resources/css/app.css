@@ -206,18 +206,6 @@
 
 }
 
-
-.create{
-	
-}
-.create__title{
-	
-}
-.create__label{
-	
-}
-
-
 .admin{
 	
 }
@@ -246,4 +234,31 @@
 .data__link{
 	color = black;
 	margin: 0;
+}
+
+
+.create{
+	
+}
+.create__title{
+	
+}
+.create__label{
+	
+}
+
+
+.offered{
+	
+}
+.offered__title{
+	
+}
+.offered__label{
+	font-size: 1.5rem;
+	
+}
+.offered__text{
+	margin-left: 2rem;
+	
 }

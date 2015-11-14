@@ -1,35 +1,29 @@
-<!doctype html>
-<html class="no-js" mlns:th="http://www.thymeleaf.org">
-
-<!--
-	TODO:
-		- Thymeleaf einarbeiten
-		- Kommentare löschen
--->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta charset="utf-8"/>
+	    <meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta http-equiv="content-type" content="text/html"/>
 		
-		<title th:text="${title}">Refugee App</title>
+		<title>Home</title>
 		
 		<link rel="stylesheet" href="../resources/css/foundation.css"/>
 		<link rel="stylesheet" href="../resources/css/app.css"/>
 		<script src="../resources/js/vendor/modernizr.js"></script>
-	</head>
-	
-	<body th:each="content : ${offers}" >
-		<nav th:include="navigation :: navigation"></nav>
 		
-		<div class="show-for-small-only">
-			<div th:include="item_single-small :: item">
+	</head>
+	<body>
+		<div>
+			<h2> Goods </h2>
+		</div>
+		<div class="row">
+			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
+				<div class="small-12 medium-6 columns" >
+					<div th:id="good+${good.id}" th:include="goods_item :: item" >
+					</div>
+				</div>
 			</div>
 		</div>
-		
-		<div class="hide-for-small-only">
-			<div th:include="item_single-big :: item">
-			</div>
-		</div>		
 		
 		<script src="../resources/js/vendor/jquery.js"></script>
 		<script src="../resources/js/foundation.min.js"></script>
