@@ -16,21 +16,19 @@
 	<body>
 	
 		<div class="row">
-			<div class="large-12 colums">
-		
-				<div class="all">
+			<div class="small-12 colums">
+				<div>
 					<header>
 						<h1>Kundendaten</h1>
 					</header>
 					
-					
-					<div class="content">
+					<div>
 						<ul>
 							<li sec:authorize="!isAuthenticated()" ><a th:href="@{/login}" >Login</a></li>
 
 							<li sec:authorize="isAuthenticated()">
 								<form th:action="@{/logout}" method="post">
-									<input type="submit" value="Logout" />
+									<input class="button" type="submit" value="Logout" />
 								</form>
 							</li>
 						</ul>
@@ -41,14 +39,18 @@
 						<table sec:authorize="hasRole('ROLE_NORMAL')">			
 							<thead>
 								<tr>
-									<th>Firstname</th><th>Lastname</th><th>Email</th>
+									<th>Firstname</th>
+									<th>Lastname</th>
+									<th>Email</th>
 								</tr>
 							</thead>
+							
 							<tbody>
 									<tr>
-										<td th:text="${userAccount.firstname}">Hans</td><td th:text="${userAccount.lastname}">Mueller</td><td th:text="${userAccount.email}">email</td>
+										<td th:text="${userAccount.firstname}">Hans</td>
+										<td th:text="${userAccount.lastname}">Mueller</td>
+										<td th:text="${userAccount.email}">email</td>
 									</tr>
-																						
 							</tbody>
 						</table>
 					</div>

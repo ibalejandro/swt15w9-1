@@ -5,11 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta http-equiv="content-type" content="text/html"/>
 		
-		<title> Offer </title>
-		
 		<link rel="stylesheet" href="../resources/css/foundation.css"/>
 		<link rel="stylesheet" href="../resources/css/app.css"/>
 		<script src="../resources/js/vendor/modernizr.js"></script>
+		
+		<title> Offer good </title>
     </head>
     <body>
 		<div th:include="navigation :: navigation"></div>
@@ -19,7 +19,7 @@
 				<div class="create">
 					<h1>Offer</h1>
 				
-					<form th:action="@{/offeredGood}" method="post">
+					<form th:action="@{/saveGood}" method="post">
 						<div>
 							<label class="create__label"> Name :</label> 
 							<input type="text" name="name"/>
