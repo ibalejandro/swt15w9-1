@@ -3,3 +3,7 @@ TODO:
 		Dateien müssen dann im Ordner: resiurces/static/resources/{CSS/JS/IMG} liegen. Dort können auch
 		Unterordner verwendet werden.
 	- Thyme Leaf ein Bindung über prüfen
+	
+FRAGEN:
+	- userDetails.html notwendig? wir haben eine admin.html Seite, welche diesen Zweck erfüllt.
+	
