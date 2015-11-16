@@ -5,6 +5,7 @@ TODO:
 	
 Templates:
 	- data.html						Style
+	- navigation.html				Weitere Links einfügen, und überarbeiten
 	- error.html 					komplett
 	- errorpage0_empty.html 		komplett
 	- errorpage0_wrongpw.html 		komplett
@@ -17,9 +18,8 @@ Templates:
 	- new_user_aboutuser2b.html 	komplett
 	- new_user_data.html 			komplett
 	- reCAPTCHA.html 				komplett
-	- userDetails.html 				Style
 	- validation_success.html 		komplett
 	
 FRAGEN:
-	- userDetails.html notwendig? wir haben eine admin.html Seite, welche diesen Zweck erfüllt.
+
 	
