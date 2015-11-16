@@ -5,19 +5,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta http-equiv="content-type" content="text/html"/>
 		
-		<title th:text="${title}">offer Good</title>
+		<link rel="stylesheet" href="../resources/css/foundation.css"/>
+		<link rel="stylesheet" href="../resources/css/app.css"/>
+		<script src="../resources/js/vendor/modernizr.js"></script>
 		
-		<link rel="stylesheet" href="css/foundation.css"/>
-		<link rel="stylesheet" href="css/app.css"/>
-		<script src="js/vendor/modernizr.js"></script>
+		<title> Offer </title>
     </head>
     <body>
+	
+		<div th:include="navigation :: navigation"></div>
+		
 		<div class = "row">
-			<div class = "large-12 columns"">
+			<div class = "small-12 columns">
+				
 				<div class="create">
-					<h1 class="create__title"> Good </h2>
-					
-					<form th:action="@{/saveGood}" method="post">
+					<h1 class="create__title">Offer</h1>
+				
+					<form th:action="@{/offeredGood}" method="post">
 						<div>
 							<label class="create__label"> Name :</label> 
 							<input type="text" name="name"/>
@@ -30,7 +34,7 @@
 						
 						<div>
 							<label class="create__label"> Tags:</label>
-							<input type="text" name="tags"/> 
+							<input type="text" name="tags" placeholder="Example: Winter, Rain, Cold"/> 
 						</div>
 						
 						<div>
@@ -38,10 +42,12 @@
 						</div>
 					</form>
 				</div>
+				
 			</div>
 		</div>
-		<script src="js/vendor/jquery.js"></script>
-		<script src="js/foundation.min.js"></script>
+		
+		<script src="../resources/js/vendor/jquery.js"></script>
+		<script src="../resources/js/foundation.min.js"></script>
 		<script>
 			$(document).foundation();
 		</script>
