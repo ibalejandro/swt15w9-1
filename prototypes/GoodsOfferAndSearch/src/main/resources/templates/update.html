@@ -1,20 +1,57 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title> Update </title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="content-type" content="text/html"/>
+    
+    <link rel="stylesheet" href="../resources/css/foundation.css"/>
+    <link rel="stylesheet" href="../resources/css/app.css"/>
+    <script src="../resources/js/vendor/modernizr.js"></script>
+    
+        <title> Update </title>    
+  </head>
     <body>
-        <form th:action="@{/updatedGood}" method="post">
-        	<h2> Good </h2>
-            <div><label> Name : <input type="text" name="name" th:value="*{result.name}"/>  </label></div>
-            <br></br>
-            <div><label> Description: <input type="text" name="description" th:value="*{result.description}"/> </label></div>
-            <br></br>
-            <div><label> Tags: <input type="text" name="tags" th:value="*{parsedTags}"/> </label></div>
-	        <br></br>
-	        <input type="hidden" name="id" th:value="${result.id}"/>
-	        <div><input type="submit" value="Update"/></div>
-        </form>
+  
+        <div th:include="navigation :: navigation"></div>
+    
+    <div class = "row">
+      <div class = "small-12 columns">
+        
+        <div class="create">
+          <h1 class="create__title"> Good </h1>
+          
+          <form th:action="@{/updatedGood}" method="post">
+            <div>
+              <label class="create__label"> Name : </label>
+              <input type="text" name="name" th:value="*{result.name}"/>
+            </div>
+
+            <div>
+              <label class="create__label"> Description: </label>
+              <input type="text" name="description" th:value="*{result.description}"/> </div>
+
+            <div>
+              <label class="create__label"> Tags: </label>
+              <input type="text" name="tags" th:value="*{parsedTags}"/> 
+            </div>
+            
+            
+            <input type="hidden" name="id" th:value="${result.id}"/>
+            
+            <div>
+              <input class="button" type="submit" value="Update"/>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+    
+    <script src="../resources/js/vendor/jquery.js"></script>
+    <script src="../resources/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
     </body>
 </html>
