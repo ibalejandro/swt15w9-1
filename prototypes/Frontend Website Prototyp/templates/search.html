@@ -12,7 +12,7 @@
     </head>
 	
     <body>
-		<div th:fragment="search">
+		<div th:fragment="search1">
 			<form th:action="@{/searchResultsByName}" class="has-form" method="post">
 				<div class="row collapse">
 					<div class="large-8 small-9 columns">
@@ -23,7 +23,8 @@
 					</div>
 				</div>
 			</form>
-			
+		</div>
+		<div th:fragment="search2">
 			<form th:action="@{/searchResultsByTag}" class="has-form" method="post">
 			<div class="row collapse">
 				<div class="large-8 small-9 columns">
