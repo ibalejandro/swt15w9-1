@@ -20,3 +20,4 @@ Thumbs.db
 # output directory
 target/
 *.odp#
+prototypes/new_user2/config/application.properties
