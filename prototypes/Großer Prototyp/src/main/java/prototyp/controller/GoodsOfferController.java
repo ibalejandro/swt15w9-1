@@ -38,9 +38,15 @@ public class GoodsOfferController {
 	}
 	/////////////////////////////////////////////////////////end
 	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String listAllGoods(Model model) {
+        model.addAttribute("result", repository.findAll());
+				return "home";
+   }
+
 	@RequestMapping(value = "/saveGood", method = RequestMethod.POST)
 	    public String saveGood(HttpServletRequest request, Model model, @LoggedIn Optional<UserAccount> userAccount) {//!!!!
-			String name = request.getParameter("name");
+				String name = request.getParameter("name");
 	    	String description = request.getParameter("description");
 	    	String tagsString = request.getParameter("tags");
 	    	
@@ -48,11 +54,11 @@ public class GoodsOfferController {
 	    	if(!(userAccount.isPresent())){
 	    		return "errorpage0_empty";
 	    	}
-			User user= repositoryUser.findByUserAccount(userAccount.get());
+				User user= repositoryUser.findByUserAccount(userAccount.get());
 	    	//////////////////////////////////////////////////////////////end
 	    	
 	    	Set<String> tags = new HashSet<String>
-	    					   (Arrays.asList(tagsString.split(", ")));
+	    					   				 (Arrays.asList(tagsString.split(", ")));
 	    	
 	    	GoodEntity good = new GoodEntity(name, description, tags);
 	    
@@ -63,19 +69,14 @@ public class GoodsOfferController {
 	    	 */
 	    	long userId = 1;
 	    	
-	    	repository.save(good);
+	    	GoodEntity savedGood = repository.save(good);
 	    	///////////////////////////////////////////////////hinzufügen in User:
-	    	user.addGood(good);
+	    	user.addGood(savedGood);
 	    	////////////////////////////////////////////////////////////end
 	    	
 			
-			model.addAttribute("result", repository.findAll());
-			return "offeredGood";
+				model.addAttribute("result", savedGood);
+				return "offeredGood";
 	    }
 	
-		@RequestMapping(value = "/listAllGoods", method = RequestMethod.GET)
-	    public String listAllGoods(Model model) {
-	        model.addAttribute("result", repository.findAll());
-			return "home";
-	    }
 	}

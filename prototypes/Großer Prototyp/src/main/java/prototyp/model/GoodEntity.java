@@ -51,12 +51,70 @@ public class GoodEntity implements Serializable {
     	//this.user = user;
     }
     
+    /*
+     * This method returns all the tags in a String, in which they are
+     * separated by commas.
+     */
+    public String getTagsAsString() {
+      String tagsAsString = "";
+      if (!tags.isEmpty()) {
+        for (String tag : tags) tagsAsString += tag + ", ";
+        // This statement eliminates the last ", ".
+        tagsAsString = tagsAsString.substring(0, tagsAsString.length()-2);
+      }
+      
+      return tagsAsString;
+    }
     
+    //This method shows a good in JSON format.
     @Override
     public String toString() {
-        return String.format("Good = [id = %d], [name = %s], [description = %s]"
-                		     + ", [tags = %S], [user_id = %d]", id, name,
-                		     description, tags.toString(), userId);
+        return String.format("{\"id\": \"%d\", \"name\": \"%s\", "
+                             + "\"description\": \"%s\", \"tags\": \"%s\", "
+                             + "\"userId\": \"%d\"}", id, name, description, 
+                             tags.toString(), userId);
     }
+
+    public long getId() {
+      return id;
+    }
+    
+    public void setId(long id) {
+      this.id = id;
+    }
+
+    public String getName() {
+      return name;
+    }
+    
+    public void setName(String name) {
+      this.name = name;
+    }
+
+    public String getDescription() {
+      return description;
+    }
+    
+    public void setDescription(String description) {
+      this.description = description;
+    }
+
+    public Set<String> getTags() {
+      return tags;
+    }
+    
+    public void setTags(Set<String> tags) {
+      this.tags = tags;
+    }
+
+    /*
+    public long getUserId() {
+      return userId;
+    }
+    
+    public void setUserId(long userId) {
+      this.userId = userId;
+    }
+    */
 
 }
