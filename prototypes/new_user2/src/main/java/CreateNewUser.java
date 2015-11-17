@@ -8,19 +8,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+
 
 @Controller
 public class CreateNewUser {	
@@ -108,6 +106,22 @@ public class CreateNewUser {
 		
 		return response.toString();
 
+	}
+	
+	@Autowired
+	private MailSender mailSender;
+	
+	private void Mailsenden(String SendTo, String Subject, String Text)
+	{
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(SendTo);
+		message.setSubject(Subject);
+		message.setText(Text);
+		mailSender.send(message);
+		
+		return;
+		
 	}
 	
 	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
