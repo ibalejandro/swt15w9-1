@@ -3,7 +3,6 @@ package prototyp.model;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.salespointframework.useraccount.UserAccount;
 
 @SuppressWarnings("serial")
@@ -27,7 +25,11 @@ public class GoodEntity implements Serializable {
 	
 	private String name;
 	private String description;
-	//@ManyToOne(targetEntity=User.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private User user;
+	/*
+	 * @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL,
+	 * 			  fetch = FetchType.EAGER) private User user;
+	 */
+	
 	/*
 	 * The JPA created a technology named Lazy Loading to the classes 
 	 * attributes. We could define Lazy Loading by: “the desired information 
@@ -43,11 +45,12 @@ public class GoodEntity implements Serializable {
 	@SuppressWarnings("unused")
 	private GoodEntity() {} // For the sake of JPA.
 
-    public GoodEntity(String name, String description, Set<String> tags
-    				  /*User user*/) {
+    public GoodEntity(String name, String description, Set<String> tags,
+    				  long userId /*User user*/) {
         this.name = name;
         this.description = description;
     	this.tags = tags;
+    	this.userId = userId;
     	//this.user = user;
     }
     
@@ -107,7 +110,6 @@ public class GoodEntity implements Serializable {
       this.tags = tags;
     }
 
-    /*
     public long getUserId() {
       return userId;
     }
@@ -115,6 +117,5 @@ public class GoodEntity implements Serializable {
     public void setUserId(long userId) {
       this.userId = userId;
     }
-    */
 
 }
