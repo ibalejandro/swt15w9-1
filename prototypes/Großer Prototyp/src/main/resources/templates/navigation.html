@@ -35,7 +35,7 @@
 					
 					<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 					<li class="toggle-topbar menu-icon">
-						<a href="#"><span>Menu</span></a>
+						<a><span>Menu</span></a>
 					</li>
 				</ul>
 			
@@ -64,15 +64,19 @@
 							<ul class="dropdown">
 
 								<li sec:authorize="hasRole('ROLE_ADMIN')">
-									<a th:href="@{/userDetails}" >Kundenliste</a>
+									<a th:href="@{/userDetails}" href="userDetails.html" >Kundenliste.</a>
 								</li>
 								
 								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a th:href="@{/data}" > Eigene Daten</a>
+									<a th:href="@{/data}" href="data.html" > Eigene Daten.</a>
+								</li>
+								
+								<li sec:autorize="!isAuthenticated()">
+									<a th:href="@{/new_user_data}" href="new_user_data.html"> Regestrieren.</a>
 								</li>
 								
 								<li sec:authorize="!isAuthenticated()">
-									<a th:href="@{/login}" >Login</a>
+									<a th:href="@{/login}" href="login.html" >Login.</a>
 								</li>
 								
 								<li sec:authorize="isAuthenticated()">
