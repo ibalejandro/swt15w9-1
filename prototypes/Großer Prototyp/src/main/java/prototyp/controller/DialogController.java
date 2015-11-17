@@ -20,11 +20,6 @@ public class DialogController {
 		this.messages = messages;
 	}
 
-	@RequestMapping("/")
-	String index() {
-		return "redirect:/dialog";
-	}
-
 	@RequestMapping(value = "/dialog", method = RequestMethod.GET)
 	String dialog(Model model) {
 		model.addAttribute("messages", messages.findAll());
