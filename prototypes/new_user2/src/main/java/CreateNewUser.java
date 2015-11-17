@@ -9,11 +9,17 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Date;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.MimeMessage;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -109,16 +115,61 @@ public class CreateNewUser {
 	}
 	
 	@Autowired
-	private MailSender mailSender;
 	
-	private void Mailsenden(String SendTo, String Subject, String Text)
+	public CreateNewUser(MailSender mailSender)
 	{
-		
+		this.mailSender=mailSender;
+	}
+	
+	
+	private final MailSender mailSender;
+	
+	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException
+	{
+	
+		/*Properties props = new Properties();
+
+		props.put("mail.smtp.starttls.enable", "true");
+		props.setProperty("mail.debug", "true");
+
+		Session session = Session.getInstance(props, null);
+		  
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(SendTo);
 		message.setSubject(Subject);
 		message.setText(Text);
-		mailSender.send(message);
+		
+	    Transport transport = session.getTransport("smtp");
+
+		mailSender.send(message); */
+		
+		String mailhost = "smtp.gmail.com"; 			//Aus application.properties auslesen.
+		String mailusername = "***"; 	//Aus application.properties auslesen.
+	    String mailpassword = "***"; 			//Aus application.properties auslesen.
+	    String mailport= "587"; 						//Aus application.properties auslesen.
+	    String recipient = SendTo;
+
+	    Properties props = new Properties();
+
+	    props.put("mail.smtp.host", mailhost);
+	    props.put("mail.from", mailusername);
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.smtp.port", mailport);
+	    props.setProperty("mail.debug", "false");
+
+	    Session session = Session.getInstance(props, null);
+	    MimeMessage msg = new MimeMessage(session);
+
+	    msg.setRecipients(Message.RecipientType.TO, recipient);
+	    msg.setSubject(Subject);
+	    msg.setSentDate(new Date());
+	    msg.setText(Text);
+
+	    Transport transport = session.getTransport("smtp");
+
+	    transport.connect(mailusername, mailpassword);
+	    transport.sendMessage(msg, msg.getAllRecipients());
+	    transport.close();
 		
 		return;
 		
@@ -181,22 +232,14 @@ public class CreateNewUser {
 			return "errorpage0_wrongpw";
 		}
 				
-	/*	// Mail senden:
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
+		try {
+			Mailsenden(Mail,"Activation of your RefugeesApp-Account ("+Username+")","Please activate your RefugeesApp-Account with");
+			System.out.println("Mail versandt");
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(Mail);
-		msg.setSubject("Aktivation of your Refugees-App Account");
-		msg.setText("Aktivierungslink");
-		
-		try{
-            mailSender.send(msg);
-        }
-        catch (MailException ex) {
-            // simply log it and go on...
-            System.err.println(ex.getMessage());
-        }   */
 		
 		return "redirect:/new_user_aboutuser1"; //"index";
 	}
