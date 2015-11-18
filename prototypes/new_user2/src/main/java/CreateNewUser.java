@@ -232,13 +232,13 @@ public class CreateNewUser {
 			return "errorpage0_wrongpw";
 		}
 				
-		try {
+	/*	try {
 			Mailsenden(Mail,"Activation of your RefugeesApp-Account ("+Username+")","Please activate your RefugeesApp-Account with");
 			System.out.println("Mail versandt");
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}     */
 		
 		
 		return "redirect:/new_user_aboutuser1"; //"index";
