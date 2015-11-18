@@ -71,6 +71,10 @@
 									<a th:href="@{/data}" href="data.html" > Eigene Daten.</a>
 								</li>
 								
+								<li sec:authorize="hasRole('ROLE_NORMAL')">
+									<a th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge.</a>
+								</li>
+								
 								<li sec:autorize="!isAuthenticated()">
 									<a th:href="@{/new_user_data}" href="new_user_data.html"> Regestrieren.</a>
 								</li>
