@@ -5,7 +5,7 @@
 	<meta charset="utf-8"/>
 	<meta name="dialog-list" content="width=device-width, initial-scale=1.0"/>
 	
-	<title th:text="${dialog-list.title">Dialog List</title>
+	<title>Dialog List</title>
 	
 	<link rel="stylesheet" href="../resources/css/foundation.css" />
 	<link rel="stylesheet" href="../resources/css/app.css" />
@@ -13,6 +13,7 @@
 	</head>
 	
 	<body>
+		<div th:include="navigation :: navigation"></div>
 		<div>
 			<table>
 				<thead>
