@@ -212,6 +212,8 @@ public class CreateNewUser {
 		userAccount.setEmail(Mail);
 		userAccountManager.save(userAccount);
 		
+		System.out.println("Account "+userAccount.getUsername()+" angelegt.");
+		
 		return "redirect:/new_user_aboutuser1/user/"+userAccount.getUsername(); /*"index"; */
 	}
 	
@@ -284,7 +286,7 @@ public class CreateNewUser {
 			User user_1=new User(LoggUser, address);
 			userRepository.save(user_1);
 		
-			return "redirect:/user";
+			return "redirect:/";
 		}
 		return "error";
 	}
@@ -313,7 +315,7 @@ public class CreateNewUser {
 			User user_1=new User(LoggUser, address);
 			userRepository.save(user_1);
 		
-			return "redirect:/user";
+			return "redirect:/";
 		}
 		return "error";
 	}

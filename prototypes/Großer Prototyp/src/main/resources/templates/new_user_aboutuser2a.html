@@ -1,7 +1,7 @@
 ﻿<html  xmlns:th="http://www.thymeleaf.org">
 <body>
-<form action="/submit_userdata2a" method="post">
-  <h3>Adress</h3>
+<form th:action="@{/submit_userdata2a/user/} + ${user}" method="post">
+  <h3 th:text="@{(3) Your Adress: &nbsp; } + ${user}"> ADRESS</h3>
   <p>Name of the Flüchstlichsheim:</p>
   <p>
     <input name="flh_name" type="text"/>
