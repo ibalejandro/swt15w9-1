@@ -1,4 +1,4 @@
-package prototyp.controller;
+﻿package prototyp.controller;
 
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -211,26 +211,6 @@ public class CreateNewUser {
 		userAccountManager.save(userAccount);
 		userAccount.setEmail(Mail);
 		userAccountManager.save(userAccount);
-		
-		
-		
-				
-	/*	// Mail senden:
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
-		
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(Mail);
-		msg.setSubject("Aktivation of your Refugees-App Account");
-		msg.setText("Aktivierungslink");
-		
-		try{
-            mailSender.send(msg);
-        }
-        catch (MailException ex) {
-            // simply log it and go on...
-            System.err.println(ex.getMessage());
-        }   */
 		
 		return "redirect:/new_user_aboutuser1/user/"+userAccount.getUsername(); /*"index"; */
 	}
