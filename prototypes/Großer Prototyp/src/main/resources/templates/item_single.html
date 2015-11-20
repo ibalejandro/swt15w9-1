@@ -6,19 +6,13 @@
 		- Thymeleaf einarbeiten
 		- Kommentare löschen
 -->
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
-		<title th:text="${title}">Refugee App</title>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
+	
+	<head th:include="imports :: head">
+	
 	</head>
 	
-	<body th:each="content : ${offers}" >
+	<body th:include="imports :: script">
+	
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="show-for-small-only">
@@ -31,10 +25,6 @@
 			</div>
 		</div>		
 		
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
 	</body>
+	
 </html>

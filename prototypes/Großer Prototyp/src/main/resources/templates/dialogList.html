@@ -1,19 +1,15 @@
 <!DOCTYPE HTML>
 
 <html lang="de">
-	<head>
-	<meta charset="utf-8"/>
-	<meta name="dialog-list" content="width=device-width, initial-scale=1.0"/>
 	
-	<title>Dialog List</title>
-	
-	<link rel="stylesheet" href="../resources/css/foundation.css" />
-	<link rel="stylesheet" href="../resources/css/app.css" />
-	<script type="text/javascript" src="../resources/js/vendor/modernizer.js"></script>
+	<head th:include="imports :: head">
+		<title>Dialog List</title>
 	</head>
 	
-	<body>
+	<body th:include="imports :: script">
+	
 		<div th:include="navigation :: navigation"></div>
+		
 		<div>
 			<table>
 				<thead>
@@ -22,20 +18,15 @@
 						<th>Link</th>
 					</tr>
 				</thead>
+				
 				<tbody>
 					<tr th:each="dialog : ${dialogList}">
-						<th th:text="${dialog.partner}">
-						</th>
+						<th th:text="${dialog.partner}"></th>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		
-	
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
 	</body>
+	
 </html>

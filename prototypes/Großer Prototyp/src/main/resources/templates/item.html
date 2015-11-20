@@ -8,20 +8,12 @@
 		- th:href Mapping überarbeiten
 		- Kommentare löschen
 -->
-
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
-		<title th:text="${title}">Refugee App</title>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
+	
+	<head th:include="imports :: head">
+	
 	</head>
 	
-	<body>
+	<body th:include="imports :: script">
 		<div th:fragment="item" class="item">
 			<a th:href="@{'/detail/' + ${content.identifier}}" class="item__link" href="#">
 				<div class = "item__title">
@@ -41,10 +33,6 @@
 			</a>
 		</div>
 		
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
 	</body>
+	
 </html>

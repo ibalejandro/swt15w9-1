@@ -1,38 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-	<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
-		
-		<title>Offered good</title>
-	</head>
 
-	<body>
+	<head th:include="imports :: head">
+	
+	</head>
+	
+	<body th:include="imports :: script">
 	
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="row">
 			<div class="small-12 colums">
 				<div class="gooditem--single">
-					
 					<div class="gooditem__head--single">
 						<h2 class="gooditem__title--single"> You just offered this good: </h2>
 					</div>
-					<div th:include="goods_item--single :: item"></div>
 					
+					<div th:include="goods_item--single :: item"></div>
 				</div>
 			</div>
 		</div>
 		
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
 	</body>
+	
 </html>
