@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+
+<!--
+	TODO:
+		- Variablen Namen nach content._ überarbeiten
+		- th:src Fileverweis überarbeiten
+		- th:href Mapping überarbeiten
+		- Kommentare löschen
+-->
+
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="content-type" content="text/html"/>
+		
+		<title th:text="${title}">Refugee App</title>
+		
+		<link rel="stylesheet" href="../resources/css/foundation.css"/>
+		<link rel="stylesheet" href="../resources/css/app.css"/>
+		<script src="../resources/js/vendor/modernizr.js"></script>
+	</head>
+	
+	<body>
+		<div th:fragment="item" class="item">
+			<a th:href="@{'/detail/' + ${content.identifier}}" class="item__link" href="#">
+				<div class = "item__title">
+					<h3 th:text="${content.name}" class = "item__title__text">Title</h3>
+				</div>
+				<div class = "item__container">
+					<div class="item__img">
+						<img th:src="@{'img/'+${content.image}}" class="hide-for-small-only" src="img/Koala.jpg"/>
+					</div>
+					<div class= "item__description">
+						<p th:text="${content.description}" class="item__description__text">Ich bin eine Lame Kurzbeschreibung. Der Koala wurde kaum genutzt!</p>
+					</div>
+					<div class="item__info">
+						<p th:text="${content.location}" class="item__info__text">01127-Dresden</p>
+					</div>
+				</div>
+			</a>
+		</div>
+		
+		<script src="../resources/js/vendor/jquery.js"></script>
+		<script src="../resources/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>

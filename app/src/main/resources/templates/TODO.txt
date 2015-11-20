@@ -1,0 +1,24 @@
+TODO:
+	- Thyme Leaf ein Bindung überprüfen
+	- Überschriften überarbeiten
+	- navigation fixen
+	
+Templates:
+	- data.html						Style
+	- error.html 					komplett
+	- errorpage0_empty.html 		komplett
+	- errorpage0_wrongpw.html 		komplett
+	- errorpage1_empty.html 		komplett
+	- errorpage2a_empty.html 		komplett
+	- errorpage2b_empty.html 		komplett
+	- modify.html 					komplett
+	- new_user_aboutuser1.html 		komplett
+	- new_user_aboutuser2a.html 	komplett
+	- new_user_aboutuser2b.html 	komplett
+	- new_user_data.html 			komplett
+	- reCAPTCHA.html 				komplett
+	- validation_success.html 		komplett
+	
+FRAGEN:
+
+	

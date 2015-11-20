@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="de">
+
+<!--
+	TODO:
+		- iterration Object setzen
+		- in navigation.html die Navigation fertig machen
+		- Footer erstellen einfügen und includen.
+		- Kommentare löschen
+-->
+
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="content-type" content="text/html"/>
+		
+		<title th:text="${title}">Refugee App</title>
+		
+		<link rel="stylesheet" href="../resources/css/foundation.css"/>
+		<link rel="stylesheet" href="../resources/css/app.css"/>
+		<script src="../resources/js/vendor/modernizr.js"></script>
+		
+	</head>
+	
+	<body>
+		<div th:include="navigation :: navigation"></div>
+	<!--
+		<div th:each="content : ${}" class="row">
+			<div class="small-12 colums medium-6 columns">
+				<div th:include="item :: item">
+				</div>
+			</div>
+		</div>
+-->		
+
+		<p>Bestehende Nutzer:</p>
+		<table>
+			<thead>
+				<tr>
+					<th>Login-Name</th>
+					<th>Passwort</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Lisa</td>
+					<td>pw</td>
+				</tr>
+				<tr>
+					<td>admin</td>
+					<td>123</td>
+				</tr>								
+			</tbody>
+		</table>
+		
+		<script src="../resources/js/vendor/jquery.js"></script>
+		<script src="../resources/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>
