@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<th:block th:fragment="head">
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+			<link rel="stylesheet" href="../resources/css/foundation.css"/>
+			<link rel="stylesheet" href="../resources/css/app.css"/>
+			<script src="../resources/js/vendor/modernizr.js"></script>
+		</th:block>
+	</head>
+	
+	<body>
+		<th:block th:fragment="script">
+			<script src="../resources/js/vendor/jquery.js"></script>
+			<script src="../resources/js/foundation.min.js"></script>
+			<script>
+				$(document).foundation();
+			</script>
+		</th:block>
+	</body>
+</html>

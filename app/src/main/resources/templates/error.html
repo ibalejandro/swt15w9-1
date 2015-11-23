@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
+		<th:block th:include="imports :: head"></th:block>
 		<title>Error</title>
 	</head>
-<body>
-	<div class="all">
-		<header>
-			<h1>ERROR</h1>
-		</header>
-		
-		
-		<div class="content">
-			<p>Es ist leider ein Fehler aufgetreten.</p>
-			<p><a th:href="@{/index}" > Zur Startseite</a></p>
+	
+	<body>
+	
+		<div class="all">
+			<header>
+				<h1>ERROR</h1>
+			</header>
+			
+			<div class="content">
+				<p>Es ist leider ein Fehler aufgetreten.</p>
+				<p><a th:href="@{/index}" > Zur Startseite</a></p>
+			</div>
 		</div>
-	</div>
-</body>
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+
 </html>

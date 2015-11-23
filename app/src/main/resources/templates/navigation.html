@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html class="no-js" lang="de">
-
 <!--
 	TODO:
 		- Navigation weiter anpassen
@@ -11,16 +10,8 @@
 		- th:href Mapping festlegen.
 		- Kommentare löschen
 -->
-
 	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		
-		<title th:text="${title}">Refugee App</title>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
+		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
@@ -99,11 +90,6 @@
 				</section>
 			</nav>
 		</div>
-
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
+		<th:block th:include="imports :: script"></th:block>
 	</body>
 </html>

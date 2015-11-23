@@ -3,24 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
+		<th:block th:include="imports :: head"></th:block>
 		<title th:text="${title}">Admin Page</title>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
 	</head>
-
+	
 	<body>
+	
 		<div th:include="navigation :: navigation"></div>
-		<div class="row">
 		
+		<div class="row">
 			<div class ="small-12 colums large-6 columns">
 				<div class="admin">
+				
 					<h1 class="admin__title">User List:</h1>
+					
 					<table class="admin__table">
 						<tr class="admin__table__row"> <!-- List all attributes here! -->
 							<th>First name</th>
@@ -29,6 +25,7 @@
 							<th>origin</th>
 							<th>username</th>
 						</tr>
+						
 						<tr th:each="user : ${users}" class="admin__table__row">
 							<td th:text="${user.userAccount.firstname}">Max</td>
 							<td th:text="${user.userAccount.lastname}">Mustermann</td>
@@ -37,34 +34,33 @@
 							<td th:text="${user.username}">MadMax</td>
 						</tr>
 					</table>
+					
 				</div>
 			</div>
 			
 			<div class ="small-12 colums large-6 columns">
 				<div class="admin">
+				
 					<h1 class="admin__title">Offer List:</h1>
+					
 					<table class="admin__table">
 						<tr class="admin__table__row"> <!-- List all attributes here! -->
 							<th>Name</th>
 							<th>Description</th>
 							<th>Offered by</th>
 						</tr>
+						
 						<tr th:each="offer : ${offers}" class="admin__table__row">
 							<td th:text="${offer.name}">Title</td>
 							<td th:text="${offer.description}">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,</td>
 							<td th:text="${offer.user}">Max Mustermann</td>
 						</tr>
 					</table>
+					
 				</div>
 			</div>
-		
 		</div>
-		
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
+		<th:block th:include="imports :: script"></th:block>
 	</body>
 
 </html>

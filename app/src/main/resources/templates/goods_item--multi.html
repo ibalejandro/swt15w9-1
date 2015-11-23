@@ -8,51 +8,45 @@
 		- th:href Mapping überarbeiten
 		- Kommentare löschen
 -->
-
+	
 	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
-		
-		<title th:text="${title}">Refugee App</title>
+		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
+	
 		<div th:fragment="item">
 			<div class="small-12 colums medium-6 columns">
 				<div th:fragment="good" th:id="good+${good.id}">
 					<div class="gooditem--multi">
+					
 						<div  class="gooditem__head--multi">
 							<h3 th:text="${good.id}+'. '+${good.name}" class="gooditem__title--multi"></h3>
 						</div>
+						
 						<div class="gooditem__body--multi">
 							<div>
 								<label class="gooditem__label--multi"> Description </label>
 								<p th:text="${good.description}" class="gooditem__text--multi"></p>
 							</div>
+							
 							<div>
 								<label class="gooditem__label--multi"> Tags </label>
 								<p th:text="${good.tags}" class="gooditem__text--multi"></p>
 							</div>
+							
 							<div>
 								<label class="gooditem__label--multi"> User-ID </label>
 								<p th:text="${good.userId}" class="gooditem__text--multi"></p>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
-
 		</div>
+		<th:block th:include="imports :: script"></th:block>
 		
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
 	</body>
+	
 </html>

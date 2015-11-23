@@ -1,48 +1,41 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
-		
-		<title> Search </title>
-    </head>
 	
-    <body>
+    <head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
 		<div th:fragment="search1">
 			<form th:action="@{/searchResultsByName}" class="has-form" method="post">
 				<div class="row collapse">
 					<div class="large-8 small-9 columns">
 						<input type="text" name="name" placeholder="Suche nach Namen" />
 					</div>
+					
 					<div class="large-4 small-3 columns">
 						<input class="alert button expand" type="submit" value="Search"/>
 					</div>
 				</div>
 			</form>
 		</div>
+		
 		<div th:fragment="search2">
 			<form th:action="@{/searchResultsByTag}" class="has-form" method="post">
-			<div class="row collapse">
-				<div class="large-8 small-9 columns">
-					<input type="text" name="tag" placeholder="Suche nach Tag" />
-				</div>
-				<div class="large-4 small-3 columns">
-					<input class="alert button expand" type="submit" value="Search"/>
-				</div>
+				<div class="row collapse">
+					<div class="large-8 small-9 columns">
+						<input type="text" name="tag" placeholder="Suche nach Tag" />
+					</div>
+					
+					<div class="large-4 small-3 columns">
+						<input class="alert button expand" type="submit" value="Search"/>
+					</div>
 				</div>
 			</form>
-			
 		</div>
 		
-		
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
+		<th:block th:include="imports :: script"></th:block>
     </body>
+	
 </html>
