@@ -17,6 +17,13 @@ hs_err_pid*
 # Windows
 Thumbs.db
 
+# eclipse project files
+.metadata
+.project
+.classpath
+.settings/
+.loadpath
+
 # output directory
 target/
 *.odp#
