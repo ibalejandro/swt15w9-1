@@ -1,4 +1,4 @@
-﻿package app.controller;
+package app.controller;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
