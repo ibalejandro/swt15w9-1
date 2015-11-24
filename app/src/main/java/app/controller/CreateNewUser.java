@@ -65,6 +65,11 @@ public class CreateNewUser {
 	public String new_user2b(@PathVariable String user){
       return "/new_user_aboutuser2b";
 	}
+	
+	@RequestMapping({"/new_user_language_origin/user/{user}"})
+	public String new_user_language_origin(@PathVariable String user){
+      return "/new_user_language_origin";
+	}
 
 	@RequestMapping(value = "/submit_captcha")
 	public String redirect_reCAPTCHA(){
@@ -200,6 +205,8 @@ public class CreateNewUser {
 		userAccount.setEmail(Mail);
 		userAccountManager.save(userAccount);
 
+		//userAccount.isEnabled = false;
+		
 		System.out.println("Account "+userAccount.getUsername()+" angelegt.");
 
 		return "redirect:/new_user_aboutuser1/user/"+userAccount.getUsername(); /*"index"; */
@@ -274,7 +281,7 @@ public class CreateNewUser {
 			User user_1=new User(LoggUser, address);
 			userRepository.save(user_1);
 
-			return "redirect:/";
+			return "redirect:/new_user_language_origin/user/{user}";
 		}
 		return "error";
 	}
@@ -301,6 +308,41 @@ public class CreateNewUser {
 			}
 			Address address= new Address(Street, Housenr, Postcode, City);
 			User user_1=new User(LoggUser, address);
+			userRepository.save(user_1);
+
+			return "redirect:/new_user_language_origin/user/{user}";
+		}
+		return "error";
+	}
+	
+	@RequestMapping(value = "/submit_language_origin/user/{user}", method = RequestMethod.POST)
+	public String submit_language_origin(@PathVariable String user, @RequestParam("nativelanguage")String Nativelanguage, @RequestParam("otherlanguages")String OtherLanguages, @RequestParam("origin")String Origin)
+	{
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
+
+		System.out.println(Nativelanguage);
+		System.out.println(OtherLanguages);
+		System.out.println(Origin);
+
+		if(userAccountManager.findByUsername(user).isPresent()){
+			UserAccount LoggUser=userAccountManager.findByUsername(user).get();
+
+			if (Nativelanguage.isEmpty() ||  Origin.isEmpty() )
+			{
+				return "errorpage2b_empty";
+			}
+            
+			User user_1 = userRepository.findByUserAccount(LoggUser);
+			user_1.setLanguage(Nativelanguage);
+			
+			user_1.setOrigin(Origin);
+			
+		//	LoggUser.se
+			
+			
 			userRepository.save(user_1);
 
 			return "redirect:/";

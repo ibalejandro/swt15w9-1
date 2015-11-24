@@ -27,6 +27,7 @@ public class User implements Serializable{
 	private String PrefferedLanguage;
 	@OneToMany(cascade = CascadeType.ALL) private Set<Language> languages;
 	private boolean enabled;
+	private boolean activated; // Aktivierungsstatus (d1456)
 	@OneToOne private UserAccount userAccount;
 	//Einbindung Güter:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
@@ -39,6 +40,7 @@ public class User implements Serializable{
 		this.location = location;
 		this.userAccount = userAccount;
 		this.enabled= userAccount.isEnabled();
+		this.activated = false;
 		Set<Language>languages=new HashSet<>();
 	}
 	
@@ -92,6 +94,14 @@ public class User implements Serializable{
 	
 	public boolean isEnabled(){
 		return enabled;
+	}
+	
+	public boolean isActivated(){
+		return activated;
+	}
+	
+	public void Activate(){
+		this.activated = true;
 	}
 	
 }
