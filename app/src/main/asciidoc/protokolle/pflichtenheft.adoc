@@ -243,5 +243,27 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 Mithilfe von Akzeptanztests wird geprüft, ob die Software die funktionalen Erwartungen und Anforderungen im Gebrauch erfüllt. Diese sollen und können aus den Anwendungsfallbeschreibungen und den UML-Sequenzdiagrammen abgeleitet werden. D.h., pro (komplexen) Anwendungsfall gibt es typischerweise mindestens ein Sequenzdiagramm (welches ein Szenarium beschreibt). Für jedes Szenarium sollte es einen Akzeptanztestfall geben. Listen Sie alle Akzeptanztestfälle in tabellarischer Form auf.
 Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumenten (z.B. im Test-Plan) referenzieren zu können.
 
+[options="header"]
+|===
+|ID  |Akzeptanztestfall         | Beschreibung
+|1   |User erstellen            | Es können Benutzer permanent erstellt werden.
+|2   |User verändern            | Es können die Eigenschaften und Daten eines Nutzers verändert werden.
+|3   |User löschen              | Ein User kann sein eigenes Account löschen.
+|4   |Hilfsgut erstellen        | Ein User kann ein Hilfsgut inserieren.
+|5   |Hilfsgut verändern        | Ein User kann ein inseriertes Hilfsgut verändern.
+|6   |Hilfsgut suchen           | Ein User kann die Menge der Hilfsgüter nach bestimmten Kriterien durchsuchen.
+|7   |Hilfsgut löschen          | Ein User kann sein inseriertes Hilfsgut (vorzeitig) löschen.
+|8   |Dialog initiieren         | Ein User kann einen Dialog über ein Hilfsgut oder direkt mit einem anderen Benutzer initiieren.
+|9   |Dialogbaustein verwenden  | Ein User kann aus einer Menge von vorgegebenen Textbausteinen einen wählen und Platzhalter durch sinnvolle Angaben ergänzen.
+|10  |Admin: User untersuchen   | Der Administrator kann die Eigenschaften, Daten und Dialoge eines Users anzeigen lassen.
+|11  |Admin: User löschen       | Der Administrator kann einen User löschen.
+|12  |Admin: Good untersuchen   | Der Administrator kann ein Hilfsgut untersuchen.
+|13  |Admin: Good löschen       | Der Administrator kann unangebrachte Hilfsgüter löschen.
+|14  |Oberfläche übersetzbar    | Die Webseiten werden in abhängig von der gewählten Sprache angezeigt.
+|15  |Textbausteine erstellen   | Es können neue Textbausteine erstellt werden.
+|16  |Textbausteine verändern   | Es können bestehende Textbausteine verändert werden.
+|17  |Textbausteine löschen     | Es können bestehende Textbausteine gelöscht werden.
+|===
+
 == Offene Punkte
 Offene Punkte werden entweder direkt in der Spezifikation notiert. Wenn das Pflichtenheft  zum finalen Review vorgelegt wird, sollte es keine offenen Punkte mehr geben.
