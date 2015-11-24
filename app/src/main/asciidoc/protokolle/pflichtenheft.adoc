@@ -4,11 +4,11 @@
 
 == Refugee App
 
-__Version:__    *0.5*
+__Version:__    *0.6*
 
 __Status:__     *In Arbeit*
 
-__Stand:__      *05.11.2015*
+__Stand:__      *24.11.2015*
 
 == Zusammenfassung
 Dies ist das Pflichtenheft zum Projekt "Refugee App".
