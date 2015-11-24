@@ -34,6 +34,10 @@ public class Dialog implements Serializable {
 		this.userId = userId;
 		this.messageHistory = messageHistory;
 	}
+	
+	public void addMessageElement(MessageElement msg) {
+		this.messageHistory.add(msg);
+	}
 
 	public long getId() {
 		return id;
