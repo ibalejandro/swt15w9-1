@@ -19,7 +19,7 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
+//import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,10 +37,10 @@ import app.model.UserRepository;
 public class CreateNewUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
-    private final MailSender mailSender;
+   // private final MailSender mailSender;
 
 	@Autowired
-	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository, MailSender mailSender) {
+	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository /*, MailSender mailSender*/) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -48,7 +48,7 @@ public class CreateNewUser {
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
 		
-		this.mailSender=mailSender;
+		//this.mailSender=mailSender;
 	}
 
 	@RequestMapping({"/new_user_data"})
@@ -138,7 +138,7 @@ public class CreateNewUser {
 	
 	
 	
-	@Autowired
+	/*@Autowired
 	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException
 	{
 		
@@ -172,7 +172,7 @@ public class CreateNewUser {
 		
 		return;
 		
-	}
+	} */
 	
 	public static String sha256(String base) {
         try{
@@ -284,6 +284,16 @@ public class CreateNewUser {
 		//userAccount.isEnabled = false;
 		
 		System.out.println("Account "+userAccount.getUsername()+" angelegt.");
+		
+		UserAccount LoggUser=userAccountManager.findByUsername(userAccount.getUsername()).get();
+		Address emptyadress= new Address("", "", "", "");
+		User user_xyz=new User(LoggUser, emptyadress);
+		user_xyz.setRegistrationstate(0);
+		userRepository.save(user_xyz);
+		
+		user_xyz.setRegistrationdate(new Date()); //Temporäres Registrierungsdatum um unvollständige Konten nach einer betimmten Zeit zu löschen.
+		user_xyz.setRegistrationstate(1);
+		userRepository.save(user_xyz);
 
 		return "redirect:/new_user_aboutuser1/user/"+userAccount.getUsername(); /*"index"; */
 	}
@@ -303,8 +313,8 @@ public class CreateNewUser {
 		System.out.println(Adresstyp);
 
 	    if(userAccountManager.findByUsername(user).isPresent()){
-			UserAccount LoggUser=userAccountManager.findByUsername(user).get();
-
+            User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+	    	
 			if (Name.isEmpty() ||  Firstname.isEmpty() || Adresstyp.isEmpty())
 			{
 				return "errorpage1_empty";
@@ -312,9 +322,12 @@ public class CreateNewUser {
 
 			System.out.println("user="+user);
 
-			LoggUser.setLastname(Name);
-        	LoggUser.setFirstname(Firstname);
-			userAccountManager.save(LoggUser);
+			user_xyz.getUserAccount().setLastname(Name);
+			user_xyz.getUserAccount().setFirstname(Firstname);
+			userAccountManager.save(user_xyz.getUserAccount());
+			
+			user_xyz.setRegistrationstate(2);
+			userRepository.save(user_xyz);
 
 			if (Adresstyp.equals("Refugees_home"))
 			{
@@ -353,8 +366,8 @@ public class CreateNewUser {
 			{
 				return "errorpage2a_empty";
 			}
-			Address address= new Address(Flh_name, Citypart, Postcode, City);
-			User user_1=new User(LoggUser, address);
+			Address address= new Address(Flh_name, Citypart, Postcode, City);			
+			user_1.setLocation(address);
 			userRepository.save(user_1);
 
 			return "redirect:/new_user_language_origin/user/{user}";
@@ -385,7 +398,7 @@ public class CreateNewUser {
 			Address address= new Address(Street, Housenr, Postcode, City);
 			User user_1=new User(LoggUser, address);
 			userRepository.save(user_1);
-
+			
 			return "redirect:/new_user_language_origin/user/{user}";
 		}
 		return "error";
@@ -422,10 +435,10 @@ public class CreateNewUser {
 			z1 = (int)(Math.random() * 1000000000)+123456;
 			z2 = (int)(Math.random() * 1000000000)+117980;
 			
-			System.out.println(z1.toString()+" , "+z2.toString());
-			
 			String activationkey = AktivierungskeyErzeugen(user_1.getUserAccount().getUsername(), user_1.getUserAccount().getEmail(), z1, z2);
 			user_1.setActivationkey(activationkey);
+			
+			user_1.setRegistrationdate(new Date());
 			
 			userRepository.save(user_1);
 

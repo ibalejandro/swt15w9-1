@@ -1,6 +1,7 @@
 package app.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +29,9 @@ public class User implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL) private Set<Language> languages;
 	private boolean enabled;
 	private boolean activated; // Aktivierungsstatus (d1456)
+	private int registrationstate; // Registrierungsstatus
 	private String activationkey; // String mit dem das Konto aktiviert wird (d1456)
+	private Date registrationdate; //Registrierungsdatum (d1456)
 	@OneToOne private UserAccount userAccount;
 	//Einbindung Güter:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
@@ -42,6 +45,7 @@ public class User implements Serializable{
 		this.userAccount = userAccount;
 		this.enabled= userAccount.isEnabled();
 		this.activated = false;
+		this.registrationstate = -1;  //-1 ~ noch nichts eingegeben; 10 ~ Kontodaten vollständig und aktiviert
 		Set<Language>languages=new HashSet<>();
 	}
 	
@@ -97,6 +101,8 @@ public class User implements Serializable{
 		return enabled;
 	}
 	
+	//***************************** (d1456)
+	
 	public boolean isActivated(){
 		return activated;
 	}
@@ -109,6 +115,14 @@ public class User implements Serializable{
 		this.activated = false;
 	}
 	
+	public int getRegistrationstate(){
+		return registrationstate;
+	}
+	
+	public void setRegistrationstate(int registrationstate){
+		this.registrationstate=registrationstate;
+	}
+	
 	public String getActivationkey(){
 		return activationkey;
 	}
@@ -117,6 +131,12 @@ public class User implements Serializable{
 		this.activationkey=activationkey;
 	}
 	
+	public Date getRegistrationdate(){
+		return registrationdate;
+	}
 	
+	public void setRegistrationdate(Date registrationdate){
+		this.registrationdate=registrationdate;
+	}
 	
 }
