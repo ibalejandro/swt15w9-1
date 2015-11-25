@@ -331,6 +331,11 @@ public class CreateNewUser {
 			{
 			    user_xyz.Activate();
 			    System.out.println(user_xyz.getUserAccount().getUsername()+" wurde aktiviert.");
+			    
+			    user_xyz.setRegistrationstate(10);
+			    userRepository.save(user_xyz);
+			    
+			    System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
 			}
 			else
 			{	
