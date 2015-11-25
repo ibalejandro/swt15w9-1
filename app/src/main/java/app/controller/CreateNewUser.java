@@ -295,6 +295,8 @@ public class CreateNewUser {
 		user_xyz.setRegistrationstate(1);
 		userRepository.save(user_xyz);
 
+		System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
+		
 		return "redirect:/new_user_aboutuser1/user/"+userAccount.getUsername(); /*"index"; */
 	}
 
@@ -329,6 +331,8 @@ public class CreateNewUser {
 			user_xyz.setRegistrationstate(2);
 			userRepository.save(user_xyz);
 
+			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
+			
 			if (Adresstyp.equals("Refugees_home"))
 			{
 				return "redirect:/new_user_aboutuser2a/user/{user}";
@@ -359,7 +363,7 @@ public class CreateNewUser {
 		System.out.println(City);
 
 		if(userAccountManager.findByUsername(user).isPresent()){
-			UserAccount LoggUser=userAccountManager.findByUsername(user).get();
+			User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 
 		//KLASSE FLÜCHTLINGSHEIM UND INTERFACE LOCATION!!!!!!!!!!!!!!
 			if (Flh_name.isEmpty() ||  Citypart.isEmpty() || Postcode.isEmpty() || City.isEmpty())
@@ -367,9 +371,11 @@ public class CreateNewUser {
 				return "errorpage2a_empty";
 			}
 			Address address= new Address(Flh_name, Citypart, Postcode, City);			
-			user_1.setLocation(address);
-			userRepository.save(user_1);
+			user_xyz.setLocation(address);
+			user_xyz.setRegistrationstate(3); //3 ~ Flüchtlingsheim
+			userRepository.save(user_xyz);
 
+			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
 			return "redirect:/new_user_language_origin/user/{user}";
 		}
 		return "error";
@@ -389,16 +395,19 @@ public class CreateNewUser {
 		System.out.println(City);
 
 		if(userAccountManager.findByUsername(user).isPresent()){
-			UserAccount LoggUser=userAccountManager.findByUsername(user).get();
+			User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 
 			if (Street.isEmpty() ||  Housenr.isEmpty() || Postcode.isEmpty() || City.isEmpty())
 			{
 				return "errorpage2b_empty";
 			}
-			Address address= new Address(Street, Housenr, Postcode, City);
-			User user_1=new User(LoggUser, address);
-			userRepository.save(user_1);
 			
+			Address address= new Address(Street, Housenr, Postcode, City);
+			user_xyz.setLocation(address);
+			user_xyz.setRegistrationstate(4); //4 ~ Wohnung
+			userRepository.save(user_xyz);
+			
+			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());			
 			return "redirect:/new_user_language_origin/user/{user}";
 		}
 		return "error";
@@ -417,17 +426,19 @@ public class CreateNewUser {
 		System.out.println(Origin);
 
 		if(userAccountManager.findByUsername(user).isPresent()){
-			UserAccount LoggUser=userAccountManager.findByUsername(user).get();
+			User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 
 			if (Nativelanguage.isEmpty() ||  Origin.isEmpty() )
 			{
 				return "errorpage2b_empty";
 			}
             
-			User user_1 = userRepository.findByUserAccount(LoggUser);
-			user_1.setLanguage(Nativelanguage);
+			user_xyz.setLanguage(Nativelanguage);
 			
-			user_1.setOrigin(Origin);
+			user_xyz.setOrigin(Origin);
+			
+			user_xyz.setRegistrationstate(5);   
+			userRepository.save(user_xyz);   
 			
 		//	Nutzeraktivierung vorbereiten:
 			
@@ -435,13 +446,14 @@ public class CreateNewUser {
 			z1 = (int)(Math.random() * 1000000000)+123456;
 			z2 = (int)(Math.random() * 1000000000)+117980;
 			
-			String activationkey = AktivierungskeyErzeugen(user_1.getUserAccount().getUsername(), user_1.getUserAccount().getEmail(), z1, z2);
-			user_1.setActivationkey(activationkey);
+			String activationkey = AktivierungskeyErzeugen(user_xyz.getUserAccount().getUsername(), user_xyz.getUserAccount().getEmail(), z1, z2);
+			user_xyz.setActivationkey(activationkey);
 			
-			user_1.setRegistrationdate(new Date());
-			
-			userRepository.save(user_1);
-
+			user_xyz.setRegistrationdate(new Date());
+			user_xyz.setRegistrationstate(6); // 6 ~ Bereit zur Aktivierung
+			userRepository.save(user_xyz);
+	
+			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
 			return "redirect:/";
 		}
 		return "error";

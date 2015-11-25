@@ -45,7 +45,8 @@ public class User implements Serializable{
 		this.userAccount = userAccount;
 		this.enabled= userAccount.isEnabled();
 		this.activated = false;
-		this.registrationstate = -1;  //-1 ~ noch nichts eingegeben; 10 ~ Kontodaten vollständig und aktiviert
+		this.registrationstate = -1;  
+		//-1 ~ noch nichts eingegeben; 0-7 ~ für Registriegungsfortschritt; 9 ~ Konto von Admin o.ä. deaktiviert; 10 ~ Kontodaten vollständig und aktiviert; 
 		Set<Language>languages=new HashSet<>();
 	}
 	
