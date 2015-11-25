@@ -86,7 +86,11 @@ public class CreateNewUser {
 	@RequestMapping(value = "/submit_captcha")
 	public String redirect_reCAPTCHA(){
 	      return "redirect:/reCAPTCHA-TEST";
-
+		}
+	
+	@RequestMapping(value = "/submit_captcha/user/{user}")
+	public String redirect_reCAPTCHA_user(){
+	      return "redirect:/reCAPTCHA-TEST";
 		}
 
 	@RequestMapping(value = "/reCAPTCHA-TEST")
@@ -235,8 +239,105 @@ public class CreateNewUser {
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/submit_captcha/user/{user}", method = RequestMethod.POST)
+	public String recieve_reCAPTCHA_user(@PathVariable String user, @RequestParam("g-recaptcha-response")String CaptchaResponse){
 
-	//@ResponseBody
+		System.out.println("## CaptchaResponse:");
+		System.out.println(CaptchaResponse);
+
+		if (CaptchaResponse.isEmpty() || (!userAccountManager.findByUsername(user).isPresent()))
+		{
+		   return "redirect:/reCAPTCHA-TEST";
+		}
+		else
+		{
+			//http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
+
+			String Secret="6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
+			String Returnstring="";
+
+			System.out.println("## Validate:");
+			System.out.println("https://www.google.com/recaptcha/api/siteverify?response="+CaptchaResponse+"&secret="+Secret);
+
+			try {
+				Returnstring=sendPost(CaptchaResponse,Secret);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (Returnstring.equals("{  \"success\": true}"))
+			{
+				if(userAccountManager.findByUsername(user).isPresent()){
+		            User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+		            
+		            
+		            user_xyz.setRegistrationstate(7); //7 ~ Captcha erfolgreich geprüft
+					userRepository.save(user_xyz);
+					
+					
+					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());	
+					
+					String link="/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+user_xyz.getActivationkey()+"}";
+					String mailtext = "<h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" <br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+" ";
+					
+					System.out.println(link);
+					
+					//Mail senden: 
+					/*	try {
+					Mailsenden(Mail,"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+					System.out.println("Mail versandt");
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}     */
+					
+					user_xyz.setRegistrationstate(8); //8 ~ Aktivierungsmail versandt.
+					userRepository.save(user_xyz);
+					
+					return "/validation_success";
+		            
+				}
+				return "redirect:/";
+				
+			}
+			else
+			{
+				return "redirect:/reCAPTCHA-TEST";
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/activation/user/{user}/{textactivationkey}", method = RequestMethod.POST)
+	public String recieve_activationkey(@PathVariable String user, @PathVariable String textactivationkey){
+		
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
+
+	    if(userAccountManager.findByUsername(user).isPresent()){
+            User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+	    	
+			if (textactivationkey.isEmpty())
+			{
+				return "redirect:/";
+			}
+
+			if (user_xyz.getActivationkey().equals(textactivationkey))
+			{
+			    user_xyz.Activate();
+			}
+
+			return "redirect:/";
+		}
+	
+		
+		
+       return "redirect:/";
+	}		
+
 	@RequestMapping(value = "/create_temp_new_user", method = RequestMethod.POST)
 	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword)
 	{
