@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import app.model.UserRepository;
+import app.repository.UserRepository;
 
 @Controller
 public class UserManagementController {

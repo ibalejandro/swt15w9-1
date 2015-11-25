@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import app.model.Address;
 import app.model.User;
-import app.model.UserRepository;
+import app.repository.UserRepository;
 
 
 

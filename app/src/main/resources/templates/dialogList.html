@@ -18,6 +18,7 @@
 			<table sec:authorize="hasRole('ROLE_NORMAL')">
 				<thead>
 					<tr>
+						<th>Title</th>
 						<th>Dialog Partner</th>
 						<th>Link</th>
 					</tr>
@@ -25,7 +26,8 @@
 
 				<tbody>
 					<tr th:each="dialog : ${dialogList}">
-						<th th:text="${dialog.partner}"></th>
+						<th th:text="${dialog.title">Title</th>
+						<th th:text="${dialog.partner}">Partner</th>
 						<th><input type="button" value="Go to" /></th>
 					</tr>
 				</tbody>

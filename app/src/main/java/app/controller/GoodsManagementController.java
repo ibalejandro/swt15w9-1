@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.model.GoodEntity;
-import app.model.UserRepository;
 import app.repository.GoodRepository;
+import app.repository.UserRepository;
 
 /**
 * <h1>GoodsManagementController</h1>

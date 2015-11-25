@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.model.GoodEntity;
 import app.model.User;
-import app.model.UserRepository;
 import app.repository.GoodRepository;
+import app.repository.UserRepository;
 
 /**
 * <h1>GoodsOfferController</h1>

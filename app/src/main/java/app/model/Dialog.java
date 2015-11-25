@@ -1,13 +1,18 @@
 package app.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.springframework.util.Assert;
 
 //TODO: should it really be suppressed?
 @SuppressWarnings("serial")
@@ -17,22 +22,32 @@ public class Dialog implements Serializable {
 	@Id
 	@GeneratedValue
 	private long id;
-	private long userId;
+	
+	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private User userA;
+	
+	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private User userB;
 	
 	private String title;
 	
-	@ElementCollection(fetch = FetchType.EAGER)
-	protected List<MessageElement> messageHistory;
+	//@ElementCollection(fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL) 
+	protected List<MessageElement> messageHistory = new LinkedList<>();
 	
 	@SuppressWarnings("unused")
 	private Dialog() {
 		
 	}
 	
-	public Dialog(String title, long userId, List<MessageElement> messageHistory) {
+	public Dialog(String title, User userA, User userB) {
+		Assert.hasText(title, "Title of dialog must be not empty!");
+		Assert.notNull(userA, "User A must not be empty!");
+		Assert.notNull(userB, "User B must not be empty!");
+		
 		this.title = title;
-		this.userId = userId;
-		this.messageHistory = messageHistory;
+		this.userA = userA;
+		this.userB = userB;
 	}
 	
 	public void addMessageElement(MessageElement msg) {
@@ -43,16 +58,12 @@ public class Dialog implements Serializable {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public User getUserA() {
+		return userA;
 	}
-
-	public long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
+	
+	public User getUserB() {
+		return userB;
 	}
 
 	public String getTitle() {
@@ -63,11 +74,7 @@ public class Dialog implements Serializable {
 		this.title = title;
 	}
 
-	public List<MessageElement> getMessageHistory() {
+	public Iterable<MessageElement> getMessageHistory() {
 		return messageHistory;
-	}
-
-	public void setMessageHistory(List<MessageElement> messageHistory) {
-		this.messageHistory = messageHistory;
 	}
 }

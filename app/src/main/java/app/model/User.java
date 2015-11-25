@@ -36,6 +36,7 @@ public class User implements Serializable{
 	@OneToOne private UserAccount userAccount;
 	//Einbindung Güter:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
+	@OneToMany(targetEntity=Dialog.class, cascade = CascadeType.ALL, fetch= FetchType.EAGER) private Set<Dialog> dialogs;
 	  
 	@SuppressWarnings("unused")
 	private User() {} 
@@ -59,6 +60,14 @@ public class User implements Serializable{
 	
 	public Iterable<GoodEntity> getGoods(){
 		return goods;
+	}
+	
+	public void addDialog(Dialog dialog) {
+		dialogs.add(dialog);
+	}
+	
+	public Iterable<Dialog> getDialogs() {
+		return dialogs;
 	}
 
 	public Address getLocation() {

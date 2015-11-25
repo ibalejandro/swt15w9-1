@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import app.model.UserRepository;
 import app.repository.GoodRepository;
+import app.repository.UserRepository;
 
 /**
 * <h1>GoodsSearchController</h1>
