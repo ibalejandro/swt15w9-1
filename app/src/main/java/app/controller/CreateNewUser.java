@@ -89,7 +89,7 @@ public class CreateNewUser {
 		}
 	
 	@RequestMapping(value = "/reCAPTCHA/user/{user}")
-	public String redirect_reCAPTCHA_user(){
+	public String show_reCAPTCHA_user(@PathVariable String user){
 	      return "/reCAPTCHA_User";
 		}
 

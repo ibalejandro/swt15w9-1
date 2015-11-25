@@ -8,7 +8,7 @@
 	<body>
 	
 		<h1>reCAPTCHA</h1>
-		<h3 th:text="@{ (5)  }+${user}+@{ submit this CAPTCHA for getting your activationlink with mail: &nbsp; }"> CAPTCHA</h3>
+		<h3 th:text="@{(5)}+ ${user} + @{ submit this CAPTCHA for getting your activationlink with mail: &nbsp; }"> CAPTCHA</h3>
 		
 		<form th:action="@{/submit_captcha/user/} + ${user}" method="post">
 			<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
