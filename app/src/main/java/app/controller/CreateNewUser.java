@@ -349,6 +349,30 @@ public class CreateNewUser {
 		
        return "redirect:/";
 	}		
+	
+	
+	@RequestMapping(value = "/not_activated/user/{user}", method = RequestMethod.POST)
+	public String user_not_activated(@PathVariable String user){
+
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+		   return "redirect:/";
+		}
+		else
+		{
+			if(userAccountManager.findByUsername(user).isPresent()){
+	            User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+		    	
+	            case user_xyz.getRegistrationstate() switch 
+			}	
+
+		}
+		return user;
+	}
+	
+	
+	
+	// Registrierung:
 
 	@RequestMapping(value = "/create_temp_new_user", method = RequestMethod.POST)
 	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword)
