@@ -24,6 +24,8 @@
 							<th>email</th>
 							<th>origin</th>
 							<th>username</th>
+							<th>date of registration</th>
+							<th>user activated</th>
 						</tr>
 						
 						<tr th:each="user : ${users}" class="admin__table__row">
@@ -32,6 +34,8 @@
 							<td th:text="${user.userAccount.email}">123@4.com</td>
 							<td th:text="${user.origin}">GER</td>
 							<td th:text="${user.username}">MadMax</td>
+							<td th:text="${user.registrationdate}">rdate</td>
+							<td th:text="${user.activated}">activation_state</td>
 						</tr>
 					</table>
 					
