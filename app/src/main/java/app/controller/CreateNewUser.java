@@ -370,7 +370,11 @@ public class CreateNewUser {
 	            
 	            switch (user_xyz.getRegistrationstate()) {
 	            case -1: return "redirect:/new_user_data";
-				case 0:  return "redirect:/new_user_aboutuser1/user/{user}";
+				case 0:  // Fall: Temporäres Registrierungsdatum fehlt.
+					user_xyz.setRegistrationdate(new Date()); //Temporäres Registrierungsdatum um unvollständige Konten nach einer betimmten Zeit zu löschen.
+					user_xyz.setRegistrationstate(1);
+					userRepository.save(user_xyz); 
+					     return "redirect:/new_user_aboutuser1/user/{user}";
 				case 1:  return "redirect:/new_user_aboutuser1/user/{user}";
 				case 2:  
 						if (user_xyz.getAdresstyp().equals("Refugees_home"))
@@ -382,9 +386,9 @@ public class CreateNewUser {
 							return "redirect:/new_user_aboutuser2b/user/{user}";
 						}
 					    return "redirect:/new_user_aboutuser1/user/{user}";
-				case 3:  return "redirect:/new_user_aboutuser1/user/{user}";
-				case 4:  return "redirect:/new_user_aboutuser1/user/{user}";
-				case 5:  return "redirect:/new_user_language_origin/user/{user}";
+				case 3:  return "redirect:/new_user_language_origin/user/{user}";
+				case 4:  return "redirect:/new_user_language_origin/user/{user}";
+				case 5:  return "redirect:/new_user_language_origin/user/{user}";  // Aktivierungskey noch nicht generiert
 				case 6:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
 				case 7:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
 				case 8:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
