@@ -328,7 +328,12 @@ public class CreateNewUser {
 			if (user_xyz.getActivationkey().equals(textactivationkey))
 			{
 			    user_xyz.Activate();
+			    System.out.println(user_xyz.getUserAccount().getUsername()+" wurde aktiviert.");
 			}
+			else
+			{	
+				System.out.println(user_xyz.getUserAccount().getUsername()+": Aktivierung fehlgeschlagen");
+			}	
 
 			return "redirect:/";
 		}
