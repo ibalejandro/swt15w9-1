@@ -308,8 +308,8 @@ public class CreateNewUser {
 			}
 		}
 	}
-	
-	@RequestMapping(value = "/activation/user/{user}/{textactivationkey}", method = RequestMethod.POST)
+	                         
+	@RequestMapping(value = "/activation/user/{user}/{textactivationkey}", method = RequestMethod.GET)
 	public String recieve_activationkey(@PathVariable String user, @PathVariable String textactivationkey){
 		
 		if (!userAccountManager.findByUsername(user).isPresent())
@@ -320,6 +320,8 @@ public class CreateNewUser {
 	    if(userAccountManager.findByUsername(user).isPresent()){
             User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 	    	
+            System.out.println("Get activationlink for "+user_xyz.getUserAccount().getUsername()+"");
+            
 			if (textactivationkey.isEmpty())
 			{
 				return "redirect:/";
