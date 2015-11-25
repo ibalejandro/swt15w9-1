@@ -560,7 +560,7 @@ public class CreateNewUser {
 			userRepository.save(user_xyz);
 	
 			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
-			return "redirect://reCAPTCHA/user/{user}";
+			return "redirect:/reCAPTCHA/user/{user}";
 		}
 		return "error";
 	}
