@@ -4,13 +4,22 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.util.Date;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.MimeMessage;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,15 +37,18 @@ import app.model.UserRepository;
 public class CreateNewUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
+    private final MailSender mailSender;
 
 	@Autowired
-	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository) {
+	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository, MailSender mailSender) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
 
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
+		
+		this.mailSender=mailSender;
 	}
 
 	@RequestMapping({"/new_user_data"})
@@ -122,6 +134,70 @@ public class CreateNewUser {
 
 	}
 
+
+	
+	
+	
+	@Autowired
+	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException
+	{
+		
+		String mailhost = "smtp.gmail.com"; 			//Aus application.properties auslesen.
+		String mailusername = "***"; 	//Aus application.properties auslesen.
+	    String mailpassword = "***"; 			//Aus application.properties auslesen.
+	    String mailport= "587"; 						//Aus application.properties auslesen.
+	    String recipient = SendTo;
+
+	    Properties props = new Properties();
+
+	    props.put("mail.smtp.host", mailhost);
+	    props.put("mail.from", mailusername);
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.smtp.port", mailport);
+	    props.setProperty("mail.debug", "false");
+
+	    Session session = Session.getInstance(props, null);
+	    MimeMessage msg = new MimeMessage(session);
+
+	    msg.setRecipients(Message.RecipientType.TO, recipient);
+	    msg.setSubject(Subject);
+	    msg.setSentDate(new Date());
+	    msg.setText(Text);
+
+	    Transport transport = session.getTransport("smtp");
+
+	    transport.connect(mailusername, mailpassword);
+	    transport.sendMessage(msg, msg.getAllRecipients());
+	    transport.close();
+		
+		return;
+		
+	}
+	
+	public static String sha256(String base) {
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch(Exception ex){
+          throw new RuntimeException(ex);
+        }
+    }
+	
+	private String AktivierungskeyErzeugen(String username, String mail, Integer Zufallszahl1, Integer Zufallszahl2){
+		float fl = Zufallszahl1/Zufallszahl2;
+		String starttext = sha256("s"+sha256(sha256("Aktivierungskey"+username+"123"+mail+"XYZ"+Float.toString(fl)+"fff")+Zufallszahl1.toString())+Zufallszahl2.toString());
+		return sha256(sha256(sha256(sha256(sha256(starttext)))));
+	}
+	
 	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
 	public String recieve_reCAPTCHA(@RequestParam("g-recaptcha-response")String CaptchaResponse){
 
@@ -340,8 +416,16 @@ public class CreateNewUser {
 			
 			user_1.setOrigin(Origin);
 			
-		//	LoggUser.se
+		//	Nutzeraktivierung vorbereiten:
 			
+			Integer z1, z2; //Zufallszahlen
+			z1 = (int)(Math.random() * 1000000000)+123456;
+			z2 = (int)(Math.random() * 1000000000)+117980;
+			
+			System.out.println(z1.toString()+" , "+z2.toString());
+			
+			String activationkey = AktivierungskeyErzeugen(user_1.getUserAccount().getUsername(), user_1.getUserAccount().getEmail(), z1, z2);
+			user_1.setActivationkey(activationkey);
 			
 			userRepository.save(user_1);
 

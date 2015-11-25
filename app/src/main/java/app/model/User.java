@@ -28,6 +28,7 @@ public class User implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL) private Set<Language> languages;
 	private boolean enabled;
 	private boolean activated; // Aktivierungsstatus (d1456)
+	private String activationkey; // String mit dem das Konto aktiviert wird (d1456)
 	@OneToOne private UserAccount userAccount;
 	//Einbindung Güter:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
@@ -103,5 +104,19 @@ public class User implements Serializable{
 	public void Activate(){
 		this.activated = true;
 	}
+	
+	public void DeActivate(){
+		this.activated = false;
+	}
+	
+	public String getActivationkey(){
+		return activationkey;
+	}
+	
+	public void setActivationkey(String activationkey){
+		this.activationkey=activationkey;
+	}
+	
+	
 	
 }
