@@ -50,11 +50,17 @@ public class CreateNewUser {
 		
 		//this.mailSender=mailSender;
 	}
+	
+	int zufallzahl1, zufallzahl2; //Zufallszahlen
 
 	@RequestMapping({"/new_user_data"})
 	public String new_user(){
-      return "new_user_data";
-
+      
+		
+		zufallzahl1 = (int)(Math.random() * 100)+1;
+		zufallzahl2 = (int)(Math.random() * 98)+3;
+		
+		return "new_user_data";
 	}
 
 	@RequestMapping({"/new_user_aboutuser1/user/{user}"})
@@ -402,11 +408,11 @@ public class CreateNewUser {
 	}
 	
 	
-	
+	//******************************************************************************************//
 	// Registrierung:
 
 	@RequestMapping(value = "/create_temp_new_user", method = RequestMethod.POST)
-	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword)
+	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword, @RequestParam("summe")String chsumme)
 	{
 
 		System.out.println(Mail);
@@ -415,7 +421,7 @@ public class CreateNewUser {
 		System.out.println(RePassword);
 
 
-		if (Mail.isEmpty() ||  Username.isEmpty() || Password.isEmpty())
+		if (Mail.isEmpty() ||  Username.isEmpty() || Password.isEmpty() || chsumme.isEmpty())
 		{
 			return "errorpage0_empty";
 		}
@@ -424,6 +430,16 @@ public class CreateNewUser {
 		{
 			return "errorpage0_wrongpw";
 		}
+		
+		
+		Integer sum = zufallzahl1 + zufallzahl2;
+		System.out.println(sum.toString());
+		
+		if ( !(sum.toString().equals(chsumme)) )
+		{
+			return "errorpage0_empty";
+		}
+
 
 		if (Username.equals("new_user"))
 		{

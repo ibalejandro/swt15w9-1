@@ -33,7 +33,12 @@
 				<input name="repassword" type="password"/>
 			</p>
 			
-			<p>After creating the new user please wait for the Validation-Mail an then login again.</p>
+			<p> <b th:text="${zufallzahl1} + @{ &nbsp; + &nbsp; } + ${zufallzahl2}">z12 </b></p>
+			<p>Summe:</p>
+			
+			<p>
+				<input name="summe" type="text"/>
+			</p>
 			
 			<input type="submit" value="Create User"/>
 		</form>
