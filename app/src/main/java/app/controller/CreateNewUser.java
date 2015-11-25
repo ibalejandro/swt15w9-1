@@ -51,14 +51,40 @@ public class CreateNewUser {
 		//this.mailSender=mailSender;
 	}
 	
-	int zufallzahl1, zufallzahl2; //Zufallszahlen
+	int zufallzahl_1, zufallzahl_2; //Zufallszahlen
+	boolean za;
 
-	@RequestMapping({"/new_user_data"})
-	public String new_user(){
-      
+	@RequestMapping( value="/new_user_data")
+    public String new_user(){
 		
-		zufallzahl1 = (int)(Math.random() * 100)+1;
-		zufallzahl2 = (int)(Math.random() * 98)+3;
+		Integer zufallzahl1 = (int)(Math.random() * 50)+1;
+		Integer zufallzahl2 = (int)(Math.random() * 48)+3;
+		
+		zufallzahl_1 = zufallzahl1;
+		zufallzahl_2 = zufallzahl2;
+		za = true;
+		
+		String szufallzahl1 = zufallzahl1.toString();
+		String szufallzahl2 = zufallzahl2.toString();
+		
+		//System.out.println("----1");
+		
+		return "redirect:/new_user_data_rd/"+szufallzahl1+"/"+szufallzahl2;
+	}  
+	
+	@RequestMapping(value ="/new_user_data_rd/0/0", method = RequestMethod.GET)
+	public String new_user_rd0(){
+		return "redirect:/new_user_data";
+	}
+	
+	@RequestMapping(value ="/new_user_data_rd/{zufallzahl1}/{zufallzahl2}", method = RequestMethod.GET)
+	public String new_user_rd(@PathVariable("zufallzahl1")String szufallzahl1 , @PathVariable("zufallzahl2")String szufallzahl2){
+		
+		if (!za) {
+			return "redirect:/new_user_data";			
+		}
+		
+		za = false;
 		
 		return "new_user_data";
 	}
@@ -432,12 +458,12 @@ public class CreateNewUser {
 		}
 		
 		
-		Integer sum = zufallzahl1 + zufallzahl2;
-		System.out.println(sum.toString());
+		Integer sum = zufallzahl_1 + zufallzahl_2;
+		System.out.println(sum.toString()+ " =? "+ chsumme);
 		
 		if ( !(sum.toString().equals(chsumme)) )
 		{
-			return "errorpage0_empty";
+			return "redirect:/new_user_data";
 		}
 
 
