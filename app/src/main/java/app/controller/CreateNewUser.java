@@ -173,8 +173,8 @@ public class CreateNewUser {
 
 	
 	
-	
-	/*@Autowired
+	/*
+	@Autowired
 	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException
 	{
 		
@@ -208,7 +208,7 @@ public class CreateNewUser {
 		
 		return;
 		
-	} */
+	}   */
 	
 	public static String sha256(String base) {
         try{
@@ -317,8 +317,8 @@ public class CreateNewUser {
 					System.out.println(link);
 					
 					//Mail senden: 
-					/*	try {
-					Mailsenden(Mail,"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+				/*		try {
+					Mailsenden(user_xyz.getUserAccount().getEmail(),"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
 					System.out.println("Mail versandt");
 				} catch (MessagingException e) {
 					// TODO Auto-generated catch block
@@ -353,7 +353,7 @@ public class CreateNewUser {
 	    if(userAccountManager.findByUsername(user).isPresent()){
             User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 	    	
-            System.out.println("Get activationlink for "+user_xyz.getUserAccount().getUsername()+"");
+            System.out.println("Get a activationlink for "+user_xyz.getUserAccount().getUsername()+"");
             
 			if (textactivationkey.isEmpty())
 			{
