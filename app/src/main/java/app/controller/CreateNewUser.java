@@ -389,9 +389,9 @@ public class CreateNewUser {
 				case 3:  return "redirect:/new_user_language_origin/user/{user}";
 				case 4:  return "redirect:/new_user_language_origin/user/{user}";
 				case 5:  return "redirect:/new_user_language_origin/user/{user}";  // Aktivierungskey noch nicht generiert
-				case 6:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
-				case 7:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
-				case 8:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
+				case 6:  return "redirect:/reCAPTCHA/user/{user}";
+				case 7:  return "redirect:/reCAPTCHA/user/{user}";
+				case 8:  return "redirect:/reCAPTCHA/user/{user}";
 				case 9:  return "redirect:/";    //Account deaktiviert.
 				case 10:  return "redirect:/";   //Alles OK.
 	            }
