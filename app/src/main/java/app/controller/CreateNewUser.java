@@ -351,7 +351,7 @@ public class CreateNewUser {
 	}		
 	
 	
-	@RequestMapping(value = "/not_activated/user/{user}", method = RequestMethod.POST)
+	@RequestMapping(value = "/not_activated/user/{user}", method = RequestMethod.GET)
 	public String user_not_activated(@PathVariable String user){
 
 		if (!userAccountManager.findByUsername(user).isPresent())
