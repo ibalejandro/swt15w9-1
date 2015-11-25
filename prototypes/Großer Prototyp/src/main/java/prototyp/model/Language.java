@@ -7,7 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+/**
+* <h1>Language</h1>
+* The Language is the Entity, which represents a certain Language.
+* 
+* @author Friederike Kitzing
+*/
+//Möglicherweise Repository notwendig?
 
 @SuppressWarnings("serial")
 @Entity
@@ -16,23 +22,36 @@ public class Language implements Serializable{
 	
 	private @Id @GeneratedValue long id;
 	private String name;
-	public Language(long id, String name) {
+	
+	/**
+	 * Constructor.
+	 * @param String The name of the Language
+	 */
+	public Language(String name) {
 		super();
-		this.id = id;
 		this.name = name;
 	}
+	
+	/**
+	   * Getter.
+	   * @return The Language's id 
+	   */
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
-		this.id = id;
-	}
+	
+	/**
+	   * Getter.
+	   * @return String The Language's name
+	   */
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+		
+	/**
+	   * toString 
+	   * @return String The name of this Language
+	   */
 	@Override
 	public String toString() {
 		return name;
