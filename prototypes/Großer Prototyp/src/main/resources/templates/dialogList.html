@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+
+<html lang="de">
+	
+	<head th:include="imports :: head">
+		<title>Dialog List</title>
+	</head>
+	
+	<body th:include="imports :: script">
+	
+		<div th:include="navigation :: navigation"></div>
+		
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>Dialog Partner</th>
+						<th>Link</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="dialog : ${dialogList}">
+						<th th:text="${dialog.partner}"></th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	</body>
+	
+</html>

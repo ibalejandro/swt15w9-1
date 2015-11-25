@@ -1,0 +1,60 @@
+= Protokoll Gruppe 09
+__Treffen am 05.11.2015__
+
+__Schriftführer:__ Friederike Kitzing
+
+__Nächstes Treffen:__ 12.11.2015
+
+.__Teilnehmer:__
+* Kilian Heret
+* Alejandro Sánchez Aristizábal
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* Vorstellen der Prototypen
+* Hinweise zu GitHub/Git
+* Fragen zum Zeitplan
+
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe                                   |Status         |Bemerkung
+|#3    |ein kleiner Prototyp pro Teammitglied     |geschlossen    |N/A
+|#4    |Kontextdiagramm, Top-Level-Architektur,
+        Anwendungsfall-,Klassen-, Sequenzdiagramme|geschlossen	|N/A
+|#5    |Pflichtenheft								|geschlossen    |GUI Snapshots einfügen
+
+|===
+
+
+== Aktueller Stand
+* Prototypen GoodsOfferAndSearch, Dialogbausteine, UserManagement, Nutzer_erstellen existieren und sind funktionsfähig
+* Prototyp zu Properties und Goods noch nicht lauffähig
+* Templates (Frontend-Prototyp) vorhanden, allerdings noch nicht alle
+
+== Planung des nächsten Sprints
+* Zusammenführung der Prototypen
+* großer Prototyp mit grundlegenen Funktionen; angestrebt zum nächsten Treffen, harte Deadline in 2 Wochen
+* notwendige Templates 
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel          |Beschreibung                   |Verantwortlicher |Status
+|#10    |Großer Prototyp   |zusammenführen der kleinen Prototypen |N/A              |offen
+|#11    |Verfeinerte UML-Modelle|Angleichen der Modelle an Prototypen |N/A   |offen
+|#12    |Entwurfsenscheidungen treffen|  |N/A |offen
+|#13	|Anpassung an Salespointframework |Einfügen der Salespoint Elemente in UML-Diagramme |N/A |offen
+|#14	|Entwicklerdokumentation |   |N/A |offen
+|#15	|Testplan				|Akzeptanztestfälle erweitern |N/A |offen
+
+
+|===

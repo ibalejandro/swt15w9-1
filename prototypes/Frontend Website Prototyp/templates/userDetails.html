@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="content-type" content="text/html"/>
+		
+		<link rel="stylesheet" href="../resources/css/foundation.css"/>
+		<link rel="stylesheet" href="../resources/css/app.css"/>
+		<script src="../resources/js/vendor/modernizr.js"></script>
+		
+		<title>User</title>
+	</head>
+
+	<body>
+
+
+		<div class="userdetail">
+			<header class="userdetail__header">
+				<h1>Kundenliste</h1>
+				
+				<ul>
+					<li class="button" sec:authorize="!isAuthenticated()" ><a th:href="@{/login}" ><p>Login</p></a></li>
+
+					<li sec:authorize="isAuthenticated()">
+						<form th:action="@{/logout}" method="post">
+							<input type="submit" value="Logout" />
+						</form>
+					</li>
+				</ul>
+			</header>
+			
+			
+			<div class="content">
+			
+		
+				<h4 sec:authorize="!hasRole('ROLE_ADMIN')">Keine Berechtigung!</h4>
+				
+				<table sec:authorize="hasRole('ROLE_ADMIN')">			
+					<thead>
+						<tr>
+							<th>Vorname</th><th>Nachname</th><th>Email</th><th>Adresse</th><th>Herkunft</th><th>Sprache</th>
+						</tr>
+					</thead>
+					<tbody th:remove="all-but-first">
+							<tr th:each=" user : ${userDetails}">
+								<td th:text="${user.userAccount.firstname}">Hans</td>
+								<td th:text="${user.userAccount.lastname}">Mueller</td>
+								<td th:text="${user.userAccount.email}">xyz</td>
+								<td th:text="${user.location.getLocation()}">Adresse</td>
+								<td th:text="${user.getOrigin()}">Herkunft</td>
+								<td th:text="${user.getLanguage()}">Sprache</td>
+								<td><a th:href="@{/modify}">Bearbeiten</a></td>
+							</tr>
+																				
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		
+		<script src="../resources/js/vendor/jquery.js"></script>
+		<script src="../resources/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>

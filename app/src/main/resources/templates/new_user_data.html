@@ -1,0 +1,49 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		
+		<form action="/create_temp_new_user" method="post">
+			<h3>(1) Create New User</h3>
+			
+			<p>EMail:</p>
+			
+			<p>
+				<input name="mail" type="text"/>
+			</p>
+			
+			<p>Username:</p>
+			
+			<p>
+				<input name="username" type="text"/>
+			</p>
+			
+			<p>Password:</p>
+			
+			<p>
+				<input name="password" type="password"/>
+			</p>
+			
+			<p>Repeate Password:</p>
+			
+			<p>
+				<input name="repassword" type="password"/>
+			</p>
+			
+			<p> <b th:text="${zufallzahl1} + @{ &nbsp; + &nbsp; } + ${zufallzahl2}">z12 </b></p>
+			<p>Summe:</p>
+			
+			<p>
+				<input name="summe" type="text"/>
+			</p>
+			
+			<input type="submit" value="Create User"/>
+		</form>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+	
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title> Offer good </title>
+    </head>
+    <body>
+        <form th:action="@{/saveGood}" method="post">
+        	<h2> Good </h2>
+            <div><label> Name : <input type="text" name="name"/> </label></div>
+            <br></br>
+            <div><label> Description: <input type="text" name="description"/> </label></div>
+            <br></br>
+            <div><label> Tags: <input type="text" name="tags"/> </label></div>
+	        <br></br>
+	        <div><input type="submit" value="Offer"/></div>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<form th:action="@{/submit_language_origin/user/} + ${user}" method="post">
+			<h3 th:text="@{(4) Your Language and Origin: &nbsp; } + ${user}"> LANGUAGE</h3>
+			
+			<p>Native Language: </p>
+			
+			<p>
+				<input name="nativelanguage" type="text"/>
+			</p>
+			
+			<p>other languages</p>
+			
+			<p>
+				<input name="otherlanguages" type="text"/>
+			</p>
+			
+			<p>Country of origin</p>
+			
+			<p>
+				<input name="origin" type="text"/>
+			</p>
+			<input type="submit" value="OK"/>
+		</form>
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+	
+</html>
