@@ -11,38 +11,34 @@
 		- Kommentare löschen
 -->
 
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
-		<title th:text="${title}">Refugee App</title>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
+	<head th:include="imports :: head">
+	
 	</head>
 	
-	<body>
+	<body th:include="imports :: script">
+	
 		<div th:fragment="item">
 			<div class="single--small">
+			
 				<div class="single__divider">
 					<div class="single__head--small">
 						<a style="float:right;" role="button" aria-label="anfragen" href="#" class="button">anfragen</a>
 						<h2 th:text="${content.name}" class="single__title--small">Lorem ipsum</h3>
 					</div>
 				</div>
+				
 				<div class="single__container--small">
 					<div class="single__divider">
 						<p th:text="${content.location}" class = "single__location--small"> Amtstraße 11 - 01134 Dresden - Deutschland</p>
-
 					</div>
+					
 					<div class="single__divider">
 						<div class="single__img__container--small">
 						
 							<img th:src="@{'img/'+${content.image}}" class="single__img--small" src="img/Koala.jpg"/>
 						
 						</div>
+						
 						<div class="single__description--small--first">
 						
 							<p th:text="${content.description1}" class="single__description__text--small--first">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
@@ -56,14 +52,9 @@
 						</p>
 
 					</div>
-					
 				</div>
 			</div>
 		</div>
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
+	
 	</body>
 </html>

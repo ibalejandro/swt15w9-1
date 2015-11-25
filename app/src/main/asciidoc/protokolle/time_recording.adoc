@@ -12,7 +12,7 @@ Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen
 |26.10 |01.11 |20h 30min  |           |           |22h        |24h  25min |23h 20min  |10h 25min
 |02.11 |08.11 |10h 30min  |           |           |12h        |25h  30min |11h 45min  |2h 5min
 |09.10 |15.11 |30h        |           |           |           |           |16h 45min  |4h 35min
-|16.11 |22.11 |           |           |           |           |           |           |
+|16.11 |22.11 |14h        |           |           |           |           |15h 20min  |1h 35min
 |23.11 |29.11 |           |           |           |           |           |           |
 |30.11 |06.12 |           |           |           |           |           |           |
 |07.12 |13.12 |           |           |           |           |           |           |

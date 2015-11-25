@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	
+    <head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<div th:include="navigation :: navigation"></div>
+		
+		<div class = "row">
+			<div class = "small-12 columns">
+				
+				<div class="create">
+					<h1 class="create__title">Offer</h1>
+				
+					<form th:action="@{/offeredGood}" method="post">
+						<div>
+							<label class="create__label"> Name :</label> 
+							<input type="text" name="name"/>
+						</div>
+						
+						<div>
+							<label class="create__label"> Description:</label>
+							<input type="text" name="description"/>
+						</div>
+						
+						<div>
+							<label class="create__label"> Tags:</label>
+							<input type="text" name="tags" placeholder="Example: Winter, Rain, Cold"/> 
+						</div>
+						
+						<div>
+							<input class="button" type="submit" value="Offer"/>
+						</div>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+		<th:block th:include="imports :: script"></th:block>
+    </body>
+	
+</html>

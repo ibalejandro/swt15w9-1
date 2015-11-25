@@ -1,7 +1,8 @@
 TODO:
 	- Thyme Leaf ein Bindung überprüfen
-	- Überschriften überarbeiten
+	- Überschriften überarbeiten und einfügen 
 	- navigation fixen
+	- info in <HTML> Tag überprüfen
 	
 Templates:
 	- data.html						Style

@@ -1,25 +1,17 @@
 <!doctype html>
-<html class="no-js" mlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
-		
-		<title th:text="${title}">Refugee App</title>
-		
-		
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!--	
+		TODO:
+			-Title einfügen
+			- 
+	-->
+	
+	<head th:include="imports :: head">
+	
 	</head>
 	
-	<body>
+	<body th:include="imports :: script">
 		
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
 	</body>
+	
 </html>

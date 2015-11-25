@@ -8,19 +8,12 @@
 			- Title
 	-->
 
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="content-type" content="text/html"/>
-		
-		<title th:text="${title}">Refugee App</title>
-		
-		<link rel="stylesheet" href="../resources/css/foundation.css"/>
-		<link rel="stylesheet" href="../resources/css/app.css"/>
-		<script src="../resources/js/vendor/modernizr.js"></script>
+	<head th:include="imports :: head">
+	
 	</head>
-
-	<body>
+	
+	<body th:include="imports :: script">
+	
 		<div th:include="navigation :: navigation"></div>
 	
 		<div class="row">
@@ -40,15 +33,18 @@
 							<h1>Login page</h1>
 							<p th:if="${loginError}" class="login__error">Wrong Username or Password!</p>
 						</div>
+						
 						<form th:action="@{/login}" method="post">
 							<div class="large-12 columns">
 								<label class="login__label" for="username">Username:</label>
 								<input type="text" id="username" name="username" autofocus="autofocus" /> <br />
 							</div>
+							
 							<div class="large-12 columns">
 								<label class="login__label" for="password">Password:</label>
 								<input type="password" id="password" name="password" /> <br />
 							</div>
+							
 							<div class="large-12 columns">
 								<input class="button" type="submit" value="Log in" />
 							</div>
@@ -59,10 +55,5 @@
 			</div>
 		</div>
 		
-		<script src="../resources/js/vendor/jquery.js"></script>
-		<script src="../resources/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
 	</body>
 </html>

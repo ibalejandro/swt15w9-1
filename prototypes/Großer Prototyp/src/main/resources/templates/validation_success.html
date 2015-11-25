@@ -1,10 +1,12 @@
-<html>
-  <body>
-    <form action="/" method="post">
-      Validation von Recaptcha erfolgreich
-	  
-	  Mail senden: 
-      <input type="submit" value="Submit"/>
-    </form>
-  </body>
+<html>	
+	<head th:include="imports :: head"></head>
+
+	<body th:include="imports :: script">
+		<form action="/" method="post">
+		Validation von Recaptcha erfolgreich
+
+		Mail senden: 
+		<input type="submit" value="Submit"/>
+		</form>
+	</body>
 </html>

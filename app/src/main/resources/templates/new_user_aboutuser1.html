@@ -1,0 +1,38 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<form th:action="@{/submit_userdata1/user/} + ${user}" method="post">
+			<h3 th:text="@{(2) About You: &nbsp; } + ${user}"> ABOUT</h3>
+			
+			<p>Name:</p>
+			
+			<p>
+				<input name="name" type="text"/>
+			</p>
+			
+			<p>First Name:</p>
+			
+			<p>
+				<input name="firstname" type="text"/>
+			</p>
+			
+			<p>Wohnungstyp</p>
+			
+			<p>
+				<select name="Adresstyp" size="2" >
+					<option>Refugees_home</option>
+					<option>Wohnung</option>
+				</select>
+			</p>
+			
+			<input type="submit" value="Next"/>
+		</form>
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+	
+</html>
