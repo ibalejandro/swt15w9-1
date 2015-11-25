@@ -1,5 +1,7 @@
 package app.controller;
 
+import java.util.Date;
+
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -61,8 +63,12 @@ public class TestDaten implements DataInitializer {
 		User user1= new User(u1, address1);
 		user1.setLanguage("Deutsch");
 		user1.setOrigin("Deutschland");
+		user1.setRegistrationdate(new Date());
+		user1.Activate();
+				
 		User user2= new User(u2,address1);
 		user2.setLanguage("Arabisch");
+		user2.setRegistrationdate(new Date());
 		userRepository.save(user1);
 		userRepository.save(user2);
 	}

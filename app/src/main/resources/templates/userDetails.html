@@ -29,7 +29,7 @@
 				<table sec:authorize="hasRole('ROLE_ADMIN')">			
 					<thead>
 						<tr>
-							<th>Vorname</th><th>Nachname</th><th>Email</th><th>Adresse</th><th>Herkunft</th><th>Sprache</th>
+							<th>Vorname</th><th>Nachname</th><th>Email</th><th>Adresse</th><th>Herkunft</th><th>Sprache</th><th>Registrierungsdatum</th><th>Aktivierung</th>
 						</tr>
 					</thead>
 					
@@ -41,6 +41,8 @@
 								<td th:text="${user.location.getLocation()}">Adresse</td>
 								<td th:text="${user.getOrigin()}">Herkunft</td>
 								<td th:text="${user.getLanguage()}">Sprache</td>
+								<td th:text="${user.getRegistrationdate()}">rdate</td>
+								<td th:text="${user.isActivated()}">activation_state</td>
 								<td><a th:href="@{/modify}">Bearbeiten</a></td>
 							</tr>
 					</tbody>
