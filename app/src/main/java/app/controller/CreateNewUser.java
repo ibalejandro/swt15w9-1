@@ -363,6 +363,11 @@ public class CreateNewUser {
 			if(userAccountManager.findByUsername(user).isPresent()){
 	            User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 		    	
+	            if (user_xyz.isActivated())
+	            {
+	            	return "redirect:/";   //Alles OK.
+	            }
+	            
 	            switch (user_xyz.getRegistrationstate()) {
 	            case -1: return "redirect:/new_user_data";
 				case 0:  return "redirect:/new_user_aboutuser1/user/{user}";
