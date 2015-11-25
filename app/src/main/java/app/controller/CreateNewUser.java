@@ -88,7 +88,7 @@ public class CreateNewUser {
 	      return "redirect:/reCAPTCHA-TEST";
 		}
 	
-	@RequestMapping(value = "/submit_captcha/user/{user}")
+	@RequestMapping(value = "/reCAPTCHA/user/{user}")
 	public String redirect_reCAPTCHA_user(){
 	      return "/reCAPTCHA_User";
 		}
@@ -560,7 +560,7 @@ public class CreateNewUser {
 			userRepository.save(user_xyz);
 	
 			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
-			return "redirect:/submit_captcha/user/{user}";
+			return "redirect://reCAPTCHA/user/{user}";
 		}
 		return "error";
 	}
