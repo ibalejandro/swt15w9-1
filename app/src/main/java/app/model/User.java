@@ -32,6 +32,7 @@ public class User implements Serializable{
 	private int registrationstate; // Registrierungsstatus
 	private String activationkey; // String mit dem das Konto aktiviert wird (d1456)
 	private Date registrationdate; //Registrierungsdatum (d1456)
+	private String adresstyp; 
 	@OneToOne private UserAccount userAccount;
 	//Einbindung Güter:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
@@ -47,6 +48,7 @@ public class User implements Serializable{
 		this.activated = false;
 		this.registrationstate = -1; 
 		this.activationkey = "";
+		this.adresstyp = "";
 		//-1 ~ noch nichts eingegeben; 0-8 ~ für Registriegungsfortschritt; 9 ~ Konto von Admin o.ä. deaktiviert; 10 ~ Kontodaten vollständig und aktiviert; 
 		Set<Language>languages=new HashSet<>();
 	}
@@ -139,6 +141,14 @@ public class User implements Serializable{
 	
 	public void setRegistrationdate(Date registrationdate){
 		this.registrationdate=registrationdate;
+	}
+	
+	public String getAdresstyp() {
+		return adresstyp;
+	}
+
+	public void setAdresstyp(String adresstyp) {
+		this.adresstyp = adresstyp;
 	}
 	
 }

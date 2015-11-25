@@ -363,11 +363,32 @@ public class CreateNewUser {
 			if(userAccountManager.findByUsername(user).isPresent()){
 	            User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 		    	
-	            case user_xyz.getRegistrationstate() switch 
+	            switch (user_xyz.getRegistrationstate()) {
+	            case -1: return "redirect:/new_user_data";
+				case 0:  return "redirect:/new_user_aboutuser1/user/{user}";
+				case 1:  return "redirect:/new_user_aboutuser1/user/{user}";
+				case 2:  
+						if (user_xyz.getAdresstyp().equals("Refugees_home"))
+						{
+							return "redirect:/new_user_aboutuser2a/user/{user}";
+						}
+						if (user_xyz.getAdresstyp().equals("Wohnung"))
+						{
+							return "redirect:/new_user_aboutuser2b/user/{user}";
+						}
+					    return "redirect:/new_user_aboutuser1/user/{user}";
+				case 3:  return "redirect:/new_user_aboutuser1/user/{user}";
+				case 4:  return "redirect:/new_user_aboutuser1/user/{user}";
+				case 5:  return "redirect:/new_user_language_origin/user/{user}";
+				case 6:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
+				case 7:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
+				case 8:  return "redirect:/redirect:/reCAPTCHA/user/{user}";
+				case 9:  return "redirect:/";    //Account deaktiviert.
+				case 10:  return "redirect:/";   //Alles OK.
+	            }
 			}	
-
-		}
-		return user;
+			return "redirect:/"; 
+		} 
 	}
 	
 	
@@ -463,6 +484,7 @@ public class CreateNewUser {
 
 			user_xyz.getUserAccount().setLastname(Name);
 			user_xyz.getUserAccount().setFirstname(Firstname);
+			user_xyz.setAdresstyp(Adresstyp);
 			userAccountManager.save(user_xyz.getUserAccount());
 			
 			user_xyz.setRegistrationstate(2);
