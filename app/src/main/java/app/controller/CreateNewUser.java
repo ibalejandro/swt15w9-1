@@ -31,7 +31,14 @@ import app.model.Address;
 import app.model.User;
 import app.model.UserRepository;
 
-
+/**
+* <h1>CreateNewUserController</h1>
+* The CreateNewUserController is used for registration and create UserAccounts.
+* 
+*
+* @author Kilian Heret
+* 
+*/
 
 @Controller
 public class CreateNewUser {
@@ -39,6 +46,10 @@ public class CreateNewUser {
 	private final UserRepository userRepository;
     //private final MailSender mailSender;
 
+	/**
+	   * Autowire.
+	   * @param CreateNewUser
+	   */
 	@Autowired
 	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository /*, MailSender mailSender*/) {
 
