@@ -295,8 +295,9 @@ public class CreateNewUser {
 					
 					user_xyz.setRegistrationstate(8); //8 ~ Aktivierungsmail versandt.
 					userRepository.save(user_xyz);
-					
-					return "/validation_success";
+				
+					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
+					return "/activationmail_gesended";
 		            
 				}
 				return "redirect:/";
