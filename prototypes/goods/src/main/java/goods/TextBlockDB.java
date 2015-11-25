@@ -1,18 +1,19 @@
 package goods;
 
+import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TextBlockDB extends Repository<TexBlock, Long> {
+public interface TextBlockDB extends JpaRepository<TexBlock, Long> {
 	
 	void delete(Long id);
 	
 	TexBlock save(TexBlock textblock);
 	
-	Optional<TexBlock> findOne(Long id);
+	TexBlock findOne(Long id);
 	
-	Iterable<TexBlock> findAll();
+	List<TexBlock> findAll();
 	
-	int count();
+	long count();
 }

@@ -34,7 +34,14 @@ import prototyp.model.Address;
 import prototyp.model.User;
 import prototyp.model.UserRepository;
 
-
+/**
+* <h1>CreateNewUserController</h1>
+* The CreateNewUserController is used for registration and create UserAccounts.
+* 
+*
+* @author Kilian Heret
+* 
+*/
 
 @Controller
 public class CreateNewUser {	

@@ -10,21 +10,21 @@ public class Property {
 	 */
 	TexBlock category;
 	
-	TexBlock value;
+	TexBlock blockvalue;
 	
 	String textvalue;
 	
 	
 	public Property(TexBlock textblock, TexBlock textblock2){
-		assert Arrays.asList(textblock.values).contains(textblock2) : "'"+textblock2.translations[0]+"' ist kein gültiger Wert für '"+textblock.translations[0]+"'";
+		assert Arrays.asList(textblock.getValues()).contains(textblock2) : "'"+textblock2.getTranslation(0)+"' ist kein gültiger Wert für '"+textblock.getTranslation(0)+"'";
 		this.category=textblock;
-		this.value=textblock;
+		this.blockvalue=textblock;
 		this.textvalue=null;
 	}
 	
 	public Property(TexBlock textblock, String text){
 		this.category=textblock;
-		this.value=null;
+		this.blockvalue=null;
 		this.textvalue=text;
 	}
 	
@@ -37,7 +37,7 @@ public class Property {
 	}
 	
 	public TexBlock getValue(){
-		return value;
+		return blockvalue;
 	}
 	
 	public void setCategory(TexBlock category){
@@ -49,9 +49,9 @@ public class Property {
 		this.textvalue=text;
 	}
 	
-	public void setValue(TexBlock value){
-		Assert.notNull(this.value, "Dieser Eigenschaft besitzt keine vorgefertigten Werte!");
-		this.value=value;
+	public void setValue(TexBlock blockvalue){
+		Assert.notNull(this.blockvalue, "Dieser Eigenschaft besitzt keine vorgefertigten Werte!");
+		this.blockvalue=blockvalue;
 	}
 	
 	
