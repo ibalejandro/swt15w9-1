@@ -5,6 +5,8 @@
 	</head>
 	
 	<body>
+	
+		<div th:include="navigation :: navigation"></div>
 		
 		<form action="/create_temp_new_user" method="post">
 			<h3>(1) Create New User</h3>
@@ -44,6 +46,7 @@
 		</form>
 		
 		<th:block th:include="imports :: script"></th:block>
+		
 	</body>
 	
 </html>

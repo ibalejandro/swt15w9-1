@@ -8,19 +8,19 @@
 	
 	<body>
 	
+		<div th:include="navigation :: navigation"></div>
+	
 		<div class="userdetail">
 			<header class="userdetail__header">
 				<h1>Kundenliste</h1>
-				
-				<ul>
-					<li class="button" sec:authorize="!isAuthenticated()" ><a th:href="@{/login}" ><p>Login</p></a></li>
+					<div class="button" sec:authorize="!isAuthenticated()" ><a class="button__link" th:href="@{/login}" ><p>Login</p></a></div>
 
-					<li sec:authorize="isAuthenticated()">
+					<div  sec:authorize="isAuthenticated()">
 						<form th:action="@{/logout}" method="post">
-							<input type="submit" value="Logout" />
+							<input class="button" type="submit" value="Logout" />
 						</form>
-					</li>
-				</ul>
+					</div>
+
 			</header>
 			
 			<div class="content">

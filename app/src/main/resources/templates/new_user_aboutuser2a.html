@@ -6,6 +6,8 @@
 	
 	<body>
 	
+		<div th:include="navigation :: navigation"></div>
+		
 		<form th:action="@{/submit_userdata2a/user/} + ${user}" method="post">
 			<h3 th:text="@{(3) Your Adress: &nbsp; } + ${user}"> ADRESS</h3>
 			
@@ -35,7 +37,9 @@
 			
 			<input type="submit" value="OK"/>
 		</form>
+		
 		<th:block th:include="imports :: script"></th:block>
+		
 	</body>
 
 </html>
