@@ -17,7 +17,7 @@ public class Application {
     }
 	private static final String LOGIN_ROUTE = "/login";
 
-	//Übernommen aus Vidoeshop, Modifikation nötig
+	//Übernommen aus Videoshop, Modifikation nötig
 	@Configuration
 	static class UserManagementApplicationWebConfiguration extends SalespointWebConfiguration {
 		@Override

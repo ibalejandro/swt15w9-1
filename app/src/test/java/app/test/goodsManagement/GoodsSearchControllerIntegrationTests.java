@@ -30,28 +30,30 @@ AbstractWebIntegrationTests {
   public void createGoodEntities() {
     long userId = 1L;
     Set<String> tags1 = new HashSet<String>(Arrays.asList("Transport", "Kids"));
+    String picLink1 = "http://i.imgur.com/C2csOAA.jpg";
+    String picLink2 = "http://i.imgur.com/Xr50D6D.jpg";
     good1 = new GoodEntity("Bicycle", "This bicycle is for girls under 12 years"
-                           + " old. It's pink and purple", tags1, userId);
+                           + " old. It's pink and purple", tags1, picLink1, userId);
     
     Set<String> tags2 = new HashSet<String>
                         (Arrays.asList("Winter", "Men", "Clothes"));
     good2 = new GoodEntity("Jacket", "The jacket is for men. It's black with a"
-                           + " gray hood", tags2, userId);
+                           + " gray hood", tags2, picLink2, userId);
     
     Set<String> tags3 = new HashSet<String>
                         (Arrays.asList("Transport", "Teenagers"));
     good3 = new GoodEntity("Bicycle with new tires", "This bicycle is not new"
-                           + " but it is renewed with fresh tires.", tags3, 
+                           + " but it is renewed with fresh tires.", tags3, picLink2, 
                            userId);
     Set<String> tags4 = new HashSet<String>
                         (Arrays.asList("Winter", "Women", "Clothes"));
     good4 = new GoodEntity("Winter gloves", "The winter gloves are for women's"
-                           + " size S.", tags4, userId);
+                           + " size S.", tags4, picLink1, userId);
 
     Set<String> tags5 = new HashSet<String>
                         (Arrays.asList("Sleep", "Winter", "Kids"));
     good5 = new GoodEntity("Sleeping", "This sleeping is for kids and is useful"
-                           + "to keep them warm in the night.", tags5, userId);
+                           + "to keep them warm in the night.", tags5, picLink2, userId);
     
     repository.save(good1);
     repository.save(good2);

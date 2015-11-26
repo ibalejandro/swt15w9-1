@@ -89,7 +89,8 @@ public class GoodsManagementController {
 		else {
   		Set<String> emptyTags = new HashSet<>();
   		long invalidUserId = -1L;
-  		good = new GoodEntity("", "", emptyTags, invalidUserId);
+  		String emptyPic = new String();
+  		good = new GoodEntity("", "", emptyTags, emptyPic, invalidUserId);
     }
     	
     model.addAttribute("result", good);
@@ -156,7 +157,8 @@ public class GoodsManagementController {
   	else {
   	  Set<String> emptyTags = new HashSet<>();
   		long invalidUserId = -1L;
-  		good = new GoodEntity("", "", emptyTags, invalidUserId);
+  		String emptyPic = new String();
+  		good = new GoodEntity("", "", emptyTags, emptyPic, invalidUserId);
   	}
     	
     model.addAttribute("result", good);
