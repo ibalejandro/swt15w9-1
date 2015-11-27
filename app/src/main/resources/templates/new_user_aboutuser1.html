@@ -8,32 +8,27 @@
 		
 		<div th:include="navigation :: navigation"></div>	
 	
-		<form th:action="@{/submit_userdata1/user/} + ${user}" method="post">
-			<h3 th:text="@{(2) About You: &nbsp; } + ${user}"> ABOUT</h3>
+		<div class="row">
+			<div class="large-12 colums">
+				<h1 th:text="@{&Uuml;ber dich: &nbsp; } + ${user}"> ABOUT</h1>
 			
-			<p>Name:</p>
-			
-			<p>
-				<input name="name" type="text"/>
-			</p>
-			
-			<p>First Name:</p>
-			
-			<p>
-				<input name="firstname" type="text"/>
-			</p>
-			
-			<p>Wohnungstyp</p>
-			
-			<p>
-				<select name="Adresstyp" size="2" >
-					<option>Refugees_home</option>
-					<option>Wohnung</option>
-				</select>
-			</p>
-			
-			<input type="submit" value="Next"/>
-		</form>
+				<form th:action="@{/submit_userdata1/user/} + ${user}" method="post">
+					<p class="new__user__text">Nachname:</p>
+					<input name="name" type="text"/>
+					
+					<p class="new__user__text">Vorname:</p>
+					<input name="firstname" type="text"/>
+					
+					<p class="new__user__text">Wohnungstyp</p>
+					<select class="new__user__select" name="Adresstyp" size="2" >
+						<option class="new__user__option">Refugees_home</option>
+						<option class="new__user__option">Wohnung</option>
+					</select>
+					
+					<input type="submit" class="button" value="Next"/>
+				</form>
+			</div>
+		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
 		

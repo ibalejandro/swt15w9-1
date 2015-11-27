@@ -8,48 +8,51 @@
 	
 	<body>
 	
-		<div th:include="navigation :: navigation"></div>
-	
-		<div class="userdetail">
-			<header class="userdetail__header">
-				<h1>Kundenliste</h1>
-					<div class="button" sec:authorize="!isAuthenticated()" ><a class="button__link" th:href="@{/login}" ><p>Login</p></a></div>
-
-					<div  sec:authorize="isAuthenticated()">
-						<form th:action="@{/logout}" method="post">
-							<input class="button" type="submit" value="Logout" />
-						</form>
-					</div>
-
-			</header>
-			
-			<div class="content">
-				<h4 sec:authorize="!hasRole('ROLE_ADMIN')">Keine Berechtigung!</h4>
-				
-				<table sec:authorize="hasRole('ROLE_ADMIN')">			
-					<thead>
-						<tr>
-							<th>Vorname</th><th>Nachname</th><th>Email</th><th>Adresse</th><th>Herkunft</th><th>Sprache</th><th>Registrierungsdatum</th><th>Aktivierung</th>
-						</tr>
-					</thead>
+		<th:block th:include="navigation :: navigation"></th:block>
+		
+		<div class="row">
+			<div class="large-12 colums">
+				<div class="userdetail">
+					<h1 class="userdetail__headline">Kundenliste</h1>
 					
-					<tbody th:remove="all-but-first">
-							<tr th:each=" user : ${userDetails}">
-								<td th:text="${user.userAccount.firstname}">Hans</td>
-								<td th:text="${user.userAccount.lastname}">Mueller</td>
-								<td th:text="${user.userAccount.email}">xyz</td>
-								<td th:text="${user.location.getLocation()}">Adresse</td>
-								<td th:text="${user.getOrigin()}">Herkunft</td>
-								<td th:text="${user.getLanguage()}">Sprache</td>
-								<td th:text="${user.getRegistrationdate()}">rdate</td>
-								<td th:text="${user.isActivated()}">activation_state</td>
-								<td><a th:href="@{/modify}">Bearbeiten</a></td>
-							</tr>
-					</tbody>
-				</table>
+					<div class="userdetail__content">
+					
+						<div class="error_field" sec:authorize="!hasRole('ROLE_ADMIN')">
+							<p class="error__msg">Keine Berechtigung!</p>
+							
+							<div class="button">
+								<a th:href="@{/login}" class="button__link">zum Login</a>
+							</div>
+						</div>
+						
+						<table sec:authorize="hasRole('ROLE_ADMIN')">			
+							<thead>
+								<tr>
+									<th>Vorname</th><th>Nachname</th><th>E-Mail</th><th>Adresse</th><th>Herkunft</th><th>Sprache</th><th>Registrierungsdatum</th><th>Aktivierung</th>
+								</tr>
+							</thead>
+							
+							<tbody th:remove="all-but-first">
+								<tr th:each=" user : ${userDetails}">
+									<td th:text="${user.userAccount.firstname}">Hans</td>
+									<td th:text="${user.userAccount.lastname}">Mueller</td>
+									<td th:text="${user.userAccount.email}">xyz</td>
+									<td th:text="${user.location.getLocation()}">Adresse</td>
+									<td th:text="${user.getOrigin()}">Herkunft</td>
+									<td th:text="${user.getLanguage()}">Sprache</td>
+									<td th:text="${user.getRegistrationdate()}">rdate</td>
+									<td th:text="${user.isActivated()}">activation_state</td>
+									<td><a th:href="@{/modify}">Bearbeiten</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
+	
 	</body>
 	
 </html>

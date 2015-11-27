@@ -257,3 +257,33 @@
 .single__img--small{
 	
 }
+
+.userdetail{
+	
+}
+.userdetail__headline{
+	
+}
+.userdetail__content{
+
+}
+
+.error__msg{
+	color: red;
+	font-size: 1.5rem;
+}
+.error__field{
+	
+}
+
+.button__link{
+	color: white;
+}
+
+
+.new__user__text{
+	margin-bottom:0;
+}
+.new__user__select{
+	height:inherit;
+}

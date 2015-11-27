@@ -7,6 +7,7 @@ TODO:
 Templates:
 
 	- navigation					Style
+	
 	- data.html						Style
 	- error.html 					Style
 	- errorpage0_empty.html 		Style
@@ -24,4 +25,5 @@ Templates:
 	
 FRAGEN:
 
+	- data.html? 			Wird das noch gebraucht oder kann das weg?
 	
