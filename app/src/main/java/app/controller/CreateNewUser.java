@@ -529,8 +529,9 @@ public class CreateNewUser {
                 i = i+1;
             }
             
-            int pwlengthsec = (int) Math.floor(Math.floor( Math.log(password.length()*10))/2);
-            strengthPercentage = strengthPercentage * pwlengthsec *1.4f;
+            // 12 Zeichen empfohlen
+            int pwlengthsec = (int) Math.floor(Math.floor( Math.log((password.length()-6)*0.00002))+11);
+            strengthPercentage = strengthPercentage * (1+(pwlengthsec/10)) *3.0f;
 
             if (! ((hasLower && hasUpper) && (hasDigits && hasSymbols) && (password.length()>=8) ))
             {
