@@ -788,6 +788,7 @@ public class CreateNewUser {
 	            		System.out.println("Ungültige Postleitzahl");
 	    				return "error";
 	                }
+	            	i = i+1;
 	            }	
 			}
 			
@@ -846,6 +847,7 @@ public class CreateNewUser {
 	            		System.out.println("Ungültige Postleitzahl");
 	    				return "error";
 	                }
+	            	i = i+1;
 	            }	
 			}
 			
