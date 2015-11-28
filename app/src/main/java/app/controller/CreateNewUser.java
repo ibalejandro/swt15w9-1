@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -16,15 +17,19 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.net.ssl.HttpsURLConnection;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -294,7 +299,15 @@ public class CreateNewUser {
 
 		if (CaptchaResponse.isEmpty() || (!userAccountManager.findByUsername(user).isPresent()))
 		{
-		   return "redirect:/reCAPTCHA-TEST";
+			if (!userAccountManager.findByUsername(user).isPresent())
+			{
+				return "redirect:/";
+			}
+			else
+			{
+				return "redirect:/submit_captcha/user/"+user;
+			}
+		   
 		}
 		else
 		{
@@ -399,14 +412,31 @@ public class CreateNewUser {
 	
 	
 	@RequestMapping(value = "/not_activated/user/{user}", method = RequestMethod.GET)
-	public String user_not_activated(@PathVariable String user){
+	public String user_not_activated(@PathVariable final String user, @LoggedIn final Optional<UserAccount> userAccount){
 
-		if (!userAccountManager.findByUsername(user).isPresent())
+		if (userAccount.isPresent() == false) 
+		{
+			return "redirect:/";
+		}
+		
+		if (user.equals("")) 
+		{
+			return "redirect:/";
+		}
+		
+		if (!userAccountManager.findByUsername(user).isPresent()) 
+		{
+		   return "redirect:/";
+		}
+		
+		if ((userAccount.get().getUsername().equals(user)) == false)
 		{
 		   return "redirect:/";
 		}
 		else
 		{
+			System.out.println(userAccount.get().getUsername());
+			
 			if(userAccountManager.findByUsername(user).isPresent()){
 	            User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 		    	
@@ -546,7 +576,7 @@ public class CreateNewUser {
 	// Registrierung:
 
 	@RequestMapping(value = "/create_temp_new_user", method = RequestMethod.POST)
-	public String create_new_user_t(@Email @RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword, @RequestParam("summe")String chsumme)
+	public String create_new_user_t(@RequestParam("mail") @Email @Valid final String  Mail, @RequestParam("username") @Valid final String Username, @RequestParam("password") @Valid final String  Password, @RequestParam("repassword") @Valid final String RePassword, @RequestParam("summe") @Valid final String chsumme)
 	{
 
 		System.out.println(Mail);
@@ -667,7 +697,7 @@ public class CreateNewUser {
 
 
 	@RequestMapping(value = "/submit_userdata1/user/{user}", method = RequestMethod.POST)
-	public String submit_userdata1(@PathVariable String user, @RequestParam("name")String Name, @RequestParam("firstname")String Firstname, @RequestParam("Adresstyp")String Adresstyp)
+	public String submit_userdata1(@PathVariable final String user, @RequestParam("name") final String Name, @RequestParam("firstname") final String Firstname, @RequestParam("Adresstyp") final String Adresstyp)
 	{
 		if (!userAccountManager.findByUsername(user).isPresent())
 		{
@@ -715,7 +745,7 @@ public class CreateNewUser {
 	}
 
 	@RequestMapping(value = "/submit_userdata2a/user/{user}", method = RequestMethod.POST)
-	public String submit_userdata2a(@PathVariable String user, @RequestParam("flh_name")String Flh_name, @RequestParam("citypart")String Citypart, @RequestParam("postcode")String Postcode, @RequestParam("city")String City)
+	public String submit_userdata2a(@PathVariable final String user, @RequestParam("flh_name") final String Flh_name, @RequestParam("citypart") final String Citypart, @RequestParam("postcode") final String Postcode, @RequestParam("city") final String City)
 	{
 		if (!userAccountManager.findByUsername(user).isPresent())
 		{
@@ -747,7 +777,7 @@ public class CreateNewUser {
 	}
 
 	@RequestMapping(value = "/submit_userdata2b/user/{user}", method = RequestMethod.POST)
-	public String submit_userdata2b(@PathVariable String user, @RequestParam("street")String Street, @RequestParam("housenr")String Housenr, @RequestParam("postcode")String Postcode, @RequestParam("city")String City)
+	public String submit_userdata2b(@PathVariable final String user, @RequestParam("street") final String Street, @RequestParam("housenr") final String Housenr, @RequestParam("postcode") final String Postcode, @RequestParam("city") final String City)
 	{
 		if (!userAccountManager.findByUsername(user).isPresent())
 		{
@@ -779,7 +809,7 @@ public class CreateNewUser {
 	}
 	
 	@RequestMapping(value = "/submit_language_origin/user/{user}", method = RequestMethod.POST)
-	public String submit_language_origin(@PathVariable String user, @RequestParam("nativelanguage")String Nativelanguage, @RequestParam("otherlanguages")String OtherLanguages, @RequestParam("origin")String Origin)
+	public String submit_language_origin(@PathVariable final String user, @RequestParam("nativelanguage") final String Nativelanguage, @RequestParam("otherlanguages") final String OtherLanguages, @RequestParam("origin") final String Origin)
 	{
 		if (!userAccountManager.findByUsername(user).isPresent())
 		{
