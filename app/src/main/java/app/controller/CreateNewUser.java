@@ -12,9 +12,12 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.net.ssl.HttpsURLConnection;
 
+import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
@@ -444,19 +447,111 @@ public class CreateNewUser {
 		} 
 	}
 	
+	private static boolean containsString( String s, String subString ) {
+        return s.indexOf( subString ) > -1 ? true : false;
+    }
+	
+	private boolean emailValidator(String email) {
+		boolean isValid = false;
+		
+		if (containsString(email,"@") == false)
+		{
+			return false;	
+		}
+		
+		if (containsString(email,".") == false)
+		{
+			return false;	
+		}
+		
+		try {
+			//
+			// Create InternetAddress object and validated the supplied
+			// address which is this case is an email address.
+			InternetAddress internetAddress = new InternetAddress(email);
+			internetAddress.validate();
+			isValid = true;
+		} catch (AddressException e) {
+			System.out.println("You are in catch block -- Exception Occurred for: " + email);
+		}
+		return isValid;
+	}
+	
+	
+	
+	private int checkPasswordStrength(String password) 
+	{
+		if (password.equals("")) 
+		{
+			return 0;
+		}
+		
+		boolean hasLower =false;
+		boolean hasUpper =false;
+		boolean hasDigits =false;
+		boolean hasSymbols =false;
+		
+		
+        float strengthPercentage=0;
+        String[] partialRegexChecks = 
+        	{
+        			".*[a-z]+.*", // lower
+        			".*[A-Z]+.*", // upper
+        			".*[\\d]+.*", // digits
+        			".*[@#§$%&/()=?{}#+-~.,;:<>|\\!]+.*" // symbols
+        	};
+        
+            int i=0;    
+            while (i< (password.length())){
+            	
+            	if (password.substring(i, i+1).matches(partialRegexChecks[0])) 
+                {
+                	hasLower = true;
+                	strengthPercentage+=2;
+                }
+                if (password.substring(i, i+1).matches(partialRegexChecks[1])) 
+                {
+                	hasUpper = true;
+                	strengthPercentage+=3;
+                }
+                if (password.substring(i, i+1).matches(partialRegexChecks[2])) 
+                {
+                	hasDigits = true;
+                	strengthPercentage+=5;
+                }
+                if ((!password.substring(i, i+1).matches(partialRegexChecks[0])) && (!password.substring(i, i+1).matches(partialRegexChecks[1])) && (!password.substring(i, i+1).matches(partialRegexChecks[2])) )
+                {
+                	if (password.substring(i, i+1).matches(partialRegexChecks[3])) {
+                		hasSymbols = true;
+                		strengthPercentage+=8;  
+                	}	
+                }
+                i = i+1;
+            }
+            
+            int pwlengthsec = (int) Math.floor(Math.floor( Math.log(password.length()*10))/2);
+            strengthPercentage = strengthPercentage * pwlengthsec *1.4f;
+
+            if (! ((hasLower && hasUpper) && (hasDigits && hasSymbols) && (password.length()>=8) ))
+            {
+            	strengthPercentage = 0;
+            }
+            return Math.round(strengthPercentage);
+        }
+
+
 	
 	//******************************************************************************************//
 	// Registrierung:
 
 	@RequestMapping(value = "/create_temp_new_user", method = RequestMethod.POST)
-	public String create_new_user_t(@RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword, @RequestParam("summe")String chsumme)
+	public String create_new_user_t(@Email @RequestParam("mail")String Mail, @RequestParam("username")String Username, @RequestParam("password")String Password, @RequestParam("repassword")String RePassword, @RequestParam("summe")String chsumme)
 	{
 
 		System.out.println(Mail);
 		System.out.println(Username);
 		System.out.println(Password);
 		System.out.println(RePassword);
-
 
 		if (Mail.isEmpty() ||  Username.isEmpty() || Password.isEmpty() || chsumme.isEmpty())
 		{
@@ -468,6 +563,53 @@ public class CreateNewUser {
 			return "errorpage0_wrongpw";
 		}
 		
+		if (Password.length()<8) 
+		{
+			System.out.println("Passwort zu kurz.");
+			return "errorpage0_wrongpw";
+		}else
+		{
+			int pwstrength=0; 
+			pwstrength = checkPasswordStrength(Password);
+			
+			System.out.println("PasswordStrength: "+pwstrength);
+			if (pwstrength==0)
+			{
+				System.out.println("Passwort erfüllt nicht die Anforderungen.");
+				return "errorpage0_wrongpw";
+			}
+		}
+		
+		if (emailValidator(Mail) == false)
+		{
+			System.out.println(Mail+" ist eine ungültige Mailadresse.");
+			return "error";
+		}
+		
+		boolean equalMail = false;
+		for (UserAccount TempUA: userAccountManager.findAll())
+		{
+			if ((!(TempUA == null)) && (equalMail == false))
+			{
+				//System.out.println(TempUA.getUsername());
+				//System.out.println(TempUA.getEmail());
+				
+				if (!(TempUA.getEmail() == null))
+				{
+					if (TempUA.getEmail().equals(Mail))
+					{
+						equalMail = true;
+					} 
+				}	
+			}
+		}
+		
+		if (equalMail)
+		{
+			System.out.println(Mail+" ist eine bereits verwendete Mailadresse.");
+			return "error";
+		}
+
 		
 		Integer sum = zufallzahl_1 + zufallzahl_2;
 		System.out.println(sum.toString()+ " =? "+ chsumme);
