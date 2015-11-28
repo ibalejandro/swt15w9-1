@@ -765,6 +765,33 @@ public class CreateNewUser {
 			{
 				return "errorpage2a_empty";
 			}
+			
+			if (Postcode.length()!=5) 
+			{
+				System.out.println("Ungültige Postleitzahl");
+				return "error";
+			}
+			else
+			{ 
+				String[] partialRegexChecks = 
+		        	{
+		        			".*[a-z]+.*", // lower
+		        			".*[A-Z]+.*", // upper
+		        			".*[\\d]+.*", // digits
+		        			".*[@#§$%&/()=?{}#+-~.,;:<>|\\!]+.*" // symbols
+		        	};
+				int i=0; 
+	            while (i< 5)
+	            {       	
+	            	if (! Postcode.substring(i, i+1).matches(partialRegexChecks[2]))
+	                {
+	            		System.out.println("Ungültige Postleitzahl");
+	    				return "error";
+	                }
+	            }	
+			}
+			
+			
 			Address address= new Address(Flh_name, Citypart, Postcode, City);			
 			user_xyz.setLocation(address);
 			user_xyz.setRegistrationstate(3); //3 ~ Flüchtlingsheim
@@ -796,6 +823,32 @@ public class CreateNewUser {
 			{
 				return "errorpage2b_empty";
 			}
+			
+			if (Postcode.length()!=5) 
+			{
+				System.out.println("Ungültige Postleitzahl");
+				return "error";
+			}
+			else
+			{ 
+				String[] partialRegexChecks = 
+		        	{
+		        			".*[a-z]+.*", // lower
+		        			".*[A-Z]+.*", // upper
+		        			".*[\\d]+.*", // digits
+		        			".*[@#§$%&/()=?{}#+-~.,;:<>|\\!]+.*" // symbols
+		        	};
+				int i=0; 
+	            while (i< 5)
+	            {       	
+	            	if (! Postcode.substring(i, i+1).matches(partialRegexChecks[2]))
+	                {
+	            		System.out.println("Ungültige Postleitzahl");
+	    				return "error";
+	                }
+	            }	
+			}
+			
 			
 			Address address= new Address(Street, Housenr, Postcode, City);
 			user_xyz.setLocation(address);
