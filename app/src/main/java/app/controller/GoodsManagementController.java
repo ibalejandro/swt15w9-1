@@ -2,17 +2,22 @@ package app.controller;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.model.GoodEntity;
+import app.model.User;
 import app.model.UserRepository;
 import app.repository.GoodRepository;
 
@@ -52,16 +57,25 @@ public class GoodsManagementController {
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/myOfferedGoods", method = RequestMethod.GET)
-  public String listUserOfferedGoods(Model model) {
+	public String listUserOfferedGoods(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 	  /*
   	 * This is just for the examples. The userId will be the real id of
   	 * the user, who wants to see his offered goods.
   	 */
-  	long userId = 1L;
+		/*long userId = 1L;
 	
-    model.addAttribute("result", repository.findByUserId(userId));
-    return "myOfferedGoods";
-  }
+		model.addAttribute("result", repository.findByUserId(userId));
+		return "myOfferedGoods";*/
+		
+		if(userAccount.isPresent()){
+			User LoggUser = repositoryUser.findByUserAccount(userAccount.get());
+			model.addAttribute("goods", LoggUser.getGoods());
+			return "myOfferedGoods";
+			}
+		return "noUser";
+	}
+  
+  
 	
 	/**
    * This method is the answer for the request to '/update'. It finds and
@@ -87,14 +101,19 @@ public class GoodsManagementController {
 		}
 		// If the entity doesn't exist, an empty entity is returned.
 		else {
-  		Set<String> emptyTags = new HashSet<>();
-  		long invalidUserId = -1L;
   		String emptyPic = new String();
-  		good = new GoodEntity("", "", emptyTags, emptyPic, invalidUserId);
-    }
+			Set<String> emptyTags = new HashSet<>();
+			//long invalidUserId = -1L;
+			
+			///////////////////////Änderung aufgrund Änderung in Konstruktor
+  			User noValidUser=null;
+  			good = new GoodEntity("", "", emptyTags, noValidUser);
+  			
+  			///////////////////////////////////end
+		}
     	
-    model.addAttribute("result", good);
-   	model.addAttribute("parsedTags", tagsAsString);
+		model.addAttribute("result", good);
+		model.addAttribute("parsedTags", tagsAsString);
 		return "update";
   }
 	
@@ -107,7 +126,7 @@ public class GoodsManagementController {
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/updatedGood", method = RequestMethod.POST)
-  public String updateGood(HttpServletRequest request, Model model) {
+  public String updateGood(HttpServletRequest request, Model model,@LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 		
 		GoodEntity goodToBeUpdated = repository.findOne(id);
@@ -126,9 +145,18 @@ public class GoodsManagementController {
   	/*
   	 * This is just for the examples. The userId will be the real id of
   	 * the user, who is offering the good.
-  	 */
+  	 
   	long userId = 1L;
   	goodToBeUpdated.setUserId(userId);
+  	*/
+  	///////////////////////////////Zuordnung User=Aktiver User
+  		if(userAccount.isPresent()){
+			User LoggUser = repositoryUser.findByUserAccount(userAccount.get());
+			goodToBeUpdated.setUser(LoggUser);
+		}else{
+			return "noUser";
+		}
+  	////////////////////////////////////////end
     	
   	/*
   	 * Calling save() on an object with predefined id will update the
@@ -156,9 +184,10 @@ public class GoodsManagementController {
     // If the entity doesn't exist, an empty entity is returned.
   	else {
   	  Set<String> emptyTags = new HashSet<>();
-  		long invalidUserId = -1L;
   		String emptyPic = new String();
-  		good = new GoodEntity("", "", emptyTags, emptyPic, invalidUserId);
+  		//long invalidUserId = -1L;
+  	  	User noValidUser=null;
+  		good = new GoodEntity("", "", emptyTags, noValidUser);
   	}
     	
     model.addAttribute("result", good);

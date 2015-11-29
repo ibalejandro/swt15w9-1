@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 // Imports für die Bildeinbindung
@@ -41,10 +43,10 @@ public class GoodEntity implements Serializable {
 	private String name;
 	private String description;
 	public String pic;
-	/*
-	 * @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL,
-	 * 			  fetch = FetchType.EAGER) private User user;
-	 */
+	
+	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL,
+	 			  fetch = FetchType.EAGER) private User user;
+	
 	
 	/*
 	 * The JPA created a technology named Lazy Loading to the classes 
@@ -55,8 +57,8 @@ public class GoodEntity implements Serializable {
 	 *  To avoid Lazy Loading you have to use Eager Loading
 	 */
 	@ElementCollection(fetch = FetchType.EAGER)
-  protected Set<String> tags = new HashSet<>();
-	private long userId;
+	protected Set<String> tags = new HashSet<>();
+	//private long userId;
 	
 	@SuppressWarnings("unused")
 	private GoodEntity() {} // For the sake of JPA.
@@ -68,14 +70,8 @@ public class GoodEntity implements Serializable {
 	 * @param tags The tags associated with the good
 	 * @param userId The ID of the user who is offering the good
 	 */
-  public GoodEntity(String name, String description, Set<String> tags, String piclink,
-  				          long userId /*User user*/) {
     this.name = name;
     this.description = description;
-		this.tags = tags;
-		this.userId = userId;
-		//this.user = user;
-		
 		//Erschaffung eines temporären Files, um das Bild zu speichern.
 		try{
 			URL srcPic = new URL(piclink);
@@ -92,6 +88,9 @@ public class GoodEntity implements Serializable {
 		} catch(Exception e) {
 			throw new IllegalStateException(e.getMessage(), e);
 		}
+	this.tags = tags;
+		//this.userId = userId;
+	this.user = user;
   }
     
   /**
@@ -119,7 +118,7 @@ public class GoodEntity implements Serializable {
     return String.format("{\"id\": \"%d\", \"name\": \"%s\", "
                          + "\"description\": \"%s\", \"tags\": \"%s\", "
                          + "\"userId\": \"%d\"}", id, name, description, 
-                         tags.toString(), userId);
+                         tags.toString(), user.getId());
   }
 
   /**
@@ -195,16 +194,16 @@ public class GoodEntity implements Serializable {
    * @return long The user-ID
    */
   public long getUserId() {
-    return userId;
+    return user.getId();
   }
   
   /**
    * Setter.
-   * @param long The user-ID
+   * @param User The user
    * @return Nothing
    */
-  public void setUserId(long userId) {
-    this.userId = userId;
+  public void setUser(User user) {
+    this.user = user;
   }
 
 }

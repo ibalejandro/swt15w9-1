@@ -3,6 +3,7 @@ package app.repository;
 import org.springframework.data.repository.CrudRepository;
 
 import app.model.GoodEntity;
+import app.model.User;
 
 /**
 * <h1>GoodRepository</h1>
@@ -30,7 +31,8 @@ public interface GoodRepository extends CrudRepository<GoodEntity, Long> {
    * @param userId The given user-ID
    * @return Iterable<GoodEntity> A list with all matches for the given user-ID
    */
-	Iterable<GoodEntity> findByUserId(long userId);
+	//Iterable<GoodEntity> findByUserId(long userId);
+	Iterable<GoodEntity> findByUser(User user);
 	/**
    * This method deletes a good by a given good's id.
    * @param id The given good's id
