@@ -27,7 +27,7 @@
 						<div class="gooditem__body--multi">
 							<div>
 								<label class="gooditem__label--single"> Bild </label>
-								<img th:src="${good.pic}" class="gooditem__text--multi"/>
+								<img th:src="${good.picture}" class="gooditem__text--multi"/>
 							</div>		
 							<div>
 								<label class="gooditem__label--multi"> Description </label>
@@ -36,12 +36,12 @@
 							
 							<div>
 								<label class="gooditem__label--multi"> Tags </label>
-								<p th:text="${good.tags}" class="gooditem__text--multi"></p>
+								<p th:text="${good.tag.name}" class="gooditem__text--multi"></p>
 							</div>
 							
 							<div>
 								<label class="gooditem__label--multi"> User-ID </label>
-								<p th:text="${good.userId}" class="gooditem__text--multi"></p>
+								<p th:text="${good.user.id}" class="gooditem__text--multi"></p>
 							</div>
 						</div>
 						

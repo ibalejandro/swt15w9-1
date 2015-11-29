@@ -24,7 +24,7 @@ import app.model.Address;
 import app.model.GoodEntity;
 import app.model.User;
 import app.model.UserRepository;
-import app.repository.GoodRepository;
+import app.repository.GoodsRepository;
 
 public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegrationTests {
 
@@ -32,7 +32,7 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
   private static int iterableSize = 2;
   
   @Autowired GoodsOfferController controller;
-  @Autowired GoodRepository repository;
+  @Autowired GoodsRepository repository;
   @Autowired UserRepository userRepository;
   @Autowired UserAccountManager userAccountManager;
   

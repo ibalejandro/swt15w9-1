@@ -45,7 +45,7 @@ public class UserManagementController {
 	/*@RequestMapping("/admin")
 	String userDetails(ModelMap map){
 		map.addAttribute("users", userRepository.findAll());
-		//map.addAttribute("offers",GoodRepository.findAll());
+		//map.addAttribute("offers",GoodsRepository.findAll());
 		return "admin";
 	}  */
 	

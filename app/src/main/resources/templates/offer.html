@@ -28,12 +28,18 @@
 						
 						<div>
 							<label class="create__label"> Tags:</label>
-							<input type="text" name="tags" placeholder="Example: Winter, Rain, Cold"/> 
+							<select name="tagId">
+				    			<option value="-1">---- Select ----</option>
+				    			<option th:each="tag : ${tags}"
+				            			th:value="${tag.id}"
+				            			th:text="${tag.name}">
+				    			</option>
+							</select>  
 						</div>
 						
 						<div>
 							<label class="create__label"> Bildadresse:</label>
-							<input type="text" name="pic" placeholder="Example: http://i.imgur.com/C2csOAA.jpg"/> 
+							<input type="text" name="picture" placeholder="Example: http://i.imgur.com/C2csOAA.jpg"/> 
 						</div>
 						
 						<div>

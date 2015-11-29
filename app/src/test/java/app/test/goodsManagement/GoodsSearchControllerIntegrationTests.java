@@ -23,7 +23,7 @@ import app.model.Address;
 import app.model.GoodEntity;
 import app.model.User;
 import app.model.UserRepository;
-import app.repository.GoodRepository;
+import app.repository.GoodsRepository;
 
 public class GoodsSearchControllerIntegrationTests extends 
 AbstractWebIntegrationTests {
@@ -33,7 +33,7 @@ AbstractWebIntegrationTests {
   private static int iterableSizeForSearchByName = 2;
   private static int iterableSizeForSearchByTag = 3;
   
-  @Autowired GoodRepository repository;
+  @Autowired GoodsRepository repository;
   @Autowired UserRepository userRepository;
   @Autowired UserAccountManager userAccountManager;
   

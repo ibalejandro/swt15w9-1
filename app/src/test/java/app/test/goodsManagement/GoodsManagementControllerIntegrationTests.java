@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import app.model.GoodEntity;
 import app.model.User;
 import app.model.UserRepository;
-import app.repository.GoodRepository;
+import app.repository.GoodsRepository;
 
 public class GoodsManagementControllerIntegrationTests extends 
 AbstractWebIntegrationTests {
@@ -30,7 +30,7 @@ AbstractWebIntegrationTests {
   private static int iterableSizeWithOnlyOneSave = 1;
   private static int iterableSize = 4;
   
-  @Autowired GoodRepository repository;
+  @Autowired GoodsRepository repository;
   @Autowired UserRepository userRepository;
   @Autowired UserAccountManager userAccountManager;
 
