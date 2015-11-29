@@ -7,14 +7,20 @@ import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import app.model.GoodEntity;
+import app.model.User;
+import app.model.UserRepository;
 import app.repository.GoodRepository;
 
 public class GoodsManagementControllerIntegrationTests extends 
@@ -25,11 +31,19 @@ AbstractWebIntegrationTests {
   private static int iterableSize = 4;
   
   @Autowired GoodRepository repository;
+  @Autowired UserRepository userRepository;
+  @Autowired UserAccountManager userAccountManager;
+
   
   @Before
   public void createGoodEntities() {
-    long userId1 = 1L;
-    long userId2 = 2L;
+    //long userId1 = 1L;
+	//long userId2 = 2L;
+	  /////////////////////////////////Korrektur aufgrund Konstruktoränderung
+	  User userId1= userRepository.findByUserAccount(userAccountManager.findByUsername("Lisa").get());
+	  User userId2= userRepository.findByUserAccount(userAccountManager.findByUsername("Peter").get());
+	  /////////////////////////////end
+    
     Set<String> tags1 = new HashSet<String>(Arrays.asList("Transport", "Kids"));
     String picLink1 = "http://i.imgur.com/C2csOAA.jpg";
     String picLink2 = "http://i.imgur.com/Xr50D6D.jpg";

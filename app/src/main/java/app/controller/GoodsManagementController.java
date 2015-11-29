@@ -187,7 +187,7 @@ public class GoodsManagementController {
   		String emptyPic = new String();
   		//long invalidUserId = -1L;
   	  	User noValidUser=null;
-  		good = new GoodEntity("", "", emptyTags, noValidUser);
+  		good = new GoodEntity("", "", emptyTags,emptyPic, noValidUser);
   	}
     	
     model.addAttribute("result", good);
