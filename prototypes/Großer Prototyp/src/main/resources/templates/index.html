@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html class="no-js" lang="de">
+
+<!--
+	TODO:
+		- iterration Object setzen
+		- in navigation.html die Navigation fertig machen
+		- Footer erstellen einfügen und includen.
+		- Kommentare löschen
+-->
+	
+	<head th:include="imports :: head">
+	
+	</head>
+	
+	<body th:include="imports :: script">
+	
+		<div th:include="navigation :: navigation"></div>
+		
+		<!--
+		<div th:each="content : ${}" class="row">
+			<div class="small-12 colums medium-6 columns">
+				<div th:include="item :: item">
+				</div>
+			</div>
+		</div>
+		-->		
+
+		<p>Bestehende Nutzer:</p>
+		<table>
+			<thead>
+				<tr>
+					<th>Login-Name</th>
+					<th>Passwort</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td>Lisa</td>
+					<td>pw</td>
+				</tr>
+				<tr>
+					<td>admin</td>
+					<td>123</td>
+				</tr>								
+			</tbody>
+		</table>
+		
+	</body>
+	
+</html>

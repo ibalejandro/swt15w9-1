@@ -1,0 +1,55 @@
+= Protokoll Gruppe 09
+__Treffen am 12.11.2015__
+
+__Schriftführer:__ Alejandro Sánchez Aristizábal
+
+__Nächstes Treffen:__ 19.11.2015
+
+.__Teilnehmer:__
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* Retrospektive der Arbeit der letzten Woche
+* Feedback vom Tutor und 'Kunde' zu den Prototypen
+* Kommentare zur Integration der Prototypen im Großen Prototyp
+* Diskussion und Anregungen vom Tutor zu den Bugs vom Ferdinands Prototyp
+* Kommentare zum erwarteten Ergebnis für die nächste Woche
+* Diskussion über die Integration-Tests
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe                 |Status      |Bemerkung
+|#11   |verfeinerte UML-Modelle |geschlossen |N/A
+|#12   |Entwurfsentscheidungen treffen |geschlossen |N/A
+|#13   |Anpassung des Modells an das SalesPoint Framework |geschlossen |N/A
+|===
+
+
+== Aktueller Stand
+* Individuelle Prototypen schon fertig
+
+== Planung des nächsten Sprints
+* Abgabe der Große Prototyp mit Navegation durch die Webseiten
+* Implementierung der Tests für die wichtigste Funktionen
+* Ideen zu den künftigen Integration-Tests
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel          |Beschreibung |Verantwortlicher |Status
+|#8    |jUnit-Tests    |N/A          |N/A              |offen
+|#10   |Großer Prototyp | N/A        |N/A              |offen
+|#14   |Entwicklerdokumentation v1 |N/A |N/A           |offen
+|#23   |Zusammenführen von UserManagement und Goods |N/A |N/A |offen
+|#24   |Integration des Dialogs |N/A |N/A              |offen
+|===

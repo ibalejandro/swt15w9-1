@@ -1,0 +1,29 @@
+TODO:
+	- Thyme Leaf ein Bindung überprüfen
+	- Überschriften überarbeiten
+	
+	- 404.html erstellen
+	
+Templates:
+
+	- navigation					Style
+	
+	- data.html						Style
+	- error.html 					Style
+	- errorpage0_empty.html 		Style
+	- errorpage0_wrongpw.html 		Style
+	- errorpage1_empty.html 		Style
+	- errorpage2a_empty.html 		Style
+	- errorpage2b_empty.html 		Style
+	- modify.html 					Style
+	- new_user_aboutuser1.html 		Style
+	- new_user_aboutuser2a.html 	Style
+	- new_user_aboutuser2b.html 	Style
+	- new_user_data.html 			Style
+	- reCAPTCHA.html 				Style
+	- validation_success.html 		Style
+	
+FRAGEN:
+
+	- data.html? 			Wird das noch gebraucht oder kann das weg?
+	

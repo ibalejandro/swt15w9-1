@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	
+    <head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<th:block th:fragment="searchByName">
+			<form th:action="@{/searchResultsByName}" method="post">
+				<div class="row collapse">
+					<div class="large-8 small-9 columns">
+						<input type="text" name="name" placeholder="Suche nach Namen" />
+					</div>
+					
+					<div class="large-4 small-3 columns">
+						<input class="alert button expand" type="submit" value="Search"/>
+					</div>
+				</div>
+			</form>
+		</th:block>
+		
+		<th:block th:fragment="searchByTag">
+			<form th:action="@{/searchResultsByTag}" method="post">
+				<div class="row collapse">
+					<div class="large-8 small-9 columns">
+						<input type="text" name="tag" placeholder="Suche nach Tag" />
+					</div>
+					
+					<div class="large-4 small-3 columns">
+						<input class="alert button expand" type="submit" value="Search"/>
+					</div>
+				</div>
+			</form>
+		</th:block>
+		
+		<th:block th:include="imports :: script"></th:block>
+		
+    </body>
+	
+</html>

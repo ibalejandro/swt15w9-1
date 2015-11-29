@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
+	<head th:include="imports :: head">
+	
+	</head>
+	
+	<body th:include="imports :: script">
+		<div>
+			<header>
+				<h1>Entschuldigung</h1>
+			</header>
+			
+			<div>
+				<p>Das Bearbeiten ist im Moment noch nicht möglich.</p>
+				
+				<p><a th:href="@{/userDetails}" > Zur Kundenübersicht</a></p>
+			</div>
+		</div>
+	</body>
+	
+</html>

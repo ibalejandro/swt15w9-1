@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:include="imports :: head">
+		<title> Deleted good </title>
+	</head>
+	
+	<body th:include="imports :: script">
+	
+		<div th:include="navigation :: navigation"></div>
+		
+		<div class="row">
+			<div class="small-12 colums">
+				<div class="gooditem--single">
+	
+					<div class="gooditem__head--single">
+						<h2 class="gooditem__title--single"> You just deleted this good: </h2>
+					</div>
+					
+					<div th:include="goods_item--single :: item"></div>
+		
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	
+</html>

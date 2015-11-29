@@ -1,0 +1,46 @@
+= Protokoll Gruppe 09
+__Treffen am 04.11.2015__
+
+__Schriftführer:__ Mario Henze
+
+__Nächstes Treffen:__ 05.11.2015
+
+.__Teilnehmer:__
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Alejandro Sánchez Aristizábal
+* Mario Henze
+
+== Bemerkungen
+* Vorstellung des bisherigen Standes aller Prototypen
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe 								  |Status |Bemerkung
+|#3    |ein kleiner Prototyp pro Teammitglied     |offen  |N/A
+|===
+
+
+== Aktueller Stand
+* Datenbank-Prototyp fertig
+* Goods Oberfläche entworfen
+* User Management teilweise lauffähig
+* Dialog-Prototyp größtenteils lauffähig
+
+== Planung des nächsten Sprints
+* Fertigstellung der Prototypen
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel 								   |Beschreibung |Verantwortlicher |Status
+|#3    |ein kleiner Prototyp pro Teammitglied  |N/A          |N/A              |offen
+|===

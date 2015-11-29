@@ -1,0 +1,52 @@
+= Protokoll Gruppe 09
+__Treffen am 19.11.2015__
+
+__Schriftführer:__ Mario Henze
+
+__Nächstes Treffen:__ 25.11.2015
+
+.__Teilnehmer:__
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* Vorführung des Großen Prototyps
+* Rücksprache mit Tutor über String Formatierung
+* Testing- und CI-Server können bald genutzt werden
+* Testing-Server wird wahrscheinlich extra vom Kunden gestellt
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe                                      |Status      |Bemerkung
+|#10   |Großer Prototyp                              |geschlossen |N/A
+|#22   |Integration UserManagement und Registrierung |geschlossen |N/A
+|#24   |Integration des Dialogs                      |geschlossen |N/A
+|===
+
+
+== Aktueller Stand
+* Großer Prototyp ist lauffähig
+* rudimentäre Funktionalität ist bereits vorhanden
+* bestehender Prototyp wird als Hauptprojekt weiter entwickelt
+
+== Planung des nächsten Sprints
+* Abgabe der Große Prototyp mit Navegation durch die Webseiten
+* Implementierung der Tests für die wichtigste Funktionen
+* Ideen zu den künftigen Integration-Tests
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel                    |Beschreibung |Verantwortlicher |Status
+|#7    |Verteilung Zuständigkeit |N/A          |N/A              |offen
+|#6    |Basisfunktionalität      |N/A          |N/A              |offen
+|===
