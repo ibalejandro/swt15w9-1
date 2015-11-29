@@ -52,10 +52,10 @@ public class TestDaten implements DataInitializer {
 		u1.setLastname("Maier");
 		u1.setEmail("Maier@gmail.com");
 		userAccountManager.save(u1);
+		
 		UserAccount u2=userAccountManager.create("Peter", "pw", normalUserRole);
 		u2.setFirstname("Peter");
 		u2.setLastname("U.");
-
 		userAccountManager.save(u2);
 		
 		Address address1=new Address("Mittelstraße"," 1", "11587","Dresden");
