@@ -147,26 +147,34 @@
 
 
 .login{
-	background-color: silvergray;
-	background-color: silvergray;
+	background-color: lightgray;
 	outline-style: solid;
 	outline-width: 1px; 
 	outline-color: lightgray;
-	padding: 1%;
 }
-.login__header{
-	
-}
-.login__header__text{
-	
+.login__headline{
+	font-size: 2rem;
 }
 .login__error{
 	color: red;
+	font-size: 1rem;
 }
 .login__label{
-
+	font-size: 1rem;
+	padding: 0.5rem 0 0 0;
 }
-
+.login__link{
+	font-size: 1rem;
+	padding: 1rem 0 0 0;
+}
+.login__link--right{
+	font-size: 1rem;
+	text-align: right;
+	padding: 1rem 0 0 0;
+}
+.login__button{
+	float: right;
+}
 
 .single__divider{
 	border-bottom: 1px solid;
@@ -280,10 +288,21 @@
 	color: white;
 }
 
+.startsite__login{
+	padding-top: 10%;
+	display: block;
+}
+.startsite__reg{
+	display: none;
+}
 
 .new__user__text{
 	margin-bottom:0;
 }
 .new__user__select{
 	height:inherit;
+}
+
+.toggle__link{
+	
 }
