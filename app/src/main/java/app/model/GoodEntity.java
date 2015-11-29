@@ -70,6 +70,9 @@ public class GoodEntity implements Serializable {
 	 * @param tags The tags associated with the good
 	 * @param userId The ID of the user who is offering the good
 	 */
+	 
+	 public GoodEntity(String name, String description, Set<String> tags, String piclink,
+  				          User user) {
     this.name = name;
     this.description = description;
 		//Erschaffung eines temporären Files, um das Bild zu speichern.

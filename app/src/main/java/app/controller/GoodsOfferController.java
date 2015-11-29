@@ -86,7 +86,7 @@ public class GoodsOfferController {
   	Set<String> tags = new HashSet<String>
   	                   (Arrays.asList(tagsString.split(", ")));
   	
-  	GoodEntity good = new GoodEntity(name, description, tags, user);
+	GoodEntity good = new GoodEntity(name, description, tags, piclink, user);
   	
   	GoodEntity savedGood = repository.save(good);
   	///////////////////////////////////////////////////hinzufügen in User:

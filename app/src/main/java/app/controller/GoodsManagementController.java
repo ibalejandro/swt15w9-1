@@ -107,7 +107,7 @@ public class GoodsManagementController {
 			
 			///////////////////////Änderung aufgrund Änderung in Konstruktor
   			User noValidUser=null;
-  			good = new GoodEntity("", "", emptyTags, noValidUser);
+			good = new GoodEntity("", "", emptyTags, emptyPic, noValidUser);
   			
   			///////////////////////////////////end
 		}
