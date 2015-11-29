@@ -19,6 +19,7 @@ import app.model.GoodEntity;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.GoodRepository;
+
 /**
 * <h1>GoodsOfferController</h1>
 * The GoodsOfferController is used to offer and view offered goods by the users.
@@ -77,7 +78,7 @@ public class GoodsOfferController {
   	
   	//////////////////////////////////////////////suchen des aktiven Users:
   	if (!(userAccount.isPresent())) {
-  		return "errorpage0_empty";
+  		return "noUser";
   	}
   	User user = repositoryUser.findByUserAccount(userAccount.get());
   	//////////////////////////////////////////////////////////////end
@@ -85,7 +86,7 @@ public class GoodsOfferController {
   	Set<String> tags = new HashSet<String>
   	                   (Arrays.asList(tagsString.split(", ")));
   	
-  	GoodEntity good = new GoodEntity(name, description, tags, piclink, user.getId());
+	GoodEntity good = new GoodEntity(name, description, tags, piclink, user);
   	
   	GoodEntity savedGood = repository.save(good);
   	///////////////////////////////////////////////////hinzufügen in User:

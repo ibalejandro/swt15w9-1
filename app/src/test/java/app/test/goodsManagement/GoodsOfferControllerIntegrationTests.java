@@ -4,17 +4,26 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
+
 import app.controller.GoodsOfferController;
+import app.model.Address;
 import app.model.GoodEntity;
+import app.model.User;
+import app.model.UserRepository;
 import app.repository.GoodRepository;
 
 public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegrationTests {
@@ -24,10 +33,17 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
   
   @Autowired GoodsOfferController controller;
   @Autowired GoodRepository repository;
+  @Autowired UserRepository userRepository;
+  @Autowired UserAccountManager userAccountManager;
   
   @Before
   public void createGoodEntities() {
-    long userId = 1L;
+    //long userId = 1L;////////////////////////Korrektor aufgrund Konstruktoränderung:
+	User userId= userRepository.findByUserAccount(userAccountManager.findByUsername("Lisa").get());//funktioniert irgendwie nicht
+	
+
+    ////////////////////////////////////end
+	
     Set<String> tags1 = new HashSet<String>(Arrays.asList("Transport", "Kids"));
     String picLink1 = "http://i.imgur.com/C2csOAA.jpg";
     String picLink2 = "http://i.imgur.com/Xr50D6D.jpg";
