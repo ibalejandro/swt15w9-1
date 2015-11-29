@@ -1,18 +1,24 @@
 = Pflichtenheft
+:toc:
+:toc-placement!:
 
-== Projektname
+== Refugee App
 
-__Version:__    *0.3*
+__Version:__    *0.6*
 
 __Status:__     *In Arbeit*
 
-__Stand:__      *28.10.2015*
+__Stand:__      *24.11.2015*
 
 == Zusammenfassung
-Eine kurze Beschreibung des Dokuments. Wenige Absätze.
+Dies ist das Pflichtenheft zum Projekt "Refugee App".
+Es legt die grobe Struktur der Software fest und definiert die Kriterien zur erfolgreichen Beendigung des Projektes.
 
 == Inhaltsverzeichnis
 
+toc::[]
+
+:sectnums:
 == Aufgabenstellung und Zielsetzung
 Was uns vorschwebt ist eine Art eBay-Kleinanzeigen Portal allerdings multi-lingual - ein Art Welcome- Refugee - Portal, wo Menschen mittels einer Textbaustein-dialog-prinzip und mit Unterstützung von Google Translate in der eigenen Landsprache mit Menschen jeglicher Nationen einfach und unkompliziert in Kontakt treten können, damit so einfach Dinge schnell und unkompliziert direkt ohne Umwege über Sammellager von DRK etc. den Weg zu Bedürftigen finden können. Die Plattform soll aber nicht nur ausschließlich dem Austausch von Gegenständen dienen, sondern auch die Möglichkeit bieten, Angebote zur schnellen Integration der Flüchtlingen bei uns anzubieten z.B. durch das Annoncieren von Deutschkursen etc.
 
@@ -24,25 +30,24 @@ Hierbei scheitert es jedoch oft an den Fremdsprachenkenntnisse der Beteiligten u
 == Systemgrenze und Top-Level-Architektur
 
 === Kontextdiagramm
-Das Kontextdiagramm zeigt das geplante Software-System in seiner Umgebung. Zur Umgebung gehören alle Nutzergruppen des Systems und Nachbarsysteme. Die Grafik kann auch informell gehalten sein. Überlegen Sie sich dann geeignete Symbole. Die Grafik kann beispielsweise mit Visio erstellt werden. Wenn nötig, erläutern Sie diese Grafik.
+image::images/Kontextdiagram.jpg[]
 
 === Top-level architecture
-Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm.
+image::images/TopLevel-Architektur.jpg[]
 
 == Anwendungsfälle
 
 === Überblick Anwendungsfalldiagramm
-Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt
+image::images/Anwendungsfälle.jpg[]
 
 === Akteure
-
-Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Dokumentieren Sie die Akteure in einer Tabelle. Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz. Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
-
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Name |Beschreibung |
-|…    |…            |
+|Name |Beschreibung
+|Helfer|offeriert Hilfsgüter
+|Flüchtling|meldet sich auf Hilfsgüter
+|Admin|nimmt Verwaltungsaufgaben wahr
 |===
 
 === Anwendungsfallbeschreibungen
@@ -50,6 +55,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle. In dieser Beschreibung m�
 Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
+
+image::images/Sequenzdiagramm_Dialog.png[]
+image::images/Sequenzdiagramm_User_account_erstellen.png[]
 
 == Anforderungen
 
@@ -204,7 +212,7 @@ Helfender:: Adresse
 == Datenmodell
 
 === Überblick: Klassendiagramm
-UML-Analyseklassendiagramm
+image::images/Analyseklassendiagramm.jpg[]
 
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
@@ -212,13 +220,50 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Klasse/Enumeration |Beschreibung |
-|…                  |…            |
+|Klasse/Enumeration|Beschreibung
+|Client|
+|UserManagement|
+|User|
+|GoodsManagement|
+|adress|
+|Language (Enum)|
+|Offer|
+|Activity|
+|Good|
+|Tags (Enum)|
+|Property|
+|Dialog|
+|Message|
+|MessageElement|
+|FreeText|
+|TextBlock|
 |===
 
 == Aktzeptanztestfälle
 Mithilfe von Akzeptanztests wird geprüft, ob die Software die funktionalen Erwartungen und Anforderungen im Gebrauch erfüllt. Diese sollen und können aus den Anwendungsfallbeschreibungen und den UML-Sequenzdiagrammen abgeleitet werden. D.h., pro (komplexen) Anwendungsfall gibt es typischerweise mindestens ein Sequenzdiagramm (welches ein Szenarium beschreibt). Für jedes Szenarium sollte es einen Akzeptanztestfall geben. Listen Sie alle Akzeptanztestfälle in tabellarischer Form auf.
 Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumenten (z.B. im Test-Plan) referenzieren zu können.
+
+[options="header"]
+|===
+|ID  |Akzeptanztestfall         | Beschreibung
+|1   |User erstellen            | Es können Benutzer permanent erstellt werden.
+|2   |User verändern            | Es können die Eigenschaften und Daten eines Nutzers verändert werden.
+|3   |User löschen              | Ein User kann sein eigenes Account löschen.
+|4   |Hilfsgut erstellen        | Ein User kann ein Hilfsgut inserieren.
+|5   |Hilfsgut verändern        | Ein User kann ein inseriertes Hilfsgut verändern.
+|6   |Hilfsgut suchen           | Ein User kann die Menge der Hilfsgüter nach bestimmten Kriterien durchsuchen.
+|7   |Hilfsgut löschen          | Ein User kann sein inseriertes Hilfsgut (vorzeitig) löschen.
+|8   |Dialog initiieren         | Ein User kann einen Dialog über ein Hilfsgut oder direkt mit einem anderen Benutzer initiieren.
+|9   |Dialogbaustein verwenden  | Ein User kann aus einer Menge von vorgegebenen Textbausteinen einen wählen und Platzhalter durch sinnvolle Angaben ergänzen.
+|10  |Admin: User untersuchen   | Der Administrator kann die Eigenschaften, Daten und Dialoge eines Users anzeigen lassen.
+|11  |Admin: User löschen       | Der Administrator kann einen User löschen.
+|12  |Admin: Good untersuchen   | Der Administrator kann ein Hilfsgut untersuchen.
+|13  |Admin: Good löschen       | Der Administrator kann unangebrachte Hilfsgüter löschen.
+|14  |Oberfläche übersetzbar    | Die Webseiten werden in abhängig von der gewählten Sprache angezeigt.
+|15  |Textbausteine erstellen   | Es können neue Textbausteine erstellt werden.
+|16  |Textbausteine verändern   | Es können bestehende Textbausteine verändert werden.
+|17  |Textbausteine löschen     | Es können bestehende Textbausteine gelöscht werden.
+|===
 
 == Offene Punkte
 Offene Punkte werden entweder direkt in der Spezifikation notiert. Wenn das Pflichtenheft  zum finalen Review vorgelegt wird, sollte es keine offenen Punkte mehr geben.

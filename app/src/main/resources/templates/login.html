@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<!--
+		ToDo:
+			- Username zu EMail addresse ändern.
+			- Header und ul Liste: Ist das Kunst oder kann das weg?
+			- Title
+	-->
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<div th:include="navigation :: navigation"></div>
+	
+		<div class="row">
+			<div class="large-12 columns">
+			
+				<div th:fragment="login" class="login">
+					<header class="login__header">
+						<h1 class="login__header_text">Login</h1>
+					</header>
+					
+					<ul>
+						<li><a th:href="@{/userDetails}">Kundenliste</a></li>
+					</ul>
+					
+					<div class="row">
+						<div class="large-12 columns">
+							<h1>Login page</h1>
+							<p th:if="${loginError}" class="login__error">Wrong Username or Password!</p>
+						</div>
+						
+						<form th:action="@{/login}" method="post">
+							<div class="large-12 columns">
+								<label class="login__label" for="username">Username:</label>
+								<input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+							</div>
+							
+							<div class="large-12 columns">
+								<label class="login__label" for="password">Password:</label>
+								<input type="password" id="password" name="password" /> <br />
+							</div>
+							
+							<div class="large-12 columns">
+								<input class="button" type="submit" value="Log in" />
+							</div>
+						</form>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>

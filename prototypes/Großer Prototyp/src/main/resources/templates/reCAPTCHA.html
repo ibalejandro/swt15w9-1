@@ -1,0 +1,21 @@
+<html>
+
+	<head th:include="imports :: head">
+		<script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
+	</head>
+	
+	<body th:include="imports :: script">
+	
+		<h1>reCAPTCHA demo: Simple page</h1>
+		
+		<form action="/submit_captcha" method="post">
+			<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
+			
+			<br/>
+			
+			<input type="submit" value="Submit"/>
+		</form>
+		
+	</body>
+	
+</html>
