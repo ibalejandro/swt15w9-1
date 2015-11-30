@@ -21,7 +21,8 @@ public class FreeText extends MessageElement {
 		this.text = text;
 	}
 
-	public String getText() {
+	@Override
+	public String getContent() {
 		return this.text;
 	}
 }
