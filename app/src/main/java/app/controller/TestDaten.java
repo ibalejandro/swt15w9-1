@@ -12,8 +12,8 @@ import org.springframework.util.Assert;
 
 import app.model.Address;
 import app.model.User;
+import app.model.UserRepository;
 import app.repository.DialogRepository;
-import app.repository.UserRepository;
 
 @Component
 public class TestDaten implements DataInitializer {

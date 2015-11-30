@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import app.model.Dialog;
 import app.model.User;
+import app.model.UserRepository;
 import app.repository.DialogRepository;
-import app.repository.UserRepository;
 
 @Controller
 @PreAuthorize("isAuthenticated()")

@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import app.model.Address;
 import app.model.User;
-import app.repository.UserRepository;
+import app.model.UserRepository;
 
 /**
 * <h1>CreateNewUserController</h1>
