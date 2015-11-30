@@ -12,7 +12,7 @@ public class TemplatedString extends MessageElement {
 	public TemplatedString(String templateString, Map<String, ? extends Object> valueMap) {
 		Assert.hasText(templateString);
 		Assert.notEmpty(valueMap);
-		
+
 		this.templateString = templateString;
 		this.valueMap = valueMap;
 	}
@@ -28,15 +28,16 @@ public class TemplatedString extends MessageElement {
 		StrSubstitutor sub = new StrSubstitutor(this.valueMap);
 		return sub.replace(this.templateString);
 	}
-	
+
 	/**
 	 * Changes the valueMap used for the substitution.
 	 * 
-	 * @param valueMap the new value map
+	 * @param valueMap
+	 *            the new value map
 	 */
 	public void setValueMap(Map<String, ? extends Object> valueMap) {
 		Assert.notEmpty(valueMap);
-		
+
 		this.valueMap = valueMap;
 	}
 }

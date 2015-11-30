@@ -1,10 +1,7 @@
 package app.model;
 
-import javax.persistence.Entity;
-
 import org.springframework.util.Assert;
 
-@Entity
 public class FreeText extends MessageElement {
 	private final String text;
 
