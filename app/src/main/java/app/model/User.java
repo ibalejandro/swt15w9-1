@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.salespointframework.useraccount.UserAccount;
+import org.springframework.util.Assert;
 
 /**
 * <h1>User</h1>
@@ -85,6 +86,8 @@ public class User implements Serializable{
 	}
 	
 	public void addDialog(Dialog dialog) {
+		Assert.notNull(dialog);
+		
 		dialogs.add(dialog);
 	}
 	
