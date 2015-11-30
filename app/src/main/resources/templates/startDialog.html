@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="imports :: head"></th:block>
+</head>
+<body>
+	<div th:include="navigation :: navigation"></div>
+	<div class="row">
+		<div class = "small-12 columns">
+			<div class="create">
+				<h1 class="create_title">New Dialog</h1>
+				
+				<form th:action="@{/newDialog}" method="post">
+				
+				</form>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="imports :: script"></th:block>
+</body>
+</html>
