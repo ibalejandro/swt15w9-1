@@ -7,17 +7,26 @@
 	
 	<body>
 	
-		<h1>reCAPTCHA</h1>
-		<h3 th:text="@{(5) &nbsp;}+ ${user} + @{ &nbsp; submit this CAPTCHA for getting your activationlink with mail: &nbsp; }"> CAPTCHA</h3>
+		<th:block th:include="navigation :: navigation"></th:block>
 		
-		<form th:action="@{/submit_captcha/user/} + ${user}" method="post">
-			<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
-			
-			<br/>
-			
-			<input type="submit" value="Submit"/>
-		</form>
+		<div class="row">
+			<div class="large-12 colums">
+				<h1>reCAPTCHA</h1>
+				
+				<h3 th:text="${user} + @{&nbsp;f&uuml;hre dieses CAPTCHA aus, daraufhin wird an deine E-Mail Adresse ein Aktivierungslink geschickt:}"> CAPTCHA</h3>
+				
+				<form th:action="@{/submit_captcha/user/} + ${user}" method="post">
+					<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
+					
+					<br/>
+					
+					<input class="button" type="submit" value="Submit"/>
+				</form>
+			</div>
+		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
+		
 	</body>
 	
 </html>

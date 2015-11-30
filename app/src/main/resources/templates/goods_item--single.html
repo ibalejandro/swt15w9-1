@@ -8,7 +8,11 @@
 	<body>
 		
 		<div th:fragment="item">
-			<div class="gooditem__body--single">								
+			<div class="gooditem__body--single">
+				<div>
+					<label class="gooditem__label--single"> Bild </label>
+					<img th:src="${result.picture}" class="gooditem__text--single"/>
+				</div>								
 				<div>
 					<label class="gooditem__label--single"> Name </label>
 					<p th:text="${result.name}" class="gooditem__text--single">Lorem ipsum</p>
@@ -21,7 +25,7 @@
 				
 				<div>
 					<label class="gooditem__label--single"> Tags </label>
-					<p th:text="${result.tags}" class="gooditem__text--single">Lorem</p>
+					<p th:text="${result.tag.name}" class="gooditem__text--single">Lorem</p>
 				</div>
 			</div>
 		</div>

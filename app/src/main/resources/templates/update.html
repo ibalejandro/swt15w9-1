@@ -27,7 +27,13 @@
 
 						<div>
 							<label class="create__label"> Tags: </label>
-							<input type="text" name="tags" th:value="*{parsedTags}"/> 
+							<select name="tagId">
+				    			<option th:value="${result.tag.id}" th:text="${result.tag.name}"></option>
+				    			<option th:each="tag : ${tags}"
+				            			th:value="${tag.id}"
+				            			th:text="${tag.name}">
+				    			</option>
+							</select>  
 						</div>
 						
 						<input type="hidden" name="id" th:value="${result.id}"/>

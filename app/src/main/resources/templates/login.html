@@ -15,45 +15,50 @@
 	<body>
 	
 		<div th:include="navigation :: navigation"></div>
-	
-		<div class="row">
-			<div class="large-12 columns">
-			
-				<div th:fragment="login" class="login">
-					<header class="login__header">
-						<h1 class="login__header_text">Login</h1>
-					</header>
+		
+		<th:block th:fragment="login">
+			<div class="login" id="log">
+				<div class="row">
+					<div class="large-6 small-6 columns">
+						<h1 class="login__headline">Login</h1>
+					</div>
 					
-					<ul>
-						<li><a th:href="@{/userDetails}">Kundenliste</a></li>
-					</ul>
+					<div class="large-6 small-6 columns">
+						<label class="login__link--right"><a th:href="@{/new_user_data}" onclick="return toggle('log');">Noch nicht registriert?</a></label>
+					</div>
 					
-					<div class="row">
-						<div class="large-12 columns">
-							<h1>Login page</h1>
-							<p th:if="${loginError}" class="login__error">Wrong Username or Password!</p>
+					<form th:action="@{/login}" method="post">
+						<div class = "large-12 columns">
+							<label th:if="${loginError}" class="login__error">Wrong Username or Password!</label>
 						</div>
 						
-						<form th:action="@{/login}" method="post">
-							<div class="large-12 columns">
-								<label class="login__label" for="username">Username:</label>
-								<input type="text" id="username" name="username" autofocus="autofocus" /> <br />
-							</div>
-							
-							<div class="large-12 columns">
-								<label class="login__label" for="password">Password:</label>
-								<input type="password" id="password" name="password" /> <br />
-							</div>
-							
-							<div class="large-12 columns">
+						<div class="large-1 small-12 columns"> 
+							<label class="login__label" for="username">Username:</label> 
+						</div>
+						<div class="large-5 small-12 columns">
+							<input class="login__input" type="text" id="username" name="username" autofocus="autofocus"/>
+						</div>
+					
+						<div class="large-1 small-12 columns">
+							<label class="login__label" for="password">Password:</label>
+						</div>
+						<div class="large-5 small-12 columns">
+							<input class="login__input" type="password" id="password" name="password" />
+						</div>
+						
+
+						<div class="large-12 columns">
+							<div class="login__button">
 								<input class="button" type="submit" value="Log in" />
 							</div>
-						</form>
-					</div>
+							<label class="login__link"><a>Passwort vergessen?</a></label>
+						</div>
+
+					</form>
 				</div>
-				
 			</div>
-		</div>
+		</th:block>
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 </html>

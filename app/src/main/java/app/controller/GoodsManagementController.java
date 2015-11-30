@@ -1,20 +1,20 @@
 package app.controller;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
-
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import app.repository.TagsRepository;
 import app.model.GoodEntity;
-import app.repository.GoodRepository;
-import app.repository.UserRepository;
+import app.model.TagEntity;
+import app.model.User;
+import app.model.UserRepository;
+import app.repository.GoodsRepository;
 
 /**
 * <h1>GoodsManagementController</h1>
@@ -27,42 +27,53 @@ import app.repository.UserRepository;
 @Controller
 public class GoodsManagementController {
 
-	//@Autowired GoodRepository repository;
 	/////////////////////////////////////////////////////Ergänzung Userzuordnung
-	private final UserRepository repositoryUser;
-	private final GoodRepository repository;
-	
+	private final UserRepository userRepository;
+	private final GoodsRepository goodsRepository;
+	private final TagsRepository tagsRepository;
+
 	/**
    * Autowire.
-   * @param userRepository The repository for the users
-   * @param description The repository for the goods
+   * @param UserRepository The repository for the users
+   * @param GoodsRepository The repository for the goods
    */
 	@Autowired
 	public GoodsManagementController(UserRepository userRepository,
-									                 GoodRepository repository){
-		this.repositoryUser = userRepository;
-		this.repository = repository;
+									                 GoodsRepository goodsRepository,
+									                 TagsRepository tagsRepository){
+		this.userRepository = userRepository;
+		this.goodsRepository = goodsRepository;
+		this.tagsRepository = tagsRepository;
 	}
 	/////////////////////////////////////////////////////////end
-	
+
 	/**
    * This method is the answer for the request to '/myOfferedGoods'. It finds
    * and retrieves all the goods associated with a particular user.
    * @param Model The model to add response's attributes
+   * @param Optional<UserAccount> The user's account who wants to see his
+   *                              offered goods
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/myOfferedGoods", method = RequestMethod.GET)
-  public String listUserOfferedGoods(Model model) {
+	public String listUserOfferedGoods
+	(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 	  /*
-  	 * This is just for the examples. The userId will be the real id of
-  	 * the user, who wants to see his offered goods.
-  	 */
-  	long userId = 1L;
-	
-    model.addAttribute("result", repository.findByUserId(userId));
-    return "myOfferedGoods";
-  }
-	
+     * If there wasn't a log in instance, then the user is redirected to an
+     * error page.
+     */
+    if (!userAccount.isPresent()) return "noUser";
+	  /* Frederike's code */
+		User loggedUser = userRepository.findByUserAccount(userAccount.get());
+		//model.addAttribute("result", loggedUser.getGoods());
+		//System.out.println("LoggedUser.getGoods(): "
+		//                   + loggedUser.getGoods().toString());
+		/* */
+
+		model.addAttribute("result", goodsRepository.findByUser(loggedUser));
+		return "myOfferedGoods";
+	}
+
 	/**
    * This method is the answer for the request to '/update'. It finds and
    * retrieves the particular good that the user wants to update.
@@ -73,70 +84,63 @@ public class GoodsManagementController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
   public String showGoodToUpdate(HttpServletRequest request, Model model) {
 	  long id = Long.parseLong(request.getParameter("id"));
-		
-		GoodEntity good = repository.findOne(id);
-		
-		String tagsAsString = "";
-		
-		/* 
-		 * If the entity exists a parsed string for the tags is built, so that
-		 * they can be easily updated by the user.
+
+		GoodEntity good = goodsRepository.findOne(id);
+
+		// If the entity doesn't exist, an empty entity is created.
+		if (good == null) good = GoodEntity.createEmptyGood();
+
+		model.addAttribute("result", good);
+		/*
+		 * Every tag is sent to the update view except for the current tag. The
+		 * current tag is already known and it's put as the default value whereas
+		 * the other tags are there, so that the user can change the existing one.
 		 */
-		if (good != null) {
-			tagsAsString = good.getTagsAsString();
-		}
-		// If the entity doesn't exist, an empty entity is returned.
-		else {
-  		Set<String> emptyTags = new HashSet<>();
-  		long invalidUserId = -1L;
-  		good = new GoodEntity("", "", emptyTags, invalidUserId);
-    }
-    	
-    model.addAttribute("result", good);
-   	model.addAttribute("parsedTags", tagsAsString);
+		model.addAttribute("tags", tagsRepository
+		                   .findByIdNot(good.getTag().getId()));
 		return "update";
   }
-	
+
 	/**
    * This method is the answer for the request to '/updatedGood'. It updates
    * a particular good with the given information and retrieves the updated
    * good.
    * @param HttpServletRequest The request with its information
    * @param Model The model to add response's attributes
+   * @param Optional<UserAccount> The user's account who wants to update one of
+   *                              his offered goods
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/updatedGood", method = RequestMethod.POST)
-  public String updateGood(HttpServletRequest request, Model model) {
+  public String updateGood(HttpServletRequest request, Model model,
+                           @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
-		
-		GoodEntity goodToBeUpdated = repository.findOne(id);
-		
+
+		GoodEntity goodToBeUpdated = goodsRepository.findOne(id);
+
 		String name = request.getParameter("name");
     String description = request.getParameter("description");
-    String tagsString = request.getParameter("tags");
-    	
-    Set<String> tags = new HashSet<String>
-    					         (Arrays.asList(tagsString.split(", ")));
-    	
+    long tagId = Long.parseLong(request.getParameter("tagId"));
+
+    TagEntity tag = tagsRepository.findOne(tagId);
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
-  	goodToBeUpdated.setTags(tags);
-    	
-  	/*
-  	 * This is just for the examples. The userId will be the real id of
-  	 * the user, who is offering the good.
-  	 */
-  	long userId = 1L;
-  	goodToBeUpdated.setUserId(userId);
-    	
+  	goodToBeUpdated.setTag(tag);
+
+  	///////////////////////////////Zuordnung User=Aktiver User
+  	if (!userAccount.isPresent()) return "noUser";
+		User loggedUser = userRepository.findByUserAccount(userAccount.get());
+		goodToBeUpdated.setUser(loggedUser);
+  	////////////////////////////////////////end
+
   	/*
   	 * Calling save() on an object with predefined id will update the
   	 * corresponding database record rather than insert a new one.
   	 */
-  	model.addAttribute("result", repository.save(goodToBeUpdated));
+  	model.addAttribute("result", goodsRepository.save(goodToBeUpdated));
 		return "updatedGood";
   }
-	
+
 	/**
    * This method is the answer for the request to '/deletedGood'. It retrieves
    * the good that the user wants to delete and then deletes it.
@@ -147,20 +151,16 @@ public class GoodsManagementController {
 	@RequestMapping(value = "/deletedGood", method = RequestMethod.POST)
   public String deleteGood(HttpServletRequest request, Model model) {
 		long id = Long.parseLong(request.getParameter("id"));
-		
-		GoodEntity good = repository.findOne(id);
-		
+
+		GoodEntity good = goodsRepository.findOne(id);
+
 		// This statement check if the entity to delete actually exists.
-		if (good != null) repository.delete(id);
+		if (good != null) goodsRepository.delete(id);
     // If the entity doesn't exist, an empty entity is returned.
-  	else {
-  	  Set<String> emptyTags = new HashSet<>();
-  		long invalidUserId = -1L;
-  		good = new GoodEntity("", "", emptyTags, invalidUserId);
-  	}
-    	
+  	else good = GoodEntity.createEmptyGood();
+
     model.addAttribute("result", good);
 		return "deletedGood";
   }
-	
+
 }

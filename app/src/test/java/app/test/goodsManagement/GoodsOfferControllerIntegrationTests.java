@@ -4,18 +4,27 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
+
 import app.controller.GoodsOfferController;
+import app.model.Address;
 import app.model.GoodEntity;
-import app.repository.GoodRepository;
+import app.model.User;
+import app.model.UserRepository;
+import app.repository.GoodsRepository;
 
 public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegrationTests {
 
@@ -23,19 +32,28 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
   private static int iterableSize = 2;
   
   @Autowired GoodsOfferController controller;
-  @Autowired GoodRepository repository;
+  @Autowired GoodsRepository repository;
+  @Autowired UserRepository userRepository;
+  @Autowired UserAccountManager userAccountManager;
   
   @Before
   public void createGoodEntities() {
-    long userId = 1L;
+    //long userId = 1L;////////////////////////Korrektor aufgrund Konstruktoränderung:
+	User userId= userRepository.findByUserAccount(userAccountManager.findByUsername("Lisa").get());//funktioniert irgendwie nicht
+	
+
+    ////////////////////////////////////end
+	
     Set<String> tags1 = new HashSet<String>(Arrays.asList("Transport", "Kids"));
+    String picLink1 = "http://i.imgur.com/C2csOAA.jpg";
+    String picLink2 = "http://i.imgur.com/Xr50D6D.jpg";
     good1 = new GoodEntity("Bicycle", "This bicycle is for girls under 12 years"
-                           + " old. It's pink and purple", tags1, userId);
+                           + " old. It's pink and purple", tags1, picLink1, userId);
     
     Set<String> tags2 = new HashSet<String>
                         (Arrays.asList("Winter", "Men", "Clothes"));
     good2 = new GoodEntity("Jacket", "The jacket is for men. It's black with a"
-                           + " gray hood", tags2, userId);
+                           + " gray hood", tags2, picLink2, userId);
     
     repository.save(good1);
     repository.save(good2);

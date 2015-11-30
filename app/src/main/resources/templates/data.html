@@ -19,13 +19,13 @@
 					
 					<div>
 						<ul>
-							<li sec:authorize="!isAuthenticated()" ><a th:href="@{/login}" >Login</a></li>
+							<div sec:authorize="!isAuthenticated()"> <a th:href="@{/login}" >Login</a></div>
 
-							<li sec:authorize="isAuthenticated()">
+							<div sec:authorize="isAuthenticated()">
 								<form th:action="@{/logout}" method="post">
 									<input class="button" type="submit" value="Logout" />
 								</form>
-							</li>
+							</div>
 						</ul>
 					
 						<h4 sec:authorize="!hasRole('ROLE_NORMAL')">Login notwendig</h4>

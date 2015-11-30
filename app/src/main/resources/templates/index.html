@@ -9,23 +9,14 @@
 		- Footer erstellen einfügen und includen.
 		- Kommentare löschen
 -->
-	
-	<head>
-		<th:block th:include="imports :: head"></th:block>
-	</head>
-	
-	<body>
-		
-		<div th:include="navigation :: navigation"></div>
-		
-		<!--
+	<!--/*
 		<div th:each="content : ${}" class="row">
 			<div class="small-12 colums medium-6 columns">
 				<div th:include="item :: item">
 				</div>
 			</div>
 		</div>
-		-->		
+			
 
 		<p>Bestehende Nutzer:</p>
 		<table>
@@ -47,6 +38,20 @@
 				</tr>								
 			</tbody>
 		</table>
+		*/-->	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>		
+		<div sec:authorize="isAuthenticated()">		
+			<th:block th:include="navigation :: navigation"></th:block>
+			<!--Plcace for Items-->
+		</div>
+		
+		<div sec:authorize="!isAuthenticated()">
+			<th:block th:include="startsite :: start"></th:block>
+		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
 	</body>

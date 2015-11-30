@@ -6,12 +6,17 @@
 	</head>
 	
 	<body>
-	
-		<div th:fragment="search1">
-			<form th:action="@{/searchResultsByName}" class="has-form" method="post">
+		<th:block th:fragment="searchByTag">
+			<form th:action="@{/searchResultsByTag}" method="post">
 				<div class="row collapse">
 					<div class="large-8 small-9 columns">
-						<input type="text" name="name" placeholder="Suche nach Namen" />
+						<select name="tagId">
+				    		<option value="-1">All</option>
+				    		<option th:each="tag : ${tags}"
+				            		th:value="${tag.id}"
+				            		th:text="${tag.name}">
+				    		</option>
+						</select>
 					</div>
 					
 					<div class="large-4 small-3 columns">
@@ -19,23 +24,10 @@
 					</div>
 				</div>
 			</form>
-		</div>
-		
-		<div th:fragment="search2">
-			<form th:action="@{/searchResultsByTag}" class="has-form" method="post">
-				<div class="row collapse">
-					<div class="large-8 small-9 columns">
-						<input type="text" name="tag" placeholder="Suche nach Tag" />
-					</div>
-					
-					<div class="large-4 small-3 columns">
-						<input class="alert button expand" type="submit" value="Search"/>
-					</div>
-				</div>
-			</form>
-		</div>
+		</th:block>
 		
 		<th:block th:include="imports :: script"></th:block>
+		
     </body>
 	
 </html>

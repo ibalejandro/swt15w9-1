@@ -1,0 +1,29 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*	
+		TODO:
+			-Title einfügen
+			- 
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>		
+		<th:block th:fragment="start">
+			<div class="startsite__login">
+				<th:block th:include="login :: login"></th:block>
+			</div>
+			<div class="startsite__reg">
+			<!--	
+				<th:block th:include="new_user :: reg"></th:block>
+			-->
+			</div>
+		</th:block>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+	
+</html>

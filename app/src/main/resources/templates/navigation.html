@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html class="no-js" lang="de">
-<!--
+<!--/*
 	TODO:
 		- Navigation weiter anpassen
 			+ weiter Links hinzufügen
@@ -9,42 +9,36 @@
 		- Variablen hinzufügen
 		- th:href Mapping festlegen.
 		- Kommentare löschen
--->
+*/-->
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-		<div th:fragment="navigation">
+	
+		<th:block th:fragment="navigation">
 			<nav class="top-bar" data-topbar="" role="navigation">
 				<ul class="title-area">
 					<li class="name">
 						<h1><a th:href="@{/index}" href="./index.html">My Site</a></h1>
 					</li>
-				
-					
-					
 					<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 					<li class="toggle-topbar menu-icon">
 						<a><span>Menu</span></a>
 					</li>
 				</ul>
 			
-			
 				<section class="top-bar-section">
+				
 				<!-- Right Nav Section -->
 					<ul class="right">
-					
-						<li>
-							<div th:include="search :: search1"></div>
-						</li>
-						<li>
-							<div th:include="search :: search2"></div>
+						
+						<li class="has-form">
+							<th:block th:include="search :: searchByTag"></th:block>
 						</li>
 						
-						
 						<li>
-							<a th:href="@{/offer}" href="./offer.html">Offer</a>
+							<a sec:authorize="isAuthenticated()" th:href="@{/offer}" href="./offer.html">Offer</a>
 						</li>
 						
 						<li class="has-dropdown">
@@ -53,43 +47,43 @@
 							</a>
 							
 							<ul class="dropdown">
-
 								<li sec:authorize="hasRole('ROLE_ADMIN')">
-									<a th:href="@{/userDetails}" href="userDetails.html" >Kundenliste.</a>
+									<a th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
 								</li>
 								
 								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a th:href="@{/data}" href="data.html" > Eigene Daten.</a>
+									<a th:href="@{/data}" href="data.html" > Eigene Daten</a>
 								</li>
 								
 								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge.</a>
-								</li>
-								
-								<li sec:autorize="!isAuthenticated()">
-									<a th:href="@{/new_user_data}" href="new_user_data.html"> Regestrieren.</a>
+									<a th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
 								</li>
 								
 								<li sec:authorize="!isAuthenticated()">
-									<a th:href="@{/login}" href="login.html" >Login.</a>
+									<a th:href="@{/new_user_data}" href="new_user_data.html"> Registrieren</a>
+								</li>
+								
+								<li sec:authorize="!isAuthenticated()">
+									<a th:href="@{/login}" href="login.html" >Login</a>
 								</li>
 								
 								<li sec:authorize="isAuthenticated()">
-									<form th:action="@{/logout}" method="post">
-										<input class="button" type="submit" value="Logout" />
-									</form>
+									<a th:href="@{/logout}" type="submit" value="Logout">Logout</a>
 								</li>
 							</ul>
 						</li>
 					</ul>
 
-				<!-- Left Nav Section -->
+					<!-- Left Nav Section -->
 					<ul class="left">
 						
 					</ul>
 				</section>
 			</nav>
-		</div>
+		</th:block>
+		
 		<th:block th:include="imports :: script"></th:block>
+		
 	</body>
+	
 </html>

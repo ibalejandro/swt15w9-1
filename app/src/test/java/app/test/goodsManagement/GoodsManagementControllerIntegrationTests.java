@@ -7,15 +7,21 @@ import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import app.model.GoodEntity;
-import app.repository.GoodRepository;
+import app.model.User;
+import app.model.UserRepository;
+import app.repository.GoodsRepository;
 
 public class GoodsManagementControllerIntegrationTests extends 
 AbstractWebIntegrationTests {
@@ -24,35 +30,45 @@ AbstractWebIntegrationTests {
   private static int iterableSizeWithOnlyOneSave = 1;
   private static int iterableSize = 4;
   
-  @Autowired GoodRepository repository;
+  @Autowired GoodsRepository repository;
+  @Autowired UserRepository userRepository;
+  @Autowired UserAccountManager userAccountManager;
+
   
   @Before
   public void createGoodEntities() {
-    long userId1 = 1L;
-    long userId2 = 2L;
+    //long userId1 = 1L;
+	//long userId2 = 2L;
+	  /////////////////////////////////Korrektur aufgrund Konstruktoränderung
+	  User userId1= userRepository.findByUserAccount(userAccountManager.findByUsername("Lisa").get());
+	  User userId2= userRepository.findByUserAccount(userAccountManager.findByUsername("Peter").get());
+	  /////////////////////////////end
+    
     Set<String> tags1 = new HashSet<String>(Arrays.asList("Transport", "Kids"));
+    String picLink1 = "http://i.imgur.com/C2csOAA.jpg";
+    String picLink2 = "http://i.imgur.com/Xr50D6D.jpg";
     good1 = new GoodEntity("Bicycle", "This bicycle is for girls under 12 years"
-                           + " old. It's pink and purple", tags1, userId1);
+                           + " old. It's pink and purple", tags1, picLink1, userId1);
     
     Set<String> tags2 = new HashSet<String>
                         (Arrays.asList("Winter", "Men", "Clothes"));
     good2 = new GoodEntity("Jacket", "The jacket is for men. It's black with a"
-                           + " gray hood", tags2, userId2);
+                           + " gray hood", tags2, picLink2, userId2);
     
     Set<String> tags3 = new HashSet<String>
                         (Arrays.asList("Soccer", "Teenagers", "Sports"));
     good3 = new GoodEntity("Soccer ball", "This is an almost new soccer ball"
-                           + " for teenagers.", tags3, userId1);
+                           + " for teenagers.", tags3, picLink2, userId1);
     
     Set<String> tags4 = new HashSet<String>
                         (Arrays.asList("Winter", "Women", "Clothes"));
     good4 = new GoodEntity("Winter gloves", "The winter gloves are for women's"
-                           + " size S.", tags4, userId1);
+                           + " size S.", tags4, picLink1, userId1);
     
     Set<String> tags5 = new HashSet<String>
                         (Arrays.asList("Sleep", "Winter", "Kids"));
     good5 = new GoodEntity("Sleeping", "This sleeping is for kids and is useful"
-                           + "to keep them warm in the night.", tags5, userId1);
+                           + "to keep them warm in the night.", tags5, picLink1, userId1);
   }
   
   @Test
