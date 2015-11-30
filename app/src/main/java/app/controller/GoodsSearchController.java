@@ -19,23 +19,23 @@ import app.repository.TagsRepository;
 */
 @Controller
 public class GoodsSearchController {
-	
+
 	private final GoodsRepository goodsRepository;
 	private final TagsRepository tagsRepository;
-	
+
 	/**
    * Autowire.
    * @param GoodsRepository The repository for the goods
    * @param TagsRepository The repository for the tags
    */
 	@Autowired
-	public GoodsSearchController(GoodsRepository goodsRepository, 
+	public GoodsSearchController(GoodsRepository goodsRepository,
 								               TagsRepository tagsRepository){
 		this.goodsRepository = goodsRepository;
 		this.tagsRepository = tagsRepository;
 	}
 	/////////////////////////////////////////////////////////end
-	
+
 	/**
    * This method is the answer for the request to '/search'. It retrieves and
    * populates the tags dropdown with the whole available tags.
@@ -47,7 +47,7 @@ public class GoodsSearchController {
     model.addAttribute("tags", tagsRepository.findAll());
     return "search";
   }
-	
+
 	 /**
    * This method is the answer for the request to '/searchResultsByTag'. It
    * finds and retrieves a list of goods that matches with the the given
@@ -60,27 +60,27 @@ public class GoodsSearchController {
   public String searchGoodByTag(HttpServletRequest request, Model model) {
 		String parameterType = "tag";
 		long tagId = Long.parseLong(request.getParameter("tagId"));
-		
+
 		/*
-     * The type of parameter and the parameter itself for the search are 
+     * The type of parameter and the parameter itself for the search are
      * sent to the view, so that the user can see his search criteria.
      */
-		
+
 		if (tagId != -1L) {
 		  TagEntity tag = tagsRepository.findOne(tagId);
 		  model.addAttribute("resultParameter", tag.getName());
 		  model.addAttribute("result", goodsRepository.findByTag(tag));
-	    
+
 		}
 		/*
-     * If the tagId is -1L that means that the user doesn't want to filter by 
+     * If the tagId is -1L that means that the user doesn't want to filter by
      * any search criteria.
      */
 		else {
 		  model.addAttribute("resultParameter", "All");
 		  model.addAttribute("result", goodsRepository.findAll());
 		}
-		
+
 		model.addAttribute("resultParameterType", parameterType);
 		return "searchResults";
   }

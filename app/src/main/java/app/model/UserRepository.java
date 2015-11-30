@@ -3,8 +3,6 @@ package app.model;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.data.repository.CrudRepository;
 
-import app.model.User;
-
 /**
 * <h1>UserRepository</h1>
 * The UserRepository is a Spring-repository in which all registered Users are saved.

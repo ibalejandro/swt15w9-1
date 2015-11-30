@@ -30,7 +30,7 @@ public class GoodsOfferController {
 	private final UserRepository userRepository;
 	private final GoodsRepository goodsRepository;
 	private final TagsRepository tagsRepository;
-	
+
 	/**
    * Autowire.
    * @param UserRepository The repository for the users
@@ -46,7 +46,7 @@ public class GoodsOfferController {
 		this.tagsRepository = tagsRepository;
 	}
 	/////////////////////////////////////////////////////////end
-	
+
 	/**
    * This method is the answer for the request to '/home'. It finds
    * and retrieves all the offered goods by the users.
@@ -58,7 +58,7 @@ public class GoodsOfferController {
 	  model.addAttribute("result", goodsRepository.findAll());
 		return "home";
   }
-	
+
   /**
    * This method is the answer for the request to '/offer'. It retrieves and
    * and populates the tags dropdown with the whole available tags.
@@ -70,7 +70,7 @@ public class GoodsOfferController {
     model.addAttribute("tags", tagsRepository.findAll());
     return "offer";
   }
-	
+
 	/**
    * This method is the answer for the request to '/offeredGood'. It saves
    * and retrieves the good that the user wants to offer and associates it with
@@ -87,20 +87,20 @@ public class GoodsOfferController {
 	  String description = request.getParameter("description");
   	long tagId = Long.parseLong(request.getParameter("tagId"));
   	String picture = request.getParameter("picture");
-  	
+
   	//////////////////////////////////////////////suchen des aktiven Users:
   	if (!userAccount.isPresent()) return "noUser";
   	User user = userRepository.findByUserAccount(userAccount.get());
   	//////////////////////////////////////////////////////////////end
-  	
+
   	TagEntity tag = tagsRepository.findOne(tagId);
   	GoodEntity good = new GoodEntity(name, description, tag, picture, user);
   	GoodEntity savedGood = goodsRepository.save(good);
-  	
+
   	///////////////////////////////////////////////////hinzufügen in User:
   	user.addGood(savedGood);
   	////////////////////////////////////////////////////////////end
-  	
+
   	model.addAttribute("result", savedGood);
   	return "offeredGood";
   }

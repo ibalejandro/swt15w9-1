@@ -1,27 +1,32 @@
 package app.model;
 
-import javax.persistence.Entity;
-
 import org.springframework.util.Assert;
 
-@Entity
+/**
+ * <h1>FreeText</h1> The FreeText is an implementation of {@link MessageElement}
+ * . It is used to represent and store simple text.
+ * 
+ * @author Mario Henze
+ */
 public class FreeText extends MessageElement {
 	private final String text;
 
-	public FreeText() {
-		super();
-		this.text = null;
-	}
-
+	/**
+	 * Constructor.
+	 * 
+	 * @param text
+	 *            The text to store
+	 */
 	public FreeText(String text) {
 		super();
 
-		Assert.hasText(text, "Textfield must not be null or empty!");
+		Assert.hasText(text);
 
 		this.text = text;
 	}
 
-	public String getText() {
+	@Override
+	public String getContent() {
 		return this.text;
 	}
 }

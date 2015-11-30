@@ -31,7 +31,7 @@ public class GoodsManagementController {
 	private final UserRepository userRepository;
 	private final GoodsRepository goodsRepository;
 	private final TagsRepository tagsRepository;
-	
+
 	/**
    * Autowire.
    * @param UserRepository The repository for the users
@@ -39,14 +39,14 @@ public class GoodsManagementController {
    */
 	@Autowired
 	public GoodsManagementController(UserRepository userRepository,
-									                 GoodsRepository goodsRepository, 
+									                 GoodsRepository goodsRepository,
 									                 TagsRepository tagsRepository){
 		this.userRepository = userRepository;
 		this.goodsRepository = goodsRepository;
 		this.tagsRepository = tagsRepository;
 	}
 	/////////////////////////////////////////////////////////end
-	
+
 	/**
    * This method is the answer for the request to '/myOfferedGoods'. It finds
    * and retrieves all the goods associated with a particular user.
@@ -59,21 +59,21 @@ public class GoodsManagementController {
 	public String listUserOfferedGoods
 	(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 	  /*
-     * If there wasn't a log in instance, then the user is redirected to an 
+     * If there wasn't a log in instance, then the user is redirected to an
      * error page.
      */
     if (!userAccount.isPresent()) return "noUser";
 	  /* Frederike's code */
 		User loggedUser = userRepository.findByUserAccount(userAccount.get());
 		//model.addAttribute("result", loggedUser.getGoods());
-		//System.out.println("LoggedUser.getGoods(): " 
+		//System.out.println("LoggedUser.getGoods(): "
 		//                   + loggedUser.getGoods().toString());
 		/* */
-		
+
 		model.addAttribute("result", goodsRepository.findByUser(loggedUser));
 		return "myOfferedGoods";
 	}
-  
+
 	/**
    * This method is the answer for the request to '/update'. It finds and
    * retrieves the particular good that the user wants to update.
@@ -84,12 +84,12 @@ public class GoodsManagementController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
   public String showGoodToUpdate(HttpServletRequest request, Model model) {
 	  long id = Long.parseLong(request.getParameter("id"));
-		
+
 		GoodEntity good = goodsRepository.findOne(id);
-		
+
 		// If the entity doesn't exist, an empty entity is created.
 		if (good == null) good = GoodEntity.createEmptyGood();
-    	
+
 		model.addAttribute("result", good);
 		/*
 		 * Every tag is sent to the update view except for the current tag. The
@@ -100,39 +100,39 @@ public class GoodsManagementController {
 		                   .findByIdNot(good.getTag().getId()));
 		return "update";
   }
-	
+
 	/**
    * This method is the answer for the request to '/updatedGood'. It updates
    * a particular good with the given information and retrieves the updated
    * good.
    * @param HttpServletRequest The request with its information
    * @param Model The model to add response's attributes
-   * @param Optional<UserAccount> The user's account who wants to update one of 
+   * @param Optional<UserAccount> The user's account who wants to update one of
    *                              his offered goods
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/updatedGood", method = RequestMethod.POST)
-  public String updateGood(HttpServletRequest request, Model model, 
+  public String updateGood(HttpServletRequest request, Model model,
                            @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
-		
+
 		GoodEntity goodToBeUpdated = goodsRepository.findOne(id);
-		
+
 		String name = request.getParameter("name");
     String description = request.getParameter("description");
     long tagId = Long.parseLong(request.getParameter("tagId"));
-    
+
     TagEntity tag = tagsRepository.findOne(tagId);
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
   	goodToBeUpdated.setTag(tag);
-    	
+
   	///////////////////////////////Zuordnung User=Aktiver User
   	if (!userAccount.isPresent()) return "noUser";
 		User loggedUser = userRepository.findByUserAccount(userAccount.get());
 		goodToBeUpdated.setUser(loggedUser);
   	////////////////////////////////////////end
-    	
+
   	/*
   	 * Calling save() on an object with predefined id will update the
   	 * corresponding database record rather than insert a new one.
@@ -140,7 +140,7 @@ public class GoodsManagementController {
   	model.addAttribute("result", goodsRepository.save(goodToBeUpdated));
 		return "updatedGood";
   }
-	
+
 	/**
    * This method is the answer for the request to '/deletedGood'. It retrieves
    * the good that the user wants to delete and then deletes it.
@@ -151,16 +151,16 @@ public class GoodsManagementController {
 	@RequestMapping(value = "/deletedGood", method = RequestMethod.POST)
   public String deleteGood(HttpServletRequest request, Model model) {
 		long id = Long.parseLong(request.getParameter("id"));
-		
+
 		GoodEntity good = goodsRepository.findOne(id);
-		
+
 		// This statement check if the entity to delete actually exists.
 		if (good != null) goodsRepository.delete(id);
     // If the entity doesn't exist, an empty entity is returned.
   	else good = GoodEntity.createEmptyGood();
-    	
+
     model.addAttribute("result", good);
 		return "deletedGood";
   }
-	
+
 }
