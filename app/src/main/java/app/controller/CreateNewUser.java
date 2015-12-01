@@ -55,14 +55,14 @@ import app.model.UserRepository;
 public class CreateNewUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
-    //private final MailSender mailSender;
+    private final MailSender mailSender;
 
 	/**
 	   * Autowire.
 	   * @param CreateNewUser
 	   */
 	@Autowired
-	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository /*, MailSender mailSender*/) {
+	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository , MailSender mailSender) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -70,7 +70,7 @@ public class CreateNewUser {
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
 		
-		//this.mailSender=mailSender;
+		this.mailSender = mailSender;
 	}
 	
 	int zufallzahl_1, zufallzahl_2; //Zufallszahlen
@@ -213,11 +213,19 @@ public class CreateNewUser {
 
 	}
 
-/*
-	private boolean Propladen() throws IOException
+
+	
+	@Autowired
+	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException, IOException
 	{
+		
 		String result = "";
 		InputStream inputStream = null;
+		
+		String mailhost = "";
+		String mailport = "";
+		String mailusername = "";
+		String mailpassword = "";
 	 
 			try {
 				Properties prop = new Properties();
@@ -234,33 +242,23 @@ public class CreateNewUser {
 				Date time = new Date(System.currentTimeMillis());
 	 
 				// get the property value and print it out
-				String host = prop.getProperty("spring.mail.host");
-				String port = prop.getProperty("spring.mail.port");
-				String username = prop.getProperty("spring.mail.username");
-				String password = prop.getProperty("spring.mail.password");
-	 
-				result = "Company List = " + host + ", " + port + ", " + username + ", " + password;
-				System.out.println(result);
+				mailhost = prop.getProperty("spring.mail.host");
+				mailport = prop.getProperty("spring.mail.port");
+				mailusername = prop.getProperty("spring.mail.username");
+				mailpassword = prop.getProperty("spring.mail.password");
+	
 			} catch (Exception e) {
 				System.out.println("Exception: " + e);
 			} finally {
 				inputStream.close();
 			}
-			return true;
-		}
-*/
-	
-	/*
-	@Autowired
-	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException
-	{
+
+
 		
-		
-		
-		String mailhost = "smtp.gmail.com"; 			//Aus application.properties auslesen.
-		String mailusername = "***"; 	//Aus application.properties auslesen.
-	    String mailpassword = "***"; 			//Aus application.properties auslesen.
-	    String mailport= "587"; 						//Aus application.properties auslesen.
+		//String mailhost = "***"; 			//Aus application.properties auslesen.
+		//String mailusername = "***"; 	//Aus application.properties auslesen.
+	    //String mailpassword = "***"; 			//Aus application.properties auslesen.
+	    //String mailport= "***"; 						//Aus application.properties auslesen.
 	    String recipient = SendTo;
 
 	    Properties props = new Properties();
@@ -287,7 +285,7 @@ public class CreateNewUser {
 		
 		return;
 		
-	}   */
+	}   
 	
 	public static String sha256(String base) {
         try{
@@ -402,22 +400,15 @@ public class CreateNewUser {
 					String mailtext = "<h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" <br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+" ";
 					
 					System.out.println(link);
-					/*
-					try {
-						Propladen();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} */
 					
 					//Mail senden: 
-				/*		try {
-					Mailsenden(user_xyz.getUserAccount().getEmail(),"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
-					System.out.println("Mail versandt");
-				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}     */
+					try {
+						Mailsenden(user_xyz.getUserAccount().getEmail(),"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+						System.out.println("Mail versandt");
+					} catch (MessagingException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}     
 					
 					user_xyz.setRegistrationstate(8); //8 ~ Aktivierungsmail versandt.
 					userRepository.save(user_xyz);
