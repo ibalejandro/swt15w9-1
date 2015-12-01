@@ -55,14 +55,14 @@ import app.model.UserRepository;
 public class CreateNewUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
-    private final MailSender mailSender;
+    //private final MailSender mailSender;
 
 	/**
 	   * Autowire.
 	   * @param CreateNewUser
 	   */
 	@Autowired
-	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository , MailSender mailSender) {
+	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository /*, MailSender mailSender*/) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -70,7 +70,7 @@ public class CreateNewUser {
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
 		
-		this.mailSender = mailSender;
+		//this.mailSender = mailSender;
 	}
 	
 	int zufallzahl_1, zufallzahl_2; //Zufallszahlen
@@ -398,17 +398,18 @@ public class CreateNewUser {
 					
 					String link="/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+user_xyz.getActivationkey()+"}";
 					String mailtext = "<h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" <br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+" ";
+					String mailadresse = "";  // user_xyz.getUserAccount().getEmail();
 					
 					System.out.println(link);
 					
 					//Mail senden: 
-					try {
-						Mailsenden(user_xyz.getUserAccount().getEmail(),"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+				/*	try {
+						Mailsenden(mailadresse,"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
 						System.out.println("Mail versandt");
 					} catch (MessagingException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}     
+					}     */
 					
 					user_xyz.setRegistrationstate(8); //8 ~ Aktivierungsmail versandt.
 					userRepository.save(user_xyz);
