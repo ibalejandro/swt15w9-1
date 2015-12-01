@@ -2,6 +2,9 @@ package app.controller;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.MessageDigest;
@@ -110,28 +113,44 @@ public class CreateNewUser {
 
 	@RequestMapping({"/new_user_aboutuser1/user/{user}"})
 	public String new_user1(@PathVariable String user){
-      return "new_user_aboutuser1";
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
+		return "new_user_aboutuser1";
 
 	}
 
 	@RequestMapping({"/new_user_aboutuser2"})
 	public String new_user2(){
-      return "redirect:new_user_aboutuser1";
+		return "redirect:new_user_aboutuser1";
 	}
 
 	@RequestMapping({"/new_user_aboutuser2a/user/{user}"})
 	public String new_user2a(@PathVariable String user){
-      return "/new_user_aboutuser2a";
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
+		return "/new_user_aboutuser2a";
 	}
 
 	@RequestMapping({"/new_user_aboutuser2b/user/{user}"})
 	public String new_user2b(@PathVariable String user){
-      return "/new_user_aboutuser2b";
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
+		return "/new_user_aboutuser2b";
 	}
 	
 	@RequestMapping({"/new_user_language_origin/user/{user}"})
 	public String new_user_language_origin(@PathVariable String user){
-      return "/new_user_language_origin";
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
+		}
+		return "/new_user_language_origin";
 	}
 
 	@RequestMapping(value = "/submit_captcha")
@@ -140,9 +159,14 @@ public class CreateNewUser {
 		}
 	
 	@RequestMapping(value = "/reCAPTCHA/user/{user}")
-	public String show_reCAPTCHA_user(@PathVariable String user){
-	      return "/reCAPTCHA_User";
+	public String show_reCAPTCHA_user(@PathVariable String user)
+	{
+		if (!userAccountManager.findByUsername(user).isPresent())
+		{
+			return "redirect:/";
 		}
+		return "/reCAPTCHA_User";
+	}
 
 	@RequestMapping(value = "/reCAPTCHA-TEST")
 	public String show_reCAPTCHA(){
@@ -189,13 +213,49 @@ public class CreateNewUser {
 
 	}
 
-
-	
+/*
+	private boolean Propladen() throws IOException
+	{
+		String result = "";
+		InputStream inputStream = null;
+	 
+			try {
+				Properties prop = new Properties();
+				String propFileName = "application.properties";
+	 
+				inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+	 
+				if (inputStream != null) {
+					prop.load(inputStream);
+				} else {
+					throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+				}
+	 
+				Date time = new Date(System.currentTimeMillis());
+	 
+				// get the property value and print it out
+				String host = prop.getProperty("spring.mail.host");
+				String port = prop.getProperty("spring.mail.port");
+				String username = prop.getProperty("spring.mail.username");
+				String password = prop.getProperty("spring.mail.password");
+	 
+				result = "Company List = " + host + ", " + port + ", " + username + ", " + password;
+				System.out.println(result);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e);
+			} finally {
+				inputStream.close();
+			}
+			return true;
+		}
+*/
 	
 	/*
 	@Autowired
 	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException
 	{
+		
+		
 		
 		String mailhost = "smtp.gmail.com"; 			//Aus application.properties auslesen.
 		String mailusername = "***"; 	//Aus application.properties auslesen.
@@ -342,6 +402,13 @@ public class CreateNewUser {
 					String mailtext = "<h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" <br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+" ";
 					
 					System.out.println(link);
+					/*
+					try {
+						Propladen();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} */
 					
 					//Mail senden: 
 				/*		try {
@@ -369,8 +436,11 @@ public class CreateNewUser {
 		}
 	}
 	                         
-	@RequestMapping(value = "/activation/user/{user}/{textactivationkey}", method = RequestMethod.GET)
-	public String recieve_activationkey(@PathVariable String user, @PathVariable String textactivationkey){
+	@RequestMapping(value = "/activation/user/{user_temp}/{textactivationkey_temp}", method = RequestMethod.GET)
+	public String recieve_activationkey(@PathVariable String user_temp, @PathVariable String textactivationkey_temp){
+		
+		String user = user_temp.replace("{", "").replace("}", "");
+		String textactivationkey = textactivationkey_temp.replace("{", "").replace("}", "");
 		
 		if (!userAccountManager.findByUsername(user).isPresent())
 		{
