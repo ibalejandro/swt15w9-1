@@ -214,7 +214,7 @@ public class CreateNewUser {
 	}
 
 
-	
+	/*
 	@Autowired
 	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException, IOException
 	{
@@ -284,8 +284,10 @@ public class CreateNewUser {
 	    transport.close();
 		
 		return;
-		
+		 
 	}   
+	*/
+	
 	
 	public static String sha256(String base) {
         try{
