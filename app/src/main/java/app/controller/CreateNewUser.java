@@ -172,6 +172,16 @@ public class CreateNewUser {
       return "/reCAPTCHA";
 
 	}
+	
+	@RequestMapping({"/activationmail_gesendet"})
+	public String activationmail_gesendet(){
+		return "/activationmail_gesendet";
+	}
+	
+	@RequestMapping({"/activationmail_local"})
+	public String activationmail_local(){
+		return "/activationmail_local";
+	}
 
 	private String sendPost(String CaptchaResponse, String Secret) throws Exception {
 
@@ -424,8 +434,15 @@ public class CreateNewUser {
 					userRepository.save(user_xyz);
 				
 					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
-					return "/activationmail_gesended";
-		            
+					
+					if (!mailadresse.equals("test@test.test"))
+					{
+						return "redirect:/activationmail_gesended";
+					}	
+					else
+					{
+						return "redirect:/activationmail_local";
+					}
 				}
 				return "redirect:/";
 				
@@ -574,6 +591,11 @@ public class CreateNewUser {
 		{
 			return false;	
 		}
+		
+	/*	if (email.equals("test@test.test"))
+		{
+			return false;	
+		}	*/
 		
 		try {
 			//
