@@ -99,8 +99,8 @@ public class GoodsOfferController {
 
   	///////////////////////////////////////////////////hinzufügen in User:
   	user.addGood(savedGood);
+  	userRepository.save(user);
   	////////////////////////////////////////////////////////////end
-
   	model.addAttribute("result", savedGood);
   	return "offeredGood";
   }

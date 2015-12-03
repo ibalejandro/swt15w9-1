@@ -4,27 +4,20 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
-import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
-
 import app.controller.GoodsOfferController;
-import app.model.Address;
 import app.model.GoodEntity;
+import app.model.TagEntity;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.GoodsRepository;
+import app.repository.TagsRepository;
 
 public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegrationTests {
 
@@ -32,39 +25,36 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
   private static int iterableSize = 2;
   
   @Autowired GoodsOfferController controller;
-  @Autowired GoodsRepository repository;
+  @Autowired GoodsRepository goodsRepository;
+  @Autowired TagsRepository tagsRepository;
   @Autowired UserRepository userRepository;
   @Autowired UserAccountManager userAccountManager;
   
   @Before
   public void createGoodEntities() {
-    //long userId = 1L;////////////////////////Korrektor aufgrund Konstruktoränderung:
-	User userId= userRepository.findByUserAccount(userAccountManager.findByUsername("Lisa").get());//funktioniert irgendwie nicht
-	
-
-    ////////////////////////////////////end
-	
-    Set<String> tags1 = new HashSet<String>(Arrays.asList("Transport", "Kids"));
-    String picLink1 = "http://i.imgur.com/C2csOAA.jpg";
-    String picLink2 = "http://i.imgur.com/Xr50D6D.jpg";
-    good1 = new GoodEntity("Bicycle", "This bicycle is for girls under 12 years"
-                           + " old. It's pink and purple", tags1, picLink1, userId);
+    String name1 = "Jacket";
+    String name2 = "Beautiful Bear";
+    String description1 = "The jacket is for men. It's black with a gray hood";
+    String description2 = "A beautiful little bear for beautiful little girls";
+    TagEntity tag1 = new TagEntity("Clothes, Shoes and Accesories");
+    TagEntity tag2 = new TagEntity("Dolls & Bears");
+    String picture1 = "http://i.imgur.com/C2csOAA.jpg";
+    String picture2 = "http://i.imgur.com/Xr50D6D.jpg";
+    User user = userRepository.findByUserAccount(userAccountManager
+                                                 .findByUsername("Lisa").get());
     
-    Set<String> tags2 = new HashSet<String>
-                        (Arrays.asList("Winter", "Men", "Clothes"));
-    good2 = new GoodEntity("Jacket", "The jacket is for men. It's black with a"
-                           + " gray hood", tags2, picLink2, userId);
+    good1 = new GoodEntity(name1, description1, tag1, picture1, user);
+    good2 = new GoodEntity(name2, description2, tag2, picture2, user);
     
-    repository.save(good1);
-    repository.save(good2);
+    tagsRepository.save(tag1);
+    tagsRepository.save(tag2);
   }
   
-  /*
   @Test
   public void testSaveGood() throws Exception {
     mvc.perform(post("/offeredGood").param("name", good1.getName())
                 .param("description", good1.getDescription())
-                .param("tags", good1.getTagsAsString()))
+                .param("tagId", String.valueOf(good1.getTag().getId())))
    .andExpect(status().isOk())
    .andExpect(model().attribute("result", is(not(emptyIterable()))))
    .andExpect
@@ -74,11 +64,24 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("description", Matchers.equalTo
-                                            (good1.getDescription()))));
+                                            (good1.getDescription()))))
+    .andExpect
+    (model().attribute("result",
+                       Matchers.hasProperty("tag", Matchers.equalTo
+                                            (good1.getTag()))))
+    .andExpect
+    (model().attribute("result",
+                       Matchers.hasProperty("picture", Matchers.equalTo
+                                            (good1.getPicture()))))
+    .andExpect
+    (model().attribute("result",
+                       Matchers.hasProperty("user", Matchers.equalTo
+                                            (good1.getUser()))));
+    
     
     mvc.perform(post("/offeredGood").param("name", good2.getName())
                 .param("description", good2.getDescription())
-                .param("tags", good2.getTagsAsString()))
+                .param("tags", String.valueOf(good2.getTag().getId())))
     .andExpect(status().isOk())
     .andExpect(model().attribute("result", is(not(emptyIterable()))))
     .andExpect
@@ -88,14 +91,24 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("description", Matchers.equalTo
-                                            (good2.getDescription()))));
+                                            (good2.getDescription()))))
+    .andExpect
+    (model().attribute("result",
+                       Matchers.hasProperty("tag", Matchers.equalTo
+                                            (good2.getTag()))))
+    .andExpect
+    (model().attribute("result",
+                       Matchers.hasProperty("picture", Matchers.equalTo
+                                            (good2.getPicture()))))
+    .andExpect
+    (model().attribute("result",
+                       Matchers.hasProperty("user", Matchers.equalTo
+                                            (good2.getUser()))));
   }
-  */
   
   @Test
   @SuppressWarnings("unchecked")
   public void testListAllGoods() {
-
     Model model = new ExtendedModelMap();
 
     String returnedView = controller.listAllGoods(model);

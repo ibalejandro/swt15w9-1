@@ -114,8 +114,8 @@ public class GoodEntity implements Serializable {
   public String toString() {
     return String.format("{\"id\": \"%d\", \"name\": \"%s\", "
                          + "\"description\": \"%s\", \"tag\": \"%s\", "
-                         + "\"picture\": \"%s\", \"user\": \"%d\"}", id, name, 
-                         description, tag.toString(), user.toString());
+                         + "\"picture\": \"%s\", \"user\": \"%s\"}", id, name, 
+                         description, tag.toString(), picture, user.toString());
   }
 
   /**
