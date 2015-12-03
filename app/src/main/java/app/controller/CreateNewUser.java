@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Properties;
@@ -30,9 +31,7 @@ import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,14 +54,14 @@ import app.model.UserRepository;
 public class CreateNewUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
-    //private final MailSender mailSender;
+    private final MailSender mailSender;
 
 	/**
 	   * Autowire.
 	   * @param CreateNewUser
 	   */
 	@Autowired
-	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository /*, MailSender mailSender*/) {
+	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository , MailSender mailSender) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -70,7 +69,7 @@ public class CreateNewUser {
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
 		
-		//this.mailSender = mailSender;
+		this.mailSender = mailSender;
 	}
 	
 	int zufallzahl_1, zufallzahl_2; //Zufallszahlen
@@ -173,6 +172,16 @@ public class CreateNewUser {
       return "/reCAPTCHA";
 
 	}
+	
+	@RequestMapping({"/activationmail_gesendet"})
+	public String activationmail_gesendet(){
+		return "/activationmail_gesendet";
+	}
+	
+	@RequestMapping({"/activationmail_local"})
+	public String activationmail_local(){
+		return "/activationmail_local";
+	}
 
 	private String sendPost(String CaptchaResponse, String Secret) throws Exception {
 
@@ -214,8 +223,8 @@ public class CreateNewUser {
 	}
 
 
-	/*
-	@Autowired
+	
+	//@Autowired
 	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException, IOException
 	{
 		
@@ -275,7 +284,7 @@ public class CreateNewUser {
 	    msg.setRecipients(Message.RecipientType.TO, recipient);
 	    msg.setSubject(Subject);
 	    msg.setSentDate(new Date());
-	    msg.setText(Text);
+	    msg.setContent(Text, "text/html; charset=utf-8");
 
 	    Transport transport = session.getTransport("smtp");
 
@@ -286,7 +295,7 @@ public class CreateNewUser {
 		return;
 		 
 	}   
-	*/
+	
 	
 	
 	public static String sha256(String base) {
@@ -398,27 +407,42 @@ public class CreateNewUser {
 					
 					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());	
 					
-					String link="/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+user_xyz.getActivationkey()+"}";
-					String mailtext = "<h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" <br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+" ";
-					String mailadresse = "";  // user_xyz.getUserAccount().getEmail();
+					Date zeitstempel = new Date();
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy HH:mm:ss"
+					// simpleDateFormat.format(zeitstempel)
+					
+					String domain 	= "http://localhost:8080";
+					String link   	= domain + "/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+sha256(user_xyz.getActivationkey()+simpleDateFormat.format(zeitstempel)+(user_xyz.getRegistrationstate()+1))+"}";
+					String mailtext = "<html> <head> </head> <body> <h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+"  </body> </html>";
+					String mailadresse = user_xyz.getUserAccount().getEmail();
 					
 					System.out.println(link);
 					
-					//Mail senden: 
-				/*	try {
-						Mailsenden(mailadresse,"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
-						System.out.println("Mail versandt");
-					} catch (MessagingException | IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}     */
+					if (!mailadresse.equals("test@test.test"))					
+					{
+						//Mail senden: 
+						try {
+							Mailsenden(mailadresse,"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+							System.out.println("Mail versandt");
+						} catch (MessagingException | IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}   
+					}
 					
 					user_xyz.setRegistrationstate(8); //8 ~ Aktivierungsmail versandt.
 					userRepository.save(user_xyz);
 				
 					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
-					return "/activationmail_gesended";
-		            
+					
+					if (!mailadresse.equals("test@test.test"))
+					{
+						return "redirect:/activationmail_gesended";
+					}	
+					else
+					{
+						return "redirect:/activationmail_local";
+					}
 				}
 				return "redirect:/";
 				
@@ -451,7 +475,17 @@ public class CreateNewUser {
 				return "redirect:/";
 			}
 
-			if (user_xyz.getActivationkey().equals(textactivationkey))
+			if (user_xyz.isActivated())
+			{
+				System.out.println("Nutzer bereits aktiviert.");
+				return "redirect:/";
+			}	
+			
+			Date zeitstempel = new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy HH:mm:ss"
+			// simpleDateFormat.format(zeitstempel)
+			
+			if (sha256(user_xyz.getActivationkey()+simpleDateFormat.format(zeitstempel)+user_xyz.getRegistrationstate()).equals(textactivationkey))
 			{
 			    user_xyz.Activate();
 			    System.out.println(user_xyz.getUserAccount().getUsername()+" wurde aktiviert.");
@@ -557,6 +591,11 @@ public class CreateNewUser {
 		{
 			return false;	
 		}
+		
+	/*	if (email.equals("test@test.test"))
+		{
+			return false;	
+		}	*/
 		
 		try {
 			//
