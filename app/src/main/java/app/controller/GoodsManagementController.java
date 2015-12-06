@@ -63,14 +63,9 @@ public class GoodsManagementController {
      * error page.
      */
     if (!userAccount.isPresent()) return "noUser";
-	  /* Frederike's code */
 		User loggedUser = userRepository.findByUserAccount(userAccount.get());
-		//model.addAttribute("result", loggedUser.getGoods());
-		//System.out.println("LoggedUser.getGoods(): "
-		//                   + loggedUser.getGoods().toString());
-		/* */
-
-		model.addAttribute("result", goodsRepository.findByUser(loggedUser));
+		
+		model.addAttribute("result", loggedUser.getGoods());
 		return "myOfferedGoods";
 	}
 
