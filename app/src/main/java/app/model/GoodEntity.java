@@ -91,7 +91,7 @@ public class GoodEntity implements Serializable {
 			
 			double scaling;
 			if(img.getWidth()!=128){
-				scaling = img.getWidth()/128;
+				scaling = 128/img.getWidth();
 			}else{
 				scaling = 1;
 			}
