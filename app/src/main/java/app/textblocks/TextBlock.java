@@ -88,7 +88,7 @@ public class TextBlock {
      * @return html checkbox
      */
     public String makeSelectedInput() {
-        return "<input type=\"checkbox\" name=\"" + makeSelectedFieldID() + " />";
+        return "<input type=\"checkbox\" name=\"" + makeSelectedFieldID() + "\" />";
     }
 
     /**
