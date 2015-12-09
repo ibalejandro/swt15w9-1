@@ -14,13 +14,9 @@ import javax.persistence.Table;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.net.URL;
-import java.awt.image.ImageObserver;
-import java.awt.geom.AffineTransform;
 
 /**
 * <h1>GoodEntity</h1>
@@ -41,10 +37,6 @@ public class GoodEntity implements Serializable {
 	
 	private String name;
 	private String description;
-	
-	/* Ferdinand's Code */
-	
-	private static final ImageObserver observer = (img, infoflags, x,y,width,height)->true;
 
 	/*
    * The JPA created a technology named Lazy Loading to the classes 
@@ -88,19 +80,7 @@ public class GoodEntity implements Serializable {
 			//System.out.println(hpath.toAbsolutePath().toString());
 			Path tempPic = Files.createTempFile("picture", ".jpg").toAbsolutePath();
 			BufferedImage img = ImageIO.read(srcPic);
-			
-			double scaling;
-			if(img.getWidth()!=128){
-				scaling = img.getWidth()/128;
-			}else{
-				scaling = 1;
-			}
-			
-			BufferedImage imgOut = new BufferedImage((int)(scaling*img.getWidth()),(int)(scaling*img.getHeight()),img.getType());
-			Graphics2D g = imgOut.createGraphics();
-			AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
-			g.drawImage(img, transform, observer);
-			ImageIO.write(imgOut, "jpg", tempPic.toFile());
+			ImageIO.write(img, "jpg", tempPic.toFile());
 			String h = tempPic.toString();
 			h = h.replace("\\", "/");
 			if (!Paths.get(h).toFile().canRead()) {
