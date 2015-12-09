@@ -1,7 +1,6 @@
 package app.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -88,48 +87,52 @@ public class GoodEntity implements Serializable {
     this.description = description;
     this.tag = tag;
     
-    /* Ferdinand's code */
-		//Erschaffung eines temporären Files, um das Bild zu speichern.
-		try{
-			URL srcPic = new URL(picture);
-			//Path hpath = Paths.get("src/main/resources/static/images");
-			//System.out.println(hpath.toAbsolutePath().toString());
-			//Path tempPic = Files.createTempFile("picture", ".jpg").toAbsolutePath();
-			BufferedImage img = ImageIO.read(srcPic);
-			//ImageIO.write(img, "jpg", tempPic.toFile());
-			
-			double scaling;
-			if(img.getWidth()!=128){
-				scaling = 128.0/img.getWidth();
-			}else{
-				scaling = 1.0;
-			}
-			
-			BufferedImage imgOut = new BufferedImage((int)(scaling*((double)img.getWidth())),(int)(scaling*((double)img.getHeight())),img.getType());
-			Graphics2D g = imgOut.createGraphics();
-			AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
-			g.drawImage(img, transform, observer);
-			
-			ByteArrayOutputStream imgoutput = new ByteArrayOutputStream();
-			ImageIO.write(imgOut, "jpg", imgoutput);
-			this.picture = imgoutput.toByteArray();
-			/*ImageIO.write(imgOut, "jpg", tempPic.toFile());
-			String h = tempPic.toString();
-			h = h.replace("\\", "/");
-			if (!Paths.get(h).toFile().canRead()) {
-			  System.out.println("Ich kanns nicht lesen!");
-			}
-			h = "file:///" + h;
-			this.picture = h;*/
-			
-		} 
-		catch(Exception e) {
-			throw new IllegalStateException(e.getMessage(), e);
-		}
-		/* */
+    this.picture = createPicture(picture);
 		
 		this.user = user;
   }
+	 
+	public static byte[] createPicture(String pictureLink) {
+	  /* Ferdinand's code */
+    //Erschaffung eines temporären Files, um das Bild zu speichern.
+    try{
+      URL srcPic = new URL(pictureLink);
+      //Path hpath = Paths.get("src/main/resources/static/images");
+      //System.out.println(hpath.toAbsolutePath().toString());
+      //Path tempPic = Files.createTempFile("picture", ".jpg").toAbsolutePath();
+      BufferedImage img = ImageIO.read(srcPic);
+      //ImageIO.write(img, "jpg", tempPic.toFile());
+      
+      double scaling;
+      if(img.getWidth()!=128){
+        scaling = 128.0/img.getWidth();
+      }else{
+        scaling = 1.0;
+      }
+      
+      BufferedImage imgOut = new BufferedImage((int)(scaling*((double)img.getWidth())),(int)(scaling*((double)img.getHeight())),img.getType());
+      Graphics2D g = imgOut.createGraphics();
+      AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
+      g.drawImage(img, transform, observer);
+      
+      ByteArrayOutputStream imgoutput = new ByteArrayOutputStream();
+      ImageIO.write(imgOut, "jpg", imgoutput);
+      return imgoutput.toByteArray();
+      /*ImageIO.write(imgOut, "jpg", tempPic.toFile());
+      String h = tempPic.toString();
+      h = h.replace("\\", "/");
+      if (!Paths.get(h).toFile().canRead()) {
+        System.out.println("Ich kanns nicht lesen!");
+      }
+      h = "file:///" + h;
+      this.picture = h;*/
+      
+    } 
+    catch(Exception e) {
+      throw new IllegalStateException(e.getMessage(), e);
+    }
+    /* */
+	}
 	
 	 /**
 	   * This method builds an empty and invalid GoodEntity
@@ -222,7 +225,7 @@ public class GoodEntity implements Serializable {
   
   /**
    * Getter.
-   * @return String The good's picture link
+   * @return byte[] The good's picture
    */
   public byte[] getPicture() {
     return picture;
@@ -230,7 +233,7 @@ public class GoodEntity implements Serializable {
   
   /**
    * Setter.
-   * @param String The good's picture link
+   * @param byte[] The good's picture
    * @return Nothing
    */
   public void setPicture(byte[] picture) {

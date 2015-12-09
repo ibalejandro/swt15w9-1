@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import app.repository.TagsRepository;
 import app.model.GoodEntity;
 import app.model.TagEntity;
@@ -77,6 +76,8 @@ public class GoodsManagementController {
    * retrieves the particular good that the user wants to update.
    * @param HttpServletRequest The request with its information
    * @param Model The model to add response's attributes
+   * @param Optional<UserAccount> The user's account who wants to update one of
+   *                              his offered goods
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -132,7 +133,7 @@ public class GoodsManagementController {
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
   	goodToBeUpdated.setTag(tag);
-  	goodToBeUpdated.setPicture(picture.getBytes());
+  	goodToBeUpdated.setPicture(GoodEntity.createPicture(picture));
 		goodToBeUpdated.setUser(loggedUser);
 		
 		loggedUser.addGood(goodToBeUpdated);
@@ -151,6 +152,8 @@ public class GoodsManagementController {
    * the good that the user wants to delete and then deletes it.
    * @param HttpServletRequest The request with its information
    * @param Model The model to add response's attributes
+   * @param Optional<UserAccount> The user's account who wants to delete one of
+   *                              his offered goods
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/deletedGood", method = RequestMethod.POST)
