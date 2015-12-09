@@ -15,7 +15,6 @@ import app.model.User;
 import app.model.UserRepository;
 import app.repository.GoodsRepository;
 import app.repository.TagsRepository;
-
 /**
 * <h1>GoodsOfferController</h1>
 * The GoodsOfferController is used to offer and view offered goods by the users.
