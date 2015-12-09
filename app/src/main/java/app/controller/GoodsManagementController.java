@@ -80,9 +80,12 @@ public class GoodsManagementController {
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-  public String showGoodToUpdate(HttpServletRequest request, Model model) {
+  public String showGoodToUpdate(HttpServletRequest request, Model model, 
+                                 @LoggedIn Optional<UserAccount> userAccount) {
 	  long id = Long.parseLong(request.getParameter("id"));
 
+	  if (!userAccount.isPresent()) return "noUser";
+	  
 		GoodEntity good = goodsRepository.findOne(id);
 
 		// If the entity doesn't exist, an empty entity is created.
@@ -113,23 +116,27 @@ public class GoodsManagementController {
   public String updateGood(HttpServletRequest request, Model model,
                            @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
-
-		GoodEntity goodToBeUpdated = goodsRepository.findOne(id);
-
 		String name = request.getParameter("name");
     String description = request.getParameter("description");
     long tagId = Long.parseLong(request.getParameter("tagId"));
+    String picture = request.getParameter("picture");
 
+    ///////////////////////////////Zuordnung User=Aktiver User
+    if (!userAccount.isPresent()) return "noUser";
+    User loggedUser = userRepository.findByUserAccount(userAccount.get());
+    ////////////////////////////////////////end
+    
+    GoodEntity goodToBeUpdated = goodsRepository.findOne(id);
     TagEntity tag = tagsRepository.findOne(tagId);
+    
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
   	goodToBeUpdated.setTag(tag);
-
-  	///////////////////////////////Zuordnung User=Aktiver User
-  	if (!userAccount.isPresent()) return "noUser";
-		User loggedUser = userRepository.findByUserAccount(userAccount.get());
+  	goodToBeUpdated.setPicture(picture);
 		goodToBeUpdated.setUser(loggedUser);
-  	////////////////////////////////////////end
+		
+		loggedUser.addGood(goodToBeUpdated);
+    userRepository.save(loggedUser);
 
   	/*
   	 * Calling save() on an object with predefined id will update the
@@ -147,13 +154,21 @@ public class GoodsManagementController {
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/deletedGood", method = RequestMethod.POST)
-  public String deleteGood(HttpServletRequest request, Model model) {
+  public String deleteGood(HttpServletRequest request, Model model, 
+                           @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 
+		if (!userAccount.isPresent()) return "noUser";
+		User loggedUser = userRepository.findByUserAccount(userAccount.get());
+    
 		GoodEntity good = goodsRepository.findOne(id);
 
 		// This statement check if the entity to delete actually exists.
-		if (good != null) goodsRepository.delete(id);
+		if (good != null) {
+		  loggedUser.removeGood(good);
+	    userRepository.save(loggedUser);
+		  goodsRepository.delete(id);
+		}
     // If the entity doesn't exist, an empty entity is returned.
   	else good = GoodEntity.createEmptyGood();
 

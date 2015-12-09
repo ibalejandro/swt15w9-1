@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.util.Assert;
 
@@ -69,13 +67,32 @@ public class User implements Serializable{
 	}
 	
 	/**
-	   * Adds a GoodEntity to the Set goods.
-	   * @param GoodEntity The good to be added
+	   * Adds a GoodEntity to the Set goods or updates a GoodEntity if it was 
+	   * already saved.
+	   * @param GoodEntity The good to be added/updated
 	   * @return Nothing
 	   */
 	public void addGood(GoodEntity good){
+	  // It is used to eliminate a good if it already exists.
+	  removeGood(good);
+	  
 		goods.add(good);
 	}
+	
+	/**
+   * Removes a GoodEntity from the Set goods.
+   * @param GoodEntity The good to be removed
+   * @return Nothing
+   */
+  public void removeGood(GoodEntity good){
+    for (GoodEntity g : goods) {
+      // It means that the user wants to update one of its offered goods.
+      if (g.getId() == good.getId()) {
+        goods.remove(g);
+        break;
+      }
+    }
+  }
 	
 	/**
 	   * Getter.

@@ -16,14 +16,17 @@ import javax.persistence.Table;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.net.URL;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+<<<<<<< HEAD
 import java.awt.image.ImageObserver;
 import java.awt.geom.AffineTransform;
 import java.io.ByteArrayOutputStream;
+=======
+>>>>>>> origin/master
 
 /**
 * <h1>GoodEntity</h1>
@@ -42,12 +45,13 @@ public class GoodEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long id;
 	
-	private String name;
-	private String description;
-	
 	/* Ferdinand's Code */
 	
 	private static final ImageObserver observer = (img, infoflags, x,y,width,height)->true;
+	
+	
+	private String name;
+	private String description;
 
 	/*
    * The JPA created a technology named Lazy Loading to the classes 
@@ -92,6 +96,7 @@ public class GoodEntity implements Serializable {
 			//System.out.println(hpath.toAbsolutePath().toString());
 			//Path tempPic = Files.createTempFile("picture", ".jpg").toAbsolutePath();
 			BufferedImage img = ImageIO.read(srcPic);
+			//ImageIO.write(img, "jpg", tempPic.toFile());
 			
 			double scaling;
 			if(img.getWidth()!=128){
