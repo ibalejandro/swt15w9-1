@@ -13,13 +13,15 @@
 	
 	<body>		
 		<th:block th:fragment="start">
-			<div class="startsite__login">
+		
+			<div class="startsite__pad"></div>
+			<div class="startsite__login" id="log">
 				<th:block th:include="login :: login"></th:block>
 			</div>
-			<div class="startsite__reg">
-			<!--	
+			<div class="startsite__reg" id="reg">
+			<!---->	
 				<th:block th:include="new_user :: reg"></th:block>
-			-->
+			<!-- -->
 			</div>
 		</th:block>
 		
