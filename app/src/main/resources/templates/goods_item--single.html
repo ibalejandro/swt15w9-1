@@ -10,13 +10,8 @@
 		<div th:fragment="item">
 			<div class="gooditem__body--single">
 				<div>
-<!--<<<<<<< HEAD
-					<label class="gooditem__label-?-single"> Bild </label>
-					<img th:src="${result.id+'/image'}" class="gooditem__text-?-single"/>
-======= -->
 					<label class="gooditem__label--single"> Picture </label>
-					<img th:src="${result.id+'/image'}" class="gooditem__text--single"/>
-<!-- >>>>>>> origin/master-->
+					<img th:src="${result.getId()+'/image'}" class="gooditem__text--single"/>
 				</div>								
 				<div>
 					<label class="gooditem__label--single"> Name </label>

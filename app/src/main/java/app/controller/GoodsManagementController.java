@@ -120,7 +120,7 @@ public class GoodsManagementController {
 		String name = request.getParameter("name");
     String description = request.getParameter("description");
     long tagId = Long.parseLong(request.getParameter("tagId"));
-    String picture = request.getParameter("picture");
+    //String picture = request.getParameter("picture");
 
     ///////////////////////////////Zuordnung User=Aktiver User
     if (!userAccount.isPresent()) return "noUser";
@@ -133,7 +133,7 @@ public class GoodsManagementController {
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
   	goodToBeUpdated.setTag(tag);
-  	goodToBeUpdated.setPicture(GoodEntity.createPicture(picture));
+  	//goodToBeUpdated.setPicture(GoodEntity.createPicture(picture));
 		goodToBeUpdated.setUser(loggedUser);
 		
 		loggedUser.addGood(goodToBeUpdated);
