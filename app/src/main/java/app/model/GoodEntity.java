@@ -21,12 +21,12 @@ import javax.imageio.ImageIO;
 import java.net.URL;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import java.awt.image.ImageObserver;
 import java.awt.geom.AffineTransform;
 import java.io.ByteArrayOutputStream;
-=======
->>>>>>> origin/master
+//=======
+//>>>>>>> origin/master
 
 /**
 * <h1>GoodEntity</h1>

@@ -132,7 +132,7 @@ public class GoodsManagementController {
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
   	goodToBeUpdated.setTag(tag);
-  	goodToBeUpdated.setPicture(picture);
+  	goodToBeUpdated.setPicture(picture.getBytes());
 		goodToBeUpdated.setUser(loggedUser);
 		
 		loggedUser.addGood(goodToBeUpdated);
