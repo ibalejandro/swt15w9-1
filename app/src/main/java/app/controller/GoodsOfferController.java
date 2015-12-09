@@ -87,6 +87,10 @@ public class GoodsOfferController {
 	  String description = request.getParameter("description");
   	long tagId = Long.parseLong(request.getParameter("tagId"));
   	String picture = request.getParameter("picture");
+  	
+  	System.out.println(name);
+  	System.out.println(description);
+  	System.out.println(picture);
 
   	//////////////////////////////////////////////suchen des aktiven Users:
   	if (!userAccount.isPresent()) return "noUser";

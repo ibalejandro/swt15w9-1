@@ -81,6 +81,19 @@ public class GoodEntity implements Serializable {
 			Path tempPic = Files.createTempFile("picture", ".jpg").toAbsolutePath();
 			BufferedImage img = ImageIO.read(srcPic);
 			ImageIO.write(img, "jpg", tempPic.toFile());
+			
+			double scaling;
+			if(img.getWidth()!=128){
+				scaling = 128/img.getWidth();
+			}else{
+				scaling = 1;
+			}
+			
+			BufferedImage imgOut = new BufferedImage((int)(scaling*img.getWidth()),(int)(scaling*img.getHeight()),img.getType());
+			Graphics2D g = imgOut.createGraphics();
+			AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
+			g.drawImage(img, transform, observer);
+			ImageIO.write(imgOut, "jpg", tempPic.toFile());
 			String h = tempPic.toString();
 			h = h.replace("\\", "/");
 			if (!Paths.get(h).toFile().canRead()) {

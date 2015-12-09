@@ -734,7 +734,7 @@ public class CreateNewUser {
 
 
 		UserAccount userAccount = userAccountManager.create(Username, Password,
-				new Role("ROLE_NORMALE"));
+				new Role("ROLE_NORMAL"));
 		userAccountManager.save(userAccount);
 		userAccount.setEmail(Mail);
 		userAccountManager.save(userAccount);
