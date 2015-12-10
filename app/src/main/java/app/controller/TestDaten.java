@@ -1,7 +1,7 @@
 package app.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
-
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -9,11 +9,12 @@ import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
 import app.model.Address;
+import app.model.TagEntity;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.DialogRepository;
+import app.repository.TagsRepository;
 
 @Component
 public class TestDaten implements DataInitializer {
@@ -21,33 +22,43 @@ public class TestDaten implements DataInitializer {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
 	private final DialogRepository dialogRepository;
+	private final TagsRepository tagsRepository;
 
 	@Autowired
-	public TestDaten(UserAccountManager userAccountManager, UserRepository userRepository,
-			DialogRepository dialogRepository) {
+	public TestDaten(UserAccountManager userAccountManager, 
+	                 UserRepository userRepository, 
+	                 DialogRepository dialogRepository, 
+	                 TagsRepository tagsRepository) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
 		Assert.notNull(dialogRepository, "DialogRepository must not be null!");
+		Assert.notNull(tagsRepository, "TagsRepository must not be null!");
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
 		this.dialogRepository = dialogRepository;
+		this.tagsRepository = tagsRepository;
 	}
 
 	@Override
 	public void initialize() {
 
-		initializeUsers(userAccountManager, userRepository, dialogRepository);
+		initializeUsers(userAccountManager, userRepository, dialogRepository, 
+		                tagsRepository);
 
 	}
 
-	private void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository, DialogRepository dialogRepository) {
+	private void initializeUsers(UserAccountManager userAccountManager, 
+	                             UserRepository userRepository, 
+	                             DialogRepository dialogRepository, 
+	                             TagsRepository tagsRepository) {
 
 		if (userAccountManager.findByUsername("boss").isPresent()) {
 			return;
 		}
 
-		UserAccount bossAccount = userAccountManager.create("admin", "123", new Role("ROLE_ADMIN"));
+		UserAccount bossAccount = userAccountManager
+		                          .create("admin", "123", new Role("ROLE_ADMIN"));
 		userAccountManager.save(bossAccount);
 
 		Role normalUserRole = new Role("ROLE_NORMAL");
@@ -82,5 +93,64 @@ public class TestDaten implements DataInitializer {
 		user1.addDialog(savedDialog);
 		user2.addDialog(savedDialog);
 		*/
+		
+		ArrayList<TagEntity> tags = createTags();
+		for (TagEntity tag : tags) tagsRepository.save(tag);
 	}
+	
+	/**
+   * This method creates the whole tags to save them in the database, so that 
+   * they can be accessible and the user can select one of them for his offers.
+   * @return ArrayList<TagEntity> A list with all available tags
+   */
+	public ArrayList<TagEntity> createTags() {
+	  ArrayList<TagEntity> tags = new ArrayList<>();
+	  
+	  TagEntity tag1 = new TagEntity("Baby");
+    TagEntity tag2 = new TagEntity("Books");
+    TagEntity tag3 = new TagEntity("Cameras & Photo");
+    TagEntity tag4 = new TagEntity("Cell Phones & Accesories");
+    TagEntity tag5 = new TagEntity("Clothes, Shoes and Accesories");
+    TagEntity tag6 = new TagEntity("Computers/Tablets & Networking");
+    TagEntity tag7 = new TagEntity("Consumer Electronics");
+    TagEntity tag8 = new TagEntity("Dolls & Bears");
+    TagEntity tag9 = new TagEntity("DVDs & Movies");
+    TagEntity tag10 = new TagEntity("Gift Cards & Coupons");
+    TagEntity tag11 = new TagEntity("Health & Beauty");
+    TagEntity tag12 = new TagEntity("Jewelry & Watches");
+    TagEntity tag13 = new TagEntity("Music");
+    TagEntity tag14 = new TagEntity("Musical Instruments and Gear");
+    TagEntity tag15 = new TagEntity("Pottery & Glass");
+    TagEntity tag16 = new TagEntity("Sporting Goods");
+    TagEntity tag17 = new TagEntity("Sports Mem, Cards & Fan Shop");
+    TagEntity tag18 = new TagEntity("Tickets & Experiences");
+    TagEntity tag19 = new TagEntity("Toys & Hobbies");
+    TagEntity tag20 = new TagEntity("Video Games & Consoles");
+    TagEntity tag21 = new TagEntity("Others");
+    
+    tags.add(tag1);
+    tags.add(tag2);
+    tags.add(tag3);
+    tags.add(tag4);
+    tags.add(tag5);
+    tags.add(tag6);
+    tags.add(tag7);
+    tags.add(tag8);
+    tags.add(tag9);
+    tags.add(tag10);
+    tags.add(tag11);
+    tags.add(tag12);
+    tags.add(tag13);
+    tags.add(tag14);
+    tags.add(tag15);
+    tags.add(tag16);
+    tags.add(tag17);
+    tags.add(tag18);
+    tags.add(tag19);
+    tags.add(tag20);
+    tags.add(tag21);
+    
+    return tags;
+	}
+	
 }

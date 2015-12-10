@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import app.model.TagEntity;
 import app.repository.TagsRepository;
 
+/**
+* <h1>TagsFillerController</h1>
+* The TagsFillerController is used to save the whole available tags in the 
+* database.
+*
+* @author Alejandro Sánchez Aristizábal
+* @since  10.12.2015
+*/
 @Controller
 public class TagsFillerController {
 
