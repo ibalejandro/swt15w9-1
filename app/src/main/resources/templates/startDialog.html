@@ -11,8 +11,20 @@
 			<div class="create">
 				<h1 class="create_title">New Dialog</h1>
 				
-				<form th:action="@{/newDialog}" method="post">
-				
+				<form th:action="@{/startDialog}" method="post">
+					<div>
+						<label class="create__label">Title:</label>
+						<input type="text" name="title" />
+					</div>
+					
+					<div>
+						<label class="create__label">Participant:</label>
+						<input type="text" name="participant" />
+					</div>
+					
+					<div>
+						<input class="button" type="submit" value="Begin" />
+					</div>
 				</form>
 			</div>
 		</div>
