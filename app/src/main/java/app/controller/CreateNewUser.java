@@ -800,6 +800,8 @@ public class CreateNewUser {
 
 		System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
 		
+		System.out.println("/not_activated/user/"+user_xyz.getUserAccount().getUsername() );
+		
 		//Step 2
 		
 		System.out.println(Name);
@@ -814,14 +816,23 @@ public class CreateNewUser {
 
 			user_xyz.getUserAccount().setLastname(Name);
 			user_xyz.getUserAccount().setFirstname(Firstname);
-			user_xyz.setAdresstyp(Adresstyp);
+			
+			if (Adresstyp.equals("refugee"))
+			{
+				user_xyz.setAdresstyp("Refugees_home");
+			}
+			
+			if (Adresstyp.equals("helper"))
+			{
+				user_xyz.setAdresstyp("Wohnung");
+			}
+			
 			userAccountManager.save(user_xyz.getUserAccount());
 			
 			user_xyz.setRegistrationstate(2);
 			userRepository.save(user_xyz);
 
 			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
-			System.out.println("/not_activated/user/"+user_xyz.getUserAccount().getUsername() );
 			
 			String Postcode_N;
 			String City_N;
