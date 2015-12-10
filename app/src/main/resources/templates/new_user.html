@@ -1,0 +1,194 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<th:block th:include="navigation :: navigation"></th:block>
+		<div class="startsite__reg" id="reg">
+			<th:blcok th:fragment="reg">
+				<div class="reg">
+					<div class="row small-uncollapse">
+					
+						<div class="small-6 columns">
+							<h1 class="headline">Erstelle dein Nutzerkonto</h1>
+						</div>
+					
+						<div class="small-6 columns">
+							<label class="link--right"><a th:href="@{/new_user}" onclick="return toggle('reg');" >Login.</a></label>
+						</div>
+						<div class="medium-12 columns"></div>
+						
+						<form action="/create_new_user" method="post">
+						
+							<div class="medium-6 small-12 columns">
+								<div class="row">
+									<div class="large-3 small-12 columns">
+										<label class="form__label" for="firstnameIN">Vorname:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="firstnameIN" type="text"/>
+									</div>
+									
+									<div class="large-3 small-12 columns">
+										<label class="form__label" for="nameIN">Nachname:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="nameIN" type="text"/>
+									</div>
+									
+									<div class="large-3 small-12 columns">
+										<label class="form__label" for="mailIN">E-Mail:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="mailIN" type="email"/>
+									</div>
+									
+									<div class="large-3 small-12 columns">
+										<label class="form__label" for="usernameIN">Nutzername:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="usernameIN" type="text"/>
+									</div>
+									
+									<div class="large-3 small-12 columns">
+										<!--  Mindestens 8 Zeichen, min 1 Kleinbuchstabe, min 1 Gro&szlig;bruchstabe, min 1 Zahl, min 1 Sonderzeichen Es wird ein Passwort mit 12 oder mehr Zeichen empfohlen. -->
+										<label class="form__label" for="passwordIN">Passwort:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="passwordIN" type="password"/>
+									</div>
+									
+									<div class="large-3 small-12 columns">
+										<label class="form__label--paddingOFF" for="repasswordIN">Wiederhole Passwort:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="repasswordIN" type="password"/>
+									</div>
+									
+									<div class="large-3 small-12 columns">
+										<label class="form__label">Muttersprache:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="nativelanguage" type="text"/>
+									</div>
+									
+									<div class="large-3 small-12 columns">
+										<label class="form__label--paddingOFF">andere Sprachen:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="otherlanguages" type="text"/>
+									</div>
+									
+									<div class="large-3 small-12 columns">
+										<label class="form__label">Herkunftsland:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<input name="origin" type="text"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="medium-6 small-12 columns">
+								<div class="row">
+								
+									<div class="small-12 columns">
+										<label class="form__label--sup">Wohnungstyp:</label>
+									</div>
+									
+									<input id="hh" type="radio" name="wohnen" value="helper" checked=""/>
+									<label class="form__label" for="hh">Wohnung</label>
+									
+									<input type="radio" id="fh" name="wohnen" value="refugee"/>
+									<label class="form__label" for="fh">Flüchtlingsheim</label>
+									
+									<div class="new__user__helper">
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Stra&szlig;e:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="street" type="text"/>
+										</div>
+										
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Hausnummer:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="housenr" type="text"/>
+										</div>
+										
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Postleitzahl:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="postcode" type="text"/>
+										</div>
+									
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Stadt:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="city" type="text"/>
+										</div>
+									</div>
+									
+									<div class="new__user__refugee">
+										<div class="large-3 small-12 columns">
+											<label class="form__label--paddingOFF">Fl&uuml;chtlingsheim Name:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="flh_name" type="text"/>
+										</div>
+									
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Postleitzahl:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="postcode" type="text"/>
+										</div>
+									
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Stadt:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="city" type="text"/>
+										</div>
+									
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Stadtteil:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="citypart" type="text"/>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							
+							<div class="small-12 colums"></div>
+						
+						<div class="medium-6 small-12 columns">
+							<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
+						</div>
+						
+						<div class="medium-6 small-12 columns">
+							<div class="button--right">
+								<input class="button" type="submit" value="Create User" />
+							</div>
+						</div>
+						</form>
+						
+						
+						
+					</div>
+				</div>
+			</th:blcok>
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+	
+</html>

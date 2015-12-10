@@ -13,51 +13,50 @@
 	</head>
 	
 	<body>
-	
-		<div th:include="navigation :: navigation"></div>
-		
-		<th:block th:fragment="login">
-			<div class="login" id="log">
-				<div class="row">
-					<div class="large-6 small-6 columns">
-						<h1 class="login__headline">Login</h1>
-					</div>
-					
-					<div class="large-6 small-6 columns">
-						<label class="login__link--right"><a th:href="@{/new_user_data}" onclick="return toggle('log');">Noch nicht registriert?</a></label>
-					</div>
-					
-					<form th:action="@{/login}" method="post">
-						<div class = "large-12 columns">
-							<label th:if="${loginError}" class="login__error">Wrong Username or Password!</label>
+		<div class="startsite__login" id="log">
+			<th:block th:fragment="login">
+				<div class="login">
+					<div class="row">
+						<div class="large-6 small-6 columns">
+							<h1 class="headline">Login</h1>
 						</div>
 						
-						<div class="large-1 small-12 columns"> 
-							<label class="login__label" for="username">Username:</label> 
-						</div>
-						<div class="large-5 small-12 columns">
-							<input class="login__input" type="text" id="username" name="username" autofocus="autofocus"/>
-						</div>
-					
-						<div class="large-1 small-12 columns">
-							<label class="login__label" for="password">Password:</label>
-						</div>
-						<div class="large-5 small-12 columns">
-							<input class="login__input" type="password" id="password" name="password" />
+						<div class="large-6 small-6 columns">
+							<label class="link--right"><a th:href="@{/new_user}" onclick="return toggle('log');" >Noch nicht registriert?</a></label>
 						</div>
 						
-
-						<div class="large-12 columns">
-							<div class="login__button">
-								<input class="button" type="submit" value="Log in" />
+						<form th:action="@{/login}" method="post">
+							<div class = "large-12 columns">
+								<label th:if="${loginError}" class="form__error" for="username">Wrong Username or Password!</label>
 							</div>
-							<label class="login__link"><a>Passwort vergessen?</a></label>
-						</div>
+							
+							<div class="large-1 medium-2 small-12 columns"> 
+								<label class="form__label" for="username">Username:</label> 
+							</div>
+							<div class="large-5 medium-10 small-12 columns">
+								<input class="form__input" type="text" id="username" name="username" autofocus="autofocus"/>
+							</div>
+						
+							<div class="large-1 medium-2 small-12 columns">
+								<label class="form__label" for="password">Password:</label>
+							</div>
+							<div class="large-5 medium-10 small-12 columns">
+								<input class="form__input" type="password" id="password" name="password" />
+							</div>
+							
 
-					</form>
+							<div class="large-12 columns">
+								<div class="button--right">
+									<input class="button" type="submit" value="Log in" />
+								</div>
+								<label class="link"><a>Passwort vergessen?</a></label>
+							</div>
+
+						</form>
+					</div>
 				</div>
-			</div>
-		</th:block>
+			</th:block>
+		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
