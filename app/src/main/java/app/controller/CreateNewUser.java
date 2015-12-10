@@ -444,7 +444,7 @@ public class CreateNewUser {
                     
                     if (!mailadresse.equals("test@test.test"))
                     {
-                        return "redirect:/activationmail_gesended";
+                        return "redirect:/activationmail_gesendet";
                     }    
                     else
                     {
@@ -690,7 +690,12 @@ public class CreateNewUser {
 	@RequestMapping(value = "/create_new_user", method = RequestMethod.POST)
 	public String create_new_user(@RequestParam("mailIN") @Email @Valid final String  Mail, @RequestParam("usernameIN") @Valid final String Username, @RequestParam("passwordIN") @Valid final String  Password, @RequestParam("repasswordIN") @Valid final String RePassword, @RequestParam("nameIN") final String Name,  @RequestParam("firstnameIN") final String Firstname, @RequestParam("wohnen") final String Adresstyp, @RequestParam("flh_name") final Optional<String> Flh_name_OPT, @RequestParam("citypart") final Optional<String> Citypart_OPT, @RequestParam("street") final Optional<String> Street_OPT, @RequestParam("housenr") final Optional<String> Housenr_OPT, @RequestParam("postcode") final String Postcode, @RequestParam("city") final String City, @RequestParam("nativelanguage") final String Nativelanguage, @RequestParam("otherlanguages") final String OtherLanguages, @RequestParam("origin") final String Origin, @RequestParam("g-recaptcha-response")String CaptchaResponse)
 	{
-
+		if (CaptchaResponse.isEmpty() )
+		{
+		  return "error_empty_captcha"; 
+		}
+		
+		
 		System.out.println(Mail);
 		System.out.println(Username);
 		System.out.println(Password);
