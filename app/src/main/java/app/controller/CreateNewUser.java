@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Properties;
@@ -55,27 +56,32 @@ import app.model.UserRepository;
 public class CreateNewUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
-    //private final MailSender mailSender;
+    private final MailSender mailSender;
 
 	/**
 	   * Autowire.
 	   * @param CreateNewUser
 	   */
 	@Autowired
-	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository /*, MailSender mailSender*/) {
-
+	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository , MailSender mailSender){
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
 
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
 		
-		//this.mailSender = mailSender;
+		this.mailSender = mailSender;
 	}
 	
 	int zufallzahl_1, zufallzahl_2; //Zufallszahlen
 	boolean za;
 
+	@RequestMapping( value="/new_user")
+    public String new_user0(){
+		return "redirect:/";
+		
+	}
+	
 	@RequestMapping( value="/new_user_data")
     public String new_user(){
 		
@@ -173,6 +179,16 @@ public class CreateNewUser {
       return "/reCAPTCHA";
 
 	}
+	
+	@RequestMapping({"/activationmail_gesendet"})
+    public String activationmail_gesendet(){
+        return "/activationmail_gesendet";
+    }
+    
+    @RequestMapping({"/activationmail_local"})
+    public String activationmail_local(){
+        return "/activationmail_local";
+    }
 
 	private String sendPost(String CaptchaResponse, String Secret) throws Exception {
 
@@ -214,8 +230,6 @@ public class CreateNewUser {
 	}
 
 
-	/*
-	@Autowired
 	private void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException, IOException
 	{
 		
@@ -275,7 +289,8 @@ public class CreateNewUser {
 	    msg.setRecipients(Message.RecipientType.TO, recipient);
 	    msg.setSubject(Subject);
 	    msg.setSentDate(new Date());
-	    msg.setText(Text);
+	    msg.setContent(Text, "text/html; charset=utf-8");
+
 
 	    Transport transport = session.getTransport("smtp");
 
@@ -286,7 +301,6 @@ public class CreateNewUser {
 		return;
 		 
 	}   
-	*/
 	
 	
 	public static String sha256(String base) {
@@ -398,26 +412,44 @@ public class CreateNewUser {
 					
 					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());	
 					
-					String link="/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+user_xyz.getActivationkey()+"}";
-					String mailtext = "<h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" <br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+" ";
-					String mailadresse = "";  // user_xyz.getUserAccount().getEmail();
+					Date zeitstempel = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy HH:mm:ss"
+                    // simpleDateFormat.format(zeitstempel)
+                    
+                    String domain     = "http://localhost:8080";
+                    String link       = domain + "/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+sha256(user_xyz.getActivationkey()+simpleDateFormat.format(zeitstempel)+(user_xyz.getRegistrationstate()+1))+"}";
+                    String mailtext = "<html> <head> </head> <body> <h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+"  </body> </html>";
+                    String mailadresse = user_xyz.getUserAccount().getEmail();
 					
 					System.out.println(link);
 					
 					//Mail senden: 
-				/*	try {
-						Mailsenden(mailadresse,"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
-						System.out.println("Mail versandt");
-					} catch (MessagingException | IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}     */
+                    if (!mailadresse.equals("test@test.test"))                    
+                    {
+                        //Mail senden: 
+                        try {
+                            Mailsenden(mailadresse,"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+                            System.out.println("Mail versandt");
+                        } catch (MessagingException | IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }   
+                    }
+
 					
 					user_xyz.setRegistrationstate(8); //8 ~ Aktivierungsmail versandt.
 					userRepository.save(user_xyz);
 				
 					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
-					return "/activationmail_gesended";
+                    
+                    if (!mailadresse.equals("test@test.test"))
+                    {
+                        return "redirect:/activationmail_gesended";
+                    }    
+                    else
+                    {
+                        return "redirect:/activationmail_local";
+                    }
 		            
 				}
 				return "redirect:/";
@@ -451,7 +483,17 @@ public class CreateNewUser {
 				return "redirect:/";
 			}
 
-			if (user_xyz.getActivationkey().equals(textactivationkey))
+            if (user_xyz.isActivated())
+            {
+                System.out.println("Nutzer bereits aktiviert.");
+                return "redirect:/";
+            }    
+            
+            Date zeitstempel = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy HH:mm:ss"
+            // simpleDateFormat.format(zeitstempel)
+            
+            if (sha256(user_xyz.getActivationkey()+simpleDateFormat.format(zeitstempel)+user_xyz.getRegistrationstate()).equals(textactivationkey))
 			{
 			    user_xyz.Activate();
 			    System.out.println(user_xyz.getUserAccount().getUsername()+" wurde aktiviert.");
@@ -558,6 +600,12 @@ public class CreateNewUser {
 			return false;	
 		}
 		
+	    /*    if (email.equals("test@test.test"))
+        {
+            return false;    
+        }    */
+
+		
 		try {
 			//
 			// Create InternetAddress object and validated the supplied
@@ -636,9 +684,492 @@ public class CreateNewUser {
 
 
 	
-	//******************************************************************************************//
+	//******************************************************************************************//*************************************************//
 	// Registrierung:
 
+	@RequestMapping(value = "/create_new_user", method = RequestMethod.POST)
+	public String create_new_user(@RequestParam("mailIN") @Email @Valid final String  Mail, @RequestParam("usernameIN") @Valid final String Username, @RequestParam("passwordIN") @Valid final String  Password, @RequestParam("repasswordIN") @Valid final String RePassword, @RequestParam("nameIN") final String Name,  @RequestParam("firstnameIN") final String Firstname, @RequestParam("wohnen") final String Adresstyp, @RequestParam("flh_name") final Optional<String> Flh_name_OPT, @RequestParam("citypart") final Optional<String> Citypart_OPT, @RequestParam("street") final Optional<String> Street_OPT, @RequestParam("housenr") final Optional<String> Housenr_OPT, @RequestParam("postcode") final String Postcode, @RequestParam("city") final String City, @RequestParam("nativelanguage") final String Nativelanguage, @RequestParam("otherlanguages") final String OtherLanguages, @RequestParam("origin") final String Origin, @RequestParam("g-recaptcha-response")String CaptchaResponse)
+	{
+
+		System.out.println(Mail);
+		System.out.println(Username);
+		System.out.println(Password);
+		System.out.println(RePassword);
+
+		if (Mail.isEmpty() ||  Username.isEmpty() || Password.isEmpty())
+		{
+			return "errorpage0_empty";
+		}
+
+		if (!Password.equals(RePassword))
+		{
+			return "errorpage0_wrongpw";
+		}
+		
+		if (Password.length()<8) 
+		{
+			System.out.println("Passwort zu kurz.");
+			return "errorpage0_wrongpw";
+		}else
+		{
+			int pwstrength=0; 
+			pwstrength = checkPasswordStrength(Password);
+			
+			System.out.println("PasswordStrength: "+pwstrength);
+			if (pwstrength==0)
+			{
+				System.out.println("Passwort erfüllt nicht die Anforderungen.");
+				return "errorpage0_wrongpw";
+			}
+		}
+		
+		if (emailValidator(Mail) == false)
+		{
+			System.out.println(Mail+" ist eine ungültige Mailadresse.");
+			return "error";
+		}
+		
+		boolean equalMail = false;
+		for (UserAccount TempUA: userAccountManager.findAll())
+		{
+			if ((!(TempUA == null)) && (equalMail == false))
+			{
+				//System.out.println(TempUA.getUsername());
+				//System.out.println(TempUA.getEmail());
+				
+				if (!(TempUA.getEmail() == null))
+				{
+					if (TempUA.getEmail().equals(Mail))
+					{
+						equalMail = true;
+					} 
+				}	
+			}
+		}
+		
+		if (equalMail)
+		{
+			System.out.println(Mail+" ist eine bereits verwendete Mailadresse.");
+			return "error";
+		}
+
+		if (Username.equals("new_user"))
+		{
+			String e_descrition = "Invalid Username.";
+			System.out.println("ERROR: "+e_descrition);
+
+
+			return "error";
+		}
+
+		if (userAccountManager.findByUsername(Username).isPresent())
+		{
+			String e_descrition = "Username already in use.";
+			System.out.println("ERROR: "+e_descrition);
+
+			return "error";
+		}
+
+
+		UserAccount userAccount = userAccountManager.create(Username, Password,
+				new Role("ROLE_NORMAL"));
+		userAccountManager.save(userAccount);
+		userAccount.setEmail(Mail);
+		userAccountManager.save(userAccount);
+
+		//userAccount.isEnabled = false;
+		
+		System.out.println("Account "+userAccount.getUsername()+" angelegt.");
+		
+		UserAccount LoggUser=userAccountManager.findByUsername(userAccount.getUsername()).get();
+		Address emptyadress= new Address("", "", "", "");
+		User user_xyz=new User(LoggUser, emptyadress);
+		user_xyz.setRegistrationstate(0);
+		userRepository.save(user_xyz);
+		
+		user_xyz.setRegistrationdate(new Date()); //Temporäres Registrierungsdatum um unvollständige Konten nach einer betimmten Zeit zu löschen.
+		user_xyz.setRegistrationstate(1);
+		userRepository.save(user_xyz);
+
+		System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
+		
+		//Step 2
+		
+		System.out.println(Name);
+		System.out.println(Firstname);
+		System.out.println(Adresstyp);
+
+	    	
+			if (Name.isEmpty() ||  Firstname.isEmpty() || Adresstyp.isEmpty())
+			{
+				return "errorpage1_empty";
+			}
+
+			user_xyz.getUserAccount().setLastname(Name);
+			user_xyz.getUserAccount().setFirstname(Firstname);
+			user_xyz.setAdresstyp(Adresstyp);
+			userAccountManager.save(user_xyz.getUserAccount());
+			
+			user_xyz.setRegistrationstate(2);
+			userRepository.save(user_xyz);
+
+			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
+			System.out.println("/not_activated/user/"+user_xyz.getUserAccount().getUsername() );
+			
+			if (Adresstyp.equals("refugee"))  //Refugees_home
+			{
+				//return "redirect:/new_user_aboutuser2a/user/{user}";
+				
+				String Postcode_N;
+				String City_N;
+				
+				if ((Postcode.isEmpty()) || (Postcode.length()<=3))
+				{
+					Postcode_N="";
+				}
+				else
+				{
+					if (Postcode.substring(Postcode.length()-1).equals(","))
+					{
+						Postcode_N = Postcode.substring(0, Postcode.length()-1);	
+					}
+					else
+					{
+						Postcode_N= Postcode;
+					}
+					
+					if (Postcode_N.substring(0,1).equals(","))
+					{
+						Postcode_N = Postcode_N.substring(1, Postcode_N.length());	
+					}
+				}
+				
+				if ((City.isEmpty()) || (City.length()<=2))
+				{
+					City_N="";
+				}
+				else
+				{
+					if (City.substring(City.length()-1).equals(","))
+					{
+						City_N = City.substring(0, City.length()-1);	
+					}
+					else 
+					{
+						City_N= City;
+					}
+					
+					if (City_N.substring(0,1).equals(","))
+					{
+						City_N = City_N.substring(1, City_N.length());	
+					}
+
+				}
+				
+				System.out.println(Flh_name_OPT.get());
+				System.out.println(Citypart_OPT.get());
+				System.out.println(Postcode_N);
+				System.out.println(City_N);
+				
+				String Flh_name;
+				String Citypart;
+				
+				if (Flh_name_OPT.isPresent())
+				{
+					Flh_name = Flh_name_OPT.get();
+				}
+				else
+				{
+					Flh_name = "";
+				}
+				
+				if (Citypart_OPT.isPresent())
+				{
+					Citypart = Citypart_OPT.get();
+				}
+				else
+				{
+					Citypart = "";
+				}
+
+				//KLASSE FLÜCHTLINGSHEIM UND INTERFACE LOCATION!!!!!!!!!!!!!!
+					if ((Flh_name.isEmpty()) ||  (Citypart.isEmpty()) || Postcode_N.isEmpty() || City_N.isEmpty())
+					{
+						return "errorpage2a_empty";
+					}
+					
+					if (Postcode_N.length()!=5) 
+					{
+						System.out.println("Ungültige Postleitzahl");
+						return "error";
+					}
+					else
+					{ 
+						String[] partialRegexChecks = 
+				        	{
+				        			".*[a-z]+.*", // lower
+				        			".*[A-Z]+.*", // upper
+				        			".*[\\d]+.*", // digits
+				        			".*[@#§$%&/()=?{}#+-~.,;:<>|\\!]+.*" // symbols
+				        	};
+						int i=0; 
+			            while (i< 5)
+			            {       	
+			            	if (! Postcode_N.substring(i, i+1).matches(partialRegexChecks[2]))
+			                {
+			            		System.out.println("Ungültige Postleitzahl");
+			    				return "error";
+			                }
+			            	i = i+1;
+			            }	
+					}
+					
+					
+					Address address= new Address(Flh_name, Citypart, Postcode_N, City_N);			
+					user_xyz.setLocation(address);
+					user_xyz.setRegistrationstate(3); //3 ~ Flüchtlingsheim
+					userRepository.save(user_xyz);
+
+					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
+					//return "redirect:/new_user_language_origin/user/{user}";
+			}
+
+			if (Adresstyp.equals("helper"))  //Wohnung
+			{
+				//return "redirect:/new_user_aboutuser2b/user/{user}";
+				
+				String Postcode_N;
+				String City_N;
+				
+				if ((Postcode.isEmpty()) || (Postcode.length()<=3))
+				{
+					Postcode_N="";
+				}
+				else
+				{
+					if (Postcode.substring(Postcode.length()-1).equals(","))
+					{
+						Postcode_N = Postcode.substring(0, Postcode.length()-1);	
+					}
+					else
+					{
+						Postcode_N= Postcode;
+					}
+					
+					if (Postcode_N.substring(0,1).equals(","))
+					{
+						Postcode_N = Postcode_N.substring(1, Postcode_N.length());	
+					}
+				}
+				
+				if ((City.isEmpty()) || (City.length()<=2))
+				{
+					City_N="";
+				}
+				else
+				{
+					if (City.substring(City.length()-1).equals(","))
+					{
+						City_N = City.substring(0, City.length()-1);	
+					}
+					else 
+					{
+						City_N= City;
+					}
+					
+					if (City_N.substring(0,1).equals(","))
+					{
+						City_N = City_N.substring(1, City_N.length());	
+					}
+				}
+				
+				System.out.println(Street_OPT.get());
+				System.out.println(Housenr_OPT.get());
+				System.out.println(Postcode_N);
+				System.out.println(City_N);
+
+				String Street;
+				String Housenr;
+				
+				if (Street_OPT.isPresent())
+				{
+					Street = Street_OPT.get();
+				}
+				else
+				{
+					Street = "";
+				}
+				
+				if (Housenr_OPT.isPresent())
+				{
+					Housenr = Housenr_OPT.get();
+				}
+				else
+				{
+					Housenr = "";
+				}
+				
+					if (Street.isEmpty() ||  Housenr.isEmpty() || Postcode_N.isEmpty() || City_N.isEmpty())
+					{
+						return "errorpage2b_empty";
+					}
+					
+					if (Postcode_N.length()!=5) 
+					{
+						System.out.println("Ungültige Postleitzahl");
+						return "error";
+					}
+					else
+					{ 
+						String[] partialRegexChecks = 
+				        	{
+				        			".*[a-z]+.*", // lower
+				        			".*[A-Z]+.*", // upper
+				        			".*[\\d]+.*", // digits
+				        			".*[@#§$%&/()=?{}#+-~.,;:<>|\\!]+.*" // symbols
+				        	};
+						int i=0; 
+			            while (i< 5)
+			            {       	
+			            	if (! Postcode_N.substring(i, i+1).matches(partialRegexChecks[2]))
+			                {
+			            		System.out.println("Ungültige Postleitzahl");
+			    				return "error";
+			                }
+			            	i = i+1;
+			            }	
+					}
+					
+					
+					Address address= new Address(Street, Housenr, Postcode_N, City_N);
+					user_xyz.setLocation(address);
+					user_xyz.setRegistrationstate(4); //4 ~ Wohnung
+					userRepository.save(user_xyz);
+					
+					System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());			
+					//return "redirect:/new_user_language_origin/user/{user}";
+			}
+			
+			// Step 3;
+			
+			System.out.println(Nativelanguage);
+			System.out.println(OtherLanguages);
+			System.out.println(Origin);
+			
+			if (Nativelanguage.isEmpty() ||  Origin.isEmpty() )
+			{
+				return "errorpage2b_empty";
+			}
+            
+			user_xyz.setLanguage(Nativelanguage);
+			
+			user_xyz.setOrigin(Origin);
+			
+			user_xyz.setRegistrationstate(5);   
+			userRepository.save(user_xyz);   
+			
+		//	Nutzeraktivierung vorbereiten:
+			
+			Integer z1, z2; //Zufallszahlen
+			z1 = (int)(Math.random() * 1000000000)+123456;
+			z2 = (int)(Math.random() * 1000000000)+117980;
+			
+			String activationkey = AktivierungskeyErzeugen(user_xyz.getUserAccount().getUsername(), user_xyz.getUserAccount().getEmail(), z1, z2);
+			user_xyz.setActivationkey(activationkey);
+			
+			user_xyz.setRegistrationdate(new Date());
+			user_xyz.setRegistrationstate(6); // 6 ~ Bereit zur Aktivierung
+			userRepository.save(user_xyz);
+	
+			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
+			//return "redirect:/reCAPTCHA/user/{user}";
+
+			//Step 4;
+			
+			System.out.println("## CaptchaResponse:");
+			System.out.println(CaptchaResponse);
+
+			if (CaptchaResponse.isEmpty() )
+			{
+			  return "error"; 
+			}
+			else
+			{
+				//http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
+
+				String Secret="6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
+				String Returnstring="";
+
+				System.out.println("## Validate:");
+				System.out.println("https://www.google.com/recaptcha/api/siteverify?response="+CaptchaResponse+"&secret="+Secret);
+
+				try {
+					Returnstring=sendPost(CaptchaResponse,Secret);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if (Returnstring.equals("{  \"success\": true}"))
+				{			            
+			            user_xyz.setRegistrationstate(7); //7 ~ Captcha erfolgreich geprüft
+						userRepository.save(user_xyz);
+						
+						
+						System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());	
+						
+						Date zeitstempel = new Date();
+	                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy HH:mm:ss"
+	                    // simpleDateFormat.format(zeitstempel)
+	                    
+	                    String domain     = "http://localhost:8080";
+	                    String link       = domain + "/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+sha256(user_xyz.getActivationkey()+simpleDateFormat.format(zeitstempel)+(user_xyz.getRegistrationstate()+1))+"}";
+	                    String mailtext = "<html> <head> </head> <body> <h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+"  </body> </html>";
+	                    String mailadresse = user_xyz.getUserAccount().getEmail();
+						
+						System.out.println(link);
+						
+						//Mail senden: 
+	                    if (!mailadresse.equals("test@test.test"))                    
+	                    {
+	                        //Mail senden: 
+	                        try {
+	                            Mailsenden(mailadresse,"Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+	                            System.out.println("Mail versandt");
+	                        } catch (MessagingException | IOException e) {
+	                            // TODO Auto-generated catch block
+	                            e.printStackTrace();
+	                        }   
+	                    }
+
+						
+						user_xyz.setRegistrationstate(8); //8 ~ Aktivierungsmail versandt.
+						userRepository.save(user_xyz);
+					
+						System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
+	                    
+	                    if (!mailadresse.equals("test@test.test"))
+	                    {
+	                        return "redirect:/activationmail_gesendet";
+	                    }    
+	                    else
+	                    {
+	                        return "redirect:/activationmail_local";
+	                    }
+			            
+					
+				}
+				else
+				{
+					return "redirect:/reCAPTCHA-TEST";
+				}
+			}
+
+	}
+	
+	//##################################################################################################################//
+	//##################################################################################################################//
+	
 	@RequestMapping(value = "/create_temp_new_user", method = RequestMethod.POST)
 	public String create_new_user_t(@RequestParam("mail") @Email @Valid final String  Mail, @RequestParam("username") @Valid final String Username, @RequestParam("password") @Valid final String  Password, @RequestParam("repassword") @Valid final String RePassword, @RequestParam("summe") @Valid final String chsumme)
 	{
