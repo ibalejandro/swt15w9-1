@@ -19,7 +19,7 @@
 		
 		<div class="row">
 			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
-				<div th:id="good+${good.id}" th:include="goods_item--multi :: item" ></div>
+				<div th:id="good+${good.id}" th:include="itemN--small :: item" ></div>
 			</div>
 		</div>
 		

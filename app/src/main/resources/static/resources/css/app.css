@@ -1,9 +1,12 @@
-/********************************************
+/*******************************************\
 *			by Lennart Schmidt		 		*
-*********************************************/
+\*******************************************/
 
 
-
+/********************************************
+*	Um Formulare in der Navigation korrekt	*
+*	anzuzeigen								*
+********************************************/
 .has-form {
 	top: 0;
 	left: 6rem;
@@ -19,8 +22,194 @@
 	} 
 }
 
+/********************************************
+*	Item Design								*
+********************************************/
+.itemN{
+	margin: 1%;
+	padding: 1%;
+	background-color: silvergray;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+	overflow: auto;
+}
+.itemN__headlinecontainer{
+	
+}
+.itemN__imgcontainer{
+	width:20%;
+	max-height:10rem;
+	overflow:hidden;
+	float: left;
+}
+.itemN__textcontainer{
+	
+}
+.itemN__img{
+	
+}
+.itemN__location{
+	right: 0.5rem;
+	bottom: 0.5rem;
+}
+
+/********************************************
+*	Zeitenübergreifendes Design der			*
+*	Schrifft Buttons und Co.				*
+*	with modifyer for Text and Button		*
+*	positions.								*
+********************************************/
+p{margin: 0; padding:0;}
+.headline{
+	font-size: 2.0rem;
+}
+.headline--sub{
+	font-size: 1.7rem;
+}
+.headline--super{
+	font-size: 2.3rem;
+}
+.text{
+	font-size: 1rem;
+}
+.text--super{
+	font-size: 1.2rem;
+}
+.text--sub{
+	font-size:0.8rem;
+}
+.text--right{
+	font-size: 1rem;
+	text-align: right;
+}
+.text--super--right{
+	font-size: 1.2rem;
+	text-align: right;
+}
+.text--sub--right{
+	font-size:0.8rem;
+	text-align: right;
+}
+.button__link{
+	color: white;
+}
+.button--right{
+	float: right;
+}
+.button--left{
+	float: left;
+}
+.link{
+	font-size: 1rem;
+	padding: 1rem 0 0 0;
+}
+.link--right{
+	font-size: 1rem;
+	text-align: right;
+	padding: 1rem 0 0 0;
+}
+.error{
+	color: red;
+	font-size: 1rem;
+}
+.space{
+	margin-top: 2rem;
+}
+.divider{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 1% 0;
+	overflow: auto;
+}
+
+/********************************************
+*	Anpassung bei Formularen und Label und	*
+*	zugehöriger Label						*
+********************************************/
+.form__label{
+	font-size: 1rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--paddingOFF{
+	font-size: 1rem;
+	padding: 0 0 0 0;
+}
+.form__label--super{
+	font-size: 1.3rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--super--paddingOFF{
+	font-size: 1.3rem;
+	padding: 0 0 0 0;
+}
+.form__label--sub{
+	font-size: 0.7rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--sub--paddingOFF{
+	font-size: 0.7rem;
+	padding: 0 0 0 0;
+}
+.form__input{
+	margin: 0;
+	padding: 0;
+	
+}
+.form__input[type = "radio"]{
+	margin-left: 1rem;
+}
+
+/********************************************
+*	Registrierung und Login:				*
+********************************************/
+.login{
+	background-color: lightgray;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+}
+.reg{
+	background-color: lightgray;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+}
+
+/*	Aus Blenendne von Optionen in erhalb der 
+	Registrierung*/
+#hh:checked ~ .new__user__helper{
+	margin: 0;
+	padding: 0;
+	display:block;
+}
+#hh:checked ~ .new__user__refugee{
+	display:none;
+}
+#fh:checked ~ .new__user__helper{
+	display:none;
+}
+#fh:checked ~ .new__user__refugee{
+	margin: 0;
+	padding: 0;
+	display:block;
+}
+/*	Startseiten Anpassung. Login/Registrierung
+	Anzeige*/
+.startsite__login{
+	display: block;
+}
+.startsite__reg{
+	display: none;
+}
 
 
+
+
+
+/********************************************
+*	Noch zu bearbeiten						*
+********************************************/
 
 .admin{
 	
@@ -256,142 +445,4 @@
 }
 .userdetail__content{
 
-}
-/********************************************
-*	Item Design								*
-*********************************************/
-.item{
-
-}
-
-
-
-/********************************************
-*	Zeitenübergreifendes Design der			*
-*	Schrifft Buttons und Co.				*
-*	with modifyer for Text and Button		*
-*	positions.								*
-*********************************************/
-.headline{
-	font-size: 2.0rem;
-}
-.headline--sub{
-	font-size: 1.7rem;
-}
-.headline--super{
-	font-size: 2.3rem;
-}
-.text{
-	font-size: 1rem;
-}
-.text--super{
-	font-size: 1.3rem;
-}
-.text--sub{
-	font-size:0.7;
-}
-.button__link{
-	color: white;
-}
-.button--right{
-	float: right;
-}
-.button--left{
-	float: left;
-}
-.link{
-	font-size: 1rem;
-	padding: 1rem 0 0 0;
-}
-.link--right{
-	font-size: 1rem;
-	text-align: right;
-	padding: 1rem 0 0 0;
-}
-.error{
-	color: red;
-	font-size: 1rem;
-}
-.space{
-	margin-top: 2rem;
-}
-
-/********************************************
-*	Anpassung bei Formularen und Label und	*
-*	zugehöriger Label						*
-*********************************************/
-.form__label{
-	font-size: 1rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--paddingOFF{
-	font-size: 1rem;
-	padding: 0 0 0 0;
-}
-.form__label--super{
-	font-size: 1.3rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--super--paddingOFF{
-	font-size: 1.3rem;
-	padding: 0 0 0 0;
-}
-.form__label--sub{
-	font-size: 0.7rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--sub--paddingOFF{
-	font-size: 0.7rem;
-	padding: 0 0 0 0;
-}
-.form__input{
-	margin: 0;
-	padding: 0;
-	
-}
-.form__input[type = "radio"]{
-	margin-left: 1rem;
-}
-
-/********************************************
-*	Registrierung und Login:				*
-*********************************************/
-.login{
-	background-color: lightgray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-}
-.reg{
-	background-color: lightgray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-}
-
-/*	Aus Blenendne von Optionen in erhalb der 
-	Registrierung*/
-#hh:checked ~ .new__user__helper{
-	margin: 0;
-	padding: 0;
-	display:block;
-}
-#hh:checked ~ .new__user__refugee{
-	display:none;
-}
-#fh:checked ~ .new__user__helper{
-	display:none;
-}
-#fh:checked ~ .new__user__refugee{
-	margin: 0;
-	padding: 0;
-	display:block;
-}
-/*	Startseiten Anpassung. Login/Registrierung
-	Anzeige*/
-.startsite__login{
-	display: block;
-}
-.startsite__reg{
-	display: none;
 }

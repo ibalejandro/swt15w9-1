@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			-
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<div th:fragment="item">
+			<div class="small-12 medium-6 large-6 columns end">
+				<div th:id="good+${good.getId()}" class="itemN">
+					<div class="itemN__headlinecontainer">
+						<p th:text="${good.name}" class="headline--sub"></p> <!--${good.getId()}+'. '+-->
+					</div>
+					
+					<div class="divider"></div>
+					
+					<div class="itemN__imgcontainer">
+						<img th:src="${good.getId()+'/image'}" class="itemN__img"/>
+					</div>		
+
+					<div class="itemN__textcontainer">
+						<p class="text--super"> Description </p>
+						<p th:text="${good.description}" class="text"></p>
+
+						<p class="text--super"> Tags </p>
+						<p th:text="${good.tag.name}" class="text"></p>
+
+						<!-- User ID ist uninteressant. Anstelle müsste ort gegeben werden -->
+						<div class="itemN__location">
+							<p class="text--sub--right"> User-ID </p>
+							<p th:text="${good.user.id}" class="text--sub--right"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>
