@@ -688,7 +688,7 @@ public class CreateNewUser {
 	// Registrierung:
 
 	@RequestMapping(value = "/create_new_user", method = RequestMethod.POST)
-	public String create_new_user(@RequestParam("mailIN") @Email @Valid final String  Mail, @RequestParam("usernameIN") @Valid final String Username, @RequestParam("passwordIN") @Valid final String  Password, @RequestParam("repasswordIN") @Valid final String RePassword, @RequestParam("nameIN") final String Name,  @RequestParam("firstnameIN") final String Firstname, @RequestParam("wohnen") final String Adresstyp, @RequestParam("flh_name") final Optional<String> Flh_name_OPT, @RequestParam("citypart") final Optional<String> Citypart_OPT, @RequestParam("street") final Optional<String> Street_OPT, @RequestParam("housenr") final Optional<String> Housenr_OPT, @RequestParam("postcode") final String Postcode, @RequestParam("city") final String City, @RequestParam("nativelanguage") final String Nativelanguage, @RequestParam("otherlanguages") final String OtherLanguages, @RequestParam("origin") final String Origin, @RequestParam("g-recaptcha-response")String CaptchaResponse)
+	public String create_new_user(@RequestParam("mailIN") @Email @Valid final String  Mail, @RequestParam("usernameIN") @Valid final String Username, @RequestParam("passwordIN") @Valid final String  Password, @RequestParam("repasswordIN") @Valid final String RePassword, @RequestParam("nameIN") final String Name,  @RequestParam("firstnameIN") final String Firstname, @RequestParam("wohnen") final String Adresstyp, @RequestParam("flh_name") final Optional<String> Flh_name_OPT, @RequestParam("citypart") final Optional<String> Citypart_OPT, @RequestParam("street") final Optional<String> Street_OPT, @RequestParam("housenr") final Optional<String> Housenr_OPT, @RequestParam("postcode_R") final Optional<String> Postcode_R, @RequestParam("city_R") final Optional<String> City_R, @RequestParam("postcode_H") final Optional<String> Postcode_H, @RequestParam("city_H") final Optional<String> City_H, @RequestParam("nativelanguage") final String Nativelanguage, @RequestParam("otherlanguages") final String OtherLanguages, @RequestParam("origin") final String Origin, @RequestParam("g-recaptcha-response")String CaptchaResponse)
 	{
 		if (CaptchaResponse.isEmpty() )
 		{
@@ -696,25 +696,27 @@ public class CreateNewUser {
 		}
 		
 		
+		System.out.println("/************ Create_New_User ************/");
+		
 		System.out.println(Mail);
 		System.out.println(Username);
-		System.out.println(Password);
-		System.out.println(RePassword);
+		//System.out.println(Password);
+		//System.out.println(RePassword);
 
 		if (Mail.isEmpty() ||  Username.isEmpty() || Password.isEmpty())
 		{
-			return "errorpage0_empty";
+			return "errorpage_empty";
 		}
 
 		if (!Password.equals(RePassword))
 		{
-			return "errorpage0_wrongpw";
+			return "errorpage_wrongpw";
 		}
 		
 		if (Password.length()<8) 
 		{
 			System.out.println("Passwort zu kurz.");
-			return "errorpage0_wrongpw";
+			return "errorpage_wrongpw";
 		}else
 		{
 			int pwstrength=0; 
@@ -724,7 +726,7 @@ public class CreateNewUser {
 			if (pwstrength==0)
 			{
 				System.out.println("Passwort erfüllt nicht die Anforderungen.");
-				return "errorpage0_wrongpw";
+				return "errorpage_wrongpw";
 			}
 		}
 		
@@ -798,6 +800,8 @@ public class CreateNewUser {
 
 		System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
 		
+		System.out.println("/not_activated/user/"+user_xyz.getUserAccount().getUsername() );
+		
 		//Step 2
 		
 		System.out.println(Name);
@@ -807,74 +811,42 @@ public class CreateNewUser {
 	    	
 			if (Name.isEmpty() ||  Firstname.isEmpty() || Adresstyp.isEmpty())
 			{
-				return "errorpage1_empty";
+				return "errorpage_empty";
 			}
 
 			user_xyz.getUserAccount().setLastname(Name);
 			user_xyz.getUserAccount().setFirstname(Firstname);
-			user_xyz.setAdresstyp(Adresstyp);
+			
+			if (Adresstyp.equals("refugee"))
+			{
+				user_xyz.setAdresstyp("Refugees_home");
+			}
+			
+			if (Adresstyp.equals("helper"))
+			{
+				user_xyz.setAdresstyp("Wohnung");
+			}
+			
 			userAccountManager.save(user_xyz.getUserAccount());
 			
 			user_xyz.setRegistrationstate(2);
 			userRepository.save(user_xyz);
 
 			System.out.println("Registrationstate: "+user_xyz.getRegistrationstate());
-			System.out.println("/not_activated/user/"+user_xyz.getUserAccount().getUsername() );
+			
+			String Postcode_N;
+			String City_N;
 			
 			if (Adresstyp.equals("refugee"))  //Refugees_home
 			{
 				//return "redirect:/new_user_aboutuser2a/user/{user}";
 				
-				String Postcode_N;
-				String City_N;
 				
-				if ((Postcode.isEmpty()) || (Postcode.length()<=3))
-				{
-					Postcode_N="";
-				}
-				else
-				{
-					if (Postcode.substring(Postcode.length()-1).equals(","))
-					{
-						Postcode_N = Postcode.substring(0, Postcode.length()-1);	
-					}
-					else
-					{
-						Postcode_N= Postcode;
-					}
-					
-					if (Postcode_N.substring(0,1).equals(","))
-					{
-						Postcode_N = Postcode_N.substring(1, Postcode_N.length());	
-					}
-				}
-				
-				if ((City.isEmpty()) || (City.length()<=2))
-				{
-					City_N="";
-				}
-				else
-				{
-					if (City.substring(City.length()-1).equals(","))
-					{
-						City_N = City.substring(0, City.length()-1);	
-					}
-					else 
-					{
-						City_N= City;
-					}
-					
-					if (City_N.substring(0,1).equals(","))
-					{
-						City_N = City_N.substring(1, City_N.length());	
-					}
-
-				}
 				
 				System.out.println(Flh_name_OPT.get());
 				System.out.println(Citypart_OPT.get());
-				System.out.println(Postcode_N);
-				System.out.println(City_N);
+				System.out.println(Postcode_R.get());
+				System.out.println(City_R.get());
 				
 				String Flh_name;
 				String Citypart;
@@ -886,6 +858,24 @@ public class CreateNewUser {
 				else
 				{
 					Flh_name = "";
+				}
+				
+				if (Postcode_R.isPresent())
+				{
+					Postcode_N = Postcode_R.get();
+				}
+				else
+				{
+					Postcode_N = "";
+				}
+				
+				if (City_R.isPresent())
+				{
+					City_N = City_R.get();
+				}
+				else
+				{
+					City_N = "";
 				}
 				
 				if (Citypart_OPT.isPresent())
@@ -900,7 +890,7 @@ public class CreateNewUser {
 				//KLASSE FLÜCHTLINGSHEIM UND INTERFACE LOCATION!!!!!!!!!!!!!!
 					if ((Flh_name.isEmpty()) ||  (Citypart.isEmpty()) || Postcode_N.isEmpty() || City_N.isEmpty())
 					{
-						return "errorpage2a_empty";
+						return "errorpage_empty";
 					}
 					
 					if (Postcode_N.length()!=5) 
@@ -943,55 +933,10 @@ public class CreateNewUser {
 			{
 				//return "redirect:/new_user_aboutuser2b/user/{user}";
 				
-				String Postcode_N;
-				String City_N;
-				
-				if ((Postcode.isEmpty()) || (Postcode.length()<=3))
-				{
-					Postcode_N="";
-				}
-				else
-				{
-					if (Postcode.substring(Postcode.length()-1).equals(","))
-					{
-						Postcode_N = Postcode.substring(0, Postcode.length()-1);	
-					}
-					else
-					{
-						Postcode_N= Postcode;
-					}
-					
-					if (Postcode_N.substring(0,1).equals(","))
-					{
-						Postcode_N = Postcode_N.substring(1, Postcode_N.length());	
-					}
-				}
-				
-				if ((City.isEmpty()) || (City.length()<=2))
-				{
-					City_N="";
-				}
-				else
-				{
-					if (City.substring(City.length()-1).equals(","))
-					{
-						City_N = City.substring(0, City.length()-1);	
-					}
-					else 
-					{
-						City_N= City;
-					}
-					
-					if (City_N.substring(0,1).equals(","))
-					{
-						City_N = City_N.substring(1, City_N.length());	
-					}
-				}
-				
 				System.out.println(Street_OPT.get());
 				System.out.println(Housenr_OPT.get());
-				System.out.println(Postcode_N);
-				System.out.println(City_N);
+				System.out.println(Postcode_H.get());
+				System.out.println(City_H.get());
 
 				String Street;
 				String Housenr;
@@ -1014,9 +959,27 @@ public class CreateNewUser {
 					Housenr = "";
 				}
 				
+				if (Postcode_H.isPresent())
+				{
+					Postcode_N = Postcode_H.get();
+				}
+				else
+				{
+					Postcode_N = "";
+				}
+				
+				if (City_H.isPresent())
+				{
+					City_N = City_H.get();
+				}
+				else
+				{
+					City_N = "";
+				}
+				
 					if (Street.isEmpty() ||  Housenr.isEmpty() || Postcode_N.isEmpty() || City_N.isEmpty())
 					{
-						return "errorpage2b_empty";
+						return "errorpage_empty";
 					}
 					
 					if (Postcode_N.length()!=5) 
@@ -1063,7 +1026,7 @@ public class CreateNewUser {
 			
 			if (Nativelanguage.isEmpty() ||  Origin.isEmpty() )
 			{
-				return "errorpage2b_empty";
+				return "errorpage_empty";
 			}
             
 			user_xyz.setLanguage(Nativelanguage);
