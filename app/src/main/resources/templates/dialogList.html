@@ -1,40 +1,39 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 
-<html lang="de">
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+		<title>Dialog List</title>
+	</head>
 
-<head>
-<th:block th:include="imports :: head"></th:block>
-<title>Dialog List</title>
-</head>
+	<body>
+		<div th:include="navigation :: navigation"></div>
 
-<body>
+		<div class="row">
+			<!-- replace by actual internalization string -->
+			<h1>My Dialogs</h1>
+			
+			<div class="small-12 columns">
+				<table sec:authorize="hasRole('ROLE_NORMAL')">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Dialog Partner</th>
+							<th>Link</th>
+						</tr>
+					</thead>
 
-	<div th:include="navigation :: navigation"></div>
-
-	<div class="row">
-		<!-- replace by actual internalization string -->
-		<h1>My Dialogs</h1>
-		<div class="small-12 columns">
-			<table sec:authorize="hasRole('ROLE_NORMAL')">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Dialog Partner</th>
-						<th>Link</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr th:each="dialog : ${dialogList}">
-						<th th:text="${dialog.title">Title</th>
-						<th th:text="${dialog.partner}">Partner</th>
-						<th><input type="button" value="Go to" /></th>
-					</tr>
-				</tbody>
-			</table>
+					<tbody>
+						<tr th:each="dialog : ${dialogList}">
+							<th th:text="${dialog.title">Title</th>
+							<th th:text="${dialog.partner}">Partner</th>
+							<th><input type="button" value="Go to" /></th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</div>
-	<th:block th:include="imports :: script"></th:block>
-</body>
-
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>´
 </html>

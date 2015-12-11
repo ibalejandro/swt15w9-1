@@ -1,12 +1,12 @@
-<html>
-
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 		<script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
 	</head>
 	
 	<body>
-	
 		<th:block th:include="navigation :: navigation"></th:block>
 	
 		<h1>reCAPTCHA demo: Simple page</h1>
@@ -18,7 +18,5 @@
 		</form>
 		
 		<th:block th:include="imports :: script"></th:block>
-		
 	</body>
-	
 </html>

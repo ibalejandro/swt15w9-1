@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	
-    <head>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+    
+	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
@@ -12,6 +17,7 @@
 					<div class="large-8 small-9 columns">
 						<select name="tagId">
 				    		<option value="-1">All</option>
+							
 				    		<option th:each="tag : ${navTags}"
 				            		th:value="${tag.id}"
 				            		th:text="${tag.name}">
@@ -27,7 +33,5 @@
 		</th:block>
 		
 		<th:block th:include="imports :: script"></th:block>
-		
     </body>
-	
 </html>

@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 		<title th:text="${title}">User</title>
 	</head>
 	
 	<body>
-	
 		<div class="row">
 			<div class="small-12 colums">
 				<div>
@@ -53,7 +56,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
-	
 </html>

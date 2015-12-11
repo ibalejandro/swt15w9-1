@@ -1,6 +1,11 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
@@ -17,6 +22,7 @@
 				<div th:id="good+${good.id}" th:include="goods_item--multi :: item" ></div>
 			</div>
 		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 	

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-
-<html class="no-js" lang="de">
-<!--/*
-	TODO:
-		- Navigation weiter anpassen
-			+ weiter Links hinzufügen
-		- Template mehr zum Template ausbauen
-		- Variablen hinzufügen
-		- th:href Mapping festlegen.
-		- Kommentare löschen
-*/-->
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- Navigation weiter anpassen
+				+ weiter Links hinzufügen
+			- Template mehr zum Template ausbauen
+			- Variablen hinzufügen
+			- th:href Mapping festlegen.
+			- Kommentare löschen
+	*/-->
+	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-	
 		<th:block th:fragment="navigation">
 			<nav class="top-bar" data-topbar="" role="navigation">
 				<ul class="title-area">
@@ -37,7 +37,7 @@
 							<th:block th:include="search :: searchByTag"></th:block>
 						</li>
 						
-						<li>
+						<li sec:authorize="hasRole('ROLE_NORMAL')">
 							<a sec:authorize="isAuthenticated()" th:href="@{/offer}" href="./offer.html">Offer</a>
 						</li>
 						
@@ -83,7 +83,5 @@
 		</th:block>
 		
 		<th:block th:include="imports :: script"></th:block>
-		
 	</body>
-	
 </html>
