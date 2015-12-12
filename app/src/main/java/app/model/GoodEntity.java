@@ -59,7 +59,7 @@ public class GoodEntity implements Serializable {
 	@OneToOne(targetEntity = TagEntity.class, fetch = FetchType.EAGER) 
 	private TagEntity tag;
 	
-	@Column(length=9001)
+	@Column(length=90001)
 	private byte[] picture;
 
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER) 
@@ -95,8 +95,8 @@ public class GoodEntity implements Serializable {
 			BufferedImage img = ImageIO.read(srcPic);
       
 			double scaling;
-			if(img.getWidth()!=128){
-				scaling = 128.0/img.getWidth();
+			if(img.getWidth()!=512){
+				scaling = 512.0/img.getWidth();
 			}else{
 				scaling = 1.0;
 			}
