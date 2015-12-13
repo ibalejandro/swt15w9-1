@@ -1,13 +1,18 @@
 .has-form {
-  top: 0;
-  left: 6rem;
-  min-width: 14rem; }
-  @media only screen and (max-width: 40em) {
-    .has-form {
-      min-width: 10rem;
-      top: 0.5rem; }
-      .has-form .button {
-        height: 1.85rem; } }
+	top: 0;
+	left: 6rem;
+	min-width: 14rem; 
+}
+@media only screen and (max-width: 40em){
+	.has-form {
+		min-width: 10rem;
+		top: 0.5rem; 
+	}
+	.has-form .button {
+		height: 1.85rem; 
+	} 
+}
+
 
 
 
@@ -146,12 +151,6 @@
 }
 
 
-.login{
-	background-color: lightgray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-}
 
 .single__divider{
 	border-bottom: 1px solid;
@@ -252,15 +251,39 @@
 .userdetail__content{
 
 }
+/********************************************
+*	Item Design								*
+*********************************************/
+.item{
 
-.error__msg{
-	color: red;
-	font-size: 1.5rem;
-}
-.error__field{
-	
 }
 
+
+
+/********************************************
+*	Zeitenübergreifendes Design der			*
+*	Schrifft Buttons und Co.				*
+*	with modifyer for Text and Button		*
+*	positions.								*
+*********************************************/
+.headline{
+	font-size: 2.0rem;
+}
+.headline--sub{
+	font-size: 1.7rem;
+}
+.headline--super{
+	font-size: 2.3rem;
+}
+.text{
+	font-size: 1rem;
+}
+.text--super{
+	font-size: 1.3rem;
+}
+.text--sub{
+	font-size:0.7;
+}
 .button__link{
 	color: white;
 }
@@ -279,22 +302,67 @@
 	text-align: right;
 	padding: 1rem 0 0 0;
 }
-.headline{
-	font-size: 2rem;
+.error{
+	color: red;
+	font-size: 1rem;
+}
+.space{
+	margin-top: 2rem;
 }
 
-.startsite__pad{
-	height: 10%;
-	max-height: 5rem;
-	min-height: 1rem;
+/********************************************
+*	Anpassung bei Formularen und Label und	*
+*	zugehöriger Label						*
+*********************************************/
+.form__label{
+	font-size: 1rem;
+	padding: 0.5rem 0 0 0;
 }
-.startsite__login{
-	display: block;
+.form__label--paddingOFF{
+	font-size: 1rem;
+	padding: 0 0 0 0;
 }
-.startsite__reg{
-	display: none;
+.form__label--super{
+	font-size: 1.3rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--super--paddingOFF{
+	font-size: 1.3rem;
+	padding: 0 0 0 0;
+}
+.form__label--sub{
+	font-size: 0.7rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--sub--paddingOFF{
+	font-size: 0.7rem;
+	padding: 0 0 0 0;
+}
+.form__input{
+	
+}
+.form__input[type = "radio"]{
+	margin-left: 1rem;
 }
 
+/********************************************
+*	Registrierung und Login:				*
+*********************************************/
+.login{
+	background-color: lightgray;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+}
+.reg{
+	background-color: lightgray;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+}
+
+/*	Aus Blenendne von Optionen in erhalb der 
+	Registrierung*/
 #hh:checked ~ .new__user__helper{
 	margin: 0;
 	padding: 0;
@@ -311,42 +379,11 @@
 	padding: 0;
 	display:block;
 }
-
-.form__error{
-	color: red;
-	font-size: 1rem;
+/*	Startseiten Anpassung. Login/Registrierung
+	Anzeige*/
+.startsite__login{
+	display: block;
 }
-.form__label{
-	font-size: 1rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--paddingOFF{
-	font-size: 1rem;
-	padding: 0 0 0 0;
-}
-.form__label--sup{
-	font-size: 1.3rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--sup--paddingOFF{
-	font-size: 1.3rem;
-	padding: 0 0 0 0;
-}
-.form__label--sub{
-	font-size: 0.7rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--sub--paddingOFF{
-	font-size: 0.7rem;
-	padding: 0 0 0 0;
-}
-.form__input{
-	
-}
-
-.reg{
-	background-color: lightgray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
+.startsite__reg{
+	display: none;
 }

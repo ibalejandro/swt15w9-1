@@ -6,20 +6,16 @@
 	</head>
 	
 	<body>
-	
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="row">
 			<div class="small-12 colums">
-				<div class="gooditem--single">
-					<div class="gooditem__head--single">
-						<h2 class="gooditem__title--single"> You just offered this good: </h2>
-					</div>
-					
-					<div th:include="goods_item--single :: item"></div>
-				</div>
+				<h1 class="headline"> You just offered this good: </h1>
 			</div>
+				
+			<div th:include="goods_item--single :: item"></div>
 		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 	
