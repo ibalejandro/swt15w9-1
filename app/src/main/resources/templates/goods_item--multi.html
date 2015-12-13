@@ -17,17 +17,17 @@
 	
 		<div th:fragment="item">
 			<div class="small-12 colums medium-6 columns">
-				<div th:fragment="good" th:id="good+${good.getId()}">
+				<div th:fragment="good" th:id="good+${good.id}">
 					<div class="gooditem--multi">
 					
 						<div  class="gooditem__head--multi">
-							<h3 th:text="${good.getId()}+'. '+${good.name}" class="gooditem__title--multi"></h3>
+							<h3 th:text="${good.id}+'. '+${good.name}" class="gooditem__title--multi"></h3>
 						</div>
 						
 						<div class="gooditem__body--multi">
 							<div>
 								<label class="gooditem__label--multi"> Picture </label>
-								<img th:src="${good.getId()+'/image'}" class="gooditem__text--multi"/>
+								<img th:src="${good.id+'/image'}" class="gooditem__text--multi"/>
 							</div>		
 
 							<div>

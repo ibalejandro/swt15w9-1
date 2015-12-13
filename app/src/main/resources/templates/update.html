@@ -16,7 +16,7 @@
 					
 					<form th:action="@{/updatedGood}" method="post">
 						<div>
-							<label class="create__label"> Name: </label>
+							<label class="create__label"> Name : </label>
 							<input type="text" name="name" th:value="*{result.name}"/>
 						</div>
 
@@ -25,10 +25,10 @@
 							<input type="text" name="description" th:value="*{result.description}"/> 
 						</div>
 						
-						<!--<div> Noch zu überarbeiten. result.picture ist das Bild in Bitform, aber der GoodsManagementController erwartet einen Dateipfad...
+						<div>
 							<label class="create__label"> Picture: </label>
 							<input type="text" name="picture" th:value="*{result.picture}"/> 
-						</div>-->
+						</div>
 
 						<div>
 							<label class="create__label"> Tags: </label>

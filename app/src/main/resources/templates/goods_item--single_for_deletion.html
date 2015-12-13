@@ -9,11 +9,7 @@
 		
 		<div th:fragment="item">
 			<div class="gooditem__body--single">
-				<!-- Bild kann momentan noch nicht angezeigt werden, da es zu schnell aus der DB gelöscht wird.
-				<div>
-					<label class="gooditem__label-?-single"> Picture </label>
-					<img th:src="${result.getId()+'/image'}" class="gooditem__text-?-single"/>
-				</div>-->				
+								
 				<div>
 					<label class="gooditem__label--single"> Name </label>
 					<p th:text="${result.name}" class="gooditem__text--single">Lorem ipsum</p>

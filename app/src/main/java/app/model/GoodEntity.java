@@ -20,9 +20,12 @@ import javax.imageio.ImageIO;
 import java.net.URL;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+//<<<<<<< HEAD
 import java.awt.image.ImageObserver;
 import java.awt.geom.AffineTransform;
 import java.io.ByteArrayOutputStream;
+//=======
+//>>>>>>> origin/master
 
 /**
 * <h1>GoodEntity</h1>
@@ -39,9 +42,10 @@ public class GoodEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	public long id;
 	
 	/* Ferdinand's Code */
+	
 	private static final ImageObserver observer = (img, infoflags, x,y,width,height)->true;
 	
 	
@@ -90,30 +94,44 @@ public class GoodEntity implements Serializable {
 	 
 	public static byte[] createPicture(String pictureLink) {
 	  /* Ferdinand's code */
-		try{
-			URL srcPic = new URL(pictureLink);
-			BufferedImage img = ImageIO.read(srcPic);
+    //Erschaffung eines temporären Files, um das Bild zu speichern.
+    try{
+      URL srcPic = new URL(pictureLink);
+      //Path hpath = Paths.get("src/main/resources/static/images");
+      //System.out.println(hpath.toAbsolutePath().toString());
+      //Path tempPic = Files.createTempFile("picture", ".jpg").toAbsolutePath();
+      BufferedImage img = ImageIO.read(srcPic);
+      //ImageIO.write(img, "jpg", tempPic.toFile());
       
-			double scaling;
-			if(img.getWidth()!=128){
-				scaling = 128.0/img.getWidth();
-			}else{
-				scaling = 1.0;
-			}
+      double scaling;
+      if(img.getWidth()!=128){
+        scaling = 128.0/img.getWidth();
+      }else{
+        scaling = 1.0;
+      }
       
-			BufferedImage imgOut = new BufferedImage((int)(scaling*((double)img.getWidth())),(int)(scaling*((double)img.getHeight())),img.getType());
-			Graphics2D g = imgOut.createGraphics();
-			AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
-			g.drawImage(img, transform, observer);
+      BufferedImage imgOut = new BufferedImage((int)(scaling*((double)img.getWidth())),(int)(scaling*((double)img.getHeight())),img.getType());
+      Graphics2D g = imgOut.createGraphics();
+      AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
+      g.drawImage(img, transform, observer);
       
-			ByteArrayOutputStream imgoutput = new ByteArrayOutputStream();
-			ImageIO.write(imgOut, "jpg", imgoutput);
-			return imgoutput.toByteArray();
-		} 
-		catch(Exception e) {
-			throw new IllegalStateException(e.getMessage(), e);
-		}
-
+      ByteArrayOutputStream imgoutput = new ByteArrayOutputStream();
+      ImageIO.write(imgOut, "jpg", imgoutput);
+      return imgoutput.toByteArray();
+      /*ImageIO.write(imgOut, "jpg", tempPic.toFile());
+      String h = tempPic.toString();
+      h = h.replace("\\", "/");
+      if (!Paths.get(h).toFile().canRead()) {
+        System.out.println("Ich kanns nicht lesen!");
+      }
+      h = "file:///" + h;
+      this.picture = h;*/
+      
+    } 
+    catch(Exception e) {
+      throw new IllegalStateException(e.getMessage(), e);
+    }
+    /* */
 	}
 	
 	 /**
