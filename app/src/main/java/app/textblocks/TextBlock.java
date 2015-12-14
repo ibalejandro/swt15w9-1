@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import app.util.SelectorFunctions;
@@ -16,7 +19,7 @@ import app.util.SelectorFunctions;
  */
 public class TextBlock {
 
-    // @Id @GeneratedValue
+    @Id @GeneratedValue
     private long id;
 
     /**

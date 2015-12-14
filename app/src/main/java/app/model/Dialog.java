@@ -5,18 +5,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.springframework.util.Assert;
 
+import app.textblocks.Chat;
+
 /**
- * <h1>Dialog</h1> The Dialog "glues" all {@link MessageElement}s together with
+ * <h1>Dialog</h1> The Dialog "glues" all {@link Chat}s together with
  * both {@link User}s.
  * 
  * @author Mario Henze
@@ -37,9 +39,8 @@ public class Dialog implements Serializable {
 
 	private String title;
 
-	// @ElementCollection(fetch = FetchType.EAGER)
-	@OneToMany(cascade = CascadeType.ALL)
-	protected List<MessageElement> messageHistory = new LinkedList<>();
+	@ElementCollection(fetch = FetchType.EAGER)
+	protected List<Chat> messageHistory = new LinkedList<>();
 
 	/**
 	 * Constructor.
@@ -62,12 +63,12 @@ public class Dialog implements Serializable {
 	}
 
 	/**
-	 * Adds the given {@link MessageElement} to the messageHistory.
+	 * Adds the given {@link Chat} to the messageHistory.
 	 * 
 	 * @param msg
 	 *            The messageElement to be added
 	 */
-	public void addMessageElement(MessageElement msg) {
+	public void addMessageElement(Chat msg) {
 		this.messageHistory.add(msg);
 	}
 
@@ -112,7 +113,7 @@ public class Dialog implements Serializable {
 	/**
 	 * @return A list of all entries in the dialog
 	 */
-	public Iterable<MessageElement> getMessageHistory() {
-		return messageHistory;
+	public Iterable<Chat> getMessageHistory() {
+		return this.messageHistory;
 	}
 }
