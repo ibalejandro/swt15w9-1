@@ -10,7 +10,7 @@ import app.util.SelectorFunctions;
 
 /**
  * This is the value associated with a TextBlock.
- *
+ * <p>
  * Created by justusadam on 05/12/15.
  */
 public class TextBlockValue {
@@ -34,7 +34,7 @@ public class TextBlockValue {
      *
      * @return map
      */
-    public Map<String, String> makeValueMap () {
+    public Map<String, String> makeValueMap() {
         return values.stream().collect(Collectors.toMap(
                 FormatTagValue::getName
                 , FormatTagValue::valueRepresentation

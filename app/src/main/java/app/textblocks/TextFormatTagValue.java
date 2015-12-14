@@ -6,6 +6,8 @@ import java.util.List;
 import app.util.Tuple;
 
 /**
+ * A tag value which represents a small bit of text.
+ *
  * Created by justusadam on 05/12/15.
  */
 public class TextFormatTagValue extends FormatTagValue {
@@ -15,7 +17,8 @@ public class TextFormatTagValue extends FormatTagValue {
 
     private String value;
 
-    public TextFormatTagValue() {}
+    public TextFormatTagValue() {
+    }
 
     public TextFormatTagValue(FormatTag tag, String value) {
         super(tag);
@@ -25,7 +28,7 @@ public class TextFormatTagValue extends FormatTagValue {
     /**
      * @see MessageFormatTagValue#mkInputClasses()
      */
-    protected static List<String> mkInputClasses () {
+    protected static List<String> mkInputClasses() {
         List<String> l = new LinkedList<>();
         l.add("text");
         return l;

@@ -10,7 +10,7 @@ import app.util.SelectorFunctions;
 
 /**
  * This is the source text block in the database.
- *
+ * <p>
  * This class abstracts a block of text (Textbaustein) in it's raw form (before values have been supplied).
  * It is responsible for rendering a form with input fields appropriate for the expected values that are supplied to the fields.
  */
@@ -48,12 +48,12 @@ public class TextBlock {
     /**
      * Build a map where the keys are the names of the tags from the internal tag list and the values are html form
      * fields with types appropriate for the type of the respective tag.
-     *
+     * <p>
      * This map is suitable for substituting into the {@link #formatString} for rendering a form.
      *
      * @return the map
      */
-    public Map<String, String> makeReplacementMap () {
+    public Map<String, String> makeReplacementMap() {
         return tags.stream().collect(Collectors.toMap(
                 FormatTag::getName
                 , (FormatTag t) -> t.asInput(String.valueOf(id))
@@ -62,15 +62,17 @@ public class TextBlock {
 
     /**
      * Build a unique form for this text block.
+     *
      * @return html text and inputs
      */
     public String asForm() {
-        return  makeSelectedInput() +
+        return makeSelectedInput() +
                 new StrSubstitutor(makeReplacementMap()).replace(formatString);
     }
 
     /**
      * Whether this block was selected.
+     *
      * @param requestValues data from the http request
      * @return true if this block was selected
      */
@@ -97,7 +99,7 @@ public class TextBlock {
      * @param requestValues values from the htp request
      * @return value
      */
-    public TextBlockValue fromForm (Map<String, String> requestValues) {
+    public TextBlockValue fromForm(Map<String, String> requestValues) {
         return toValue(valuesFromForm(requestValues));
     }
 
@@ -117,7 +119,7 @@ public class TextBlock {
                         return null;
                     }
                 }
-            ).collect(Collectors.toList());
+        ).collect(Collectors.toList());
     }
 
     public long getId() {
