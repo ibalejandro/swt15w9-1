@@ -26,9 +26,10 @@
 						
 						<div class="gooditem__body--multi">
 							<div>
-								<label class="gooditem__label--single"> Bild </label>
-								<img th:src="${good.picture}" class="gooditem__text--multi"/>
+								<label class="gooditem__label--multi"> Picture </label>
+								<img th:src="${good.id+'/image'}" class="gooditem__text--multi"/>
 							</div>		
+
 							<div>
 								<label class="gooditem__label--multi"> Description </label>
 								<p th:text="${good.description}" class="gooditem__text--multi"></p>

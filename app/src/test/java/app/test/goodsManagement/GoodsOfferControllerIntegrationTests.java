@@ -54,7 +54,8 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
   public void testSaveGood() throws Exception {
     mvc.perform(post("/offeredGood").param("name", good1.getName())
                 .param("description", good1.getDescription())
-                .param("tagId", String.valueOf(good1.getTag().getId())))
+                .param("tagId", String.valueOf(good1.getTag().getId()))
+                .param("picture", String.valueOf(good1.getPicture())))
    .andExpect(status().isOk())
    .andExpect(model().attribute("result", is(not(emptyIterable()))))
    .andExpect

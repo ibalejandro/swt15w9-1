@@ -44,7 +44,7 @@ public class GoodsSearchController {
    */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
   public String populateTagsDropdown(Model model) {
-    model.addAttribute("tags", tagsRepository.findAll());
+    model.addAttribute("navTags", tagsRepository.findAll());
     return "search";
   }
 

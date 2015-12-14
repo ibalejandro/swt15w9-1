@@ -12,7 +12,7 @@
 					<div class="large-8 small-9 columns">
 						<select name="tagId">
 				    		<option value="-1">All</option>
-				    		<option th:each="tag : ${tags}"
+				    		<option th:each="tag : ${navTags}"
 				            		th:value="${tag.id}"
 				            		th:text="${tag.name}">
 				    		</option>
@@ -22,6 +22,12 @@
 					<div class="large-4 small-3 columns">
 						<input class="alert button expand" type="submit" value="Search"/>
 					</div>
+					
+					<tr th:each="message : ${messages}">
+					    <td th:text="${message.id}">1</td>
+					    <td><a href="#" th:text="${message.name}">Title ...</a></td>
+					</tr>
+
 				</div>
 			</form>
 		</th:block>

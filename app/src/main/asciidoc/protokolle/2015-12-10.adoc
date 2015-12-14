@@ -1,0 +1,56 @@
+= Protokoll Gruppe 09
+__Treffen am 10.12.2015__
+
+__Schriftführer:__ Alejandro Sánchez Aristizábal
+
+__Nächstes Treffen:__ 17.12.2015
+
+.__Teilnehmer:__
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* Retrospektive der Arbeit der letzten Woche
+* Feedback vom Tutor und Hilfe zum Thema Textblocks und Sprachen der Users
+* Kommentare zur Veränderungen im Projekt zur TomCat Anpassung
+* Kommentare zum Übergang von in-memory Speicherung zur persistenten Datenbank
+* Diskussion über die Notwendigkeit eines Controllers für Tagsbearbeitung
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe                                   |Status         |Bemerkung
+|#6    |Basisfunktionalität                       |geschlossen    |N/A
+|#7    |Verteilung Zuständigkeit                  |geschloossen   |N/A
+|===
+
+
+== Aktueller Stand
+* Basisfunktionalität geschafft
+* Bearbeitung der Textblocks und ihrer Funktionalität
+* TomCat Anpassung des Projektes
+* Verfeinerung der vorhandenen Funktionalitäten
+
+== Planung des nächsten Sprints
+* Funktionalität der Textblocks
+* TomCat Anpassung des Projektes
+* Einarbeitung in Sprachen der Users
+* Funktionalität der Suche anhand der Navigationsbar
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel          |Beschreibung                   |Verantwortlicher |Status
+|#8    |junit-Tests    |N/A                            |N/A              |offen
+|#9    |Javadoc-Dokumentation|N/A                      |N/A              |offen
+|#32   |Eigene Daten ändern |Möglichkeit eigene Daten zu ändern |N/A     |offen
+|#33   |Mehrsprachigkeit |N/A                          |N/A              |offen
+|===

@@ -112,7 +112,8 @@ AbstractWebIntegrationTests {
     mvc.perform(post("/updatedGood")
                 .param("id", String.valueOf(savedGood.getId()))
                 .param("name", "Updated name")
-                .param("description", "Updated description"))
+                .param("description", "Updated description")
+                .param("tagId", String.valueOf(good1.getTag().getId())))
     .andExpect(status().isOk())
     .andExpect(model().attribute("result", is(not(emptyIterable()))))
     .andExpect
@@ -126,7 +127,7 @@ AbstractWebIntegrationTests {
      .andExpect
      (model().attribute("result",
                         Matchers.hasProperty("tag", Matchers.equalTo
-                                             (good4.getTag()))))
+                                             (good1.getTag()))))
      .andExpect
      (model().attribute("result",
                         Matchers.hasProperty("picture", Matchers.equalTo
