@@ -25,33 +25,73 @@
 /********************************************
 *	Item Design								*
 ********************************************/
-.itemN{
-	margin: 1%;
-	padding: 1%;
-	background-color: silvergray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-	overflow: auto;
+@media only screen {
+	.itemN{
+		background-color: white;
+		outline-style: solid;
+		outline-width: 1px; 
+		outline-color: lightgray;
+		overflow: hidden;
+		height: 19rem;
+	}
+	.itemN__container{
+		overflow: hidden;
+		height: 22rem; 
+	}
+	.itemN__img{
+		width: 100%;
+		margin-top: -10%;
+		height: 9rem;
+		overflow: hidden;
+	}
+}
+
+@media only screen and (min-width: 40.0625em){
+	.itemN{
+		background-color: white;
+		outline-style: solid;
+		outline-width: 1px; 
+		outline-color: lightgray;
+		overflow: hidden;
+		height: 16rem;
+	}
+	.itemN__container{
+		margin-bottom: 0.1rem;
+		overflow: hidden;
+		height: 11rem; 
+	}
+	.itemN__img{
+		width: 100%;
+		height: 11rem;
+		overflow: hidden;
+	}
 }
 .itemN__headlinecontainer{
-	
+	overflow: hidden;
+	padding-left: 1rem;
+	height: 3rem;
 }
-.itemN__imgcontainer{
-	width:20%;
-	max-height:10rem;
-	overflow:hidden;
-	float: left;
+.itemN--left{
+	float:left;
 }
-.itemN__textcontainer{
-	
+.itemN--right{
+	float:right;
 }
-.itemN__img{
-	
+.itemN--bottom{
+	background-color: white;
+	padding:0 1rem 0 1rem;
+	height: 2rem;
+	width: 95%;
+	position: absolute;
+	overflow: hidden;
+	bottom: 0.1rem;
 }
-.itemN__location{
-	right: 0.5rem;
-	bottom: 0.5rem;
+.itemN__link{
+	color: black;
+}
+.itemN__link:hover{
+	background-color:yellow;
+	color: black;
 }
 
 /********************************************
@@ -119,7 +159,16 @@ p{margin: 0; padding:0;}
 .divider{
 	border-bottom: 1px solid;
 	border-color: black;
-	margin: 1% 0;
+	margin: 0;
+	margin-bottom: 5px;
+	height: 0;
+	overflow: auto;
+}
+.divider--marginOff{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 0;
+	height: 0;
 	overflow: auto;
 }
 

@@ -12,32 +12,46 @@
 	
 	<body>
 		<div th:fragment="item">
-			<div class="small-12 medium-6 large-6 columns end">
-				<div th:id="good+${good.getId()}" class="itemN">
-					<div class="itemN__headlinecontainer">
-						<p th:text="${good.name}" class="headline--sub"></p> <!--${good.getId()}+'. '+-->
-					</div>
-					
-					<div class="divider"></div>
-					
-					<div class="itemN__imgcontainer">
-						<img th:src="${good.getId()+'/image'}" class="itemN__img"/>
-					</div>		
-
-					<div class="itemN__textcontainer">
-						<p class="text--super"> Description </p>
-						<p th:text="${good.description}" class="text"></p>
-
-						<p class="text--super"> Tags </p>
-						<p th:text="${good.tag.name}" class="text"></p>
-
-						<!-- User ID ist uninteressant. Anstelle müsste ort gegeben werden -->
-						<div class="itemN__location">
-							<p class="text--sub--right"> User-ID </p>
-							<p th:text="${good.user.id}" class="text--sub--right"></p>
+			<div class="small-12 medium-6 columns end">
+				<a th:href="@{'/item='+${good.getId()}}" class="itemN__link">
+					<div th:id="good+${good.getId()}" class="itemN">
+						
+						<div class="itemN__headlinecontainer">
+							<p th:text="${good.name}" class="headline--sub"></p> <!--${good.getId()}+'. '+-->
+						</div>
+						
+						<div class="divider"></div>
+						
+						<div class="row ">
+							<div class="itemN__container">
+								<div class="medium-6 small-12 columns "><!-- hide-for-small-only -->
+									<div class="itemN__img">
+										<img th:src="${good.getId()+'/image'}"/>
+									</div>
+								</div>		
+								
+								<div class="medium-6 small-12 columns">
+									
+									
+									<p th:text="${good.description}" class="text"></p>							
+								</div>
+							</div>
+							
+							<div class="itemN--bottom">
+								<div class="divider"></div>
+								
+								<div class="itemN--left">
+									<p th:text="${good.tag.name}" class="text"></p>
+								</div>
+								
+								<div class="itemN--right">
+									<!-- User ID ist uninteressant. Anstelle müsste ort gegeben werden -->
+									<p th:text="${good.user.location.city}" class="text--right"></p>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</a>
 			</div>
 		</div>
 		

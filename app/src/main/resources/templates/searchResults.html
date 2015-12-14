@@ -13,13 +13,15 @@
 	<body>
 		<div th:include="navigation :: navigation"></div>
 		
+		<div class="space"></div>
+		<!--/*
 		<div>
 			<h2 th:text="'Goods found by '+${resultParameterType}+': '+${resultParameter}"></h2>
 		</div>
-		
-	    <div class="row">
+		*/-->
+	    <div class="row small-collapse">
 			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
-				<div th:id="good+${good.id}" th:include="goods_item--multi :: item" ></div>
+				<div th:id="good+${good.id}" th:include="itemN--small :: item" ></div>
 			</div>
 		</div>
 		

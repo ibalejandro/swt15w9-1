@@ -34,13 +34,7 @@ public class UserManagementController {
 		this.userRepository=userRepository;
 	}
 	
-	/**
-	   * This method is the answer for the request to '/index' or '/' and redirects to the main page (index template).
-	   */
-	@RequestMapping({"/","/index"})
-	String index(){
-		return "index";
-	}
+
 	
 	/*@RequestMapping("/admin")
 	String userDetails(ModelMap map){
