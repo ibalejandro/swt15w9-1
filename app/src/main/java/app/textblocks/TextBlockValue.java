@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import app.util.SelectorFunctions;
@@ -13,15 +19,22 @@ import app.util.SelectorFunctions;
  * <p>
  * Created by justusadam on 05/12/15.
  */
-public class TextBlockValue {
 
+@Entity
+public class TextBlockValue {
+	@Id @GeneratedValue
+	private long id;
     /**
      * The text block for which this is a value
      */
+	
+	@OneToOne
     private TextBlock textBlock;
     /**
      * Values and tags for this text block.
      */
+	
+	@OneToMany
     private List<FormatTagValue> values;
 
     public TextBlockValue(TextBlock textBlock, List<FormatTagValue> values) {

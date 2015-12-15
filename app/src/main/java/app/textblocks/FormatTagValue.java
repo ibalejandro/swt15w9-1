@@ -2,6 +2,11 @@ package app.textblocks;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import app.util.Tuple;
 
 /**
@@ -9,8 +14,13 @@ import app.util.Tuple;
  * <p>
  * Created by justusadam on 05/12/15.
  */
-public abstract class FormatTagValue {
 
+@Entity
+public abstract class FormatTagValue {
+	@Id @GeneratedValue
+	private long id;
+
+	@OneToOne
     private FormatTag formatTag;
 
     /**

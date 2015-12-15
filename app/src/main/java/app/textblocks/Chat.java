@@ -2,11 +2,11 @@ package app.textblocks;
 
 import java.util.List;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * This class represents a single conversation step that has happened. Multiple text blocks, all with values in them.
@@ -18,7 +18,7 @@ public class Chat {
 	@Id @GeneratedValue
 	private Long id;
 
-	@ElementCollection(fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = TextBlockValue.class, fetch = FetchType.EAGER)
 	private List<TextBlockValue> blocks;
 
     public Chat(List<TextBlockValue> blocks) {

@@ -1,8 +1,18 @@
 package app.textblocks;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import app.util.Tuple;
 
+@Entity
 public final class FormatTag {
+	@Id @GeneratedValue
+	private long id;
+	
+	@OneToOne
     private FormatTagValue value;
     private String name;
 

@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.apache.commons.lang3.text.StrSubstitutor;
 
@@ -17,6 +19,8 @@ import app.util.SelectorFunctions;
  * This class abstracts a block of text (Textbaustein) in it's raw form (before values have been supplied).
  * It is responsible for rendering a form with input fields appropriate for the expected values that are supplied to the fields.
  */
+
+@Entity
 public class TextBlock {
 
     @Id @GeneratedValue
@@ -31,6 +35,7 @@ public class TextBlock {
     /**
      * A list of replaceable tags in the format string.
      */
+    @OneToMany
     private List<FormatTag> tags;
 
     public TextBlock(String formatString, List<FormatTag> tags) {
