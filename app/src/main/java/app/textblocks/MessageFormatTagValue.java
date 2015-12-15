@@ -7,7 +7,7 @@ import app.util.Tuple;
 
 /**
  * A format tag suitable for a longer message.
- *
+ * <p>
  * Created by justusadam on 05/12/15.
  */
 public class MessageFormatTagValue extends FormatTagValue {
@@ -17,18 +17,21 @@ public class MessageFormatTagValue extends FormatTagValue {
      */
     private static final List<String> inputClasses = mkInputClasses();
     private String value;
+
     public MessageFormatTagValue(FormatTag tag, String value) {
         super(tag);
         this.value = value;
     }
 
-    public MessageFormatTagValue() {}
+    public MessageFormatTagValue() {
+    }
 
     /**
      * Generates the list for {@link #inputClasses}
+     *
      * @return list of html classes
      */
-    protected static List<String> mkInputClasses () {
+    protected static List<String> mkInputClasses() {
         List<String> l = new LinkedList<>();
         l.add("message");
         return l;

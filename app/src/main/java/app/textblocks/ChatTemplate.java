@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * This class is a conversion step, before it has taken place. It consists of multiple text blocks which can be
  * rendered into a form.
- *
+ * <p>
  * Created by justusadam on 05/12/15.
  */
 public class ChatTemplate {
@@ -19,6 +19,7 @@ public class ChatTemplate {
 
     /**
      * Turn all text blocks into a single combined form (without a head)
+     *
      * @return headless html form
      */
     public String createForm() {
