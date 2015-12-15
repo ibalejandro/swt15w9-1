@@ -9,7 +9,7 @@
         <div th:include="navigation :: navigation"></div>
 		
 		<div class = "row">
-			<div class = "small-12 columns">
+			<!--/*<div class = "small-12 columns">
 				<div class="create">
 					<h1 class="create__title"> Good </h1>
 					
@@ -24,10 +24,10 @@
 							<input type="text" name="description" th:value="*{result.description}"/> 
 						</div>
 						
-						<!--<div> Noch zu überarbeiten. result.picture ist das Bild in Bitform, aber der GoodsManagementController erwartet einen Dateipfad...
+						<div> Noch zu überarbeiten. result.picture ist das Bild in Bitform, aber der GoodsManagementController erwartet einen Dateipfad...
 							<label class="create__label"> Picture: </label>
 							<input type="text" name="picture" th:value="*{result.picture}"/> 
-						</div>-->
+						</div>
 
 						<div>
 							<label class="create__label"> Tags: </label>
@@ -47,7 +47,52 @@
 						</div>
 					</form>
 				</div>
+			</div>*/-->
+			
+			<div class="small-12 columns space"></div>
+			
+			<div class="small-12 columns">
+				<h1 class="headline">Good</h1>
 			</div>
+			
+			<form th:action="@{/updatedGood}" method="post">
+				<div class="large-1 medium-2 small-12 columns">
+					<label for="name" class="form__label">Name</label> 
+				</div>
+				<div class="large-5 medium-10 small-12 columns">
+					<input type="text" id="name" name="name" th:value="*{result.name}"/>
+				</div>
+				
+				
+				
+				<div class="large-1 medium-2 small-12 columns">
+					<label for="tagId" class="form__label">Tags</label>
+				</div>
+				<div class="large-5 medium-10 small-12 columns">
+					<select id="tagId" name="tagId">
+						<option th:value="${result.tag.id}" th:text="${result.tag.name}"></option>
+						<option th:each="tag : ${tags}"
+								th:value="${tag.id}"
+								th:text="${tag.name}">
+						</option>
+					</select>  
+				</div>
+				
+				<div class="large-2 medium-2 small-12 columns">
+					<label for="description" class="form__label">Description</label>
+				</div>
+				<div class="large-10 medium-10 small-12 columns">
+					<textarea rows="1" type="text" id="description" name="description" th:text="*{result.description}"/>
+				</div>
+				
+				<input type="hidden" name="id" th:value="${result.id}"/>
+				
+				<div class="small-12 columns">
+					<input class="button" type="submit" value="Offer"/>
+				</div>
+			</form>
+			
+			
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>

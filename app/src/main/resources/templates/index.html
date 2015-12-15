@@ -16,7 +16,10 @@
 	<body>		
 		<div sec:authorize="isAuthenticated()">		
 			<th:block th:include="navigation :: navigation"></th:block>
-			<!--Plcace for Items-->
+			
+			<div class="space"></div>
+			
+			<th:block th:include="itemN--small :: show_items"></th:block>
 		</div>
 		
 		<div sec:authorize="!isAuthenticated()">

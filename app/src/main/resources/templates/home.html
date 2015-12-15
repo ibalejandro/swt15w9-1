@@ -11,18 +11,12 @@
 	</head>
 	
 	<body>
-		<div th:include="navigation :: navigation"></div>
+		<th:block th:include="navigation :: navigation"></th:block>
 	
-		<div>
-			<h2> Goods </h2>
-		</div>
-		
-		<div class="row small-collapse">
-			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
-				<div th:id="good+${good.id}" th:include="itemN--small :: item" ></div>
-			</div>
-		</div>
-		
+		<div class="space"></div>
+
+		<th:block th:include="itemN--small :: show_items"></th:block>
+
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 	
