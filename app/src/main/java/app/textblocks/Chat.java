@@ -3,7 +3,6 @@ package app.textblocks;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -18,7 +17,7 @@ public class Chat {
 	@Id @GeneratedValue
 	private Long id;
 
-	@OneToMany(targetEntity = TextBlockValue.class, fetch = FetchType.EAGER)
+	@OneToMany
 	private List<TextBlockValue> blocks;
 
     public Chat(List<TextBlockValue> blocks) {
