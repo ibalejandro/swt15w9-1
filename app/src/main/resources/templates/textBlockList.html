@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<th:block th:include="imports :: head"></th:block>
+</head>
+
+<body>
+	<div th:include="navigation :: navigation"></div>
+
+	<div>
+		<h2>TextBlockList</h2>
+	</div>
+
+	<div class="row">
+		<div th:each="textBlockFormatString : ${textBlocks}">
+			<p th:text="${textBlockFormatString}"></p>
+		</div>
+	</div>
+
+	<th:block th:include="imports :: script"></th:block>
+</body>
+</html>

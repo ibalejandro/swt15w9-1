@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<div th:include="navigation :: navigation"></div>
+	
+		<div>
+			<h2> Neuer TextBlock </h2>
+		</div>
+		
+		<form th:action="@{/newTextBlock}" method="post">
+			<input type="text" id="formatString" name="formatString" />
+			<input class="button" type="submit" value="Submit" /> 
+		</form>		
+
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>
