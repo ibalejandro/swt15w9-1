@@ -31,23 +31,19 @@
 						<h4 sec:authorize="!hasRole('ROLE_NORMAL')">Login notwendig</h4>
 						
 						
-						<table sec:authorize="hasRole('ROLE_NORMAL')">			
-							<thead>
-								<tr>
-									<th>Firstname</th>
-									<th>Lastname</th>
-									<th>Email</th>
-								</tr>
-							</thead>
-							
-							<tbody>
-								<tr>
-									<td th:text="${userAccount.firstname}">Hans</td>
-									<td th:text="${userAccount.lastname}">Mueller</td>
-									<td th:text="${userAccount.email}">email</td>
-								</tr>
-							</tbody>
-						</table>
+						<ul sec:authorize="hasRole('ROLE_NORMAL')">			
+									<li><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html">Password ändern</a></li>
+									<li th:text="${user.userAccount.firstname}">Firstname</li>
+									<li th:text="${user.userAccount.lastname}">Lastname</li>
+									<li th:text="${user.userAccount.email}">Email</li>
+									<li><a th:href="@{/modifyUserAccount/} + ${user.userAccount.getUsername()}" href="modifyUserAccount.html">Nutzerdaten bearbeiten</a></li>
+									<li th:text="${user.location.getLocation()}">Adresse</li>
+									<li><a th:href="@{/modifyAddress}" href="modifyAddress.html">Adresse bearbeiten</a></li>
+									<li th:text="${user.origin}">Herkunftsland</li>
+									<li th:text="${user.getPrefLanguage().toString()}">Muttersprache</li>
+									<li th:text="${user.showLanguages()}">weitere Sprachen</li>
+									<li><a th:href="@{/modifyLanguages}" href="modifyLanguages.html">Sprachen bearbeiten</a></li>
+						</ul>
 					</div>
 					
 				</div>

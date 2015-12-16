@@ -22,14 +22,18 @@ public class Language implements Serializable{
 	
 	private @Id @GeneratedValue long id;
 	private String name;
+	private String kennung;
 	
+	@SuppressWarnings("unused")
+	private Language(){}
 	/**
 	 * Constructor.
 	 * @param String The name of the Language
 	 */
-	public Language(String name) {
+	public Language(String name, String kennung) {
 		super();
 		this.name = name;
+		this.kennung=kennung;
 	}
 	
 	/**
@@ -46,6 +50,14 @@ public class Language implements Serializable{
 	   */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	   * Getter.
+	   * @return String The Language's ISO
+	   */
+	public String getkennung() {
+		return kennung;
 	}
 		
 	/**
