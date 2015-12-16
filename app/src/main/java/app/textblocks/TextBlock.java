@@ -38,6 +38,10 @@ public class TextBlock {
     @OneToMany
     private List<FormatTag> tags;
 
+    public TextBlock() {
+    	
+    }
+    
     public TextBlock(String formatString, List<FormatTag> tags) {
         this.formatString = formatString;
         this.tags = tags;

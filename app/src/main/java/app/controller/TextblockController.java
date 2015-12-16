@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.repository.TextBlockRepository;
+import app.textblocks.FormatTag;
 import app.textblocks.TextBlock;
+import app.util.FormatStringTagFilter;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
@@ -23,8 +24,6 @@ public class TextblockController {
 
 	@Autowired
 	public TextblockController(TextBlockRepository tbr) {
-		Assert.notNull(tbr);
-
 		this.textBlockRepository = tbr;
 	}
 
@@ -49,8 +48,13 @@ public class TextblockController {
 	
 	@RequestMapping(value = "/newTextBlock", method = RequestMethod.POST)
 	public String newTextBlock(HttpServletRequest request) {
+		String formatString = request.getParameter("formatString");
+		List<FormatTag> tags = new FormatStringTagFilter("formatString").getTags();
+		
 		//TODO: delete in final release!
-		System.out.println(request.getParameter("formatString"));
+		System.out.println(formatString);
+		
+		textBlockRepository.save(new TextBlock(formatString, tags));
 		
 		return "newTextBlock";
 	}
