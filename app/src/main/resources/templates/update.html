@@ -14,26 +14,26 @@
 				<div class="create">
 					<h1 class="create__title"> Good </h1>
 					
-					<form th:action="@{/updatedGood}" method="post">
+					<form th:action="@{/updatedGood}" th:object="${good}" method="post">
 						<div>
-							<label class="create__label"> Name : </label>
-							<input type="text" name="name" th:value="*{result.name}"/>
+							<label class="create__label"> Name </label>
+							<input type="text" name="name" th:value="*{name}"/>
 						</div>
 
 						<div>
-							<label class="create__label"> Description: </label>
-							<input type="text" name="description" th:value="*{result.description}"/> 
+							<label class="create__label"> Description </label>
+							<input type="text" name="description" th:value="*{description}"/> 
 						</div>
 						
 						<div>
-							<label class="create__label"> Picture: </label>
-							<input type="text" name="picture" th:value="*{result.picture}"/> 
+							<label class="create__label"> Picture </label>
+							<input type="text" name="picture" th:value="*{picture}"/> 
 						</div>
 
 						<div>
-							<label class="create__label"> Tags: </label>
+							<label class="create__label"> Tag </label>
 							<select name="tagId">
-				    			<option th:value="${result.tag.id}" th:text="${result.tag.name}"></option>
+				    			<option th:value="${good.tag.id}" th:text="${good.tag.name}"></option>
 				    			<option th:each="tag : ${tags}"
 				            			th:value="${tag.id}"
 				            			th:text="${tag.name}">
@@ -41,7 +41,7 @@
 							</select>  
 						</div>
 						
-						<input type="hidden" name="id" th:value="${result.id}"/>
+						<input type="hidden" name="id" th:value="${good.id}"/>
 						
 						<div>
 							<input class="button" type="submit" value="Update"/>
