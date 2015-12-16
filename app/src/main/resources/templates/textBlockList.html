@@ -8,13 +8,21 @@
 <body>
 	<div th:include="navigation :: navigation"></div>
 
-	<div>
+	<div class="row">
 		<h2>TextBlockList</h2>
 	</div>
 
 	<div class="row">
+		<h3>Raw FormatStrings</h3>
 		<div th:each="textBlockFormatString : ${textBlocks}">
 			<p th:text="${textBlockFormatString}"></p>
+		</div>
+	</div>
+	
+	<div class="row">
+		<h3>Textblocks as Form</h3>
+		<div th:each="textBlockHtmlInputString : ${textBlocksHtmlInput}">
+			<p th:utext="${textBlockHtmlInputString}"></p>
 		</div>
 	</div>
 

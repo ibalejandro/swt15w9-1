@@ -31,12 +31,16 @@ public class TextblockController {
 	public String showTextBlocks(Model model) {
 		Iterable<TextBlock> itb = textBlockRepository.findAll();
 		List<String> tbFormatStrings = new LinkedList<>();
+		List<String> tbHtmlInputStrings = new LinkedList<>();
 		
 		for (TextBlock textBlock : itb) {
 			tbFormatStrings.add(textBlock.getFormatString());
+			tbHtmlInputStrings.add(textBlock.asForm());
+			System.out.println(textBlock.asForm());
 		}
 		
 		model.addAttribute("textBlocks", tbFormatStrings);
+		model.addAttribute("textBlocksHtmlInput", tbHtmlInputStrings);
 		
 		return "textBlockList";
 	}
