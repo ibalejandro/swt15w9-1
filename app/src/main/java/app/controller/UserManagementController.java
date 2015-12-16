@@ -191,15 +191,18 @@ public class UserManagementController {
 			user_xyz.removeAllLanguages();
 			
 			if(SecondLanguage!=null && !(SecondLanguage.isEmpty())){
-				System.out.println("1.0");
-				Language l2=languageRepository.findByName(SecondLanguage);
+				Language l2;
+				if(SecondLanguage.length()==2)l2=languageRepository.findByKennung(SecondLanguage);
+				else  l2=languageRepository.findByName(SecondLanguage);
 				System.out.println("1.1- "+l2.toString());
 				if(l2!=null)user_xyz.setLanguage(l2);
 				System.out.println("1.2- "+ user_xyz.getLanguages().toString());
 			}
 			if(ThirdLanguage!=null && !(ThirdLanguage.isEmpty())){
-				System.out.println("2.0");
-				Language l3=languageRepository.findByName(ThirdLanguage);
+				Language l3;
+				if(ThirdLanguage.length()==2)l3=languageRepository.findByKennung(ThirdLanguage);
+				else  l3=languageRepository.findByName(ThirdLanguage);
+				
 				System.out.println("2.1- "+l3.toString());
 				if(l3!=null)user_xyz.setLanguage(l3);
 				System.out.println("2.2- "+ user_xyz.getLanguages().toString());
