@@ -1,0 +1,34 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		
+		<div th:include="navigation :: navigation"></div>	
+	
+		<div class="row">
+			<div class="large-12 colums">
+				<h1 th:text="@{&Uuml;ber dich: &nbsp; } + ${userAccount.getUsername()}"> UserAccount</h1>
+			
+				<form th:action="@{/modifyUserAccount_submit/} + ${userAccount.getUsername()}" method="post">
+					<p th:text="@{Lastname:&nbsp;} + ${userAccount.getLastname()}" class="new__user__text">Nachname:</p>
+					<input name="lastname" type="text" />
+					
+					<p th:text="@{Firstname:&nbsp;} + ${userAccount.getFirstname()}" class="new__user__text">Vorname:</p>
+					<input name="firstname" type="text" />
+					
+					<p th:text="@{Email:&nbsp;} + ${userAccount.getEmail()}" class="new__user__text">Email</p>
+					<input name="email" type="text" />
+					
+					<input type="submit" class="button" value="Next"/>
+				</form>
+			</div>
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+	
+</html>

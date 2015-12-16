@@ -1,0 +1,34 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		
+		<div th:include="navigation :: navigation"></div>	
+	
+		<div class="row">
+			<div class="large-12 colums">
+				<h1 th:text="@{Your Languages: &nbsp; }"> UserAccount</h1>
+			
+				<form th:action="@{/modifyLanguages_submit/}" method="post">
+					<p th:text="@{Preferred Language: &nbsp; } + ${user.getPrefLanguage().toString()}" class="new__user__text" >Preferred Language: </p>
+					
+					
+					<p th:text="@{Language 2: &nbsp; }" class="new__user__text">2.Language:</p>
+					<input name="secondLanguage" type="text" />
+					
+					<p th:text="@{Language 3: &nbsp; }" class="new__user__text">3.Language:</p>
+					<input name="thirdLanguage" type="text" />
+					
+					<input type="submit" class="button" value="Next"/>
+				</form>
+			</div>
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+	
+</html>
