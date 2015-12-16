@@ -260,7 +260,7 @@ public class RestorePassword {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy HH:mm:ss"
                     // simpleDateFormat.format(zeitstempel)
                     
-                    String NewPassword = sha256(user_xyz.getActivationkey() + zeitstempel).substring(4, 14); 
+                    String NewPassword = "PW:"+sha256(user_xyz.getActivationkey() + zeitstempel).substring(4, 14); 
                     
                     String domain     = "http://localhost:8080";
                     String mailtext = "<html> <head> </head> <body> <h1>New Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> This is your new temp Password: "+NewPassword+" </body> </html>";
