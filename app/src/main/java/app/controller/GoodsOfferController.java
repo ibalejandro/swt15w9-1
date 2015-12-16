@@ -17,7 +17,7 @@ import app.model.User;
 import app.model.UserRepository;
 import app.repository.GoodsRepository;
 import app.repository.TagsRepository;
-import validator.GoodValidator;
+import app.validator.GoodValidator;
 
 /**
 * <h1>GoodsOfferController</h1>

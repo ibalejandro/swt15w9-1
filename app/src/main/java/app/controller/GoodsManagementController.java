@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import app.repository.TagsRepository;
-import validator.GoodValidator;
+import app.validator.GoodValidator;
 import app.model.GoodEntity;
 import app.model.TagEntity;
 import app.model.User;
