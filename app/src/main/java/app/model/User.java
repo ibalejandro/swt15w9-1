@@ -4,13 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.util.Assert;
 
@@ -31,8 +36,7 @@ public class User implements Serializable{
 	
 	private Address location;
 	private String origin;
-	private String PrefferedLanguage;
-	@OneToMany(cascade = CascadeType.ALL) private Set<Language> languages;
+	
 	private boolean enabled;
 	private boolean activated; // Aktivierungsstatus (d1456)
 	private int registrationstate; // Registrierungsstatus
@@ -40,7 +44,16 @@ public class User implements Serializable{
 	private Date registrationdate; //Registrierungsdatum (d1456)
 	private String adresstyp; 
 	@OneToOne private UserAccount userAccount;
-	//Einbindung Güter:
+	
+	//Einseitig:
+	@ManyToOne (targetEntity=Language.class, cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH }, fetch=FetchType.EAGER) 
+	@JoinColumn(name= "PREF_LANGUAGE")
+		private Language PrefLanguage;
+		
+	@ManyToMany(targetEntity=Language.class,cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH }, fetch=FetchType.EAGER)
+	private Set<Language> languages;
+	
+	//Bidirektional:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
 	@OneToMany(targetEntity=Dialog.class, cascade = CascadeType.ALL, fetch= FetchType.EAGER) private Set<Dialog> dialogs;
 	  
@@ -63,7 +76,7 @@ public class User implements Serializable{
 		this.activationkey = "";
 		this.adresstyp = "";
 		//-1 ~ noch nichts eingegeben; 0-8 ~ für Registriegungsfortschritt; 9 ~ Konto von Admin o.ä. deaktiviert; 10 ~ Kontodaten vollständig und aktiviert; 
-		Set<Language>languages=new HashSet<>();
+		languages=new HashSet<>();
 	}
 	
 	/**
@@ -76,7 +89,7 @@ public class User implements Serializable{
 	  // It is used to eliminate a good if it already exists.
 	  removeGood(good);
 	  
-		goods.add(good);
+	  goods.add(good);
 	}
 	
 	/**
@@ -163,14 +176,46 @@ public class User implements Serializable{
 		languages.add(newLanguage);
 	}
 	
-	//Hilfsfunktionen: umwandeln in Language-Objekt!!!
-	public String getLanguage() {
-		return PrefferedLanguage;
+	
+	/**
+	   * Remove Language.
+	   * @param Language The new language that should be added.
+	   * @return Nothing
+	   */
+	public Language removeLanguage(Language language){
+		if(language.equals(PrefLanguage))return null;
+		if(languages.remove(language))return language;
+		return null;
 	}
-	public void setLanguage(String language) {
-		this.PrefferedLanguage = language;
+	
+	public void removeAllLanguages(){
+		Set<Language> PL=new HashSet<>();
+		PL.add(PrefLanguage);
+		languages.retainAll(PL);
 	}
-	/////////////////
+	
+
+	public Language getPrefLanguage() {
+		return PrefLanguage;
+	}
+	
+	
+	public void setPrefLanguage(Language language) {
+		//PrefLanguage in Set Languages enthalten
+		if(!languages.contains(language)){
+			languages.add(language);
+			System.out.println("already here");
+		}
+		this.PrefLanguage=language;
+	}
+	
+	public String showLanguages(){
+		String languageNames="";
+		for(Language l:languages){
+			languageNames=languageNames+l.toString()+", ";
+		}
+		return languageNames.substring(0, languageNames.length()-2);
+	}
 
 	/**
 	   * Getter.

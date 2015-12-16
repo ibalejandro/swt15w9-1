@@ -2,6 +2,7 @@ package app.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -9,11 +10,14 @@ import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+
 import app.model.Address;
+import app.model.Language;
 import app.model.TagEntity;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.DialogRepository;
+import app.repository.LanguageRepository;
 import app.repository.TagsRepository;
 
 @Component
@@ -22,12 +26,14 @@ public class TestDaten implements DataInitializer {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
 	private final DialogRepository dialogRepository;
+	private final LanguageRepository languageRepository;
 	private final TagsRepository tagsRepository;
 
 	@Autowired
 	public TestDaten(UserAccountManager userAccountManager, 
 	                 UserRepository userRepository, 
-	                 DialogRepository dialogRepository, 
+	                 DialogRepository dialogRepository,
+	                 LanguageRepository languageRepository,
 	                 TagsRepository tagsRepository) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
@@ -37,13 +43,14 @@ public class TestDaten implements DataInitializer {
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
 		this.dialogRepository = dialogRepository;
+		this.languageRepository=languageRepository;
 		this.tagsRepository = tagsRepository;
 	}
 
 	@Override
 	public void initialize() {
 
-		initializeUsers(userAccountManager, userRepository, dialogRepository, 
+		initializeUsers(userAccountManager, userRepository, dialogRepository, languageRepository,
 		                tagsRepository);
 
 	}
@@ -51,6 +58,7 @@ public class TestDaten implements DataInitializer {
 	private void initializeUsers(UserAccountManager userAccountManager, 
 	                             UserRepository userRepository, 
 	                             DialogRepository dialogRepository, 
+	                             LanguageRepository languageRepository,
 	                             TagsRepository tagsRepository) {
 
 		if (userAccountManager.findByUsername("boss").isPresent()) {
@@ -76,14 +84,30 @@ public class TestDaten implements DataInitializer {
 		Address address1 = new Address("Mittelstraße", " 1", "11587", "Dresden");
 
 		User user1 = new User(u1, address1);
-		user1.setLanguage("Deutsch");
 		user1.setOrigin("Deutschland");
 		user1.setRegistrationdate(new Date());
 		user1.Activate();
 
 		User user2 = new User(u2, address1);
-		user2.setLanguage("Arabisch");
 		user2.setRegistrationdate(new Date());
+		userRepository.save(user1);
+		userRepository.save(user2);
+		
+		//Sprachen:
+		Language language1= new Language("Deutsch", "de");
+		Language language2= new Language("Englisch", "en");
+		Language language3= new Language("Arabisch", "ar");
+		Language language4= new Language("Spanisch", "es");
+		languageRepository.save(language1);
+		languageRepository.save(language2);
+		languageRepository.save(language3);
+		languageRepository.save(language4);
+		
+		user1.setPrefLanguage(language1);
+		user1.setLanguage(language2);
+		
+		user2.setPrefLanguage(language3);
+		
 		userRepository.save(user1);
 		userRepository.save(user2);
 
