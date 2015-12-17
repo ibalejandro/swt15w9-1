@@ -234,17 +234,28 @@ public class DeaktivateUser {
 	}
 	
 	@RequestMapping(value = "/submit_deaktivateUser", method = RequestMethod.POST)
-	public String submit_deaktivateUser(@RequestParam("g-recaptcha-response")String CaptchaResponse, @LoggedIn Optional<UserAccount> userAccount){
+	public String submit_deaktivateUser(@RequestParam("deaktivate")String checkbox_deaktivate, @RequestParam("g-recaptcha-response")String CaptchaResponse, @LoggedIn Optional<UserAccount> userAccount){
 
 		System.out.println("## CaptchaResponse:");
 		System.out.println(CaptchaResponse);
 
-		if (CaptchaResponse.isEmpty() || (!userAccount.isPresent()))
+		if (!userAccount.isPresent())
 		{
-			return "redirect:/";		   
+			return "redirect:/";
+		}
+		
+		if (CaptchaResponse.isEmpty() || checkbox_deaktivate.isEmpty())
+		{
+			return "redirect:/deaktivateUser";		   
 		}
 		else
 		{
+			if (!checkbox_deaktivate.equals("yes"))
+			{
+				return "redirect:/deaktivateUser";		   
+			}
+			
+			
 			//http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
 			String Secret="6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
@@ -278,7 +289,7 @@ public class DeaktivateUser {
                     String NewPassword = "PW:"+sha256(user_xyz.getActivationkey() + zeitstempel).substring(4, 14); 
                     
                     String domain     = "http://localhost:8080";
-                    String mailtext = "<html> <head> </head> <body> <h1>New Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> This is your new temp Password: "+NewPassword+" </body> </html>";
+                    String mailtext = "<html> <head> </head> <body> <h1>Deactivated RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> Dein Useraccount wurde deaktiviert. </body> </html>";
                     String mailadresse = user_xyz.getUserAccount().getEmail();
 					
 					
@@ -287,7 +298,7 @@ public class DeaktivateUser {
                     {
                         //Mail senden: 
                         try {
-                            Mailsenden(mailadresse,"New Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+                            Mailsenden(mailadresse,"Deactivated RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
                             System.out.println("Mail versandt");
                         } catch (MessagingException | IOException e) {
                             // TODO Auto-generated catch block
@@ -296,6 +307,8 @@ public class DeaktivateUser {
                     }
 					
                     user_xyz.DeActivate();
+                    userAccountManager.disable(user_xyz.getUserAccount().getIdentifier());
+                    
 					userRepository.save(user_xyz);
 					
 					System.out.println("Nutzer deaktiviert");

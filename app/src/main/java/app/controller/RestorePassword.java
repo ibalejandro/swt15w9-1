@@ -263,7 +263,7 @@ public class RestorePassword {
                     String NewPassword = "PW:"+sha256(user_xyz.getActivationkey() + zeitstempel).substring(4, 14); 
                     
                     String domain     = "http://localhost:8080";
-                    String mailtext = "<html> <head> </head> <body> <h1>New Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> This is your new temp Password: "+NewPassword+" </body> </html>";
+                    String mailtext = "<html> <head> </head> <body> <h1>Reset Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> This is your new temp Password: "+NewPassword+" </body> </html>";
                     String mailadresse = user_xyz.getUserAccount().getEmail();
 					
 					
@@ -272,7 +272,7 @@ public class RestorePassword {
                     {
                         //Mail senden: 
                         try {
-                            Mailsenden(mailadresse,"New Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+                            Mailsenden(mailadresse,"Reset Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
                             System.out.println("Mail versandt");
                         } catch (MessagingException | IOException e) {
                             // TODO Auto-generated catch block
