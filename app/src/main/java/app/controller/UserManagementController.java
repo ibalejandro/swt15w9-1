@@ -110,6 +110,8 @@ public class UserManagementController {
 			}
 			userRepository.save(user_xyz);
 			userAccountManager.save(user_xyz.getUserAccount());
+			
+			System.out.println("Passwort geändert");
 
 			return "redirect:/data";
 		}
