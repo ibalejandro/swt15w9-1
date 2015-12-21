@@ -156,6 +156,15 @@ p{margin: 0; padding:0;}
 .space{
 	margin-top: 2rem;
 }
+.space--2rem{
+	margin-top: 2rem;
+}
+.space--4rem{
+	margin-top: 4rem;
+}
+.space--6rem{
+	margin-top: 6rem;
+}
 .divider{
 	border-bottom: 1px solid;
 	border-color: black;

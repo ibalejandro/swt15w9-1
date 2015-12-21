@@ -12,47 +12,40 @@
 	</head>
 	
 	<body>
-		<div class="row">
-			<div class="small-12 colums">
-				<div>
-				
-					<header>
-						<h1>Kundendaten</h1>
-					</header>
-					
-					<div>
-						<ul>
-							<div sec:authorize="!isAuthenticated()"> <a th:href="@{/login}" >Login</a></div>
+		<th:block th:include="imports :: head"></th:block>
+	
+		<header>
+			<h1>Kundendaten</h1>
+		</header>
+		
+		<div>
+			<ul>
+				<div sec:authorize="!isAuthenticated()"> <a th:href="@{/login}" >Login</a></div>
 
-							<div sec:authorize="isAuthenticated()">
-								<form th:action="@{/logout}" method="post">
-									<input class="button" type="submit" value="Logout" />
-								</form>
-							</div>
-						</ul>
-					
-						<h4 sec:authorize="!hasRole('ROLE_NORMAL')">Login notwendig</h4>
-						
-						
-						<ul sec:authorize="hasRole('ROLE_NORMAL')">			
-									<li><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html">Password ändern</a></li>
-									<li th:text="${user.userAccount.firstname}">Firstname</li>
-									<li th:text="${user.userAccount.lastname}">Lastname</li>
-									<li th:text="${user.userAccount.email}">Email</li>
-									<li><a th:href="@{/modifyUserAccount/} + ${user.userAccount.getUsername()}" href="modifyUserAccount.html">Nutzerdaten bearbeiten</a></li>
-									<li th:text="${user.location.getLocation()}">Adresse</li>
-									<li><a th:href="@{/modifyAddress}" href="modifyAddress.html">Adresse bearbeiten</a></li>
-									<li th:text="${user.origin}">Herkunftsland</li>
-									<li th:text="${user.getPrefLanguage().toString()}">Muttersprache</li>
-									<li th:text="${user.showLanguages()}">weitere Sprachen</li>
-									<li><a th:href="@{/modifyLanguages}" href="modifyLanguages.html">Sprachen bearbeiten</a></li>
-									<p></p>
-									<li><a th:href="@{/deaktivateUser}" href="deaktivateUser.html">Nutzerkonto deaktivieren</a></li>
-						</ul>
-					</div>
-					
+				<div sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="post">
+						<input class="button" type="submit" value="Logout" />
+					</form>
 				</div>
-			</div>
+			</ul>
+		
+			<h4 sec:authorize="!hasRole('ROLE_NORMAL')">Login notwendig</h4>
+			
+			
+			<ul sec:authorize="hasRole('ROLE_NORMAL')">			
+				<li> <a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html">Password ändern</a> </li>
+				<li th:text="${user.userAccount.firstname}">Firstname</li>
+				<li th:text="${user.userAccount.lastname}">Lastname</li>
+				<li th:text="${user.userAccount.email}">Email</li>
+				<li> <a th:href="@{/modifyUserAccount/} + ${user.userAccount.getUsername()}" href="modifyUserAccount.html">Nutzerdaten bearbeiten</a> </li>
+				<li th:text="${user.location.getLocation()}">Adresse</li>
+				<li> <a th:href="@{/modifyAddress}" href="modifyAddress.html">Adresse bearbeiten</a> </li>
+				<li th:text="${user.origin}">Herkunftsland</li>
+				<li th:text="${user.getPrefLanguage().toString()}">Muttersprache</li>
+				<li th:text="${user.showLanguages()}">weitere Sprachen</li>
+				<li> <a th:href="@{/modifyLanguages}" href="modifyLanguages.html">Sprachen bearbeiten</a> </li>
+				<li> <a th:href="@{/deaktivateUser}" href="deaktivateUser.html">Nutzerkonto deaktivieren</a> </li>
+			</ul>
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
