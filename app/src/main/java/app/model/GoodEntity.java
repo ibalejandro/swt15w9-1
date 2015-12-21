@@ -15,9 +15,11 @@ import javax.persistence.Table;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.net.URL;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.ImageObserver;
@@ -39,11 +41,12 @@ public class GoodEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	public long id;
 	
 	/* Ferdinand's Code */
-	private static final ImageObserver observer = (img, infoflags, x,y,width,height)->true;
 	
+	private static final ImageObserver observer = (img, infoflags, x, y, width,
+                                                 height)->true;
 	
 	private String name;
 	private String description;
@@ -56,10 +59,11 @@ public class GoodEntity implements Serializable {
    * it will “ask” the JPA to load this collection from the database.
    * To avoid Lazy Loading you have to use Eager Loading.
    */
+  
 	@OneToOne(targetEntity = TagEntity.class, fetch = FetchType.EAGER) 
 	private TagEntity tag;
 	
-	@Column(length=90001)
+	@Column(length = 90001)
 	private byte[] picture;
 
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER) 
@@ -90,30 +94,37 @@ public class GoodEntity implements Serializable {
 	 
 	public static byte[] createPicture(String pictureLink) {
 	  /* Ferdinand's code */
-		try{
-			URL srcPic = new URL(pictureLink);
-			BufferedImage img = ImageIO.read(srcPic);
-      
+    try{
+      URL srcPic = new URL(pictureLink);
+      BufferedImage img = ImageIO.read(srcPic);
+
 			double scaling;
-			if(img.getWidth()!=512){
-				scaling = 512.0/img.getWidth();
-			}else{
+			if (img.getWidth() != 512) {
+				scaling = 512.0 / img.getWidth();
+			}
+      else{
 				scaling = 1.0;
 			}
       
-			BufferedImage imgOut = new BufferedImage((int)(scaling*((double)img.getWidth())),(int)(scaling*((double)img.getHeight())),img.getType());
+			BufferedImage img2 = new BufferedImage(img.getWidth(), img.getHeight(), 
+                                             BufferedImage.TYPE_INT_RGB);
+			img2.createGraphics().drawImage(img, 0, 0, Color.WHITE, observer);
+			
+			BufferedImage imgOut = new BufferedImage((int)(scaling*((double)img.getWidth())),(int)(scaling*((double)img.getHeight())),img.TYPE_INT_RGB);
 			Graphics2D g = imgOut.createGraphics();
-			AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
-			g.drawImage(img, transform, observer);
+			AffineTransform transform = AffineTransform.getScaleInstance(scaling, 
+                                                                   scaling);
+			g.drawImage(img2, transform, observer);
       
-			ByteArrayOutputStream imgoutput = new ByteArrayOutputStream();
-			ImageIO.write(imgOut, "jpg", imgoutput);
-			return imgoutput.toByteArray();
-		} 
-		catch(Exception e) {
-			throw new IllegalStateException(e.getMessage(), e);
-		}
-
+      ByteArrayOutputStream imgoutput = new ByteArrayOutputStream();
+      ImageIO.write(imgOut, "jpg", imgoutput);
+      return imgoutput.toByteArray();
+      
+    } 
+    catch (Exception e) {
+      throw new IllegalStateException(e.getMessage(), e);
+    }
+    /* */
 	}
 	
 	 /**
@@ -123,6 +134,20 @@ public class GoodEntity implements Serializable {
 	public static GoodEntity createEmptyGood() {
 	  return new GoodEntity("", "", null, "", null);
 	}
+	
+	/**
+   * This method returns the size of a given Iterable Object
+   * @param Iterable<?> An Iterable Object
+   * @return int The size of the given Iterable Object
+   */
+	public static int getIterableSize(Iterable<?> it) {
+    if (it instanceof Collection) return ((Collection<?>)it).size();
+    else {
+      int i = 0;
+      for (@SuppressWarnings("unused") Object obj : it) i++;
+      return i;
+    }
+  }
   
   /**
    * This method builds a String in which the good's information is presented

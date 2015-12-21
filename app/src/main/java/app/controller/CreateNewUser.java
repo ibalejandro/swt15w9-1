@@ -40,8 +40,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import app.model.Address;
+import app.model.Language;
 import app.model.User;
 import app.model.UserRepository;
+import app.repository.LanguageRepository;
 
 /**
 * <h1>CreateNewUserController</h1>
@@ -56,6 +58,7 @@ import app.model.UserRepository;
 public class CreateNewUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
+	private final LanguageRepository languageRepository;
     private final MailSender mailSender;
 
 	/**
@@ -63,13 +66,13 @@ public class CreateNewUser {
 	   * @param CreateNewUser
 	   */
 	@Autowired
-	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository , MailSender mailSender){
+	public CreateNewUser (UserAccountManager userAccountManager, UserRepository userRepository,LanguageRepository languageRepository, MailSender mailSender){
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
 
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
-		
+		this.languageRepository= languageRepository;
 		this.mailSender = mailSender;
 	}
 	
@@ -1029,7 +1032,32 @@ public class CreateNewUser {
 				return "errorpage_empty";
 			}
             
-			user_xyz.setLanguage(Nativelanguage);
+			Language PreferredLanguage= languageRepository.findByName(Nativelanguage);
+			if(PreferredLanguage==null)System.out.println("Prefl==null");
+			else System.out.println(PreferredLanguage);
+			
+			user_xyz.setPrefLanguage(PreferredLanguage);
+			System.out.println(user_xyz.getLanguages());
+			userRepository.save(user_xyz);
+			System.out.println("save");
+			
+			
+			/////////////////Muss noch geÃ¤ndert werden, Spracheingabe
+			if(OtherLanguages!=null && !OtherLanguages.isEmpty()){
+				for(String languageName:OtherLanguages.split(",")){
+					System.out.println(languageName);
+					if(languageRepository.findByName(languageName)!=null){
+						//user_xyz.setLanguage(languageRepository.findByName(languageName));
+						Language l1=languageRepository.findByName(languageName);
+						System.out.println(l1.toString());
+						user_xyz.setLanguage(l1);
+						userRepository.save(user_xyz);
+					
+					}
+					System.out.println(user_xyz.getLanguages());
+				}
+			}
+			/////////////////
 			
 			user_xyz.setOrigin(Origin);
 			
@@ -1446,7 +1474,32 @@ public class CreateNewUser {
 				return "errorpage2b_empty";
 			}
             
-			user_xyz.setLanguage(Nativelanguage);
+			Language PreferredLanguage= languageRepository.findByName(Nativelanguage);
+			if(PreferredLanguage==null)System.out.println("Prefl==null");
+			else System.out.println(PreferredLanguage);
+			
+			user_xyz.setPrefLanguage(PreferredLanguage);
+			System.out.println(user_xyz.getLanguages());
+			userRepository.save(user_xyz);
+			System.out.println("save");
+			
+			
+			/////////////////Muss noch geÃ¤ndert werden, Spracheingabe
+			if(OtherLanguages!=null && !OtherLanguages.isEmpty()){
+				for(String languageName:OtherLanguages.split(",")){
+					System.out.println(languageName);
+					if(languageRepository.findByName(languageName)!=null){
+						//user_xyz.setLanguage(languageRepository.findByName(languageName));
+						Language l1=languageRepository.findByName(languageName);
+						System.out.println(l1.toString());
+						user_xyz.setLanguage(l1);
+						userRepository.save(user_xyz);
+					
+					}
+					System.out.println(user_xyz.getLanguages());
+				}
+			}
+			/////////////////
 			
 			user_xyz.setOrigin(Origin);
 			

@@ -1,0 +1,37 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		
+		<div th:include="navigation :: navigation"></div>	
+	
+		<div class="row">
+			<div class="large-12 colums">
+				<h1 th:text="@{Your address: &nbsp; } + ${userAccount.getUsername()}"> UserAccount</h1>
+			
+				<form th:action="@{/modifyAddress_submit/}" method="post">
+					<p class="new__user__text">Street:</p>
+					<input name="street" type="text" />
+					
+					<p class="new__user__text">House Number:</p>
+					<input name="houseNr" type="text" />
+					
+					<p class="new__user__text">ZipCode</p>
+					<input name="zipCode" type="text"/>
+					
+					<p class="new__user__text">City:</p>
+					<input name="city" type="text"/>
+					
+					<input type="submit" class="button" value="Next"/>
+				</form>
+			</div>
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+	
+</html>

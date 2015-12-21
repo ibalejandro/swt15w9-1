@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import app.model.GoodEntity;
 import app.model.TagEntity;
 import app.repository.GoodsRepository;
 import app.repository.TagsRepository;
@@ -65,12 +66,11 @@ public class GoodsSearchController {
      * The type of parameter and the parameter itself for the search are
      * sent to the view, so that the user can see his search criteria.
      */
-
+		Iterable<GoodEntity> goodsFound;
 		if (tagId != -1L) {
 		  TagEntity tag = tagsRepository.findOne(tagId);
 		  model.addAttribute("resultParameter", tag.getName());
-		  model.addAttribute("result", goodsRepository.findByTag(tag));
-
+		  goodsFound = goodsRepository.findByTag(tag);
 		}
 		/*
      * If the tagId is -1L that means that the user doesn't want to filter by
@@ -78,10 +78,13 @@ public class GoodsSearchController {
      */
 		else {
 		  model.addAttribute("resultParameter", "All");
-		  model.addAttribute("result", goodsRepository.findAll());
+		  goodsFound = goodsRepository.findAll();
 		}
-
+		
+		model.addAttribute("result", goodsFound);
 		model.addAttribute("resultParameterType", parameterType);
+		model.addAttribute("numberOfResults", 
+		                   GoodEntity.getIterableSize(goodsFound));
 		return "searchResults";
   }
 

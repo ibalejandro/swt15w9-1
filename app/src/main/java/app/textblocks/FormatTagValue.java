@@ -2,18 +2,33 @@ package app.textblocks;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import app.util.Tuple;
 
 /**
  * Class for associating {@link FormatTag}s with a value.
- *
+ * <p>
  * Created by justusadam on 05/12/15.
  */
-public abstract class FormatTagValue {
 
+@Entity
+public abstract class FormatTagValue {
+	@Id @GeneratedValue
+	private long id;
+
+	@OneToOne
     private FormatTag formatTag;
 
-    public FormatTagValue () {}
+    /**
+     * This constructor is for creating empty FormatTagValues to be used as initial values in new FormatTags.
+     *
+     * Every subclass will require such an empty constructor.
+     */
+    public FormatTagValue() {}
 
     protected FormatTagValue(FormatTag tag) {
         formatTag = tag;
@@ -31,15 +46,23 @@ public abstract class FormatTagValue {
         return formatTag.asIdentifier(baseIdentifier);
     }
 
+    /**
+     * Construct a value of the same kind filles with the (parsed) value of s
+     *
+     * @param tag associated tag
+     * @param s value string
+     * @return new FormatTagValue
+     * @throws TypeError
+     */
     protected abstract FormatTagValue fromValue(FormatTag tag, String s) throws TypeError;
 
     /**
      * This is the canonical function for constructing a {@link FormatTagValue} from the {@link String} out of a html
      * form
-     *
+     * <p>
      * It verifies the input and either throws a type error or constructs the value.
      *
-     * @param tag tag to associate the constructed value with
+     * @param tag   tag to associate the constructed value with
      * @param value the string from the form
      * @return new FormatTagValue
      * @throws TypeError
@@ -53,7 +76,7 @@ public abstract class FormatTagValue {
 
     /**
      * Verifies the structure of the input.
-     *
+     * <p>
      * This should be overwritten in subclasses if the input needs a specific structure. See {@link DateFormatTagValue#verify(String)}
      *
      * @param value String from the html form
@@ -79,6 +102,7 @@ public abstract class FormatTagValue {
 
     /**
      * Returns some classes that the generated input field should have.
+     *
      * @return List of html classes
      */
     public abstract List<String> getInputClasses();
