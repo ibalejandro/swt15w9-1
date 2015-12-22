@@ -48,31 +48,31 @@
 							
 							<ul class="dropdown">
 								<li sec:authorize="hasRole('ROLE_ADMIN')">
-									<a th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
+									<a class="center" th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
 								</li>
 								
 								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a th:href="@{/data}" href="data.html" > Eigene Daten</a>
+									<a class="center" th:href="@{/data}" href="data.html" > Eigene Daten</a>
 								</li>
 								
 								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a th:href="@{/myOfferedGoods}" href="myOfferedGoods"> My Offered Goods</a>
+									<a class="center" th:href="@{/myOfferedGoods}" href="myOfferedGoods"> My Offered Goods</a>
 								</li>
 								
 								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
+									<a class="center" th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
 								</li>
 								
 								<li sec:authorize="!isAuthenticated()">
-									<a th:href="@{/new_user_data}" href="new_user_data.html"> Registrieren</a>
+									<a class="center" th:href="@{/new_user_data}" href="new_user_data.html"> Registrieren</a>
 								</li>
 								
 								<li sec:authorize="!isAuthenticated()">
-									<a th:href="@{/login}" href="login.html" >Login</a>
+									<a class="center" th:href="@{/login}" href="login.html" >Login</a>
 								</li>
 								
 								<li sec:authorize="isAuthenticated()">
-									<a th:href="@{/logout}" type="submit" value="Logout">Logout</a>
+									<a class="center" th:href="@{/logout}" type="submit" value="Logout">Logout</a>
 								</li>
 							</ul>
 						</li>

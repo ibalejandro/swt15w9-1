@@ -12,13 +12,14 @@
 	</head>
 	
 	<body>
-		<th:block th:include="imports :: head"></th:block>
+		<th:block th:include="navigation :: navigation"></th:block>
 	
 		<header>
 			<h1>Kundendaten</h1>
 		</header>
 		
 		<div>
+			<!--
 			<ul>
 				<div sec:authorize="!isAuthenticated()"> <a th:href="@{/login}" >Login</a></div>
 
@@ -28,9 +29,9 @@
 					</form>
 				</div>
 			</ul>
-		
+			-->
+			<!-- Unnötig, da wir das alles eh umleiten wollen -->
 			<h4 sec:authorize="!hasRole('ROLE_NORMAL')">Login notwendig</h4>
-			
 			
 			<ul sec:authorize="hasRole('ROLE_NORMAL')">			
 				<li> <a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html">Password ändern</a> </li>

@@ -96,11 +96,14 @@
 
 /********************************************
 *	Zeitenübergreifendes Design der			*
-*	Schrifft Buttons und Co.				*
+*	Schrifft Buttons						*
 *	with modifyer for Text and Button		*
 *	positions.								*
 ********************************************/
-p{margin: 0; padding:0;}
+p{
+	margin: 0; 
+	padding:0;
+}
 .headline{
 	font-size: 2.0rem;
 }
@@ -153,17 +156,60 @@ p{margin: 0; padding:0;}
 	color: red;
 	font-size: 1rem;
 }
+
+.left{
+	text-align:left;
+}
+.right{
+	text-align: right;
+}
+.center{
+	text-align: center;
+}
+
+/********************************************
+*	Divider and Space						*
+********************************************/
 .space{
-	margin-top: 2rem;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 2rem;
+}
+.space--1rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 1rem;
+}
+.space--1rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 0.5rem 0;
 }
 .space--2rem{
-	margin-top: 2rem;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 2rem;
+}
+.space--2rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 1rem 0;
 }
 .space--4rem{
-	margin-top: 4rem;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 4rem;
+}
+.space--4rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 2rem 0;
 }
 .space--6rem{
-	margin-top: 6rem;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 6rem;
+}
+.space--6rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 3rem 0;
 }
 .divider{
 	border-bottom: 1px solid;
@@ -180,7 +226,6 @@ p{margin: 0; padding:0;}
 	height: 0;
 	overflow: auto;
 }
-
 /********************************************
 *	Anpassung bei Formularen und Label und	*
 *	zugehöriger Label						*
@@ -212,7 +257,6 @@ p{margin: 0; padding:0;}
 .form__input{
 	margin: 0;
 	padding: 0;
-	
 }
 .form__input[type = "radio"]{
 	margin-left: 1rem;
