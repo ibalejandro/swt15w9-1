@@ -17,6 +17,27 @@
 					
 					<div class="userdetail__content">
 					
+						<div class="userdetail__search">
+							<form th:action="@{/searchUser}" method="post">
+								<div>
+									<div class="row">
+										<div class="large-3 small-12 columns">
+											<label class="form__label" for="userNameIN">Username:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="userNameIN" type="text"/>
+										</div>
+									</div>
+								</div>
+								<div class="medium-5 small-12 columns">
+									<div class="button--right">
+										<input class="button" type="submit" value="Search user" />
+									</div>
+								</div>
+						
+							</form>
+						</div>
+						
 						<div class="error_field" sec:authorize="!hasRole('ROLE_ADMIN')">
 							<p class="error__msg">Keine Berechtigung!</p>
 							

@@ -68,7 +68,15 @@ private final LanguageRepository languageRepository;
 		return "modify2";
 	}
 	
-	@RequestMapping(value="/modify_submit/user/{user}", method = RequestMethod.POST)
+	@RequestMapping(value="/searchUser", method = RequestMethod.POST)
+	public String searchUser(@RequestParam(value="userNameIN") final String UserName, Model model){
+		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(UserName).get());
+		model.addAttribute("user", user_xyz);
+		return "userDetails_single";
+		
+	}
+	
+	@RequestMapping(value="/modify_submit/user/{user}", method = RequestMethod.POST)//user/{user}
 	public String modify_submit(@PathVariable final String user, 
 			@RequestParam(value="mailIN") final Optional<String>  Mail, 
 			@RequestParam(value="nameIN") final Optional<String> Name, 
@@ -87,30 +95,35 @@ private final LanguageRepository languageRepository;
 			@RequestParam(value="origin") final Optional<String> Origin)
 	{
 		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
-		if(Mail.isPresent()) user_xyz.getUserAccount().setEmail(Mail.get());
+		if(Mail.isPresent()&& !Mail.get().isEmpty()) user_xyz.getUserAccount().setEmail(Mail.get());
 		System.out.println(user_xyz.getUserAccount().getEmail());
-		if(Name.isPresent()) user_xyz.getUserAccount().setLastname(Name.get());
+		if(Name.isPresent()&& !Name.get().isEmpty()) user_xyz.getUserAccount().setLastname(Name.get());
 		System.out.println(user_xyz.getUserAccount().getLastname());
-		if(Firstname.isPresent()) user_xyz.getUserAccount().setFirstname(Firstname.get());
+		if(Firstname.isPresent()&& !Firstname.get().isEmpty()) user_xyz.getUserAccount().setFirstname(Firstname.get());
 		System.out.println(user_xyz.getUserAccount().getFirstname());
 		
 		if(!Adresstyp.equals(user_xyz.getAdresstyp()))user_xyz.setAdresstyp(Adresstyp);
 		if(Adresstyp.equals("refugee")){
-			if (Flh_name_OPT.isPresent())user_xyz.getLocation().setStreet(Flh_name_OPT.get());			
-			if ((Postcode_R.isPresent()) && (Postcode_R.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_R.get());				
-			if (City_R.isPresent())user_xyz.getLocation().setCity(City_R.get());
-			if (Citypart_OPT.isPresent())user_xyz.getLocation().setHousenr(Citypart_OPT.get());
+			System.out.println("refugee");
+			if (Flh_name_OPT.isPresent()&& !Flh_name_OPT.get().isEmpty())user_xyz.getLocation().setStreet(Flh_name_OPT.get());			
+			if ((Postcode_R.isPresent()&& !Postcode_R.get().isEmpty()) && (Postcode_R.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_R.get());				
+			if (City_R.isPresent()&& !City_R.get().isEmpty())user_xyz.getLocation().setCity(City_R.get());
+			if (Citypart_OPT.isPresent()&& !Citypart_OPT.get().isEmpty())user_xyz.getLocation().setHousenr(Citypart_OPT.get());
 		}else{
-			if (Street_OPT.isPresent())user_xyz.getLocation().setStreet(Street_OPT.get());	
-			if (Housenr_OPT.isPresent())user_xyz.getLocation().setHousenr(Housenr_OPT.get());		
-			if ((Postcode_H.isPresent()) && (Postcode_H.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_H.get());				
-			if (City_H.isPresent())user_xyz.getLocation().setCity(City_H.get());			
+			System.out.println("helper");
+			if (Street_OPT.isPresent()&& !Street_OPT.get().isEmpty())user_xyz.getLocation().setStreet(Street_OPT.get());	
+			if (Housenr_OPT.isPresent()&& !Housenr_OPT.get().isEmpty())user_xyz.getLocation().setHousenr(Housenr_OPT.get());		
+			if ((Postcode_H.isPresent()) && !Postcode_H.get().isEmpty() && (Postcode_H.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_H.get());				
+			if (City_H.isPresent()&& !City_H.get().isEmpty())user_xyz.getLocation().setCity(City_H.get());			
 		}
-		if(Nativelanguage.isPresent()){
+		if(Nativelanguage.isPresent()&& !Nativelanguage.get().isEmpty()){
+			System.out.println("modify language");
 			Language PreferredLanguage= languageRepository.findByName(Nativelanguage.get());
 			user_xyz.setPrefLanguage(PreferredLanguage);
 		}
-		if(OtherLanguages.isPresent()){
+		if(OtherLanguages.isPresent() && !OtherLanguages.get().isEmpty()){
+			System.out.println("modify languages");
+			user_xyz.removeAllLanguages();
 			if(OtherLanguages.get()!=null && !OtherLanguages.get().isEmpty()){
 				for(String languageName:OtherLanguages.get().split(",")){
 					System.out.println(languageName);
@@ -125,8 +138,10 @@ private final LanguageRepository languageRepository;
 				}
 			}
 		}
+		System.out.println("origin?");
 		if(Origin.isPresent())user_xyz.setOrigin(Origin.get());
 		userRepository.save(user_xyz);
+		System.out.println("saved");
 		return "redirect:/userDetails";
 		
 	}

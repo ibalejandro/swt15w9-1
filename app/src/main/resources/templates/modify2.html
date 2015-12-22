@@ -13,7 +13,7 @@
 				<h1 th:text="@{&Uuml;ber den User: &nbsp; }+${user.getUserAccount().getUsername()} "> UserAccount</h1>
 			
 				
-						<form action="@{/modify_submit/user/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
+						<form th:action="@{/modify_submit/user/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
 						
 							<div class="medium-6 small-12 columns">
 								<div class="row">
@@ -142,10 +142,12 @@
 							</div>
 						
 						</form>
-						<div>
-							<a th:href="@{/changePassword/{path}(path=${user.getUserAccount().getUsername()})}" href="changePassword.html">Password ändern</a>
-						</div>
-			</div>
+						
+					</div>
+					
+		</div>
+		<div>
+			<a th:href="@{/changePassword/{path}(path=${user.getUserAccount().getUsername()})}" href="changePassword.html">Password ändern</a>
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>

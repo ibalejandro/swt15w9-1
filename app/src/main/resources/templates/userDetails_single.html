@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+		<title th:text="${title}">User</title>
+	</head>
+	
+	<body>
+	
+		<div class="row">
+			<div class="small-12 colums">
+				<div>
+				
+					<header>
+						<h1>Kundendaten</h1>
+					</header>
+					
+					<div>
+						<ul>
+							<div sec:authorize="!isAuthenticated()"> <a th:href="@{/login}" >Login</a></div>
+
+							<div sec:authorize="isAuthenticated()">
+								<form th:action="@{/logout}" method="post">
+									<input class="button" type="submit" value="Logout" />
+								</form>
+							</div>
+						</ul>
+					
+				
+						
+						
+						<ul>			
+									<li th:text="${user.userAccount.firstname}">Firstname</li>
+									<li th:text="${user.userAccount.lastname}">Lastname</li>
+									<li th:text="${user.userAccount.email}">Email</li>
+									<li th:text="${user.location.getLocation()}">Adresse</li>
+									<li th:text="${user.origin}">Herkunftsland</li>
+									<li th:text="${user.getPrefLanguage().toString()}">Muttersprache</li>
+									<li th:text="${user.showLanguages()}">weitere Sprachen</li>
+									<li th:text="${user.isActivated()}">activation_state</li>
+									
+						</ul>
+					</div>
+					<div>
+						<a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}">Bearbeiten</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+	
+</html>
