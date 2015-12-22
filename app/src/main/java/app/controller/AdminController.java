@@ -1,11 +1,25 @@
 package app.controller;
 
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.Email;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import app.model.Language;
+import app.model.User;
 import app.model.UserRepository;
+import app.repository.LanguageRepository;
 
 /**
 * <h1>AdminManagementController</h1>
@@ -21,19 +35,99 @@ import app.model.UserRepository;
 public class AdminController {
 
 private final UserRepository userRepository;
+private final UserAccountManager userAccountManager;
+private final LanguageRepository languageRepository;
 
 	/**
 	 * Autowire.
 	 * @param userRepository The repository for the users
 	 */
 	@Autowired
-	public AdminController(UserRepository userRepository){
+	public AdminController(UserRepository userRepository, UserAccountManager userAccountManager, LanguageRepository languageRepository){
 		this.userRepository=userRepository;
+		this.userAccountManager=userAccountManager;
+		this.languageRepository= languageRepository;
+	}
+	/**
+	   * This method is the answer for the request to '/userDetails'. It finds
+	   * and retrieves all the user in the UserRepository.
+	   * @param ModelMap The modelmap to add the user
+	   * @return String The name of the view to be shown after processing
+	   */
+	@RequestMapping("/userDetails")
+	String userDetails(ModelMap map) {
+		map.addAttribute("userDetails", userRepository.findAll());
+		return "userDetails";
+	}
+
+	@RequestMapping("/modify/user/{user}")
+	public String modify(@PathVariable final String user, Model model){
+		
+		model.addAttribute("user",userRepository.findByUserAccount(userAccountManager.findByUsername(user).get()));
+		System.out.println(model.toString());
+		return "modify2";
 	}
 	
-	@RequestMapping("/modify")
-	public String modify(){
+	@RequestMapping(value="/modify_submit/user/{user}", method = RequestMethod.POST)
+	public String modify_submit(@PathVariable final String user, 
+			@RequestParam(value="mailIN") final Optional<String>  Mail, 
+			@RequestParam(value="nameIN") final Optional<String> Name, 
+			@RequestParam(value="firstnameIN") final Optional<String> Firstname, 
+			@RequestParam(value="wohnen") final String Adresstyp, 
+			@RequestParam(value="flh_name") final Optional<String> Flh_name_OPT, 
+			@RequestParam(value="citypart") final Optional<String> Citypart_OPT, 
+			@RequestParam(value="street") final Optional<String> Street_OPT, 
+			@RequestParam(value="housenr") final Optional<String> Housenr_OPT, 
+			@RequestParam(value="postcode_R") final Optional<String> Postcode_R, 
+			@RequestParam(value="city_R") final Optional<String> City_R, 
+			@RequestParam(value="postcode_H") final Optional<String> Postcode_H, 
+			@RequestParam(value="city_H") final Optional<String> City_H,
+			@RequestParam(value="nativelanguage") final Optional<String> Nativelanguage, 
+			@RequestParam(value="otherlanguages") final Optional<String> OtherLanguages, 
+			@RequestParam(value="origin") final Optional<String> Origin)
+	{
+		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+		if(Mail.isPresent()) user_xyz.getUserAccount().setEmail(Mail.get());
+		System.out.println(user_xyz.getUserAccount().getEmail());
+		if(Name.isPresent()) user_xyz.getUserAccount().setLastname(Name.get());
+		System.out.println(user_xyz.getUserAccount().getLastname());
+		if(Firstname.isPresent()) user_xyz.getUserAccount().setFirstname(Firstname.get());
+		System.out.println(user_xyz.getUserAccount().getFirstname());
 		
-		return "modify";
+		if(!Adresstyp.equals(user_xyz.getAdresstyp()))user_xyz.setAdresstyp(Adresstyp);
+		if(Adresstyp.equals("refugee")){
+			if (Flh_name_OPT.isPresent())user_xyz.getLocation().setStreet(Flh_name_OPT.get());			
+			if ((Postcode_R.isPresent()) && (Postcode_R.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_R.get());				
+			if (City_R.isPresent())user_xyz.getLocation().setCity(City_R.get());
+			if (Citypart_OPT.isPresent())user_xyz.getLocation().setHousenr(Citypart_OPT.get());
+		}else{
+			if (Street_OPT.isPresent())user_xyz.getLocation().setStreet(Street_OPT.get());	
+			if (Housenr_OPT.isPresent())user_xyz.getLocation().setHousenr(Housenr_OPT.get());		
+			if ((Postcode_H.isPresent()) && (Postcode_H.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_H.get());				
+			if (City_H.isPresent())user_xyz.getLocation().setCity(City_H.get());			
+		}
+		if(Nativelanguage.isPresent()){
+			Language PreferredLanguage= languageRepository.findByName(Nativelanguage.get());
+			user_xyz.setPrefLanguage(PreferredLanguage);
+		}
+		if(OtherLanguages.isPresent()){
+			if(OtherLanguages.get()!=null && !OtherLanguages.get().isEmpty()){
+				for(String languageName:OtherLanguages.get().split(",")){
+					System.out.println(languageName);
+					if(languageRepository.findByName(languageName)!=null){
+						//user_xyz.setLanguage(languageRepository.findByName(languageName));
+						Language l1=languageRepository.findByName(languageName);
+						System.out.println(l1.toString());
+						user_xyz.setLanguage(l1);
+						userRepository.save(user_xyz);					
+					}
+					System.out.println(user_xyz.getLanguages());
+				}
+			}
+		}
+		if(Origin.isPresent())user_xyz.setOrigin(Origin.get());
+		userRepository.save(user_xyz);
+		return "redirect:/userDetails";
+		
 	}
 }

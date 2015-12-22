@@ -39,10 +39,10 @@
 									<td th:text="${user.userAccount.email}">xyz</td>
 									<td th:text="${user.location.getLocation()}">Adresse</td>
 									<td th:text="${user.getOrigin()}">Herkunft</td>
-									<td th:text="${user.getLanguage()}">Sprache</td>
+									<td th:text="${user.getPrefLanguage()}">Sprache</td>
 									<td th:text="${user.getRegistrationdate()}">rdate</td>
 									<td th:text="${user.isActivated()}">activation_state</td>
-									<td><a th:href="@{/modify}">Bearbeiten</a></td>
+									<td><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}">Bearbeiten</a></td>
 								</tr>
 							</tbody>
 						</table>

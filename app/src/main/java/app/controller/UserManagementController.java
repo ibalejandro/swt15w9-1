@@ -2,6 +2,7 @@ package app.controller;
 
 import java.util.Optional;
 
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +55,7 @@ public class UserManagementController {
 		return "index";
 	}
 	
+	
 	/*
 	@RequestMapping("/admin")
 	String userDetails(ModelMap map){
@@ -68,11 +71,12 @@ public class UserManagementController {
    * @param ModelMap The modelmap to add the user
    * @return String The name of the view to be shown after processing
    */
+	/*
 	@RequestMapping("/userDetails")
 	String userDetails(ModelMap map) {
 		map.addAttribute("userDetails", userRepository.findAll());
 		return "userDetails";
-	}
+	}*7
 
 	/**
 	   * This method is the answer for the request to '/data'. It finds
@@ -93,15 +97,19 @@ public class UserManagementController {
 		}
 	
 		@RequestMapping("/changePassword/{user}")
-		public String changePassword(Model model,  @LoggedIn Optional<UserAccount> userAccount){
-			if(userAccount.isPresent())model.addAttribute("userAccount",userAccount.get());
+		public String changePassword(@PathVariable final String user, Model model,  @LoggedIn Optional<UserAccount> userAccount){
+			if(userAccount.isPresent()&& userAccount.get().hasRole(new Role("ROLE_NORMAL")))model.addAttribute("userAccount",userAccount.get());
+			if(userAccount.isPresent()&& userAccount.get().hasRole(new Role("ROLE_ADMIN")))model.addAttribute("userAccount",userAccountManager.findByUsername(user).get());
+			System.out.println(model.toString());
 			return "changePassword";
 		}
 		
 		@RequestMapping(value="/changePassword_submit/{user}", method = RequestMethod.POST)
-		public String changePassword_submit(@LoggedIn Optional<UserAccount> userAccount,  @RequestParam("actualPassword") final String ActualPassword, @RequestParam("newPassword1") final String NewPassword1,@RequestParam("newPassword2") final String NewPassword2){
+		public String changePassword_submit(@PathVariable final String user, @LoggedIn Optional<UserAccount> userAccount,  @RequestParam("actualPassword") final String ActualPassword, @RequestParam("newPassword1") final String NewPassword1,@RequestParam("newPassword2") final String NewPassword2){
 			if(!userAccount.isPresent())return "noUser";
-			User user_xyz=userRepository.findByUserAccount(userAccount.get());
+			User user_xyz;
+			if(userAccount.get().hasRole(new Role("ROLE_ADMIN")))user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+			else user_xyz=userRepository.findByUserAccount(userAccount.get());
 			
 			if(ActualPassword!=null /*&& user_xyz.getUserAccount().getPassword().equals(new Password(oldPW))*/){
 				if(NewPassword1.equals(NewPassword2) && validate(NewPassword1))userAccountManager.changePassword(user_xyz.getUserAccount(), NewPassword1);;
@@ -110,7 +118,7 @@ public class UserManagementController {
 			}
 			userRepository.save(user_xyz);
 			userAccountManager.save(user_xyz.getUserAccount());
-
+			if(userAccount.get().hasRole(new Role("ROLE_ADMIN")))return "redirect:/userDetails";
 			return "redirect:/data";
 		}
 		
@@ -165,14 +173,22 @@ public class UserManagementController {
 		}
 		
 		@RequestMapping(value="/modifyAddress_submit", method = RequestMethod.POST)
-		public String modifyAddress_submit( @LoggedIn Optional<UserAccount> userAccount, @RequestParam("street")final String Street,@RequestParam("houseNr")final String HouseNr,@RequestParam("zipCode")final String ZipCode,@RequestParam("city")final String City){
+		public String modifyAddress_submit( @LoggedIn Optional<UserAccount> userAccount, @RequestParam("wohnen") final String Adresstyp, @RequestParam("flh_name") final Optional<String> Flh_name_OPT, @RequestParam("citypart") final Optional<String> Citypart_OPT, @RequestParam("street") final Optional<String> Street_OPT, @RequestParam("housenr") final Optional<String> Housenr_OPT, @RequestParam("postcode_R") final Optional<String> Postcode_R, @RequestParam("city_R") final Optional<String> City_R, @RequestParam("postcode_H") final Optional<String> Postcode_H, @RequestParam("city_H") final Optional<String> City_H){
 			if(!userAccount.isPresent())return "noUser";
 			User user_xyz=userRepository.findByUserAccount(userAccount.get());
-			
-			user_xyz.getLocation().setStreet(Street);
-			user_xyz.getLocation().setHousenr(HouseNr);
-			if(ZipCode.matches("[0-9]{5}"))user_xyz.getLocation().setZipCode(ZipCode);
-			user_xyz.getLocation().setCity(City);
+			user_xyz.setAdresstyp(Adresstyp);
+			if(Adresstyp.equals("refugee")){
+				if (Flh_name_OPT.isPresent())user_xyz.getLocation().setStreet(Flh_name_OPT.get());			
+				if ((Postcode_R.isPresent()) && (Postcode_R.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_R.get());				
+				if (City_R.isPresent())user_xyz.getLocation().setCity(City_R.get());
+				if (Citypart_OPT.isPresent())user_xyz.getLocation().setHousenr(Citypart_OPT.get());
+			}else{
+				if (Street_OPT.isPresent())user_xyz.getLocation().setStreet(Street_OPT.get());	
+				if (Housenr_OPT.isPresent())user_xyz.getLocation().setHousenr(Housenr_OPT.get());		
+				if ((Postcode_H.isPresent()) && (Postcode_H.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_H.get());				
+				if (City_H.isPresent())user_xyz.getLocation().setCity(City_H.get());
+				
+			}
 			userRepository.save(user_xyz);
 			
 			return "redirect:/data";
