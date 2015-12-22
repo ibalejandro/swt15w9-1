@@ -144,9 +144,12 @@ public class UserManagementController {
 			if(!userAccount.isPresent())return "noUser";
 			User user_xyz=userRepository.findByUserAccount(userAccount.get());
 			
-			if(Firstname!=null)user_xyz.getUserAccount().setFirstname(Firstname);
-			if(Lastname!=null)user_xyz.getUserAccount().setLastname(Lastname);
-			if(Email!=null)user_xyz.getUserAccount().setEmail(Email);
+			if ((Firstname!=null) && (!Firstname.equals("")))
+				user_xyz.getUserAccount().setFirstname(Firstname);
+			if ((Lastname!=null) && (!Lastname.equals("")))
+				user_xyz.getUserAccount().setLastname(Lastname);
+			if ((Email!=null) && (!Email.equals("")))
+				user_xyz.getUserAccount().setEmail(Email);
 			
 			userAccountManager.save(user_xyz.getUserAccount());
 			userRepository.save(user_xyz);
