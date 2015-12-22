@@ -2,6 +2,9 @@ package app.controller;
 
 import java.util.Optional;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -139,6 +142,42 @@ public class UserManagementController {
 			return "modifyUserAccount";
 		}
 		
+		private static boolean containsString( String s, String subString ) {
+	        return s.indexOf( subString ) > -1 ? true : false;
+	    }
+		
+		private boolean emailValidator(String email) {
+			boolean isValid = false;
+			
+			if (containsString(email,"@") == false)
+			{
+				return false;	
+			}
+			
+			if (containsString(email,".") == false)
+			{
+				return false;	
+			}
+			
+		    /*    if (email.equals("test@test.test"))
+	        {
+	            return false;    
+	        }    */
+
+			
+			try {
+				//
+				// Create InternetAddress object and validated the supplied
+				// address which is this case is an email address.
+				InternetAddress internetAddress = new InternetAddress(email);
+				internetAddress.validate();
+				isValid = true;
+			} catch (AddressException e) {
+				System.out.println("You are in catch block -- Exception Occurred for: " + email);
+			}
+			return isValid;
+		}
+		
 		@RequestMapping(value="/modifyUserAccount_submit/{user}", method = RequestMethod.POST)
 		public String modifyUserAccount(@LoggedIn Optional<UserAccount> userAccount,  @RequestParam(value = "firstname", required = false) final String Firstname, @RequestParam(value = "lastname", required = false) final String Lastname,@RequestParam(value = "email", required = false) final String Email){
 			if(!userAccount.isPresent())return "noUser";
@@ -148,7 +187,7 @@ public class UserManagementController {
 				user_xyz.getUserAccount().setFirstname(Firstname);
 			if ((Lastname!=null) && (!Lastname.equals("")))
 				user_xyz.getUserAccount().setLastname(Lastname);
-			if ((Email!=null) && (!Email.equals("")))
+			if ((Email!=null) && (!Email.equals("")) && emailValidator(Email))
 				user_xyz.getUserAccount().setEmail(Email);
 			
 			userAccountManager.save(user_xyz.getUserAccount());
