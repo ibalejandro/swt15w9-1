@@ -81,7 +81,7 @@ public class CreateNewUser {
 
 	@RequestMapping( value="/new_user")
     public String new_user0(){
-		return "redirect:/";
+		return "new_user";
 		
 	}
 	
@@ -419,7 +419,7 @@ public class CreateNewUser {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy HH:mm:ss"
                     // simpleDateFormat.format(zeitstempel)
                     
-                    String domain     = "http://localhost:8080";
+                    String domain     = "http://refugee-app.tk/swt15w9/"; //"http://localhost:8080";
                     String link       = domain + "/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+sha256(user_xyz.getActivationkey()+simpleDateFormat.format(zeitstempel)+(user_xyz.getRegistrationstate()+1))+"}";
                     String mailtext = "<html> <head> </head> <body> <h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+"  </body> </html>";
                     String mailadresse = user_xyz.getUserAccount().getEmail();
@@ -1118,7 +1118,7 @@ public class CreateNewUser {
 	                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy HH:mm:ss"
 	                    // simpleDateFormat.format(zeitstempel)
 	                    
-	                    String domain     = "http://localhost:8080";
+	                    String domain     = "http://refugee-app.tk/swt15w9/"; //"http://localhost:8080";
 	                    String link       = domain + "/activation/user/{"+user_xyz.getUserAccount().getUsername()+"}/{"+sha256(user_xyz.getActivationkey()+simpleDateFormat.format(zeitstempel)+(user_xyz.getRegistrationstate()+1))+"}";
 	                    String mailtext = "<html> <head> </head> <body> <h1>Activation of your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> Please activate your RefugeesApp-Account with this link: <a href=\""+link+"\">Activationlink</a>  <br/><br/> Textlink: "+link+"  </body> </html>";
 	                    String mailadresse = user_xyz.getUserAccount().getEmail();
