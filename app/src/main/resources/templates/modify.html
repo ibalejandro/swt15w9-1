@@ -1,26 +1,19 @@
 <html  xmlns:th="http://www.thymeleaf.org">
-	
+
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
+		
+		<div th:include="navigation :: navigation"></div>	
 	
-		<th:block th:include="navigation :: navigation"></th:block>
-		<div class="startsite__reg" id="reg">
-			<th:blcok th:fragment="reg">
-				<div class="reg">
-					<div class="row small-uncollapse">
-					
-						<div class="small-9 columns">
-							<h1 class="headline">Nutzer bearbeiten</h1>
-						</div>
-					
-						<div class="small-3 columns">
-							<label class="link--right"><a th:href="@{/new_user}" onclick="return toggle('reg');" >Login.</a></label>
-						</div>
-						
-						<form action="@{/modify_submit/user}+${user}" method="post">
+		<div class="row">
+			<div class="large-12 colums">
+				<h1 th:text="@{&Uuml;ber den User: &nbsp; }+${user.getUserAccount().getUsername()} "> UserAccount</h1>
+			
+				
+						<form th:action="@{/modify_submit/user/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
 						
 							<div class="medium-6 small-12 columns">
 								<div class="row">
@@ -144,14 +137,17 @@
 						
 							<div class="medium-5 small-12 columns">
 								<div class="button--right">
-									<input class="button" type="submit" value="Create User" />
+									<input class="button" type="submit" value="Modify User" />
 								</div>
 							</div>
 						
 						</form>
+						
 					</div>
-				</div>
-			</th:blcok>
+					
+		</div>
+		<div>
+			<a th:href="@{/changePassword/{path}(path=${user.getUserAccount().getUsername()})}" href="changePassword.html">Password ändern</a>
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>

@@ -65,14 +65,29 @@ private final LanguageRepository languageRepository;
 		
 		model.addAttribute("user",userRepository.findByUserAccount(userAccountManager.findByUsername(user).get()));
 		System.out.println(model.toString());
-		return "modify2";
+		return "modify";
 	}
 	
 	@RequestMapping(value="/searchUser", method = RequestMethod.POST)
 	public String searchUser(@RequestParam(value="userNameIN") final String UserName, Model model){
 		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(UserName).get());
 		model.addAttribute("user", user_xyz);
-		return "userDetails_single";
+		return "data";
+		
+	}
+	@RequestMapping(value="/addLanguage")
+	public String addLanguage_submit(){
+		return "addLanguage";
+	}
+	
+	
+	@RequestMapping(value="/addLanguage_submit", method = RequestMethod.POST)
+	public String addLanguage_submit(@RequestParam(value="languageName") final String LanguageName, @RequestParam(value="kennung") final String Kennung){
+		if(languageRepository.findByName(LanguageName)==null){
+			Language newLanguage= new Language(LanguageName, Kennung);
+			languageRepository.save(newLanguage);
+		}
+		return "index";
 		
 	}
 	
