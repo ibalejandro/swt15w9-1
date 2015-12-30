@@ -1,7 +1,7 @@
 TODO:
-	- Thyme Leaf ein Bindung überprüfen
-	- Überschriften überarbeiten
-	
+	- Thyme Leaf ein Bindung Ã¼berprÃ¼fen
+	- Ãœberschriften Ã¼berarbeiten
+	- Sprachauswahl bei Registrierung, modifyLanguages, modify
 	- 404.html erstellen
 	
 Templates:
