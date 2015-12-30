@@ -59,12 +59,28 @@ public class Address implements  Serializable { //<> Flüchtlingsunterkunft
 	}
 	
 	 /**
+	   * Getter.
+	   * @return String The street name
+	   */
+	public String getStreet() {
+		return street;
+	}
+	
+	 /**
 	   * Setter.
 	   * @param String The house number
 	   * @return Nothing
 	   */
 	public void setHousenr(String housenr) {
 		this.housenr = housenr;
+	}
+	
+	 /**
+	   * Getter.
+	   * @return String The house number
+	   */
+	public String getHousenr() {
+		return housenr;
 	}
 
 	 /**
