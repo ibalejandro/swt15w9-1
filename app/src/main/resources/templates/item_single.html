@@ -1,18 +1,17 @@
-<!doctype html>
-<html class="no-js" mlns:th="http://www.thymeleaf.org">
-
-<!--
-	TODO:
-		- Thymeleaf einarbeiten
-		- Kommentare löschen
--->
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- Thymeleaf einarbeiten
+			- Kommentare löschen
+	*/-->
 	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-	
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="show-for-small-only">
@@ -24,7 +23,7 @@
 			<div th:include="item_single--big :: item">
 			</div>
 		</div>		
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
-	
 </html>

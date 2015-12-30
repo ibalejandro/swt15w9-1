@@ -6,6 +6,7 @@ __Schriftführer:__ Friederike Kitzing
 __Nächstes Treffen:__ 12.11.2015
 
 .__Teilnehmer:__
+
 * Kilian Heret
 * Alejandro Sánchez Aristizábal
 * Ferdinand Lehmann
@@ -41,7 +42,7 @@ __Nächstes Treffen:__ 12.11.2015
 == Planung des nächsten Sprints
 * Zusammenführung der Prototypen
 * großer Prototyp mit grundlegenen Funktionen; angestrebt zum nächsten Treffen, harte Deadline in 2 Wochen
-* notwendige Templates 
+* notwendige Templates
 
 *Issue referenziert die Issue ID von GitHub*
 

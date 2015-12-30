@@ -1,0 +1,45 @@
+= Protokoll Gruppe 09
+__Treffen am 16.12.2015__
+
+__Schriftführer:__ Mario Henze
+
+__Nächstes Treffen:__ 17.12.2015
+
+__Teilnehmer:__
+
+* Alejandro Sánchez Aristizábal
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* Gruppentreffen um den aktuellen Stand zu besprechen und fehlende
+  Funktionalität zu sichten
+
+== Aktueller Stand
+* Bis auf Dialog sind die Bestandteile wie Goods Management und Userverwaltung
+  im Groben fertig
+
+== Planung des nächsten Sprints
+* Nutzer muss sich selbst löschen können
+* Nutzer muss deaktivierbar sein
+* Das Passwort eines Nutzer muss zurücksetzbar sein (Passwort vergessen)
+* Admin muss alle Güter bearbeiten können
+* Dialog Seite muss anzeigbar sein
+* Activities erstellen
+* mehrsprachiges Interface umsetzen
+* Entfernungsbestimmung einbauen
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel          |Beschreibung                   |Verantwortlicher |Status
+|#8    |junit-Tests    |N/A                            |N/A              |offen
+|#9    |Javadoc-Dokumentation|N/A                      |N/A              |offen
+|#32   |Eigene Daten ändern |Möglichkeit eigene Daten zu ändern |N/A     |offen
+|#33   |Mehrsprachigkeit |N/A                          |N/A              |offen
+|===

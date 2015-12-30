@@ -1,44 +1,13 @@
-<!doctype html>
-
-<html class="no-js" lang="de">
-
-<!--
-	TODO:
-		- iterration Object setzen
-		- in navigation.html die Navigation fertig machen
-		- Footer erstellen einfügen und includen.
-		- Kommentare löschen
--->
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
 	<!--/*
-		<div th:each="content : ${}" class="row">
-			<div class="small-12 colums medium-6 columns">
-				<div th:include="item :: item">
-				</div>
-			</div>
-		</div>
-			
-
-		<p>Bestehende Nutzer:</p>
-		<table>
-			<thead>
-				<tr>
-					<th>Login-Name</th>
-					<th>Passwort</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<tr>
-					<td>Lisa</td>
-					<td>pw</td>
-				</tr>
-				<tr>
-					<td>admin</td>
-					<td>123</td>
-				</tr>								
-			</tbody>
-		</table>
-		*/-->	
+		TODO:
+			- iterration Object setzen
+			- in navigation.html die Navigation fertig machen
+			- Footer erstellen einfügen und includen.
+			- Kommentare löschen
+	*/-->
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 		<script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
@@ -47,7 +16,10 @@
 	<body>		
 		<div sec:authorize="isAuthenticated()">		
 			<th:block th:include="navigation :: navigation"></th:block>
-			<!--Plcace for Items-->
+			
+			<div class="space"></div>
+			
+			<th:block th:include="itemN--small :: show_items"></th:block>
 		</div>
 		
 		<div sec:authorize="!isAuthenticated()">
@@ -56,5 +28,4 @@
 		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
-	
 </html>

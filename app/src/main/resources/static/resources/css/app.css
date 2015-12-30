@@ -1,3 +1,12 @@
+/*******************************************\
+*			by Lennart Schmidt		 		*
+\*******************************************/
+
+
+/********************************************
+*	Um Formulare in der Navigation korrekt	*
+*	anzuzeigen								*
+********************************************/
 .has-form {
 	top: 0;
 	left: 6rem;
@@ -13,8 +22,296 @@
 	} 
 }
 
+/********************************************
+*	Item Design								*
+********************************************/
+@media only screen {
+	.itemN{
+		background-color: white;
+		outline-style: solid;
+		outline-width: 1px; 
+		outline-color: lightgray;
+		overflow: hidden;
+		height: 19rem;
+	}
+	.itemN__container{
+		overflow: hidden;
+		height: 22rem; 
+	}
+	.itemN__img{
+		width: 100%;
+		margin-top: -10%;
+		height: 9rem;
+		overflow: hidden;
+	}
+}
+
+@media only screen and (min-width: 40.0625em){
+	.itemN{
+		background-color: white;
+		outline-style: solid;
+		outline-width: 1px; 
+		outline-color: lightgray;
+		overflow: hidden;
+		height: 16rem;
+	}
+	.itemN__container{
+		margin-bottom: 0.1rem;
+		overflow: hidden;
+		height: 11rem; 
+	}
+	.itemN__img{
+		width: 100%;
+		height: 11rem;
+		overflow: hidden;
+	}
+}
+.itemN__headlinecontainer{
+	overflow: hidden;
+	padding-left: 1rem;
+	height: 3rem;
+}
+.itemN--left{
+	float:left;
+}
+.itemN--right{
+	float:right;
+}
+.itemN--bottom{
+	background-color: white;
+	padding:0 1rem 0 1rem;
+	height: 2rem;
+	width: 94%;
+	position: absolute;
+	overflow: hidden;
+	bottom: 0.1rem;
+}
+.itemN__link{
+	color: black;
+}
+.itemN__link:hover{
+	background-color:yellow;
+	color: black;
+}
+
+/********************************************
+*	Zeitenübergreifendes Design der			*
+*	Schrifft Buttons						*
+*	with modifyer for Text and Button		*
+*	positions.								*
+********************************************/
+p{
+	margin: 0; 
+	padding:0;
+}
+.headline{
+	font-size: 2.0rem;
+}
+.headline--sub{
+	font-size: 1.7rem;
+}
+.headline--super{
+	font-size: 2.3rem;
+}
+.text{
+	font-size: 1rem;
+}
+.text--super{
+	font-size: 1.2rem;
+}
+.text--sub{
+	font-size:0.8rem;
+}
+.text--right{
+	font-size: 1rem;
+	text-align: right;
+}
+.text--super--right{
+	font-size: 1.2rem;
+	text-align: right;
+}
+.text--sub--right{
+	font-size:0.8rem;
+	text-align: right;
+}
+.button__link{
+	color: white;
+}
+.button--right{
+	float: right;
+}
+.button--left{
+	float: left;
+}
+.link{
+	font-size: 1rem;
+	padding: 1rem 0 0 0;
+}
+.link--right{
+	font-size: 1rem;
+	text-align: right;
+	padding: 1rem 0 0 0;
+}
+.error{
+	color: red;
+	font-size: 1rem;
+}
+
+.left{
+	text-align:left;
+}
+.right{
+	text-align: right;
+}
+.center{
+	text-align: center;
+}
+
+/********************************************
+*	Divider and Space						*
+********************************************/
+.space{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 2rem;
+}
+.space--1rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 1rem;
+}
+.space--1rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 0.5rem 0;
+}
+.space--2rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 2rem;
+}
+.space--2rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 1rem 0;
+}
+.space--4rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 4rem;
+}
+.space--4rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 2rem 0;
+}
+.space--6rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 6rem;
+}
+.space--6rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 3rem 0;
+}
+.divider{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 0;
+	margin-bottom: 5px;
+	height: 0;
+	overflow: auto;
+}
+.divider--marginOff{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 0;
+	height: 0;
+	overflow: auto;
+}
+/********************************************
+*	Anpassung bei Formularen und Label und	*
+*	zugehöriger Label						*
+********************************************/
+.form__label{
+	font-size: 1rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--paddingOFF{
+	font-size: 1rem;
+	padding: 0 0 0 0;
+}
+.form__label--super{
+	font-size: 1.3rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--super--paddingOFF{
+	font-size: 1.3rem;
+	padding: 0 0 0 0;
+}
+.form__label--sub{
+	font-size: 0.7rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--sub--paddingOFF{
+	font-size: 0.7rem;
+	padding: 0 0 0 0;
+}
+.form__input{
+	margin: 0;
+	padding: 0;
+}
+.form__input[type = "radio"]{
+	margin-left: 1rem;
+}
+
+/********************************************
+*	Registrierung und Login:				*
+********************************************/
+.login{
+	background-color: lightgray;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+}
+.reg{
+	background-color: lightgray;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+}
+
+/*	Aus Blenendne von Optionen in erhalb der 
+	Registrierung*/
+#hh:checked ~ .new__user__helper{
+	margin: 0;
+	padding: 0;
+	display:block;
+}
+#hh:checked ~ .new__user__refugee{
+	display:none;
+}
+#fh:checked ~ .new__user__helper{
+	display:none;
+}
+#fh:checked ~ .new__user__refugee{
+	margin: 0;
+	padding: 0;
+	display:block;
+}
+/*	Startseiten Anpassung. Login/Registrierung
+	Anzeige*/
+.startsite__login{
+	display: block;
+}
+.startsite__reg{
+	display: none;
+}
 
 
+
+
+
+/********************************************
+*	Noch zu bearbeiten						*
+********************************************/
 
 .admin{
 	
@@ -250,140 +547,4 @@
 }
 .userdetail__content{
 
-}
-/********************************************
-*	Item Design								*
-*********************************************/
-.item{
-
-}
-
-
-
-/********************************************
-*	Zeitenübergreifendes Design der			*
-*	Schrifft Buttons und Co.				*
-*	with modifyer for Text and Button		*
-*	positions.								*
-*********************************************/
-.headline{
-	font-size: 2.0rem;
-}
-.headline--sub{
-	font-size: 1.7rem;
-}
-.headline--super{
-	font-size: 2.3rem;
-}
-.text{
-	font-size: 1rem;
-}
-.text--super{
-	font-size: 1.3rem;
-}
-.text--sub{
-	font-size:0.7;
-}
-.button__link{
-	color: white;
-}
-.button--right{
-	float: right;
-}
-.button--left{
-	float: left;
-}
-.link{
-	font-size: 1rem;
-	padding: 1rem 0 0 0;
-}
-.link--right{
-	font-size: 1rem;
-	text-align: right;
-	padding: 1rem 0 0 0;
-}
-.error{
-	color: red;
-	font-size: 1rem;
-}
-.space{
-	margin-top: 2rem;
-}
-
-/********************************************
-*	Anpassung bei Formularen und Label und	*
-*	zugehöriger Label						*
-*********************************************/
-.form__label{
-	font-size: 1rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--paddingOFF{
-	font-size: 1rem;
-	padding: 0 0 0 0;
-}
-.form__label--super{
-	font-size: 1.3rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--super--paddingOFF{
-	font-size: 1.3rem;
-	padding: 0 0 0 0;
-}
-.form__label--sub{
-	font-size: 0.7rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--sub--paddingOFF{
-	font-size: 0.7rem;
-	padding: 0 0 0 0;
-}
-.form__input{
-	
-}
-.form__input[type = "radio"]{
-	margin-left: 1rem;
-}
-
-/********************************************
-*	Registrierung und Login:				*
-*********************************************/
-.login{
-	background-color: lightgray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-}
-.reg{
-	background-color: lightgray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-}
-
-/*	Aus Blenendne von Optionen in erhalb der 
-	Registrierung*/
-#hh:checked ~ .new__user__helper{
-	margin: 0;
-	padding: 0;
-	display:block;
-}
-#hh:checked ~ .new__user__refugee{
-	display:none;
-}
-#fh:checked ~ .new__user__helper{
-	display:none;
-}
-#fh:checked ~ .new__user__refugee{
-	margin: 0;
-	padding: 0;
-	display:block;
-}
-/*	Startseiten Anpassung. Login/Registrierung
-	Anzeige*/
-.startsite__login{
-	display: block;
-}
-.startsite__reg{
-	display: none;
 }

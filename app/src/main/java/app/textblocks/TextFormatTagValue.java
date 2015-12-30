@@ -12,45 +12,44 @@ import app.util.Tuple;
  */
 public class TextFormatTagValue extends FormatTagValue {
 
-    private static final List<String> inputClasses = mkInputClasses();
+	private static final List<String> inputClasses = mkInputClasses();
 
+	private String value;
 
-    private String value;
+	public TextFormatTagValue() {
+	}
 
-    public TextFormatTagValue() {
-    }
+	public TextFormatTagValue(FormatTag tag, String value) {
+		super(tag);
+		this.value = value;
+	}
 
-    public TextFormatTagValue(FormatTag tag, String value) {
-        super(tag);
-        this.value = value;
-    }
+	/**
+	 * @see MessageFormatTagValue#mkInputClasses()
+	 */
+	protected static List<String> mkInputClasses() {
+		List<String> l = new LinkedList<>();
+		l.add("text");
+		return l;
+	}
 
-    /**
-     * @see MessageFormatTagValue#mkInputClasses()
-     */
-    protected static List<String> mkInputClasses() {
-        List<String> l = new LinkedList<>();
-        l.add("text");
-        return l;
-    }
+	@Override
+	protected FormatTagValue fromValue(FormatTag tag, String s) throws TypeError {
+		return new TextFormatTagValue(tag, s);
+	}
 
-    @Override
-    protected FormatTagValue fromValue(FormatTag tag, String s) throws TypeError {
-        return new TextFormatTagValue(tag, s);
-    }
+	@Override
+	public String valueRepresentation() {
+		return value;
+	}
 
-    @Override
-    public String valueRepresentation() {
-        return value;
-    }
+	@Override
+	public Tuple<String, String> inputDelims() {
+		return new Tuple<>("<input type=\"text\" ", " />");
+	}
 
-    @Override
-    public Tuple<String, String> inputDelims() {
-        return new Tuple<>("<input type=\"text\" ", " />");
-    }
-
-    @Override
-    public List<String> getInputClasses() {
-        return inputClasses;
-    }
+	@Override
+	public List<String> getInputClasses() {
+		return inputClasses;
+	}
 }

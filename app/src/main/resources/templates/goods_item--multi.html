@@ -1,20 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-
-<!--
-	TODO:
-		- Variablen Namen nach content._ überarbeiten
-		- th:src Fileverweis überarbeiten
-		- th:href Mapping überarbeiten
-		- Kommentare löschen
--->
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- Variablen Namen nach content._ überarbeiten
+			- th:src Fileverweis überarbeiten
+			- th:href Mapping überarbeiten
+			- Kommentare löschen
+	*/-->
 	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-	
 		<div th:fragment="item">
 			<div class="small-12 colums medium-6 columns">
 				<div th:fragment="good" th:id="good+${good.id}">
@@ -36,7 +35,7 @@
 							</div>
 							
 							<div>
-								<label class="gooditem__label--multi"> Tags </label>
+								<label class="gooditem__label--multi"> Tag </label>
 								<p th:text="${good.tag.name}" class="gooditem__text--multi"></p>
 							</div>
 							
@@ -50,8 +49,7 @@
 				</div>
 			</div>
 		</div>
-		<th:block th:include="imports :: script"></th:block>
 		
+		<th:block th:include="imports :: script"></th:block>
 	</body>
-	
 </html>

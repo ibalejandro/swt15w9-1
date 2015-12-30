@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.net.URL;
@@ -47,7 +48,6 @@ public class GoodEntity implements Serializable {
 	private static final ImageObserver observer = (img, infoflags, x, y, width,
                                                  height)->true;
 	
-	
 	private String name;
 	private String description;
 
@@ -59,6 +59,7 @@ public class GoodEntity implements Serializable {
    * it will “ask” the JPA to load this collection from the database.
    * To avoid Lazy Loading you have to use Eager Loading.
    */
+  
 	@OneToOne(targetEntity = TagEntity.class, fetch = FetchType.EAGER) 
 	private TagEntity tag;
 	
@@ -133,6 +134,20 @@ public class GoodEntity implements Serializable {
 	public static GoodEntity createEmptyGood() {
 	  return new GoodEntity("", "", null, "", null);
 	}
+	
+	/**
+   * This method returns the size of a given Iterable Object
+   * @param Iterable<?> An Iterable Object
+   * @return int The size of the given Iterable Object
+   */
+	public static int getIterableSize(Iterable<?> it) {
+    if (it instanceof Collection) return ((Collection<?>)it).size();
+    else {
+      int i = 0;
+      for (@SuppressWarnings("unused") Object obj : it) i++;
+      return i;
+    }
+  }
   
   /**
    * This method builds a String in which the good's information is presented

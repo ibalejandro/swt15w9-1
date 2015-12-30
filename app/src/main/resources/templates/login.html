@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-	<!--
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
 		ToDo:
-			- Username zu EMail addresse ändern.
-			- Header und ul Liste: Ist das Kunst oder kann das weg?
+			- Username zu EMail addresse ändern?
 			- Title
-	-->
+	*/-->
 
 	<head>
 		<th:block th:include="imports :: head"></th:block>
@@ -15,6 +14,11 @@
 	<body>
 		<div class="startsite__login" id="log">
 			<th:block th:fragment="login">
+			
+				<div class="show-for-small-only space--2rem"></div>
+				<div class="show-for-medium-only space--4rem"></div>
+				<div class="show-for-large-up space--6rem"></div>
+				
 				<div class="login">
 					<div class="row">
 						<div class="large-6 small-6 columns">
@@ -26,8 +30,8 @@
 						</div>
 						
 						<form th:action="@{/login}" method="post">
-							<div class = "large-12 columns">
-								<label th:if="${loginError}" class="form__error" for="username">Wrong Username or Password!</label>
+							<div class = "small-12 columns">
+								<label th:if="${param.error}" class="error center space--1rem--topbottom" for="username">Wrong Username or Password!</label>
 							</div>
 							
 							<div class="large-1 medium-2 small-12 columns"> 
@@ -36,7 +40,7 @@
 							<div class="large-5 medium-10 small-12 columns">
 								<input class="form__input" type="text" id="username" name="username" autofocus="autofocus"/>
 							</div>
-						
+							
 							<div class="large-1 medium-2 small-12 columns">
 								<label class="form__label" for="password">Password:</label>
 							</div>
@@ -44,14 +48,12 @@
 								<input class="form__input" type="password" id="password" name="password" />
 							</div>
 							
-
 							<div class="small-12 columns">
 								<div class="button--right">
 									<input class="button" type="submit" value="Log in" />
 								</div>
 								<label class="link"><a href="/restorePassword">Passwort vergessen?</a></label>
 							</div>
-
 						</form>
 					</div>
 				</div>

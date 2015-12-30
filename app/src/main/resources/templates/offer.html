@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
 	
     <head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-	
-		<div th:include="navigation :: navigation"></div>
+		<th:block th:include="navigation :: navigation"></th:block>
 		
 		<div class = "row">
 			
 			<div class="small-12 columns space"></div>
+			
 			<div class="small-12 columns">
 				<h1 class="headline">Offer</h1>
 			</div>
-			<form th:action="@{/offeredGood}" method="post">
+			
+			<form th:action="@{/offeredGood}" th:object="${good}" method="post">
 				<div class="large-1 medium-2 small-12 columns">
 					<label for="name" class="form__label">Name</label> 
 				</div>
-				
 				<div class="large-5 medium-10 small-12 columns">
 					<input type="text" id="name" name="name"/>
 				</div>
@@ -57,7 +62,7 @@
 			</form>		
 			
 		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
     </body>
-	
 </html>

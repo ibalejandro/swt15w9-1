@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 		<title th:text="${title}">User</title>
 	</head>
 	
 	<body>
+		<th:block th:include="navigation :: navigation"></th:block>
 	
-		<div class="row">
-			<div class="small-12 colums">
-				<div>
-				
-					<header>
-						<h1>Kundendaten</h1>
-					</header>
-					
-					<div>
-						<ul>
-							<div sec:authorize="!isAuthenticated()"> <a th:href="@{/login}" >Login</a></div>
-
-							<div sec:authorize="isAuthenticated()">
-								<form th:action="@{/logout}" method="post">
-									<input class="button" type="submit" value="Logout" />
-								</form>
-							</div>
-						</ul>
+		<header>
+			<h1>Kundendaten</h1>
+		</header>
+		
 						
-						<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html">Password ändern</a></div>
+					<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html">Password ändern</a></div>
 						<table>			
 								<tr>
 									<td>Firstname</td>
@@ -75,10 +66,10 @@
 						<div sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}">Modify User</a></div>
 					</div>
 					
-				</div>
-			</div>
-		</div>
+
+				
+
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
-	
 </html>

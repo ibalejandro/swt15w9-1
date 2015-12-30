@@ -1,12 +1,16 @@
-<!doctype html>
-<html class="no-js" mlns:th="http://www.thymeleaf.org">
-	
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-		
 		<div th:fragment="item">
 			<div class="gooditem__body--single">
 				<div>
@@ -25,13 +29,12 @@
 				</div>
 				
 				<div>
-					<label class="gooditem__label--single"> Tags </label>
+					<label class="gooditem__label--single"> Tag </label>
 					<p th:text="${result.tag.name}" class="gooditem__text--single">Lorem</p>
 				</div>
 			</div>
 		</div>
-		<th:block th:include="imports :: script"></th:block>
 		
+		<th:block th:include="imports :: script"></th:block>
 	</body>
-	
 </html>

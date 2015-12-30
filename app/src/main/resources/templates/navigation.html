@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-
-<html class="no-js" lang="de">
-<!--/*
-	TODO:
-		- Navigation weiter anpassen
-			+ weiter Links hinzufügen
-		- Template mehr zum Template ausbauen
-		- Variablen hinzufügen
-		- th:href Mapping festlegen.
-		- Kommentare löschen
-*/-->
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- Navigation weiter anpassen
+				+ weiter Links hinzufügen
+			- Template mehr zum Template ausbauen
+			- Variablen hinzufügen
+			- th:href Mapping festlegen.
+			- Kommentare löschen
+	*/-->
+	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-	
 		<th:block th:fragment="navigation">
 			<nav class="top-bar" data-topbar="" role="navigation">
 				<ul class="title-area">
 					<li class="name">
-						<h1><a th:href="@{/index}" href="./index.html">My Site</a></h1>
+						<h1><a th:href="@{/}" href="./index.html">My Site</a></h1>
 					</li>
 					<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 					<li class="toggle-topbar menu-icon">
@@ -37,7 +37,7 @@
 							<th:block th:include="search :: searchByTag"></th:block>
 						</li>
 						
-						<li>
+						<li sec:authorize="hasRole('ROLE_NORMAL')">
 							<a sec:authorize="isAuthenticated()" th:href="@{/offer}" href="./offer.html">Offer</a>
 						</li>
 						
@@ -48,27 +48,31 @@
 							
 							<ul class="dropdown">
 								<li sec:authorize="hasRole('ROLE_ADMIN')">
-									<a th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
+									<a class="center" th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
 								</li>
 								
 								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a th:href="@{/data}" href="data.html" > Eigene Daten</a>
+									<a class="center" th:href="@{/data}" href="data.html" > Eigene Daten</a>
 								</li>
 								
 								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
+									<a class="center" th:href="@{/myOfferedGoods}" href="myOfferedGoods"> My Offered Goods</a>
+								</li>
+								
+								<li sec:authorize="hasRole('ROLE_NORMAL')">
+									<a class="center" th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
 								</li>
 								
 								<li sec:authorize="!isAuthenticated()">
-									<a th:href="@{/new_user_data}" href="new_user_data.html"> Registrieren</a>
+									<a class="center" th:href="@{/new_user}" href="new_user.html"> Registrieren</a>
 								</li>
 								
 								<li sec:authorize="!isAuthenticated()">
-									<a th:href="@{/login}" href="login.html" >Login</a>
+									<a class="center" th:href="@{/login}" href="login.html" >Login</a>
 								</li>
 								
 								<li sec:authorize="isAuthenticated()">
-									<a th:href="@{/logout}" type="submit" value="Logout">Logout</a>
+									<a class="center" th:href="@{/logout}" type="submit" value="Logout">Logout</a>
 								</li>
 							</ul>
 						</li>
@@ -83,7 +87,5 @@
 		</th:block>
 		
 		<th:block th:include="imports :: script"></th:block>
-		
 	</body>
-	
 </html>

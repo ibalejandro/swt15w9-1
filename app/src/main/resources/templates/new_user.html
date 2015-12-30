@@ -1,5 +1,5 @@
-<html  xmlns:th="http://www.thymeleaf.org">
-	
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
@@ -20,7 +20,7 @@
 							<label class="link--right"><a th:href="@{/new_user}" onclick="return toggle('reg');" >Login.</a></label>
 						</div>
 						
-						<form action="/create_new_user" method="post">
+						<form th:action="@{/create_new_user}" method="post">
 						
 							<div class="medium-6 small-12 columns">
 								<div class="row">
