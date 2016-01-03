@@ -55,7 +55,7 @@ public class User implements Serializable{
 	
 	//Bidirektional:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
-	@OneToMany(targetEntity=Dialog.class, cascade = CascadeType.ALL, fetch= FetchType.EAGER) private Set<Dialog> dialogs;
+	@OneToMany private Set<Dialog> dialogs;
 	  
 	@SuppressWarnings("unused")
 	private User() {} 
@@ -118,7 +118,17 @@ public class User implements Serializable{
 	public void addDialog(Dialog dialog) {
 		Assert.notNull(dialog);
 		
+		removeDialog(dialog);
 		dialogs.add(dialog);
+	}
+	
+	public void removeDialog(Dialog d) {
+		for (Dialog dialog : dialogs) {
+			if (dialog.getId() == d.getId()) {
+				dialogs.remove(dialog);
+				break;
+			}
+		}
 	}
 	
 	public Iterable<Dialog> getDialogs() {

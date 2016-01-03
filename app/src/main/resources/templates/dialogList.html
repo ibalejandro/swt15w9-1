@@ -25,8 +25,8 @@
 
 					<tbody>
 						<tr th:each="dialog : ${dialogList}">
-							<th th:text="${dialog.title">Title</th>
-							<th th:text="${dialog.partner}">Partner</th>
+							<th th:text="${dialog.title}">Title</th>
+							<th th:text="${dialog.userB.userAccount.firstname}">Partner</th>
 							<th><input type="button" value="Go to" /></th>
 						</tr>
 					</tbody>

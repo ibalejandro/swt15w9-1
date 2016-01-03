@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,10 +28,10 @@ public class Dialog implements Serializable {
 	@GeneratedValue
 	private long id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private User userA;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private User userB;
 
 	private String title;
@@ -40,6 +39,10 @@ public class Dialog implements Serializable {
 	@OneToMany
 	protected List<Chat> messageHistory = new LinkedList<>();
 
+	public Dialog() {
+		
+	}
+	
 	/**
 	 * Constructor.
 	 * 

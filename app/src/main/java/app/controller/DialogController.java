@@ -50,10 +50,8 @@ public class DialogController {
 		}
 		User loggedInUser = userRepository.findByUserAccount(loggedInUserAccount.get());
 
+		System.out.println(loggedInUser.getDialogs());
 		model.addAttribute("dialogList", loggedInUser.getDialogs());
-		for (Dialog dialog : loggedInUser.getDialogs()) {
-			System.out.println(dialog.getTitle());
-		}
 		return "dialogList";
 	}
 
@@ -80,9 +78,11 @@ public class DialogController {
 		User participantUser = userRepository.findByUserAccount(participantAccount.get());
 		
 		Dialog d = new Dialog(title, loggedInUser, participantUser);
-		dialogList.save(d);
-		loggedInUser.addDialog(d);
-		participantUser.addDialog(d);
+		Dialog savedDialog = dialogList.save(d);
+		loggedInUser.addDialog(savedDialog);
+		userRepository.save(loggedInUser);
+		participantUser.addDialog(savedDialog);
+		userRepository.save(participantUser);
 
 		return "redirect:/dialogList";
 	}

@@ -63,6 +63,10 @@
 									<a class="center" th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
 								</li>
 								
+								<li sec:authorize="hasRole('ROLE_NORMAL')">
+									<a class="center" th:href="@{/startDialog}" href="startDialog.html" > Neuer Dialog</a>
+								</li>
+								
 								<li sec:authorize="!isAuthenticated()">
 									<a class="center" th:href="@{/new_user}" href="new_user.html"> Registrieren</a>
 								</li>
