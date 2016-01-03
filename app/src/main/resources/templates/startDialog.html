@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<th:block th:include="imports :: head"></th:block>
-</head>
-<body>
-	<div th:include="navigation :: navigation"></div>
-	<div class="row">
-		<div class = "small-12 columns">
-			<div class="create">
-				<h1 class="create_title">New Dialog</h1>
-				
-				<form th:action="@{/startDialog}" method="post">
-					<div>
-						<label class="create__label">Title:</label>
-						<input type="text" name="title" />
-					</div>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<div th:include="navigation :: navigation"></div>
+		
+		<div class="row">
+			<div class = "small-12 columns">
+				<div class="create">
+					<h1 class="create_title">New Dialog</h1>
 					
-					<div>
-						<label class="create__label">Participant:</label>
-						<input type="text" name="participant" />
-					</div>
-					
-					<div>
-						<input class="button" type="submit" value="Begin" />
-					</div>
-				</form>
+					<form th:action="@{/startDialog}" method="post">
+						<div>
+							<label class="create__label">Title:</label>
+							<input type="text" name="title" />
+						</div>
+						
+						<div>
+							<label class="create__label">Participant:</label>
+							<input type="text" name="participant" />
+						</div>
+						
+						<div>
+							<input class="button" type="submit" value="Begin" />
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-	<th:block th:include="imports :: script"></th:block>
-</body>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
 </html>

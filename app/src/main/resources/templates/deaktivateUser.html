@@ -1,0 +1,32 @@
+<html>
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+		<script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
+	</head>
+	
+	<body>
+	
+		<th:block th:include="navigation :: navigation"></th:block>
+	
+		<h1>Nutzerkonto deaktivieren</h1>
+		
+		<form action="/submit_deaktivateUser" method="post">
+		
+		   	<p class="deaktivate__user__text"><font color="red"><b>Wollen Sie ihr Nutzerkonto wirklich deaktivieren? Diese Aktion kann nur von einem Administrator r&uuml;ckg&auml;ngig gemacht werden. Deaktivierte Nutzerkonten werden nach 3 Monaten gel&ouml;scht.</b></font></p>
+		
+		    <p> <label for="check1">
+     			<input type="checkbox" name="deaktivate" value="yes" id="check1">
+      			Nutzerkonto deaktivieren </input>
+    		</label> </p>
+		
+			<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
+			
+			<input class="button" type="submit" value="Submit"/>
+		</form>
+		
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+	
+</html>

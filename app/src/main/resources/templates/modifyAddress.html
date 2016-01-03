@@ -11,24 +11,84 @@
 		<div class="row">
 			<div class="large-12 colums">
 				<h1 th:text="@{Your address: &nbsp; } + ${userAccount.getUsername()}"> UserAccount</h1>
-			
 				<form th:action="@{/modifyAddress_submit/}" method="post">
-					<p class="new__user__text">Street:</p>
-					<input name="street" type="text" />
-					
-					<p class="new__user__text">House Number:</p>
-					<input name="houseNr" type="text" />
-					
-					<p class="new__user__text">ZipCode</p>
-					<input name="zipCode" type="text"/>
-					
-					<p class="new__user__text">City:</p>
-					<input name="city" type="text"/>
-					
-					<input type="submit" class="button" value="Next"/>
-				</form>
-			</div>
-		</div>
+				<div class="medium-6 small-12 columns">
+								<div class="row">
+									<div class="small-12 columns">
+										<label class="headline--sub">Wohnungstyp:</label>
+									</div>
+									
+									<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked=""/>
+									<label class="form__label" for="hh">Wohnung</label>
+									
+									<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee"/>
+									<label class="form__label" for="fh">Flüchtlingsheim</label>
+									<div class="small-12 columns"></div>
+									<div class="new__user__helper">
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Stra&szlig;e:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="street" type="text"/>
+										</div>
+										
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Hausnummer:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="housenr" type="text"/>
+										</div>
+										
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Postleitzahl:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="postcode_H" type="text"/>
+										</div>
+									
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Stadt:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="city_H" type="text"/>
+										</div>
+									</div>
+									
+									<div class="new__user__refugee">
+										<div class="large-3 small-12 columns">
+											<label class="form__label--paddingOFF">Fl&uuml;chtlingsheim Name:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="flh_name" type="text"/>
+										</div>
+									
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Postleitzahl:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="postcode_R" type="text"/>
+										</div>
+									
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Stadt:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="city_R" type="text"/>
+										</div>
+									
+										<div class="large-3 small-12 columns">
+											<label class="form__label">Stadtteil:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="citypart" type="text"/>
+										</div>
+									</div>
+									<input type="submit" class="button" value="Next"/>
+								</div>
+							</div>
+						</form>
+					</div>			
+				</div>
 		
 		<th:block th:include="imports :: script"></th:block>
 		

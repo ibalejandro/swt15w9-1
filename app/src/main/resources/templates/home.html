@@ -1,22 +1,22 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-		<div th:include="navigation :: navigation"></div>
+		<th:block th:include="navigation :: navigation"></th:block>
 	
-		<div>
-			<h2> Goods </h2>
-		</div>
-		
-		<div class="row">
-			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
-				<div th:id="good+${good.id}" th:include="goods_item--multi :: item" ></div>
-			</div>
-		</div>
+		<div class="space"></div>
+
+		<th:block th:include="itemN--small :: show_items"></th:block>
+
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 	

@@ -44,8 +44,8 @@ import app.model.User;
 import app.model.UserRepository;
 
 /**
-* <h1>RestorePassword</h1>
-* The RestorePasswordController is used for reset Passwords from UserAccounts.
+* <h1>DeaktivateUser</h1>
+* The DeaktivateUserController is used for deaktivate UserAccounts.
 * 
 *
 * @author Kilian Heret
@@ -53,7 +53,7 @@ import app.model.UserRepository;
 */
 
 @Controller
-public class RestorePassword {
+public class DeaktivateUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
     private final MailSender mailSender;
@@ -63,7 +63,7 @@ public class RestorePassword {
 	   * @param CreateNewUser
 	   */
 	@Autowired
-	public RestorePassword (UserAccountManager userAccountManager, UserRepository userRepository , MailSender mailSender){
+	public DeaktivateUser (UserAccountManager userAccountManager, UserRepository userRepository , MailSender mailSender){
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
 
@@ -74,9 +74,17 @@ public class RestorePassword {
 	}
 	
 	
-	@RequestMapping({"/restorePassword"})
-	public String restorePassword(){
-		return "/restorePassword";
+	@RequestMapping({"/deaktivateUser"})
+	public String deaktivateUser(@LoggedIn Optional<UserAccount> userAccount){
+
+		if (userAccount.isPresent())
+		{
+			return "deaktivateUser";
+		}
+		else
+		{
+		return "redirect:/";
+		}
 	}
 
 	private String sendPost(String CaptchaResponse, String Secret) throws Exception {
@@ -210,26 +218,44 @@ public class RestorePassword {
         }
     }
 	
-	@RequestMapping(value = "/submit_captcha_restorePW")
-	public String recieve_reCAPTCHA(){
+	@RequestMapping(value = "/submit_deaktivateUser")
+	public String submit_deaktivateUser0(@LoggedIn Optional<UserAccount> userAccount){
 
-		
-				return "redirect:/";
+		if (userAccount.isPresent())
+		{
+			return "redirect:/deaktivateUser";
+		}
+		else
+		{
+			return "redirect:/";
+		}
+				
 		
 	}
 	
-	@RequestMapping(value = "/submit_captcha_restorePW", method = RequestMethod.POST)
-	public String recieve_reCAPTCHA_user(@RequestParam("username") @Valid final String Username, @RequestParam("g-recaptcha-response")String CaptchaResponse){
+	@RequestMapping(value = "/submit_deaktivateUser", method = RequestMethod.POST)
+	public String submit_deaktivateUser(@RequestParam("deaktivate")String checkbox_deaktivate, @RequestParam("g-recaptcha-response")String CaptchaResponse, @LoggedIn Optional<UserAccount> userAccount){
 
 		System.out.println("## CaptchaResponse:");
 		System.out.println(CaptchaResponse);
 
-		if (CaptchaResponse.isEmpty() || (!userAccountManager.findByUsername(Username).isPresent()))
+		if (!userAccount.isPresent())
 		{
-			return "redirect:/";		   
+			return "redirect:/";
+		}
+		
+		if (CaptchaResponse.isEmpty() || checkbox_deaktivate.isEmpty())
+		{
+			return "redirect:/deaktivateUser";		   
 		}
 		else
 		{
+			if (!checkbox_deaktivate.equals("yes"))
+			{
+				return "redirect:/deaktivateUser";		   
+			}
+			
+			
 			//http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
 			String Secret="6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
@@ -247,8 +273,8 @@ public class RestorePassword {
 
 			if (Returnstring.equals("{  \"success\": true}"))
 			{
-				if(userAccountManager.findByUsername(Username).isPresent()){
-		            User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(Username).get());					
+				if(userAccount.isPresent()){
+		            User user_xyz = userRepository.findByUserAccount(userAccount.get());					
 					
 		            if (user_xyz.getUserAccount().getEmail().isEmpty()) 
 		            {
@@ -263,7 +289,7 @@ public class RestorePassword {
                     String NewPassword = "PW:"+sha256(user_xyz.getActivationkey() + zeitstempel).substring(4, 14); 
                     
                     String domain     = "http://localhost:8080";
-                    String mailtext = "<html> <head> </head> <body> <h1>Reset Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> This is your new temp Password: "+NewPassword+" </body> </html>";
+                    String mailtext = "<html> <head> </head> <body> <h1>Deactivated RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> Dein Useraccount wurde deaktiviert. </body> </html>";
                     String mailadresse = user_xyz.getUserAccount().getEmail();
 					
 					
@@ -272,32 +298,23 @@ public class RestorePassword {
                     {
                         //Mail senden: 
                         try {
-                            Mailsenden(mailadresse,"Reset Password for your RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+                            Mailsenden(mailadresse,"Deactivated RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
                             System.out.println("Mail versandt");
                         } catch (MessagingException | IOException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }   
                     }
-                    else
-                    {
-                    	System.out.println(NewPassword);
-                    }
-
 					
-                    userAccountManager.changePassword(user_xyz.getUserAccount(), NewPassword);
+                    user_xyz.DeActivate();
+                    userAccountManager.disable(user_xyz.getUserAccount().getIdentifier());
+                    
 					userRepository.save(user_xyz);
 					
-					System.out.println(NewPassword);
-                    
-                    if (!mailadresse.equals("test@test.test"))
-                    {
-                        return "redirect:/login";
-                    }    
-                    else
-                    {
-                        return "redirect:/login";
-                    }
+					System.out.println("Nutzer deaktiviert");
+
+                    return "redirect:/login";
+
 		            
 				}
 				return "redirect:/";

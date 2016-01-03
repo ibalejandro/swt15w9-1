@@ -1,22 +1,21 @@
-<!doctype html>
-<html class="no-js" mlns:th="http://www.thymeleaf.org">
-
-<!--
-	TODO:
-		- position vom Bild vielleicht nach oben?
-			# "Thyme Leafe IF" falls zweite Description leer ist
-		- Variablen Namen nach content._ überarbeiten
-		- th:src Fileverweis überarbeiten
-		- th:href Mapping überarbeiten
-		- Kommentare löschen
--->
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- position vom Bild vielleicht nach oben?
+				# "Thyme Leafe IF" falls zweite Description leer ist
+			- Variablen Namen nach content._ überarbeiten
+			- th:src Fileverweis überarbeiten
+			- th:href Mapping überarbeiten
+			- Kommentare löschen
+	*/-->
 
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-	
 		<div th:fragment="item">
 			<div class="single--small">
 			
@@ -55,6 +54,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 </html>
