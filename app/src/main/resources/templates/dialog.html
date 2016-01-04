@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
 
-	<head>
-		<th:block th:include="imports :: head"></th:block>
-		<title>Dialog</title>
-	</head>
+<head>
+<th:block th:include="imports :: head"></th:block>
+<title>Dialog</title>
+</head>
 
-	<body>
-		<div th:include="navigation :: navigation"></div>
+<body>
+	<div th:include="navigation :: navigation"></div>
 
-		<div class="row">
-			<!--	replace by actual internalization string
+	<div class="row">
+		<!--	replace by actual internalization string
 					change layout to two columns		
 			-->
-			<h1 th:text="${title}">dialog_title</h1>
-			<h3>Owner</h3>
-			<p th:text="${owner.userAccount.firstname}">user_A</p>
-			<h3>Participant</h3>
-			<p th:text="${participant.userAccount.firstname}">user_B</p>
-			
-			
+		<h1 th:text="${title}">dialog_title</h1>
+		<h3>Owner</h3>
+		<p th:text="${owner.userAccount.firstname}">user_A</p>
+		<h3>Participant</h3>
+		<p th:text="${participant.userAccount.firstname}">user_B</p>
+
+		<div id="messages">
+			<div th:each="message, it : ${messages}"
+				th:with="index = ${it.count}">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3>User wrote:</h3>
+					</div>
+					<div class="panel-body">
+						<blockquote class="entrytext" th:text="${message.text}">h</blockquote>
+						<footer class="date"
+							th:text="${#dates.format(message.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
+					</div>
+				</div>
+			</div>
 		</div>
-		<th:block th:include="imports :: script"></th:block>
-	</body>
+
+		<form action="/dialog" th:action="@{/dialog(id=${dialog.id})}" method="post">
+			<div th:each="textblockForm : ${textblockForms}">
+				<p th:utext="${textblockForm}"></p>
+			</div>
+			<input type="submit" value="Submit" />
+		</form>
+
+
+	</div>
+	<th:block th:include="imports :: script"></th:block>
+</body>
 </html>

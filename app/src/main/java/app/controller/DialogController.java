@@ -1,5 +1,7 @@
 package app.controller;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,8 @@ import app.model.Dialog;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.DialogRepository;
+import app.repository.TextBlockRepository;
+import app.textblocks.TextBlock;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
@@ -26,23 +30,33 @@ public class DialogController {
 	private final UserRepository userRepository;
 	private final UserAccountManager userAccountManager;
 	private final DialogRepository dialogRepo;
+	private final TextBlockRepository textBlockRepo;
 
 	@Autowired
 	public DialogController(DialogRepository dialogList, UserRepository userRepository,
-			UserAccountManager userAccountManager) {
+			UserAccountManager userAccountManager, TextBlockRepository textBlockRepo) {
 		this.dialogRepo = dialogList;
 		this.userRepository = userRepository;
 		this.userAccountManager = userAccountManager;
+		this.textBlockRepo = textBlockRepo;
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.GET)
 	public String dialog(@RequestParam("id") Long id, Model model) {
 		Dialog d = dialogRepo.findOne(id);
 
+		model.addAttribute("dialog", d);
 		model.addAttribute("title", d.getTitle());
 		model.addAttribute("owner", d.getUserA());
 		model.addAttribute("participant", d.getUserB());
 		model.addAttribute("messages", d.getMessageHistory());
+		
+		List<String> textblockForms = new LinkedList<>();
+		for (TextBlock textBlock: textBlockRepo.findAll()) {
+			textblockForms.add(textBlock.asForm());
+		}
+		
+		model.addAttribute("textblockForms", textblockForms);
 
 		return "dialog";
 	}
