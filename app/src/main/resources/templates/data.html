@@ -20,6 +20,7 @@
 		
 		<div>				
 			<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html">Password ändern</a></div>
+			<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/deaktivateUser}" href="deaktivateUser.html">Nutzerkonto deaktivieren</a></div>
 			<table>			
 				<tr>
 					<td>Firstname</td>
