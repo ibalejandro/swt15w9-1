@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,20 +25,25 @@ import app.repository.DialogRepository;
 public class DialogController {
 	private final UserRepository userRepository;
 	private final UserAccountManager userAccountManager;
-	private final DialogRepository dialogList;
+	private final DialogRepository dialogRepo;
 
 	@Autowired
 	public DialogController(DialogRepository dialogList, UserRepository userRepository,
 			UserAccountManager userAccountManager) {
-		this.dialogList = dialogList;
+		this.dialogRepo = dialogList;
 		this.userRepository = userRepository;
 		this.userAccountManager = userAccountManager;
 	}
 
-	@RequestMapping(value = "/dialog/{id}", method = RequestMethod.GET)
-	public String dialog(@PathVariable("id") Dialog dialog, Model model) {
-		model.addAttribute("messages", dialogList.findAll());
-		// model.addAttribute("form", form);
+	@RequestMapping(value = "/dialog", method = RequestMethod.GET)
+	public String dialog(@RequestParam("id") Long id, Model model) {
+		Dialog d = dialogRepo.findOne(id);
+
+		model.addAttribute("title", d.getTitle());
+		model.addAttribute("owner", d.getUserA());
+		model.addAttribute("participant", d.getUserB());
+		model.addAttribute("messages", d.getMessageHistory());
+
 		return "dialog";
 	}
 
@@ -76,27 +80,14 @@ public class DialogController {
 			return "noUser";
 		}
 		User participantUser = userRepository.findByUserAccount(participantAccount.get());
-		
+
 		Dialog d = new Dialog(title, loggedInUser, participantUser);
-		Dialog savedDialog = dialogList.save(d);
+		Dialog savedDialog = dialogRepo.save(d);
 		loggedInUser.addDialog(savedDialog);
 		userRepository.save(loggedInUser);
 		participantUser.addDialog(savedDialog);
 		userRepository.save(participantUser);
 
 		return "redirect:/dialogList";
-	}
-
-	@RequestMapping(value = "/dialogList", method = RequestMethod.POST)
-	public String saveDialog(@RequestParam("otherUser") User user, @LoggedIn Optional<UserAccount> loggedInUserAccount,
-			@RequestParam("title") String title) {
-		if (!loggedInUserAccount.isPresent()) {
-			return "errorpage0_empty";
-		}
-		User loggedInUser = userRepository.findByUserAccount(loggedInUserAccount.get());
-
-		dialogList.save(new Dialog(title, loggedInUser, user));
-
-		return "dialogList";
 	}
 }

@@ -25,9 +25,16 @@
 
 					<tbody>
 						<tr th:each="dialog : ${dialogList}">
-							<th th:text="${dialog.title}">Title</th>
-							<th th:text="${dialog.userB.userAccount.firstname}">Partner</th>
-							<th><input type="button" value="Go to" /></th>
+							<td th:text="${dialog.title}">Title</td>
+							<td th:text="${dialog.userB.userAccount.firstname}">Partner</td>
+							<td>
+							<!--
+								<form action="/dialogList" th:action="@{/dialog(id=${dialog.id})}">
+									<input type="submit" value="Go to" />
+								</form>
+							-->
+								<a href="/dialogList" th:href="@{/dialog(id=${dialog.id})}"> Go to </a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -35,5 +42,5 @@
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
-	</body>´
+	</body>
 </html>
