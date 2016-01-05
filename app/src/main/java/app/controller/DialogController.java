@@ -51,30 +51,44 @@ public class DialogController {
 		model.addAttribute("owner", d.getUserA());
 		model.addAttribute("participant", d.getUserB());
 		model.addAttribute("messages", d.getMessageHistory());
-		
+
 		List<String> textblockForms = new LinkedList<>();
-		for (TextBlock textBlock: textBlockRepo.findAll()) {
+		for (TextBlock textBlock : textBlockRepo.findAll()) {
 			textblockForms.add(textBlock.asForm());
 		}
-		
+
 		model.addAttribute("textblockForms", textblockForms);
 
 		return "dialog";
 	}
-	
+
 	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
 	public String dialog(@RequestParam("id") Long id, HttpServletRequest request) {
 		Dialog d = dialogRepo.findOne(id);
 		Enumeration<String> params = request.getParameterNames();
+		List<Long> requestedBlocks = new LinkedList<>();
+
 		while (params.hasMoreElements()) {
 			String string = (String) params.nextElement();
+			
+			//TODO: remove debug print
 			System.out.println(string);
 			System.out.println(request.getParameter(string));
+			
+			if (string.endsWith("-selected")) {
+				/*
+				 * get all ids of the selected textblocks. These are implicitly
+				 * given by the "xxx-selected" param name, where xxx represents
+				 * the id. Only if the checkbox before the textblock is ticked
+				 * in the form this param occurs in the params enum.
+				 */
+				requestedBlocks.add(Long.parseLong(string.substring(0, string.length() - 9)));
+			}
 		}
-		
-		//ChatTemplate ct = new ChatTemplate(blocks);
-		//d.addMessageElement(ct.fromForm(requestValues));
-		
+
+		// ChatTemplate ct = new ChatTemplate(blocks);
+		// d.addMessageElement(ct.fromForm(requestValues));
+
 		return "redirect:/dialog?id=" + id;
 	}
 
