@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   
-    <head>
+  <head>
     <th:block th:include="imports :: head"></th:block>
   </head>
   
@@ -13,9 +13,9 @@
       
       <div class="small-12 columns space"></div>
       <div class="small-12 columns">
-        <h1 class="headline">Offer Good</h1>
+        <h1 class="headline">Offer Activity</h1>
       </div>
-      <form th:action="@{/offeredGood}" th:object="${good}" method="post">
+      <form th:action="@{/offeredActivity}" th:object="${activity}" method="post">
         <div class="large-1 medium-2 small-12 columns">
           <label for="name" class="form__label">Name</label> 
         </div>
@@ -51,6 +51,20 @@
           </select>  
         </div>
         
+        <div class="large-1 medium-2 small-12 columns">
+          <label for="startDate" class="form__label">Start date</label>
+        </div>
+        <div class="large-5 medium-10 small-12 columns">
+          <input type="date" id="startDate" name="startDate"/> 
+        </div>
+        
+        <div class="large-1 medium-2 small-12 columns">
+          <label for="endDate" class="form__label">End date</label>
+        </div>
+        <div class="large-5 medium-10 small-12 columns">
+          <input type="date" id="endDate" name="endDate"/> 
+        </div>
+        
         <div class="small-12 columns">
           <input class="button" type="submit" value="Offer"/>
         </div>
@@ -59,5 +73,5 @@
     </div>
     <th:block th:include="imports :: script"></th:block>
     </body>
-  
+    
 </html>

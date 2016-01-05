@@ -1,0 +1,47 @@
+<!doctype html>
+<html class="no-js" mlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		
+		<div th:fragment="item">
+			<div class="gooditem__body--single">
+				<div>
+					<label class="gooditem__label--single"> Picture </label>
+					<img th:src="${result.getId()+'/activityimage'}" class="gooditem__text--single"/>
+				</div>
+				
+				<div>
+					<label class="gooditem__label--single"> Name </label>
+					<p th:text="${result.name}" class="gooditem__text--single">Lorem ipsum</p>
+				</div>
+				
+				<div>
+					<label class="gooditem__label--single"> Description </label>
+					<p th:text="${result.description}" class="gooditem__text--single">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+				</div>
+				
+				<div>
+					<label class="gooditem__label--single"> Tag </label>
+					<p th:text="${result.tag.name}" class="gooditem__text--single">Lorem</p>
+				</div>
+				
+				<div>
+					<label class="gooditem__label--single"> Start date </label>
+					<p th:text="${result.getStringFromDate(result.startDate)}" class="gooditem__text--single">Lorem</p>
+				</div>
+				
+				<div>
+					<label class="gooditem__label--single"> End date </label>
+					<p th:text="${result.getStringFromDate(result.endDate)}" class="gooditem__text--single">Lorem</p>
+				</div>
+			</div>
+		</div>
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+	
+</html>

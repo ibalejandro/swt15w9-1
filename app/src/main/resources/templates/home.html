@@ -14,9 +14,20 @@
 		
 		<div class="row">
 			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
-				<div th:id="good+${good.id}" th:include="goods_item--multi :: item" ></div>
+				<div th:id="good+${good.id}" th:include="goods_item--multi_no_numeration :: item" ></div>
 			</div>
 		</div>
+		
+		<div>
+			<h2> Activities </h2>
+		</div>
+		
+		<div class="row">
+			<div th:each="activity, it : ${resultActivities}" th:with="index = ${it.count}">
+				<div th:id="activity+${activity.id}" th:include="activities_item--multi_no_numeration :: item" ></div>
+			</div>
+		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 	

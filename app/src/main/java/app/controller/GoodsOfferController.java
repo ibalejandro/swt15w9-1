@@ -15,13 +15,15 @@ import app.model.TagEntity;
 import app.model.GoodEntity;
 import app.model.User;
 import app.model.UserRepository;
+import app.repository.ActivitiesRepository;
 import app.repository.GoodsRepository;
 import app.repository.TagsRepository;
 import app.validator.GoodValidator;
 
 /**
 * <h1>GoodsOfferController</h1>
-* The GoodsOfferController is used to offer and view offered goods by the users.
+* The GoodsOfferController is used to offer and view offered goods/activities 
+* by the users.
 *
 * @author Alejandro Sánchez Aristizábal
 * @since  19.11.2015
@@ -32,33 +34,38 @@ public class GoodsOfferController {
 	/////////////////////////////////////////////////////Ergänzung Userzuordnung
 	private final UserRepository userRepository;
 	private final GoodsRepository goodsRepository;
+	private final ActivitiesRepository activitiesRepository;
 	private final TagsRepository tagsRepository;
 
 	/**
    * Autowire.
    * @param UserRepository The repository for the users
    * @param GoodsRepository The repository for the goods
+   * @param ActivitiesRepository The repository for the activities
    * @param TagsRepository The repository for the tags
    */
 	@Autowired
 	public GoodsOfferController(UserRepository userRepository,
 	                            GoodsRepository goodsRepository,
-	                            TagsRepository tagsRepository){
+	                            ActivitiesRepository activitiesRepository,
+	                            TagsRepository tagsRepository) {
 		this.userRepository = userRepository;
 		this.goodsRepository = goodsRepository;
+		this.activitiesRepository = activitiesRepository;
 		this.tagsRepository = tagsRepository;
 	}
 	/////////////////////////////////////////////////////////end
 
 	/**
    * This method is the answer for the request to '/home'. It finds
-   * and retrieves all the offered goods by the users.
+   * and retrieves all the offered goods/activities by the users.
    * @param Model The model to add response's attributes
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
   public String listAllGoods(Model model) {
 	  model.addAttribute("result", goodsRepository.findAll());
+	  model.addAttribute("resultActivities", activitiesRepository.findAll());
 		return "home";
   }
 

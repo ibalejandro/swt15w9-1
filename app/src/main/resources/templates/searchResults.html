@@ -10,12 +10,26 @@
 		<div th:include="navigation :: navigation"></div>
 		
 		<div>
-			<h2 th:text="'Goods found by '+${resultParameterType}+': '+${resultParameter}+' ('+${numberOfResults}+')'"></h2>
+			<h1 th:text="'Results found by '+${resultParameterType}+': '+${resultParameter}"></h1>
+		</div>
+		
+		<div>
+			<h2 th:text="'Goods ('+${numberOfResults}+')'"></h2>
 		</div>
 		
 	    <div class="row">
 			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
-				<div th:id="good+${good.id}" th:include="goods_item--multi :: item" ></div>
+				<div th:id="good+${good.id}" th:include="goods_item--multi_no_numeration :: item" ></div>
+			</div>
+		</div>
+		
+		<div>
+			<h2 th:text="'Activities ('+${numberOfResultsActivities}+')'"></h2>
+		</div>
+		
+		<div class="row">
+			<div th:each="activity, it : ${resultActivity}" th:with="index = ${it.count}">
+				<div th:id="activity+${activity.id}" th:include="activities_item--multi_no_numeration :: item" ></div>
 			</div>
 		</div>
 		
