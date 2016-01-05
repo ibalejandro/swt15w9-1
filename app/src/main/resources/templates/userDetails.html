@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-	
 		<th:block th:include="navigation :: navigation"></th:block>
 		
 		<div class="row">
@@ -16,6 +19,26 @@
 					<h1 class="userdetail__headline">Kundenliste</h1>
 					
 					<div class="userdetail__content">
+					
+						<div class="userdetail__search">
+							<form th:action="@{/searchUser}" method="post">
+								<div>
+									<div class="row">
+										<div class="large-3 small-12 columns">
+											<label class="form__label" for="userNameIN">Username:</label>
+										</div>
+										<div class="large-9 small-12 columns">
+											<input name="userNameIN" type="text"/>
+										</div>
+									</div>
+								</div>
+								<div class="medium-5 small-12 columns">
+									<div class="button--right">
+										<input class="button" type="submit" value="Search user" />
+									</div>
+								</div>
+							</form>
+						</div>
 					
 						<div class="error_field" sec:authorize="!hasRole('ROLE_ADMIN')">
 							<p class="error__msg">Keine Berechtigung!</p>
@@ -39,10 +62,11 @@
 									<td th:text="${user.userAccount.email}">xyz</td>
 									<td th:text="${user.location.getLocation()}">Adresse</td>
 									<td th:text="${user.getOrigin()}">Herkunft</td>
-									<td th:text="${user.getLanguage()}">Sprache</td>
+									<td th:text="${user.getPrefLanguage()}">Sprache</td>
 									<td th:text="${user.getRegistrationdate()}">rdate</td>
 									<td th:text="${user.isActivated()}">activation_state</td>
-									<td><a th:href="@{/modify}">Bearbeiten</a></td>
+									<td><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}">Bearbeiten</a></td>
+									<td><a th:href="@{/modifyActivationStateByAdmin/{user}/{action}(user=${user.getUserAccount().getUsername()}, action=${user.getActivationStateOpposite()})}" th:text="${user.getActivationStateOpposite()}"></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -52,7 +76,5 @@
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
-	
 	</body>
-	
 </html>

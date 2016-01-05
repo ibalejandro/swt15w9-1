@@ -1,13 +1,19 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
 	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-	
 		<div th:include="navigation :: navigation"></div>
+		
+		<div class="space"></div>
 		
 		<div>
 			<h1 th:text="'Results found by '+${resultParameterType}+': '+${resultParameter}"></h1>
@@ -32,9 +38,9 @@
 				<div th:id="activity+${activity.id}" th:include="activities_item--multi_no_numeration :: item" ></div>
 			</div>
 		</div>
+
+	   <th:block th:include="itemN--small :: show_items"></th:block>
 		
 		<th:block th:include="imports :: script"></th:block>
-		
 	</body>
-	
 </html>

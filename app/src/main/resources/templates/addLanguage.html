@@ -1,0 +1,33 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		
+		<div th:include="navigation :: navigation"></div>	
+	
+		<div class="row">
+			<div class="large-12 colums">
+				<h1 th:text="@{Your Languages: &nbsp; }"> UserAccount</h1>
+			
+				<form th:action="@{/addLanguage_submit}" method="post">
+					
+					<p th:text="@{New Language: &nbsp; }" class="new__user__text">Language:</p>
+					<input name="languageName" type="text" />
+					
+					<p th:text="@{ISO code: &nbsp; }" class="new__user__text">Language:</p>
+					<input name="kennung" type="text" />
+					
+					
+					<input type="submit" class="button" value="Next"/>
+				</form>
+			</div>
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+	
+</html>

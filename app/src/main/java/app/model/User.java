@@ -278,6 +278,24 @@ public class User implements Serializable{
 		return enabled;
 	}
 	
+	/**
+	   * Getter.
+	   * @return String The opposite of the activationstate
+	   */
+	public String getActivationStateOpposite(){
+		if(userAccount.isEnabled())return "deactivate";
+		else return "activate";
+	}
+	
+	/**
+	   * Getter.
+	   * @return String The activationstate as a String
+	   */
+	public String getActivationState(){
+		if(userAccount.isEnabled())return "activated";
+		else return "deactivated";
+	}
+	
 	//***************************** (d1456)
 	
 	public boolean isActivated(){
