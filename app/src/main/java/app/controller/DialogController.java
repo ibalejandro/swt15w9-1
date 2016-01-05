@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -61,25 +62,21 @@ public class DialogController {
 		return "dialog";
 	}
 	
-	/*@RequestMapping(value = "/dialog", method = RequestMethod.POST)
-	public String dialog(@RequestParam("id") Long id, Model model, @) {
+	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
+	public String dialog(@RequestParam("id") Long id, HttpServletRequest request) {
 		Dialog d = dialogRepo.findOne(id);
-
-		model.addAttribute("dialog", d);
-		model.addAttribute("title", d.getTitle());
-		model.addAttribute("owner", d.getUserA());
-		model.addAttribute("participant", d.getUserB());
-		model.addAttribute("messages", d.getMessageHistory());
-		
-		List<String> textblockForms = new LinkedList<>();
-		for (TextBlock textBlock: textBlockRepo.findAll()) {
-			textblockForms.add(textBlock.asForm());
+		Enumeration<String> params = request.getParameterNames();
+		while (params.hasMoreElements()) {
+			String string = (String) params.nextElement();
+			System.out.println(string);
+			System.out.println(request.getParameter(string));
 		}
 		
-		model.addAttribute("textblockForms", textblockForms);
-
-		return "dialog";
-	}*/
+		//ChatTemplate ct = new ChatTemplate(blocks);
+		//d.addMessageElement(ct.fromForm(requestValues));
+		
+		return "redirect:/dialog?id=" + id;
+	}
 
 	@RequestMapping(value = "/dialogList", method = RequestMethod.GET)
 	public String dialogList(Model model, @LoggedIn Optional<UserAccount> loggedInUserAccount) {
