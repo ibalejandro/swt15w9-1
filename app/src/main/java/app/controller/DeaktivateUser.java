@@ -30,6 +30,7 @@ import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -75,10 +76,11 @@ public class DeaktivateUser {
 	
 	
 	@RequestMapping({"/deaktivateUser"})
-	public String deaktivateUser(@LoggedIn Optional<UserAccount> userAccount){
+	public String deaktivateUser(@LoggedIn Optional<UserAccount> userAccount, Model model){
 
 		if (userAccount.isPresent())
 		{
+			model.addAttribute("user", userRepository.findByUserAccount(userAccount.get()));
 			return "deaktivateUser";
 		}
 		else
@@ -86,6 +88,25 @@ public class DeaktivateUser {
 		return "redirect:/";
 		}
 	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping({"/modifyActivationStateByAdmin/{user}/{action}"})
+	public String deaktivateUserByAdmin(@PathVariable final String user,@PathVariable final String action, @LoggedIn Optional<UserAccount> userAccount, Model model){
+
+		if (userAccount.isPresent())
+		{
+			model.addAttribute("user", userRepository.findByUserAccount(userAccountManager.findByUsername(user).get()));
+			if(action.equals("deactivate"))return "deaktivateUser";
+			else return "aktivateUser";
+			
+		}
+		else
+		{
+		return "redirect:/";
+		}
+	}
+	
+	
 
 	private String sendPost(String CaptchaResponse, String Secret) throws Exception {
 
@@ -218,7 +239,7 @@ public class DeaktivateUser {
         }
     }
 	
-	@RequestMapping(value = "/submit_deaktivateUser")
+	@RequestMapping(value = "/submit_deaktivateUser/{user}")
 	public String submit_deaktivateUser0(@LoggedIn Optional<UserAccount> userAccount){
 
 		if (userAccount.isPresent())
@@ -233,11 +254,11 @@ public class DeaktivateUser {
 		
 	}
 	
-	@RequestMapping(value = "/submit_deaktivateUser", method = RequestMethod.POST)
-	public String submit_deaktivateUser(@RequestParam("deaktivate")String checkbox_deaktivate, @RequestParam("g-recaptcha-response")String CaptchaResponse, @LoggedIn Optional<UserAccount> userAccount){
+	@RequestMapping(value = "/submit_deaktivateUser/{user}", method = RequestMethod.POST)
+	public String submit_deaktivateUser(@PathVariable final String user, @RequestParam("deaktivate")String checkbox_deaktivate, @RequestParam("g-recaptcha-response")String CaptchaResponse, @LoggedIn Optional<UserAccount> userAccount, Model model){
 
 		System.out.println("## CaptchaResponse:");
-		System.out.println(CaptchaResponse);
+		//System.out.println(CaptchaResponse);
 
 		if (!userAccount.isPresent())
 		{
@@ -257,7 +278,7 @@ public class DeaktivateUser {
 			
 			
 			//http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
-
+			
 			String Secret="6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
 			String Returnstring="";
 
@@ -274,8 +295,12 @@ public class DeaktivateUser {
 			if (Returnstring.equals("{  \"success\": true}"))
 			{
 				if(userAccount.isPresent()){
-		            User user_xyz = userRepository.findByUserAccount(userAccount.get());					
-					
+					User user_xyz;
+					if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
+						user_xyz= userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+					}else{
+						user_xyz = userRepository.findByUserAccount(userAccount.get());					
+					}
 		            if (user_xyz.getUserAccount().getEmail().isEmpty()) 
 		            {
 		            	return "redirect:/";	
@@ -312,7 +337,10 @@ public class DeaktivateUser {
 					userRepository.save(user_xyz);
 					
 					System.out.println("Nutzer deaktiviert");
-
+					if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
+						model.addAttribute("user",user_xyz);
+						return "data";
+					}
                     return "redirect:/login";
 
 		            
@@ -325,6 +353,40 @@ public class DeaktivateUser {
 				return "redirect:/reCAPTCHA-TEST";
 			}
 		}
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping({"/submit_aktivateUser/{user}"})
+	public String submit_aktivateUser(@PathVariable final String user, @RequestParam("aktivate")String checkbox_deaktivate, @LoggedIn Optional<UserAccount> userAccount, Model model){
+		
+		User user_xyz= userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+		String domain     = "http://localhost:8080";
+        String mailtext = "<html> <head> </head> <body> <h1>Reactivated RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")<h1> Hallo "+user_xyz.getUserAccount().getUsername()+" </h1><br/><br/> Dein Useraccount wurde wieder aktiviert. </body> </html>";
+        String mailadresse = user_xyz.getUserAccount().getEmail();
+		
+		
+		//Mail senden: 
+        if (!mailadresse.equals("test@test.test"))                    
+        {
+            //Mail senden: 
+            try {
+                Mailsenden(mailadresse,"Reactivated RefugeesApp-Account ("+user_xyz.getUserAccount().getUsername()+")",mailtext);
+                System.out.println("Mail versandt");
+            } catch (MessagingException | IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }   
+        }
+		
+        user_xyz.Activate();
+        userAccountManager.enable(user_xyz.getUserAccount().getIdentifier());
+        
+		userRepository.save(user_xyz);
+		
+		System.out.println("Nutzer aktiviert");
+		
+		model.addAttribute("user",user_xyz);
+		return "data";
 	}
 	                         
 }
