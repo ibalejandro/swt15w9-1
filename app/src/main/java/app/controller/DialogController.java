@@ -60,6 +60,26 @@ public class DialogController {
 
 		return "dialog";
 	}
+	
+	/*@RequestMapping(value = "/dialog", method = RequestMethod.POST)
+	public String dialog(@RequestParam("id") Long id, Model model, @) {
+		Dialog d = dialogRepo.findOne(id);
+
+		model.addAttribute("dialog", d);
+		model.addAttribute("title", d.getTitle());
+		model.addAttribute("owner", d.getUserA());
+		model.addAttribute("participant", d.getUserB());
+		model.addAttribute("messages", d.getMessageHistory());
+		
+		List<String> textblockForms = new LinkedList<>();
+		for (TextBlock textBlock: textBlockRepo.findAll()) {
+			textblockForms.add(textBlock.asForm());
+		}
+		
+		model.addAttribute("textblockForms", textblockForms);
+
+		return "dialog";
+	}*/
 
 	@RequestMapping(value = "/dialogList", method = RequestMethod.GET)
 	public String dialogList(Model model, @LoggedIn Optional<UserAccount> loggedInUserAccount) {

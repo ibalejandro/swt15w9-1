@@ -53,10 +53,10 @@ public class TextblockController {
 	@RequestMapping(value = "/newTextBlock", method = RequestMethod.POST)
 	public String newTextBlock(HttpServletRequest request) {
 		String formatString = request.getParameter("formatString");
-		List<FormatTag> tags = new FormatStringTagFilter("formatString").getTags();
+		List<FormatTag> tags = new FormatStringTagFilter(formatString).getTags();
 		
 		//TODO: delete in final release!
-		System.out.println(formatString);
+		//System.out.println(formatString);
 		
 		textBlockRepository.save(new TextBlock(formatString, tags));
 		
