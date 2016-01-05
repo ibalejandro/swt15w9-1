@@ -1,0 +1,31 @@
+<html>
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+		<script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
+	</head>
+	
+	<body>
+	
+		<th:block th:include="navigation :: navigation"></th:block>
+	
+		<h1>Nutzerkonto aktivieren</h1>
+		
+		<form th:action="@{/submit_aktivateUser/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
+		
+		   	
+			<p  class="aktivate__user__text" th:text= "@{Do you really want to &nbsp;}+${user.getActivationStateOpposite()}+@{&nbsp; the User &nbsp;}+${user.userAccount.getUsername()}+@{ ?}"><font color="red"></font></p>
+		    
+		    <p> <label for="check1">
+     			<input type="checkbox" name="aktivate" value="yes" id="check2">
+      			Nutzerkonto aktivieren </input>
+    		</label> </p>
+			
+			<input class="button" type="submit" value="Submit"/>
+		</form>
+		
+		<th:block th:include="imports :: script"></th:block>
+		
+	</body>
+	
+</html>

@@ -11,16 +11,18 @@
 	
 		<h1>Nutzerkonto deaktivieren</h1>
 		
-		<form action="/submit_deaktivateUser" method="post">
+		<form th:action="@{/submit_deaktivateUser/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
 		
-		   	<p class="deaktivate__user__text"><font color="red"><b>Wollen Sie ihr Nutzerkonto wirklich deaktivieren? Diese Aktion kann nur von einem Administrator r&uuml;ckg&auml;ngig gemacht werden. Deaktivierte Nutzerkonten werden nach 3 Monaten gel&ouml;scht.</b></font></p>
-		
+		   	<p sec:authorize="hasRole('ROLE_NORMAL')" class="deaktivate__user__text"><font color="red"><b>Wollen Sie ihr Nutzerkonto wirklich deaktivieren? Diese Aktion kann nur von einem Administrator r&uuml;ckg&auml;ngig gemacht werden. Deaktivierte Nutzerkonten werden nach 3 Monaten gel&ouml;scht.</b></font></p>
+			<p sec:authorize="hasRole('ROLE_ADMIN')" class="deaktivate__user__text" th:text= "@{Do you really want to &nbsp;}+${user.getActivationStateOpposite()}+@{&nbsp; the User &nbsp;}+${user.userAccount.getUsername()}+@{&nbsp; ?}"><font color="red"></font></p>
+		    
 		    <p> <label for="check1">
      			<input type="checkbox" name="deaktivate" value="yes" id="check1">
       			Nutzerkonto deaktivieren </input>
     		</label> </p>
 		
 			<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
+			
 			
 			<input class="button" type="submit" value="Submit"/>
 		</form>

@@ -38,13 +38,13 @@ public class GoodValidator implements Validator {
       GoodEntity good = (GoodEntity) target;
       
       if (good.getName().trim().isEmpty()) {
-        errors.rejectValue("name", "your_error_code");
+        errors.rejectValue("name", "required.name");
       }
       if (good.getDescription().trim().isEmpty()) {
-        errors.rejectValue("description", "your_error_code");
+        errors.rejectValue("description", "required description");
       }
-      if (good.getTag() == null) errors.rejectValue("tag", "your_error_code");
-    }
+      if (good.getTag() == null) errors.rejectValue("tag", "required.tag");
+    }  
   }
   
 }
