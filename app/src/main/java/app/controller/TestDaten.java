@@ -79,16 +79,18 @@ public class TestDaten implements DataInitializer {
 		UserAccount u2=userAccountManager.create("Peter", "pw", normalUserRole);
 		u2.setFirstname("Peter");
 		u2.setLastname("U.");
+		u2.setEmail("test@test.test");
 		userAccountManager.save(u2);
 
 		Address address1 = new Address("Mittelstraße", " 1", "11587", "Dresden");
 
 		User user1 = new User(u1, address1);
-		user1.setOrigin("Deutschland");
+		user1.setOrigin("Germany, Deutschland (DE)");
 		user1.setRegistrationdate(new Date());
 		user1.Activate();
 
 		User user2 = new User(u2, address1);
+		user2.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
 		user2.setRegistrationdate(new Date());
 		userRepository.save(user1);
 		userRepository.save(user2);
