@@ -160,10 +160,15 @@ public class CreateNewUser {
 	}
 
 	@RequestMapping({ "/new_user_language_origin/user/{user}" })
-	public String new_user_language_origin(@PathVariable String user) {
+	public String new_user_language_origin(@PathVariable String user, Model modelMap) {
 		if (!userAccountManager.findByUsername(user).isPresent()) {
 			return "redirect:/";
 		}
+			ListCountry a = new ListCountry();
+			LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
+			
+			modelMap.addAttribute("countrys", L);
+		
 		return "/new_user_language_origin";
 	}
 
