@@ -1,8 +1,10 @@
 package app.controller;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +69,7 @@ public class DialogController {
 		Dialog d = dialogRepo.findOne(id);
 		Enumeration<String> params = request.getParameterNames();
 		List<Long> requestedBlocks = new LinkedList<>();
+		Map<String, String> requestValues = new HashMap<>();
 
 		while (params.hasMoreElements()) {
 			String string = (String) params.nextElement();
@@ -86,8 +89,14 @@ public class DialogController {
 			}
 		}
 
-		// ChatTemplate ct = new ChatTemplate(blocks);
-		// d.addMessageElement(ct.fromForm(requestValues));
+		Iterable<TextBlock> i = textBlockRepo.findAll(requestedBlocks);
+		List<TextBlock> blocks = new LinkedList<>();
+		for (TextBlock textBlock : i) {
+			blocks.add(textBlock);
+		}
+		
+		//ChatTemplate ct = new ChatTemplate(blocks);
+		//d.addMessageElement(ct.fromForm(requestValues));
 
 		return "redirect:/dialog?id=" + id;
 	}
