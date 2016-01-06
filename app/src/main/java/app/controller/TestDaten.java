@@ -79,7 +79,7 @@ public class TestDaten implements DataInitializer {
 		UserAccount u2=userAccountManager.create("Peter", "pw", normalUserRole);
 		u2.setFirstname("Peter");
 		u2.setLastname("U.");
-		u2.setEmail("test@test.test");
+		u2.setEmail("test1@test.test");
 		userAccountManager.save(u2);
 
 		Address address1 = new Address("Mittelstraße", " 1", "11587", "Dresden");
