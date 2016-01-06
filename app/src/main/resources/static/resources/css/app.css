@@ -230,6 +230,9 @@ p{
 *	Anpassung bei Formularen und Label und	*
 *	zugehöriger Label						*
 ********************************************/
+.nope{
+	padding: 0 0 0 0.15;
+}
 .form__label{
 	font-size: 1rem;
 	padding: 0.5rem 0 0 0;

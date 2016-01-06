@@ -2,6 +2,7 @@ package app.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
@@ -12,12 +13,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import app.model.Address;
+import app.model.InterfacePart;
 import app.model.Language;
+import app.model.Module;
 import app.model.TagEntity;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.DialogRepository;
+import app.repository.InterfaceRepository;
 import app.repository.LanguageRepository;
+import app.repository.ModuleRepository;
 import app.repository.TagsRepository;
 
 @Component
@@ -28,13 +33,17 @@ public class TestDaten implements DataInitializer {
 	private final DialogRepository dialogRepository;
 	private final LanguageRepository languageRepository;
 	private final TagsRepository tagsRepository;
+	private final ModuleRepository moduleRepository;
+	private final InterfaceRepository interfaceRepository;
 
 	@Autowired
 	public TestDaten(UserAccountManager userAccountManager, 
 	                 UserRepository userRepository, 
 	                 DialogRepository dialogRepository,
 	                 LanguageRepository languageRepository,
-	                 TagsRepository tagsRepository) {
+	                 TagsRepository tagsRepository,
+	                 ModuleRepository moduleRepository,
+	                 InterfaceRepository interfaceRepository) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -45,13 +54,15 @@ public class TestDaten implements DataInitializer {
 		this.dialogRepository = dialogRepository;
 		this.languageRepository=languageRepository;
 		this.tagsRepository = tagsRepository;
+		this.moduleRepository = moduleRepository;
+		this.interfaceRepository = interfaceRepository;
 	}
 
 	@Override
 	public void initialize() {
 
 		initializeUsers(userAccountManager, userRepository, dialogRepository, languageRepository,
-		                tagsRepository);
+		                tagsRepository, moduleRepository, interfaceRepository);
 
 	}
 
@@ -59,7 +70,9 @@ public class TestDaten implements DataInitializer {
 	                             UserRepository userRepository, 
 	                             DialogRepository dialogRepository, 
 	                             LanguageRepository languageRepository,
-	                             TagsRepository tagsRepository) {
+	                             TagsRepository tagsRepository,
+	                             ModuleRepository moduleRepository,
+	        	                 InterfaceRepository interfaceRepository) {
 
 		if (userAccountManager.findByUsername("boss").isPresent()) {
 			return;
@@ -120,6 +133,16 @@ public class TestDaten implements DataInitializer {
 		
 		ArrayList<TagEntity> tags = createTags();
 		for (TagEntity tag : tags) tagsRepository.save(tag);
+		
+		List<Module> mods = createModule();
+		for(Module mod : mods){
+			moduleRepository.save(mod);
+		}
+		
+		List<InterfacePart> inPs = createInterfacePart(moduleRepository, languageRepository);
+		for(InterfacePart inP : inPs){
+			interfaceRepository.save(inP);
+		}
 	}
 	
 	/**
@@ -175,6 +198,88 @@ public class TestDaten implements DataInitializer {
     tags.add(tag21);
     
     return tags;
+	}
+	
+	/**
+	 * Creates a List with all Test Modules
+	 * @return
+	 */
+	public List<Module> createModule(){
+		List<Module> res = new ArrayList<Module>();
+		
+		Module mod1 = new Module("login", "login_link_text");
+		Module mod2 = new Module("login", "login_error_text");
+		Module mod3 = new Module("login", "login_nutzername_text");
+		Module mod4 = new Module("login", "login_passwort_text");
+		Module mod5 = new Module("login", "login_button_text");
+		
+		res.add(mod1);
+		res.add(mod2);
+		res.add(mod3);
+		res.add(mod4);
+		res.add(mod5);
+		
+		return res;
+	}
+
+	/**
+	 * Creates a List with all Test InterfaceParts for the following
+	 * Languages:
+	 * 		- English
+	 * 		- German
+	 * 		- Arabic
+	 * @param modRes ModuleRepository
+	 * @param lanRes LanguageRepository
+	 * @return
+	 */
+	public List<InterfacePart> createInterfacePart(ModuleRepository modRes, LanguageRepository lanRes){
+		List<InterfacePart> res = new ArrayList<InterfacePart>();
+		
+		Language lanEN = lanRes.findByKennung("en");
+		Language lanDE = lanRes.findByKennung("de");
+		Language lanAR = lanRes.findByKennung("ar");
+				
+		Module mod1 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_link_text");
+		Module mod2 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_error_text");
+		Module mod3 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_nutzername_text");
+		Module mod4 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_passwort_text");
+		Module mod5 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_button_text");
+
+		InterfacePart in0 = new InterfacePart("Noch nicht Registriert?", lanDE.getId(), mod1.getId());
+		InterfacePart in1 = new InterfacePart("Der Nutzername oder das Passwort sind falsch!", lanDE.getId(), mod2.getId());
+		InterfacePart in2 = new InterfacePart("Nutzername:", lanDE.getId(), mod3.getId());
+		InterfacePart in3 = new InterfacePart("Passwort:", lanDE.getId(), mod4.getId());
+		InterfacePart in4 = new InterfacePart("Login", lanDE.getId(), mod5.getId());
+		
+		InterfacePart in5 = new InterfacePart("Not registered yet?", lanEN.getId(), mod1.getId());
+		InterfacePart in6 = new InterfacePart("The username or password is incorrect!", lanEN.getId(), mod2.getId());
+		InterfacePart in7 = new InterfacePart("Username:", lanEN.getId(), mod3.getId());
+		InterfacePart in8 = new InterfacePart("Password:", lanEN.getId(), mod4.getId());
+		InterfacePart in9 = new InterfacePart("Login", lanEN.getId(), mod5.getId());
+		
+		InterfacePart in10 = new InterfacePart("Noch nicht Registriert?-Auf Arabisch", lanAR.getId(), mod1.getId());
+		InterfacePart in11 = new InterfacePart("Der Nutzername oder das Passwort sind falsch!-Auf Arabisch", lanAR.getId(), mod2.getId());
+		InterfacePart in12 = new InterfacePart("Nutzername-Auf Arabisch:", lanAR.getId(), mod3.getId());
+		InterfacePart in13 = new InterfacePart("Passwort-Auf Arabisch:", lanAR.getId(), mod4.getId());
+		InterfacePart in14 = new InterfacePart("Login-Auf Arabisch", lanAR.getId(), mod5.getId());
+		
+		res.add(in0);
+		res.add(in1);
+		res.add(in2);
+		res.add(in3);
+		res.add(in4);
+		res.add(in5);
+		res.add(in6);
+		res.add(in7);
+		res.add(in8);
+		res.add(in9);
+		res.add(in10);
+		res.add(in11);
+		res.add(in12);
+		res.add(in13);
+		res.add(in14);
+		
+		return res;
 	}
 
 }
