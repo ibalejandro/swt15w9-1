@@ -10,6 +10,8 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -31,6 +33,7 @@ import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,7 +83,12 @@ public class CreateNewUser {
 	boolean za;
 
 	@RequestMapping(value = "/new_user")
-	public String new_user0() {
+	public String new_user0(Model modelMap) {
+		ListCountry a = new ListCountry();
+		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
+		
+		modelMap.addAttribute("countrys", L);
+		
 		return "new_user";
 
 	}

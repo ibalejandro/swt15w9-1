@@ -82,7 +82,14 @@
 									<label class="form__label">Herkunftsland:</label>
 								</div>
 								<div class="large-9 small-12 columns">
-									<input name="origin" type="text"/>
+									<select name="origin">
+                                            <option >---- Select ----</option>
+                                            <option th:each="country : ${countrys}"
+                                                    th:text="${country}">
+                                            </option>
+                                        </select>
+                                    <!--    <input name="origin" type="text"/> -->
+
 								</div>
 							</div>
 						</div>
@@ -163,6 +170,9 @@
 					
 						<div class="medium-7 small-12 columns">
 							<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
+							<noscript>
+      							<font color="red"><b>In Ihrem Browser ist JavaScript deaktiviert. Für die Anzeige des Captcha wird Javascript ben&ouml;tigt.</b></font>
+      						</noscript>
 						</div>
 					
 						<div class="medium-5 small-12 columns">
