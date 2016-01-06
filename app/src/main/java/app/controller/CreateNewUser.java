@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import app.model.Address;
 import app.model.Language;
 import app.model.User;
+import app.model.User.AddresstypEnum;
 import app.model.UserRepository;
 import app.repository.LanguageRepository;
 
@@ -552,15 +553,16 @@ public class CreateNewUser {
 																// Zeit zu
 																// löschen.
 					user_xyz.setRegistrationstate(1);
+
 					userRepository.save(user_xyz);
 					return "redirect:/new_user_aboutuser1/user/{user}";
 				case 1:
 					return "redirect:/new_user_aboutuser1/user/{user}";
 				case 2:
-					if (user_xyz.getAdresstyp().equals("Refugees_home")) {
+					if (user_xyz.getAddresstypString().equals("Refugees_home")) {
 						return "redirect:/new_user_aboutuser2a/user/{user}";
 					}
-					if (user_xyz.getAdresstyp().equals("Wohnung")) {
+					if (user_xyz.getAddresstypString().equals("Wohnung")) {
 						return "redirect:/new_user_aboutuser2b/user/{user}";
 					}
 					return "redirect:/new_user_aboutuser1/user/{user}";
@@ -806,11 +808,11 @@ public class CreateNewUser {
 		user_xyz.getUserAccount().setFirstname(Firstname);
 
 		if (Adresstyp.equals("refugee")) {
-			user_xyz.setAdresstyp("Refugees_home");
+			user_xyz.setAddresstyp(AddresstypEnum.Refugees_home);
 		}
 
 		if (Adresstyp.equals("helper")) {
-			user_xyz.setAdresstyp("Wohnung");
+			user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
 		}
 
 		userAccountManager.save(user_xyz.getUserAccount());
@@ -840,6 +842,7 @@ public class CreateNewUser {
 			} else {
 				Flh_name = "";
 			}
+
 
 			if (Postcode_R.isPresent()) {
 				Postcode_N = Postcode_R.get();
@@ -879,11 +882,13 @@ public class CreateNewUser {
 						System.out.println("E: Ungültige Postleitzahl");
 						return "error";
 					}
+
 					i = i + 1;
 				}
 			}
 
-			Address address = new Address(Flh_name, Citypart, Postcode_N, City_N);
+
+			Address address = new Address("","",Flh_name, Citypart, Postcode_N, City_N);
 			user_xyz.setLocation(address);
 			user_xyz.setRegistrationstate(3); // 3 ~ Flüchtlingsheim
 			userRepository.save(user_xyz);
@@ -1238,11 +1243,13 @@ public class CreateNewUser {
 
 			user_xyz.getUserAccount().setLastname(Name);
 			user_xyz.getUserAccount().setFirstname(Firstname);
-			user_xyz.setAdresstyp(Adresstyp);
+			
+			
 			userAccountManager.save(user_xyz.getUserAccount());
 
 			user_xyz.setRegistrationstate(2);
 			userRepository.save(user_xyz);
+
 
 			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
 

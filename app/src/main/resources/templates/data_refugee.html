@@ -46,8 +46,12 @@
 					<td th:text="${user.getAddresstypString()}">Addresstyp</td>
 				</tr>
 				<tr>
-					<td>Street, house number</td>
-					<td th:text="${user.location.getStreetAndNo()}">Street, house number</td>
+					<td>Refugee home</td>
+					<td th:text="${user.location.getFlh_name()}">Flh_name</td>
+				</tr>
+				<tr>
+					<td>CityPart</td>
+					<td th:text="${user.location.getCityPart()}">CityPart</td>
 				</tr>	
 				<tr>
 					<td>City, zip code</td>
