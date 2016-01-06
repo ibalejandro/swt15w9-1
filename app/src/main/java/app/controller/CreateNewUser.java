@@ -956,6 +956,10 @@ public class CreateNewUser {
 		if (Nativelanguage.isEmpty() || Origin.isEmpty()) {
 			return "errorpage_empty";
 		}
+		if (Origin.equals("---- Select ----")){
+			System.out.println("Kein Herkunftsland ausgewählt");
+			return "errorpage_empty";
+		}
 
 		Language PreferredLanguage = languageRepository.findByName(Nativelanguage);
 		if (PreferredLanguage == null)
