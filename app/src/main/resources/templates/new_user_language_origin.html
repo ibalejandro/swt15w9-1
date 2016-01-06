@@ -20,7 +20,13 @@
 					<input name="otherlanguages" type="text"/>
 					
 					<p class="new__user__text">Herkunftsland:</p>
-					<input name="origin" type="text"/>
+					<select name="origin">
+                          <option >---- Select ----</option>
+                          <option th:each="country : ${countrys}"
+                                  th:text="${country}">
+                          </option>
+                    </select>
+                    <!--    <input name="origin" type="text"/> -->
 					
 					<input class="button" type="submit" text="Okay" value="OK"/>
 				</form>
