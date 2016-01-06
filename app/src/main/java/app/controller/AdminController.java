@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import app.model.Language;
 import app.model.User;
+import app.model.User.AddresstypEnum;
 import app.model.UserRepository;
 import app.repository.LanguageRepository;
 
@@ -72,7 +73,10 @@ private final LanguageRepository languageRepository;
 	public String searchUser(@RequestParam(value="userNameIN") final String UserName, Model model){
 		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(UserName).get());
 		model.addAttribute("user", user_xyz);
-		return "data";
+		if(user_xyz.getAddresstypString().equals("Wohnung")){
+			return "data";
+		}
+		return "data_refugee";
 		
 	}
 	@RequestMapping(value="/addLanguage")
@@ -117,19 +121,45 @@ private final LanguageRepository languageRepository;
 		if(Firstname.isPresent()&& !Firstname.get().isEmpty()) user_xyz.getUserAccount().setFirstname(Firstname.get());
 		System.out.println(user_xyz.getUserAccount().getFirstname());
 		
-		if(!Adresstyp.equals(user_xyz.getAdresstyp()))user_xyz.setAdresstyp(Adresstyp);
 		if(Adresstyp.equals("refugee")){
 			System.out.println("refugee");
-			if (Flh_name_OPT.isPresent()&& !Flh_name_OPT.get().isEmpty())user_xyz.getLocation().setStreet(Flh_name_OPT.get());			
-			if ((Postcode_R.isPresent()&& !Postcode_R.get().isEmpty()) && (Postcode_R.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_R.get());				
-			if (City_R.isPresent()&& !City_R.get().isEmpty())user_xyz.getLocation().setCity(City_R.get());
-			if (Citypart_OPT.isPresent()&& !Citypart_OPT.get().isEmpty())user_xyz.getLocation().setHousenr(Citypart_OPT.get());
+			user_xyz.getLocation().setStreet("");
+			user_xyz.getLocation().setHousenr("");
+			user_xyz.setAddresstyp(AddresstypEnum.Refugees_home);
+			if (Flh_name_OPT.isPresent()&& !Flh_name_OPT.get().isEmpty()){
+				user_xyz.getLocation().setFlh_name(Flh_name_OPT.get());			
+			}
+			if ((Postcode_R.isPresent()&& !Postcode_R.get().isEmpty()) && (Postcode_R.get().matches("[0-9]{5}"))){
+				user_xyz.getLocation().setZipCode(Postcode_R.get());				
+			}
+			if (City_R.isPresent()&& !City_R.get().isEmpty()){
+				user_xyz.getLocation().setCity(City_R.get());
+			}
+			if (Citypart_OPT.isPresent()&& !Citypart_OPT.get().isEmpty()){
+				user_xyz.getLocation().setCityPart(Citypart_OPT.get());
+			}
 		}else{
 			System.out.println("helper");
-			if (Street_OPT.isPresent()&& !Street_OPT.get().isEmpty())user_xyz.getLocation().setStreet(Street_OPT.get());	
-			if (Housenr_OPT.isPresent()&& !Housenr_OPT.get().isEmpty())user_xyz.getLocation().setHousenr(Housenr_OPT.get());		
-			if ((Postcode_H.isPresent()) && !Postcode_H.get().isEmpty() && (Postcode_H.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_H.get());				
-			if (City_H.isPresent()&& !City_H.get().isEmpty())user_xyz.getLocation().setCity(City_H.get());			
+			if (Street_OPT.isPresent()&& !Street_OPT.get().isEmpty()){
+				user_xyz.getLocation().setStreet(Street_OPT.get());	
+				user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
+				userRepository.save(user_xyz);
+			}
+			if (Housenr_OPT.isPresent()&& !Housenr_OPT.get().isEmpty()){
+				user_xyz.getLocation().setHousenr(Housenr_OPT.get());
+				user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
+				userRepository.save(user_xyz);
+			}
+			if ((Postcode_H.isPresent()) && !Postcode_H.get().isEmpty() && (Postcode_H.get().matches("[0-9]{5}"))){
+				user_xyz.getLocation().setZipCode(Postcode_H.get());				
+			}
+			if (City_H.isPresent()&& !City_H.get().isEmpty()){
+				user_xyz.getLocation().setCity(City_H.get());			
+			}
+			if(user_xyz.getAddresstypString().equals("Wohnung")){
+				user_xyz.getLocation().setFlh_name("");
+				user_xyz.getLocation().setCityPart("");
+			}
 		}
 		if(Nativelanguage.isPresent()&& !Nativelanguage.get().isEmpty()){
 			System.out.println("modify language");

@@ -3,6 +3,8 @@ package app.controller;
 import java.util.Optional;
 
 
+
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import app.model.Language;
 import app.model.User;
+import app.model.User.AddresstypEnum;
 import app.model.UserRepository;
 import app.repository.LanguageRepository;
 
@@ -87,7 +90,10 @@ public class UserManagementController {
 			if(userAccount.isPresent()){
 				User LoggUser=userRepository.findByUserAccount(userAccount.get());
 				model.addAttribute("user", LoggUser);
-				return "data";
+				if(LoggUser.getAddresstypString().equals("Wohnung")){
+					return "data";
+				}
+				return "data_refugee";
 			}
 			
 			return "noUser";
@@ -118,7 +124,9 @@ public class UserManagementController {
 			
 			System.out.println("Passwort geändert");
 
-			if(userAccount.get().hasRole(new Role("ROLE_ADMIN")))return "redirect:/userDetails";
+			if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
+				return "redirect:/userDetails";
+			}
 			return "redirect:/data";
 		}
 		
@@ -215,18 +223,45 @@ public class UserManagementController {
 		public String modifyAddress_submit( @LoggedIn Optional<UserAccount> userAccount, @RequestParam("wohnen") final String Adresstyp, @RequestParam("flh_name") final Optional<String> Flh_name_OPT, @RequestParam("citypart") final Optional<String> Citypart_OPT, @RequestParam("street") final Optional<String> Street_OPT, @RequestParam("housenr") final Optional<String> Housenr_OPT, @RequestParam("postcode_R") final Optional<String> Postcode_R, @RequestParam("city_R") final Optional<String> City_R, @RequestParam("postcode_H") final Optional<String> Postcode_H, @RequestParam("city_H") final Optional<String> City_H){
 			if(!userAccount.isPresent())return "noUser";
 			User user_xyz=userRepository.findByUserAccount(userAccount.get());
-			user_xyz.setAdresstyp(Adresstyp);
 			if(Adresstyp.equals("refugee")){
-				if (Flh_name_OPT.isPresent())user_xyz.getLocation().setStreet(Flh_name_OPT.get());			
-				if ((Postcode_R.isPresent()) && (Postcode_R.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_R.get());				
-				if (City_R.isPresent())user_xyz.getLocation().setCity(City_R.get());
-				if (Citypart_OPT.isPresent())user_xyz.getLocation().setHousenr(Citypart_OPT.get());
+				System.out.println("refugee");
+				user_xyz.getLocation().setStreet("");
+				user_xyz.getLocation().setHousenr("");
+				user_xyz.setAddresstyp(AddresstypEnum.Refugees_home);
+				if (Flh_name_OPT.isPresent()&& !Flh_name_OPT.get().isEmpty()){
+					user_xyz.getLocation().setFlh_name(Flh_name_OPT.get());			
+				}
+				if ((Postcode_R.isPresent()&& !Postcode_R.get().isEmpty()) && (Postcode_R.get().matches("[0-9]{5}"))){
+					user_xyz.getLocation().setZipCode(Postcode_R.get());				
+				}
+				if (City_R.isPresent()&& !City_R.get().isEmpty()){
+					user_xyz.getLocation().setCity(City_R.get());
+				}
+				if (Citypart_OPT.isPresent()&& !Citypart_OPT.get().isEmpty()){
+					user_xyz.getLocation().setCityPart(Citypart_OPT.get());
+				}
 			}else{
-				if (Street_OPT.isPresent())user_xyz.getLocation().setStreet(Street_OPT.get());	
-				if (Housenr_OPT.isPresent())user_xyz.getLocation().setHousenr(Housenr_OPT.get());		
-				if ((Postcode_H.isPresent()) && (Postcode_H.get().matches("[0-9]{5}")))user_xyz.getLocation().setZipCode(Postcode_H.get());				
-				if (City_H.isPresent())user_xyz.getLocation().setCity(City_H.get());
-				
+				System.out.println("helper");
+				if (Street_OPT.isPresent()&& !Street_OPT.get().isEmpty()){
+					user_xyz.getLocation().setStreet(Street_OPT.get());	
+					user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
+					userRepository.save(user_xyz);
+				}
+				if (Housenr_OPT.isPresent()&& !Housenr_OPT.get().isEmpty()){
+					user_xyz.getLocation().setHousenr(Housenr_OPT.get());
+					user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
+					userRepository.save(user_xyz);
+				}
+				if ((Postcode_H.isPresent()) && !Postcode_H.get().isEmpty() && (Postcode_H.get().matches("[0-9]{5}"))){
+					user_xyz.getLocation().setZipCode(Postcode_H.get());				
+				}
+				if (City_H.isPresent()&& !City_H.get().isEmpty()){
+					user_xyz.getLocation().setCity(City_H.get());			
+				}
+				if(user_xyz.getAddresstypString().equals("Wohnung")){
+					user_xyz.getLocation().setFlh_name("");
+					user_xyz.getLocation().setCityPart("");
+				}
 			}
 			userRepository.save(user_xyz);
 			

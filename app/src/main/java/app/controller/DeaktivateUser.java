@@ -339,7 +339,10 @@ public class DeaktivateUser {
 					System.out.println("Nutzer deaktiviert");
 					if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 						model.addAttribute("user",user_xyz);
-						return "data";
+						if(user_xyz.getAddresstypString().equals("Wohnung")){
+							return "data";
+						}
+						return "data_refugee";
 					}
                     return "redirect:/login";
 
@@ -386,7 +389,10 @@ public class DeaktivateUser {
 		System.out.println("Nutzer aktiviert");
 		
 		model.addAttribute("user",user_xyz);
-		return "data";
+		if(user_xyz.getAddresstypString().equals("Wohnung")){
+			return "data";
+		}
+		return "data_refugee";
 	}
 	                         
 }
