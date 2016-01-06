@@ -3,6 +3,8 @@ TODO:
 	- Überschriften überarbeiten
 	- Sprachauswahl bei Registrierung, modifyLanguages, modify
 	- 404.html erstellen
+	- Dropdown im Navigationsbar für Offer (Good, Activity)
+	- Option "My offered Activities" im Dropdown im Navigationsbar für den User
 	
 Templates:
 

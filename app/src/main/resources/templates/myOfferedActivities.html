@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<div th:include="navigation :: navigation"></div>
+		
+		<div>
+			<h2> Activities </h2>
+		</div>
+		
+		<div class="row">
+			<div th:each="activity, it : ${result}" th:with="index = ${it.count}">
+				<div th:fragment="activity" th:id="activity+${activity.id}">
+					<div class="small-12 colums medium-6 columns">
+						<div>
+							<h3 th:text="${index}+'. '+${activity.name}"></h3>
+						</div>
+						
+						<div>
+							<div>
+								<h4> Description </h4>
+								<p th:text="${activity.description}"></p>
+							</div>
+							
+							<div>
+								<h4> Tag </h4>
+								<p th:text="${activity.tag.name}"></p>
+							</div>
+							
+							<div>
+								<h4> Start date </h4>
+								<p th:text="${activity.getStringFromDate(activity.startDate)}"></p>
+							</div>
+							
+							<div>
+								<h4> End date </h4>
+								<p th:text="${activity.getStringFromDate(activity.endDate)}"></p>
+							</div>
+							
+							<div class="row">
+								<div class="small-12 medium-6 colums">
+									<form th:action="@{/deletedActivity}" method="post">
+										<input type="hidden" name="id" th:value="${activity.id}"/>
+										<input class="button" type="submit" value="Delete"/>
+									</form>
+								</div>
+								
+								<div class="small-12 medium-6 colums">
+									<form th:action="@{/updateActivity}" method="post">
+										<input type="hidden" name="id" th:value="${activity.id}"/>
+										<input class="button" type="submit" value="Update"/>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+	
+</html>

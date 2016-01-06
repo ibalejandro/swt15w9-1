@@ -55,6 +55,7 @@ public class User implements Serializable{
 	
 	//Bidirektional:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
+	@OneToMany(targetEntity=ActivityEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<ActivityEntity> activities;
 	@OneToMany(targetEntity=Dialog.class, cascade = CascadeType.ALL, fetch= FetchType.EAGER) private Set<Dialog> dialogs;
 	  
 	@SuppressWarnings("unused")
@@ -115,6 +116,42 @@ public class User implements Serializable{
 		return goods;
 	}
 	
+  /**
+   * Adds an ActivityEntity to the Set activities or updates an ActivityEntity 
+   * if it was already saved.
+   * @param ActivityEntity The activity to be added/updated
+   * @return Nothing
+   */
+  public void addActivity(ActivityEntity activity){
+    // It is used to eliminate an activity if it already exists.
+    removeActivity(activity);
+    
+    activities.add(activity);
+  }
+  
+  /**
+   * Removes an ActivityEntity from the Set activities.
+   * @param ActivityEntity The activity to be removed
+   * @return Nothing
+   */
+  public void removeActivity(ActivityEntity activity){
+    for (ActivityEntity a : activities) {
+      // It means that the user wants to update one of its offered activities.
+      if (a.getId() == activity.getId()) {
+        activities.remove(a);
+        break;
+      }
+    }
+  }
+  
+  /**
+   * Getter.
+   * @return Iterable<ActivityEntity> The activities offered by this User
+   */
+  public Iterable<ActivityEntity> getActivities(){
+    return activities;
+  }
+
 	public void addDialog(Dialog dialog) {
 		Assert.notNull(dialog);
 		
@@ -239,6 +276,24 @@ public class User implements Serializable{
 	   */
 	public boolean isEnabled(){
 		return enabled;
+	}
+	
+	/**
+	   * Getter.
+	   * @return String The opposite of the activationstate
+	   */
+	public String getActivationStateOpposite(){
+		if(userAccount.isEnabled())return "deactivate";
+		else return "activate";
+	}
+	
+	/**
+	   * Getter.
+	   * @return String The activationstate as a String
+	   */
+	public String getActivationState(){
+		if(userAccount.isEnabled())return "activated";
+		else return "deactivated";
 	}
 	
 	//***************************** (d1456)

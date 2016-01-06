@@ -48,7 +48,7 @@ public class GoodsManagementController {
 	@Autowired
 	public GoodsManagementController(UserRepository userRepository,
 									                 GoodsRepository goodsRepository,
-									                 TagsRepository tagsRepository){
+									                 TagsRepository tagsRepository) {
 		this.userRepository = userRepository;
 		this.goodsRepository = goodsRepository;
 		this.tagsRepository = tagsRepository;
@@ -73,7 +73,8 @@ public class GoodsManagementController {
     if (!userAccount.isPresent()) return "noUser";
 		User loggedUser = userRepository.findByUserAccount(userAccount.get());
 		
-		model.addAttribute("result", loggedUser.getGoods());
+		//model.addAttribute("result", loggedUser.getGoods());
+		model.addAttribute("result", goodsRepository.findByUser(loggedUser));
 		return "myOfferedGoods";
 	}
 

@@ -66,6 +66,7 @@
 									<td th:text="${user.getRegistrationdate()}">rdate</td>
 									<td th:text="${user.isActivated()}">activation_state</td>
 									<td><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}">Bearbeiten</a></td>
+									<td><a th:href="@{/modifyActivationStateByAdmin/{user}/{action}(user=${user.getUserAccount().getUsername()}, action=${user.getActivationStateOpposite()})}" th:text="${user.getActivationStateOpposite()}"></a></td>
 								</tr>
 							</tbody>
 						</table>
