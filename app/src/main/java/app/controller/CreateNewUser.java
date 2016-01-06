@@ -87,9 +87,9 @@ public class CreateNewUser {
 	public String new_user0(Model modelMap) {
 		ListCountry a = new ListCountry();
 		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
-		
+
 		modelMap.addAttribute("countrys", L);
-		
+
 		return "new_user";
 
 	}
@@ -165,11 +165,11 @@ public class CreateNewUser {
 		if (!userAccountManager.findByUsername(user).isPresent()) {
 			return "redirect:/";
 		}
-			ListCountry a = new ListCountry();
-			LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
-			
-			modelMap.addAttribute("countrys", L);
-		
+		ListCountry a = new ListCountry();
+		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
+
+		modelMap.addAttribute("countrys", L);
+
 		return "/new_user_language_origin";
 	}
 
@@ -730,7 +730,7 @@ public class CreateNewUser {
 		}
 
 		if (emailValidator(Mail) == false) {
-			System.out.println("E: "+Mail + " ist eine ungültige Mailadresse.");
+			System.out.println("E: " + Mail + " ist eine ungültige Mailadresse.");
 			return "error";
 		}
 
@@ -749,7 +749,7 @@ public class CreateNewUser {
 		}
 
 		if (equalMail) {
-			System.out.println("E: "+Mail + " ist eine bereits verwendete Mailadresse.");
+			System.out.println("E: " + Mail + " ist eine bereits verwendete Mailadresse.");
 			return "error";
 		}
 
@@ -843,7 +843,6 @@ public class CreateNewUser {
 				Flh_name = "";
 			}
 
-
 			if (Postcode_R.isPresent()) {
 				Postcode_N = Postcode_R.get();
 			} else {
@@ -887,8 +886,7 @@ public class CreateNewUser {
 				}
 			}
 
-
-			Address address = new Address("","",Flh_name, Citypart, Postcode_N, City_N);
+			Address address = new Address("", "", Flh_name, Citypart, Postcode_N, City_N);
 			user_xyz.setLocation(address);
 			user_xyz.setRegistrationstate(3); // 3 ~ Flüchtlingsheim
 			userRepository.save(user_xyz);
@@ -974,7 +972,7 @@ public class CreateNewUser {
 		if (Nativelanguage.isEmpty() || Origin.isEmpty()) {
 			return "errorpage_empty";
 		}
-		if (Origin.equals("---- Select ----")){
+		if (Origin.equals("---- Select ----")) {
 			System.out.println("E: Kein Herkunftsland ausgewählt");
 			return "errorpage_empty";
 		}
@@ -1243,13 +1241,11 @@ public class CreateNewUser {
 
 			user_xyz.getUserAccount().setLastname(Name);
 			user_xyz.getUserAccount().setFirstname(Firstname);
-			
-			
+
 			userAccountManager.save(user_xyz.getUserAccount());
 
 			user_xyz.setRegistrationstate(2);
 			userRepository.save(user_xyz);
-
 
 			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
 
