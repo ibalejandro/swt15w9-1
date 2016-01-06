@@ -68,18 +68,42 @@
 									</div>
 									
 									<div class="large-3 small-12 columns">
-										<label class="form__label">Muttersprache:</label>
+										<label for="nativelanguage" class="form__label">Muttersprache:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="nativelanguage" type="text" placeholder="Deutsch/Englisch/Arabisch"/>
+										<select id="nativelanguage" name="nativelanguage">
+											<option value="-1">---- Select ----</option>
+											<option th:each="language : ${languages}"
+												th:value="${language.getkennung()}"
+												th:text="${language.name}">
+											</option>
+										</select>  
+									</div>
+									<div class="large-3 small-12 columns">
+										<label for="otherlanguages" class="form__label">2.Sprache:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<select id="otherlanguages" name="otherlanguages">
+											<option value="-1">---- Select ----</option>
+											<option th:each="language : ${languages}"
+												th:value="${language.getkennung()}"
+												th:text="${language.name}">
+											</option>
+										</select>  
+									</div>
+									<div class="large-3 small-12 columns">
+										<label for="otherlanguages" class="form__label">3.Sprache:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<select id="otherlanguages" name="otherlanguages">
+											<option value="-1">---- Select ----</option>
+											<option th:each="language : ${languages}"
+												th:value="${language.getkennung()}"
+												th:text="${language.name}">
+											</option>
+										</select>  
 									</div>
 									
-									<div class="large-3 small-12 columns">
-										<label class="form__label--paddingOFF">andere Sprachen:</label>
-									</div>
-									<div class="large-9 small-12 columns">
-										<input name="otherlanguages" type="text" placeholder="Deutsch,Englisch,Arabisch- mit Komma ohne Lehrzeichen"/>
-									</div>
 									
 									<div class="large-3 small-12 columns">
 										<label class="form__label">Herkunftsland:</label>

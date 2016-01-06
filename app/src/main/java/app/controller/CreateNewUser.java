@@ -962,7 +962,7 @@ public class CreateNewUser {
 			return "errorpage_empty";
 		}
 
-		Language PreferredLanguage = languageRepository.findByName(Nativelanguage);
+		Language PreferredLanguage = languageRepository.findByKennung(Nativelanguage);
 		if (PreferredLanguage == null)
 			System.out.println("Prefl==null");
 		else
@@ -973,13 +973,13 @@ public class CreateNewUser {
 		userRepository.save(user_xyz);
 		System.out.println("save");
 
-		///////////////// Muss noch geÃ¤ndert werden, Spracheingabe
+		
 		if (OtherLanguages != null && !OtherLanguages.isEmpty()) {
 			for (String languageName : OtherLanguages.split(",")) {
 				System.out.println(languageName);
-				if (languageRepository.findByName(languageName) != null) {
+				if (languageRepository.findByKennung(languageName) != null) {
 					// user_xyz.setLanguage(languageRepository.findByName(languageName));
-					Language l1 = languageRepository.findByName(languageName);
+					Language l1 = languageRepository.findByKennung(languageName);
 					System.out.println(l1.toString());
 					user_xyz.setLanguage(l1);
 					userRepository.save(user_xyz);

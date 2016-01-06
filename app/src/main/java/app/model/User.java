@@ -220,11 +220,10 @@ public class User implements Serializable{
 	
 	/**
 	   * Remove Language.
-	   * @param Language The new language that should be added.
+	   * @param Language The language that should be removed.
 	   * @return Nothing
 	   */
 	public Language removeLanguage(Language language){
-		if(language.equals(PrefLanguage))return null;
 		if(languages.remove(language))return language;
 		return null;
 	}

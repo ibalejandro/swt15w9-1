@@ -65,6 +65,7 @@ private final LanguageRepository languageRepository;
 	public String modify(@PathVariable final String user, Model model){
 		
 		model.addAttribute("user",userRepository.findByUserAccount(userAccountManager.findByUsername(user).get()));
+		model.addAttribute("languages", languageRepository.findAll());
 		System.out.println(model.toString());
 		return "modify";
 	}
@@ -109,8 +110,8 @@ private final LanguageRepository languageRepository;
 			@RequestParam(value="city_R") final Optional<String> City_R, 
 			@RequestParam(value="postcode_H") final Optional<String> Postcode_H, 
 			@RequestParam(value="city_H") final Optional<String> City_H,
-			@RequestParam(value="nativelanguage") final Optional<String> Nativelanguage, 
-			@RequestParam(value="otherlanguages") final Optional<String> OtherLanguages, 
+			@RequestParam(value="nativelanguage") final String Nativelanguage, 
+			@RequestParam(value="otherlanguages") final String OtherLanguages, 
 			@RequestParam(value="origin") final Optional<String> Origin)
 	{
 		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
@@ -161,20 +162,31 @@ private final LanguageRepository languageRepository;
 				user_xyz.getLocation().setCityPart("");
 			}
 		}
-		if(Nativelanguage.isPresent()&& !Nativelanguage.get().isEmpty()){
+		if( !Nativelanguage.isEmpty()){
 			System.out.println("modify language");
-			Language PreferredLanguage= languageRepository.findByName(Nativelanguage.get());
+			user_xyz.removeLanguage(user_xyz.getPrefLanguage());
+			Language PreferredLanguage=languageRepository.findByKennung(Nativelanguage);
 			user_xyz.setPrefLanguage(PreferredLanguage);
 		}
-		if(OtherLanguages.isPresent() && !OtherLanguages.get().isEmpty()){
+		if(!OtherLanguages.isEmpty()&& !OtherLanguages.toString().equals("-1")){
 			System.out.println("modify languages");
-			user_xyz.removeAllLanguages();
-			if(OtherLanguages.get()!=null && !OtherLanguages.get().isEmpty()){
-				for(String languageName:OtherLanguages.get().split(",")){
+			System.out.println(OtherLanguages);
+			System.out.println(OtherLanguages.toString());
+			Boolean nichtleer=false;
+			for(String test:OtherLanguages.split(",")){
+				if(!test.equals("-1")){
+					nichtleer=true;
+				}
+			}
+			if(nichtleer){
+				user_xyz.removeAllLanguages();
+			}
+			if(OtherLanguages!=null && !OtherLanguages.isEmpty()){
+				for(String languageName:OtherLanguages.split(",")){
 					System.out.println(languageName);
-					if(languageRepository.findByName(languageName)!=null){
+					if(languageRepository.findByKennung(languageName)!=null){
 						//user_xyz.setLanguage(languageRepository.findByName(languageName));
-						Language l1=languageRepository.findByName(languageName);
+						Language l1=languageRepository.findByKennung(languageName);
 						System.out.println(l1.toString());
 						user_xyz.setLanguage(l1);
 						userRepository.save(user_xyz);					

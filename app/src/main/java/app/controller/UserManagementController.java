@@ -269,8 +269,9 @@ public class UserManagementController {
 		}
 		
 		@RequestMapping("/modifyLanguages")
-		public String modifyLanguages(Model model,  @LoggedIn Optional<UserAccount> userAccount){
+		public String modifyLanguages(ModelMap model,  @LoggedIn Optional<UserAccount> userAccount){
 			if(userAccount.isPresent())model.addAttribute("user",userRepository.findByUserAccount(userAccount.get()));
+			model.addAttribute("languages", languageRepository.findAll());
 			return "modifyLanguages";
 		}
 		
@@ -278,9 +279,10 @@ public class UserManagementController {
 		public String modify( @LoggedIn Optional<UserAccount> userAccount, @RequestParam(value="secondLanguage", required=false)final String SecondLanguage,@RequestParam(value="thirdLanguage", required=false)final String ThirdLanguage){
 			if(!userAccount.isPresent())return "noUser";
 			User user_xyz=userRepository.findByUserAccount(userAccount.get());
-			user_xyz.removeAllLanguages();
 			
-			if(SecondLanguage!=null && !(SecondLanguage.isEmpty())){
+			
+			if(SecondLanguage!=null && !(SecondLanguage.isEmpty()) &&!(SecondLanguage.equals("-1"))){
+				user_xyz.removeAllLanguages();
 				Language l2;
 				if(SecondLanguage.length()==2)l2=languageRepository.findByKennung(SecondLanguage);
 				else  l2=languageRepository.findByName(SecondLanguage);
@@ -288,7 +290,7 @@ public class UserManagementController {
 				if(l2!=null)user_xyz.setLanguage(l2);
 				System.out.println("1.2- "+ user_xyz.getLanguages().toString());
 			}
-			if(ThirdLanguage!=null && !(ThirdLanguage.isEmpty())){
+			if(ThirdLanguage!=null && !(ThirdLanguage.isEmpty())&&!(ThirdLanguage.equals("-1"))){
 				Language l3;
 				if(ThirdLanguage.length()==2)l3=languageRepository.findByKennung(ThirdLanguage);
 				else  l3=languageRepository.findByName(ThirdLanguage);
