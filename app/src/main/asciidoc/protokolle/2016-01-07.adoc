@@ -1,0 +1,86 @@
+= Protokoll Gruppe 09
+__Treffen am 07.01.2016__
+
+__Schriftführer:__ Friederike Kitzing
+
+__Nächstes Treffen:__ 14.01.2016
+
+.__Teilnehmer:__
+
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+* Alejandro Sánchez Aristizábal
+
+== Bemerkungen
+* Vorstellung von Neuerungen, die über Jahreswechsel stattfanden (Dialog, Activities, Übersetzung) und Klärung von Fragen
+* Anmerkungen zur Codequalität (möglichst Verwendung von Lombok,Redundanzen insbesondere bei new_user, modify und deaktivateUser)
+* Kritik an Variablen- und Methodennamen; Festlegung: Variablen kleinschreiben, Klassen beginnen mit Großbuchstaben, Verwendung von CamelCase, kein Unterstrich
+* Variablen- und Methodennamen in Englisch
+* Hinweis: Application.properties entweder als Umgebungsvariable oder der Einfachkeit halber mit hochladen
+* Hinweise/Wünsche zur Übersetzung: Sprachennamen als Eigenname, möglicherweise mit Bitte um Mithilfe bei Übersetzung fehlender Sprachen, Grundsprache Englisch
+
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue 				|Aufgabe                                   	|Status         |Bemerkung
+|#31 				| Aktivitäten								|geschlossen    |N/A
+|#32  				| Eigene Daten bearbeiten					|geschlossen    |N/A
+|#34  				| Sprachen speichern, zuordnen, bearbeiten	|geschlossen    |N/A
+|#39, #36    		| Probleme mit Crosstesting und Testserver  |geschlossen    |N/A
+|#48, #47, #41    	|Bugs/Probleme  beheben						|geschlossen   	|N/A
+|===
+
+
+== Aktueller Stand
+* Admin kann Tags bearbeiten
+* UserManagement komplett (bearbeiten, deaktivieren, (reaktiviern durch Admin))
+* Erste mehrsprachige Templates vorhanden
+* Dialogerstellung mittels Button in Offer möglich
+* Länder- und Sprachauswahl per Drop-Down
+* Überarbeitete Templates
+
+== Planung des nächsten Sprints
+* Funktionalität des Dialogs
+* Übersetzungsfunktion der Templates
+* Default-Tag "sonstiges"
+* Unterteilung der Angebote auf Startseite in Goods und Activities
+* Koordinaten und Entfernungsbestimmung (wenn möglich mit SQL, ansonsten in Java)
+* Überarbeitung des Codes, Redundanz vermindern
+* Anzeigen von gespeicherten Daten in modify-Templates
+* Fotos hochladen fertigstellen
+* möglichst: Überarbeitung der Userfreundlichkeit; mögliche optionale Werte in Registrierung...
+* Fehlerbehandlung in Registrierung ohne Verlust der eingegebenen Daten
+* Admin kann Offer bearbeiten/löschen
+* jUnit Tests
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel         								 |Beschreibung                   |Verantwortlicher |Status
+|#8    |junit-Tests   								 |N/A                            |N/A              |offen
+|#16   |Kann-Kriterien								 |N/A                            |N/A              |offen
+|#17   |Kundenwünsche								|N/A                           	 |N/A              |offen
+|#18   |Stabilisierung und Crosstesting Feedback   	|Ausfüllen des Formulars		 |N/A              |offen
+|#19   |Abschlussdokumentation						|N/A                         	 |N/A              |offen
+|#26   |Testpläne									|N/A                         	 |N/A              |offen
+|#30   |Entfernungsbestimmung						|N/A                          	 |Friederike       |offen
+|#33   |Mehrsprachigkeit 							|N/A                          	 |N/A              |offen
+|#44   |Fehlerbehandlung Registrierung				|(ToDo)                        	 |N/A              |offen
+|#46   |Bilderhochladen								|N/A                         	 |Ferdinand        |so gut wie fertig
+|#51   |Default-Tag									|(ToDo)                        	 |N/A              |offen
+|#52   |Methoden- und Variablennamen				|nach Festlegungen umbenennen    |N/A              |offen
+|#53   |Redundanzen verringern						|(ToDo)                        	 |N/A              |offen
+|#54   |Angebote auf Startseite unterteilen			|(ToDo)                        	 |N/A              |offen
+|#55   |Beim Bearbeiten der eigenen Daten Werte anzeigen	|(ToDo)                  |Friederike       |offen
+|#56   |TestDaten für Präsentation					|(ToDo)                        	 |N/A              |offen
+|#57   |Admin kann Offer bearbeiten/löschen			|(ToDo)                        	 |N/A              |offen
+|===
