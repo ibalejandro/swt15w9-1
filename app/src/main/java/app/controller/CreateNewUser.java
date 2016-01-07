@@ -10,6 +10,8 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -31,6 +33,7 @@ import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,7 +84,12 @@ public class CreateNewUser {
 	boolean za;
 
 	@RequestMapping(value = "/new_user")
-	public String new_user0() {
+	public String new_user0(Model modelMap) {
+		ListCountry a = new ListCountry();
+		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
+
+		modelMap.addAttribute("countrys", L);
+
 		return "new_user";
 
 	}
@@ -153,10 +161,15 @@ public class CreateNewUser {
 	}
 
 	@RequestMapping({ "/new_user_language_origin/user/{user}" })
-	public String new_user_language_origin(@PathVariable String user) {
+	public String new_user_language_origin(@PathVariable String user, Model modelMap) {
 		if (!userAccountManager.findByUsername(user).isPresent()) {
 			return "redirect:/";
 		}
+		ListCountry a = new ListCountry();
+		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
+
+		modelMap.addAttribute("countrys", L);
+
 		return "/new_user_language_origin";
 	}
 
@@ -703,7 +716,7 @@ public class CreateNewUser {
 		}
 
 		if (Password.length() < 8) {
-			System.out.println("Passwort zu kurz.");
+			System.out.println("E: Passwort zu kurz.");
 			return "errorpage_wrongpw";
 		} else {
 			int pwstrength = 0;
@@ -711,13 +724,13 @@ public class CreateNewUser {
 
 			System.out.println("PasswordStrength: " + pwstrength);
 			if (pwstrength == 0) {
-				System.out.println("Passwort erfüllt nicht die Anforderungen.");
+				System.out.println("E: Passwort erfüllt nicht die Anforderungen.");
 				return "errorpage_wrongpw";
 			}
 		}
 
 		if (emailValidator(Mail) == false) {
-			System.out.println(Mail + " ist eine ungültige Mailadresse.");
+			System.out.println("E: " + Mail + " ist eine ungültige Mailadresse.");
 			return "error";
 		}
 
@@ -736,19 +749,19 @@ public class CreateNewUser {
 		}
 
 		if (equalMail) {
-			System.out.println(Mail + " ist eine bereits verwendete Mailadresse.");
+			System.out.println("E: " + Mail + " ist eine bereits verwendete Mailadresse.");
 			return "error";
 		}
 
 		if (Username.equals("new_user")) {
-			String e_descrition = "Invalid Username.";
+			String e_descrition = "E: Invalid Username.";
 			System.out.println("ERROR: " + e_descrition);
 
 			return "error";
 		}
 
 		if (userAccountManager.findByUsername(Username).isPresent()) {
-			String e_descrition = "Username already in use.";
+			String e_descrition = "E: Username already in use.";
 			System.out.println("ERROR: " + e_descrition);
 
 			return "error";
@@ -830,7 +843,6 @@ public class CreateNewUser {
 				Flh_name = "";
 			}
 
-
 			if (Postcode_R.isPresent()) {
 				Postcode_N = Postcode_R.get();
 			} else {
@@ -855,7 +867,7 @@ public class CreateNewUser {
 			}
 
 			if (Postcode_N.length() != 5) {
-				System.out.println("Ungültige Postleitzahl");
+				System.out.println("E: Ungültige Postleitzahl");
 				return "error";
 			} else {
 				String[] partialRegexChecks = { ".*[a-z]+.*", // lower
@@ -866,7 +878,7 @@ public class CreateNewUser {
 				int i = 0;
 				while (i < 5) {
 					if (!Postcode_N.substring(i, i + 1).matches(partialRegexChecks[2])) {
-						System.out.println("Ungültige Postleitzahl");
+						System.out.println("E: Ungültige Postleitzahl");
 						return "error";
 					}
 
@@ -874,8 +886,7 @@ public class CreateNewUser {
 				}
 			}
 
-
-			Address address = new Address("","",Flh_name, Citypart, Postcode_N, City_N);
+			Address address = new Address("", "", Flh_name, Citypart, Postcode_N, City_N);
 			user_xyz.setLocation(address);
 			user_xyz.setRegistrationstate(3); // 3 ~ Flüchtlingsheim
 			userRepository.save(user_xyz);
@@ -925,7 +936,7 @@ public class CreateNewUser {
 			}
 
 			if (Postcode_N.length() != 5) {
-				System.out.println("Ungültige Postleitzahl");
+				System.out.println("E: Ungültige Postleitzahl");
 				return "error";
 			} else {
 				String[] partialRegexChecks = { ".*[a-z]+.*", // lower
@@ -936,7 +947,7 @@ public class CreateNewUser {
 				int i = 0;
 				while (i < 5) {
 					if (!Postcode_N.substring(i, i + 1).matches(partialRegexChecks[2])) {
-						System.out.println("Ungültige Postleitzahl");
+						System.out.println("E: Ungültige Postleitzahl");
 						return "error";
 					}
 					i = i + 1;
@@ -961,10 +972,14 @@ public class CreateNewUser {
 		if (Nativelanguage.isEmpty() || Origin.isEmpty()) {
 			return "errorpage_empty";
 		}
+		if (Origin.equals("---- Select ----")) {
+			System.out.println("E: Kein Herkunftsland ausgewählt");
+			return "errorpage_empty";
+		}
 
 		Language PreferredLanguage = languageRepository.findByKennung(Nativelanguage);
 		if (PreferredLanguage == null)
-			System.out.println("Prefl==null");
+			System.out.println("E: Prefl==null");
 		else
 			System.out.println(PreferredLanguage);
 
@@ -1226,13 +1241,11 @@ public class CreateNewUser {
 
 			user_xyz.getUserAccount().setLastname(Name);
 			user_xyz.getUserAccount().setFirstname(Firstname);
-			
-			
+
 			userAccountManager.save(user_xyz.getUserAccount());
 
 			user_xyz.setRegistrationstate(2);
 			userRepository.save(user_xyz);
-
 
 			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
 
