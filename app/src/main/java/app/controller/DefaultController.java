@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.model.UserRepository;
 import app.repository.GoodsRepository;
+import app.repository.LanguageRepository;
 import app.repository.TagsRepository;
 
 @Controller
@@ -25,13 +26,14 @@ public class DefaultController {
 	private final UserRepository userRepository;
 	private final GoodsRepository goodsRepository;
 	private final TagsRepository tagsRepository;
-
+	private final LanguageRepository languageRepository;
+	
 	@Autowired
-	public DefaultController(UserRepository userRepository, GoodsRepository goodsRepository,
-			TagsRepository tagsRepository) {
+	public DefaultController(UserRepository userRepository, GoodsRepository goodsRepository, TagsRepository tagsRepository, LanguageRepository languageRepository){
 		this.userRepository = userRepository;
 		this.goodsRepository = goodsRepository;
 		this.tagsRepository = tagsRepository;
+		this.languageRepository = languageRepository;
 	}
 
 	/**
@@ -42,11 +44,13 @@ public class DefaultController {
 	String index(HttpServletRequest request, Model modelMap) {
 		// translation(modelMap);
 		modelMap.addAttribute("result", goodsRepository.findAll());
+		modelMap.addAttribute("languages", languageRepository.findAll());
 
 		ListCountry a = new ListCountry();
 		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
 		
 		modelMap.addAttribute("countrys", L);
+
 		return "index";
 	}
 
