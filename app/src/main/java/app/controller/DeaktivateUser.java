@@ -113,21 +113,7 @@ public class DeaktivateUser {
 
 			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
-			String Secret = "6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
-			String Returnstring = "";
-
-			System.out.println("## Validate:");
-			System.out.println("https://www.google.com/recaptcha/api/siteverify?response=" + CaptchaResponse
-					+ "&secret=" + Secret);
-
-			try {
-				Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			if (Returnstring.equals("{  \"success\": true}")) {
+			if (HelpFunctions.checkCaptcha(CaptchaResponse)) {
 				if (userAccount.isPresent()) {
 					User user_xyz;
 					if (userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
@@ -158,7 +144,7 @@ public class DeaktivateUser {
 					if (!mailadresse.equals("test@test.test")) {
 						// Mail senden:
 						try {
-							HelpFunctions.Mailsenden(mailadresse,
+							HelpFunctions.mailSenden(mailadresse,
 									"Deactivated RefugeesApp-Account (" + user_xyz.getUserAccount().getUsername() + ")",
 									mailtext);
 							System.out.println("Mail versandt");
@@ -209,7 +195,7 @@ public class DeaktivateUser {
 		if (!mailadresse.equals("test@test.test")) {
 			// Mail senden:
 			try {
-				HelpFunctions.Mailsenden(mailadresse,
+				HelpFunctions.mailSenden(mailadresse,
 						"Reactivated RefugeesApp-Account (" + user_xyz.getUserAccount().getUsername() + ")", mailtext);
 				System.out.println("Mail versandt");
 			} catch (MessagingException | IOException e) {

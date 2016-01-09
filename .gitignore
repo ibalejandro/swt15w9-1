@@ -30,4 +30,3 @@ target/
 prototypes/new_user2/config/application.properties
 prototypes/new_user2/src/main/resources/application.properties
 prototypes/Großer Prototyp/src/main/resources/application.properties
-app/src/main/resources/application.properties

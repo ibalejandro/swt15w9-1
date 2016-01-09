@@ -203,7 +203,7 @@ public class HelpFunctions {
 
 	}
 
-	public static void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException, IOException {
+	public static void mailSenden(String SendTo, String Subject, String Text) throws MessagingException, IOException {
 
 		InputStream inputStream = null;
 
@@ -270,7 +270,7 @@ public class HelpFunctions {
 
 	}
 
-	public static String AktivierungskeyErzeugen(String username, String mail, Integer Zufallszahl1,
+	public static String aktivationkeyCreation(String username, String mail, Integer Zufallszahl1,
 			Integer Zufallszahl2) {
 		float fl = Zufallszahl1 / Zufallszahl2;
 		String starttext = HelpFunctions.sha256("s" + HelpFunctions.sha256(
@@ -279,5 +279,28 @@ public class HelpFunctions {
 				+ Zufallszahl2.toString());
 		return HelpFunctions.sha256(
 				HelpFunctions.sha256(HelpFunctions.sha256(HelpFunctions.sha256(HelpFunctions.sha256(starttext)))));
+	}
+
+	public static boolean checkCaptcha(String CaptchaResponse) {
+
+		String Secret = "6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
+		String Returnstring = "";
+
+		System.out.println("## Validate:");
+		System.out.println(
+				"https://www.google.com/recaptcha/api/siteverify?response=" + CaptchaResponse + "&secret=" + Secret);
+
+		try {
+			Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (Returnstring.equals("{  \"success\": true}")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
