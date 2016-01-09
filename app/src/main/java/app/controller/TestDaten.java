@@ -15,6 +15,7 @@ import app.model.Address;
 import app.model.Language;
 import app.model.TagEntity;
 import app.model.User;
+import app.model.User.AddresstypEnum;
 import app.model.UserRepository;
 import app.repository.DialogRepository;
 import app.repository.LanguageRepository;
@@ -85,11 +86,13 @@ public class TestDaten implements DataInitializer {
 		Address address1 = new Address("Mittelstraße", " 1", "11587", "Dresden");
 
 		User user1 = new User(u1, address1);
+	    user1.setAddresstyp(AddresstypEnum.Wohnung);
 		user1.setOrigin("Germany, Deutschland (DE)");
 		user1.setRegistrationdate(new Date());
 		user1.Activate();
 
 		User user2 = new User(u2, address1);
+		user1.setAddresstyp(AddresstypEnum.Refugees_home);
 		user2.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
 		user2.setRegistrationdate(new Date());
 		userRepository.save(user1);
