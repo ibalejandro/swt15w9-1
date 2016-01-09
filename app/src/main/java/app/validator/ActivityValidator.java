@@ -59,7 +59,8 @@ public class ActivityValidator implements Validator {
         if (activity.getEndDate().before(activity.getStartDate())) {
           errors.rejectValue("endDate", "invalid.endDate");
         }
-        if (activity.getStartDate().before(new Date())) {
+        if (activity.getStartDate()
+            .before(ActivityEntity.getZeroTimeDate(new Date()))) {
           errors.rejectValue("startDate", "invalid.startDate");
         }
       }

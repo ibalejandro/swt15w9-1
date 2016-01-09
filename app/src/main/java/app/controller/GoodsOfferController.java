@@ -63,7 +63,7 @@ public class GoodsOfferController {
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-  public String listAllGoods(Model model) {
+  public String listAllGoodsAndActivities(Model model) {
 	  model.addAttribute("result", goodsRepository.findAll());
 	  model.addAttribute("resultActivities", activitiesRepository.findAll());
 		return "home";
@@ -84,7 +84,7 @@ public class GoodsOfferController {
                                      userAccount) {
     if (!userAccount.isPresent()) return "noUser";
     
-    model.addAttribute("tags", tagsRepository.findAll());
+    model.addAttribute("tags", tagsRepository.findAllByOrderByNameAsc());
     return "offer";
   }
 

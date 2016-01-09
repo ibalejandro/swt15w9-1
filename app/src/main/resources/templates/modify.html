@@ -29,42 +29,67 @@
 										<label class="form__label" for="firstnameIN">Vorname:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="firstnameIN" type="text"/>
+										<input name="firstnameIN" type="text" th:value="${user.getUserAccount().getFirstname()}"/>
 									</div>
 									
 									<div class="large-3 small-12 columns">
 										<label class="form__label" for="nameIN">Nachname:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="nameIN" type="text"/>
+										<input name="nameIN" type="text" th:value="${user.getUserAccount().getLastname()}"/>
 									</div>
 									
 									<div class="large-3 small-12 columns">
 										<label class="form__label" for="mailIN">E-Mail:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="mailIN" type="email"/>
+										<input name="mailIN" type="email" th:value="${user.getUserAccount().getEmail()}"/>
 									</div>
-									
 									<div class="large-3 small-12 columns">
-										<label class="form__label">Muttersprache:</label>
+										<label for="nativelanguage" class="form__label">Muttersprache:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="nativelanguage" type="text" />
+										<select id="nativelanguage" name="nativelanguage">
+											<option 
+												th:value="${user.getPrefLanguage().getkennung()}" 
+												th:text="${user.getPrefLanguage().getName()}">
+											</option>
+											<option th:each="language : ${languages}"
+												th:value="${language.getkennung()}"
+												th:text="${language.name}">
+											</option>
+										</select>  
 									</div>
-									
 									<div class="large-3 small-12 columns">
-										<label class="form__label--paddingOFF">andere Sprachen:</label>
+										<label for="otherlanguages" class="form__label">2.Sprache:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="otherlanguages" type="text" />
+										<select id="otherlanguages" name="otherlanguages">
+											<option value="-1">---- Select ----</option>
+											<option th:each="language : ${languages}"
+												th:value="${language.getkennung()}"
+												th:text="${language.name}">
+											</option>
+										</select>  
+									</div>
+									<div class="large-3 small-12 columns">
+										<label for="otherlanguages" class="form__label">3.Sprache:</label>
+									</div>
+									<div class="large-9 small-12 columns">
+										<select id="otherlanguages" name="otherlanguages">
+											<option value="-1">---- Select ----</option>
+											<option th:each="language : ${languages}"
+												th:value="${language.getkennung()}"
+												th:text="${language.name}">
+											</option>
+										</select>  
 									</div>
 									
 									<div class="large-3 small-12 columns">
 										<label class="form__label">Herkunftsland:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="origin" type="text"/>
+										<input name="origin" type="text" th:value="${user.getOrigin()}"/>
 									</div>
 								</div>
 							</div>

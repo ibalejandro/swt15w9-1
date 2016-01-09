@@ -21,6 +21,8 @@ public class Address implements  Serializable { //<> Flüchtlingsunterkunft
 	
 	private String street;
 	private String housenr;
+	private String flh_name;
+	private String cityPart;
 	private String zipCode;
 	private String city;
 	
@@ -39,8 +41,28 @@ public class Address implements  Serializable { //<> Flüchtlingsunterkunft
 		this.housenr=housenr;
 		this.zipCode=zipCode;
 		this.city=city;
+		this.flh_name="";
+		this.cityPart="";
 	}
  
+	/**
+	 * Constructor.
+	 * @param String The street
+	 * @param String The house number
+	 * @param String The flh_name
+	 * @param String The cityPart
+	 * @param String The zip code
+	 * @param String The city
+	 * 	 */
+	public Address(String street,String housenr, String flh_name, String cityPart, String zipCode, String city){
+		this.street= "";
+		this.housenr="";
+		this.flh_name=flh_name;
+		this.cityPart=cityPart;
+		this.zipCode=zipCode;
+		this.city=city;
+	}
+	
 	 /**
 	   * Getter.
 	   * @return String The street and the house number separated by a blank space
@@ -82,6 +104,41 @@ public class Address implements  Serializable { //<> Flüchtlingsunterkunft
 	public String getHousenr() {
 		return housenr;
 	}
+	
+	/**
+	   * Setter.
+	   * @param String The name of the Refugee Camp
+	   * @return Nothing
+	   */
+	public void setFlh_name(String flh_name) {
+		this.flh_name = flh_name;
+	}
+	
+	 /**
+	   * Getter.
+	   * @return String The name of the Refugee Camp
+	   */
+	public String getFlh_name() {
+		return flh_name;
+	}
+	
+	/**
+	   * Setter.
+	   * @param String The Part of the City
+	   * @return Nothing
+	   */
+	public void setCityPart(String cityPart) {
+		this.cityPart = cityPart;
+	}
+	
+	 /**
+	   * Getter.
+	   * @return String The Part of the City
+	   */
+	public String getCityPart() {
+		return cityPart;
+	}
+	
 
 	 /**
 	   * Getter.
@@ -123,6 +180,9 @@ public class Address implements  Serializable { //<> Flüchtlingsunterkunft
 	   */
 	//@Override
 	public String getLocation() {
+		if(street.isEmpty()){
+			return (flh_name+", "+zipCode+ " "+city);
+		}
 		return (street+" "+housenr +", "+zipCode);
 	}
 	

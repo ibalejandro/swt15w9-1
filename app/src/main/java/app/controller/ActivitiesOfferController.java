@@ -67,7 +67,7 @@ public class ActivitiesOfferController {
    @LoggedIn Optional<UserAccount> userAccount) {
     if (!userAccount.isPresent()) return "noUser";
     
-    model.addAttribute("tags", tagsRepository.findAll());
+    model.addAttribute("tags", tagsRepository.findAllByOrderByNameAsc());
     return "offerActivity";
   }
 

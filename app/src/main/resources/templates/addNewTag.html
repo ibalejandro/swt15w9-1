@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
+  <head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<th:block th:include="navigation :: navigation"></th:block>
+		
+		<div class = "row">
+			
+			<div class="small-12 columns space"></div>
+			
+			<div class="small-12 columns">
+				<h1 class="headline">Add new Tag</h1>
+			</div>
+			
+			<form th:action="@{/addedNewTag}" th:object="${tag}" method="post">
+				<div class="large-1 medium-2 small-12 columns">
+					<label for="name" class="form__label">Name</label> 
+				</div>
+				<div class="large-5 medium-10 small-12 columns">
+					<input type="text" id="name" name="name"/>
+				</div>
+				
+				<div class="small-12 columns">
+					<input class="button" type="submit" value="Add"/>
+				</div>
+			</form>		
+			
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+
+    </body>
+</html>

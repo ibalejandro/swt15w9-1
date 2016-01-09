@@ -136,8 +136,9 @@ public class ActivitiesManagementController {
 		 * current tag is already known and it's put as the default value whereas
 		 * the other tags are there, so that the user can change the existing one.
 		 */
-		model.addAttribute("tags", tagsRepository
-		                   .findByIdNot(activityToUpdate.getTag().getId()));
+		model.addAttribute("tags", 
+		                   tagsRepository.findByIdNotOrderByNameAsc
+		                   (activityToUpdate.getTag().getId()));
 		return "updateActivity";
   }
 

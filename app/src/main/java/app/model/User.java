@@ -32,6 +32,10 @@ import org.springframework.util.Assert;
 @Entity
 public class User implements Serializable{
 	
+	public enum AddresstypEnum {
+	    Wohnung,Refugees_home,empty
+	}
+	
 	private @Id @GeneratedValue long id;
 	
 	private Address location;
@@ -42,7 +46,7 @@ public class User implements Serializable{
 	private int registrationstate; // Registrierungsstatus
 	private String activationkey; // String mit dem das Konto aktiviert wird (d1456)
 	private Date registrationdate; //Registrierungsdatum (d1456)
-	private String adresstyp; 
+	private AddresstypEnum adresstyp; 
 	@OneToOne private UserAccount userAccount;
 	
 	//Einseitig:
@@ -75,7 +79,7 @@ public class User implements Serializable{
 		this.activated = false;
 		this.registrationstate = -1; 
 		this.activationkey = "";
-		this.adresstyp = "";
+		this.adresstyp = AddresstypEnum.empty;
 		//-1 ~ noch nichts eingegeben; 0-8 ~ für Registriegungsfortschritt; 9 ~ Konto von Admin o.ä. deaktiviert; 10 ~ Kontodaten vollständig und aktiviert; 
 		languages=new HashSet<>();
 	}
@@ -226,11 +230,10 @@ public class User implements Serializable{
 	
 	/**
 	   * Remove Language.
-	   * @param Language The new language that should be added.
+	   * @param Language The language that should be removed.
 	   * @return Nothing
 	   */
 	public Language removeLanguage(Language language){
-		if(language.equals(PrefLanguage))return null;
 		if(languages.remove(language))return language;
 		return null;
 	}
@@ -344,11 +347,15 @@ public class User implements Serializable{
 		this.registrationdate=registrationdate;
 	}
 	
-	public String getAdresstyp() {
+	public AddresstypEnum getAddresstyp() {
 		return adresstyp;
 	}
+	
+	public String getAddresstypString() {
+		return adresstyp.toString();
+	}
 
-	public void setAdresstyp(String adresstyp) {
+	public void setAddresstyp(AddresstypEnum adresstyp) {
 		this.adresstyp = adresstyp;
 	}
 	

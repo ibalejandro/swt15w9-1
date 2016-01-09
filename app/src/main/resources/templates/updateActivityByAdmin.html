@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
+	
         <div th:include="navigation :: navigation"></div>
 		
 		<div class = "row">
 			<div class = "small-12 columns">
 				<div class="create">
-					<h1 class="create__title"> Good </h1>
+					<h1 class="create__title"> Activity </h1>
 					
-					<form th:action="@{/updatedGood}" th:object="${good}" method="post">
+					<form th:action="@{/updatedActivityByAdmin}" th:object="${activity}" method="post">
 						<div>
 							<label class="create__label"> Name </label>
 							<input type="text" name="name" th:value="*{name}"/>
@@ -32,7 +33,7 @@
 						<div>
 							<label class="create__label"> Tag </label>
 							<select name="tagId">
-				    			<option th:value="${good.tag.id}" th:text="${good.tag.name}"></option>
+				    			<option th:value="${activity.tag.id}" th:text="${activity.tag.name}"></option>
 				    			<option th:each="tag : ${tags}"
 				            			th:value="${tag.id}"
 				            			th:text="${tag.name}">
@@ -40,16 +41,26 @@
 							</select>  
 						</div>
 						
-						<input type="hidden" name="id" th:value="${good.id}"/>
+						<div>
+							<label class="create__label"> Start date </label>
+							<input type="date" name="startDate" th:value="*{startDate}"/> 
+						</div>
+						
+						<div>
+							<label class="create__label"> End date </label>
+							<input type="date" name="endDate" th:value="*{endDate}"/> 
+						</div>
+						
+						<input type="hidden" name="id" th:value="${activity.id}"/>
 						
 						<div>
 							<input class="button" type="submit" value="Update"/>
 						</div>
 					</form>
 				</div>
-			</div>	
+			</div>
 		</div>
-		
 		<th:block th:include="imports :: script"></th:block>
     </body>
+	
 </html>

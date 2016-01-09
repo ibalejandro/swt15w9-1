@@ -112,7 +112,7 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
   public void testListAllGoods() {
     Model model = new ExtendedModelMap();
 
-    String returnedView = controller.listAllGoods(model);
+    String returnedView = controller.listAllGoodsAndActivities(model);
 
     assertThat(returnedView, is("home"));
 
