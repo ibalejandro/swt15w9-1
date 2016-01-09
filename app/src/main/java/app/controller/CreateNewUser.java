@@ -74,6 +74,8 @@ public class CreateNewUser {
 
 		modelMap.addAttribute("countrys", L);
 
+		// modelMap.add
+
 		return "new_user";
 
 	}
@@ -266,8 +268,9 @@ public class CreateNewUser {
 			@RequestParam("nativelanguage") final String Nativelanguage,
 			@RequestParam("otherlanguages") final String OtherLanguages, @RequestParam("origin") final String Origin,
 			@RequestParam("g-recaptcha-response") String CaptchaResponse) {
+		System.out.println("New Registration");
 		if (CaptchaResponse.isEmpty()) {
-			return "error_empty_captcha";
+			return "redirect:/new_user?EmptyError_captcha";
 		}
 
 		System.out.println("/************ Create_New_User ************/");
