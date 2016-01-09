@@ -183,6 +183,45 @@ public class HelpFunctions {
 		return Math.round(strengthPercentage);
 	}
 
+	public static String sendPost(String CaptchaResponse, String Secret) throws Exception {
+
+		String url = "https://www.google.com/recaptcha/api/siteverify" + "?response=" + CaptchaResponse + "&secret="
+				+ Secret;
+		URL obj = new URL(url);
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+		// add reuqest header
+		con.setRequestMethod("POST");
+
+		String urlParameters = "";
+
+		// Send post request
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(urlParameters);
+		wr.flush();
+		wr.close();
+
+		int responseCode = con.getResponseCode();
+		// System.out.println("\nSending 'POST' request to URL : " + url);
+		// System.out.println("Response Code : " + responseCode);
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+
+		// print result
+		System.out.println(response.toString());
+
+		return response.toString();
+
+	}
+
 	public static void Mailsenden(String SendTo, String Subject, String Text) throws MessagingException, IOException {
 
 		InputStream inputStream = null;

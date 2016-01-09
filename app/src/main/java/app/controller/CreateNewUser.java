@@ -202,45 +202,6 @@ public class CreateNewUser {
 		return "/activationmail_local";
 	}
 
-	private String sendPost(String CaptchaResponse, String Secret) throws Exception {
-
-		String url = "https://www.google.com/recaptcha/api/siteverify" + "?response=" + CaptchaResponse + "&secret="
-				+ Secret;
-		URL obj = new URL(url);
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-		// add reuqest header
-		con.setRequestMethod("POST");
-
-		String urlParameters = "";
-
-		// Send post request
-		con.setDoOutput(true);
-		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		wr.writeBytes(urlParameters);
-		wr.flush();
-		wr.close();
-
-		int responseCode = con.getResponseCode();
-		// System.out.println("\nSending 'POST' request to URL : " + url);
-		// System.out.println("Response Code : " + responseCode);
-
-		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
-
-		// print result
-		System.out.println(response.toString());
-
-		return response.toString();
-
-	}
-
 	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
 	public String recieve_reCAPTCHA(@RequestParam("g-recaptcha-response") String CaptchaResponse) {
 
@@ -260,7 +221,7 @@ public class CreateNewUser {
 					+ "&secret=" + Secret);
 
 			try {
-				Returnstring = sendPost(CaptchaResponse, Secret);
+				Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -299,7 +260,7 @@ public class CreateNewUser {
 					+ "&secret=" + Secret);
 
 			try {
-				Returnstring = sendPost(CaptchaResponse, Secret);
+				Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -864,7 +825,7 @@ public class CreateNewUser {
 					+ "&secret=" + Secret);
 
 			try {
-				Returnstring = sendPost(CaptchaResponse, Secret);
+				Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
