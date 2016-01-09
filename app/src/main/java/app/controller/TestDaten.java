@@ -92,7 +92,7 @@ public class TestDaten implements DataInitializer {
 		user1.Activate();
 
 		User user2 = new User(u2, address1);
-		user1.setAddresstyp(AddresstypEnum.Refugees_home);
+		user2.setAddresstyp(AddresstypEnum.Refugees_home);
 		user2.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
 		user2.setRegistrationdate(new Date());
 		userRepository.save(user1);
