@@ -221,7 +221,7 @@ public class HelpFunctions {
 			if (inputStream != null) {
 				prop.load(inputStream);
 			} else {
-				throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+				throw new FileNotFoundException("E: property file '" + propFileName + "' not found in the classpath");
 			}
 
 			Date time = new Date(System.currentTimeMillis());
