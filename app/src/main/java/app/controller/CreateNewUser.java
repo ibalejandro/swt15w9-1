@@ -616,8 +616,7 @@ public class CreateNewUser {
 		{
 			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
-			if (HelpFunctions.checkCaptcha(CaptchaResponse)) 
-			{
+			if (HelpFunctions.checkCaptcha(CaptchaResponse)) {
 				user_xyz.setRegistrationstate(7); // 7 ~ Captcha erfolgreich
 													// geprüft
 				userRepository.save(user_xyz);
@@ -669,7 +668,7 @@ public class CreateNewUser {
 				}
 
 			} else {
-				return "redirect:/new_user?InvalError_captcha";  
+				return "redirect:/new_user?InvalError_captcha";
 			}
 		}
 
