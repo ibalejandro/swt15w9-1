@@ -108,21 +108,9 @@ public class CreateNewUser {
 		} else {
 			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
-			String Secret = "6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
-			String Returnstring = "";
+			
 
-			System.out.println("## Validate:");
-			System.out.println("https://www.google.com/recaptcha/api/siteverify?response=" + CaptchaResponse
-					+ "&secret=" + Secret);
-
-			try {
-				Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			if (Returnstring.equals("{  \"success\": true}")) {
+			if (HelpFunctions.CheckCaptcha(CaptchaResponse)) {
 				return "/validation_success";
 			} else {
 				return "redirect:/reCAPTCHA-TEST";
@@ -618,21 +606,7 @@ public class CreateNewUser {
 		} else {
 			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
-			String Secret = "6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
-			String Returnstring = "";
-
-			System.out.println("## Validate:");
-			System.out.println("https://www.google.com/recaptcha/api/siteverify?response=" + CaptchaResponse
-					+ "&secret=" + Secret);
-
-			try {
-				Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			if (Returnstring.equals("{  \"success\": true}")) {
+			if (HelpFunctions.CheckCaptcha(CaptchaResponse)) {
 				user_xyz.setRegistrationstate(7); // 7 ~ Captcha erfolgreich
 													// geprüft
 				userRepository.save(user_xyz);

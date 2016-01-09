@@ -95,21 +95,7 @@ public class RestorePassword {
 		} else {
 			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
-			String Secret = "6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
-			String Returnstring = "";
-
-			System.out.println("## Validate:");
-			System.out.println("https://www.google.com/recaptcha/api/siteverify?response=" + CaptchaResponse
-					+ "&secret=" + Secret);
-
-			try {
-				Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			if (Returnstring.equals("{  \"success\": true}")) {
+			if (HelpFunctions.CheckCaptcha(CaptchaResponse)) {
 				if (userAccountManager.findByUsername(Username).isPresent()) {
 					User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(Username).get());
 

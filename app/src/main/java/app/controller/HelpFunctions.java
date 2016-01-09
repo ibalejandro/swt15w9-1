@@ -280,4 +280,27 @@ public class HelpFunctions {
 		return HelpFunctions.sha256(
 				HelpFunctions.sha256(HelpFunctions.sha256(HelpFunctions.sha256(HelpFunctions.sha256(starttext)))));
 	}
+
+	public static boolean CheckCaptcha(String CaptchaResponse) {
+
+		String Secret = "6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
+		String Returnstring = "";
+
+		System.out.println("## Validate:");
+		System.out.println(
+				"https://www.google.com/recaptcha/api/siteverify?response=" + CaptchaResponse + "&secret=" + Secret);
+
+		try {
+			Returnstring = HelpFunctions.sendPost(CaptchaResponse, Secret);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (Returnstring.equals("{  \"success\": true}")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
