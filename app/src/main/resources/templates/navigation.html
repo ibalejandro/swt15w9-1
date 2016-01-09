@@ -31,7 +31,7 @@
 				<section class="top-bar-section">
 				
 				<!-- Right Nav Section -->
-					<ul class="right">
+					<ul class="right  center">
 						
 						<li class="has-form">
 							<th:block th:include="search :: searchByTag"></th:block>
@@ -40,42 +40,62 @@
 						<li sec:authorize="hasRole('ROLE_NORMAL')">
 							<a sec:authorize="isAuthenticated()" th:href="@{/offer}" href="./offer.html">Offer</a>
 						</li>
-						
-						<li class="has-dropdown">
-							<a class="center" th:text="${#authentication?.name}">
-								Mein Account
-							</a>
+	
+						<th:block sec:authorize="!isAuthenticated()">
+							<li>
+								<a class="center" th:href="@{/new_user}" href="new_user.html"> Registrieren</a>
+							</li>
 							
-							<ul class="dropdown">
-								<li sec:authorize="hasRole('ROLE_ADMIN')">
-									<a class="center" th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
-								</li>
+							<li>
+								<a class="center" th:href="@{/login}" href="login.html" >Login</a>
+							</li>
+						</th:block>
+
+						<th:block sec:authorize="isAuthenticated()">
+							<li sec:authorize="hasRole('ROLE_ADMIN')" class="has-dropdown">
+								<a class="center"> Admin </a>
 								
-								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a class="center" th:href="@{/data}" href="data.html" > Eigene Daten</a>
-								</li>
+								<ul class="dropdown">
+									<li>
+										<a class="center" th:href="@{//newTextBlock}" href="userDetails.html">New Text Block</a>
+									</li>
+									<li>
+										<a class="center" th:href="@{/textBlockList}" href="userDetails.html" >Text Block List</a>
+									</li>
+									<li>
+										<a class="center" th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
+									</li>
+									
+									<li>
+										<a class="center" th:href="@{/logout}" type="submit" value="Logout">Logout</a>
+									</li>
+								</ul>
+							</li>
+							
+							<li sec:authorize="hasRole('ROLE_NORMAL')" class="has-dropdown">
+								<a class="center" th:text="${#authentication?.name}">
+									Mein Account
+								</a>
 								
-								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a class="center" th:href="@{/myOfferedGoods}" href="myOfferedGoods"> My Offered Goods</a>
-								</li>
-								
-								<li sec:authorize="hasRole('ROLE_NORMAL')">
-									<a class="center" th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
-								</li>
-								
-								<li sec:authorize="!isAuthenticated()">
-									<a class="center" th:href="@{/new_user}" href="new_user.html"> Registrieren</a>
-								</li>
-								
-								<li sec:authorize="!isAuthenticated()">
-									<a class="center" th:href="@{/login}" href="login.html" >Login</a>
-								</li>
-								
-								<li sec:authorize="isAuthenticated()">
-									<a class="center" th:href="@{/logout}" type="submit" value="Logout">Logout</a>
-								</li>
-							</ul>
-						</li>
+								<ul class="dropdown">
+									<li>
+										<a class="center" th:href="@{/data}" href="data.html" > Eigene Daten</a>
+									</li>
+									
+									<li>
+										<a class="center" th:href="@{/myOfferedGoods}" href="myOfferedGoods"> My Offered Goods</a>
+									</li>
+									
+									<li>
+										<a class="center" th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
+									</li>
+									
+									<li>
+										<a class="center" th:href="@{/logout}" type="submit" value="Logout">Logout</a>
+									</li>
+								</ul>
+							</li>
+						</th:block>
 					</ul>
 
 					<!-- Left Nav Section -->
