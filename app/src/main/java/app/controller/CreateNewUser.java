@@ -130,8 +130,6 @@ public class CreateNewUser {
 		}
 	}
 
-	
-
 	@RequestMapping(value = "/activation/user/{user_temp}/{textactivationkey_temp}", method = RequestMethod.GET)
 	public String recieve_activationkey(@PathVariable String user_temp, @PathVariable String textactivationkey_temp) {
 
