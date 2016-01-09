@@ -1,7 +1,12 @@
 package app.controller;
 
+import java.io.IOException;
 import java.util.Optional;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,18 +152,20 @@ public class GoodsManagementController {
    * @param Optional<UserAccount> The user's account who wants to update one of
    *                              his offered goods
    * @return String The name of the view to be shown after processing
+	 * @throws ServletException 
+	 * @throws IOException 
    */
 	@RequestMapping(value = "/updatedGood", method = RequestMethod.POST)
   public String updateGood(HttpServletRequest request, Model model, 
                            @ModelAttribute("good") GoodEntity good, 
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes,
-                           @LoggedIn Optional<UserAccount> userAccount) {
+                           @LoggedIn Optional<UserAccount> userAccount) throws IOException, ServletException {
 		long id = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
     String description = request.getParameter("description");
     long tagId = Long.parseLong(request.getParameter("tagId"));
-    String picture = request.getParameter("picture");
+    Part picture = request.getPart("pict");
 
     ///////////////////////////////Zuordnung User=Aktiver User
     if (!userAccount.isPresent()) return "noUser";
@@ -171,7 +178,9 @@ public class GoodsManagementController {
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
   	goodToBeUpdated.setTag(tag);
+  	if (picture!=null){
   	goodToBeUpdated.setPicture(GoodEntity.createPicture(picture));
+  	}
 		goodToBeUpdated.setUser(loggedUser);
 		
 		GoodValidator goodValidator = new GoodValidator();
