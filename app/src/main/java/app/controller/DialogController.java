@@ -95,6 +95,7 @@ public class DialogController {
 			blocks.add(textBlock);
 		}
 		
+		
 		//ChatTemplate ct = new ChatTemplate(blocks);
 		//d.addMessageElement(ct.fromForm(requestValues));
 
@@ -107,9 +108,19 @@ public class DialogController {
 			return "errorpage0_empty";
 		}
 		User loggedInUser = userRepository.findByUserAccount(loggedInUserAccount.get());
+		
+		List<Dialog> userDialogs = new LinkedList<>();
+		
+		// Every Dialog in which the logged user is the owner of the Dialog
+		for (Dialog dialog : dialogRepo.findByUserA(loggedInUser)) {
+			userDialogs.add(dialog);
+		}
+		// Every Dialog in which the logged user is the participant of the Dialog
+		for (Dialog dialog : dialogRepo.findByUserB(loggedInUser)) {
+			userDialogs.add(dialog);
+		}
 
-		System.out.println(loggedInUser.getDialogs());
-		model.addAttribute("dialogList", loggedInUser.getDialogs());
+		model.addAttribute("dialogList", userDialogs);
 		return "dialogList";
 	}
 
@@ -136,11 +147,7 @@ public class DialogController {
 		User participantUser = userRepository.findByUserAccount(participantAccount.get());
 
 		Dialog d = new Dialog(title, loggedInUser, participantUser);
-		Dialog savedDialog = dialogRepo.save(d);
-		loggedInUser.addDialog(savedDialog);
-		userRepository.save(loggedInUser);
-		participantUser.addDialog(savedDialog);
-		userRepository.save(participantUser);
+		dialogRepo.save(d);
 
 		return "redirect:/dialogList";
 	}

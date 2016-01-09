@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.salespointframework.useraccount.UserAccount;
-import org.springframework.util.Assert;
 
 /**
 * <h1>User</h1>
@@ -60,7 +59,6 @@ public class User implements Serializable{
 	//Bidirektional:
 	@OneToMany(targetEntity=GoodEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<GoodEntity> goods;
 	@OneToMany(targetEntity=ActivityEntity.class, cascade = CascadeType.ALL,fetch= FetchType.EAGER) private Set<ActivityEntity> activities;
-	@OneToMany(targetEntity=Dialog.class, cascade = CascadeType.ALL, fetch= FetchType.EAGER) private Set<Dialog> dialogs;
 	  
 	@SuppressWarnings("unused")
 	private User() {} 
@@ -155,26 +153,6 @@ public class User implements Serializable{
   public Iterable<ActivityEntity> getActivities(){
     return activities;
   }
-
-	public void addDialog(Dialog dialog) {
-		Assert.notNull(dialog);
-		
-		removeDialog(dialog);
-		dialogs.add(dialog);
-	}
-	
-	public void removeDialog(Dialog d) {
-		for (Dialog dialog : dialogs) {
-			if (dialog.getId() == d.getId()) {
-				dialogs.remove(dialog);
-				break;
-			}
-		}
-	}
-	
-	public Iterable<Dialog> getDialogs() {
-		return dialogs;
-	}
 
 	/**
 	   * Getter.	 
