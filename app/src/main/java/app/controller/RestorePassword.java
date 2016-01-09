@@ -95,7 +95,7 @@ public class RestorePassword {
 		} else {
 			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
-			if (HelpFunctions.CheckCaptcha(CaptchaResponse)) {
+			if (HelpFunctions.checkCaptcha(CaptchaResponse)) {
 				if (userAccountManager.findByUsername(Username).isPresent()) {
 					User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(Username).get());
 
@@ -122,7 +122,7 @@ public class RestorePassword {
 					if (!mailadresse.equals("test@test.test")) {
 						// Mail senden:
 						try {
-							HelpFunctions.Mailsenden(mailadresse, "Reset Password for your RefugeesApp-Account ("
+							HelpFunctions.mailSenden(mailadresse, "Reset Password for your RefugeesApp-Account ("
 									+ user_xyz.getUserAccount().getUsername() + ")", mailtext);
 							System.out.println("Mail versandt");
 						} catch (MessagingException | IOException e) {

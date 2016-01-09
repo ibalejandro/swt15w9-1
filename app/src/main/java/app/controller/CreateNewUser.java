@@ -67,6 +67,8 @@ public class CreateNewUser {
 
 	@RequestMapping(value = "/new_user")
 	public String new_user0(Model modelMap) {
+		modelMap.addAttribute("languages", languageRepository.findAll());
+
 		ListCountry a = new ListCountry();
 		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
 
@@ -108,9 +110,7 @@ public class CreateNewUser {
 		} else {
 			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
-			
-
-			if (HelpFunctions.CheckCaptcha(CaptchaResponse)) {
+			if (HelpFunctions.checkCaptcha(CaptchaResponse)) {
 				return "/validation_success";
 			} else {
 				return "redirect:/reCAPTCHA-TEST";
@@ -585,7 +585,7 @@ public class CreateNewUser {
 		z1 = (int) (Math.random() * 1000000000) + 123456;
 		z2 = (int) (Math.random() * 1000000000) + 117980;
 
-		String activationkey = HelpFunctions.AktivierungskeyErzeugen(user_xyz.getUserAccount().getUsername(),
+		String activationkey = HelpFunctions.aktivationkeyCreation(user_xyz.getUserAccount().getUsername(),
 				user_xyz.getUserAccount().getEmail(), z1, z2);
 		user_xyz.setActivationkey(activationkey);
 
@@ -606,7 +606,7 @@ public class CreateNewUser {
 		} else {
 			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
 
-			if (HelpFunctions.CheckCaptcha(CaptchaResponse)) {
+			if (HelpFunctions.checkCaptcha(CaptchaResponse)) {
 				user_xyz.setRegistrationstate(7); // 7 ~ Captcha erfolgreich
 													// geprüft
 				userRepository.save(user_xyz);
@@ -636,7 +636,7 @@ public class CreateNewUser {
 				if (!mailadresse.equals("test@test.test")) {
 					// Mail senden:
 					try {
-						HelpFunctions.Mailsenden(mailadresse, "Activation of your RefugeesApp-Account ("
+						HelpFunctions.mailSenden(mailadresse, "Activation of your RefugeesApp-Account ("
 								+ user_xyz.getUserAccount().getUsername() + ")", mailtext);
 						System.out.println("Mail versandt");
 					} catch (MessagingException | IOException e) {
