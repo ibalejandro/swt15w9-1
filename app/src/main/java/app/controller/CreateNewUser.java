@@ -309,31 +309,14 @@ public class CreateNewUser {
 
 	}
 
-	public static String sha256(String base) {
-		try {
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(base.getBytes("UTF-8"));
-			StringBuffer hexString = new StringBuffer();
-
-			for (int i = 0; i < hash.length; i++) {
-				String hex = Integer.toHexString(0xff & hash[i]);
-				if (hex.length() == 1)
-					hexString.append('0');
-				hexString.append(hex);
-			}
-
-			return hexString.toString();
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
 	private String AktivierungskeyErzeugen(String username, String mail, Integer Zufallszahl1, Integer Zufallszahl2) {
 		float fl = Zufallszahl1 / Zufallszahl2;
-		String starttext = sha256(
-				"s" + sha256(sha256("Aktivierungskey" + username + "123" + mail + "XYZ" + Float.toString(fl) + "fff")
-						+ Zufallszahl1.toString()) + Zufallszahl2.toString());
-		return sha256(sha256(sha256(sha256(sha256(starttext)))));
+		String starttext = HelpFunctions.sha256("s" + HelpFunctions.sha256(
+				HelpFunctions.sha256("Aktivierungskey" + username + "123" + mail + "XYZ" + Float.toString(fl) + "fff")
+						+ Zufallszahl1.toString())
+				+ Zufallszahl2.toString());
+		return HelpFunctions.sha256(
+				HelpFunctions.sha256(HelpFunctions.sha256(HelpFunctions.sha256(HelpFunctions.sha256(starttext)))));
 	}
 
 	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
@@ -416,8 +399,8 @@ public class CreateNewUser {
 					// simpleDateFormat.format(zeitstempel)
 
 					String domain = "http://refugee-app.tk/swt15w9"; // "http://localhost:8080";
-					String link = domain + "/activation/user/{"
-							+ user_xyz.getUserAccount().getUsername() + "}/{" + sha256(user_xyz.getActivationkey()
+					String link = domain + "/activation/user/{" + user_xyz.getUserAccount().getUsername()
+							+ "}/{" + HelpFunctions.sha256(user_xyz.getActivationkey()
 									+ simpleDateFormat.format(zeitstempel) + (user_xyz.getRegistrationstate() + 1))
 							+ "}";
 					String mailtext = "<html> <head> </head> <body> <h1>Activation of your RefugeesApp-Account ("
@@ -492,7 +475,7 @@ public class CreateNewUser {
 																					// HH:mm:ss"
 			// simpleDateFormat.format(zeitstempel)
 
-			if (sha256(user_xyz.getActivationkey() + simpleDateFormat.format(zeitstempel)
+			if (HelpFunctions.sha256(user_xyz.getActivationkey() + simpleDateFormat.format(zeitstempel)
 					+ user_xyz.getRegistrationstate()).equals(textactivationkey)) {
 				user_xyz.Activate();
 				System.out.println(user_xyz.getUserAccount().getUsername() + " wurde aktiviert.");
@@ -988,7 +971,6 @@ public class CreateNewUser {
 		userRepository.save(user_xyz);
 		System.out.println("save");
 
-		
 		if (OtherLanguages != null && !OtherLanguages.isEmpty()) {
 			for (String languageName : OtherLanguages.split(",")) {
 				System.out.println(languageName);
@@ -1065,7 +1047,7 @@ public class CreateNewUser {
 
 				String domain = "http://refugee-app.tk/swt15w9"; // "http://localhost:8080";
 				String link = domain + "/activation/user/{" + user_xyz.getUserAccount().getUsername() + "}/{"
-						+ sha256(user_xyz.getActivationkey() + simpleDateFormat.format(zeitstempel)
+						+ HelpFunctions.sha256(user_xyz.getActivationkey() + simpleDateFormat.format(zeitstempel)
 								+ (user_xyz.getRegistrationstate() + 1))
 						+ "}";
 				String mailtext = "<html> <head> </head> <body> <h1>Activation of your RefugeesApp-Account ("
