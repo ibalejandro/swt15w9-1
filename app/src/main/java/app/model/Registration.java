@@ -12,7 +12,7 @@ import javax.persistence.Entity;
  */
 
 @SuppressWarnings("serial")
-@Entity
+//@Entity
 public class Registration implements Serializable {
 
 }
