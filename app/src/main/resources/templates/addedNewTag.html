@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<div th:include="navigation :: navigation"></div>
+		
+		<div class="row">
+			<div class="small-12 colums">
+				<h1 class="headline"> You just added this tag: </h1>
+			</div>
+				
+			<div th:include="tags_item--single :: item"></div>
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>

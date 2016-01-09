@@ -38,7 +38,7 @@ public class GoodsManagementController {
 	private final GoodsRepository goodsRepository;
 	private final TagsRepository tagsRepository;
 	
-	private static final String POST = "POST";
+	public static final String POST = "POST";
 
 	/**
    * Autowire.
@@ -130,8 +130,9 @@ public class GoodsManagementController {
 		 * current tag is already known and it's put as the default value whereas
 		 * the other tags are there, so that the user can change the existing one.
 		 */
-		model.addAttribute("tags", tagsRepository
-		                   .findByIdNot(goodToUpdate.getTag().getId()));
+		model.addAttribute("tags", 
+		                   tagsRepository.findByIdNotOrderByNameAsc
+		                   (goodToUpdate.getTag().getId()));
 		return "update";
   }
 

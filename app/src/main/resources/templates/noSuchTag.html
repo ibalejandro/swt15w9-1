@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <th:block th:include="imports :: head"></th:block>
+	</head>
+
+	<body>
+		<form th:action="@{/availableTags}">
+			<h3 th:text="'The tag you want to '+${wantedAction}+' doesn\' t exist.'"></h3>
+			<div class="button--right">
+				<input class="button" type="submit" value="Go to Available tags" />
+			</div>
+		</form>	
+	</body>
+</html>

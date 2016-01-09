@@ -20,6 +20,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -191,6 +192,7 @@ public class ActivityEntity implements Serializable {
     
     return null;
   }
+  
   /**
    * This method converts a date into a String
    * @param Date A java Date
@@ -202,6 +204,26 @@ public class ActivityEntity implements Serializable {
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     
     return formatter.format(date);
+  }
+  
+  /**
+   * This method changes to 00:00:00 a date's time
+   * @param Date A java Date
+   * @return Date The given java Date but with its time changed to 00:00:00
+   */
+  public static Date getZeroTimeDate(Date date) {
+    Date dateWithoutTime = date;
+    Calendar calendar = Calendar.getInstance();
+
+    calendar.setTime(date);
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+
+    dateWithoutTime = calendar.getTime();
+
+    return dateWithoutTime;
   }
   
   /**

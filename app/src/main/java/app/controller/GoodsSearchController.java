@@ -51,7 +51,7 @@ public class GoodsSearchController {
    */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
   public String populateTagsDropdown(Model model) {
-    model.addAttribute("navTags", tagsRepository.findAll());
+    model.addAttribute("navTags", tagsRepository.findAllByOrderByNameAsc());
     return "search";
   }
 
@@ -64,7 +64,8 @@ public class GoodsSearchController {
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/searchResultsByTag", method = RequestMethod.POST)
-  public String searchGoodByTag(HttpServletRequest request, Model model) {
+  public String searchGoodOrActivityByTag(HttpServletRequest request, 
+                                          Model model) {
 		String parameterType = "tag";
 		long tagId = Long.parseLong(request.getParameter("tagId"));
 
