@@ -177,19 +177,6 @@ public class User implements Serializable {
 		return activities;
 	}
 
-<<<<<<< HEAD
-=======
-	public void addDialog(Dialog dialog) {
-		Assert.notNull(dialog);
-
-		dialogs.add(dialog);
-	}
-
-	public Iterable<Dialog> getDialogs() {
-		return dialogs;
-	}
-
->>>>>>> refs/remotes/origin/master
 	/**
 	 * Getter.
 	 *
