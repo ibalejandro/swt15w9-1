@@ -16,7 +16,6 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -46,7 +45,6 @@ public class CreateNewUser {
 	private final UserAccountManager userAccountManager;
 	private final UserRepository userRepository;
 	private final LanguageRepository languageRepository;
-	private final MailSender mailSender;
 
 	/**
 	 * Autowire.
@@ -55,14 +53,13 @@ public class CreateNewUser {
 	 */
 	@Autowired
 	public CreateNewUser(UserAccountManager userAccountManager, UserRepository userRepository,
-			LanguageRepository languageRepository, MailSender mailSender) {
+			LanguageRepository languageRepository) {
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
 
 		this.userAccountManager = userAccountManager;
 		this.userRepository = userRepository;
 		this.languageRepository = languageRepository;
-		this.mailSender = mailSender;
 	}
 
 	int zufallzahl_1, zufallzahl_2; // Zufallszahlen
