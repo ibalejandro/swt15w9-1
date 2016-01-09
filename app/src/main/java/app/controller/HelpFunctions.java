@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -302,5 +303,15 @@ public class HelpFunctions {
 		} else {
 			return false;
 		}
+	}
+	
+	public static String getOptionalString(Optional<String> optString){
+		String S;
+		if (optString.isPresent()) {
+			S = optString.get();
+		} else {
+			S = "";
+		}
+		return S;
 	}
 }

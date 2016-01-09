@@ -47,6 +47,7 @@
 									<input name="mailIN" type="email" required="required"/>
 									<label th:if="${param.EmptyError_mail}" class="error center space--1rem--topbottom" for="mailIN">Mail must not be empty!</label>
 									<label th:if="${param.InvalError_mail}" class="error center space--1rem--topbottom" for="mailIN">Invalid Mail!</label>
+									<label th:if="${param.UsedError_mail}" class="error center space--1rem--topbottom" for="mailIN">This mail-address is already used!</label>
 								</div>
 								
 								<div class="large-3 small-12 columns">
@@ -56,6 +57,7 @@
 									<input name="usernameIN" type="text" required="required"/>
 									<label th:if="${param.EmptyError_username}" class="error center space--1rem--topbottom" for="usernameIN">Username must not be empty!</label>
 									<label th:if="${param.InvalError_username}" class="error center space--1rem--topbottom" for="usernameIN">Invalid Username!</label>
+									<label th:if="${param.UsedError_username}" class="error center space--1rem--topbottom" for="usernameIN">Username already used!</label>
 								</div>
 								
 								<div class="large-3 small-12 columns">
