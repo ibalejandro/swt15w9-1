@@ -621,11 +621,9 @@ public class CreateNewUser {
 		if (Adresstyp.equals("refugee")) {
 			user_xyz.setAddresstyp(AddresstypEnum.Refugees_home);
 		}
-
 		if (Adresstyp.equals("helper")) {
 			user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
 		}
-
 		userAccountManager.save(user_xyz.getUserAccount());
 
 		user_xyz.setRegistrationstate(2);
