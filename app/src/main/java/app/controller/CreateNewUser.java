@@ -360,12 +360,25 @@ public class CreateNewUser {
 
 		System.out.println(Mail);
 		System.out.println(Username);
-		System.out.println(Password);
-		System.out.println(RePassword);
+		//System.out.println(Password);
+		//System.out.println(RePassword);
 		System.out.println("---");
 
-		if (Mail.isEmpty() || Username.isEmpty() || Password.isEmpty()) {
-			return "errorpage_empty";
+		if (Mail.isEmpty() || Username.isEmpty() || Password.isEmpty() || RePassword.isEmpty()) {
+			String returnstr = "redirect:/new_user?";
+			if (Mail.isEmpty()) {
+				returnstr = returnstr + "&EmptyError_mail";
+			}
+			if (Username.isEmpty()) {
+				returnstr = returnstr + "&EmptyError_username";
+			}
+			if (Password.isEmpty()) {
+				returnstr = returnstr + "&EmptyError_password";
+			}
+			if (RePassword.isEmpty()) {
+				returnstr = returnstr + "&EmptyError_repassword";
+			}
+			return returnstr.replace("?&", "?") + filledFields;
 		}
 
 		if (!Password.equals(RePassword)) {
