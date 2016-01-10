@@ -168,11 +168,11 @@
 									<label class="headline--sub">Wohnungstyp:</label>
 								</div>
 								
-								<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked=""/>
+								<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked="" />							
 								<label class="form__label" for="hh">Wohnung</label>
 								
-								<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee"/>
-								<label class="form__label" for="fh">Flüchtlingsheim</label>
+								<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee" th:checked="${checked2Old}"/>
+								<label class="form__label" for="fh">Flüchtlingsheim</label>								
 								<div class="small-12 columns"></div>
 								<div class="new__user__helper">
 									<div class="large-3 small-12 columns">

@@ -328,6 +328,13 @@ public class HelpFunctions {
 		result = result + "&mailOld=" + mail;
 		result = result + "&usernameOld=" + username;
 
+		if (Adresstyp.equals("helper")) {
+			result = result + "&checked1Old=checked";
+		}
+		if (Adresstyp.equals("refugee")) {
+			result = result + "&checked2Old=checked";
+		}
+
 		// Wohnung
 		result = result + "&streetOld=" + getOptionalString(street_OPT);
 		result = result + "&housenrOld=" + getOptionalString(housenr_OPT);

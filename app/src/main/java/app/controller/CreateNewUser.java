@@ -89,6 +89,9 @@ public class CreateNewUser {
 			@RequestParam("mailOld") final Optional<String> mailOld,
 			@RequestParam("usernameOld") final Optional<String> usernameOld,
 
+			@RequestParam("checked1Old") final Optional<String> checked1Old,
+			@RequestParam("checked2Old") final Optional<String> checked2Old,
+
 			@RequestParam("streetOld") final Optional<String> streetOld,
 			@RequestParam("housenrOld") final Optional<String> housenrOld,
 			@RequestParam("postcodeHOld") final Optional<String> postcodeHOld,
@@ -116,6 +119,21 @@ public class CreateNewUser {
 		modelMap.addAttribute("nameOld", HelpFunctions.getOptionalString(nameOld));
 		modelMap.addAttribute("mailOld", HelpFunctions.getOptionalString(mailOld));
 		modelMap.addAttribute("usernameOld", HelpFunctions.getOptionalString(usernameOld));
+
+		if ("checked".equals(HelpFunctions.getOptionalString(checked1Old))
+				&& "checked".equals(HelpFunctions.getOptionalString(checked2Old))) {
+			modelMap.addAttribute("checked1Old", true);
+			System.out.println("c1");
+			
+		} else {
+			if ("checked".equals(HelpFunctions.getOptionalString(checked2Old))) {
+				modelMap.addAttribute("checked2Old", true);
+				System.out.println("c2");
+			} else {
+				modelMap.addAttribute("checked1Old", true);
+				System.out.println("c1");
+			}
+		}
 
 		modelMap.addAttribute("streetOld", HelpFunctions.getOptionalString(streetOld));
 		modelMap.addAttribute("housenrOld", HelpFunctions.getOptionalString(housenrOld));
