@@ -1,47 +1,46 @@
 <!doctype html>
 <html class="no-js" mlns:th="http://www.thymeleaf.org">
-	
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
 	
 	<body>
-		
-		<div th:fragment="item">
-			<div class="gooditem__body--single">
-				<div>
-					<label class="gooditem__label--single"> Picture </label>
-					<img th:src="${result.getId()+'/activityimage'}" class="gooditem__text--single"/>
+		<th:block> th:fragment="item">
+			<div class="row">
+				<div class="12-small columns">
+					<p class="text"> Picture </p>
+					<img th:src="${result.getId()+'/activityimage'}"/>
 				</div>
 				
-				<div>
-					<label class="gooditem__label--single"> Name </label>
-					<p th:text="${result.name}" class="gooditem__text--single">Lorem ipsum</p>
-				</div>
-				
-				<div>
-					<label class="gooditem__label--single"> Description </label>
-					<p th:text="${result.description}" class="gooditem__text--single">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
-				</div>
-				
-				<div>
-					<label class="gooditem__label--single"> Tag </label>
-					<p th:text="${result.tag.name}" class="gooditem__text--single">Lorem</p>
-				</div>
-				
-				<div>
-					<label class="gooditem__label--single"> Start date </label>
-					<p th:text="${result.getStringFromDate(result.startDate)}" class="gooditem__text--single">Lorem</p>
-				</div>
-				
-				<div>
-					<label class="gooditem__label--single"> End date </label>
-					<p th:text="${result.getStringFromDate(result.endDate)}" class="gooditem__text--single">Lorem</p>
-				</div>
+				<th:block th:fragment="help">
+					<div class="12-small columns">
+						<p class="text"> Name </p>
+						<p th:text="${result.name}" class="text--super">Lorem ipsum</p>
+					</div>
+					
+					<div class="12-small columns">
+						<p class="text"> Description </p>
+						<p th:text="${result.description}" class="text--super">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+					</div>
+					
+					<div class="12-small columns">
+						<p class="text"> Tag </p>
+						<p th:text="${result.tag.name}" class="text--super">Lorem</p>
+					</div>
+					
+					<div class="12-small columns">
+						<p class="text"> Start date </p>
+						<p th:text="${result.getStringFromDate(result.startDate)}" class="text--super">Lorem</p>
+					</div>
+					
+					<div class="12-small columns">
+						<p class="text"> End date </p>
+						<p th:text="${result.getStringFromDate(result.endDate)}" class="text--super">Lorem</p>
+					</div>
+				</th:block>
 			</div>
-		</div>
-		<th:block th:include="imports :: script"></th:block>
+		</th:block>
 		
+		<th:block th:include="imports :: script"></th:block>
 	</body>
-	
 </html>

@@ -101,10 +101,10 @@
 									<label th:if="${param.EmptyError_nativelanguage}" class="error center space--1rem--topbottom" for="nativelanguage">Select your native language!</label>
 									<label th:if="${param.InvalError_nativelanguage}" class="error center space--1rem--topbottom" for="nativelanguage">Invalid language!</label>
 								</div>
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<label for="otherlanguages" class="form__label">2.Sprache:</label>
 								</div>
-								<div class="small-12 columns">
+								<div class="small-12 columns less_space">
 									<select id="otherlanguages" name="otherlanguages">
 										<option value="-1">---- Select ----</option>
 										<option th:each="language : ${languages}"
@@ -159,7 +159,6 @@
 								<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee"/>
 								<label class="form__label--paddingOFF" for="fh">Flüchtlingsheim</label>
 								
-								<div class="small-12 columns space--3rem hide-for-small-only"></div>
 								<div class="small-12 columns space--05rem"></div>
 								
 								<div class="new__user__helper">
@@ -231,9 +230,7 @@
 									<div class="small-12 columns">
 										<label class="form__label--paddingOFF">Stadtteil:</label>
 									</div>
-									
 									<div class="small-12 columns less_space">
-										<input name="citypart" type="text"/>
 										<input name="citypart" type="text"/>
 										<label th:if="${param.EmptyError_citypart}" class="error center space--1rem--topbottom" for="citypart">Citypart must not be empty!</label>
 										<label th:if="${param.InvalError_citypart}" class="error center space--1rem--topbottom" for="citypart">Invalid Citypart!</label>

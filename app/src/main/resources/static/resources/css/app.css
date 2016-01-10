@@ -111,22 +111,14 @@ p{
 	margin: 0; 
 	padding:0;
 }
-.umrandung{
-	margin: 0.5rem;
-	padding: 1rem;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-	overflow: auto;
-}
 .headline{
 	font-size: 2.0rem;
 }
 .headline--sub{
-	font-size: 1.7rem;
+	font-size: 1.5rem;
 }
 .headline--super{
-	font-size: 2.3rem;
+	font-size: 2.5rem;
 }
 .text{
 	font-size: 1rem;
@@ -182,6 +174,50 @@ p{
 }
 .center{
 	text-align: center;
+}
+.black{
+	color: black;
+}
+/********************************************
+*	Anpassung bei Formularen und Label und	*
+*	zugehöriger Label						*
+********************************************/
+.no_padding_margin{
+	padding-bottom: 0;
+	padding-top: 0;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.form__label{
+	font-size: 1rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--paddingOFF{
+	font-size: 1rem;
+	padding: 0;
+}
+.form__label--super{
+	font-size: 1.3rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--super--paddingOFF{
+	font-size: 1.3rem;
+	padding: 0 0 0 0;
+}
+.form__label--sub{
+	font-size: 0.7rem;
+	padding: 0.5rem 0 0 0;
+}
+.form__label--sub--paddingOFF{
+	font-size: 0.7rem;
+	padding: 0 0 0 0;
+}
+.form__input{
+	margin: 0;
+	padding: 0;
+}
+.form__input[type = "radio"]{
+	margin-left: 1rem;
 }
 
 /********************************************
@@ -251,12 +287,19 @@ p{
 	margin: 0 0 0 0;
 	padding: 3rem 0;
 }
-
 .divider{
 	border-bottom: 1px solid;
 	border-color: black;
 	margin: 0;
-	margin-bottom: 5px;
+	margin-bottom: 0.5rem;
+	height: 0;
+	overflow: auto;
+}
+.divider--1rem{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 0;
+	margin-bottom: 1rem;
 	height: 0;
 	overflow: auto;
 }
@@ -267,46 +310,21 @@ p{
 	height: 0;
 	overflow: auto;
 }
-/********************************************
-*	Anpassung bei Formularen und Label und	*
-*	zugehöriger Label						*
-********************************************/
-.no_padding_margin{
-	padding-bottom: 0;
-	padding-top: 0;
-	margin-bottom: 0;
-	margin-top: 0;
+.umrandung{
+	margin: 0.5rem;
+	padding: 1rem;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+	overflow: auto;
 }
-.form__label{
-	font-size: 1rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--paddingOFF{
-	font-size: 1rem;
-	padding: 0;
-}
-.form__label--super{
-	font-size: 1.3rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--super--paddingOFF{
-	font-size: 1.3rem;
-	padding: 0 0 0 0;
-}
-.form__label--sub{
-	font-size: 0.7rem;
-	padding: 0.5rem 0 0 0;
-}
-.form__label--sub--paddingOFF{
-	font-size: 0.7rem;
-	padding: 0 0 0 0;
-}
-.form__input{
+.umrandung--nomargin{
 	margin: 0;
-	padding: 0;
-}
-.form__input[type = "radio"]{
-	margin-left: 1rem;
+	padding: 0.5rem 1rem 0 1rem;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+	overflow: auto;
 }
 
 /********************************************

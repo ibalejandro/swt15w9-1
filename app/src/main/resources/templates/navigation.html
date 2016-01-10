@@ -32,26 +32,35 @@
 				
 				<!-- Right Nav Section -->
 					<ul class="right  center">
-						
-						<li class="has-form">
-							<th:block th:include="search :: searchByTag"></th:block>
-						</li>
-						
-						<li sec:authorize="hasRole('ROLE_NORMAL')">
-							<a sec:authorize="isAuthenticated()" th:href="@{/offer}" href="./offer.html">Offer</a>
-						</li>
-	
+							
 						<th:block sec:authorize="!isAuthenticated()">
 							<li>
 								<a class="center" th:href="@{/new_user}" href="new_user.html"> Registrieren</a>
 							</li>
 							
 							<li>
-								<a class="center" th:href="@{/login}" href="login.html" >Login</a>
+								<a class="center" th:href="@{/}" href="login.html" >Login</a>
 							</li>
 						</th:block>
 
 						<th:block sec:authorize="isAuthenticated()">
+						
+							<li sec:authorize="isAuthenticated()" class="has-form">
+								<th:block th:include="search :: searchByTag"></th:block>
+							</li>
+							
+							<li sec:authorize="hasRole('ROLE_NORMAL')" class="has-dropdown">
+								<a> Offer </a>
+								<ul class="dropdown">
+									<li>
+										<a th:href="@{/offer}">goods</a>
+									</li>
+									<li>
+										<a th:href="@{/offerActivity}">activities</a>
+									</li>
+								</ul>
+							</li>
+							
 							<li sec:authorize="hasRole('ROLE_ADMIN')" class="has-dropdown">
 								<a class="center"> Admin </a>
 								
@@ -65,9 +74,8 @@
 									<li>
 										<a class="center" th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
 									</li>
-									
 									<li>
-										<a class="center" th:href="@{/logout}" type="submit" value="Logout">Logout</a>
+										<a class="center" th:href="@{/logout}">Logout</a>
 									</li>
 								</ul>
 							</li>
@@ -81,17 +89,17 @@
 									<li>
 										<a class="center" th:href="@{/data}" href="data.html" > Eigene Daten</a>
 									</li>
-									
 									<li>
 										<a class="center" th:href="@{/myOfferedGoods}" href="myOfferedGoods"> My Offered Goods</a>
 									</li>
-									
+									<li>
+										<a class="center" th:href="@{/myOfferedActivities}" href="myOfferedActivities"> My Offered Activities</a>
+									</li>
 									<li>
 										<a class="center" th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
 									</li>
-									
 									<li>
-										<a class="center" th:href="@{/logout}" type="submit" value="Logout">Logout</a>
+										<a class="center" th:href="@{/logout}">Logout</a>
 									</li>
 								</ul>
 							</li>
