@@ -152,8 +152,8 @@
                                             <option th:each="country : ${countrys}"
                                             		th:text="${country}"
                                             		>
-                                            </option>                     
-                                        </select>
+                                    	</option>                     
+                                    </select>
                                     <!--    <input name="origin" type="text"/> -->
                                     <label th:if="${param.EmptyError_origin}" class="error center space--1rem--topbottom" for="origin">Select your native country!</label>
 									<label th:if="${param.InvalError_origin}" class="error center space--1rem--topbottom" for="origin">Invalid country!</label>

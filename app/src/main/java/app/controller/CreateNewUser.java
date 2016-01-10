@@ -443,74 +443,11 @@ public class CreateNewUser {
 			return "redirect:/new_user?UsedError_username" + filledFields;
 		}
 
-		UserAccount userAccount = userAccountManager.create(Username, Password, new Role("ROLE_NORMAL"));
-		userAccountManager.save(userAccount);
-		userAccount.setEmail(Mail);
-		userAccountManager.save(userAccount);
-
-		// userAccount.isEnabled = false;
-
-		System.out.println("Account " + userAccount.getUsername() + " angelegt.");
-
-		UserAccount LoggUser = userAccountManager.findByUsername(userAccount.getUsername()).get();
-		Address emptyadress = new Address("", "", "", "");
-		User user_xyz = new User(LoggUser, emptyadress);
-		user_xyz.setRegistrationstate(0);
-		userRepository.save(user_xyz);
-
-		user_xyz.setRegistrationdate(new Date()); // Temporäres
-													// Registrierungsdatum um
-													// unvollständige Konten
-													// nach einer betimmten Zeit
-													// zu löschen.
-		user_xyz.setRegistrationstate(1);
-		userRepository.save(user_xyz);
-
-		System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
-
-		System.out.println("/not_activated/user/" + user_xyz.getUserAccount().getUsername());
-
-		// Step 2
-
-		System.out.println(Name);
-		System.out.println(Firstname);
-		System.out.println(Adresstyp);
-
-		if (Name.isEmpty() || Firstname.isEmpty() || Adresstyp.isEmpty())
-
-		{
-			user_xyz.getUserAccount().setEmail("");
-			userRepository.save(user_xyz);
-			return "errorpage_empty";
-		}
-
-		user_xyz.getUserAccount().setLastname(Name);
-		user_xyz.getUserAccount().setFirstname(Firstname);
-
-		if (Adresstyp.equals("refugee"))
-
-		{
-			user_xyz.setAddresstyp(AddresstypEnum.Refugees_home);
-		}
-
-		if (Adresstyp.equals("helper"))
-
-		{
-			user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
-		}
-
-		userAccountManager.save(user_xyz.getUserAccount());
-
-		user_xyz.setRegistrationstate(2);
-		userRepository.save(user_xyz);
-
-		System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
-
 		String Postcode_N;
 		String City_N;
+		Address address = new Address("", "", "", "", "", "");
 
 		if (Adresstyp.equals("refugee")) // Refugees_home
-
 		{
 			// return "redirect:/new_user_aboutuser2a/user/{user}";
 
@@ -571,14 +508,7 @@ public class CreateNewUser {
 					i = i + 1;
 				}
 			}
-
-			Address address = new Address("", "", Flh_name, Citypart, Postcode_N, City_N);
-			user_xyz.setLocation(address);
-			user_xyz.setRegistrationstate(3); // 3 ~ Flüchtlingsheim
-			userRepository.save(user_xyz);
-
-			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
-			// return "redirect:/new_user_language_origin/user/{user}";
+			address = new Address("", "", Flh_name, Citypart, Postcode_N, City_N);
 		}
 
 		if (Adresstyp.equals("helper")) // Wohnung
@@ -641,8 +571,120 @@ public class CreateNewUser {
 					i = i + 1;
 				}
 			}
+			address = new Address(Street, Housenr, Postcode_N, City_N);
+		}
 
-			Address address = new Address(Street, Housenr, Postcode_N, City_N);
+		// Useraccount anlegen *********************************************
+
+		UserAccount userAccount = userAccountManager.create(Username, Password, new Role("ROLE_NORMAL"));
+		userAccountManager.save(userAccount);
+		userAccount.setEmail(Mail);
+		userAccountManager.save(userAccount);
+
+		// userAccount.isEnabled = false;
+
+		System.out.println("Account " + userAccount.getUsername() + " angelegt.");
+
+		UserAccount LoggUser = userAccountManager.findByUsername(userAccount.getUsername()).get();
+		Address emptyadress = new Address("", "", "", "");
+		User user_xyz = new User(LoggUser, emptyadress);
+		user_xyz.setRegistrationstate(0);
+		userRepository.save(user_xyz);
+
+		user_xyz.setRegistrationdate(new Date()); // Temporäres
+													// Registrierungsdatum um
+													// unvollständige Konten
+													// nach einer betimmten Zeit
+													// zu löschen.
+		user_xyz.setRegistrationstate(1);
+		userRepository.save(user_xyz);
+
+		System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
+
+		System.out.println("/not_activated/user/" + user_xyz.getUserAccount().getUsername());
+
+		// Step 2
+
+		System.out.println(Name);
+		System.out.println(Firstname);
+		System.out.println(Adresstyp);
+
+		if (Name.isEmpty() || Firstname.isEmpty() || Adresstyp.isEmpty()) {
+			user_xyz.getUserAccount().setEmail("");
+			userRepository.save(user_xyz);
+			return "errorpage_empty";
+		}
+
+		user_xyz.getUserAccount().setLastname(Name);
+		user_xyz.getUserAccount().setFirstname(Firstname);
+
+		if (Adresstyp.equals("refugee")) {
+			user_xyz.setAddresstyp(AddresstypEnum.Refugees_home);
+		}
+
+		if (Adresstyp.equals("helper")) {
+			user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
+		}
+
+		userAccountManager.save(user_xyz.getUserAccount());
+
+		user_xyz.setRegistrationstate(2);
+		userRepository.save(user_xyz);
+
+		System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
+
+		if (Adresstyp.equals("refugee")) // Refugees_home
+		{
+			// return "redirect:/new_user_aboutuser2a/user/{user}";
+
+			System.out.println(Flh_name_OPT.get());
+			System.out.println(Citypart_OPT.get());
+			System.out.println(Postcode_R.get());
+			System.out.println(City_R.get());
+
+			String Flh_name;
+			String Citypart;
+
+			Flh_name = HelpFunctions.getOptionalString(Flh_name_OPT);
+			Postcode_N = HelpFunctions.getOptionalString(Postcode_R);
+			City_N = HelpFunctions.getOptionalString(City_R);
+			Citypart = HelpFunctions.getOptionalString(Citypart_OPT);
+
+			// KLASSE FLÜCHTLINGSHEIM UND INTERFACE LOCATION!!!!!!!!!!!!!!
+			if ((Flh_name.isEmpty()) || (Citypart.isEmpty()) || Postcode_N.isEmpty() || City_N.isEmpty()) {
+				return "error";
+			}
+
+			user_xyz.setLocation(address);
+			user_xyz.setRegistrationstate(3); // 3 ~ Flüchtlingsheim
+			userRepository.save(user_xyz);
+
+			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
+			// return "redirect:/new_user_language_origin/user/{user}";
+		}
+
+		if (Adresstyp.equals("helper")) // Wohnung
+
+		{
+			// return "redirect:/new_user_aboutuser2b/user/{user}";
+
+			System.out.println(Street_OPT.get());
+			System.out.println(Housenr_OPT.get());
+			System.out.println(Postcode_H.get());
+			System.out.println(City_H.get());
+
+			String Street;
+			String Housenr;
+
+			Street = HelpFunctions.getOptionalString(Street_OPT);
+			Housenr = HelpFunctions.getOptionalString(Housenr_OPT);
+			Postcode_N = HelpFunctions.getOptionalString(Postcode_H);
+			City_N = HelpFunctions.getOptionalString(City_H);
+
+			if (Street.isEmpty() || Housenr.isEmpty() || Postcode_N.isEmpty() || City_N.isEmpty()) {
+				return "error";
+			}
+
 			user_xyz.setLocation(address);
 			user_xyz.setRegistrationstate(4); // 4 ~ Wohnung
 			userRepository.save(user_xyz);
@@ -657,16 +699,13 @@ public class CreateNewUser {
 		System.out.println(OtherLanguages);
 		System.out.println(Origin);
 
-		if (Nativelanguage.isEmpty() || Origin.isEmpty())
-
-		{
+		if (Nativelanguage.isEmpty() || Origin.isEmpty()) {
 			user_xyz.getUserAccount().setEmail("");
 			userRepository.save(user_xyz);
 			return "errorpage_empty";
 		}
-		if (Origin.equals("---- Select ----"))
 
-		{
+		if (Origin.equals("---- Select ----")) {
 			user_xyz.getUserAccount().setEmail("");
 			userRepository.save(user_xyz);
 			System.out.println("E: Kein Herkunftsland ausgewählt");
