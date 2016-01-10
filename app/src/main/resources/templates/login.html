@@ -26,14 +26,14 @@
 					
 					<div class="large-6 small-6 columns">
 						<label class="link--right"><a th:text="${login_link_text.text}" th:href="@{/new_user}" onclick="return toggle('log');" >Noch nicht registriert?</a></label>
-						<!--<label class="link--right"><a th:text="${login_link_text.text}" th:href="@{/new_user}" onclick="return toggle('log');" >Noch nicht registriert?</a></label>-->
+						<!--<label class="link__right"><a th:text="${login_link_text.text}" th:href="@{/new_user}" onclick="return toggle('log');" >Noch nicht registriert?</a></label>-->
 					</div>
 					
 					<form th:action="@{/login}" method="post">
 						
 						<div class = "small-12 columns">
 							<label th:if="${param.error}" class="error center space--1rem--topbottom" for="username">Wrong Username or Password!</label>
-							<!--<label th:text="${login_error_text.text}" th:if="${param.error}" class="error center space--1rem--topbottom" for="username">Wrong Username or Password!</label>-->
+							<!--<label th:text="${login_error_text.text}" th:if="${param.error}" class="error center space__1rem__topbottom" for="username">Wrong Username or Password!</label>-->
 						</div>
 						
 						<div class="medium-6 small-12 columns">
