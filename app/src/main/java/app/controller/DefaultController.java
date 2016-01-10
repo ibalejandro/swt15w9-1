@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.model.UserRepository;
+import app.repository.ActivitiesRepository;
 import app.repository.GoodsRepository;
 import app.repository.LanguageRepository;
 import app.repository.TagsRepository;
@@ -27,13 +28,19 @@ public class DefaultController {
 	private final GoodsRepository goodsRepository;
 	private final TagsRepository tagsRepository;
 	private final LanguageRepository languageRepository;
+	private final ActivitiesRepository activitiesRepository;
 	
 	@Autowired
-	public DefaultController(UserRepository userRepository, GoodsRepository goodsRepository, TagsRepository tagsRepository, LanguageRepository languageRepository){
+	public DefaultController(UserRepository userRepository, 
+	                         GoodsRepository goodsRepository, 
+	                         TagsRepository tagsRepository, 
+	                         LanguageRepository languageRepository,
+	                         ActivitiesRepository activitiesRepository){
 		this.userRepository = userRepository;
 		this.goodsRepository = goodsRepository;
 		this.tagsRepository = tagsRepository;
 		this.languageRepository = languageRepository;
+		this.activitiesRepository = activitiesRepository;
 	}
 
 	/**
@@ -44,6 +51,7 @@ public class DefaultController {
 	String index(HttpServletRequest request, Model modelMap) {
 		// translation(modelMap);
 		modelMap.addAttribute("result", goodsRepository.findAll());
+		modelMap.addAttribute("resultActivities", activitiesRepository.findAll());
 		modelMap.addAttribute("languages", languageRepository.findAll());
 
 		ListCountry a = new ListCountry();

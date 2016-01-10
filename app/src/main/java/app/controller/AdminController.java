@@ -1,9 +1,12 @@
 package app.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.Email;
@@ -526,18 +529,20 @@ private final ActivitiesRepository activitiesRepository;
    * @param Optional<UserAccount> The admin's account who wants to update one of
    *                              the offered goods
    * @return String The name of the view to be shown after processing
+ * @throws ServletException 
+ * @throws IOException 
    */
   @RequestMapping(value = "/updatedGoodByAdmin", method = RequestMethod.POST)
   public String updateGood(HttpServletRequest request, Model model, 
                            @ModelAttribute("good") GoodEntity good, 
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes,
-                           @LoggedIn Optional<UserAccount> userAccount) {
+                           @LoggedIn Optional<UserAccount> userAccount) throws IOException, ServletException {
     long id = Long.parseLong(request.getParameter("id"));
     String name = request.getParameter("name");
     String description = request.getParameter("description");
     long tagId = Long.parseLong(request.getParameter("tagId"));
-    String picture = request.getParameter("picture");
+    Part picture = request.getPart("pict");
 
     if (!userAccount.isPresent()) return "noUser";
     

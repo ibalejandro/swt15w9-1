@@ -23,6 +23,10 @@
 						
 						<div>
 							<div>
+								<label class="gooditem__label--single"> Picture </label>
+								<img th:src="${good.getId()+'/image'}"/>
+							</div>
+							<div>
 								<h4> Description </h4>
 								<p th:text="${good.description}"></p>
 							</div>
