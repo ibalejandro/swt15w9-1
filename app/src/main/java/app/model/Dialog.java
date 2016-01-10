@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import org.springframework.util.Assert;
 
 import app.textblocks.Chat;
+import lombok.ToString;
 
 /**
  * <h1>Dialog</h1> The Dialog "glues" all {@link Chat}s together with
@@ -21,6 +22,7 @@ import app.textblocks.Chat;
  * @author Mario Henze
  */
 @Entity
+@ToString
 public class Dialog implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,7 @@
 package app.controller;
 
 import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +25,7 @@ import app.model.User;
 import app.model.UserRepository;
 import app.repository.DialogRepository;
 import app.repository.TextBlockRepository;
+import app.textblocks.ChatTemplate;
 import app.textblocks.TextBlock;
 
 @Controller
@@ -65,40 +66,58 @@ public class DialogController {
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
-	public String dialog(@RequestParam("id") Long id, HttpServletRequest request) {
-		Dialog d = dialogRepo.findOne(id);
-		Enumeration<String> params = request.getParameterNames();
-		List<Long> requestedBlocks = new LinkedList<>();
-		Map<String, String> requestValues = new HashMap<>();
+	public String dialog(@RequestParam("id") Long id, HttpServletRequest req) {
+//		Dialog d = dialogRepo.findOne(id);
+//		Enumeration<String> params = req.getParameterNames();
+//		Map<String, String> requestValues = new HashMap<>();
+//		
+//		List<Long> requestedBlocks = new LinkedList<>();
+//		while (params.hasMoreElements()) {
+//			String string = (String) params.nextElement();
+//			
+//			//TODO: remove debug print
+//			System.out.println(string);
+//			System.out.println(req.getParameter(string));
+//			
+//			if (string.endsWith("-selected")) {
+//				/*
+//				 * get all ids of the selected textblocks. These are implicitly
+//				 * given by the "xxx-selected" param name, where xxx represents
+//				 * the id. Only if the checkbox before the textblock is ticked
+//				 * in the form this param occurs in the params enum.
+//				 */
+//				Long textBlockId = Long.parseLong(string.substring(0, string.length() - 9));
+//				requestedBlocks.add(textBlockId);
+//				
+//			}
+//		}
+//		
+//		Iterable<TextBlock> i = textBlockRepo.findAll(requestedBlocks);
+//		List<TextBlock> blocks = new LinkedList<>();
+//		for (TextBlock textBlock : i) {
+//			blocks.add(textBlock);
+//		}
+//		
+//		
+//		
+//		//ChatTemplate ct = new ChatTemplate(blocks);
+//		//d.addMessageElement(ct.fromForm(requestValues));
 
+		Map<String, String> formMap = new LinkedHashMap<>();
+		Enumeration<String> params = req.getParameterNames();
 		while (params.hasMoreElements()) {
-			String string = (String) params.nextElement();
-			
-			//TODO: remove debug print
-			System.out.println(string);
-			System.out.println(request.getParameter(string));
-			
-			if (string.endsWith("-selected")) {
-				/*
-				 * get all ids of the selected textblocks. These are implicitly
-				 * given by the "xxx-selected" param name, where xxx represents
-				 * the id. Only if the checkbox before the textblock is ticked
-				 * in the form this param occurs in the params enum.
-				 */
-				requestedBlocks.add(Long.parseLong(string.substring(0, string.length() - 9)));
-			}
-		}
-
-		Iterable<TextBlock> i = textBlockRepo.findAll(requestedBlocks);
-		List<TextBlock> blocks = new LinkedList<>();
-		for (TextBlock textBlock : i) {
-			blocks.add(textBlock);
+			String paramName = (String) params.nextElement();
+			formMap.put(paramName, req.getParameter(paramName));
 		}
 		
+		Iterable<TextBlock> i = textBlockRepo.findAll();
+		List<TextBlock> tbl = new LinkedList<>();
+		i.forEach((TextBlock t) -> tbl.add(t));
 		
-		//ChatTemplate ct = new ChatTemplate(blocks);
-		//d.addMessageElement(ct.fromForm(requestValues));
-
+		ChatTemplate ct = new ChatTemplate(tbl);
+		dialogRepo.findOne(id).addMessageElement(ct.fromForm(formMap));
+		dialogRepo.findOne(id).toString();
+		
 		return "redirect:/dialog?id=" + id;
 	}
 
@@ -142,7 +161,7 @@ public class DialogController {
 		Optional<UserAccount> participantAccount = userAccountManager.findByUsername(participant);
 		if (!participantAccount.isPresent()) {
 			System.err.println("Couldn't find participant: " + participant);
-			return "noUser";
+			return "error";
 		}
 		User participantUser = userRepository.findByUserAccount(participantAccount.get());
 
