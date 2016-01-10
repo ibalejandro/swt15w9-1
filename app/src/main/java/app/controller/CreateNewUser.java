@@ -124,7 +124,6 @@ public class CreateNewUser {
 				&& "checked".equals(HelpFunctions.getOptionalString(checked2Old))) {
 			modelMap.addAttribute("checked1Old", true);
 			System.out.println("c1");
-			
 		} else {
 			if ("checked".equals(HelpFunctions.getOptionalString(checked2Old))) {
 				modelMap.addAttribute("checked2Old", true);
@@ -529,18 +528,20 @@ public class CreateNewUser {
 
 			// KLASSE FLÜCHTLINGSHEIM UND INTERFACE LOCATION!!!!!!!!!!!!!!
 			if ((Flh_name.isEmpty()) || (Citypart.isEmpty()) || Postcode_N.isEmpty() || City_N.isEmpty()) {
+				String returnstr = "redirect:/new_user?";
 				if (Flh_name.isEmpty()) {
-					return "redirect:/new_user?EmptyError_fhl_name" + filledFields;
+					returnstr = returnstr + "&EmptyError_fhl_name";
 				}
 				if (Citypart.isEmpty()) {
-					return "redirect:/new_user?EmptyError_citypart" + filledFields;
+					returnstr = returnstr + "&EmptyError_citypart";
 				}
 				if (Postcode_N.isEmpty()) {
-					return "redirect:/new_user?EmptyError_plzR" + filledFields;
+					returnstr = returnstr + "&EmptyError_plzR";
 				}
 				if (City_N.isEmpty()) {
-					return "redirect:/new_user?EmptyError_cityR" + filledFields;
+					returnstr = returnstr + "&EmptyError_cityR";
 				}
+				return returnstr.replace("?&", "?") + filledFields;
 			}
 
 			while (Postcode_N.length() < 5) {
@@ -598,18 +599,20 @@ public class CreateNewUser {
 			City_N = HelpFunctions.getOptionalString(City_H);
 
 			if (Street.isEmpty() || Housenr.isEmpty() || Postcode_N.isEmpty() || City_N.isEmpty()) {
+				String returnstr = "redirect:/new_user?";
 				if (Street.isEmpty()) {
-					return "redirect:/new_user?EmptyError_street" + filledFields;
+					returnstr = returnstr + "&EmptyError_street";
 				}
 				if (Housenr.isEmpty()) {
-					return "redirect:/new_user?EmptyError_housenr" + filledFields;
+					returnstr = returnstr + "&EmptyError_housenr";
 				}
 				if (Postcode_N.isEmpty()) {
-					return "redirect:/new_user?EmptyError_plzH" + filledFields;
+					returnstr = returnstr + "&EmptyError_plzH";
 				}
 				if (City_N.isEmpty()) {
-					return "redirect:/new_user?EmptyError_cityH" + filledFields;
+					returnstr = returnstr + "&EmptyError_cityH";
 				}
+				return returnstr.replace("?&", "?") + filledFields;
 			}
 
 			while (Postcode_N.length() < 5) {
