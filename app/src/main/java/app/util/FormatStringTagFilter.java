@@ -25,14 +25,13 @@ public class FormatStringTagFilter {
 		String delim = "[ ]";
 		String[] tokens = formatString.split(delim);
 		List<String> tl = Arrays.asList(tokens);
-
+		
 		for (String st : tl) {
 			if (st.startsWith("$")) {
 				String s;
 				s = st.replaceAll("\\p{Punct}", "");
 				s = s.replace("${", "");
 				s = s.replace("}", "");
-				System.out.println(s);
 				l.add(new FormatTag(new TextFormatTagValue(), s));
 			}
 		}

@@ -1,4 +1,4 @@
-package app.model;
+﻿package app.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.salespointframework.useraccount.UserAccount;
-import org.springframework.util.Assert;
 
 /**
  * <h1>User</h1> The User is the persistent object of a User. It contains the
@@ -25,7 +24,7 @@ import org.springframework.util.Assert;
  * UserRepository.
  *
  * @author Friederike Kitzing
- * 
+ *
  */
 
 @SuppressWarnings("serial")
@@ -66,8 +65,6 @@ public class User implements Serializable {
 	private Set<GoodEntity> goods;
 	@OneToMany(targetEntity = ActivityEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<ActivityEntity> activities;
-	@OneToMany(targetEntity = Dialog.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Dialog> dialogs;
 
 	@SuppressWarnings("unused")
 	private User() {
@@ -75,7 +72,7 @@ public class User implements Serializable {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param userAccount
 	 *            The Spring Object UserAccount which is connected to the User
 	 * @param location
@@ -100,7 +97,7 @@ public class User implements Serializable {
 	/**
 	 * Adds a GoodEntity to the Set goods or updates a GoodEntity if it was
 	 * already saved.
-	 * 
+	 *
 	 * @param GoodEntity
 	 *            The good to be added/updated
 	 * @return Nothing
@@ -114,7 +111,7 @@ public class User implements Serializable {
 
 	/**
 	 * Removes a GoodEntity from the Set goods.
-	 * 
+	 *
 	 * @param GoodEntity
 	 *            The good to be removed
 	 * @return Nothing
@@ -131,7 +128,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return Iterable<GoodEntity> The goods offered by this User
 	 */
 	public Iterable<GoodEntity> getGoods() {
@@ -141,7 +138,7 @@ public class User implements Serializable {
 	/**
 	 * Adds an ActivityEntity to the Set activities or updates an ActivityEntity
 	 * if it was already saved.
-	 * 
+	 *
 	 * @param ActivityEntity
 	 *            The activity to be added/updated
 	 * @return Nothing
@@ -155,7 +152,7 @@ public class User implements Serializable {
 
 	/**
 	 * Removes an ActivityEntity from the Set activities.
-	 * 
+	 *
 	 * @param ActivityEntity
 	 *            The activity to be removed
 	 * @return Nothing
@@ -173,26 +170,16 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return Iterable<ActivityEntity> The activities offered by this User
 	 */
 	public Iterable<ActivityEntity> getActivities() {
 		return activities;
 	}
 
-	public void addDialog(Dialog dialog) {
-		Assert.notNull(dialog);
-
-		dialogs.add(dialog);
-	}
-
-	public Iterable<Dialog> getDialogs() {
-		return dialogs;
-	}
-
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return Address The location of the User
 	 */
 	public Address getLocation() {
@@ -201,7 +188,7 @@ public class User implements Serializable {
 
 	/**
 	 * Setter.
-	 * 
+	 *
 	 * @param Address
 	 *            the new location
 	 * @return Nothing
@@ -212,7 +199,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return String The Origin of the User
 	 */
 	public String getOrigin() {
@@ -221,7 +208,7 @@ public class User implements Serializable {
 
 	/**
 	 * Setter.
-	 * 
+	 *
 	 * @param String
 	 *            The User's Origin
 	 * @return Nothing
@@ -232,7 +219,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return Iterable<Language> All languages of this User
 	 */
 	public Iterable<Language> getLanguages() {
@@ -241,7 +228,7 @@ public class User implements Serializable {
 
 	/**
 	 * Setter.
-	 * 
+	 *
 	 * @param Language
 	 *            The new language that should be added.
 	 * @return Nothing
@@ -252,7 +239,7 @@ public class User implements Serializable {
 
 	/**
 	 * Remove Language.
-	 * 
+	 *
 	 * @param Language
 	 *            The language that should be removed.
 	 * @return Nothing
@@ -292,7 +279,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return UserAccount The connected UserAccount of this User
 	 */
 	public UserAccount getUserAccount() {
@@ -301,7 +288,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return id The User's id
 	 */
 	public long getId() {
@@ -310,7 +297,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return Boolean
 	 */
 	public boolean isEnabled() {
@@ -319,7 +306,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return String The opposite of the activationstate
 	 */
 	public String getActivationStateOpposite() {
@@ -331,7 +318,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter.
-	 * 
+	 *
 	 * @return String The activationstate as a String
 	 */
 	public String getActivationState() {
