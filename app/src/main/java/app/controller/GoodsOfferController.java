@@ -1,7 +1,12 @@
 package app.controller;
 
+import java.io.IOException;
 import java.util.Optional;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,16 +103,18 @@ public class GoodsOfferController {
    * @param BindingResult The parameter in charge of the validation result
    * @param Optional<UserAccount> The user's account who wants to offer the good
    * @return String The name of the view to be shown after processing
+	 * @throws ServletException 
+	 * @throws IOException 
    */
 	@RequestMapping(value = "/offeredGood", method = RequestMethod.POST)
   public String saveGood(HttpServletRequest request, Model model,
                          @ModelAttribute("good") GoodEntity good, 
                          BindingResult bindingResult,
-  					             @LoggedIn Optional<UserAccount> userAccount) {
+  					             @LoggedIn Optional<UserAccount> userAccount) throws IOException, ServletException {
 	  String name = request.getParameter("name");
 	  String description = request.getParameter("description");
   	long tagId = Long.parseLong(request.getParameter("tagId"));
-  	String picture = request.getParameter("picture");
+  	Part picture = request.getPart("pict");
 
   	//////////////////////////////////////////////suchen des aktiven Users:
   	if (!userAccount.isPresent()) return "redirect:noUser";
