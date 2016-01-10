@@ -57,7 +57,7 @@
 							
 							<tbody th:remove="all-but-first">
 								<tr th:each=" user : ${userDetails}">
-									<td th:text="${user.userAccount.username}">User</td>
+									<td><a th:href="@{/viewUser?userNameIN=}+${user.userAccount.username}" th:text="${user.userAccount.username}">User</a></td>
 									<td th:text="${user.userAccount.firstname}">Hans</td>
 									<td th:text="${user.userAccount.lastname}">Mueller</td>
 									<td th:text="${user.userAccount.email}">xyz</td>
