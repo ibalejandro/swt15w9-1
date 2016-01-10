@@ -16,8 +16,23 @@ public interface TagsRepository extends CrudRepository<TagEntity, Long> {
    * tag's id.
    * @param id The given tag's id
    * @return Iterable<TagEntity> A list with all matches for all tag's ids 
-   *                             different from the given tag's id
+   *                             different from the given tag's id in ascendant
+   *                             order
    */
-  Iterable<TagEntity> findByIdNot(long id);
+  Iterable<TagEntity> findByIdNotOrderByNameAsc(long id);
+  
+  /**
+   * This method finds all tags and retrieves them ascendantly 
+   * @return Iterable<TagEntity> A list with the whole tags order ascendantly
+   *                             by the tag's name
+   */
+  Iterable<TagEntity> findAllByOrderByNameAsc();
+  
+  /**
+   * This method finds and retrieves the tag for the given name 
+   * @param name The given tag's name
+   * @return TagEntity A tag with matches with the given name
+   */
+  TagEntity findByName(String name);
 }
 

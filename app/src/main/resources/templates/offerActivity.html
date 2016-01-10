@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  
+  <head>
+    <th:block th:include="imports :: head"></th:block>
+  </head>
+  
+  <body>
+  
+    <div th:include="navigation :: navigation"></div>
+    
+    <div class = "row">
+      
+      <div class="small-12 columns space"></div>
+      <div class="small-12 columns">
+        <h1 class="headline">Offer Activity</h1>
+      </div>
+      <form th:action="@{/offeredActivity}" th:object="${activity}" method="post">
+        <div class="large-1 medium-2 small-12 columns">
+          <label for="name" class="form__label">Name</label> 
+        </div>
+        
+        <div class="large-5 medium-10 small-12 columns">
+          <input type="text" id="name" name="name"/>
+        </div>
+        
+        <div class="large-1 medium-2 small-12 columns">
+          <label for="description" class="form__label">Description</label>
+        </div>
+        <div class="large-5 medium-10 small-12 columns">
+          <input type="text" id="description" name="description"/>
+        </div>
+        
+        <div class="large-1 medium-2 small-12 columns">
+          <label for="picture" class="form__label">Picture</label>
+        </div>
+        <div class="large-5 medium-10 small-12 columns">
+          <input type="text" id="picture" name="picture" placeholder="Example: http://i.imgur.com/C2csOAA.jpg"/> 
+        </div>
+        
+        <div class="large-1 medium-2 small-12 columns">
+          <label for="tagId" class="form__label">Tag</label>
+        </div>
+        <div class="large-5 medium-10 small-12 columns">
+          <select id="tagId" name="tagId">
+            <option value="-1">---- Select ----</option>
+            <option th:each="tag : ${tags}"
+                th:value="${tag.id}"
+                th:text="${tag.name}">
+            </option>
+          </select>  
+        </div>
+        
+        <div class="large-1 medium-2 small-12 columns">
+          <label for="startDate" class="form__label">Start date</label>
+        </div>
+        <div class="large-5 medium-10 small-12 columns">
+          <input type="date" id="startDate" name="startDate"/> 
+        </div>
+        
+        <div class="large-1 medium-2 small-12 columns">
+          <label for="endDate" class="form__label">End date</label>
+        </div>
+        <div class="large-5 medium-10 small-12 columns">
+          <input type="date" id="endDate" name="endDate"/> 
+        </div>
+        
+        <div class="small-12 columns">
+          <input class="button" type="submit" value="Offer"/>
+        </div>
+      </form>   
+      
+    </div>
+    <th:block th:include="imports :: script"></th:block>
+    </body>
+    
+</html>

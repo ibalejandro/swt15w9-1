@@ -38,7 +38,7 @@ public class GoodsManagementController {
 	private final GoodsRepository goodsRepository;
 	private final TagsRepository tagsRepository;
 	
-	private static final String POST = "POST";
+	public static final String POST = "POST";
 
 	/**
    * Autowire.
@@ -48,7 +48,7 @@ public class GoodsManagementController {
 	@Autowired
 	public GoodsManagementController(UserRepository userRepository,
 									                 GoodsRepository goodsRepository,
-									                 TagsRepository tagsRepository){
+									                 TagsRepository tagsRepository) {
 		this.userRepository = userRepository;
 		this.goodsRepository = goodsRepository;
 		this.tagsRepository = tagsRepository;
@@ -73,7 +73,8 @@ public class GoodsManagementController {
     if (!userAccount.isPresent()) return "noUser";
 		User loggedUser = userRepository.findByUserAccount(userAccount.get());
 		
-		model.addAttribute("result", loggedUser.getGoods());
+		//model.addAttribute("result", loggedUser.getGoods());
+		model.addAttribute("result", goodsRepository.findByUser(loggedUser));
 		return "myOfferedGoods";
 	}
 
@@ -129,8 +130,9 @@ public class GoodsManagementController {
 		 * current tag is already known and it's put as the default value whereas
 		 * the other tags are there, so that the user can change the existing one.
 		 */
-		model.addAttribute("tags", tagsRepository
-		                   .findByIdNot(goodToUpdate.getTag().getId()));
+		model.addAttribute("tags", 
+		                   tagsRepository.findByIdNotOrderByNameAsc
+		                   (goodToUpdate.getTag().getId()));
 		return "update";
   }
 

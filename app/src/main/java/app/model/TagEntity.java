@@ -27,6 +27,8 @@ public class TagEntity {
   @OneToOne(targetEntity = GoodEntity.class, fetch = FetchType.EAGER) 
   private GoodEntity good;
   
+  public static final String OTHERS = "Others";
+  
   protected TagEntity() {} // For the sake of JPA.
   
   /**

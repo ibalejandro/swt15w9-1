@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<head class="no-js" xmlns:th="http://www.thymeleaf.org">
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+	
+		<div th:include="navigation :: navigation"></div>
+		
+		<div>
+			<h2> Tags </h2>
+		</div>
+		
+		<form th:action="@{/addNewTag}" method="get">
+			<input class="button" type="submit" value="Add new Tag"/>
+		</form>
+		
+		<div class="row">
+			<div th:each="tag, it : ${result}" th:with="index = ${it.count}">
+				<div th:fragment="tag" th:id="tag+${tag.id}">
+					<div class="small-12 colums medium-6 columns">
+						<div>
+							<h3 th:text="${index}+'. '+${tag.name}"></h3>
+						</div>
+						
+						<div>
+							<div class="row">
+								<div class="small-12 medium-6 colums">
+									<form th:action="@{/deletedTag}" method="post">
+										<input type="hidden" name="id" th:value="${tag.id}"/>
+										<input class="button" type="submit" value="Delete"/>
+									</form>
+								</div>
+								
+								<div class="small-12 medium-6 colums">
+									<form th:action="@{/updateTag}" method="post">
+										<input type="hidden" name="id" th:value="${tag.id}"/>
+										<input class="button" type="submit" value="Update"/>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+	
+</html>

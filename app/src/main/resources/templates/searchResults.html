@@ -14,12 +14,70 @@
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="space"></div>
-		<!--/*
+		
 		<div>
-			<h2 th:text="'Goods found by '+${resultParameterType}+': '+${resultParameter}+' ('+${numberOfResults}+')'"></h2>
+			<h1 th:text="'Results found by '+${resultParameterType}+': '+${resultParameter}"></h1>
 		</div>
-		*/-->
-	   <th:block th:include="itemN--small :: show_items"></th:block>
+		
+		<div>
+			<h2 th:text="'Goods ('+${numberOfResults}+')'"></h2>
+		</div>
+		
+	    <div class="row">
+			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
+				<div th:id="good+${good.id}" th:include="goods_item--multi_no_numeration :: item" ></div>
+				
+				<div class="small-12 columns">
+					<input sec:authorize="hasRole('ROLE_NORMAL')" class="button" type="submit" value="Ask for this good"/>
+				</div>
+				
+				<div class="small-12 medium-6 colums">
+                  <form th:action="@{/deletedGoodByAdmin}" method="post">
+                    <input type="hidden" name="id" th:value="${good.id}"/>
+                    <input sec:authorize="hasRole('ROLE_ADMIN')" class="button" type="submit" value="Delete"/>
+                  </form>
+                </div>
+                
+                <div class="small-12 medium-6 colums">
+                  <form th:action="@{/updateGoodByAdmin}" method="post">
+                    <input type="hidden" name="id" th:value="${good.id}"/>
+                    <input sec:authorize="hasRole('ROLE_ADMIN')" class="button" type="submit" value="Update"/>
+                  </form>
+                </div>
+	                
+			</div>
+		</div>
+		
+		<th:block th:include="itemN--small :: show_items"></th:block>
+		
+		<div>
+			<h2 th:text="'Activities ('+${numberOfResultsActivities}+')'"></h2>
+		</div>
+		
+		<div class="row">
+			<div th:each="activity, it : ${resultActivity}" th:with="index = ${it.count}">
+				<div th:id="activity+${activity.id}" th:include="activities_item--multi_no_numeration :: item" ></div>
+				
+				<div class="small-12 columns">
+					<input sec:authorize="hasRole('ROLE_NORMAL')" class="button" type="submit" value="Ask for this activity"/>
+				</div>
+						
+				<div class="small-12 medium-6 colums">
+                  <form th:action="@{/deletedActivityByAdmin}" method="post">
+                    <input type="hidden" name="id" th:value="${activity.id}"/>
+                    <input sec:authorize="hasRole('ROLE_ADMIN')" class="button" type="submit" value="Delete"/>
+                  </form>
+                </div>
+                
+                <div class="small-12 medium-6 colums">
+                  <form th:action="@{/updateActivityByAdmin}" method="post">
+                    <input type="hidden" name="id" th:value="${activity.id}"/>
+                    <input sec:authorize="hasRole('ROLE_ADMIN')" class="button" type="submit" value="Update"/>
+                  </form>
+                </div>
+	                
+			</div>
+		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
 	</body>

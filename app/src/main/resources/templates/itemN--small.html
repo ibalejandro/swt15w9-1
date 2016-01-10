@@ -12,7 +12,7 @@
 	<body>
 		<th:block th:fragment="item">
 			<a th:href="@{'/item='+${toShow.getId()}}" class="itemN__link">
-				<div th:id="good+${toShow.getId()}" class="itemN">
+				<div class="itemN">
 					<div class="itemN__headlinecontainer">
 						<p th:text="${toShow.name}" class="headline--sub"></p> <!--${good.getId()}+'. '+-->
 					</div>
@@ -50,4 +50,5 @@
 		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
+	
 </html>

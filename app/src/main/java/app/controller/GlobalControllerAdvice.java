@@ -37,7 +37,7 @@ public class GlobalControllerAdvice {
    */
   @ModelAttribute("navTags")
   public Iterable<TagEntity> populateSearchDropdown() {
-    return tagsRepository.findAll();
+    return tagsRepository.findAllByOrderByNameAsc();
   }
   
 }
