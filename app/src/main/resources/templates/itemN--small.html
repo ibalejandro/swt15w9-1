@@ -18,7 +18,7 @@
 	  </div>
 	  
       <div class="row small-collapse">
-        <div th:each="good, it : ${result}" th:with="index = ${it.count}">
+        <div th:each="good, it : ${resultGoods}" th:with="index = ${it.count}">
           <div class="small-12 medium-6 columns end" th:id="good+${good.id}">
             <a th:href="@{'/item='+${good.getId()}}" class="itemN__link">
               <div th:id="good+${good.getId()}" class="itemN">

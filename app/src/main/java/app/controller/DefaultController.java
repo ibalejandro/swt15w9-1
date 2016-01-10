@@ -50,7 +50,7 @@ public class DefaultController {
 	@RequestMapping({ "/", "/index" })
 	String index(HttpServletRequest request, Model modelMap) {
 		// translation(modelMap);
-		modelMap.addAttribute("result", goodsRepository.findAll());
+		modelMap.addAttribute("resultGoods", goodsRepository.findAll());
 		modelMap.addAttribute("resultActivities", activitiesRepository.findAll());
 		modelMap.addAttribute("languages", languageRepository.findAll());
 

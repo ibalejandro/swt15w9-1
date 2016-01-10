@@ -24,7 +24,7 @@
 		</div>
 		
 	    <div class="row">
-			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
+			<div th:each="good, it : ${resultGoods}" th:with="index = ${it.count}">
 				<div th:id="good+${good.id}" th:include="goods_item--multi_no_numeration :: item" ></div>
 				
 				<div class="small-12 columns">
@@ -55,7 +55,7 @@
 		</div>
 		
 		<div class="row">
-			<div th:each="activity, it : ${resultActivity}" th:with="index = ${it.count}">
+			<div th:each="activity, it : ${resultActivities}" th:with="index = ${it.count}">
 				<div th:id="activity+${activity.id}" th:include="activities_item--multi_no_numeration :: item" ></div>
 				
 				<div class="small-12 columns">

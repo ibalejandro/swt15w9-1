@@ -461,7 +461,7 @@ private final ActivitiesRepository activitiesRepository;
      */
     if (!userAccount.isPresent()) return "noUser";
     
-    model.addAttribute("result", goodsRepository.findAll());
+    model.addAttribute("resultGoods", goodsRepository.findAll());
     model.addAttribute("resultActivities", activitiesRepository.findAll());
     return "offeredGoodsAndActivities";
   }

@@ -226,6 +226,10 @@ public class ActivityEntity implements Serializable {
     return dateWithoutTime;
   }
   
+  public String getItemTypeAndId() {
+    return "activity" + id;
+  }
+  
   /**
    * This method builds a String in which the activity's information is 
    * presented as a JSON object.

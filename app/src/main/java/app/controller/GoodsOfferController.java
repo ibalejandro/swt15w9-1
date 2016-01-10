@@ -69,7 +69,7 @@ public class GoodsOfferController {
    */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
   public String listAllGoodsAndActivities(Model model) {
-	  model.addAttribute("result", goodsRepository.findAll());
+	  model.addAttribute("resultGoods", goodsRepository.findAll());
 	  model.addAttribute("resultActivities", activitiesRepository.findAll());
 		return "home";
   }
