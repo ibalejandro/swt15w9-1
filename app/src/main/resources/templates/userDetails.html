@@ -51,12 +51,13 @@
 						<table sec:authorize="hasRole('ROLE_ADMIN')">			
 							<thead>
 								<tr>
-									<th>Vorname</th><th>Nachname</th><th>E-Mail</th><th>Adresse</th><th>Herkunft</th><th>Sprache</th><th>Registrierungsdatum</th><th>Aktivierung</th>
+									<th>User</th><th>Vorname</th><th>Nachname</th><th>E-Mail</th><th>Adresse</th><th>Herkunft</th><th>Sprache</th><th>Registrierungsdatum</th><th>Aktivierung</th>
 								</tr>
 							</thead>
 							
 							<tbody th:remove="all-but-first">
 								<tr th:each=" user : ${userDetails}">
+									<td th:text="${user.userAccount.username}">User</td>
 									<td th:text="${user.userAccount.firstname}">Hans</td>
 									<td th:text="${user.userAccount.lastname}">Mueller</td>
 									<td th:text="${user.userAccount.email}">xyz</td>
