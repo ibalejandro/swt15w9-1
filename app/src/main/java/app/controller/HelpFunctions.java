@@ -304,8 +304,8 @@ public class HelpFunctions {
 			return false;
 		}
 	}
-	
-	public static String getOptionalString(Optional<String> optString){
+
+	public static String getOptionalString(Optional<String> optString) {
 		String S;
 		if (optString.isPresent()) {
 			S = optString.get();
@@ -313,5 +313,50 @@ public class HelpFunctions {
 			S = "";
 		}
 		return S;
+	}
+
+	public static String getOldData(final String firstname, final String name, final String mail, final String username,
+			final String Adresstyp, final Optional<String> flh_name_OPT, final Optional<String> citypart_OPT,
+			final Optional<String> street_OPT, final Optional<String> housenr_OPT, final Optional<String> postcode_R,
+			final Optional<String> city_R, final Optional<String> postcode_H, final Optional<String> city_H,
+			String nativelanguage, final String otherLanguages, final String origin) {
+
+		String result = "";
+
+		result = result + "&firstnameOld=" + firstname;
+		result = result + "&nameOld=" + name;
+		result = result + "&mailOld=" + mail;
+		result = result + "&usernameOld=" + username;
+
+		// Wohnung
+		result = result + "&streetOld=" + getOptionalString(street_OPT);
+		result = result + "&housenrOld=" + getOptionalString(housenr_OPT);
+		result = result + "&postcodeHOld=" + getOptionalString(postcode_H);
+		result = result + "&cityHOld=" + getOptionalString(city_H);
+
+		// Flüchtlingsheim
+
+		result = result + "&fhl_nameOld=" + getOptionalString(flh_name_OPT);
+		result = result + "&citypartOld=" + getOptionalString(citypart_OPT);
+		result = result + "&postcodeROld=" + getOptionalString(postcode_R);
+		result = result + "&cityROld=" + getOptionalString(city_R);
+		// --
+
+		System.out.println("begin1");
+		if (nativelanguage.isEmpty() || nativelanguage.equals("---- Select ----")) {
+			result = result + "&nativelanguageOld=-1";
+		} else {
+			result = result + "&nativelanguageOld=" + nativelanguage;
+		}
+		System.out.println("end1");
+
+		if (origin.isEmpty()) {
+			result = result + "&originOld=---- Select ----";
+		} else {
+			result = result + "&originOld=" + origin;
+		}
+
+		return result;
+
 	}
 }

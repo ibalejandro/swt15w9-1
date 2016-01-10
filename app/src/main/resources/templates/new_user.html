@@ -26,7 +26,7 @@
 									<label class="form__label" for="firstnameIN">Vorname:</label> 
 								</div>
 								<div class="large-9 small-12 columns">				
-									<input name="firstnameIN" type="text" required="required"/>
+									<input name="firstnameIN" type="text" required="required" th:value="${firstnameOld}"/>
 									<label th:if="${param.EmptyError_firstname}" class="error center space--1rem--topbottom" for="firstnameIN">Firstame must not be empty!</label>
 									<label th:if="${param.InvalError_firstname}" class="error center space--1rem--topbottom" for="firstnameIN">Invalid Firstame!</label>
 								</div>
@@ -35,7 +35,7 @@
 									<label class="form__label" for="nameIN">Nachname:</label>									
 								</div>
 								<div class="large-9 small-12 columns">
-									<input name="nameIN" type="text" required="required"/>
+									<input name="nameIN" type="text" required="required" th:value="${nameOld}"/>
 									<label th:if="${param.EmptyError_name}" class="error center space--1rem--topbottom" for="nameIN">Name must not be empty!</label>
 									<label th:if="${param.InvalError_name}" class="error center space--1rem--topbottom" for="nameIN">Invalid Name!</label>
 								</div>
@@ -44,7 +44,7 @@
 									<label class="form__label" for="mailIN">E-Mail:</label>
 								</div>
 								<div class="large-9 small-12 columns">
-									<input name="mailIN" type="email" required="required"/>
+									<input name="mailIN" type="email" required="required" minlength="3" maxlength="64" th:value="${mailOld}"/>
 									<label th:if="${param.EmptyError_mail}" class="error center space--1rem--topbottom" for="mailIN">Mail must not be empty!</label>
 									<label th:if="${param.InvalError_mail}" class="error center space--1rem--topbottom" for="mailIN">Invalid Mail!</label>
 									<label th:if="${param.UsedError_mail}" class="error center space--1rem--topbottom" for="mailIN">This mail-address is already used!</label>
@@ -54,7 +54,7 @@
 									<label class="form__label" for="usernameIN">Nutzername:</label>
 								</div>
 								<div class="large-9 small-12 columns">
-									<input name="usernameIN" type="text" required="required"/>
+									<input name="usernameIN" type="text" required="required" minlength="3" maxlength="16" th:value="${usernameOld}"/>
 									<label th:if="${param.EmptyError_username}" class="error center space--1rem--topbottom" for="usernameIN">Username must not be empty!</label>
 									<label th:if="${param.InvalError_username}" class="error center space--1rem--topbottom" for="usernameIN">Invalid Username!</label>
 									<label th:if="${param.UsedError_username}" class="error center space--1rem--topbottom" for="usernameIN">Username already used!</label>
@@ -65,19 +65,21 @@
 									<label class="form__label" for="passwordIN">Passwort:</label>
 								</div>
 								<div class="large-9 small-12 columns">
-									<input name="passwordIN" type="password" required="required"/>
+									<input name="passwordIN" type="password" required="required" minlength="8" maxlength="64"/>
 									<label th:if="${param.EmptyError_password}" class="error center space--1rem--topbottom" for="passwordIN">Password must not be empty!</label>
 									<label th:if="${param.ShortError_password}" class="error center space--1rem--topbottom" for="passwordIN">Password to short! Min 8 chars.</label>
 									<label th:if="${param.UnsecError_password}" class="error center space--1rem--topbottom" for="passwordIN">Password to unsecure!</label>
+									<label th:if="${param.InvalError_password}" class="error center space--1rem--topbottom" for="passwordIN">Invalid Password!</label>
 								</div>
 								
 								<div class="large-3 small-12 columns">
 									<label class="form__label--paddingOFF" for="repasswordIN">Wiederhole Passwort:</label>
 								</div>
 								<div class="large-9 small-12 columns">
-									<input name="repasswordIN" type="password" required="required"/>
+									<input name="repasswordIN" type="password" required="required" minlength="8" maxlength="64"/>
 									<label th:if="${param.EmptyError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Password repeating must not be empty!</label>
-									<label th:if="${param.InvalError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Passwords are not equal!</label>
+									<label th:if="${param.NoeqlError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Passwords have not been equal!</label>
+									<label th:if="${param.InvalError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Invalid RePassword!</label>
 								</div>
 								
 								<div class="large-3 small-12 columns">
@@ -86,6 +88,11 @@
 								<div class="large-9 small-12 columns">
 									<select id="nativelanguage" name="nativelanguage">
 										<option value="-1">---- Select ----</option>
+										<option th:each="language : ${languages}"
+											th:if="${language.getkennung()} == ${nativelanguageOld}" selected="selected"		
+											th:value="${language.getkennung()}"
+											th:text="${language.name}">
+										</option>
 										<option th:each="language : ${languages}"
 											th:value="${language.getkennung()}"
 											th:text="${language.name}">
@@ -125,11 +132,17 @@
 									<label class="form__label">Herkunftsland:</label>
 								</div>
 								<div class="large-9 small-12 columns">
-									<select name="origin">
+									<select name="origin" >
                                             <option >---- Select ----</option>
                                             <option th:each="country : ${countrys}"
-                                                    th:text="${country}">
+                                            		th:if="${country} == ${originOld}" selected="selected" 
+                                            		th:text="${country}"
+                                            		>
                                             </option>
+                                            <option th:each="country : ${countrys}"
+                                            		th:text="${country}"
+                                            		>
+                                            </option>                     
                                         </select>
                                     <!--    <input name="origin" type="text"/> -->
                                     <label th:if="${param.EmptyError_origin}" class="error center space--1rem--topbottom" for="origin">Select your native country!</label>
@@ -156,7 +169,7 @@
 										<label class="form__label">Stra&szlig;e:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="street" type="text"/>
+										<input name="street" type="text" th:value="${streetOld}"/>
 										<label th:if="${param.EmptyError_street}" class="error center space--1rem--topbottom" for="street">Streetname must not be empty!</label>
 										<label th:if="${param.InvalError_street}" class="error center space--1rem--topbottom" for="street">Invalid Streetname!</label>
 									</div>
@@ -165,7 +178,7 @@
 										<label class="form__label">Hausnummer:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="housenr" type="text"/>
+										<input name="housenr" type="text" th:value="${housenrOld}"/>
 										<label th:if="${param.EmptyError_housenr}" class="error center space--1rem--topbottom" for="housenr">Housenumber must not be empty!</label>
 										<label th:if="${param.InvalError_housenr}" class="error center space--1rem--topbottom" for="housenr">Invalid Housenumber!</label>
 									</div>
@@ -174,7 +187,7 @@
 										<label class="form__label">Postleitzahl:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="postcode_H" type="text"/>
+										<input name="postcode_H" type="number" min="1" max="99999" th:value="${postcodeHOld}"/>
 										<label th:if="${param.EmptyError_plzH}" class="error center space--1rem--topbottom" for="postcode_H">Postcode must not be empty!</label>
 										<label th:if="${param.InvalError_plzH}" class="error center space--1rem--topbottom" for="postcode_H">Invalid Postcode!</label>
 									</div>
@@ -183,7 +196,7 @@
 										<label class="form__label">Stadt:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="city_H" type="text"/>
+										<input name="city_H" type="text" th:value="${cityHOld}"/>
 										<label th:if="${param.EmptyError_cityH}" class="error center space--1rem--topbottom" for="city_H">City must not be empty!</label>
 										<label th:if="${param.InvalError_cityH}" class="error center space--1rem--topbottom" for="city_H">Invalid City!</label>
 									</div>
@@ -194,7 +207,7 @@
 										<label class="form__label--paddingOFF">Fl&uuml;chtlingsheim Name:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="flh_name" type="text"/>
+										<input name="flh_name" type="text" th:value="${fhl_nameOld}"/>
 										<label th:if="${param.EmptyError_fhl_name}" class="error center space--1rem--topbottom" for="firstnameIN">Fl&uuml;chtlingsheim Name must not be empty!</label>
 										<label th:if="${param.InvalError_fhl_name}" class="error center space--1rem--topbottom" for="firstnameIN">Invalid Fl&uuml;chtlingsheim Name!</label>
 									</div>
@@ -203,7 +216,7 @@
 										<label class="form__label">Postleitzahl:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="postcode_R" type="text"/>
+										<input name="postcode_R" type="number" min="1" max="99999" th:value="${postcodeROld}"/>
 										<label th:if="${param.EmptyError_plzR}" class="error center space--1rem--topbottom" for="postcode_R">Postcode must not be empty!</label>
 										<label th:if="${param.InvalError_plzR}" class="error center space--1rem--topbottom" for="postcode_R">Invalid Postcode!</label>
 									</div>
@@ -212,7 +225,7 @@
 										<label class="form__label">Stadt:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="city_R" type="text"/>
+										<input name="city_R" type="text" th:value="${cityROld}"/>
 										<label th:if="${param.EmptyError_cityR}" class="error center space--1rem--topbottom" for="city_R">City must not be empty!</label>
 										<label th:if="${param.InvalError_cityR}" class="error center space--1rem--topbottom" for="city_R">Invalid City!</label>
 									</div>
@@ -221,7 +234,7 @@
 										<label class="form__label">Stadtteil:</label>
 									</div>
 									<div class="large-9 small-12 columns">
-										<input name="citypart" type="text" />
+										<input name="citypart" type="text" th:value="${citypartOld}"/>
 										<label th:if="${param.EmptyError_citypart}" class="error center space--1rem--topbottom" for="citypart">Citypart must not be empty!</label>
 										<label th:if="${param.InvalError_citypart}" class="error center space--1rem--topbottom" for="citypart">Invalid Citypart!</label>
 									</div>
