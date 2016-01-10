@@ -108,6 +108,11 @@
 									<select id="otherlanguages" name="otherlanguages">
 										<option value="-1">---- Select ----</option>
 										<option th:each="language : ${languages}"
+											th:if="${language.getkennung()} == ${language2Old}" selected="selected"		
+											th:value="${language.getkennung()}"
+											th:text="${language.name}">
+										</option>
+										<option th:each="language : ${languages}"
 											th:value="${language.getkennung()}"
 											th:text="${language.name}">
 										</option>
@@ -120,6 +125,11 @@
 								<div class="large-9 small-12 columns">
 									<select id="otherlanguages" name="otherlanguages">
 										<option value="-1">---- Select ----</option>
+										<option th:each="language : ${languages}"
+											th:if="${language.getkennung()} == ${language3Old}" selected="selected"		
+											th:value="${language.getkennung()}"
+											th:text="${language.name}">
+										</option>
 										<option th:each="language : ${languages}"
 											th:value="${language.getkennung()}"
 											th:text="${language.name}">
