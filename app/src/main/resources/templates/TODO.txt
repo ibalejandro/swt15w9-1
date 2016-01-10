@@ -36,3 +36,76 @@ modify.html
 data.html
 data_refigee.html
 activities_item--single*
+modified:   main/resources/templates/activities_item--multi_no_numeration.html
+modified:   main/resources/templates/data.html
+modified:   main/resources/templates/data_refugee.html
+new file:   main/resources/templates/dialog.html
+modified:   main/resources/templates/dialogList.html
+modified:   main/resources/templates/goods_item--multi_no_numeration.html
+modified:   main/resources/templates/myOfferedGoods.html
+modified:   main/resources/templates/offer.html
+modified:   main/resources/templates/update.html
+modified:   main/resources/templates/userDetails.html
+
+
+
+
+FERTIG:
+
+error*
+changePassword
+deletedTag
+home
+index
+imports
+itemN* //Braucht erweiterrrung
+login
+ALLE Modify bis auf modify selbst
+navigation
+new
+new_user
+offer
+restorePassword
+search
+searchResults
+startsite
+tags_item--single
+
+TODO:
+activationmail_gesendet
+activationmail_local
+activities_item--multi
+activities_item--multi_no_numeration
+activities_item--single*
+addedNewTag
+addLanguage
+addNewTag
+admin
+aktivateUsewr
+availableTags
+change_template
+data
+data_refugee
+deaktivateUser
+deletedActivity
+deletedGood
+deletedTagdialog
+dialogList
+modify
+newTextBlock
+noSuchActivity
+noSuchGood
+notYourActivity
+notYourGood
+noUser
+offer
+offerActivity
+offeredActivity
+offeredGood
+reCAPTCHA
+startBialog
+template_translation_manager
+textBlockList
+update*
+userDetails
+validation_success
