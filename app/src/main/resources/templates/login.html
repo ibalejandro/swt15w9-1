@@ -26,27 +26,32 @@
 					
 					<div class="large-6 small-6 columns">
 						<label class="link--right"><a th:text="${login_link_text.text}" th:href="@{/new_user}" onclick="return toggle('log');" >Noch nicht registriert?</a></label>
+						<!--<label class="link--right"><a th:text="${login_link_text.text}" th:href="@{/new_user}" onclick="return toggle('log');" >Noch nicht registriert?</a></label>-->
 					</div>
 					
 					<form th:action="@{/login}" method="post">
 						
 						<div class = "small-12 columns">
-							<label th:text="${login_error_text.text}" th:if="${param.error}" class="error center space--1rem--topbottom" for="username">Wrong Username or Password!</label>
+							<label th:if="${param.error}" class="error center space--1rem--topbottom" for="username">Wrong Username or Password!</label>
+							<!--<label th:text="${login_error_text.text}" th:if="${param.error}" class="error center space--1rem--topbottom" for="username">Wrong Username or Password!</label>-->
 						</div>
 						
 						<div class="medium-6 small-12 columns">
-							<label th:text="${login_nutzername_text.text}" class="form__label" for="username">Username:</label> 
+							<label class="form__label" for="username">Username:</label> 
+							<!--<label th:text="${login_nutzername_text.text}" class="form__label" for="username">Username:</label> -->
 							<input class="form__input" type="text" id="username" name="username" required="required"/>
 						</div>
 						
 						<div class="medium-6 small-12 columns">
-							<label th:text="${login_passwort_text.text}" class="form__label" for="password">Password:</label>
+							<label class="form__label" for="password">Password:</label>
+							<!--<label th:text="${login_passwort_text.text}" class="form__label" for="password">Password:</label>-->
 							<input class="form__input" type="password" id="password" name="password" required="required"/>
 						</div>
 						
 						<div class="small-12 columns">
 							<div class="button--right">
-								<input th:value="${login_button_text.text}" class="button" type="submit" value="Log in" />
+								<input class="button" type="submit" value="Log in" />
+								<!--<input th:value="${login_button_text.text}" class="button" type="submit" value="Log in" />-->
 							</div>
 							<label class="link"><a href="/restorePassword">Passwort vergessen?</a></label>
 						</div>
