@@ -38,6 +38,7 @@ public class User implements Serializable {
 	private @Id @GeneratedValue long id;
 
 	private Address location;
+	private Coordinates coordinates;
 	private String origin;
 
 	private boolean enabled;
@@ -185,16 +186,82 @@ public class User implements Serializable {
 	public Address getLocation() {
 		return location;
 	}
+	
+	public Boolean isOldLocation(Address location){
+		if(adresstyp.equals("Wohnung")){
+			if(!this.location.getStreet().equals(location.getStreet()) ||
+					!this.location.getHousenr().equals(location.getHousenr())){
+				return false;
+			}
+		}else{
+			if(!this.location.getFlh_name().equals(location.getFlh_name()) ||
+					!this.location.getCityPart().equals(location.getCityPart())){
+				return false;
+			}
+		}
+		if(!this.location.getCity().equals(location.getCity()) ||
+					!this.location.getZipCode().equals(location.getZipCode())){
+				return false;
+			}
+		return true;
+	}
+	
+	public Coordinates createCoordinates(Address location){
+		if((location.getZipCode().equals(""))){
+			return new Coordinates(0.00,0.00);
+		}
+		Coordinates newCoordinates;
+		newCoordinates=;
+		
+		return newCoordinates;	
+	}
 
 	/**
-	 * Setter.
-	 *
-	 * @param Address
-	 *            the new location
-	 * @return Nothing
-	 */
+	   * Setter.
+	   * @param Address the new location
+	   * @return Nothing
+	   */
 	public void setLocation(Address location) {
+		if( !(isOldLocation(location))){
+			//Koordinaten suchen:
+			System.out.println("Koordinaten suchen...");
+			Coordinates coordinates=createCoordinates(location);
+			this.coordinates=coordinates;
+		}
 		this.location = location;
+	}
+	
+	/**
+	   * Setter.
+	   * @param Coordinates The coordinates of the address
+	   * @return Nothing
+	   */
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
+	}
+	
+	/**
+	   * Getter.
+	   * @return  Coordinates The coordinates of the address
+	   */
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
+	
+	/**
+	   * Getter.
+	   * @return Float The Longitude (Geographische LÃ¤nge)
+	   */
+	public double getLongitude() {		
+		return this.coordinates.getLongitude();
+	}
+
+	/**
+	   * Getter.
+	   * @return Float The Latitude (Geographische Breite)
+	   */
+	public double getLatitude() {
+		return this.coordinates.getLatitude();
 	}
 
 	/**

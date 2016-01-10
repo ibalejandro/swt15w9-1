@@ -1,9 +1,13 @@
 package app.controller;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 
 
+
+
+import java.util.Set;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import app.model.GoodEntity;
 import app.model.Language;
 import app.model.User;
 import app.model.User.AddresstypEnum;
@@ -53,17 +58,7 @@ public class UserManagementController {
 		this.languageRepository=languageRepository;
 	}
 
-
 	
-	
-	/*
-	@RequestMapping("/admin")
-	String userDetails(ModelMap map){
-		map.addAttribute("users", userRepository.findAll());
-		//map.addAttribute("offers",GoodsRepository.findAll());
-		return "admin";
-	}
-	*/
 	
 	/**
    * This method is the answer for the request to '/userDetails'. It finds
