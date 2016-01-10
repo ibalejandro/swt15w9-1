@@ -73,23 +73,5 @@ public class DistanceController {
 		return userByDistance;
 	}
 	
-	public Iterable<GoodEntity> getGoodsbyDistance(Iterable<GoodEntity> givenGoods, Set<User> userByDistance){
-		Set <GoodEntity> goodsByDistance= new HashSet<>();
-		for(GoodEntity good:givenGoods){
-			if(userByDistance.contains(good.getUser())){
-				goodsByDistance.add(good);
-			}
-		}
-		return goodsByDistance;
-	}
 	
-	public Iterable<ActivityEntity> getActivitiesbyDistance(Iterable<ActivityEntity> givenActivities, Set<User> userByDistance){
-		Set <ActivityEntity> activitiesByDistance= new HashSet<>();
-		for(ActivityEntity activity:givenActivities){
-			if(userByDistance.contains(activity.getUser())){
-				activitiesByDistance.add(activity);
-			}
-		}
-		return activitiesByDistance;
-	}
 }
