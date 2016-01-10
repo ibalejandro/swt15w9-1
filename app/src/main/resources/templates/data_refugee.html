@@ -15,7 +15,7 @@
 		<th:block th:include="navigation :: navigation"></th:block>
 	
 		<header>
-			<h1>Kundendaten</h1>
+			<h1 th:text="@{Kundendaten: &nbsp; }+${user.getUserAccount().getUsername()} ">Kundendaten: UserAccount</h1>
 		</header>
 		
 		<div>				

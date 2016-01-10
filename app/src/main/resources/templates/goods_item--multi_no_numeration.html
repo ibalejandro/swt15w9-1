@@ -8,50 +8,56 @@
 		- th:href Mapping überarbeiten
 		- Kommentare löschen
 -->
-	
+
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 	</head>
-	
+
 	<body>
-	
+
 		<div th:fragment="item">
 			<div class="small-12 colums medium-6 columns">
 				<div th:fragment="good" th:id="good+${good.id}">
 					<div class="gooditem--multi">
-					
+
 						<div  class="gooditem__head--multi">
 							<h3 th:text="${good.name}" class="gooditem__title--multi"></h3>
 						</div>
-						
+
 						<div class="gooditem__body--multi">
 							<div>
 								<label class="gooditem__label--multi"> Picture </label>
 								<img th:src="${good.id+'/image'}" class="gooditem__text--multi"/>
-							</div>		
+							</div>
 
 							<div>
 								<label class="gooditem__label--multi"> Description </label>
 								<p th:text="${good.description}" class="gooditem__text--multi"></p>
 							</div>
-							
+
 							<div>
 								<label class="gooditem__label--multi"> Tag </label>
 								<p th:text="${good.tag.name}" class="gooditem__text--multi"></p>
 							</div>
-							
+
 							<div>
 								<label class="gooditem__label--multi"> User-ID </label>
 								<p th:text="${good.user.id}" class="gooditem__text--multi"></p>
 							</div>
 						</div>
 						
+						<div class="small-12 columns">
+							<form action="/dialogByOffer" method="post">
+								<input type="hidden" name="goodId" th:value="${good.id}"/>
+								<input class="button" type="submit" value="Ask for this good"/>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<th:block th:include="imports :: script"></th:block>
-		
+
 	</body>
-	
+
 </html>

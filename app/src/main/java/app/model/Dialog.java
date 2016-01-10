@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +13,7 @@ import javax.persistence.OneToMany;
 import org.springframework.util.Assert;
 
 import app.textblocks.Chat;
+import lombok.ToString;
 
 /**
  * <h1>Dialog</h1> The Dialog "glues" all {@link Chat}s together with
@@ -22,6 +22,7 @@ import app.textblocks.Chat;
  * @author Mario Henze
  */
 @Entity
+@ToString
 public class Dialog implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,10 +30,10 @@ public class Dialog implements Serializable {
 	@GeneratedValue
 	private long id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private User userA;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private User userB;
 
 	private String title;
@@ -40,6 +41,10 @@ public class Dialog implements Serializable {
 	@OneToMany
 	protected List<Chat> messageHistory = new LinkedList<>();
 
+	public Dialog() {
+		
+	}
+	
 	/**
 	 * Constructor.
 	 * 

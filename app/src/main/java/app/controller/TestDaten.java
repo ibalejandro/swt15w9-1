@@ -95,7 +95,7 @@ public class TestDaten implements DataInitializer {
 		u2.setLastname("U.");
 		u2.setEmail("test1@test.test");
 		userAccountManager.save(u2);
-
+		
 		Address address1 = new Address("Mittelstraße", " 1", "11587", "Dresden");
 
 		User user1 = new User(u1, address1);
@@ -103,8 +103,10 @@ public class TestDaten implements DataInitializer {
 		user1.setOrigin("Germany, Deutschland (DE)");
 		user1.setRegistrationdate(new Date());
 		user1.Activate();
+		
+		Address address2 = new Address("", "", "Flh1", "Centrum", "01234", "Berlin");
 
-		User user2 = new User(u2, address1);
+		User user2 = new User(u2, address2);
 		user2.setAddresstyp(AddresstypEnum.Refugees_home);
 		user2.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
 		user2.setRegistrationdate(new Date());

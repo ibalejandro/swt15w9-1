@@ -21,7 +21,7 @@
 				<h1 class="headline">Offer Good</h1>
 			</div>
 			
-			<form th:action="@{/offeredGood}" th:object="${good}" method="post">
+			<form th:action="@{/offeredGood}" th:object="${good}" method="post" enctype="multipart/form-data">
 				<div class="large-1 medium-2 small-12 columns">
 					<label for="name" class="form__label">Name</label> 
 				</div>
@@ -40,7 +40,7 @@
 					<label for="picture" class="form__label">Picture</label>
 				</div>
 				<div class="large-5 medium-10 small-12 columns">
-					<input type="text" id="picture" name="picture" placeholder="Example: http://i.imgur.com/C2csOAA.jpg"/> 
+					<input type="file" id="pict" name="pict"/> 
 				</div>
 				
 				<div class="large-1 medium-2 small-12 columns">

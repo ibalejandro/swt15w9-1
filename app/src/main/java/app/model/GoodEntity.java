@@ -10,11 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.servlet.http.Part;
 
 // Imports für die Bildeinbindung.
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -23,8 +21,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.ImageObserver;
-import java.awt.geom.AffineTransform;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
 * <h1>GoodEntity</h1>
@@ -82,21 +80,24 @@ public class GoodEntity implements Serializable {
 	 */
 	 
 	 public GoodEntity(String name, String description, TagEntity tag, 
-	                   String picture, User user) {
+	                   Part pic, User user) {
     this.name = name;
     this.description = description;
     this.tag = tag;
     
-    this.picture = createPicture(picture);
+    this.picture = createPicture(pic);
 		
 		this.user = user;
   }
 	 
-	public static byte[] createPicture(String pictureLink) {
+	public static byte[] createPicture(Part picture) {
 	  /* Ferdinand's code */
+	if(picture.getSize()==0L){
+		return null;
+	}
     try{
-      URL srcPic = new URL(pictureLink);
-      BufferedImage img = ImageIO.read(srcPic);
+      InputStream is = picture.getInputStream();
+      BufferedImage img = ImageIO.read(is);
 
 			double scaling;
 			if (img.getWidth() != 512) {
@@ -132,7 +133,7 @@ public class GoodEntity implements Serializable {
 	   * @return GoodEntity An empty and invalid good
 	   */
 	public static GoodEntity createEmptyGood() {
-	  return new GoodEntity("", "", null, "", null);
+	  return new GoodEntity("", "", null, null, null);
 	}
 	
 	/**
