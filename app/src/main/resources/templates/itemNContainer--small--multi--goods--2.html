@@ -14,7 +14,7 @@
 		<th:block th:fragment="show_items">
 			<div class="row small-collapse">
 				<div th:each="toShow, it : ${resultGoods}" th:with="index = ${it.count}">
-					<div class="small-12 medium-6 columns end margin--bottom" th:id="good+${toShow.id}">
+					<div class="small-12 medium-6 columns end margin--bottom" th:id="${toShow.getItemTypeAndId()}">
 					
 						<th:block th:include="itemN--small :: item"></th:block>
 						
