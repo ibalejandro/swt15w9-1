@@ -3,6 +3,8 @@ package app.textblocks;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import app.util.Tuple;
 
 /**
@@ -10,6 +12,8 @@ import app.util.Tuple;
  *
  * Created by justusadam on 05/12/15.
  */
+
+@Entity
 public class TextFormatTagValue extends FormatTagValue {
 
 	private static final List<String> inputClasses = mkInputClasses();

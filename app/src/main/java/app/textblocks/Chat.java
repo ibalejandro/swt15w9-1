@@ -1,5 +1,6 @@
 package app.textblocks;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -16,12 +17,15 @@ import javax.persistence.OneToMany;
 public class Chat {
 	@Id @GeneratedValue
 	private Long id;
+	
+	private final Date date;
 
 	@OneToMany
 	private List<TextBlockValue> blocks;
 
     public Chat(List<TextBlockValue> blocks) {
         this.blocks = blocks;
+        this.date = new Date();
     }
 
     /**
@@ -52,6 +56,13 @@ public class Chat {
 	 */
 	public Long getId() {
 		return id;
+	}
+	
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
 	}
 
 	/**
