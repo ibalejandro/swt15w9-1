@@ -57,7 +57,10 @@
 						</div>
 						
 						<div class="small-12 columns">
-							<input class="button" type="submit" value="Ask for this activity"/>
+							<form action="/dialogByOffer" method="post">
+								<input type="hidden" name="activityId" th:value="${activity.id}"/>
+								<input class="button" type="submit" value="Ask for this activity"/>
+							</form>
 						</div>
 						
 					</div>
