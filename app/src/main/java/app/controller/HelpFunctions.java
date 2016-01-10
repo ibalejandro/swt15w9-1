@@ -21,6 +21,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.net.ssl.HttpsURLConnection;
 
+import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -283,7 +284,6 @@ public class HelpFunctions {
 	}
 
 	public static boolean checkCaptcha(String CaptchaResponse) {
-
 		String Secret = "6LcBYBATAAAAAPHUZfB4OFpbdwrVxp08YEaVX3Dr";
 		String Returnstring = "";
 
@@ -349,13 +349,57 @@ public class HelpFunctions {
 		result = result + "&cityROld=" + getOptionalString(city_R);
 		// --
 
-		System.out.println("begin1");
+		// System.out.println("begin1");
 		if (nativelanguage.isEmpty() || nativelanguage.equals("---- Select ----")) {
 			result = result + "&nativelanguageOld=-1";
 		} else {
 			result = result + "&nativelanguageOld=" + nativelanguage;
 		}
-		System.out.println("end1");
+		// System.out.println("end1");
+
+		String L2 = "";
+		String L3 = "";
+		String L4 = "";
+		String L5 = "";
+		int i = 2;
+		if (!otherLanguages.isEmpty()) {
+			System.out.println("otherLanguages: '" + otherLanguages + "'");
+			String S = otherLanguages + ",";
+			while (S.length() > 0) {
+				if (S.indexOf(",") >= 0) {
+					if (i == 2) {
+						L2 = S.substring(0, S.indexOf(","));
+						if ((!L2.isEmpty()) && (!L2.equals("-1"))) {
+							result = result + "&language2Old=" + L2;
+						}
+					}
+					if (i == 3) {
+						L3 = S.substring(0, S.indexOf(","));
+						if ((!L3.isEmpty()) && (!L3.equals("-1"))) {
+							result = result + "&language3Old=" + L3;
+						}
+					}
+					if (i == 4) {
+						L4 = S.substring(0, S.indexOf(","));
+						if ((!L4.isEmpty()) && (!L4.equals("-1"))) {
+							result = result + "&language2Old=" + L4;
+						}
+					}
+					if (i == 5) {
+						L5 = S.substring(0, S.indexOf(","));
+						if ((!L5.isEmpty()) && (!L5.equals("-1"))) {
+							result = result + "&language2Old=" + L5;
+						}
+					}
+
+					S = S.substring(S.indexOf(",") + 1);
+					System.out.println("oL: '" + S + "' >L2:" + L2 + "L3:" + L3 + "L4:" + L4 + "L5:" + L5);
+
+				} else
+					S = "";
+				i++;
+			}
+		}
 
 		if (origin.isEmpty()) {
 			result = result + "&originOld=---- Select ----";

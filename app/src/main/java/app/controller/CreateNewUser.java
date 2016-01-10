@@ -105,6 +105,8 @@ public class CreateNewUser {
 			@RequestParam("nativelanguageOld") final Optional<String> nativelanguageOld,
 			@RequestParam("language2Old") final Optional<String> language2Old,
 			@RequestParam("language3Old") final Optional<String> language3Old,
+			@RequestParam("language4Old") final Optional<String> language4Old,
+			@RequestParam("language5Old") final Optional<String> language5Old,
 			@RequestParam("originOld") final Optional<String> originOld, Model modelMap) {
 		modelMap.addAttribute("languages", languageRepository.findAll());
 
@@ -123,14 +125,14 @@ public class CreateNewUser {
 		if ("checked".equals(HelpFunctions.getOptionalString(checked1Old))
 				&& "checked".equals(HelpFunctions.getOptionalString(checked2Old))) {
 			modelMap.addAttribute("checked1Old", true);
-			System.out.println("c1");
+			// System.out.println("c1");
 		} else {
 			if ("checked".equals(HelpFunctions.getOptionalString(checked2Old))) {
 				modelMap.addAttribute("checked2Old", true);
 				System.out.println("c2");
 			} else {
 				modelMap.addAttribute("checked1Old", true);
-				System.out.println("c1");
+				// System.out.println("c1");
 			}
 		}
 
@@ -147,6 +149,8 @@ public class CreateNewUser {
 		modelMap.addAttribute("nativelanguageOld", HelpFunctions.getOptionalString(nativelanguageOld));
 		modelMap.addAttribute("language2Old", HelpFunctions.getOptionalString(language2Old));
 		modelMap.addAttribute("language3Old", HelpFunctions.getOptionalString(language3Old));
+		modelMap.addAttribute("language4Old", HelpFunctions.getOptionalString(language4Old));
+		modelMap.addAttribute("language5Old", HelpFunctions.getOptionalString(language5Old));
 		modelMap.addAttribute("originOld", HelpFunctions.getOptionalString(originOld));
 
 		return "new_user";
@@ -390,8 +394,8 @@ public class CreateNewUser {
 		boolean equalMail = false;
 		for (UserAccount TempUA : userAccountManager.findAll()) {
 			if ((!(TempUA == null)) && (equalMail == false)) {
-				// System.out.println(TempUA.getUsername());
-				// System.out.println(TempUA.getEmail());
+				System.out.println(TempUA.getUsername());
+				System.out.println(TempUA.getEmail());
 
 				if (!(TempUA.getEmail() == null)) {
 					if (TempUA.getEmail().equals(Mail)) {
@@ -406,7 +410,7 @@ public class CreateNewUser {
 			return "redirect:/new_user?UsedError_mail" + filledFields;
 		}
 
-		System.out.println("begin2");
+		// System.out.println("begin2");
 		if (Nativelanguage.isEmpty() || Nativelanguage.equals("---- Select ----")) {
 			return "redirect:/new_user?EmptyError_nativelanguage" + filledFields;
 		} else {
@@ -415,7 +419,7 @@ public class CreateNewUser {
 				return "redirect:/new_user?EmptyError_nativelanguage" + filledFields;
 			}
 		}
-		System.out.println("end2");
+		// System.out.println("end2");
 
 		if (Origin.isEmpty() || Origin.equals("---- Select ----")) {
 			return "redirect:/new_user?EmptyError_origin" + filledFields;
