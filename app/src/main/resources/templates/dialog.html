@@ -36,9 +36,7 @@
 		</div>
 
 		<form action="/dialog" th:action="@{/dialog(id=${dialog.id})}" method="post">
-			<div th:each="textblockForm : ${textblockForms}">
-				<p th:utext="${textblockForm}"></p>
-			</div>
+			<div th:utext="${textblockForm}"></div>
 			<input type="submit" value="Submit" />
 		</form>
 
