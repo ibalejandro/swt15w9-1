@@ -3,6 +3,14 @@
 \*******************************************/
 
 /********************************************
+*	Other									*
+********************************************/
+.tags__heigth{
+	height: 10.5rem;
+	overflow: hidden
+}
+
+/********************************************
 *	Um Formulare in der Navigation korrekt	*
 *	anzuzeigen								*
 ********************************************/
@@ -78,13 +86,13 @@
 	padding-left: 1rem;
 	height: 3rem;
 }
-.itemN--left{
+.itemN-left{
 	float:left;
 }
-.itemN--right{
+.itemN-right{
 	float:right;
 }
-.itemN--bottom{
+.itemN-bottom{
 	background-color: white;
 	padding:0 1rem 0 1rem;
 	height: 1.9rem;
@@ -114,50 +122,50 @@ p{
 .headline{
 	font-size: 2.0rem;
 }
-.headline--sub{
+.headline-sub{
 	font-size: 1.5rem;
 }
-.headline--super{
+.headline-super{
 	font-size: 2.5rem;
 }
 .text{
 	font-size: 1rem;
 }
-.text--mega{
+.text-mega{
 	font-size: 1.4rem;
 }
-.text--super{
+.text-super{
 	font-size: 1.2rem;
 }
-.text--sub{
+.text-sub{
 	font-size:0.8rem;
 }
-.text--right{
+.text-right{
 	font-size: 1rem;
 	text-align: right;
 }
-.text--super--right{
+.text-super-right{
 	font-size: 1.2rem;
 	text-align: right;
 }
-.text--sub--right{
+.text-sub-right{
 	font-size:0.8rem;
 	text-align: right;
 }
 .button__link{
 	color: white;
 }
-.button--right{
+.button-right{
 	float: right;
 }
-.button--left{
+.button-left{
 	float: left;
 }
 .link{
 	font-size: 1rem;
 	padding: 1rem 0 0 0;
 }
-.link--right{
+.link-right{
 	font-size: 1rem;
 	text-align: right;
 	padding: 1rem 0 0 0;
@@ -192,23 +200,23 @@ p{
 	font-size: 1rem;
 	padding: 0.5rem 0 0 0;
 }
-.form__label--paddingOFF{
+.form__label-paddingOFF{
 	font-size: 1rem;
 	padding: 0;
 }
-.form__label--super{
+.form__label-super{
 	font-size: 1.3rem;
 	padding: 0.5rem 0 0 0;
 }
-.form__label--super--paddingOFF{
+.form__label-super-paddingOFF{
 	font-size: 1.3rem;
 	padding: 0 0 0 0;
 }
-.form__label--sub{
+.form__label-sub{
 	font-size: 0.7rem;
 	padding: 0.5rem 0 0 0;
 }
-.form__label--sub--paddingOFF{
+.form__label-sub-paddingOFF{
 	font-size: 0.7rem;
 	padding: 0 0 0 0;
 }
@@ -223,7 +231,7 @@ p{
 /********************************************
 *	Divider and Space						*
 ********************************************/
-.margin--bottom{
+.margin-bottom{
 	margin-bottom: 1rem;
 }
 .less_space{
@@ -235,55 +243,55 @@ p{
 	padding: 0 0 0 0;
 	padding-bottom: 2rem;
 }
-.space--025rem{
+.space-025rem{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	padding-bottom: 0.25rem;
 }
-.space--05rem{
+.space-05rem{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	padding-bottom: 0.5rem;
 }
-.space--1rem{
+.space-1rem{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	padding-bottom: 1rem;
 }
-.space--2rem{
+.space-2rem{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	padding-bottom: 2rem;
 }
-.space--3rem{
+.space-3rem{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	padding-bottom: 3rem;
 }
-.space--4rem{
+.space-4rem{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	padding-bottom: 4rem;
 }
-.space--6rem{
+.space-6rem{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	padding-bottom: 6rem;
 }
 
-.space--1rem--topbottom{
+.space-1rem-topbottom{
 	margin: 0 0 0 0;
 	padding: 0.5rem 0;
 }
-.space--2rem--topbottom{
+.space-2rem-topbottom{
 	margin: 0 0 0 0;
 	padding: 1rem 0;
 }
-.space--4rem--topbottom{
+.space-4rem-topbottom{
 	margin: 0 0 0 0;
 	padding: 2rem 0;
 }
-.space--6rem--topbottom{
+.space-6rem-topbottom{
 	margin: 0 0 0 0;
 	padding: 3rem 0;
 }
@@ -295,7 +303,7 @@ p{
 	height: 0;
 	overflow: auto;
 }
-.divider--1rem{
+.divider-1rem{
 	border-bottom: 1px solid;
 	border-color: black;
 	margin: 0;
@@ -303,7 +311,7 @@ p{
 	height: 0;
 	overflow: auto;
 }
-.divider--marginOff{
+.divider-marginOff{
 	border-bottom: 1px solid;
 	border-color: black;
 	margin: 0;
@@ -318,7 +326,7 @@ p{
 	outline-color: lightgray;
 	overflow: auto;
 }
-.umrandung--nomargin{
+.umrandung-nomargin{
 	margin: 0;
 	padding: 0.5rem 1rem 0 1rem;
 	outline-style: solid;

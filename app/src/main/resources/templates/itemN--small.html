@@ -14,7 +14,7 @@
 			<a th:href="@{'/item/'+${toShow.getItemTypeAndId()}}" class="itemN__link">
 				<div class="itemN">
 					<div class="itemN__headlinecontainer">
-						<p th:text="${toShow.name}" class="headline--sub"></p> <!--${good.getId()}+'. '+-->
+						<p th:text="${toShow.name}" class="headline-sub"></p> <!--${good.getId()}+'. '+-->
 					</div>
 					
 					<div class="divider"></div>
@@ -32,15 +32,15 @@
 							</div>
 						</div>
 						
-						<div class="itemN--bottom">
-							<div class="divider--marginOff"></div>
+						<div class="itemN-bottom">
+							<div class="divider-marginOff"></div>
 							
-							<div class="itemN--left">
+							<div class="itemN-left">
 								<p th:text="${toShow.tag.name}" class="text"></p>
 							</div>
 							
-							<div class="itemN--right">
-								<p th:text="${toShow.user.location.city}" class="text--right"></p>
+							<div class="itemN-right">
+								<p th:text="${toShow.user.location.city}" class="text-right"></p>
 							</div>
 						</div>
 					</div>

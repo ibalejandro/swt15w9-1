@@ -5,11 +5,18 @@
 	</head>
 
 	<body>
+		<div class="row">
+			<div class="12-small columns">
+				<h1 class="headline" th:text="'The tag you want to '+${wantedAction}+' doesn\' t exist.'"></h1>
+				<a th:href="@{/availableTags}">Go to Available tags</a>
+			</div>
+		</div>
+		<!--
 		<form th:action="@{/availableTags}">
 			<h3 th:text="'The tag you want to '+${wantedAction}+' doesn\' t exist.'"></h3>
-			<div class="button--right">
+			<div class="button-right">
 				<input class="button" type="submit" value="Go to Available tags" />
 			</div>
-		</form>	
+		</form>	-->
 	</body>
 </html>

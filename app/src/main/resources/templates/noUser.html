@@ -5,11 +5,20 @@
 	</head>
 
 	<body>
-		<form th:action="@{/login}">
-			<h3> Please, login first. </h3>
-			<div class="button--right">
+		<!--</body><form th:action="@{/login}">
+			<h1> Please, login first. </h1>
+			<div class="button-right">
 				<input class="button" type="submit" value="Go to Login" />
 			</div>
-		</form>	
+		</form>	-->
+		<th:block th:include="navigation :: navigation"></th:block>
+		
+		<div class="row">
+			<div class="12-small columns">
+				<h1 class="headline"> Please, login first. </h1>
+				
+				<a th:href="@{/}">Go to Login</a>
+			</div>
+		</div>
 	</body>
 </html>

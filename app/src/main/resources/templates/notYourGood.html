@@ -5,11 +5,13 @@
 	</head>
 
 	<body>
-		<form th:action="@{/myOfferedGoods}">
-			<h3 th:text="'The good you want to '+${wantedAction}+' doesn\' t belong to you.'"></h3>
-			<div class="button--right">
-				<input class="button" type="submit" value="Go to My offered goods" />
+			<!--<form th:action="@{/myOfferedGoods}">-->
+		<div class="row">
+			<div class="12-small columns">
+				<h1 class="headline" th:text="'The good you want to '+${wantedAction}+' doesn\' t belong to you.'"></h1>
+				
+				<a th:href="@{/myOfferedGoods}">Go to My offered goods</a>
 			</div>
-		</form>	
+		</div>
 	</body>
 </html>

@@ -9,37 +9,41 @@
 	
 		<div th:include="navigation :: navigation"></div>
 		
-		<div>
-			<h2> Tags </h2>
-		</div>
 		
-		<form th:action="@{/addNewTag}" method="get">
-			<input class="button" type="submit" value="Add new Tag"/>
-		</form>
 		
 		<div class="row">
+			<div class="small-12 columns space-1rem"></div>
+			
+			<div class="small-12 medium-6 columns">
+				<h1 class="headline"> Tags </h1>
+			</div>
+			
+			<div class="small-12 medium-6 columns">
+				<form th:action="@{/addNewTag}" method="get">
+					<input class="button" type="submit" value="Add new Tag"/>
+				</form>
+			</div>
+		
+			<div class="small-12 columns space-1rem"></div>
+		
 			<div th:each="tag, it : ${result}" th:with="index = ${it.count}">
 				<div th:fragment="tag" th:id="tag+${tag.id}">
-					<div class="small-12 colums medium-6 columns">
-						<div>
-							<h3 th:text="${index}+'. '+${tag.name}"></h3>
-						</div>
-						
-						<div>
-							<div class="row">
-								<div class="small-12 medium-6 colums">
-									<form th:action="@{/deletedTag}" method="post">
-										<input type="hidden" name="id" th:value="${tag.id}"/>
-										<input class="button" type="submit" value="Delete"/>
-									</form>
-								</div>
-								
-								<div class="small-12 medium-6 colums">
-									<form th:action="@{/updateTag}" method="post">
-										<input type="hidden" name="id" th:value="${tag.id}"/>
-										<input class="button" type="submit" value="Update"/>
-									</form>
-								</div>
+					<div class="small-12 medium-4 columns">
+						<div class="row umrandung tags__heigth no_padding_margin">
+							<div class ="small-12 columns">
+								<p th:text="${index}+'. '+${tag.name}" class="text-super"></p>
+							</div>
+							<div class="small-6 columns">
+								<form th:action="@{/deletedTag}" method="post">
+									<input type="hidden" name="id" th:value="${tag.id}"/>
+									<input class="button" type="submit" value="Delete"/>
+								</form>
+							</div>
+							<div class="small-6 columns">
+								<form th:action="@{/updateTag}" method="post">
+									<input type="hidden" name="id" th:value="${tag.id}"/>
+									<input class="button" type="submit" value="Update"/>
+								</form>
 							</div>
 						</div>
 					</div>
