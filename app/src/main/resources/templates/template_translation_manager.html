@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<th:block th:include="navigation :: navigation"></th:block>
+		
+		<div class="row">
+			<div class="small-12 columns">
+				<h1 class="headline">Interface übersetzung bearbeiten: </h1>
+			</div>
+			
+			<div class="small-12 medium-6 columns"> 
+				<table>
+					<tr> <!-- List all attributes here! -->
+						<th>Template Name</th>
+						<th>Bearbeiten</th>
+						<th>Löschen</th>
+					</tr>
+					<tr th:each="temp : ${template}">
+						<td th:text="${temp}"></td>
+						<td><a th:href="@{/changeTemplate/{res}(res=${temp})}">ändern</a></td>
+						<td><a th:href="@{/deleteTemplate/{res}(res=${temp})}">löschen</a></td>
+					</tr>
+					<tr>
+						<td>Neues Template</td>
+						<td><a th:href="@{/newTemplate}">erstellen</a></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div class="small-12 medium-6 columns"> 
+				<table>
+					<tr> <!-- List all attributes here! -->
+						<th>Sprache</th>
+						<th>Bearbeiten</th>
+						<th>Löschen</th>
+					</tr>
+					<tr th:each="lang : ${language}">
+						<td th:text="${lang}"></td>
+						<td><a th:href="@{/changeTemplate/{res}(res=${lang})}">ändern</a></td>
+						<td><a th:href="@{/delete/{res}(res=${lang})}">löschen</a></td>
+					</tr>
+				</table>
+			</div>
+			<!-- 
+				Template hinzufügen
+				Template entfernen
+				Template überarbeiten
+				Sprache hinzufügen
+				Sprache entfernen
+				Sprache überarbeiten
+			-->
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>

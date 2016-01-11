@@ -14,7 +14,7 @@
 		</div>
 		
 		<div class="row">
-			<div th:each="good, it : ${result}" th:with="index = ${it.count}">
+			<div th:each="good, it : ${resultGoods}" th:with="index = ${it.count}">
 				<div th:fragment="good" th:id="good+${good.id}">
 					<div class="small-12 colums medium-6 columns">
 						<div>

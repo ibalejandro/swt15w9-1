@@ -149,6 +149,10 @@ public class GoodEntity implements Serializable {
       return i;
     }
   }
+	
+	public String getItemTypeAndId() {
+	  return "good" + id;
+	}
   
   /**
    * This method builds a String in which the good's information is presented

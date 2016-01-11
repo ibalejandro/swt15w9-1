@@ -2,7 +2,6 @@
 *			by Lennart Schmidt		 		*
 \*******************************************/
 
-
 /********************************************
 *	Um Formulare in der Navigation korrekt	*
 *	anzuzeigen								*
@@ -21,6 +20,14 @@
 		height: 1.85rem; 
 	} 
 }
+
+/********************************************
+*	Dialog Design							*
+********************************************/
+.dialog{
+	
+}
+
 
 /********************************************
 *	Item Design								*
@@ -80,7 +87,7 @@
 .itemN--bottom{
 	background-color: white;
 	padding:0 1rem 0 1rem;
-	height: 2rem;
+	height: 1.9rem;
 	width: 94%;
 	position: absolute;
 	overflow: hidden;
@@ -108,13 +115,16 @@ p{
 	font-size: 2.0rem;
 }
 .headline--sub{
-	font-size: 1.7rem;
+	font-size: 1.5rem;
 }
 .headline--super{
-	font-size: 2.3rem;
+	font-size: 2.5rem;
 }
 .text{
 	font-size: 1rem;
+}
+.text--mega{
+	font-size: 1.4rem;
 }
 .text--super{
 	font-size: 1.2rem;
@@ -156,7 +166,6 @@ p{
 	color: red;
 	font-size: 1rem;
 }
-
 .left{
 	text-align:left;
 }
@@ -166,77 +175,26 @@ p{
 .center{
 	text-align: center;
 }
-
-/********************************************
-*	Divider and Space						*
-********************************************/
-.space{
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	padding-bottom: 2rem;
-}
-.space--1rem{
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	padding-bottom: 1rem;
-}
-.space--1rem--topbottom{
-	margin: 0 0 0 0;
-	padding: 0.5rem 0;
-}
-.space--2rem{
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	padding-bottom: 2rem;
-}
-.space--2rem--topbottom{
-	margin: 0 0 0 0;
-	padding: 1rem 0;
-}
-.space--4rem{
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	padding-bottom: 4rem;
-}
-.space--4rem--topbottom{
-	margin: 0 0 0 0;
-	padding: 2rem 0;
-}
-.space--6rem{
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	padding-bottom: 6rem;
-}
-.space--6rem--topbottom{
-	margin: 0 0 0 0;
-	padding: 3rem 0;
-}
-.divider{
-	border-bottom: 1px solid;
-	border-color: black;
-	margin: 0;
-	margin-bottom: 5px;
-	height: 0;
-	overflow: auto;
-}
-.divider--marginOff{
-	border-bottom: 1px solid;
-	border-color: black;
-	margin: 0;
-	height: 0;
-	overflow: auto;
+.black{
+	color: black;
 }
 /********************************************
 *	Anpassung bei Formularen und Label und	*
 *	zugehöriger Label						*
 ********************************************/
+.no_padding_margin{
+	padding-bottom: 0;
+	padding-top: 0;
+	margin-bottom: 0;
+	margin-top: 0;
+}
 .form__label{
 	font-size: 1rem;
 	padding: 0.5rem 0 0 0;
 }
 .form__label--paddingOFF{
 	font-size: 1rem;
-	padding: 0 0 0 0;
+	padding: 0;
 }
 .form__label--super{
 	font-size: 1.3rem;
@@ -260,6 +218,113 @@ p{
 }
 .form__input[type = "radio"]{
 	margin-left: 1rem;
+}
+
+/********************************************
+*	Divider and Space						*
+********************************************/
+.margin--bottom{
+	margin-bottom: 1rem;
+}
+.less_space{
+	padding-bottom: 0;
+	margin-bottom: -0.75rem;
+}
+.space{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 2rem;
+}
+.space--025rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 0.25rem;
+}
+.space--05rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 0.5rem;
+}
+.space--1rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 1rem;
+}
+.space--2rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 2rem;
+}
+.space--3rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 3rem;
+}
+.space--4rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 4rem;
+}
+.space--6rem{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	padding-bottom: 6rem;
+}
+
+.space--1rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 0.5rem 0;
+}
+.space--2rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 1rem 0;
+}
+.space--4rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 2rem 0;
+}
+.space--6rem--topbottom{
+	margin: 0 0 0 0;
+	padding: 3rem 0;
+}
+.divider{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 0;
+	margin-bottom: 0.5rem;
+	height: 0;
+	overflow: auto;
+}
+.divider--1rem{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 0;
+	margin-bottom: 1rem;
+	height: 0;
+	overflow: auto;
+}
+.divider--marginOff{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 0;
+	height: 0;
+	overflow: auto;
+}
+.umrandung{
+	margin: 0.5rem;
+	padding: 1rem;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+	overflow: auto;
+}
+.umrandung--nomargin{
+	margin: 0;
+	padding: 0.5rem 1rem 0 1rem;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+	overflow: auto;
 }
 
 /********************************************
@@ -313,33 +378,6 @@ p{
 *	Noch zu bearbeiten						*
 ********************************************/
 
-.admin{
-	
-}
-.admin__title{
-	
-}
-.admin__table{
-	
-}
-.admin__row{
-	
-}
-.admin__element{
-	
-}
-
-
-.create{
-	
-}
-.create__title{
-	
-}
-.create__label{
-	
-}
-
 
 .data{
 	
@@ -355,189 +393,6 @@ p{
 	margin: 0;
 }
 
-
-.gooditem--multi{
-	
-}
-.gooditem__head--multi{
-
-}
-.gooditem__body--multi{
-
-}
-.gooditem__title--multi{
-
-}
-.gooditem__label--multi{
-
-}
-.gooditem__text--multi{
-
-}
-
-.gooditem--single{
-	
-}
-.gooditem__body--single{
-	
-}
-.gooditem__head--single{
-	
-}
-.gooditem__title--single{
-	
-}
-.gooditem__label--single{
-	font-size: 1.5rem;
-	
-}
-.gooditem__text--single{
-	margin-left: 2rem;
-	
-}
-
-
-.item{
-	margin: 1%;
-	padding: 1%;
-	background-color: silvergray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-	overflow: auto;
-}
-.item__link{
-	
-}
-.item__title{
-	border-bottom: 1px solid;
-	border-color: lightgray;
-}
-.item__title__text{
-	font-size: 3rem;
-	margin:0;
-}
-.item__container{
-	margin-top: 3%;
-}
-.item__container p{
-	color: black;
-	margin: 0;
-}
-.item__img{	
-
-}
-.item__img img{
-	float: left;
-	width: 45%;
-}
-.item__description{
-	
-}
-.item__description__text{
-	margin-bottom: 0.8rem;
-}
-.item__info{
-	position: absolute;
-	height:5%;
-	right: 2rem;
-	bottom: 1rem;
-}
-.item__info__text{
-	font-size: 0.75rem;
-}
-
-
-
-.single__divider{
-	border-bottom: 1px solid;
-	border-color: black;
-	margin: 1% 0;
-	overflow: auto;
-}
-
-.single--big{
-	width:70%;
-	margin:0% 15%;
-	padding: 1%;
-	background-color: silvergray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-	overflow: auto;
-}
-.single__head--big{
-	
-}
-.single__title--big{
-	margin: 0;
-}
-.single__container--big{
-	
-}
-.single__location--big{
-	margin: 0 25% 1% 25%;
-}
-.single__description--big--first{
-	margin-left: 41%;
-}
-.single__description--big--second{
-	
-}
-.single__description__text--big--first{
-	margin: 0;
-}
-.single__description__text--big--second{
-	margin: 0;
-}
-.single__img__container--big{
-	
-}
-.single__img--big{
-	float: left;
-	width: 40%;
-	margin-bottom: 1%;
-}
-
-.single--small{
-	margin: 1% 5%;
-	padding: 1%;
-	background-color: silvergray;
-	outline-style: solid;
-	outline-width: 1px; 
-	outline-color: lightgray;
-	overflow: auto;
-}
-.single__head--small{
-	
-}
-.single__title--small{
-	margin: 0;
-}
-.single__container--small{
-	
-}
-.single__location--small{
-	margin: 0 5% 1% 5%;
-}
-.single__description--small--first{
-	
-}
-.single__description--small--second{
-	
-}
-.single__description__text--small--first{
-	margin: 0;
-}
-.single__description__text--small--second{
-	margin: 0;
-}
-.single__img__container--small{
-	
-}
-.single__img--small{
-	
-}
 
 .userdetail{
 	
