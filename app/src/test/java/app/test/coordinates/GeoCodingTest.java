@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.Email;
 import org.junit.Before;
 import org.junit.Test;
 import org.salespointframework.useraccount.Role;
@@ -166,7 +169,6 @@ public class GeoCodingTest extends AbstractWebIntegrationTests{
 			 	
 			 	Authentication authentication = new   UsernamePasswordAuthenticationToken("testUser1", "pw");
 			    SecurityContextHolder.getContext().setAuthentication(authenticationManager.authenticate(authentication));
-			 	//mvc.perform(formLogin().user("testUser1").password("pw"));
 			 	
 		    	mvc.perform(post("/modifyAddress_submit")
 		    			.param("wohnen", "refugee")
@@ -207,5 +209,35 @@ public class GeoCodingTest extends AbstractWebIntegrationTests{
 		    	 assertEquals(51.045846, user1.getLatitude(), delta);
 				 assertEquals(13.736928, user1.getLongitude(),delta);
 		      }	
+	/*
+	@Test
+	public void registerAddressHelper() throws Exception{ 
+	 	User user1= userRepository.findByUserAccount(userAccountManager.findByUsername("testUser1").get());
+	 	String user="testUser1";
+	 	double delta=0.00001;
+	 
+	 	mvc.perform(post("/create_new_user")
+    			.param("mailIN", "test@test.test")
+    			.param("usernameIN", "Test")
+    			.param("passwordIN", "Test08.12")
+    			.param("repasswordIN", "Test08.12")
+    			.param("nameIN", "Abc")
+    			.param("firstnameIN", "Def")
+    			.param("wohnen", "helper")
+		    	.param("street", "Prager Str.")
+		    	.param("housenr", "10")
+		    	.param("postcode_H", "01069")
+		    	.param("city_H", "Dresden")
+    			.param("nativelanguage", "de")
+    			.param("otherlanguages", "en")
+    			.param("origin", "Deutschland")
+    			.param("g-recaptcha-response", "en")
+    			.with(user("testUser1").roles("NORMAL"))).//
+		andExpect(view().name("redirect:/userDetails"));
+    	
+    	user1= userRepository.findByUserAccount(userAccountManager.findByUsername("Test").get());
+    	 assertEquals(51.045846, user1.getLatitude(), delta);
+		 assertEquals(13.736928, user1.getLongitude(),delta);
+      }*/
 
 }

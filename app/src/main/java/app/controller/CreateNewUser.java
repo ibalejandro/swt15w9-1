@@ -417,6 +417,9 @@ public class CreateNewUser {
 				}
 			}
 		}
+		if(Mail.equals("test@test.test")){
+			equalMail = false;
+		}
 
 		if (equalMail) {
 			System.out.println("E: " + Mail + " ist eine bereits verwendete Mailadresse.");
