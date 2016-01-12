@@ -4,20 +4,20 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.springframework.util.Assert;
-
 import app.textblocks.Chat;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * <h1>Dialog</h1> The Dialog "glues" all {@link Chat}s together with
- * both {@link User}s.
+ * <h1>Dialog</h1> The Dialog "glues" all {@link Chat}s together with both
+ * {@link User}s.
  * 
  * @author Mario Henze
  */
@@ -38,13 +38,13 @@ public class Dialog implements Serializable {
 
 	private String title;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	protected List<Chat> messageHistory = new LinkedList<>();
 
 	public Dialog() {
-		
+
 	}
-	
+
 	/**
 	 * Constructor.
 	 * 
@@ -55,11 +55,7 @@ public class Dialog implements Serializable {
 	 * @param userB
 	 *            Second participant
 	 */
-	public Dialog(String title, User userA, User userB) {
-		Assert.hasText(title, "Title of dialog must be not empty!");
-		Assert.notNull(userA, "User A must not be empty!");
-		Assert.notNull(userB, "User B must not be empty!");
-
+	public Dialog(@NonNull String title, @NonNull User userA, @NonNull User userB) {
 		this.title = title;
 		this.userA = userA;
 		this.userB = userB;
@@ -71,7 +67,7 @@ public class Dialog implements Serializable {
 	 * @param msg
 	 *            The messageElement to be added
 	 */
-	public void addMessageElement(Chat msg) {
+	public void addMessageElement(@NonNull Chat msg) {
 		this.messageHistory.add(msg);
 	}
 
@@ -109,7 +105,7 @@ public class Dialog implements Serializable {
 	 * @param title
 	 *            The new title of the dialog
 	 */
-	public void setTitle(String title) {
+	public void setTitle(@NonNull String title) {
 		this.title = title;
 	}
 

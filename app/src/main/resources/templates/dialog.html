@@ -27,7 +27,7 @@
 						<h3>User wrote:</h3>
 					</div>
 					<div class="panel-body">
-						<blockquote class="entrytext" th:text="${message.text}">h</blockquote>
+						<blockquote class="entrytext" th:text="${message.toString}">h</blockquote>
 						<footer class="date"
 							th:text="${#dates.format(message.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
 					</div>
@@ -35,7 +35,8 @@
 			</div>
 		</div>
 
-		<form action="/dialog" th:action="@{/dialog(id=${dialog.id})}" method="post">
+		<form action="/dialog" th:action="@{/dialog(id=${dialog.id})}"
+			method="post">
 			<div th:utext="${textblockForm}"></div>
 			<input type="submit" value="Submit" />
 		</form>

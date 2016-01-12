@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,8 +37,12 @@ public class TextBlockValue {
 	 * Values and tags for this text block.
 	 */
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<FormatTagValue> values;
+
+	public TextBlockValue() {
+
+	}
 
 	public TextBlockValue(@NonNull TextBlock textBlock, @NonNull List<FormatTagValue> values) {
 		this.textBlock = textBlock;
