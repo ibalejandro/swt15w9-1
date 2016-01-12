@@ -20,7 +20,7 @@
 			<nav class="top-bar" data-topbar="" role="navigation">
 				<ul class="title-area">
 					<li class="name">
-						<h1><a th:href="@{/}" href="./index.html">My Site</a></h1>
+						<h1><a th:href="@{/}">My Site</a></h1>
 					</li>
 					<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 					<li class="toggle-topbar menu-icon">
@@ -35,11 +35,11 @@
 							
 						<th:block sec:authorize="!isAuthenticated()">
 							<li>
-								<a class="center" th:href="@{/new_user}" href="new_user.html"> Registrieren</a>
+								<a class="center" th:href="@{/new_user}"> Registrieren</a>
 							</li>
 							
 							<li>
-								<a class="center" th:href="@{/}" href="login.html" >Login</a>
+								<a class="center" th:href="@{/}" >Login</a>
 							</li>
 						</th:block>
 
@@ -66,16 +66,16 @@
 								
 								<ul class="dropdown">
 									<li>
-										<a class="center" th:href="@{/availableTags}" href="userDetails.html">All Tags</a>
+										<a class="center" th:href="@{/availableTags}">All Tags</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/newTextBlock}" href="userDetails.html">New Text Block</a>
+										<a class="center" th:href="@{/newTextBlock}">New TextBlock</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/textBlockList}" href="userDetails.html" >Text Block List</a>
+										<a class="center" th:href="@{/textBlockList}" >TextBlock List</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/userDetails}" href="userDetails.html" >Kundenliste</a>
+										<a class="center" th:href="@{/userDetails}" >Kundenliste</a>
 									</li>
 									<li>
 										<a class="center" th:href="@{/logout}">Logout</a>
@@ -90,19 +90,19 @@
 								
 								<ul class="dropdown">
 									<li>
-										<a class="center" th:href="@{/data}" href="data.html" > Eigene Daten</a>
+										<a class="center" th:href="@{/data}" > Eigene Daten</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/myOfferedGoods}" href="myOfferedGoods"> My Offered Goods</a>
+										<a class="center" th:href="@{/myOfferedGoods}"> My Offered Goods</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/myOfferedActivities}" href="myOfferedActivities"> My Offered Activities</a>
+										<a class="center" th:href="@{/myOfferedActivities}"> My Offered Activities</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/dialogList}" href="dialogList.html" > Eigene Dialoge</a>
+										<a class="center" th:href="@{/dialogList}" > Eigene Dialoge</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/startDialog}" href="startDialog.html" > Neuer Dialog</a>
+										<a class="center" th:href="@{/startDialog}" > Neuer Dialog</a>
 									</li>
 									<li>
 										<a class="center" th:href="@{/logout}">Logout</a>
