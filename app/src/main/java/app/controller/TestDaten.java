@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import app.model.Address;
+import app.model.Coordinates;
 import app.model.InterfacePart;
 import app.model.Language;
 import app.model.Module;
@@ -130,6 +131,30 @@ public class TestDaten implements DataInitializer {
 		
 		userRepository.save(user1);
 		userRepository.save(user2);
+		
+		UserAccount testUser1 = userAccountManager.create("testUser1", "pw", normalUserRole);
+		testUser1.setFirstname("Susi");
+		testUser1.setLastname("Müller");
+		testUser1.setEmail("test@test.test");
+		userAccountManager.save(testUser1);
+
+		UserAccount ut2=userAccountManager.create("testUser2", "pw", normalUserRole);
+		ut2.setFirstname("Paul");
+		ut2.setLastname("Mustermann");
+		ut2.setEmail("test@test.test");
+		userAccountManager.save(ut2);
+		//Prager Straße 10 01069 Dresden
+		Address testAddressWohnung1 = new Address("Nöthnitzer Str.", "46", "01187", "Dresden");
+		Address testAddressWohnung2 = new Address("Prager Str.", "10", "01069", "Dresden");
+		User userTest1 = new User(testUser1, testAddressWohnung1);
+	    userTest1.setAddresstyp(AddresstypEnum.Wohnung);
+	    userTest1.setCoordinates(new Coordinates(0.00,0.00));
+
+		User userTest2 = new User(ut2, testAddressWohnung2);
+		userTest2.setAddresstyp(AddresstypEnum.Wohnung);
+		userTest2.setCoordinates(new Coordinates(0.00,0.00));
+		userRepository.save(userTest1);
+		userRepository.save(userTest2);
 
 		/*
 		Dialog d = new Dialog("My Dialog", user1, user2);

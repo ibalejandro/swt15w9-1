@@ -205,7 +205,7 @@ public class User implements Serializable {
 	public Boolean isOldLocation(Address location){
 		System.out.println("isOldLocation check");
 		System.out.println(location+"<>"+this.location);
-		if(adresstyp.equals("Wohnung")){
+		if(adresstyp.toString().equals("Wohnung")){
 			if((!this.location.getStreet().equals(location.getStreet())) ||
 					(!this.location.getHousenr().equals(location.getHousenr()))){
 				return false;
