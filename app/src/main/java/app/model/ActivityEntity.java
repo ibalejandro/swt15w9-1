@@ -231,6 +231,19 @@ public class ActivityEntity implements Serializable {
   }
   
   /**
+   * This method converts a date into a String for input fields
+   * @param Date A java Date
+   * @return String The corresponding String for the java Date
+   */
+  public static String getStringFromDateForInput(Date date) {
+    if (date == null) return null;
+  
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    
+    return formatter.format(date);
+  }
+  
+  /**
    * This method builds a String in which the activity's information is 
    * presented as a JSON object.
    * @return String The information of an activity in JSON format
