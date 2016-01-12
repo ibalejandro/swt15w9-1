@@ -12,7 +12,7 @@ Templates
 - home									Einbindung der Container überarbeiten. bezüglich N
 - index									Einbindung der Container überarbeiten. bezüglich N
 									Activities
-- itemN--large.html 					Design anpassen das es bei OfferdGood gut aus sieht und auf der Seite
+- itemN--large--good.html 					Design anpassen das es bei OfferdGood gut aus sieht und auf der Seite
 
 
 
@@ -89,7 +89,6 @@ activities_item--multi_no_numeration
 activities_item--single*
 addLanguage
 addNewTag
-admin
 change_template
 data
 data_refugee
@@ -110,3 +109,4 @@ userDetails
 
 ZULÖSCHEN ?!:
 reCAPTCHA
+admin

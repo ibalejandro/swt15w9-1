@@ -1,5 +1,5 @@
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-	<!-- by Lennart Schmidt -->
+	<!--/* by Lennart Schmidt */-->
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 		<script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
@@ -66,7 +66,7 @@
 								</div>
 								
 								<div class="small-12 columns">
-									<!--  Mindestens 8 Zeichen, min 1 Kleinbuchstabe, min 1 Gro&szlig;bruchstabe, min 1 Zahl, min 1 Sonderzeichen Es wird ein Passwort mit 12 oder mehr Zeichen empfohlen. -->
+									<!--/* Mindestens 8 Zeichen, min 1 Kleinbuchstabe, min 1 Gro&szlig;bruchstabe, min 1 Zahl, min 1 Sonderzeichen Es wird ein Passwort mit 12 oder mehr Zeichen empfohlen. */-->
 									<label data-tooltip="" aria-haspopup="true" 
 									title="Mindestens 8 Zeichen, min ein Kleinbuchstaben, min ein Gro&szlig;buchstaben, min eine Zahl und min ein Sonderzeichen."  
 									class="has-tip form__label" for="passwordIN">Passwort:</label>
@@ -163,7 +163,7 @@
                                             		>
                                     	</option>                     
                                     </select>
-                                    <!--    <input name="origin" type="text"/> -->
+                                    <!--/*   <input name="origin" type="text"/> */-->
                                     <label th:if="${param.EmptyError_origin}" class="error center space-1rem-topbottom" for="origin">Select your native country!</label>
 									<label th:if="${param.InvalError_origin}" class="error center space-1rem-topbottom" for="origin">Invalid country!</label>
 
