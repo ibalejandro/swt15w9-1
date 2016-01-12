@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.NonNull;
+
 /**
  * This class represents a single conversation step that has happened. Multiple text blocks, all with values in them.
  * <p>
@@ -23,7 +25,7 @@ public class Chat {
 	@OneToMany
 	private List<TextBlockValue> blocks;
 
-    public Chat(List<TextBlockValue> blocks) {
+    public Chat(@NonNull List<TextBlockValue> blocks) {
         this.blocks = blocks;
         this.date = new Date();
     }
@@ -47,7 +49,7 @@ public class Chat {
         return blocks;
     }
 
-    public void setBlocks(List<TextBlockValue> blocks) {
+    public void setBlocks(@NonNull List<TextBlockValue> blocks) {
         this.blocks = blocks;
     }
     

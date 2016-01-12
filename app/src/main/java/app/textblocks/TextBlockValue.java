@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import app.util.SelectorFunctions;
+import lombok.NonNull;
 
 /**
  * This is the value associated with a TextBlock.
@@ -22,57 +23,61 @@ import app.util.SelectorFunctions;
 
 @Entity
 public class TextBlockValue {
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private long id;
-    /**
-     * The text block for which this is a value
-     */
-	
+	/**
+	 * The text block for which this is a value
+	 */
+
 	@OneToOne
-    private TextBlock textBlock;
-    /**
-     * Values and tags for this text block.
-     */
-	
+	private TextBlock textBlock;
+	/**
+	 * Values and tags for this text block.
+	 */
+
 	@OneToMany
-    private List<FormatTagValue> values;
+	private List<FormatTagValue> values;
 
-    public TextBlockValue(TextBlock textBlock, List<FormatTagValue> values) {
-        this.textBlock = textBlock;
-        this.values = values;
-    }
+	public TextBlockValue(@NonNull TextBlock textBlock, @NonNull List<FormatTagValue> values) {
+		this.textBlock = textBlock;
+		this.values = values;
+	}
 
-    /**
-     * Constructs a map suitable for substituting the format string in {@link #textBlock} to create the original message.
-     *
-     * @return map
-     */
-    public Map<String, String> makeValueMap() {
-        return values.stream().collect(Collectors.toMap(
-                FormatTagValue::getName
-                , FormatTagValue::valueRepresentation
-                , SelectorFunctions.second()
-        ));
-    }
+	/**
+	 * Constructs a map suitable for substituting the format string in
+	 * {@link #textBlock} to create the original message.
+	 *
+	 * @return map
+	 */
+	public Map<String, String> makeValueMap() {
+		values.forEach((FormatTagValue ftv) -> {
+			System.out.println(ftv.getName() + " - ");
+			System.out.println(ftv.valueRepresentation());
+		});
+		return values.stream().collect(Collectors.toMap(FormatTagValue::getName, FormatTagValue::valueRepresentation,
+				SelectorFunctions.second()));
+	}
 
-    /**
-     * Substitute the format string of the associated {@link #textBlock} with the values, creating the actual message.
-     *
-     * @return message
-     */
-    public String toString() {
-        return new StrSubstitutor(makeValueMap()).replace(textBlock.getFormatString());
-    }
+	/**
+	 * Substitute the format string of the associated {@link #textBlock} with
+	 * the values, creating the actual message.
+	 *
+	 * @return message
+	 */
+	public String toString() {
+		return new StrSubstitutor(makeValueMap()).replace(textBlock.getFormatString());
+	}
 
-    public long getId() {
-        return textBlock.getId();
-    }
+	public long getId() {
+		return textBlock.getId();
+	}
 
-    public String getFormatString() {
-        return textBlock.getFormatString();
-    }
+	public String getFormatString() {
+		return textBlock.getFormatString();
+	}
 
-    public List<FormatTag> getTags() {
-        return textBlock.getTags();
-    }
+	public List<FormatTag> getTags() {
+		return textBlock.getTags();
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 
 import app.util.Tuple;
+import lombok.NonNull;
 
 /**
  * A format tag suitable for a longer message.
@@ -22,7 +23,7 @@ public class MessageFormatTagValue extends FormatTagValue {
     private static final List<String> inputClasses = mkInputClasses();
     private String value;
 
-    public MessageFormatTagValue(FormatTag tag, String value) {
+    public MessageFormatTagValue(@NonNull FormatTag tag, @NonNull String value) {
         super(tag);
         this.value = value;
     }
@@ -42,7 +43,7 @@ public class MessageFormatTagValue extends FormatTagValue {
     }
 
     @Override
-    protected FormatTagValue fromValue(FormatTag tag, String s) {
+    protected FormatTagValue fromValue(@NonNull FormatTag tag, @NonNull String s) {
         return new MessageFormatTagValue(tag, s);
     }
 
