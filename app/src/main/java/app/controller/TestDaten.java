@@ -84,6 +84,7 @@ public class TestDaten implements DataInitializer {
 		userAccountManager.save(bossAccount);
 
 		Role normalUserRole = new Role("ROLE_NORMAL");
+		
 		UserAccount u1 = userAccountManager.create("Lisa", "pw", normalUserRole);
 		u1.setFirstname("Lisa-Marie");
 		u1.setLastname("Maier");
@@ -110,6 +111,8 @@ public class TestDaten implements DataInitializer {
 		user2.setAddresstyp(AddresstypEnum.Refugees_home);
 		user2.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
 		user2.setRegistrationdate(new Date());
+		user2.Activate();
+		
 		userRepository.save(user1);
 		userRepository.save(user2);
 		
