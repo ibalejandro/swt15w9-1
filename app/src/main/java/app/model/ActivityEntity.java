@@ -230,6 +230,10 @@ public class ActivityEntity implements Serializable {
     return "activity" + id;
   }
   
+  public String getItemPictureLink(){
+	  return id+"/activityimage";
+  }
+  
   /**
    * This method converts a date into a String for input fields
    * @param Date A java Date

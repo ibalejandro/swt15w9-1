@@ -1,7 +1,5 @@
 package app.controller;
 
-import java.util.Enumeration;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -57,34 +55,21 @@ public class DialogController {
 		model.addAttribute("title", d.getTitle());
 		model.addAttribute("owner", d.getUserA());
 		model.addAttribute("participant", d.getUserB());
-		model.addAttribute("messages", d.getMessageHistory());
+		model.addAttribute("chats", d.getMessageHistory());
 
-		List<String> textblockForms = new LinkedList<>();
-		for (TextBlock textBlock : textBlockRepo.findAll()) {
-			textblockForms.add(textBlock.asForm());
-		}
+		ChatTemplate ct = new ChatTemplate(getAllTextBlocks());
 
-		model.addAttribute("textblockForms", textblockForms);
+		model.addAttribute("textblockForm", ct.createForm());
 
 		return "dialog";
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
-	public String dialog(@RequestParam("id") Long id, HttpServletRequest req) {
-		Map<String, String> formMap = new LinkedHashMap<>();
-		Enumeration<String> params = req.getParameterNames();
-		while (params.hasMoreElements()) {
-			String paramName = (String) params.nextElement();
-			formMap.put(paramName, req.getParameter(paramName));
-		}
-
-		Iterable<TextBlock> i = textBlockRepo.findAll();
-		List<TextBlock> tbl = new LinkedList<>();
-		i.forEach((TextBlock t) -> tbl.add(t));
-
-		ChatTemplate ct = new ChatTemplate(tbl);
-		dialogRepo.findOne(id).addMessageElement(ct.fromForm(formMap));
-
+	public String dialog(@RequestParam("id") Long id, @RequestParam Map<String, String> allRequestParams) {
+		ChatTemplate ct = new ChatTemplate(getAllTextBlocks());
+		Dialog d = dialogRepo.findOne(id);
+		d.addMessageElement(ct.fromForm(allRequestParams));
+		dialogRepo.save(d);
 		return "redirect:/dialog?id=" + id;
 	}
 
@@ -141,17 +126,23 @@ public class DialogController {
 
 	@RequestMapping(value = "/dialogByOffer", method = RequestMethod.POST)
 	public String dialogByOffer(HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
-		GoodEntity g = goodsRepo.findOne(Long.parseLong(req.getParameter("goodId"))); 
-		
+		GoodEntity g = goodsRepo.findOne(Long.parseLong(req.getParameter("goodId")));
+
 		User owner;
 		if (!loggedInUA.isPresent()) {
 			return "noUser";
 		} else {
 			owner = userRepo.findByUserAccount(loggedInUA.get());
 		}
-		
+
 		Dialog d = dialogRepo.save(new Dialog(g.getName(), owner, g.getUser()));
-		
+
 		return "redirect:/dialog?id=" + d.getId();
+	}
+
+	private List<TextBlock> getAllTextBlocks() {
+		List<TextBlock> l = new LinkedList<>();
+		textBlockRepo.findAll().forEach((TextBlock t) -> l.add(t));
+		return l;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 
 import app.util.Tuple;
+import lombok.NonNull;
 
 /**
  * A tag value which represents a small bit of text.
@@ -23,7 +24,7 @@ public class TextFormatTagValue extends FormatTagValue {
 	public TextFormatTagValue() {
 	}
 
-	public TextFormatTagValue(FormatTag tag, String value) {
+	public TextFormatTagValue(@NonNull FormatTag tag, @NonNull String value) {
 		super(tag);
 		this.value = value;
 	}
@@ -38,7 +39,7 @@ public class TextFormatTagValue extends FormatTagValue {
 	}
 
 	@Override
-	protected FormatTagValue fromValue(FormatTag tag, String s) throws TypeError {
+	protected FormatTagValue fromValue(@NonNull FormatTag tag, @NonNull String s) throws TypeError {
 		return new TextFormatTagValue(tag, s);
 	}
 
