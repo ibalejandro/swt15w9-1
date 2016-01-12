@@ -271,10 +271,10 @@ public class UserManagementController {
 			}
 			userRepository.save(user_xyz);
 			userRepository.save(user_xyz);
-			if(!user_xyz.isOldLocation(lastAddress)){
+			//if(!user_xyz.isOldLocation(lastAddress)){
 				user_xyz.setCoordinates(user_xyz.createCoordinates());
 				userRepository.save(user_xyz);
-			}
+			//}
 			return "redirect:/data";
 		}
 		

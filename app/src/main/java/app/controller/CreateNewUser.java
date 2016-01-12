@@ -522,15 +522,8 @@ public class CreateNewUser {
 			}
 
 
-			Address address = new Address("", "", Flh_name, Citypart, Postcode_N, City_N);
-			user_xyz.setLocation(address);
-			user_xyz.setRegistrationstate(3); // 3 ~ Flüchtlingsheim
-			userRepository.save(user_xyz);
-			user_xyz.setCoordinates(user_xyz.createCoordinates());
-			userRepository.save(user_xyz);
-			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
-			// return "redirect:/new_user_language_origin/user/{user}";
-
+			address = new Address("", "", Flh_name, Citypart, Postcode_N, City_N);
+			
 		}
 
 		if (Adresstyp.equals("helper")) // Wohnung
@@ -676,7 +669,9 @@ public class CreateNewUser {
 			}
 
 			user_xyz.setLocation(address);
-			user_xyz.setRegistrationstate(3); // 3 ~ Flüchtlingsheim
+			userRepository.save(user_xyz);
+			user_xyz.setCoordinates(user_xyz.createCoordinates());
+			userRepository.save(user_xyz);
 			userRepository.save(user_xyz);
 
 			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());

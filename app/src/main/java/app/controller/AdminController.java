@@ -178,7 +178,12 @@ public class AdminController {
 			user_xyz.getUserAccount().setFirstname(Firstname.get());
 		System.out.println(user_xyz.getUserAccount().getFirstname());
 
-		Address lastAddress=user_xyz.getLocation();
+		Address lastAddress=new Address(user_xyz.getLocation().getStreet(),
+				user_xyz.getLocation().getHousenr(),
+				user_xyz.getLocation().getFlh_name(),
+				user_xyz.getLocation().getCityPart(),
+				user_xyz.getLocation().getZipCode(),
+				user_xyz.getLocation().getCity());
 		if (Adresstyp.equals("refugee")) {
 			System.out.println("refugee");
 			user_xyz.getLocation().setStreet("");
