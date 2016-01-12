@@ -2,6 +2,7 @@ package app.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.salespointframework.core.DataInitializer;
@@ -25,6 +26,9 @@ import app.repository.InterfaceRepository;
 import app.repository.LanguageRepository;
 import app.repository.ModuleRepository;
 import app.repository.TagsRepository;
+import app.repository.TextBlockRepository;
+import app.textblocks.TextBlock;
+import app.util.FormatStringTagFilter;
 
 @Component
 public class TestDaten implements DataInitializer {
@@ -36,6 +40,7 @@ public class TestDaten implements DataInitializer {
 	private final TagsRepository tagsRepository;
 	private final ModuleRepository moduleRepository;
 	private final InterfaceRepository interfaceRepository;
+	private final TextBlockRepository textBlockRepository;
 
 	@Autowired
 	public TestDaten(UserAccountManager userAccountManager, 
@@ -44,7 +49,8 @@ public class TestDaten implements DataInitializer {
 	                 LanguageRepository languageRepository,
 	                 TagsRepository tagsRepository,
 	                 ModuleRepository moduleRepository,
-	                 InterfaceRepository interfaceRepository) {
+	                 InterfaceRepository interfaceRepository,
+	                 TextBlockRepository textBlockRepository) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -57,6 +63,7 @@ public class TestDaten implements DataInitializer {
 		this.tagsRepository = tagsRepository;
 		this.moduleRepository = moduleRepository;
 		this.interfaceRepository = interfaceRepository;
+		this.textBlockRepository = textBlockRepository;
 	}
 
 	@Override
@@ -64,7 +71,7 @@ public class TestDaten implements DataInitializer {
 
 		initializeUsers(userAccountManager, userRepository, dialogRepository, languageRepository,
 		                tagsRepository, moduleRepository, interfaceRepository);
-
+		initializeTextBlocks();
 	}
 
 	private void initializeUsers(UserAccountManager userAccountManager, 
@@ -130,13 +137,6 @@ public class TestDaten implements DataInitializer {
 		
 		userRepository.save(user1);
 		userRepository.save(user2);
-
-		/*
-		Dialog d = new Dialog("My Dialog", user1, user2);
-		Dialog savedDialog = dialogRepository.save(d);
-		user1.addDialog(savedDialog);
-		user2.addDialog(savedDialog);
-		*/
 		
 		ArrayList<TagEntity> tags = createTags();
 		for (TagEntity tag : tags) tagsRepository.save(tag);
@@ -150,6 +150,17 @@ public class TestDaten implements DataInitializer {
 		for(InterfacePart inP : inPs){
 			interfaceRepository.save(inP);
 		}
+	}
+	
+	private final void initializeTextBlocks() {
+		List<String> tbformatStrings = new LinkedList<>();
+		
+		tbformatStrings.add("Hallo ${name}");
+		tbformatStrings.add("Das ist neuwertig ${offer}");
+		
+		List<TextBlock> tbl = new LinkedList<>();
+		tbformatStrings.forEach((String s) -> tbl.add(new TextBlock(s, new FormatStringTagFilter(s).getTags())));
+		textBlockRepository.save(tbl);
 	}
 	
 	/**

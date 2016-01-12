@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import app.util.SelectorFunctions;
+import lombok.NonNull;
 
 /**
  * This is the source text block in the database.
@@ -43,18 +44,18 @@ public class TextBlock {
 	public TextBlock() {
 	}
 
-	public TextBlock(String formatString, List<FormatTag> tags) {
+	public TextBlock(@NonNull String formatString, @NonNull List<FormatTag> tags) {
 		this.formatString = formatString;
 		this.tags = tags;
 	}
 
-	public TextBlock(long id, String formatString, List<FormatTag> tags) {
+	public TextBlock(long id, @NonNull String formatString, @NonNull List<FormatTag> tags) {
 		this.id = id;
 		this.formatString = formatString;
 		this.tags = tags;
 	}
 
-	public TextBlockValue toValue(List<FormatTagValue> values) {
+	public TextBlockValue toValue(@NonNull List<FormatTagValue> values) {
 		return new TextBlockValue(this, values);
 	}
 
@@ -89,7 +90,7 @@ public class TextBlock {
 	 *            data from the http request
 	 * @return true if this block was selected
 	 */
-	public boolean wasSelected(Map<String, String> requestValues) {
+	public boolean wasSelected(@NonNull Map<String, String> requestValues) {
 		return requestValues.containsKey(makeSelectedFieldID());
 	}
 
@@ -113,7 +114,7 @@ public class TextBlock {
 	 *            values from the htp request
 	 * @return value
 	 */
-	public TextBlockValue fromForm(Map<String, String> requestValues) {
+	public TextBlockValue fromForm(@NonNull Map<String, String> requestValues) {
 		return toValue(valuesFromForm(requestValues));
 	}
 
@@ -125,7 +126,7 @@ public class TextBlock {
 	 *            values from the request in map form
 	 * @return values associated with their tags
 	 */
-	public List<FormatTagValue> valuesFromForm(Map<String, String> requestValues) {
+	public List<FormatTagValue> valuesFromForm(@NonNull Map<String, String> requestValues) {
 		return tags.stream().map(t -> {
 			try {
 				return t.toValue(requestValues.get(t.asIdentifier(String.valueOf(id))));
@@ -157,7 +158,7 @@ public class TextBlock {
 		return tags;
 	}
 
-	public void setTags(List<FormatTag> tags) {
+	public void setTags(@NonNull List<FormatTag> tags) {
 		this.tags = tags;
 	}
 }

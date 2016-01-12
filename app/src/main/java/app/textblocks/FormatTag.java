@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import app.util.Tuple;
+import lombok.NonNull;
 
 @Entity
 public final class FormatTag {
@@ -22,7 +23,7 @@ public final class FormatTag {
 
 	}
 
-	public FormatTag(FormatTagValue value, String name) {
+	public FormatTag(@NonNull FormatTagValue value, @NonNull String name) {
 		this.value = value;
 		this.name = name;
 	}
@@ -40,7 +41,7 @@ public final class FormatTag {
 	 * @return non-empty {@link FormatTagValue}
 	 * @throws TypeError
 	 */
-	public FormatTagValue toValue(String s) throws TypeError {
+	public FormatTagValue toValue(@NonNull String s) throws TypeError {
 		return value.fromForm(this, s);
 	}
 
@@ -53,12 +54,17 @@ public final class FormatTag {
 	 * @return html input tag
 	 */
 	public String asInput(String identifier) {
-		String myIdentifier = asIdentifier(identifier);
-		Tuple<String, String> delims = value.inputDelims();
+        String myIdentifier = asIdentifier(identifier);
+        Tuple<String, String> delims = value.inputDelims();
 
-		return delims.get1() + "name=\"" + myIdentifier + '-' + name + "\" " + "class=\""
-				+ value.getInputClasses().stream().reduce(String::concat).orElse("") + "\" " + delims.get2();
-	}
+        return delims.get1() + "name=\"" +
+                myIdentifier +
+                "\" " +
+                "class=\"" +
+                value.getInputClasses().stream().reduce(String::concat).orElse("") +
+                "\" " +
+                delims.get2();
+    }
 
 	/**
 	 * Create an identifier for this tag using a base identifier from a
@@ -68,7 +74,7 @@ public final class FormatTag {
 	 *            identifier for the text block
 	 * @return unique identifier
 	 */
-	public String asIdentifier(String baseIdentifier) {
+	public String asIdentifier(@NonNull String baseIdentifier) {
 		return baseIdentifier + "-" + name;
 	}
 }
