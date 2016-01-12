@@ -16,7 +16,7 @@
 				<div th:each="toShow, it : ${resultActivities}" th:with="index = ${it.count}">
 					<div th:id="${toShow.getItemTypeAndId()}" class="small-12 medium-6 columns end margin-bottom">
 					
-						<th:block th:include="itemN--small--good :: item"></th:block>
+						<th:block th:include="itemN--small--activity  :: item"></th:block>
 						
 					</div>
 				</div>
