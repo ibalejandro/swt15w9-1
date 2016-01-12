@@ -63,7 +63,7 @@ deaktivateUser
 home
 index
 imports
-itemN* //Braucht erweiterrrung
+itemN--*--good
 login
 ALLE Modify bis auf modify selbst
 navigation
@@ -86,7 +86,7 @@ validation_success
 TODO:
 activities_item--multi
 activities_item--multi_no_numeration
-activities_item--single*
+activities_item--single*				//fast fertig..
 addLanguage
 addNewTag
 change_template
@@ -105,6 +105,7 @@ template_translation_manager
 textBlockList
 update*
 userDetails
+itemN--*--activity						//fast fertig
 
 
 ZULÖSCHEN ?!:
