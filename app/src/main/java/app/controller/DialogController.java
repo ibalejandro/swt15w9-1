@@ -55,7 +55,7 @@ public class DialogController {
 		model.addAttribute("title", d.getTitle());
 		model.addAttribute("owner", d.getUserA());
 		model.addAttribute("participant", d.getUserB());
-		model.addAttribute("messages", d.getMessageHistory());
+		model.addAttribute("chats", d.getMessageHistory());
 
 		ChatTemplate ct = new ChatTemplate(getAllTextBlocks());
 

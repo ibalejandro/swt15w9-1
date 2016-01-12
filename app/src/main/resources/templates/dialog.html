@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 <th:block th:include="imports :: head"></th:block>
@@ -19,17 +19,16 @@
 		<h3>Participant</h3>
 		<p th:text="${participant.userAccount.firstname}">user_B</p>
 
-		<div id="messages">
-			<div th:each="message, it : ${messages}"
-				th:with="index = ${it.count}">
+		<div class="messages">
+			<div th:each="msg : ${chats}">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3>User wrote:</h3>
 					</div>
 					<div class="panel-body">
-						<blockquote class="entrytext" th:text="${message.toString}">h</blockquote>
+						<blockquote class="entrytext" th:text="${msg}">h</blockquote>
 						<footer class="date"
-							th:text="${#dates.format(message.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
+							th:text="${#dates.format(msg.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
 					</div>
 				</div>
 			</div>
@@ -40,9 +39,8 @@
 			<div th:utext="${textblockForm}"></div>
 			<input type="submit" value="Submit" />
 		</form>
-
-
 	</div>
+
 	<th:block th:include="imports :: script"></th:block>
 </body>
 </html>
