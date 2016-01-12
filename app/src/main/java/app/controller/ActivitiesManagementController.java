@@ -75,8 +75,8 @@ public class ActivitiesManagementController {
     if (!userAccount.isPresent()) return "noUser";
 		User loggedUser = userRepository.findByUserAccount(userAccount.get());
 		
-		//model.addAttribute("result", loggedUser.getActivities());
-		model.addAttribute("result", activitiesRepository.findByUser(loggedUser));
+		//model.addAttribute("resultGoods", loggedUser.getActivities());
+		model.addAttribute("resultActivities", activitiesRepository.findByUser(loggedUser));
 		return "myOfferedActivities";
 	}
 

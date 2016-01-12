@@ -91,8 +91,8 @@ public class GoodsSearchController {
 		  activitiesFound = activitiesRepository.findAll();
 		}
 		
-		model.addAttribute("result", goodsFound);
-		model.addAttribute("resultActivity", activitiesFound);
+		model.addAttribute("resultGoods", goodsFound);
+		model.addAttribute("resultActivities", activitiesFound);
 		model.addAttribute("resultParameterType", parameterType);
 		model.addAttribute("numberOfResults", 
 		                   GoodEntity.getIterableSize(goodsFound));

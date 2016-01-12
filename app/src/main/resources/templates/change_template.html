@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<th:block th:include="navigation :: navigation"></th:block>
+		<div class="row">
+			<div class="small-12 columns">
+				<h1 class="headline">Template bearbeiten: </h1>
+			</div>
+			
+			<form th:action="@{/change_template_submit}" method="post">
+				<table>
+					<tr> <!-- List all attributes here! -->
+						<th>TyhmeLeaf einbindung</th>
+						<th th:if="${refSprache}">Refernzsprachen Text</th>
+						<th>zuändernde Sprache</th>
+					</tr>
+					<tr th:each="temp : ${result}">
+						<td><input class="form__input" th:value="${temp.get1().getTyhmeLeafName()}" type="text" id="username" name="username" autofocus="autofocus"/></td>
+						<td th:if="${refSprache}" th:text="${temp.get2().get2()}"></td>
+						<td><input class="form__input" th:value="${temp.get2().get1()}" type="text" id="username" name="username" autofocus="autofocus"/></td>
+					</tr>
+					<tr>
+						<td>Neues Template</td>
+						<td><a th:href="@{/newTemplate}">erstellen</a></td>
+						<td></td>
+					</tr>
+				</table>
+			</form>
+			
+		</div>
+		
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>

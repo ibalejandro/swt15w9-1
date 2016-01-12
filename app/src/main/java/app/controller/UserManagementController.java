@@ -16,10 +16,13 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.salespointframework.useraccount.AuthenticationManager;
+import org.salespointframework.useraccount.Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,16 +50,18 @@ public class UserManagementController {
 	private final UserRepository userRepository;
 	private final UserAccountManager userAccountManager;
 	private final LanguageRepository languageRepository;
+	private final AuthenticationManager authenticationManager;
 	
 	/**
    * Autowire.
    * @param userRepository The repository for the users
    */
 	@Autowired
-	public UserManagementController(UserRepository userRepository, UserAccountManager userAccountManager,LanguageRepository languageRepository) {
+	public UserManagementController(UserRepository userRepository, UserAccountManager userAccountManager,LanguageRepository languageRepository, AuthenticationManager authenticationManager) {
 		this.userRepository = userRepository;
 		this.userAccountManager=userAccountManager;
 		this.languageRepository=languageRepository;
+		this.authenticationManager = authenticationManager;
 	}
 
 	
@@ -97,8 +102,10 @@ public class UserManagementController {
 	
 		@RequestMapping("/changePassword/{user}")
 		public String changePassword(@PathVariable final String user, Model model,  @LoggedIn Optional<UserAccount> userAccount){
-			if(userAccount.isPresent()&& userAccount.get().hasRole(new Role("ROLE_NORMAL")))model.addAttribute("userAccount",userAccount.get());
-			if(userAccount.isPresent()&& userAccount.get().hasRole(new Role("ROLE_ADMIN")))model.addAttribute("userAccount",userAccountManager.findByUsername(user).get());
+			if(userAccount.isPresent()&& userAccount.get().hasRole(new Role("ROLE_NORMAL")))
+				model.addAttribute("userAccount",userAccount.get());
+			if(userAccount.isPresent()&& userAccount.get().hasRole(new Role("ROLE_ADMIN")))
+				model.addAttribute("userAccount",userAccountManager.findByUsername(user).get());
 			System.out.println(model.toString());
 			return "changePassword";
 		}
@@ -110,7 +117,9 @@ public class UserManagementController {
 			if(userAccount.get().hasRole(new Role("ROLE_ADMIN")))user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 			else user_xyz=userRepository.findByUserAccount(userAccount.get());
 			
-			if(ActualPassword!=null /*&& user_xyz.getUserAccount().getPassword().equals(new Password(oldPW))*/){
+			
+			
+			if(ActualPassword!=null && authenticationManager.matches(user_xyz.getUserAccount().getPassword(), new Password(ActualPassword))){
 				if(NewPassword1.equals(NewPassword2) && validate(NewPassword1))userAccountManager.changePassword(user_xyz.getUserAccount(), NewPassword1);;
 			}else{
 				return "redirect:/";

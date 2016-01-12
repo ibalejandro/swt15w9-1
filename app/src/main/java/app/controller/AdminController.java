@@ -451,7 +451,7 @@ public class AdminController {
 		return "addNewTag";
 	}
 
-	/**
+  /**
 	 * This method is the answer for the request to '/addedNewTag'. It saves and
 	 * retrieves the tag that the admin wants to add for the tags table.
 	 * 

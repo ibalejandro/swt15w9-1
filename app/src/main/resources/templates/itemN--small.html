@@ -1,121 +1,53 @@
 <!DOCTYPE html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-  <!-- by Lennart Schmidt -->
-  <!--/*
-    TODO:
-      -
-  */-->
-  
-  <head>
-    <th:block th:include="imports :: head"></th:block>
-  </head>
-  
-  <body>
-    <th:block th:fragment="show_items">
-    
-      <div>
-		<h2> Goods </h2>
-	  </div>
-	  
-      <div class="row small-collapse">
-        <div th:each="good, it : ${result}" th:with="index = ${it.count}">
-          <div class="small-12 medium-6 columns end" th:id="good+${good.id}">
-            <a th:href="@{'/item='+${good.getId()}}" class="itemN__link">
-              <div th:id="good+${good.getId()}" class="itemN">
-                
-                <div class="itemN__headlinecontainer">
-                  <p th:text="${good.name}" class="headline--sub"></p> <!--${good.getId()}+'. '+-->
-                </div>
-                
-                <div class="divider"></div>
-                
-                <div class="row ">
-                  <div class="itemN__container">
-                    <div class="medium-6 small-12 columns "><!-- hide-for-small-only -->
-                      <div class="itemN__img">
-                        <img th:src="${good.getId()+'/image'}"/>
-                      </div>
-                    </div>    
-                    
-                    <div class="medium-6 small-12 columns">
-                      
-                      
-                      <p th:text="${good.description}" class="text"></p>          
-                    </div>
-                  </div>
-                  
-                  <div class="itemN--bottom">
-                    <div class="divider"></div>
-                    
-                    <div class="itemN--left">
-                      <p th:text="${good.tag.name}" class="text"></p>
-                    </div>
-                    
-                    <div class="itemN--right">
-                      <!-- User ID ist uninteressant. Anstelle müsste ort gegeben werden -->
-                      <p th:text="${good.user.location.city}" class="text--right"></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-		<div>
-			<h2> Activities </h2>
-	  	</div>
-	  	
-        <div th:each="activity, it : ${resultActivities}" th:with="index = ${it.count}">
-          <div class="small-12 medium-6 columns end" th:id="activity+${activity.id}">
-            <a th:href="@{'/item='+${activity.getId()}}" class="itemN__link">
-              <div th:id="activity+${activity.getId()}" class="itemN">
-                
-                <div class="itemN__headlinecontainer">
-                  <p th:text="${activity.name}" class="headline--sub"></p> <!--${good.getId()}+'. '+-->
-                </div>
-                
-                <div class="divider"></div>
-                
-                <div class="row ">
-                  <div class="itemN__container">
-                    <div class="medium-6 small-12 columns "><!-- hide-for-small-only -->
-                      <div class="itemN__img">
-                        <img th:src="${activity.getId()+'/activityimage'}"/>
-                      </div>
-                    </div>    
-                    
-                    <div class="medium-6 small-12 columns">
-                      
-                      
-                      <p th:text="${activity.description}" class="text"></p> 
-                      <label> Start date </label>
-					  <p th:text="${activity.getStringFromDate(activity.startDate)}" class="text"></p>
-					  <label> End date </label>
-					  <p th:text="${activity.getStringFromDate(activity.endDate)}" class="text"></p>              
-                    </div>
-                  </div>
-                  
-                  <div class="itemN--bottom">
-                    <div class="divider"></div>
-                    
-                    <div class="itemN--left">
-                      <p th:text="${activity.tag.name}" class="text"></p>
-                    </div>
-                    
-                    <div class="itemN--right">
-                      <!-- User ID ist uninteressant. Anstelle müsste ort gegeben werden -->
-                      <p th:text="${activity.user.location.city}" class="text--right"></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </th:block>
-    
-    <th:block th:include="imports :: script"></th:block>
-  </body>
+	<!--/* by Lennart Schmidt */-->
+	<!--/*
+		- in th:each iteraration muss toShow als neue Variable gesetzt sein.
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<th:block th:fragment="item">
+			<a th:href="@{'/item/'+${toShow.getItemTypeAndId()}}" class="itemN__link">
+				<div class="itemN">
+					<div class="itemN__headlinecontainer">
+						<p th:text="${toShow.name}" class="headline--sub"></p> <!--${good.getId()}+'. '+-->
+					</div>
+					
+					<div class="divider"></div>
+					
+					<div class="row">
+						<div class="itemN__container">
+							<div class="medium-6 small-12 columns "><!-- hide-for-small-only -->
+								<div class="itemN__img">
+									<img th:src="${toShow.getItemPictureLink()}"/>
+								</div>
+							</div>		
+							
+							<div class="medium-6 small-12 columns">
+								<p th:text="${toShow.description}" class="text"></p>							
+							</div>
+						</div>
+						
+						<div class="itemN--bottom">
+							<div class="divider--marginOff"></div>
+							
+							<div class="itemN--left">
+								<p th:text="${toShow.tag.name}" class="text"></p>
+							</div>
+							
+							<div class="itemN--right">
+								<p th:text="${toShow.user.location.city}" class="text--right"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+		</th:block>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
 </html>

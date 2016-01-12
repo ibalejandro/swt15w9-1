@@ -363,7 +363,7 @@ public class HelpFunctions {
 		String L5 = "";
 		int i = 2;
 		if (!otherLanguages.isEmpty()) {
-			System.out.println("otherLanguages: '" + otherLanguages + "'");
+			//System.out.println("otherLanguages: '" + otherLanguages + "'");
 			String S = otherLanguages + ",";
 			while (S.length() > 0) {
 				if (S.indexOf(",") >= 0) {
@@ -393,7 +393,7 @@ public class HelpFunctions {
 					}
 
 					S = S.substring(S.indexOf(",") + 1);
-					System.out.println("oL: '" + S + "' >L2:" + L2 + "L3:" + L3 + "L4:" + L4 + "L5:" + L5);
+					//System.out.println("oL: '" + S + "' >L2:" + L2 + "L3:" + L3 + "L4:" + L4 + "L5:" + L5);
 
 				} else
 					S = "";

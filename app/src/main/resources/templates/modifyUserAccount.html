@@ -9,18 +9,20 @@
 		<div th:include="navigation :: navigation"></div>	
 	
 		<div class="row">
-			<div class="large-12 colums">
-				<h1 th:text="@{&Uuml;ber dich: &nbsp; } + ${userAccount.getUsername()}"> UserAccount</h1>
+			<div class="small-12 columns">
+				
+				<h1 th:text="@{&Uuml;ber dich: &nbsp; } + ${userAccount.getUsername()}" class="headline"> UserAccount</h1>
 			
 				<form th:action="@{/modifyUserAccount_submit/} + ${userAccount.getUsername()}" method="post">
-					<p th:text="@{Lastname:&nbsp;} + ${userAccount.getLastname()}" class="new__user__text">Nachname:</p>
-					<input name="lastname" type="text" />
 					
-					<p th:text="@{Firstname:&nbsp;} + ${userAccount.getFirstname()}" class="new__user__text">Vorname:</p>
-					<input name="firstname" type="text" />
+					<label th:text="@{Lastname:&nbsp;}" class="form__label" for="f1">Nachname:</label>
+					<input th:value="${userAccount.getLastname()}" name="lastname" type="text" id="f1"/>
 					
-					<p th:text="@{Email:&nbsp;} + ${userAccount.getEmail()}" class="new__user__text">Email</p>
-					<input name="email" type="text" />
+					<label th:text="@{Firstname:&nbsp;}" class="form__label" for="f2">Vorname:</label>
+					<input th:value="${userAccount.getFirstname()}" name="firstname" type="text" id="f2"/>
+					
+					<label th:text="@{Email:&nbsp;}" class="form__label" for="f3">Email</label>
+					<input th:value="${userAccount.getEmail()}" name="email" type="text" id="f3"/>
 					
 					<input type="submit" class="button" value="Next"/>
 				</form>

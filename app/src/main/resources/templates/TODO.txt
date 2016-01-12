@@ -1,31 +1,111 @@
 TODO:
-	- Thyme Leaf ein Bindung überprüfen
-	- Überschriften überarbeiten
 	- Sprachauswahl bei Registrierung, modifyLanguages, modify
-	- 404.html erstellen
-	- Dropdown im Navigationsbar für Offer (Good, Activity)
-	- Option "My offered Activities" im Dropdown im Navigationsbar für den User
 	
-Templates:
+	
+	
+	AUSSEHEN:
 
-	- navigation					Style
-	
-	- data.html						Style
-	- error.html 					Style
-	- errorpage0_empty.html 		Style
-	- errorpage0_wrongpw.html 		Style
-	- errorpage1_empty.html 		Style
-	- errorpage2a_empty.html 		Style
-	- errorpage2b_empty.html 		Style
-	- modify.html 					Style
-	- new_user_aboutuser1.html 		Style
-	- new_user_aboutuser2a.html 	Style
-	- new_user_aboutuser2b.html 	Style
-	- new_user_data.html 			Style
-	- reCAPTCHA.html 				Style
-	- validation_success.html 		Style
-	
-FRAGEN:
+Templates
+- offeredGood							Einbindung von der Good anzeige überarbeiten. bezüglich N
+- itemNContainer--small--multi--1		Einbindung von der Good anzeige überarbeiten. bezüglich N
+- itemNContainer--small--multi--2		Einbindung von der Good anzeige überarbeiten. bezüglich N
+- home									Einbindung der Container überarbeiten. bezüglich N
+- index									Einbindung der Container überarbeiten. bezüglich N
+									Activities
+- itemN--large.html 					Design anpassen das es bei OfferdGood gut aus sieht und auf der Seite
 
-	- data.html? 			Wird das noch gebraucht oder kann das weg?
-	
+
+
+Sonstiges
+- Sprachauswahl bei Registrierung, modifyLanguages, modify
+- Dropdown im Navigationsbar für Offer (Good, Activity)
+- Option "My offered Activities" im Dropdown im Navigationsbar für den User
+- Item in Groß anzeigen lassen. Braucht neues Template.
+
+
+
+FUNKTION:
+
+Java:
+- Relationen HASA usw.
+
+
+
+Ausgelassene
+modify.html
+data.html
+data_refigee.html
+activities_item--single*
+modified:   main/resources/templates/activities_item--multi_no_numeration.html
+modified:   main/resources/templates/data.html
+modified:   main/resources/templates/data_refugee.html
+new file:   main/resources/templates/dialog.html
+modified:   main/resources/templates/dialogList.html
+modified:   main/resources/templates/goods_item--multi_no_numeration.html
+modified:   main/resources/templates/myOfferedGoods.html
+modified:   main/resources/templates/offer.html
+modified:   main/resources/templates/update.html
+modified:   main/resources/templates/userDetails.html
+
+
+
+
+FERTIG:
+
+error*
+changePassword
+deletedTag
+home
+index
+imports
+itemN* //Braucht erweiterrrung
+login
+ALLE Modify bis auf modify selbst
+navigation
+new
+new_user
+offer
+restorePassword
+search
+searchResults
+startsite
+tags_item--single
+
+TODO:
+activationmail_gesendet
+activationmail_local
+activities_item--multi
+activities_item--multi_no_numeration
+activities_item--single*
+addedNewTag
+addLanguage
+addNewTag
+admin
+aktivateUsewr
+availableTags
+change_template
+data
+data_refugee
+deaktivateUser
+deletedActivity
+deletedGood
+deletedTagdialog
+dialogList
+modify
+newTextBlock
+noSuchActivity
+noSuchGood
+notYourActivity
+notYourGood
+noUser
+offer
+offerActivity
+offeredActivity
+offeredGood
+reCAPTCHA
+startBialog
+template_translation_manager
+textBlockList
+update*
+userDetails
+validation_success

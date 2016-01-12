@@ -1,15 +1,23 @@
-<html>
-
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<th:block th:include="imports :: head"></th:block>
+		<title>Error</title>
 	</head>
 	
 	<body>
-	
 		<div th:include="navigation :: navigation"></div>
 	
-		<p>All fields must not be empty! <br/> <a href="/">Back</a></p>
+		<div class="row">
+			<div class="small-12 columns">
+				<h1 class="headline">ERROR</h1>
+			</div>
+			<div class="small-12 columns">
+				<p class="text">All fields must not be empty!</p>
+				<a th:href="@{/}">Back</a>
+			</div>
+		</div>
+	
 		<th:block th:include="imports :: script"></th:block>
 	</body>
-	
 </html>

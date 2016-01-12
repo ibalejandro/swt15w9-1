@@ -149,7 +149,14 @@ public class GoodEntity implements Serializable {
       return i;
     }
   }
-  
+	
+	public String getItemTypeAndId() {
+	  return "good" + id;
+	}
+	public String getItemPictureLink(){
+		return id+"/image";
+	}
+	
   /**
    * This method builds a String in which the good's information is presented
    * as a JSON object.

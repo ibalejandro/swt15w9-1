@@ -15,56 +15,64 @@
 					</div>
 				
 					<div class="small-3 columns">
-						<label class="link--right"><a th:href="@{/login}" onclick="return toggle('reg');" >Login.</a></label>
+						<label class="link--right"><a th:href="@{/}" onclick="return toggle('reg');" >Login.</a></label>
 					</div>
 					
 					<form th:action="@{/create_new_user}" method="post">
 					
 						<div class="medium-6 small-12 columns">
 							<div class="row">
-								<div class="large-3 small-12 columns">
+
+								<div class="small-12 columns">
 									<label class="form__label" for="firstnameIN">Vorname:</label> 
 								</div>
-								<div class="large-9 small-12 columns">				
+
+								<div class="small-12 columns less_space">				
 									<input name="firstnameIN" type="text" required="required" th:value="${firstnameOld}"/>
 									<label th:if="${param.EmptyError_firstname}" class="error center space--1rem--topbottom" for="firstnameIN">Firstame must not be empty!</label>
 									<label th:if="${param.InvalError_firstname}" class="error center space--1rem--topbottom" for="firstnameIN">Invalid Firstame!</label>
 								</div>
 								
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<label class="form__label" for="nameIN">Nachname:</label>									
 								</div>
-								<div class="large-9 small-12 columns">
+
+								<div class="small-12 columns less_space">
 									<input name="nameIN" type="text" required="required" th:value="${nameOld}"/>
 									<label th:if="${param.EmptyError_name}" class="error center space--1rem--topbottom" for="nameIN">Name must not be empty!</label>
 									<label th:if="${param.InvalError_name}" class="error center space--1rem--topbottom" for="nameIN">Invalid Name!</label>
 								</div>
 								
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<label class="form__label" for="mailIN">E-Mail:</label>
 								</div>
-								<div class="large-9 small-12 columns">
+
+								<div class="small-12 columns less_space">
 									<input name="mailIN" type="email" required="required" minlength="3" maxlength="64" th:value="${mailOld}"/>
 									<label th:if="${param.EmptyError_mail}" class="error center space--1rem--topbottom" for="mailIN">Mail must not be empty!</label>
 									<label th:if="${param.InvalError_mail}" class="error center space--1rem--topbottom" for="mailIN">Invalid Mail!</label>
 									<label th:if="${param.UsedError_mail}" class="error center space--1rem--topbottom" for="mailIN">This mail-address is already used!</label>
 								</div>
 								
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<label class="form__label" for="usernameIN">Nutzername:</label>
 								</div>
-								<div class="large-9 small-12 columns">
+
+								<div class="small-12 columns less_space">
 									<input name="usernameIN" type="text" required="required" minlength="3" maxlength="16" th:value="${usernameOld}"/>
 									<label th:if="${param.EmptyError_username}" class="error center space--1rem--topbottom" for="usernameIN">Username must not be empty!</label>
 									<label th:if="${param.InvalError_username}" class="error center space--1rem--topbottom" for="usernameIN">Invalid Username!</label>
 									<label th:if="${param.UsedError_username}" class="error center space--1rem--topbottom" for="usernameIN">Username already used!</label>
 								</div>
 								
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<!--  Mindestens 8 Zeichen, min 1 Kleinbuchstabe, min 1 Gro&szlig;bruchstabe, min 1 Zahl, min 1 Sonderzeichen Es wird ein Passwort mit 12 oder mehr Zeichen empfohlen. -->
-									<label class="form__label" for="passwordIN">Passwort:</label>
+									<label data-tooltip="" aria-haspopup="true" 
+									title="Mindestens 8 Zeichen, min ein Kleinbuchstaben, min ein Gro&szlig;buchstaben, min eine Zahl und min ein Sonderzeichen."  
+									class="has-tip form__label" for="passwordIN">Passwort:</label>
 								</div>
-								<div class="large-9 small-12 columns">
+
+								<div class="small-12 columns less_spaces">
 									<input name="passwordIN" type="password" required="required" minlength="8" maxlength="64"/>
 									<label th:if="${param.EmptyError_password}" class="error center space--1rem--topbottom" for="passwordIN">Password must not be empty!</label>
 									<label th:if="${param.ShortError_password}" class="error center space--1rem--topbottom" for="passwordIN">Password to short! Min 8 chars.</label>
@@ -72,20 +80,20 @@
 									<label th:if="${param.InvalError_password}" class="error center space--1rem--topbottom" for="passwordIN">Invalid Password!</label>
 								</div>
 								
-								<div class="large-3 small-12 columns">
-									<label class="form__label--paddingOFF" for="repasswordIN">Wiederhole Passwort:</label>
+								<div class="small-12 columns">
+									<label class="form__label" for="repasswordIN">Wiederhole Passwort:</label>
 								</div>
-								<div class="large-9 small-12 columns">
+								<div class="small-12 columns less_space">
 									<input name="repasswordIN" type="password" required="required" minlength="8" maxlength="64"/>
 									<label th:if="${param.EmptyError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Password repeating must not be empty!</label>
 									<label th:if="${param.NoeqlError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Passwords have not been equal!</label>
 									<label th:if="${param.InvalError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Invalid RePassword!</label>
 								</div>
 								
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<label for="nativelanguage" class="form__label">Muttersprache:</label>
 								</div>
-								<div class="large-9 small-12 columns">
+								<div class="small-12 columns less_space">
 									<select id="nativelanguage" name="nativelanguage">
 										<option value="-1">---- Select ----</option>
 										<option th:each="language : ${languages}"
@@ -101,10 +109,10 @@
 									<label th:if="${param.EmptyError_nativelanguage}" class="error center space--1rem--topbottom" for="nativelanguage">Select your native language!</label>
 									<label th:if="${param.InvalError_nativelanguage}" class="error center space--1rem--topbottom" for="nativelanguage">Invalid language!</label>
 								</div>
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<label for="otherlanguages" class="form__label">2.Sprache:</label>
 								</div>
-								<div class="large-9 small-12 columns">
+								<div class="small-12 columns less_space">
 									<select id="otherlanguages" name="otherlanguages">
 										<option value="-1">---- Select ----</option>
 										<option th:each="language : ${languages}"
@@ -119,10 +127,10 @@
 									</select>  
 									<label th:if="${param.InvalError_language2}" class="error center space--1rem--topbottom" for="otherlanguages">Invalid!</label>
 								</div>
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<label for="otherlanguages" class="form__label">3.Sprache:</label>
 								</div>
-								<div class="large-9 small-12 columns">
+								<div class="small-12 columns less_space">
 									<select id="otherlanguages" name="otherlanguages">
 										<option value="-1">---- Select ----</option>
 										<option th:each="language : ${languages}"
@@ -138,11 +146,12 @@
 									<label th:if="${param.InvalError_language3}" class="error center space--1rem--topbottom" for="otherlanguages">Invalid!</label>
 								</div>
 								
-								<div class="large-3 small-12 columns">
+								<div class="small-12 columns">
 									<label class="form__label">Herkunftsland:</label>
 								</div>
-								<div class="large-9 small-12 columns">
+								<div class="small-12 columns less_space">
 									<select name="origin" >
+
                                             <option >---- Select ----</option>
                                             <option th:each="country : ${countrys}"
                                             		th:if="${country} == ${originOld}" selected="selected" 
@@ -152,8 +161,8 @@
                                             <option th:each="country : ${countrys}"
                                             		th:text="${country}"
                                             		>
-                                            </option>                     
-                                        </select>
+                                    	</option>                     
+                                    </select>
                                     <!--    <input name="origin" type="text"/> -->
                                     <label th:if="${param.EmptyError_origin}" class="error center space--1rem--topbottom" for="origin">Select your native country!</label>
 									<label th:if="${param.InvalError_origin}" class="error center space--1rem--topbottom" for="origin">Invalid country!</label>
@@ -161,51 +170,55 @@
 								</div>
 							</div>
 						</div>
-						
+							
 						<div class="medium-6 small-12 columns">
 							<div class="row">
 								<div class="small-12 columns">
-									<label class="headline--sub">Wohnungstyp:</label>
+									<h1 class="text--mega">Wohnungstyp:</h1>
 								</div>
 								
 								<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked="" />							
 								<label class="form__label" for="hh">Wohnung</label>
 								
 								<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee" th:checked="${checked2Old}"/>
-								<label class="form__label" for="fh">Flüchtlingsheim</label>								
-								<div class="small-12 columns"></div>
+								<label class="form__label" for="fh">Flüchtlingsheim</label>
+								
+								<div class="small-12 columns space--05rem"></div>
+
 								<div class="new__user__helper">
-									<div class="large-3 small-12 columns">
+									<div class="small-12 columns">
 										<label class="form__label">Stra&szlig;e:</label>
 									</div>
-									<div class="large-9 small-12 columns">
+									<div class="small-12 columns less_space">
 										<input name="street" type="text" th:value="${streetOld}"/>
 										<label th:if="${param.EmptyError_street}" class="error center space--1rem--topbottom" for="street">Streetname must not be empty!</label>
 										<label th:if="${param.InvalError_street}" class="error center space--1rem--topbottom" for="street">Invalid Streetname!</label>
 									</div>
 									
-									<div class="large-3 small-12 columns">
+									<div class="small-12 columns">
 										<label class="form__label">Hausnummer:</label>
 									</div>
-									<div class="large-9 small-12 columns">
+
+									<div class="small-12 columns less_space">
 										<input name="housenr" type="text" th:value="${housenrOld}"/>
 										<label th:if="${param.EmptyError_housenr}" class="error center space--1rem--topbottom" for="housenr">Housenumber must not be empty!</label>
 										<label th:if="${param.InvalError_housenr}" class="error center space--1rem--topbottom" for="housenr">Invalid Housenumber!</label>
 									</div>
 									
-									<div class="large-3 small-12 columns">
+									<div class="small-12 columns">
 										<label class="form__label">Postleitzahl:</label>
 									</div>
-									<div class="large-9 small-12 columns">
+
+									<div class="small-12 columns less_space">
 										<input name="postcode_H" type="number" min="1" max="99999" th:value="${postcodeHOld}"/>
 										<label th:if="${param.EmptyError_plzH}" class="error center space--1rem--topbottom" for="postcode_H">Postcode must not be empty!</label>
 										<label th:if="${param.InvalError_plzH}" class="error center space--1rem--topbottom" for="postcode_H">Invalid Postcode!</label>
 									</div>
 								
-									<div class="large-3 small-12 columns">
+									<div class="small-12 columns">
 										<label class="form__label">Stadt:</label>
 									</div>
-									<div class="large-9 small-12 columns">
+									<div class="small-12 columns less_space">
 										<input name="city_H" type="text" th:value="${cityHOld}"/>
 										<label th:if="${param.EmptyError_cityH}" class="error center space--1rem--topbottom" for="city_H">City must not be empty!</label>
 										<label th:if="${param.InvalError_cityH}" class="error center space--1rem--topbottom" for="city_H">Invalid City!</label>
@@ -213,37 +226,40 @@
 								</div>
 								
 								<div class="new__user__refugee">
-									<div class="large-3 small-12 columns">
-										<label class="form__label--paddingOFF">Fl&uuml;chtlingsheim Name:</label>
+									<div class="small-12 columns">
+										<label class="form__label">Fl&uuml;chtlingsheim Name:</label>
 									</div>
-									<div class="large-9 small-12 columns">
+
+									<div class="small-12 columns less_space">
 										<input name="flh_name" type="text" th:value="${fhl_nameOld}"/>
 										<label th:if="${param.EmptyError_fhl_name}" class="error center space--1rem--topbottom" for="firstnameIN">Fl&uuml;chtlingsheim Name must not be empty!</label>
 										<label th:if="${param.InvalError_fhl_name}" class="error center space--1rem--topbottom" for="firstnameIN">Invalid Fl&uuml;chtlingsheim Name!</label>
 									</div>
 								
-									<div class="large-3 small-12 columns">
+									<div class="small-12 columns">
 										<label class="form__label">Postleitzahl:</label>
 									</div>
-									<div class="large-9 small-12 columns">
+
+									<div class="small-12 columns less_space">
 										<input name="postcode_R" type="number" min="1" max="99999" th:value="${postcodeROld}"/>
 										<label th:if="${param.EmptyError_plzR}" class="error center space--1rem--topbottom" for="postcode_R">Postcode must not be empty!</label>
 										<label th:if="${param.InvalError_plzR}" class="error center space--1rem--topbottom" for="postcode_R">Invalid Postcode!</label>
 									</div>
 								
-									<div class="large-3 small-12 columns">
+									<div class="small-12 columns">
 										<label class="form__label">Stadt:</label>
 									</div>
-									<div class="large-9 small-12 columns">
+
+									<div class="small-12 columns less_space">
 										<input name="city_R" type="text" th:value="${cityROld}"/>
 										<label th:if="${param.EmptyError_cityR}" class="error center space--1rem--topbottom" for="city_R">City must not be empty!</label>
 										<label th:if="${param.InvalError_cityR}" class="error center space--1rem--topbottom" for="city_R">Invalid City!</label>
 									</div>
 								
-									<div class="large-3 small-12 columns">
+									<div class="small-12 columns">
 										<label class="form__label">Stadtteil:</label>
 									</div>
-									<div class="large-9 small-12 columns">
+									<div class="small-12 columns less_space">
 										<input name="citypart" type="text" th:value="${citypartOld}"/>
 										<label th:if="${param.EmptyError_citypart}" class="error center space--1rem--topbottom" for="citypart">Citypart must not be empty!</label>
 										<label th:if="${param.InvalError_citypart}" class="error center space--1rem--topbottom" for="citypart">Invalid Citypart!</label>
@@ -251,22 +267,25 @@
 								</div>
 							</div>
 						</div>
-					
-						<div class="medium-7 small-12 columns">
-							<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
-							<noscript>
-      							<font color="red"><b>In Ihrem Browser ist JavaScript deaktiviert. Für die Anzeige des Captcha wird Javascript ben&ouml;tigt.</b></font>
-      						</noscript>
-      						<label th:if="${param.EmptyError_captcha}" class="error center space--1rem--topbottom" for="g-recaptcha">Captcha must be used!</label>
-      						<label th:if="${param.InvalError_captcha}" class="error center space--1rem--topbottom" for="g-recaptcha">Invalid CaptchaResponse!</label>
-						</div>
-					
-						<div class="medium-5 small-12 columns">
-							<div class="button--right">
-								<input class="button" type="submit" value="Create User" />
+
+						<div class="medium-6 small-12 columns">
+							<div class="row">
+								<div class="large-6 small-7 large-uncentered small-centered columns">
+										<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
+								</div>
+								<noscript>
+									<font color="red"><b>In Ihrem Browser ist JavaScript deaktiviert. Für die Anzeige des Captcha wird Javascript ben&ouml;tigt.</b></font>
+								</noscript>
+								<label th:if="${param.EmptyError_captcha}" class="error center space--1rem--topbottom" for="g-recaptcha">Captcha must be used!</label>
+								<label th:if="${param.InvalError_captcha}" class="error center space--1rem--topbottom" for="g-recaptcha">Invalid CaptchaResponse!</label>
+							
+								<div class="large-6 small-7 large-uncentered small-centered columns">
+									<div class="button--right">
+										<input class="button" type="submit" value="Create User" />
+									</div>
+								</div>
 							</div>
 						</div>
-					
 					</form>
 				</div>
 			</div>

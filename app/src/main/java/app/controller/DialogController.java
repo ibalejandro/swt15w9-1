@@ -1,7 +1,5 @@
 package app.controller;
 
-import java.util.Enumeration;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,28 +19,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import app.model.Dialog;
+import app.model.GoodEntity;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.DialogRepository;
+import app.repository.GoodsRepository;
 import app.repository.TextBlockRepository;
+import app.textblocks.Chat;
 import app.textblocks.ChatTemplate;
 import app.textblocks.TextBlock;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
 public class DialogController {
-	private final UserRepository userRepository;
+	private final UserRepository userRepo;
 	private final UserAccountManager userAccountManager;
 	private final DialogRepository dialogRepo;
 	private final TextBlockRepository textBlockRepo;
+	private final GoodsRepository goodsRepo;
 
 	@Autowired
 	public DialogController(DialogRepository dialogList, UserRepository userRepository,
-			UserAccountManager userAccountManager, TextBlockRepository textBlockRepo) {
+			UserAccountManager userAccountManager, TextBlockRepository textBlockRepo, GoodsRepository goodsRepo) {
 		this.dialogRepo = dialogList;
-		this.userRepository = userRepository;
+		this.userRepo = userRepository;
 		this.userAccountManager = userAccountManager;
 		this.textBlockRepo = textBlockRepo;
+		this.goodsRepo = goodsRepo;
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.GET)
@@ -55,69 +58,26 @@ public class DialogController {
 		model.addAttribute("participant", d.getUserB());
 		model.addAttribute("messages", d.getMessageHistory());
 
-		List<String> textblockForms = new LinkedList<>();
-		for (TextBlock textBlock : textBlockRepo.findAll()) {
-			textblockForms.add(textBlock.asForm());
-		}
+		ChatTemplate ct = new ChatTemplate(getAllTextBlocks());
 
-		model.addAttribute("textblockForms", textblockForms);
+		model.addAttribute("textblockForm", ct.createForm());
 
 		return "dialog";
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
-	public String dialog(@RequestParam("id") Long id, HttpServletRequest req) {
-//		Dialog d = dialogRepo.findOne(id);
-//		Enumeration<String> params = req.getParameterNames();
-//		Map<String, String> requestValues = new HashMap<>();
-//		
-//		List<Long> requestedBlocks = new LinkedList<>();
-//		while (params.hasMoreElements()) {
-//			String string = (String) params.nextElement();
-//			
-//			//TODO: remove debug print
-//			System.out.println(string);
-//			System.out.println(req.getParameter(string));
-//			
-//			if (string.endsWith("-selected")) {
-//				/*
-//				 * get all ids of the selected textblocks. These are implicitly
-//				 * given by the "xxx-selected" param name, where xxx represents
-//				 * the id. Only if the checkbox before the textblock is ticked
-//				 * in the form this param occurs in the params enum.
-//				 */
-//				Long textBlockId = Long.parseLong(string.substring(0, string.length() - 9));
-//				requestedBlocks.add(textBlockId);
-//				
-//			}
-//		}
-//		
-//		Iterable<TextBlock> i = textBlockRepo.findAll(requestedBlocks);
-//		List<TextBlock> blocks = new LinkedList<>();
-//		for (TextBlock textBlock : i) {
-//			blocks.add(textBlock);
-//		}
-//		
-//		
-//		
-//		//ChatTemplate ct = new ChatTemplate(blocks);
-//		//d.addMessageElement(ct.fromForm(requestValues));
-
-		Map<String, String> formMap = new LinkedHashMap<>();
-		Enumeration<String> params = req.getParameterNames();
-		while (params.hasMoreElements()) {
-			String paramName = (String) params.nextElement();
-			formMap.put(paramName, req.getParameter(paramName));
-		}
-		
+	public String dialog(@RequestParam("id") Long id, @RequestParam Map<String, String> allRequestParams) {
 		Iterable<TextBlock> i = textBlockRepo.findAll();
 		List<TextBlock> tbl = new LinkedList<>();
 		i.forEach((TextBlock t) -> tbl.add(t));
-		
+
 		ChatTemplate ct = new ChatTemplate(tbl);
-		dialogRepo.findOne(id).addMessageElement(ct.fromForm(formMap));
-		dialogRepo.findOne(id).toString();
+		Chat chat = ct.fromForm(allRequestParams);
+		chat.getBlocks().forEach(b -> System.out.println(b));
 		
+		//System.out.println(ct.fromForm(allRequestParams));
+		dialogRepo.findOne(id).addMessageElement(ct.fromForm(allRequestParams));
+
 		return "redirect:/dialog?id=" + id;
 	}
 
@@ -126,15 +86,16 @@ public class DialogController {
 		if (!loggedInUserAccount.isPresent()) {
 			return "errorpage0_empty";
 		}
-		User loggedInUser = userRepository.findByUserAccount(loggedInUserAccount.get());
-		
+		User loggedInUser = userRepo.findByUserAccount(loggedInUserAccount.get());
+
 		List<Dialog> userDialogs = new LinkedList<>();
-		
+
 		// Every Dialog in which the logged user is the owner of the Dialog
 		for (Dialog dialog : dialogRepo.findByUserA(loggedInUser)) {
 			userDialogs.add(dialog);
 		}
-		// Every Dialog in which the logged user is the participant of the Dialog
+		// Every Dialog in which the logged user is the participant of the
+		// Dialog
 		for (Dialog dialog : dialogRepo.findByUserB(loggedInUser)) {
 			userDialogs.add(dialog);
 		}
@@ -157,17 +118,39 @@ public class DialogController {
 			return "noUser";
 		}
 
-		User loggedInUser = userRepository.findByUserAccount(loggedInUserAccount.get());
+		User loggedInUser = userRepo.findByUserAccount(loggedInUserAccount.get());
 		Optional<UserAccount> participantAccount = userAccountManager.findByUsername(participant);
 		if (!participantAccount.isPresent()) {
 			System.err.println("Couldn't find participant: " + participant);
 			return "error";
 		}
-		User participantUser = userRepository.findByUserAccount(participantAccount.get());
+		User participantUser = userRepo.findByUserAccount(participantAccount.get());
 
 		Dialog d = new Dialog(title, loggedInUser, participantUser);
 		dialogRepo.save(d);
 
 		return "redirect:/dialogList";
+	}
+
+	@RequestMapping(value = "/dialogByOffer", method = RequestMethod.POST)
+	public String dialogByOffer(HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
+		GoodEntity g = goodsRepo.findOne(Long.parseLong(req.getParameter("goodId")));
+
+		User owner;
+		if (!loggedInUA.isPresent()) {
+			return "noUser";
+		} else {
+			owner = userRepo.findByUserAccount(loggedInUA.get());
+		}
+
+		Dialog d = dialogRepo.save(new Dialog(g.getName(), owner, g.getUser()));
+
+		return "redirect:/dialog?id=" + d.getId();
+	}
+
+	private List<TextBlock> getAllTextBlocks() {
+		List<TextBlock> l = new LinkedList<>();
+		textBlockRepo.findAll().forEach((TextBlock t) -> l.add(t));
+		return l;
 	}
 }
