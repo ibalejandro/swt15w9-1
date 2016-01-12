@@ -530,7 +530,6 @@ public class CreateNewUser {
 
 			Citypart = HelpFunctions.getOptionalString(Citypart_OPT);
 
-			// KLASSE FLÜCHTLINGSHEIM UND INTERFACE LOCATION!!!!!!!!!!!!!!
 			if ((Flh_name.isEmpty()) || (Citypart.isEmpty()) || Postcode_N.isEmpty() || City_N.isEmpty()) {
 				String returnstr = "redirect:/new_user?";
 				if (Flh_name.isEmpty()) {
@@ -576,7 +575,8 @@ public class CreateNewUser {
 			user_xyz.setLocation(address);
 			user_xyz.setRegistrationstate(3); // 3 ~ Flüchtlingsheim
 			userRepository.save(user_xyz);
-
+			user_xyz.setCoordinates(user_xyz.createCoordinates());
+			userRepository.save(user_xyz);
 			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());
 			// return "redirect:/new_user_language_origin/user/{user}";
 		}
@@ -645,6 +645,8 @@ public class CreateNewUser {
 			Address address = new Address(Street, Housenr, Postcode_N, City_N);
 			user_xyz.setLocation(address);
 			user_xyz.setRegistrationstate(4); // 4 ~ Wohnung
+			userRepository.save(user_xyz);
+			user_xyz.setCoordinates(user_xyz.createCoordinates());
 			userRepository.save(user_xyz);
 
 			System.out.println("Registrationstate: " + user_xyz.getRegistrationstate());

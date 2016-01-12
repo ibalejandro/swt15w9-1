@@ -52,4 +52,10 @@ public class Coordinates implements  Serializable{
 		return (latitude);
 	}
 	
+	public Boolean isInvalid(){
+		if(longitude==0.00 && latitude == 0.00){
+			return true;
+		}
+		return false;
+	}
 }

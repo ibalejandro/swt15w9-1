@@ -37,7 +37,7 @@ public interface GoodsRepository extends CrudRepository<GoodEntity, Long> {
 	   * @param user The given user
 	   * @return Iterable<GoodEntity> A list with all matches for the given user
 	   */
-		Iterable<GoodEntity> findByTagAndUser(TagEntity tag, User user);
+	Iterable<GoodEntity> findByTagAndUser(TagEntity tag, User user);
 	
 	/**
    * This method deletes a good by a given good's id.

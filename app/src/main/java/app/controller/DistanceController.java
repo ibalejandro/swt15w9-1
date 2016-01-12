@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import app.model.ActivityEntity;
 import app.model.GoodEntity;
+import app.model.TagEntity;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.ActivitiesRepository;
@@ -71,6 +72,26 @@ public class DistanceController {
 			}
 		}
 		return userByDistance;
+	}
+	
+	public Iterable<GoodEntity> collectGoodsByDistance(TagEntity tag, Set<User> userByDistance){
+		Set <GoodEntity> goodsByDistance= new HashSet<>();
+		for(User user:userByDistance){
+			for(GoodEntity good: goodsRepository.findByTagAndUser(tag, user)){
+				goodsByDistance.add(good);
+			}
+		}
+		return goodsByDistance;
+	}
+	
+	public Iterable<ActivityEntity> collectActivitiesByDistance(TagEntity tag, Set<User> userByDistance){
+		Set <ActivityEntity> activitiesByDistance= new HashSet<>();
+		for(User user:userByDistance){
+			for(ActivityEntity activity: activitiesRepository.findByTagAndUser(tag, user)){
+				activitiesByDistance.add(activity);
+			}
+		}
+		return activitiesByDistance;
 	}
 	
 	

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import app.model.Address;
 import app.model.GoodEntity;
 import app.model.Language;
 import app.model.User;
@@ -218,6 +219,7 @@ public class UserManagementController {
 		public String modifyAddress_submit( @LoggedIn Optional<UserAccount> userAccount, @RequestParam("wohnen") final String Adresstyp, @RequestParam("flh_name") final Optional<String> Flh_name_OPT, @RequestParam("citypart") final Optional<String> Citypart_OPT, @RequestParam("street") final Optional<String> Street_OPT, @RequestParam("housenr") final Optional<String> Housenr_OPT, @RequestParam("postcode_R") final Optional<String> Postcode_R, @RequestParam("city_R") final Optional<String> City_R, @RequestParam("postcode_H") final Optional<String> Postcode_H, @RequestParam("city_H") final Optional<String> City_H){
 			if(!userAccount.isPresent())return "noUser";
 			User user_xyz=userRepository.findByUserAccount(userAccount.get());
+			Address lastAddress=user_xyz.getLocation();
 			if(Adresstyp.equals("refugee")){
 				System.out.println("refugee");
 				user_xyz.getLocation().setStreet("");
@@ -259,7 +261,11 @@ public class UserManagementController {
 				}
 			}
 			userRepository.save(user_xyz);
-			
+			userRepository.save(user_xyz);
+			if(!user_xyz.isOldLocation(lastAddress)){
+				user_xyz.setCoordinates(user_xyz.createCoordinates());
+				userRepository.save(user_xyz);
+			}
 			return "redirect:/data";
 		}
 		
