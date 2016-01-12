@@ -51,10 +51,6 @@ public class TextBlockValue {
 	 * @return map
 	 */
 	public Map<String, String> makeValueMap() {
-		values.forEach((FormatTagValue ftv) -> {
-			System.out.println(ftv.getName() + " - ");
-			System.out.println(ftv.valueRepresentation());
-		});
 		return values.stream().collect(Collectors.toMap(FormatTagValue::getName, FormatTagValue::valueRepresentation,
 				SelectorFunctions.second()));
 	}
