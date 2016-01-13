@@ -257,11 +257,11 @@ public class TestDaten implements DataInitializer {
 		InterfacePart in8 = new InterfacePart("Password:", lanEN.getId(), mod4.getId());
 		InterfacePart in9 = new InterfacePart("Login", lanEN.getId(), mod5.getId());
 		
-		InterfacePart in10 = new InterfacePart("Noch nicht Registriert?-Auf Arabisch", lanAR.getId(), mod1.getId());
-		InterfacePart in11 = new InterfacePart("Der Nutzername oder das Passwort sind falsch!-Auf Arabisch", lanAR.getId(), mod2.getId());
-		InterfacePart in12 = new InterfacePart("Nutzername-Auf Arabisch:", lanAR.getId(), mod3.getId());
-		InterfacePart in13 = new InterfacePart("Passwort-Auf Arabisch:", lanAR.getId(), mod4.getId());
-		InterfacePart in14 = new InterfacePart("Login-Auf Arabisch", lanAR.getId(), mod5.getId());
+		InterfacePart in10 = new InterfacePart("Noch nicht Registriert? -- Auf Arabisch", lanAR.getId(), mod1.getId());
+		InterfacePart in11 = new InterfacePart("Der Nutzername oder das Passwort sind falsch! -- Auf Arabisch", lanAR.getId(), mod2.getId());
+		InterfacePart in12 = new InterfacePart("Nutzername -- Auf Arabisch:", lanAR.getId(), mod3.getId());
+		InterfacePart in13 = new InterfacePart("Passwort -- Auf Arabisch:", lanAR.getId(), mod4.getId());
+		InterfacePart in14 = new InterfacePart("Login -- Auf Arabisch", lanAR.getId(), mod5.getId());
 		
 		res.add(in0);
 		res.add(in1);
