@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!-- by Lennart Schmidt -->
+		
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<th:block th:include="navigation :: navigation"></th:block>
+		<div class="row">
+			<div class="small-12 columns">
+				<h1 class="headline">Template löschen: </h1>
+			</div>
+			
+			<form th:action="@{/delete_template_submit/}" method="post">
+				
+				<select id="module" name="module">
+					<option th:each="modu : ${mods}" th:value="${modu}" th:text="${modu}"></option>
+				</select>
+				<input type="hidden" name="temp" th:value="${temp}"/>
+				<input type="submit" class="button" value="Löschen"/>
+			</form>
+			
+		</div>
+		
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>

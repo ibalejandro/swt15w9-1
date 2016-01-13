@@ -1,10 +1,21 @@
 package app.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import app.model.InterfacePart;
+import app.model.Language;
 import app.model.TagEntity;
+import app.repository.InterfaceRepository;
+import app.repository.LanguageRepository;
+import app.repository.ModuleRepository;
 import app.repository.TagsRepository;
 
 /**
@@ -19,15 +30,23 @@ import app.repository.TagsRepository;
 public class GlobalControllerAdvice {
   
   private final TagsRepository tagsRepository;
-  
+  private final LanguageRepository languageRepository;
+  private final InterfaceRepository interfaceRepository;
+  private final ModuleRepository moduleRepository;
   /**
    * Autowire.
    * @param TagsRepository The repository for the tags
    */
   @Autowired
-  public GlobalControllerAdvice(TagsRepository tagsRepository ) {
+  public GlobalControllerAdvice(TagsRepository tagsRepository,
+		  LanguageRepository languageRepository,
+		  InterfaceRepository interfaceRepository,
+		  ModuleRepository moduleRepository) {
     Assert.notNull(tagsRepository, "TagsRepository must not be null!");
     this.tagsRepository = tagsRepository;
+    this.languageRepository = languageRepository;
+    this.interfaceRepository = interfaceRepository;
+    this.moduleRepository = moduleRepository;
   }
   
   /**
@@ -39,5 +58,24 @@ public class GlobalControllerAdvice {
   public Iterable<TagEntity> populateSearchDropdown() {
     return tagsRepository.findAllByOrderByNameAsc();
   }
+  
+  @ModelAttribute("translationSystem")
+  public void bla(HttpServletRequest request, Model model){
+	  Language lan = languageRepository.findByKennung(request.getLocale().getLanguage());
+		if (lan == null) {
+			lan = languageRepository.findByKennung("de");
+		}
+		
+		if (lan != null) {
+			List<InterfacePart> inPLan = interfaceRepository.findByLanguageId(lan.getId());
+			for (InterfacePart iP : inPLan) {
+				if (moduleRepository.findOne(iP.getModuleId()) != null) {
+					model.addAttribute(moduleRepository.findOne(iP.getModuleId()).getThymeLeafName(), iP);
+					System.out.println(
+							moduleRepository.findOne(iP.getModuleId()).getThymeLeafName() + ", " + iP.getText());
+				}
+			}
+		}
+  	}
   
 }

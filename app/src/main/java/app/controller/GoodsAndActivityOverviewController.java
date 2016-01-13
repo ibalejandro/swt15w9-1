@@ -54,13 +54,27 @@ public class GoodsAndActivityOverviewController {
 		this.activitiesRepository = activitiesRepository;
 	}
 
+	@RequestMapping(value = "/item/good1", method = RequestMethod.GET)
+	public String showGood0() {
+		return "redirect:/item/good/1";
+	}
+
+	@RequestMapping(value = "/item/activity1", method = RequestMethod.GET)
+	public String ActivityGood0() {
+		return "redirect:/item/activity/1";
+	}
+
 	@RequestMapping(value = "/item/{typ}/{id}", method = RequestMethod.GET)
-	public String recieve_activationkey(@PathVariable String typ, @PathVariable String id, Model modelMap) {
+	public String showGoodAndActivity(@PathVariable String typ, @PathVariable String id, Model modelMap) {
 
 		if (typ.equals("good")) {
 			long idLong = Long.parseLong(id);
 			GoodEntity goodEntity = goodsRepository.findOne(idLong);
 
+			if (goodEntity == null) {
+				return "redirect:/";
+			}
+			System.out.println(goodEntity.getItemTypeAndId() + ": " + goodEntity.getName());
 			modelMap.addAttribute("result", goodEntity);
 
 			return "itemN--large";
@@ -69,11 +83,15 @@ public class GoodsAndActivityOverviewController {
 			long idLong = Long.parseLong(id);
 			ActivityEntity activitiesEntity = activitiesRepository.findOne(idLong);
 
+			if (activitiesEntity == null) {
+				return "redirect:/";
+			}
+			System.out.println(activitiesEntity.getItemTypeAndId() + ": " + activitiesEntity.getName());
 			modelMap.addAttribute("result", activitiesEntity);
 
 			return "itemN--large";
 		}
-		return "/";
+		return "redirect:/";
 
 	}
 

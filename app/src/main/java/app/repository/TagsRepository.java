@@ -34,5 +34,13 @@ public interface TagsRepository extends CrudRepository<TagEntity, Long> {
    * @return TagEntity A tag with matches with the given name
    */
   TagEntity findByName(String name);
+
+  /**
+   * This method finds and retrieves the tag for the given name ignoring the 
+   * case
+   * @param name The given tag's name
+   * @return TagEntity A tag with matches with the given name ignoring the case
+   */
+  TagEntity findByNameIgnoreCase(String name);
 }
 

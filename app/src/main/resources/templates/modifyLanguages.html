@@ -13,37 +13,58 @@
 				<h1 th:text="@{Your Languages: &nbsp; }" class="headline"> UserAccount</h1>
 			</div>
 			
-			<form th:action="@{/modifyLanguages_submit/}" method="post">
+			<form th:action="@{/modifyLanguages_submit/}" method="post">				
+				<div class="small-12 columns less_space">
+						<select id="nativelanguage" name="nativelanguage">
+							<option value="-1">---- Select ----</option>
+							<option th:each="language : ${languages}"
+								th:if="${language.getkennung()} == ${user.getPrefLanguage().getkennung()}" selected="selected"		
+								th:value="${language.getkennung()}"
+								th:text="${language.name}">
+							</option>
+							<option th:each="language : ${languages}"
+								th:value="${language.getkennung()}"
+								th:text="${language.name}">
+							</option>
+						</select>  
+				</div>
 				<div class="small-12 columns">
-					<p th:text="@{Preferred Language: &nbsp; } + ${user.getPrefLanguage().toString()}" class="ntext" >Preferred Language: </p>
+						<label for="otherlanguages" class="form__label">2.Sprache:</label>
 				</div>
-				<div class="small-12 columns divider"></div>
-				<div class="large-3 small-12 columns">
-					<label for="secondLanguage" class="form__label">2.Sprache:</label>
-				</div>
-				<div class="large-9 small-12 columns">
-					<select id="secondLanguage" name="secondLanguage">
+				<div class="small-12 columns less_space">
+					<select id="otherlanguages" name="otherlanguages">
 						<option value="-1">---- Select ----</option>
+						<option th:each="language : ${languages}"
+							th:if="${language.getkennung()} == ${language2}" selected="selected"		
+							th:value="${language.getkennung()}"
+							th:text="${language.name}">
+						</option>
 						<option th:each="language : ${languages}"
 							th:value="${language.getkennung()}"
 							th:text="${language.name}">
 						</option>
 					</select>  
 				</div>
-				<div class="large-3 small-12 columns">
-					<label for="thirdLanguage" class="form__label">3.Sprache:</label>
+				<div class="small-12 columns">
+					<label for="otherlanguages" class="form__label">3.Sprache:</label>
 				</div>
-				<div class="large-9 small-12 columns">
-					<select id="thirdLanguage" name="thirdLanguage">
+				<div class="small-12 columns less_space">
+					<select id="otherlanguages" name="otherlanguages">
 						<option value="-1">---- Select ----</option>
+						<option th:each="language : ${languages}"
+							th:if="${language.getkennung()} == ${language3}" selected="selected"		
+							th:value="${language.getkennung()}"
+							th:text="${language.name}">
+						</option>
 						<option th:each="language : ${languages}"
 							th:value="${language.getkennung()}"
 							th:text="${language.name}">
 						</option>
 					</select>  
+					<label th:if="${param.InvalError_language3}" class="error center space-1rem-topbottom" for="otherlanguages">Invalid!</label>
 				</div>
 
-				<input type="submit" class="button" value="Next"/>
+				<input type="submit" class="button" value="OK"/>
 			</form>
 			
 		</div>
