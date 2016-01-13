@@ -150,13 +150,13 @@ public class DefaultController {
 	/*
 	 * TODO:	- änderrungen einlesen <- fertig
 	 * 			- zuändernde Sprachen einlesen <- fertig
-	 * 			- komplett sprachen ändern 
+	 * 			- komplett sprachen ändern (wenn noch Zeit ist)
 	 * 			- templates und alle verweise löschen  <- fertig
 	 * 				(Erst die InterfaceParts an der mittels ModuleID 
 	 * 				finden und löschen Daraufhin das Module löschen) 
-	 * 			- templates neu erstellen
+	 * 			- templates neu erstellen <- fertig
 	 * 				(Module erstellen und dann auf change Template verweisen) 
-	 * 			- sprachen neu erstellen 
+	 * 			- sprachen neu erstellen <- fertig
 	 * 				(neue Sprachen ins LanguageRepository eintragen und neue 
 	 * 				InterfaceParts erstellen) 
 	 * 			- Daten für Bisherige Templates erstellen und Templates anpassen
@@ -269,6 +269,23 @@ public class DefaultController {
 		moduleRepository.save(newmod);
 		for(Language lang : languageRepository.findAll()){
 			interfaceRepository.save(new InterfacePart("---", lang.getId(), newmod.getId()));
+		}
+		
+		return interfaceMaping(request, model);
+	}
+	
+	@RequestMapping(value = "/newLanguage/", method = RequestMethod.POST)
+	public String newLanguageSubmit(HttpServletRequest request, Model model) {
+		
+		String newLang = request.getParameter("newLang");
+		String newLangShort = request.getParameter("newLangShort");
+		
+		Language nLang = new Language(newLang, newLangShort);
+		languageRepository.save(nLang);
+		
+		
+		for(Module module : moduleRepository.findAll()){
+			interfaceRepository.save(new InterfacePart("---",languageRepository.findByName(newLang).getId(), module.getId())); 
 		}
 		
 		return interfaceMaping(request, model);
