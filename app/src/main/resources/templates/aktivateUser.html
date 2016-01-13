@@ -9,21 +9,22 @@
 	
 		<th:block th:include="navigation :: navigation"></th:block>
 	
-		<h1>Nutzerkonto aktivieren</h1>
 		
-		<form th:action="@{/submit_aktivateUser/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
-		
-		   	
-			<p  class="aktivate__user__text" th:text= "@{Do you really want to &nbsp;}+${user.getActivationStateOpposite()}+@{&nbsp; the User &nbsp;}+${user.userAccount.getUsername()}+@{ ?}"><font color="red"></font></p>
-		    
-		    <p> <label for="check1">
-     			<input type="checkbox" name="aktivate" value="yes" id="check2">
-      			Nutzerkonto aktivieren </input>
-    		</label> </p>
-			
-			<input class="button" type="submit" value="Submit"/>
-		</form>
-		
+		<div class="row">
+			<form th:action="@{/submit_aktivateUser/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
+				<div class="small-12 columns">
+					<h1 class="headline">Nutzerkonto aktivieren</h1>
+					
+					<p  class="text-super" th:text= "@{Do you really want to &nbsp;}+${user.getActivationStateOpposite()}+@{&nbsp; the User &nbsp;}+${user.userAccount.getUsername()}+@{ ?}"><font color="red"></font></p>
+					
+					<label class="form__label" for="check2">
+						<input type="checkbox" name="aktivate" value="yes" id="check2"/>Nutzerkonto aktivieren 
+					</label>
+					
+					<input class="button" type="submit" value="Submit"/>
+				</div>
+			</form>
+		</div>
 		<th:block th:include="imports :: script"></th:block>
 		
 	</body>

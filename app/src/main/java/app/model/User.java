@@ -1,6 +1,8 @@
 package app.model;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +18,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+
+
+
+
+
+
+
+
+
 import org.salespointframework.useraccount.UserAccount;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import app.repository.LanguageRepository;
+
+import com.google.code.geocoder.Geocoder;
+import com.google.code.geocoder.GeocoderRequestBuilder;
+import com.google.code.geocoder.model.GeocodeResponse;
+import com.google.code.geocoder.model.GeocoderRequest;
+import com.google.code.geocoder.model.GeocoderResult;
 
 /**
  * <h1>User</h1> The User is the persistent object of a User. It contains the
@@ -30,7 +50,7 @@ import org.salespointframework.useraccount.UserAccount;
 @SuppressWarnings("serial")
 @Entity
 public class User implements Serializable {
-
+	
 	public enum AddresstypEnum {
 		Wohnung, Refugees_home, empty
 	}
@@ -38,6 +58,7 @@ public class User implements Serializable {
 	private @Id @GeneratedValue long id;
 
 	private Address location;
+	private Coordinates coordinates;
 	private String origin;
 
 	private boolean enabled;
@@ -61,9 +82,11 @@ public class User implements Serializable {
 	private Set<Language> languages;
 
 	// Bidirektional:
-	@OneToMany(targetEntity = GoodEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = GoodEntity.class, mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
+		CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private Set<GoodEntity> goods;
-	@OneToMany(targetEntity = ActivityEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = ActivityEntity.class, mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
+		CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private Set<ActivityEntity> activities;
 
 	@SuppressWarnings("unused")
@@ -90,10 +113,23 @@ public class User implements Serializable {
 		// aktiviert;
 		this.activationkey = "";
 		this.adresstyp = AddresstypEnum.empty;
-
+		goods=new HashSet<>();
 		languages = new HashSet<>();
 	}
 
+	@Override
+	public boolean equals(Object other){
+		if (other == null) return false;
+		if (other == this) return true;
+		if (!(other instanceof User))return false;
+		User otherUser = (User)other;
+		if(id==otherUser.getId()){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	/**
 	 * Adds a GoodEntity to the Set goods or updates a GoodEntity if it was
 	 * already saved.
@@ -185,17 +221,106 @@ public class User implements Serializable {
 	public Address getLocation() {
 		return location;
 	}
+	
+	public Boolean isOldLocation(Address location){
+		System.out.println("isOldLocation check");
+		System.out.println(location+"<>"+this.location);
+		if(adresstyp.toString().equals("Wohnung")){
+			if((!this.location.getStreet().equals(location.getStreet())) ||
+					(!this.location.getHousenr().equals(location.getHousenr()))){
+				return false;
+			}
+		}else{
+			if((!this.location.getFlh_name().equals(location.getFlh_name())) ||
+					(!this.location.getCityPart().equals(location.getCityPart()))){
+				return false;
+			}
+		}
+		if((!this.location.getCity().equals(location.getCity()))||
+					(!this.location.getZipCode().equals(location.getZipCode()))){
+				return false;
+			}
+		System.out.println("isOldLocation check: True");
+		return true;
+	}
+	
+	//Suchen Koordinaten
+	public Coordinates createCoordinates(){
+		System.out.println("create Coordinates!!");
+		if((location.getCity().equals(""))){
+			return new Coordinates(0.00,0.00);
+		}
+		
+		//String url = "http://maps.googleapis.com/maps/api/geocode/json?address="+ URLEncoder.encode(location.toString(), "UTF-8")+"+" +"&sensor=false";
+		final Geocoder geocoder = new Geocoder();
+		GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location.toString()).setLanguage("en").getGeocoderRequest();
+		GeocodeResponse geocoderResponse;
+		try {
+			geocoderResponse = geocoder.geocode(geocoderRequest);
+			if(!geocoderResponse.getStatus().toString().equals("OK")){
+				System.out.println("No Results in Geocoder!");
+				System.out.println(geocoderResponse.getStatus());
+				 return new Coordinates(0.00,0.00);
+			}
+			GeocoderResult geoCode= geocoderResponse.getResults().get(0);
+			System.out.println(geoCode);
+		    float latitude = geoCode.getGeometry().getLocation().getLat().floatValue();
+		    float longitude = geoCode.getGeometry().getLocation().getLng().floatValue();
+		    System.out.println(latitude+", "+longitude);
+	         
+			Coordinates newCoordinates= new Coordinates(latitude,longitude);
+			return newCoordinates;	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("No Response from Geocoder!");
+		return new Coordinates(0.00,0.00);
+	}
 
 	/**
-	 * Setter.
-	 *
-	 * @param Address
-	 *            the new location
-	 * @return Nothing
-	 */
+	   * Setter.
+	   * @param Address the new location
+	   * @return Nothing
+	   */
 	public void setLocation(Address location) {
 		this.location = location;
 	}
+	
+	/**
+	   * Setter.
+	   * @param Coordinates The coordinates of the address
+	   * @return Nothing
+	   */
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
+	}
+	
+	/**
+	   * Getter.
+	   * @return  Coordinates The coordinates of the address
+	   */
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
+	
+	/**
+	   * Getter.
+	   * @return Float The Longitude (Geographische LÃ¤nge)
+	   */
+	public double getLongitude() {		
+		return this.coordinates.getLongitude();
+	}
+
+	/**
+	   * Getter.
+	   * @return Float The Latitude (Geographische Breite)
+	   */
+	public double getLatitude() {
+		return this.coordinates.getLatitude();
+	}
+	
+
 
 	/**
 	 * Getter.
@@ -257,6 +382,9 @@ public class User implements Serializable {
 	}
 
 	public Language getPrefLanguage() {
+		if(PrefLanguage==null){
+			return new Language("default","default");
+		}
 		return PrefLanguage;
 	}
 
@@ -273,6 +401,9 @@ public class User implements Serializable {
 		String languageNames = "";
 		for (Language l : languages) {
 			languageNames = languageNames + l.toString() + ", ";
+		}
+		if(languageNames.isEmpty()){
+			return languageNames;
 		}
 		return languageNames.substring(0, languageNames.length() - 2);
 	}
@@ -376,6 +507,9 @@ public class User implements Serializable {
 
 	public void setAddresstyp(AddresstypEnum adresstyp) {
 		this.adresstyp = adresstyp;
+	}
+	public String toString(){
+		return userAccount.getUsername();
 	}
 
 }

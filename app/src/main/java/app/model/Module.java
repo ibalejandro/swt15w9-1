@@ -11,7 +11,7 @@ public class Module {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private String tyhmeLeafName;
+	private String thymeLeafName;
 
 	private String templateName;
 
@@ -24,14 +24,14 @@ public class Module {
 
 	/**
 	 * Constructor of Module. Creates a new Module with a specific template- and
-	 * tyhmeLeafName
+	 * thymeLeafName
 	 * 
 	 * @param templateName
-	 * @param tyhmeLeafName
+	 * @param thymeLeafName
 	 */
-	public Module(String templateName, String tyhmeLeafName) {
+	public Module(String templateName, String thymeLeafName) {
 		this.templateName = templateName;
-		this.tyhmeLeafName = tyhmeLeafName;
+		this.thymeLeafName = thymeLeafName;
 	}
 
 	/**
@@ -44,12 +44,12 @@ public class Module {
 	}
 
 	/**
-	 * getter for the TyhmeLeafName
+	 * getter for the ThymeLeafName
 	 * 
 	 * @return
 	 */
-	public String getTyhmeLeafName() {
-		return tyhmeLeafName;
+	public String getThymeLeafName() {
+		return thymeLeafName;
 	}
 
 	/**
@@ -59,5 +59,14 @@ public class Module {
 	 */
 	public String getTemplateName() {
 		return templateName;
+	}
+	
+	
+	public void setThymeLeafName(String thymeLeafName){
+		this.thymeLeafName=thymeLeafName;
+	}
+	
+	public void setTemplateName(String templateName){
+		this.templateName=templateName;
 	}
 }

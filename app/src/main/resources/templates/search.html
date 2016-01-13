@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-	<!-- by Lennart Schmidt -->
+	<!--/* by Lennart Schmidt */-->
 	<!--/*
 		TODO:
 			- 
@@ -24,6 +24,19 @@
 				    		</option>
 						</select>
 					</div>
+				</div>
+				<div class="row collapse">
+					<div class="large-8 small-9 columns">
+						<select name="distance">
+				    		<option value="-1">km</option>
+							<option value="5">5km</option>
+							<option value="10">10km</option>
+							<option value="20">20km</option>
+							<option value="30">30km</option>
+				    		<option value="50">50km</option>
+				    		<option value="100">100km</option>
+						</select>
+					</div>
 					
 					<div class="large-4 small-3 columns">
 						<input class="alert button expand" type="submit" value="Search"/>
@@ -33,6 +46,7 @@
 					    <td th:text="${message.id}">1</td>
 					    <td><a href="#" th:text="${message.name}">Title ...</a></td>
 					</tr>
+					
 
 				</div>
 			</form>

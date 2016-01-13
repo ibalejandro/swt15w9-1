@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-	<!-- by Lennart Schmidt -->
+	<!--/* by Lennart Schmidt */-->
 	<!--/*
 		TODO:
 			- 
@@ -14,13 +14,15 @@
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="row">
-			<div class="small-12 colums">
+			<div class="small-12 columns">
 				<h1 class="headline"> You just offered this good: </h1>
 			</div>
-			<div class="small-12 colums umrandung">
-				<div th:include="itemN--large :: item"></div>
+			<div class="small-12 columns umrandung">
+				<div th:include="itemN--large--good :: item"></div>
 			</div>
 		</div>
+		
+		<a th:href="@{/}">MySite</a>
 		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
