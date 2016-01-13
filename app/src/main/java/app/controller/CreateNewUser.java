@@ -229,6 +229,7 @@ public class CreateNewUser {
 			if (HelpFunctions.sha256(user_xyz.getActivationkey() + simpleDateFormat.format(zeitstempel)
 					+ user_xyz.getRegistrationstate()).equals(textactivationkey)) {
 				user_xyz.Activate();
+				userAccountManager.enable(user_xyz.getUserAccount().getIdentifier());
 				System.out.println(user_xyz.getUserAccount().getUsername() + " wurde aktiviert.");
 
 				user_xyz.setRegistrationstate(10);
@@ -595,6 +596,7 @@ public class CreateNewUser {
 		userAccountManager.save(userAccount);
 
 		// userAccount.isEnabled = false;
+		userAccountManager.disable(userAccount.getIdentifier());
 
 		System.out.println("Account " + userAccount.getUsername() + " angelegt.");
 

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import app.util.Tuple;
+import lombok.NonNull;
 
 /**
  * Class for associating {@link FormatTag}s with a value.
@@ -30,7 +31,7 @@ public abstract class FormatTagValue {
      */
     public FormatTagValue() {}
 
-    protected FormatTagValue(FormatTag tag) {
+    protected FormatTagValue(@NonNull FormatTag tag) {
         formatTag = tag;
     }
 
@@ -38,11 +39,11 @@ public abstract class FormatTagValue {
         return formatTag.getName();
     }
 
-    public String asInput(String identifier) {
+    public String asInput(@NonNull String identifier) {
         return formatTag.asInput(identifier);
     }
 
-    public String asIdentifier(String baseIdentifier) {
+    public String asIdentifier(@NonNull String baseIdentifier) {
         return formatTag.asIdentifier(baseIdentifier);
     }
 
@@ -54,7 +55,7 @@ public abstract class FormatTagValue {
      * @return new FormatTagValue
      * @throws TypeError
      */
-    protected abstract FormatTagValue fromValue(FormatTag tag, String s) throws TypeError;
+    protected abstract FormatTagValue fromValue(@NonNull FormatTag tag, @NonNull String s) throws TypeError;
 
     /**
      * This is the canonical function for constructing a {@link FormatTagValue} from the {@link String} out of a html
@@ -67,7 +68,7 @@ public abstract class FormatTagValue {
      * @return new FormatTagValue
      * @throws TypeError
      */
-    public final FormatTagValue fromForm(FormatTag tag, String value) throws TypeError {
+    public final FormatTagValue fromForm(@NonNull FormatTag tag, @NonNull String value) throws TypeError {
         if (verify(value))
             return fromValue(tag, value);
         else
@@ -82,7 +83,7 @@ public abstract class FormatTagValue {
      * @param value String from the html form
      * @return true if the structure is correct
      */
-    public boolean verify(String value) {
+    public boolean verify(@NonNull String value) {
         return true;
     }
 

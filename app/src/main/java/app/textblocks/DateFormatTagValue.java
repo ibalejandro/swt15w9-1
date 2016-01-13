@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 import app.util.Tuple;
+import lombok.NonNull;
 
 /**
  * A FormatTag which has a date inside it.
@@ -19,7 +20,7 @@ public class DateFormatTagValue extends FormatTagValue {
     private static final DateFormat format = DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMAN);
     private Date date;
 
-    public DateFormatTagValue(FormatTag tag, Date date) {
+    public DateFormatTagValue(@NonNull FormatTag tag, @NonNull Date date) {
         super(tag);
         this.date = date;
     }
@@ -50,7 +51,7 @@ public class DateFormatTagValue extends FormatTagValue {
     }
 
     @Override
-    protected FormatTagValue fromValue(FormatTag tag, String s) throws TypeError {
+    protected FormatTagValue fromValue(@NonNull FormatTag tag, @NonNull String s) throws TypeError {
         try {
             return new DateFormatTagValue(tag, format.parse(s));
         } catch (ParseException e) {

@@ -2,9 +2,10 @@ package app.controller;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.MessageDigest;
@@ -21,7 +22,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.net.ssl.HttpsURLConnection;
 
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -207,18 +207,20 @@ public class HelpFunctions {
 
 	public static void mailSenden(String SendTo, String Subject, String Text) throws MessagingException, IOException {
 
-		InputStream inputStream = null;
+		// InputStream inputStream = null;
+		FileInputStream inputStream = null;
 
 		String mailhost = "";
 		String mailport = "";
 		String mailusername = "";
 		String mailpassword = "";
-
+/*
 		try {
 			Properties prop = new Properties();
 			String propFileName = "application.properties";
+			// D:\\Repo\\swt15w9\\app\\target\\classes\\app
 
-			inputStream = HelpFunctions.class.getResourceAsStream(propFileName);
+			inputStream = new FileInputStream(".." + File.separator + propFileName);
 
 			if (inputStream != null) {
 				prop.load(inputStream);
@@ -234,16 +236,21 @@ public class HelpFunctions {
 			mailusername = prop.getProperty("spring.mail.username");
 			mailpassword = prop.getProperty("spring.mail.password");
 
+			inputStream.close();
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);
 		} finally {
-			inputStream.close();
+			inputStream = null;
 		}
-
-		// String mailhost = "***"; //Aus application.properties auslesen.
-		// String mailusername = "***"; //Aus application.properties auslesen.
-		// String mailpassword = "***"; //Aus application.properties auslesen.
-		// String mailport= "***"; //Aus application.properties auslesen.
+*/
+		mailhost = "smtp.gmail.com"; //Aus application.properties auslesen.
+		mailusername = "refugeesapp@gmail.com"; //Aus application.properties auslesen.
+		mailpassword = "refugeesapp#"; //Aus application.properties auslesen.
+		mailport= "587"; //Aus application.properties auslesen.
 		String recipient = SendTo;
 
 		Properties props = new Properties();
@@ -363,7 +370,7 @@ public class HelpFunctions {
 		String L5 = "";
 		int i = 2;
 		if (!otherLanguages.isEmpty()) {
-			//System.out.println("otherLanguages: '" + otherLanguages + "'");
+			// System.out.println("otherLanguages: '" + otherLanguages + "'");
 			String S = otherLanguages + ",";
 			while (S.length() > 0) {
 				if (S.indexOf(",") >= 0) {
@@ -393,7 +400,8 @@ public class HelpFunctions {
 					}
 
 					S = S.substring(S.indexOf(",") + 1);
-					//System.out.println("oL: '" + S + "' >L2:" + L2 + "L3:" + L3 + "L4:" + L4 + "L5:" + L5);
+					// System.out.println("oL: '" + S + "' >L2:" + L2 + "L3:" +
+					// L3 + "L4:" + L4 + "L5:" + L5);
 
 				} else
 					S = "";
