@@ -61,22 +61,22 @@ public class DefaultController {
 	String index(HttpServletRequest request, Model modelMap) {
 		modelMap.addAttribute("result", goodsRepository.findAll());
 
-		Language lan = languageRepository.findByKennung(request.getLocale().getLanguage());
-		if (lan == null) {
-			lan = languageRepository.findByKennung("de");
-		}
-		
-		if (lan != null) {
-			List<InterfacePart> inPLan = interfaceRepository.findByLanguageId(lan.getId());
-
-			for (InterfacePart iP : inPLan) {
-				if (moduleRepository.findOne(iP.getModuleId()) != null) {
-					modelMap.addAttribute(moduleRepository.findOne(iP.getModuleId()).getThymeLeafName(), iP);
-					System.out.println(
-							moduleRepository.findOne(iP.getModuleId()).getThymeLeafName() + ", " + iP.getText());
-				}
-			}
-		}
+//		Language lan = languageRepository.findByKennung(request.getLocale().getLanguage());
+//		if (lan == null) {
+//			lan = languageRepository.findByKennung("de");
+//		}
+//		
+//		if (lan != null) {
+//			List<InterfacePart> inPLan = interfaceRepository.findByLanguageId(lan.getId());
+//
+//			for (InterfacePart iP : inPLan) {
+//				if (moduleRepository.findOne(iP.getModuleId()) != null) {
+//					modelMap.addAttribute(moduleRepository.findOne(iP.getModuleId()).getThymeLeafName(), iP);
+//					System.out.println(
+//							moduleRepository.findOne(iP.getModuleId()).getThymeLeafName() + ", " + iP.getText());
+//				}
+//			}
+//		}
 		return "index";
 	}
 
