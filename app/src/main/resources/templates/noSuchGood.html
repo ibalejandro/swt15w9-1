@@ -5,11 +5,22 @@
 	</head>
 
 	<body>
-		<form th:action="@{/myOfferedGoods}">
+		<!--</body><form th:action="@{/myOfferedGoods}">
 			<h3 th:text="'The good you want to '+${wantedAction}+' doesn\' t exist.'"></h3>
-			<div class="button--right">
+			<div class="button-right">
 				<input class="button" type="submit" value="Go to My offered goods" />
 			</div>
-		</form>	
+		</form>	-->
+		
+		
+		<div class="row">
+			<div class="12-small columns">
+				<h1 class="headline" th:text="'The good you want to '+${wantedAction}+' doesn\' t exist.'"></h1>
+				
+				<a th:href="@{/myOfferedGoods}">Go to My offered goods</a>
+			</div>
+		</div>
+		
+		<th:block th:include="imports :: script"></th:block>
 	</body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-	<!-- by Lennart Schmidt -->
+	<!--/* by Lennart Schmidt */-->
 	<!--/*
 		TODO:
 			- iterration Object setzen
@@ -20,16 +20,16 @@
 			<div class="space"></div>
 			
 			<div class="row">
-				<div class="small-12 medium-6 columns umrandung--nomargin">
+				<div class="small-12 medium-6 columns umrandung-nomargin">
 					<a th:href="@{/home}" class="headline black"> All Goods </a>
-					<div class="divider--1rem"></div>
-					<th:block th:include="itemNContainer--small--multi--goods--1 :: show_items"></th:block>
+					<div class="divider-1rem"></div>
+					<th:block th:include="itemNContainer--small--goods--1 :: show_items"></th:block>
 				</div>
 				
-				<div class="small-12 medium-6 columns umrandung--nomargin">
+				<div class="small-12 medium-6 columns umrandung-nomargin">
 					<a class="headline black"> All Activities </a>
-					<div class="divider--1rem"></div>
-					<th:block th:include="itemNContainer--small--multi--activities--1 :: show_items"></th:block>
+					<div class="divider-1rem"></div>
+					<th:block th:include="itemNContainer--small--activities--1 :: show_items"></th:block>
 				</div>
 			</div>
 			

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!--/* by Lennart Schmidt */-->
+	<!--/*
+		TODO:
+			-
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<th:block th:fragment="item">
+			<div class="row">
+				<div class="item-single">
+					<div class="small-12 columns">
+						<h1 th:text="${result.name}" class="headline"></h1>
+					</div>
+					
+					<th:block th:fragment="content">
+						<div class="small-12 medium-4 columns">
+							<img th:src="${result.getItemPictureLink()}"/>
+						</div>
+						
+						<div class="small-12 medium-8 columns">
+							<p th:text="${result.getDateAsString()}" class=""></p>
+						</div>
+						
+						<div class="small-12 medium-8 columns">
+							<p th:text="${result.description}" class=""></p>
+						</div>
+						
+						<div class="small-12 medium-8 columns">
+							<p th:text="${result.tag.name}" class=""></p>
+						</div>
+					</th:block>
+				</div>
+			</div>
+		</th:block>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>

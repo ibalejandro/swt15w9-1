@@ -1,0 +1,132 @@
+QUERVERWEISE:
+/*
+	noSuchActivity
+	noSuchGood
+	noSuchTag
+	notYourActivity
+	notYourGood
+	noUser
+	*/
+	Alle:
+		-> imports :: head
+		-> imports :: sctipt
+		
+	activationmail_gesendet
+	activationmail_local
+	addLanguage
+	addNewTag
+	admin
+	aktivateUser
+	availableTags
+	changePassword
+	change_template
+	data
+	data_refugee
+	deaktivateUser
+	dialog
+	dialogList
+	error
+	errorpage_empty
+	errorpage_user_not_activated
+	error_empty_captcha
+	modify
+	modifyAddress
+	modifyLanguages
+	modifyUserAccount
+	myOfferedActivities
+	myOfferedGoods
+	New
+	newTextBlock
+	noUser
+	offer
+	offerActivity
+	offeredGoodsAndActivities
+	restorePassword
+	startDialog
+	template_translation_manager
+	textBlockList
+	update
+	updateActivity
+	updateActivityByAdmin
+	updateGoodByAdmin
+	updateTag
+	userDetails
+	validation_success
+		-> navigation :: navigation
+	
+	activities_item--single_for_deletion
+		-> activities_item--single :: nopic
+	
+	addedNewTag
+	deletedTag
+	updatedTag
+		-> navigation :: navigation
+		-> tags_item-single :: item
+		
+	
+	ItemN--large--activity--buttons
+		-> itemN--large--good--buttons :: button
+		-> itemN--large--activity :: content
+	
+	deletedActivity
+		-> itemN--large--activity--nopic :: item
+		-> navigation :: navigation
+		
+	deletedGood
+		-> navigation :: navigation
+		-> itemN--large--good :: item
+		
+	startsite
+		-> login :: login
+		-> new_user :: reg
+	
+	navigation
+		-> search :: searchByTag
+	
+	itemNContainer--small--goods--1
+	itemNContainer--small--goods--2
+		-> itemN--small--good :: item
+		
+	itemNContainer--small--activities--1
+	itemNContainer--small--activities--2
+		-> itemN--small--activity  :: item
+	
+	itemNContainer--large
+		-> itemN--large--good--buttons :: item
+		-> itemN--large--activity--buttons :: item
+		
+	itemN--large--good--buttons
+		->itemN--large--good--buttons :: content
+	
+	updatedGood
+		navigation :: navigation
+		goods_item-single :: item
+	
+	updatedActivity
+		-> navigation :: navigation
+		-> activities_item-single :: item
+	
+	searchResults
+		-> navigation :: navigation
+		-> itemNContainer--small--goods--1 :: show_items
+		-> itemNContainer--small--activities--1 :: show_items
+	
+	offeredGood
+		-> navigation :: navigation
+		-> itemN--large--good :: item
+	
+	offeredActivity
+		-> navigation :: navigation
+		-> itemN--large--activity :: item
+	
+	itemN--large--activity--buttons
+		-> itemN--large--good--buttons :: button
+		-> itemN--large--activity :: content
+	home
+		-> navigation :: navigation
+		-> itemNContainer--small--goods--2 :: show_items
+	index
+		-> navigation :: navigation
+		-> itemNContainer--small--goods--1 :: show_items
+		-> itemNContainer--small--activities--1 :: show_items
+		-> startsite :: start

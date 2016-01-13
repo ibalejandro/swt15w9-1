@@ -41,7 +41,7 @@ public class DeaktivateUser {
 	/**
 	 * Autowire.
 	 * 
-	 * @param CreateNewUser
+	 * @param DeaktivateUser
 	 */
 	@Autowired
 	public DeaktivateUser(UserAccountManager userAccountManager, UserRepository userRepository) {
@@ -54,6 +54,8 @@ public class DeaktivateUser {
 
 	@RequestMapping({ "/deaktivateUser" })
 	public String deaktivateUser(@LoggedIn Optional<UserAccount> userAccount, Model model) {
+
+		System.out.println("dU");
 
 		if (userAccount.isPresent()) {
 			model.addAttribute("user", userRepository.findByUserAccount(userAccount.get()));
@@ -82,6 +84,8 @@ public class DeaktivateUser {
 
 	@RequestMapping(value = "/submit_deaktivateUser/{user}")
 	public String submit_deaktivateUser0(@LoggedIn Optional<UserAccount> userAccount) {
+
+		System.out.println("sdU");
 
 		if (userAccount.isPresent()) {
 			return "redirect:/deaktivateUser";
@@ -125,13 +129,12 @@ public class DeaktivateUser {
 						return "redirect:/";
 					}
 
+					System.out.println("Nutzerdeaktivierung läuft ... 2");
+
 					Date zeitstempel = new Date();
 					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy"); // "dd.MM.yyyy
 																							// HH:mm:ss"
 					// simpleDateFormat.format(zeitstempel)
-
-					String NewPassword = "PW:"
-							+ HelpFunctions.sha256(user_xyz.getActivationkey() + zeitstempel).substring(4, 14);
 
 					String domain = "http://localhost:8080";
 					String mailtext = "<html> <head> </head> <body> <h1>Deactivated RefugeesApp-Account ("

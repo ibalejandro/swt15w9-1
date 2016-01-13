@@ -1,5 +1,5 @@
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-	<!-- by Lennart Schmidt -->
+	<!--/* by Lennart Schmidt */-->
 	<head>
 		<th:block th:include="imports :: head"></th:block>
 		<script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
@@ -15,7 +15,7 @@
 					</div>
 				
 					<div class="small-3 columns">
-						<label class="link--right"><a th:href="@{/}" onclick="return toggle('reg');" >Login.</a></label>
+						<label class="link-right"><a th:href="@{/}" onclick="return toggle('reg');" >Login.</a></label>
 					</div>
 					
 					<form th:action="@{/create_new_user}" method="post">
@@ -29,8 +29,8 @@
 
 								<div class="small-12 columns less_space">				
 									<input name="firstnameIN" type="text" required="required" th:value="${firstnameOld}"/>
-									<label th:if="${param.EmptyError_firstname}" class="error center space--1rem--topbottom" for="firstnameIN">Firstame must not be empty!</label>
-									<label th:if="${param.InvalError_firstname}" class="error center space--1rem--topbottom" for="firstnameIN">Invalid Firstame!</label>
+									<label th:if="${param.EmptyError_firstname}" class="error center space-1rem-topbottom" for="firstnameIN">Firstame must not be empty!</label>
+									<label th:if="${param.InvalError_firstname}" class="error center space-1rem-topbottom" for="firstnameIN">Invalid Firstame!</label>
 								</div>
 								
 								<div class="small-12 columns">
@@ -39,8 +39,8 @@
 
 								<div class="small-12 columns less_space">
 									<input name="nameIN" type="text" required="required" th:value="${nameOld}"/>
-									<label th:if="${param.EmptyError_name}" class="error center space--1rem--topbottom" for="nameIN">Name must not be empty!</label>
-									<label th:if="${param.InvalError_name}" class="error center space--1rem--topbottom" for="nameIN">Invalid Name!</label>
+									<label th:if="${param.EmptyError_name}" class="error center space-1rem-topbottom" for="nameIN">Name must not be empty!</label>
+									<label th:if="${param.InvalError_name}" class="error center space-1rem-topbottom" for="nameIN">Invalid Name!</label>
 								</div>
 								
 								<div class="small-12 columns">
@@ -49,9 +49,9 @@
 
 								<div class="small-12 columns less_space">
 									<input name="mailIN" type="email" required="required" minlength="3" maxlength="64" th:value="${mailOld}"/>
-									<label th:if="${param.EmptyError_mail}" class="error center space--1rem--topbottom" for="mailIN">Mail must not be empty!</label>
-									<label th:if="${param.InvalError_mail}" class="error center space--1rem--topbottom" for="mailIN">Invalid Mail!</label>
-									<label th:if="${param.UsedError_mail}" class="error center space--1rem--topbottom" for="mailIN">This mail-address is already used!</label>
+									<label th:if="${param.EmptyError_mail}" class="error center space-1rem-topbottom" for="mailIN">Mail must not be empty!</label>
+									<label th:if="${param.InvalError_mail}" class="error center space-1rem-topbottom" for="mailIN">Invalid Mail!</label>
+									<label th:if="${param.UsedError_mail}" class="error center space-1rem-topbottom" for="mailIN">This mail-address is already used!</label>
 								</div>
 								
 								<div class="small-12 columns">
@@ -60,13 +60,13 @@
 
 								<div class="small-12 columns less_space">
 									<input name="usernameIN" type="text" required="required" minlength="3" maxlength="16" th:value="${usernameOld}"/>
-									<label th:if="${param.EmptyError_username}" class="error center space--1rem--topbottom" for="usernameIN">Username must not be empty!</label>
-									<label th:if="${param.InvalError_username}" class="error center space--1rem--topbottom" for="usernameIN">Invalid Username!</label>
-									<label th:if="${param.UsedError_username}" class="error center space--1rem--topbottom" for="usernameIN">Username already used!</label>
+									<label th:if="${param.EmptyError_username}" class="error center space-1rem-topbottom" for="usernameIN">Username must not be empty!</label>
+									<label th:if="${param.InvalError_username}" class="error center space-1rem-topbottom" for="usernameIN">Invalid Username!</label>
+									<label th:if="${param.UsedError_username}" class="error center space-1rem-topbottom" for="usernameIN">Username already used!</label>
 								</div>
 								
 								<div class="small-12 columns">
-									<!--  Mindestens 8 Zeichen, min 1 Kleinbuchstabe, min 1 Gro&szlig;bruchstabe, min 1 Zahl, min 1 Sonderzeichen Es wird ein Passwort mit 12 oder mehr Zeichen empfohlen. -->
+									<!--/* Mindestens 8 Zeichen, min 1 Kleinbuchstabe, min 1 Gro&szlig;bruchstabe, min 1 Zahl, min 1 Sonderzeichen Es wird ein Passwort mit 12 oder mehr Zeichen empfohlen. */-->
 									<label data-tooltip="" aria-haspopup="true" 
 									title="Mindestens 8 Zeichen, min ein Kleinbuchstaben, min ein Gro&szlig;buchstaben, min eine Zahl und min ein Sonderzeichen."  
 									class="has-tip form__label" for="passwordIN">Passwort:</label>
@@ -74,10 +74,10 @@
 
 								<div class="small-12 columns less_spaces">
 									<input name="passwordIN" type="password" required="required" minlength="8" maxlength="64"/>
-									<label th:if="${param.EmptyError_password}" class="error center space--1rem--topbottom" for="passwordIN">Password must not be empty!</label>
-									<label th:if="${param.ShortError_password}" class="error center space--1rem--topbottom" for="passwordIN">Password to short! Min 8 chars.</label>
-									<label th:if="${param.UnsecError_password}" class="error center space--1rem--topbottom" for="passwordIN">Password to unsecure!</label>
-									<label th:if="${param.InvalError_password}" class="error center space--1rem--topbottom" for="passwordIN">Invalid Password!</label>
+									<label th:if="${param.EmptyError_password}" class="error center space-1rem-topbottom" for="passwordIN">Password must not be empty!</label>
+									<label th:if="${param.ShortError_password}" class="error center space-1rem-topbottom" for="passwordIN">Password to short! Min 8 chars.</label>
+									<label th:if="${param.UnsecError_password}" class="error center space-1rem-topbottom" for="passwordIN">Password to unsecure!</label>
+									<label th:if="${param.InvalError_password}" class="error center space-1rem-topbottom" for="passwordIN">Invalid Password!</label>
 								</div>
 								
 								<div class="small-12 columns">
@@ -85,9 +85,9 @@
 								</div>
 								<div class="small-12 columns less_space">
 									<input name="repasswordIN" type="password" required="required" minlength="8" maxlength="64"/>
-									<label th:if="${param.EmptyError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Password repeating must not be empty!</label>
-									<label th:if="${param.NoeqlError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Passwords have not been equal!</label>
-									<label th:if="${param.InvalError_repassword}" class="error center space--1rem--topbottom" for="repasswordIN">Invalid RePassword!</label>
+									<label th:if="${param.EmptyError_repassword}" class="error center space-1rem-topbottom" for="repasswordIN">Password repeating must not be empty!</label>
+									<label th:if="${param.NoeqlError_repassword}" class="error center space-1rem-topbottom" for="repasswordIN">Passwords have not been equal!</label>
+									<label th:if="${param.InvalError_repassword}" class="error center space-1rem-topbottom" for="repasswordIN">Invalid RePassword!</label>
 								</div>
 								
 								<div class="small-12 columns">
@@ -106,8 +106,8 @@
 											th:text="${language.name}">
 										</option>
 									</select>  
-									<label th:if="${param.EmptyError_nativelanguage}" class="error center space--1rem--topbottom" for="nativelanguage">Select your native language!</label>
-									<label th:if="${param.InvalError_nativelanguage}" class="error center space--1rem--topbottom" for="nativelanguage">Invalid language!</label>
+									<label th:if="${param.EmptyError_nativelanguage}" class="error center space-1rem-topbottom" for="nativelanguage">Select your native language!</label>
+									<label th:if="${param.InvalError_nativelanguage}" class="error center space-1rem-topbottom" for="nativelanguage">Invalid language!</label>
 								</div>
 								<div class="small-12 columns">
 									<label for="otherlanguages" class="form__label">2.Sprache:</label>
@@ -125,7 +125,7 @@
 											th:text="${language.name}">
 										</option>
 									</select>  
-									<label th:if="${param.InvalError_language2}" class="error center space--1rem--topbottom" for="otherlanguages">Invalid!</label>
+									<label th:if="${param.InvalError_language2}" class="error center space-1rem-topbottom" for="otherlanguages">Invalid!</label>
 								</div>
 								<div class="small-12 columns">
 									<label for="otherlanguages" class="form__label">3.Sprache:</label>
@@ -143,7 +143,7 @@
 											th:text="${language.name}">
 										</option>
 									</select>  
-									<label th:if="${param.InvalError_language3}" class="error center space--1rem--topbottom" for="otherlanguages">Invalid!</label>
+									<label th:if="${param.InvalError_language3}" class="error center space-1rem-topbottom" for="otherlanguages">Invalid!</label>
 								</div>
 								
 								<div class="small-12 columns">
@@ -163,9 +163,9 @@
                                             		>
                                     	</option>                     
                                     </select>
-                                    <!--    <input name="origin" type="text"/> -->
-                                    <label th:if="${param.EmptyError_origin}" class="error center space--1rem--topbottom" for="origin">Select your native country!</label>
-									<label th:if="${param.InvalError_origin}" class="error center space--1rem--topbottom" for="origin">Invalid country!</label>
+                                    <!--/*   <input name="origin" type="text"/> */-->
+                                    <label th:if="${param.EmptyError_origin}" class="error center space-1rem-topbottom" for="origin">Select your native country!</label>
+									<label th:if="${param.InvalError_origin}" class="error center space-1rem-topbottom" for="origin">Invalid country!</label>
 
 								</div>
 							</div>
@@ -174,7 +174,7 @@
 						<div class="medium-6 small-12 columns">
 							<div class="row">
 								<div class="small-12 columns">
-									<h1 class="text--mega">Wohnungstyp:</h1>
+									<h1 class="text-mega">Wohnungstyp:</h1>
 								</div>
 								
 								<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked="" />							
@@ -183,7 +183,7 @@
 								<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee" th:checked="${checked2Old}"/>
 								<label class="form__label" for="fh">Flüchtlingsheim</label>
 								
-								<div class="small-12 columns space--05rem"></div>
+								<div class="small-12 columns space-05rem"></div>
 
 								<div class="new__user__helper">
 									<div class="small-12 columns">
@@ -191,8 +191,8 @@
 									</div>
 									<div class="small-12 columns less_space">
 										<input name="street" type="text" th:value="${streetOld}"/>
-										<label th:if="${param.EmptyError_street}" class="error center space--1rem--topbottom" for="street">Streetname must not be empty!</label>
-										<label th:if="${param.InvalError_street}" class="error center space--1rem--topbottom" for="street">Invalid Streetname!</label>
+										<label th:if="${param.EmptyError_street}" class="error center space-1rem-topbottom" for="street">Streetname must not be empty!</label>
+										<label th:if="${param.InvalError_street}" class="error center space-1rem-topbottom" for="street">Invalid Streetname!</label>
 									</div>
 									
 									<div class="small-12 columns">
@@ -201,8 +201,8 @@
 
 									<div class="small-12 columns less_space">
 										<input name="housenr" type="text" th:value="${housenrOld}"/>
-										<label th:if="${param.EmptyError_housenr}" class="error center space--1rem--topbottom" for="housenr">Housenumber must not be empty!</label>
-										<label th:if="${param.InvalError_housenr}" class="error center space--1rem--topbottom" for="housenr">Invalid Housenumber!</label>
+										<label th:if="${param.EmptyError_housenr}" class="error center space-1rem-topbottom" for="housenr">Housenumber must not be empty!</label>
+										<label th:if="${param.InvalError_housenr}" class="error center space-1rem-topbottom" for="housenr">Invalid Housenumber!</label>
 									</div>
 									
 									<div class="small-12 columns">
@@ -211,8 +211,8 @@
 
 									<div class="small-12 columns less_space">
 										<input name="postcode_H" type="number" min="1" max="99999" th:value="${postcodeHOld}"/>
-										<label th:if="${param.EmptyError_plzH}" class="error center space--1rem--topbottom" for="postcode_H">Postcode must not be empty!</label>
-										<label th:if="${param.InvalError_plzH}" class="error center space--1rem--topbottom" for="postcode_H">Invalid Postcode!</label>
+										<label th:if="${param.EmptyError_plzH}" class="error center space-1rem-topbottom" for="postcode_H">Postcode must not be empty!</label>
+										<label th:if="${param.InvalError_plzH}" class="error center space-1rem-topbottom" for="postcode_H">Invalid Postcode!</label>
 									</div>
 								
 									<div class="small-12 columns">
@@ -220,8 +220,8 @@
 									</div>
 									<div class="small-12 columns less_space">
 										<input name="city_H" type="text" th:value="${cityHOld}"/>
-										<label th:if="${param.EmptyError_cityH}" class="error center space--1rem--topbottom" for="city_H">City must not be empty!</label>
-										<label th:if="${param.InvalError_cityH}" class="error center space--1rem--topbottom" for="city_H">Invalid City!</label>
+										<label th:if="${param.EmptyError_cityH}" class="error center space-1rem-topbottom" for="city_H">City must not be empty!</label>
+										<label th:if="${param.InvalError_cityH}" class="error center space-1rem-topbottom" for="city_H">Invalid City!</label>
 									</div>
 								</div>
 								
@@ -232,8 +232,8 @@
 
 									<div class="small-12 columns less_space">
 										<input name="flh_name" type="text" th:value="${fhl_nameOld}"/>
-										<label th:if="${param.EmptyError_fhl_name}" class="error center space--1rem--topbottom" for="firstnameIN">Fl&uuml;chtlingsheim Name must not be empty!</label>
-										<label th:if="${param.InvalError_fhl_name}" class="error center space--1rem--topbottom" for="firstnameIN">Invalid Fl&uuml;chtlingsheim Name!</label>
+										<label th:if="${param.EmptyError_fhl_name}" class="error center space-1rem-topbottom" for="firstnameIN">Fl&uuml;chtlingsheim Name must not be empty!</label>
+										<label th:if="${param.InvalError_fhl_name}" class="error center space-1rem-topbottom" for="firstnameIN">Invalid Fl&uuml;chtlingsheim Name!</label>
 									</div>
 								
 									<div class="small-12 columns">
@@ -242,8 +242,8 @@
 
 									<div class="small-12 columns less_space">
 										<input name="postcode_R" type="number" min="1" max="99999" th:value="${postcodeROld}"/>
-										<label th:if="${param.EmptyError_plzR}" class="error center space--1rem--topbottom" for="postcode_R">Postcode must not be empty!</label>
-										<label th:if="${param.InvalError_plzR}" class="error center space--1rem--topbottom" for="postcode_R">Invalid Postcode!</label>
+										<label th:if="${param.EmptyError_plzR}" class="error center space-1rem-topbottom" for="postcode_R">Postcode must not be empty!</label>
+										<label th:if="${param.InvalError_plzR}" class="error center space-1rem-topbottom" for="postcode_R">Invalid Postcode!</label>
 									</div>
 								
 									<div class="small-12 columns">
@@ -252,8 +252,8 @@
 
 									<div class="small-12 columns less_space">
 										<input name="city_R" type="text" th:value="${cityROld}"/>
-										<label th:if="${param.EmptyError_cityR}" class="error center space--1rem--topbottom" for="city_R">City must not be empty!</label>
-										<label th:if="${param.InvalError_cityR}" class="error center space--1rem--topbottom" for="city_R">Invalid City!</label>
+										<label th:if="${param.EmptyError_cityR}" class="error center space-1rem-topbottom" for="city_R">City must not be empty!</label>
+										<label th:if="${param.InvalError_cityR}" class="error center space-1rem-topbottom" for="city_R">Invalid City!</label>
 									</div>
 								
 									<div class="small-12 columns">
@@ -261,8 +261,8 @@
 									</div>
 									<div class="small-12 columns less_space">
 										<input name="citypart" type="text" th:value="${citypartOld}"/>
-										<label th:if="${param.EmptyError_citypart}" class="error center space--1rem--topbottom" for="citypart">Citypart must not be empty!</label>
-										<label th:if="${param.InvalError_citypart}" class="error center space--1rem--topbottom" for="citypart">Invalid Citypart!</label>
+										<label th:if="${param.EmptyError_citypart}" class="error center space-1rem-topbottom" for="citypart">Citypart must not be empty!</label>
+										<label th:if="${param.InvalError_citypart}" class="error center space-1rem-topbottom" for="citypart">Invalid Citypart!</label>
 									</div>
 								</div>
 							</div>
@@ -276,11 +276,11 @@
 								<noscript>
 									<font color="red"><b>In Ihrem Browser ist JavaScript deaktiviert. Für die Anzeige des Captcha wird Javascript ben&ouml;tigt.</b></font>
 								</noscript>
-								<label th:if="${param.EmptyError_captcha}" class="error center space--1rem--topbottom" for="g-recaptcha">Captcha must be used!</label>
-								<label th:if="${param.InvalError_captcha}" class="error center space--1rem--topbottom" for="g-recaptcha">Invalid CaptchaResponse!</label>
+								<label th:if="${param.EmptyError_captcha}" class="error center space-1rem-topbottom" for="g-recaptcha">Captcha must be used!</label>
+								<label th:if="${param.InvalError_captcha}" class="error center space-1rem-topbottom" for="g-recaptcha">Invalid CaptchaResponse!</label>
 							
 								<div class="large-6 small-7 large-uncentered small-centered columns">
-									<div class="button--right">
+									<div class="button-right">
 										<input class="button" type="submit" value="Create User" />
 									</div>
 								</div>

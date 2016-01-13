@@ -7,7 +7,6 @@ import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,11 +57,11 @@ AbstractWebIntegrationTests {
     User user2 = userRepository.findByUserAccount
                  (userAccountManager.findByUsername("Peter").get());
     
-    good1 = new GoodEntity(name1, description1, tag1, picture1, user1);
-    good2 = new GoodEntity(name2, description2, tag2, picture1, user2);
-    good3 = new GoodEntity(name3, description3, tag1, picture1, user1);
-    good4 = new GoodEntity(name4, description4, tag2, picture2, user1);
-    good5 = new GoodEntity(name5, description5, tag3, picture2, user1);
+    good1 = new GoodEntity(name1, description1, tag1, null, user1);
+    good2 = new GoodEntity(name2, description2, tag2, null, user2);
+    good3 = new GoodEntity(name3, description3, tag1, null, user1);
+    good4 = new GoodEntity(name4, description4, tag2, null, user1);
+    good5 = new GoodEntity(name5, description5, tag3, null, user1);
     
     tagsRepository.save(tag1);
     tagsRepository.save(tag2);

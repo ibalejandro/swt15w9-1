@@ -6,12 +6,21 @@
 
 	<body>
 		<th:block th:include="navigation :: navigation"></th:block>
-		<form action="/" method="post">
-		Validation von Recaptcha erfolgreich
-
-		Mail senden: 
-		<input class="button" type="submit" value="Submit"/>
-		</form>
+		
+		<div class="row">
+			<form action="/" method="post">
+				<div class="12-small columns">
+					<p class="text"> Validation von Recaptcha erfolgreich</p>
+				</div>
+				<div class="6-small columns">
+					<p class="text">Mail senden:</p>
+				</div>
+				<div class="6-small columns">
+					<input class="button" type="submit" value="Submit"/>
+				</div>
+			</form>
+		</div>
+		
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 </html>

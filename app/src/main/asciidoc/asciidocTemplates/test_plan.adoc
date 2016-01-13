@@ -15,19 +15,11 @@ Nach welchem Schema sind die Tests benannt?
 *U-1, U-2, I-1*
 
 == Test Gegenstände
-* Nutzererstellung
-* Hilfsgütererstellung
-* Dialogführung
-* Administrationsmöglichkeiten
 
 == Zu testende Funktionalitäten
-* neuer Nutzer nur mit gültigen Eingaben erstellbar
-* Hilfsgut nur mit gültigen Eingaben erstellbar
-* fragwürdige Hilfsgüter können entfernt werden durch Admin
-* Nutzer können durch Admin gesperrt werden
 
 == Nicht zu testende Funktionalitäten
-_z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel)._
+z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
 
 == Herangehensweise
 *Bsp.:*
@@ -37,9 +29,10 @@ _z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnit
 *Integrationstest nach Bottom-Up Prinzip*
 
 == Umgebungsvoraussetzungen
-* Die Software muss auf einem Webserver laufen
-* Es müssen eine Benutzerliste und eine Hilfsgüterliste bereits eingespeist sein
-* Die Software kommuniziert mit dem Anwender über einen Browser (mobil und Desktop)
+* Wird spezielle Hardware benötigt?
+* Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
+* Wird zusätzliche Software für das Testen benötigt?
+* Wie kommuniziert die Software während des Testens? Internet? Netzwerk?
 
 == Testfälle und Verantwortlichkeit
 Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.

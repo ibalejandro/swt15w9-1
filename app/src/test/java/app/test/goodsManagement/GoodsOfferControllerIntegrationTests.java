@@ -43,8 +43,8 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
     User user = userRepository.findByUserAccount(userAccountManager
                                                  .findByUsername("Lisa").get());
     
-    good1 = new GoodEntity(name1, description1, tag1, picture1, user);
-    good2 = new GoodEntity(name2, description2, tag2, picture2, user);
+    good1 = new GoodEntity(name1, description1, tag1, null, user);
+    good2 = new GoodEntity(name2, description2, tag2, null, user);
     
     tagsRepository.save(tag1);
     tagsRepository.save(tag2);

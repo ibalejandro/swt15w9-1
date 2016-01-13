@@ -8,29 +8,28 @@
 		<th:block th:include="navigation :: navigation"></th:block>
 
 		<div class="row">
-
 			<form th:action="@{/submit_deaktivateUser/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
 				<div class="small-12 columns">
 					<h1 class="headline">Nutzerkonto deaktivieren</h1>
 				</div>
 				
 				<div class="small-12 columns">
-					<p sec:authorize="hasRole('ROLE_NORMAL')" class="text"><font color="red"><b>Wollen Sie ihr Nutzerkonto wirklich deaktivieren? Diese Aktion kann nur von einem Administrator r&uuml;ckg&auml;ngig gemacht werden. Deaktivierte Nutzerkonten werden nach 3 Monaten gel&ouml;scht.</b></font></p>
-					<p sec:authorize="hasRole('ROLE_ADMIN')" class="text" th:text= "@{Do you really want to &nbsp;}+${user.getActivationStateOpposite()}+@{&nbsp; the User &nbsp;}+${user.userAccount.getUsername()}+@{&nbsp; ?}"><font color="red"></font></p>
+					<p sec:authorize="hasRole('ROLE_NORMAL')" class="text-super"><font color="red"><b>Wollen Sie ihr Nutzerkonto wirklich deaktivieren? Diese Aktion kann nur von einem Administrator r&uuml;ckg&auml;ngig gemacht werden. Deaktivierte Nutzerkonten werden nach 3 Monaten gel&ouml;scht.</b></font></p>
+					<p sec:authorize="hasRole('ROLE_ADMIN')" class="text-super" th:text= "@{Do you really want to &nbsp;}+${user.getActivationStateOpposite()}+@{&nbsp; the User &nbsp;}+${user.userAccount.getUsername()}+@{&nbsp; ?}"><font color="red"></font></p>
 				</div>
 				
 				<div class="small-12 columns">
 					<input type="checkbox" name="deaktivate" value="yes" id="check1"/>
-					<label for="check1">Nutzerkonto deaktivieren </label>
+					<label class="form__label" for="check1">Nutzerkonto deaktivieren </label>
 				</div>
 				
-				<div class="small-12 columns">
+				<div class="small-12 medium-7 columns">
 					<div class="g-recaptcha" data-sitekey="6LcBYBATAAAAAA3nbmCPoJmKJ9wYNKyia9T93sZC"></div>
 					<noscript>
 						<font color="red"><b>In Ihrem Browser ist JavaScript deaktiviert. Für die Anzeige des Captcha wird Javascript ben&ouml;tigt.</b></font>
 					</noscript>
 				</div>
-				<div class="small-12 columns">
+				<div class="small-12 medium-5 columns">
 					<input class="button" type="submit" value="Submit"/>
 				</div>
 			</form>
