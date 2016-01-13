@@ -43,7 +43,8 @@ import app.validator.TagValidator;
 
 /**
  * <h1>AdminManagementController</h1> The AdminManagementController is used to
- * modify UserAccounts or User with administrative rights.
+ * modify UserAccounts or User with administrative rights. It is also used to
+ * manage the available tags and the offered goods and activities.
  * 
  *
  * @author Friederike Kitzing
@@ -304,15 +305,18 @@ public class AdminController {
 	public String showTagToUpdate(HttpServletRequest request, Model model, @ModelAttribute("tag") TagEntity tag,
 			@LoggedIn Optional<UserAccount> userAccount) {
 		long id;
-
+		String error = null;
 		/*
 		 * This condition is made because the way parameters are read is
 		 * different for get and post requests.
 		 */
 		if (request.getMethod().equals("POST")) {
 			id = Long.parseLong(request.getParameter("id"));
-		} else
+		} 
+		else {
 			id = (Long) model.asMap().get("id");
+			error = (String) model.asMap().get("error");
+		}
 
 		if (!userAccount.isPresent())
 			return "noUser";
@@ -327,6 +331,11 @@ public class AdminController {
 		}
 
 		model.addAttribute("tag", tagToUpdate);
+		/*
+     * If the tag that the admin wanted to create already exists, an error
+     * message is returned to inform the admin about the situation.
+     */
+		model.addAttribute("error", error);
 
 		return "updateTag";
 	}
@@ -372,6 +381,18 @@ public class AdminController {
 			System.out.println("Invalid tag: " + bindingResult.getAllErrors().toString());
 			redirectAttributes.addFlashAttribute("id", id);
 			return "redirect:updateTag";
+		}
+		
+		/*
+     * If the tag to be updated has the same name as an already existing tag, 
+     * the admin is redirected to the tag-update form again.
+     */
+		TagEntity possibleExistingTag = tagsRepository.findByNameIgnoreCase
+		                                (tagToBeUpdated.getName().trim());
+		if (possibleExistingTag != null) {
+		  redirectAttributes.addFlashAttribute("id", id);
+		  redirectAttributes.addFlashAttribute("error", "This tag already exists");
+		  return "redirect:updateTag";
 		}
 
 		/*
@@ -438,9 +459,18 @@ public class AdminController {
 	@RequestMapping(value = "/addNewTag", method = RequestMethod.GET)
 	public String showFormToAddNewTag(Model model, @ModelAttribute("tag") TagEntity tag,
 			@LoggedIn Optional<UserAccount> userAccount) {
-		if (!userAccount.isPresent())
-			return "noUser";
+		if (!userAccount.isPresent()) return "noUser";
 
+		/*
+     * If the tag that the admin wanted to create already exists, the name of
+     * the tag and an error message are returned to inform the admin about the
+     * situation.
+     */
+		String name = (String) model.asMap().get("name");
+		String error = (String) model.asMap().get("error");
+		
+		model.addAttribute("name", name);
+		model.addAttribute("error", error);
 		return "addNewTag";
 	}
 
@@ -461,8 +491,11 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/addedNewTag", method = RequestMethod.POST)
-	public String addNewTag(HttpServletRequest request, Model model, @ModelAttribute("tag") TagEntity tag,
-			BindingResult bindingResult, @LoggedIn Optional<UserAccount> userAccount) {
+	public String addNewTag(HttpServletRequest request, Model model, 
+	                        @ModelAttribute("tag") TagEntity tag,
+			                    BindingResult bindingResult, 
+			                    RedirectAttributes redirectAttributes,
+			                    @LoggedIn Optional<UserAccount> userAccount) {
 		String name = request.getParameter("name");
 
 		if (!userAccount.isPresent())
@@ -480,6 +513,18 @@ public class AdminController {
 			System.out.println("Invalid tag: " + bindingResult.getAllErrors().toString());
 			return "redirect:addNewTag";
 		}
+		
+		/*
+     * If the tag to be created has the same name as an already existing tag, 
+     * the admin is redirected to the tag-add-new form again.
+     */
+    TagEntity possibleExistingTag = tagsRepository.findByNameIgnoreCase
+                                    (tagToSave.getName().trim());
+    if (possibleExistingTag != null) {
+      redirectAttributes.addFlashAttribute("name", tagToSave.getName());
+      redirectAttributes.addFlashAttribute("error", "This tag already exists");
+      return "redirect:addNewTag";
+    }
 
 		TagEntity savedTag = tagsRepository.save(tagToSave);
 
@@ -508,7 +553,7 @@ public class AdminController {
 		if (!userAccount.isPresent())
 			return "noUser";
 
-		model.addAttribute("result", goodsRepository.findAll());
+		model.addAttribute("resultGoods", goodsRepository.findAll());
 		model.addAttribute("resultActivities", activitiesRepository.findAll());
 		return "offeredGoodsAndActivities";
 	}
