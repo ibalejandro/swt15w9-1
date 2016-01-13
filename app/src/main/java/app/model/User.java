@@ -108,7 +108,7 @@ public class User implements Serializable {
 		// aktiviert;
 		this.activationkey = "";
 		this.adresstyp = AddresstypEnum.empty;
-
+		goods=new HashSet<>();
 		languages = new HashSet<>();
 	}
 

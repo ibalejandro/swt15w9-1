@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 
 import app.model.Address;
 import app.model.Coordinates;
+import app.model.GoodEntity;
 import app.model.InterfacePart;
 import app.model.Language;
 import app.model.Module;
@@ -22,7 +23,9 @@ import app.model.TagEntity;
 import app.model.User;
 import app.model.User.AddresstypEnum;
 import app.model.UserRepository;
+import app.repository.ActivitiesRepository;
 import app.repository.DialogRepository;
+import app.repository.GoodsRepository;
 import app.repository.InterfaceRepository;
 import app.repository.LanguageRepository;
 import app.repository.ModuleRepository;
@@ -42,6 +45,8 @@ public class TestDaten implements DataInitializer {
 	private final ModuleRepository moduleRepository;
 	private final InterfaceRepository interfaceRepository;
 	private final TextBlockRepository textBlockRepository;
+	private final GoodsRepository goodsRepository;
+	private final ActivitiesRepository activitiesRepository;
 
 	@Autowired
 	public TestDaten(UserAccountManager userAccountManager, 
@@ -51,7 +56,9 @@ public class TestDaten implements DataInitializer {
 	                 TagsRepository tagsRepository,
 	                 ModuleRepository moduleRepository,
 	                 InterfaceRepository interfaceRepository,
-	                 TextBlockRepository textBlockRepository) {
+	                 TextBlockRepository textBlockRepository,
+	                 GoodsRepository goodsRepository,
+	                 ActivitiesRepository activitiesRepository) {
 
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -65,6 +72,8 @@ public class TestDaten implements DataInitializer {
 		this.moduleRepository = moduleRepository;
 		this.interfaceRepository = interfaceRepository;
 		this.textBlockRepository = textBlockRepository;
+		this.goodsRepository=goodsRepository;
+		this.activitiesRepository=activitiesRepository;
 	}
 
 	@Override
@@ -72,6 +81,8 @@ public class TestDaten implements DataInitializer {
 
 		initializeUsers(userAccountManager, userRepository, dialogRepository, languageRepository,
 		                tagsRepository, moduleRepository, interfaceRepository);
+		initializeGoodsAndActivities(userAccountManager, userRepository, dialogRepository, languageRepository,
+                tagsRepository, moduleRepository, interfaceRepository);
 		initializeTextBlocks();
 	}
 
@@ -96,33 +107,116 @@ public class TestDaten implements DataInitializer {
 		UserAccount u1 = userAccountManager.create("Lisa", "pw", normalUserRole);
 		u1.setFirstname("Lisa-Marie");
 		u1.setLastname("Maier");
-		u1.setEmail("Maier@gmail.com");
+		u1.setEmail("test@test.test");
 		userAccountManager.save(u1);
 
 		UserAccount u2=userAccountManager.create("Peter", "pw", normalUserRole);
 		u2.setFirstname("Peter");
 		u2.setLastname("U.");
-		u2.setEmail("test1@test.test");
+		u2.setEmail("test@test.test");
 		userAccountManager.save(u2);
 		
-		Address address1 = new Address("Mittelstraße", " 1", "11587", "Dresden");
+		UserAccount testUser1 = userAccountManager.create("testUser1", "pw", normalUserRole);
+		testUser1.setFirstname("Susi");
+		testUser1.setLastname("Müller");
+		testUser1.setEmail("test@test.test");
+		userAccountManager.save(testUser1);
+
+		UserAccount ut2=userAccountManager.create("testUser2", "pw", normalUserRole);
+		ut2.setFirstname("Paul");
+		ut2.setLastname("Mustermann");
+		ut2.setEmail("test@test.test");
+		userAccountManager.save(ut2);
+		
+		UserAccount testUser5 = userAccountManager.create("testUser5", "pw", normalUserRole);
+		testUser5.setFirstname("Abc");
+		testUser5.setLastname("Def");
+		testUser5.setEmail("test@test.test");
+		userAccountManager.save(testUser5);
+		
+		UserAccount testUser6 = userAccountManager.create("testUser6", "pw", normalUserRole);
+		testUser6.setFirstname("Ghi");
+		testUser6.setLastname("Jkl");
+		testUser6.setEmail("test@test.test");
+		userAccountManager.save(testUser6);
+		
+		UserAccount testUser7 = userAccountManager.create("testUser7", "pw", normalUserRole);
+		testUser7.setFirstname("Abc");
+		testUser7.setLastname("Def");
+		testUser7.setEmail("test@test.test");
+		userAccountManager.save(testUser7);
+		
+		Address address1 = new Address("Nöthnitzer Str.", "46",
+				"01187", "Dresden");
+		Address address2 = new Address("Prager Str.", "10", "01069",
+				"Dresden");
+		Address testAddressWohnung3 = new Address("Scharnweberstr.", "22 A",
+						"12587", "Berlin");
+		Address testAddressWohnung4 = new Address("Merzdorfer Str.", "21 - 25",
+						"01591", "Riesa");
+		Address testAddressWohnung5 = new Address("Martin-Luther-Ring", "4-6",
+						"04109", "Leipzig");
+		Address testAddressRefugee1 = new Address("", "", "Dresden 6",
+				"Südvorstadt", "01187", "Dresden");
+		Address testAddressRefugee2 = new Address("", "",
+				"NUK Friedrichshagen", "Friedrichshagen", "12587", "Berlin");
 
 		User user1 = new User(u1, address1);
 	    user1.setAddresstyp(AddresstypEnum.Wohnung);
 		user1.setOrigin("Germany, Deutschland (DE)");
 		user1.setRegistrationdate(new Date());
 		user1.Activate();
+		user1.setCoordinates(user1.createCoordinates());
+		userRepository.save(user1);
 		
-		Address address2 = new Address("", "", "Flh1", "Centrum", "01234", "Berlin");
-
 		User user2 = new User(u2, address2);
-		user2.setAddresstyp(AddresstypEnum.Refugees_home);
+		user2.setAddresstyp(AddresstypEnum.Wohnung);
 		user2.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
 		user2.setRegistrationdate(new Date());
 		user2.Activate();
-		
-		userRepository.save(user1);
+		user2.setCoordinates(user2.createCoordinates());
 		userRepository.save(user2);
+		
+		User user3 = new User(testUser1, testAddressWohnung3);
+	    user3.setAddresstyp(AddresstypEnum.Wohnung);
+		user3.setOrigin("Germany, Deutschland (DE)");
+		user3.setRegistrationdate(new Date());
+		user3.Activate();
+		user3.setCoordinates(user3.createCoordinates());
+		userRepository.save(user3);
+		
+		User user4 = new User(ut2, testAddressWohnung4);
+		user4.setAddresstyp(AddresstypEnum.Wohnung);
+		user4.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
+		user4.setRegistrationdate(new Date());
+		user4.Activate();
+		user4.setCoordinates(user4.createCoordinates());
+		userRepository.save(user4);
+		
+		User user5 = new User(testUser5, testAddressWohnung5);
+	    user5.setAddresstyp(AddresstypEnum.Wohnung);
+		user5.setOrigin("Germany, Deutschland (DE)");
+		user5.setRegistrationdate(new Date());
+		user5.Activate();
+		user5.setCoordinates(user5.createCoordinates());
+		userRepository.save(user5);
+		
+		User user6 = new User(testUser6, testAddressRefugee1);
+		user6.setAddresstyp(AddresstypEnum.Refugees_home);
+		user6.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
+		user6.setRegistrationdate(new Date());
+		user6.Activate();
+		user6.setCoordinates(user6.createCoordinates());
+		userRepository.save(user6);
+		
+		User user7 = new User(testUser7, testAddressRefugee2);
+		user7.setAddresstyp(AddresstypEnum.Refugees_home);
+		user7.setOrigin("United Arab Emirates, Vereinigte Arabische Emirate (AE)");
+		user7.setRegistrationdate(new Date());
+		user7.Activate();
+		user7.setCoordinates(user7.createCoordinates());
+		userRepository.save(user7);
+		
 		
 		//Sprachen:
 		Language language1= new Language("Deutsch", "de");
@@ -141,31 +235,8 @@ public class TestDaten implements DataInitializer {
 		
 		userRepository.save(user1);
 		userRepository.save(user2);
+
 		
-		UserAccount testUser1 = userAccountManager.create("testUser1", "pw", normalUserRole);
-		testUser1.setFirstname("Susi");
-		testUser1.setLastname("Müller");
-		testUser1.setEmail("test@test.test");
-		userAccountManager.save(testUser1);
-
-		UserAccount ut2=userAccountManager.create("testUser2", "pw", normalUserRole);
-		ut2.setFirstname("Paul");
-		ut2.setLastname("Mustermann");
-		ut2.setEmail("test@test.test");
-		userAccountManager.save(ut2);
-		//Prager Straße 10 01069 Dresden
-		Address testAddressWohnung1 = new Address("Nöthnitzer Str.", "46", "01187", "Dresden");
-		Address testAddressWohnung2 = new Address("Prager Str.", "10", "01069", "Dresden");
-		User userTest1 = new User(testUser1, testAddressWohnung1);
-	    userTest1.setAddresstyp(AddresstypEnum.Wohnung);
-	    userTest1.setCoordinates(new Coordinates(0.00,0.00));
-
-		User userTest2 = new User(ut2, testAddressWohnung2);
-		userTest2.setAddresstyp(AddresstypEnum.Wohnung);
-		userTest2.setCoordinates(new Coordinates(0.00,0.00));
-		userRepository.save(userTest1);
-		userRepository.save(userTest2);
-
 		/*
 		Dialog d = new Dialog("My Dialog", user1, user2);
 		Dialog savedDialog = dialogRepository.save(d);
@@ -181,6 +252,8 @@ public class TestDaten implements DataInitializer {
 		for(Module mod : mods){
 			moduleRepository.save(mod);
 		}
+		
+		
 		
 		List<InterfacePart> inPs = createInterfacePart(moduleRepository, languageRepository);
 		for(InterfacePart inP : inPs){
@@ -252,6 +325,50 @@ public class TestDaten implements DataInitializer {
     tags.add(tag21);
     
     return tags;
+	}
+	
+	private void initializeGoodsAndActivities(UserAccountManager userAccountManager, 
+            UserRepository userRepository, 
+            DialogRepository dialogRepository, 
+            LanguageRepository languageRepository,
+            TagsRepository tagsRepository,
+            ModuleRepository moduleRepository,
+            InterfaceRepository interfaceRepository) {
+		
+		User user2 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser2").get());
+		User user3 =userRepository.findByUserAccount(userAccountManager
+				.findByUsername("Lisa").get());
+		User user6 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser6").get());
+		
+		GoodEntity testGood1= new GoodEntity("Test1", "First TestGood", tagsRepository.findByName("Books"), null, 
+                user2);
+		GoodEntity savedGood1 = goodsRepository.save(testGood1);
+		user2.addGood(savedGood1);
+		
+		GoodEntity testGood2= new GoodEntity("Test2", "Second TestGood", tagsRepository.findByName("Books"), null, 
+              user3);
+		GoodEntity savedGood2 = goodsRepository.save(testGood2);
+		user3.addGood(savedGood2);
+		
+		GoodEntity testGood3= new GoodEntity("Test3", "Third TestGood", tagsRepository.findByName("Books"), null, 
+              user6);
+		GoodEntity savedGood3 = goodsRepository.save(testGood3);
+		user6.addGood(savedGood3);
+		GoodEntity testGood4= new GoodEntity("Test4", "Forth TestGood", tagsRepository.findByName("Books"), null, 
+              user6);
+		GoodEntity savedGood4 = goodsRepository.save(testGood4);
+		user6.addGood(savedGood4);
+		System.out.println(user6.getGoods());
+		
+		GoodEntity testGood5= new GoodEntity("Test5", "5th TestGood", tagsRepository.findByName("Jewelry & Watches"), null, 
+              user6);
+		GoodEntity savedGood5 = goodsRepository.save(testGood5);
+		user6.addGood(savedGood5);
+		System.out.println(user6.getGoods());
+
+		
 	}
 	
 	/**

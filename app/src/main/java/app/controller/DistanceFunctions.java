@@ -16,7 +16,6 @@ import app.repository.ActivitiesRepository;
 import app.repository.GoodsRepository;
 import app.repository.LanguageRepository;
 import app.repository.TagsRepository;
-import app.test.coordinates.AbstractWebIntegrationTests;
 
 /**
  * @author Friederike Kitzing

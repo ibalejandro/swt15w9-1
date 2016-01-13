@@ -150,16 +150,13 @@ public class DistanceTest extends AbstractWebIntegrationTests {
 				.findByUsername("Lisa").get());
 		User user4 =userRepository.findByUserAccount(userAccountManager
 				.findByUsername("Peter").get());
-		
-		UserAccount testUser5 = userAccountManager.create("testUser5", "pw", normalUserRole);
-		userAccountManager.save(testUser5);
-		
-		UserAccount testUser6 = userAccountManager.create("testUser6", "pw", normalUserRole);
-		userAccountManager.save(testUser6);
-		
-		UserAccount testUser7 = userAccountManager.create("testUser7", "pw", normalUserRole);
-		userAccountManager.save(testUser7);
-
+		User user5 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser5").get());
+		User user6 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser6").get());
+		User user7 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser7").get());
+	
 		Address testAddressWohnung1 = new Address("Nöthnitzer Str.", "46",
 				"01187", "Dresden");
 		//2.44km
@@ -205,19 +202,19 @@ public class DistanceTest extends AbstractWebIntegrationTests {
 		user4.setCoordinates(user4.createCoordinates());
 		userRepository.save(user4);
 		
-		User user5 = new User(testUser5, testAddressWohnung5);
+		user5.setLocation(testAddressWohnung5);
 	    user5.setAddresstyp(AddresstypEnum.Wohnung);
 	    userRepository.save(user5);
 		user5.setCoordinates(user5.createCoordinates());
 		userRepository.save(user5);
 		
-		User user6 = new User(testUser6, testAddressWohnung6);
+		user6.setLocation(testAddressWohnung6);
 	    user6.setAddresstyp(AddresstypEnum.Wohnung);
 	    userRepository.save(user6);
 		user6.setCoordinates(user6.createCoordinates());
 		userRepository.save(user6);
 		
-		User user7 = new User(testUser7, testAddressWohnung7);
+		user7.setLocation(testAddressWohnung7);
 	    user7.setAddresstyp(AddresstypEnum.Wohnung);
 	    userRepository.save(user7);
 		user7.setCoordinates(user7.createCoordinates());
@@ -226,6 +223,7 @@ public class DistanceTest extends AbstractWebIntegrationTests {
 	}
 	
 	public void prepaireTestGoods(){
+		/*
 		User user2 = userRepository.findByUserAccount(userAccountManager
 				.findByUsername("testUser2").get());
 		User user3 =userRepository.findByUserAccount(userAccountManager
@@ -233,38 +231,14 @@ public class DistanceTest extends AbstractWebIntegrationTests {
 		User user6 = userRepository.findByUserAccount(userAccountManager
 				.findByUsername("testUser6").get());
 		
-		GoodEntity testGood1= new GoodEntity("Test1", "First TestGood", tagsRepository.findByName("Books"), null, 
-                  user2);
-		GoodEntity savedGood1 = goodsRepository.save(testGood1);
-		user2.addGood(savedGood1);
-		
-		GoodEntity testGood2= new GoodEntity("Test2", "Second TestGood", tagsRepository.findByName("Books"), null, 
-                user3);
-		GoodEntity savedGood2 = goodsRepository.save(testGood2);
-		user3.addGood(savedGood2);
-		
-		GoodEntity testGood3= new GoodEntity("Test3", "Third TestGood", tagsRepository.findByName("Books"), null, 
-                user6);
-		GoodEntity savedGood3 = goodsRepository.save(testGood3);
-		user6.addGood(savedGood3);
-		GoodEntity testGood4= new GoodEntity("Test4", "Forth TestGood", tagsRepository.findByName("Books"), null, 
-                user6);
-		GoodEntity savedGood4 = goodsRepository.save(testGood4);
-		user6.addGood(savedGood4);
-		System.out.println(user6.getGoods());
-		
-		GoodEntity testGood5= new GoodEntity("Test5", "5th TestGood", tagsRepository.findByName("Jewelry & Watches"), null, 
-                user6);
-		GoodEntity savedGood5 = goodsRepository.save(testGood5);
-		user6.addGood(savedGood5);
-		System.out.println(user6.getGoods());
+		*/
 		
 	}
 	
 	@Test
 
 	public void userByDistanceTest() {
-		
+		prepaire();
 		User user1 = userRepository.findByUserAccount(userAccountManager
 				.findByUsername("testUser1").get());
 		User user2 = userRepository.findByUserAccount(userAccountManager
