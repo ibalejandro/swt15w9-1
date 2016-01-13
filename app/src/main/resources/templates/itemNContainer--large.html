@@ -3,7 +3,7 @@
 	<!--/* by Lennart Schmidt */-->
 	<!--/*
 		TODO:
-			- 
+			-
 	*/-->
 	
 	<head>
@@ -11,16 +11,13 @@
 	</head>
 	
 	<body>
-		<div th:include="navigation :: navigation"></div>
-		
-		<div class="row">
-			<div class="small-12 columns">
-				<h1 class="headline"> You just offered this good: </h1>
+		<th:block th:fragment="show_items">
+			<div class="umrandung">
+				<th:block th:if="${itsAGood}" th:include="itemN--large--good--buttons :: item"></th:block>
+				
+				<th:block th:if="${!itsAGood}" th:include="itemN--large--activity--buttons :: item"></th:block>
 			</div>
-			<div class="small-12 columns umrandung">
-				<div th:include="itemN--large--good :: item"></div>
-			</div>
-		</div>
+		</th:block>
 		
 		<th:block th:include="imports :: script"></th:block>
 	</body>

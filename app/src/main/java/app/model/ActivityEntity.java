@@ -234,6 +234,19 @@ public class ActivityEntity implements Serializable {
 	  return id+"/activityimage";
   }
   
+  @SuppressWarnings("deprecation")
+public String getDateAsString(){
+	 if(this.startDate.getDate() == this.endDate.getDate() 
+			 && this.startDate.getYear() == this.endDate.getYear() 
+			 && this.startDate.getMonth() == this.endDate.getMonth() )
+	 {
+		 return startDate.getDate()+"."+this.startDate.getMonth()+"."+(this.startDate.getYear()+1900);
+	 }
+	 
+	 return startDate.getDate()+"."+this.startDate.getMonth()+"."+(this.startDate.getYear()+1900) +" - "
+			 +endDate.getDate()+"."+this.endDate.getMonth()+"."+(this.endDate.getYear()+1900);
+  }
+  
   /**
    * This method converts a date into a String for input fields
    * @param Date A java Date
@@ -398,5 +411,6 @@ public class ActivityEntity implements Serializable {
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
+
 
 }

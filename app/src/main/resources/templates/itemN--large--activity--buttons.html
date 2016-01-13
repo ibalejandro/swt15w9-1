@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!--/* by Lennart Schmidt */-->
+	<!--/*
+		TODO:
+			-
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<th:block th:fragment="item">
+			<div class="row">
+				<div class="item-single">
+					<div class="small-12 medium-6 large-3 columns">
+						<h1 th:text="${result.name}" class="headline"></h1>
+					</div>
+					
+					<th:block th:include="itemN--large--good--buttons :: button"></th:block>
+					
+					<th:block th:include="itemN--large--activity :: content"></th:block>
+				</div>
+			</div>
+		</th:block>
+		
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+</html>
