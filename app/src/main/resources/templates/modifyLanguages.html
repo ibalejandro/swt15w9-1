@@ -16,7 +16,6 @@
 			<form th:action="@{/modifyLanguages_submit/}" method="post">				
 				<div class="small-12 columns less_space">
 						<select id="nativelanguage" name="nativelanguage">
-							<option value="-1">---- Select ----</option>
 							<option th:each="language : ${languages}"
 								th:if="${language.getkennung()} == ${user.getPrefLanguage().getkennung()}" selected="selected"		
 								th:value="${language.getkennung()}"
@@ -61,7 +60,6 @@
 							th:text="${language.name}">
 						</option>
 					</select>  
-					<label th:if="${param.InvalError_language3}" class="error center space-1rem-topbottom" for="otherlanguages">Invalid!</label>
 				</div>
 
 				<input type="submit" class="button" value="OK"/>
