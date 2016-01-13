@@ -19,23 +19,49 @@
 			</div>
 			
 			<div class="small-12 medium-6 columns"> 
-				<table>
-					<tr> <!-- List all attributes here! -->
-						<th>Template Name</th>
-						<th>Bearbeiten</th>
-						<th>Löschen</th>
-					</tr>
-					<tr th:each="temp : ${template}">
-						<td th:text="${temp}"></td>
-						<td><a th:href="@{/changeTemplate/{res}(res=${temp})}">ändern</a></td>
-						<td><a th:href="@{/deleteTemplate/{res}(res=${temp})}">löschen</a></td>
-					</tr>
-					<tr>
-						<td>Neues Template</td>
-						<td><a th:href="@{/newTemplate}">erstellen</a></td>
-						<td></td>
-					</tr>
-				</table>
+				<form th:action="@{/changeTemplate/}" method="post">
+					<h3 class="headline">Templates bearbeiten</h3>
+					<p>Zuändernde Sprache</p>
+					<select id="changeSprache" name="changeSprache">
+						<option th:each="lang : ${language}" th:value="${lang}" th:text="${lang}"></option>
+					</select>
+					<p>Referenzsprache</p>
+					<select id="refSprache" name="refSprache">
+						<option value="-1">---</option>
+						<option th:each="lang : ${language}" th:value="${lang}" th:text="${lang}"></option>
+					</select>
+					<p>Template</p>
+					<select id="temp" name="temp">
+						<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
+					</select>
+					<input class="button" type="submit" value="Ändern"/>
+				</form>
+				<form th:action="@{/newTemplate/}" method="post">
+					<h3 class="headline">Module+Template erstellen</h3>
+					<p>Template-Name</p>
+					<input type="text" name="templ"/>
+					<p>Modul-Name</p>
+					<input type="text" name="modl"/>
+					<input class="button" type="submit" value="Erstellen"/>
+				</form>
+				<form th:action="@{/newModule/}" method="post">
+					<h3 class="headline">Modul erstellen</h3>
+					<p>Name</p>
+					<input type="text" name="module"/>
+					<p>Template</p>
+					<select id="templ" name="templ">
+						<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
+					</select>
+					<input class="button" type="submit" value="Erstellen"/>
+				</form>
+				<form th:action="@{/deleteTemplate/}" method="post">
+					<h3 class="headline">Module löschen</h3>
+					<p>Template</p>
+					<select id="temp" name="temp">
+						<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
+					</select>
+					<input class="button" type="submit" value="Weiter"/>
+				</form>
 			</div>
 			<div class="small-12 medium-6 columns"> 
 				<table>

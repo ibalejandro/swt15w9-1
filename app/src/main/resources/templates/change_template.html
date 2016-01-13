@@ -17,24 +17,24 @@
 				<h1 class="headline">Template bearbeiten: </h1>
 			</div>
 			
-			<form th:action="@{/change_template_submit}" method="post">
+			<form th:action="@{/change_template_submit/}+${template}" method="post">
 				<table>
 					<tr> <!-- List all attributes here! -->
-						<th>TyhmeLeaf einbindung</th>
-						<th th:if="${refSprache}">Refernzsprachen Text</th>
+						<th>ThymeLeaf einbindung</th>
+						<th th:if="${refSprache}">Referenzsprachen Text</th>
 						<th>zuändernde Sprache</th>
 					</tr>
-					<tr th:each="temp : ${result}">
-						<td><input class="form__input" th:value="${temp.get1().getTyhmeLeafName()}" type="text" id="username" name="username" autofocus="autofocus"/></td>
+					<tr th:each="temp, iterStat : ${result}">
+						<td>
+							<input class="form__input" th:value="${temp.get1().getThymeLeafName()}" type="text" th:name="'thymeLeafValue'+${iterStat.count}" autofocus="autofocus"/>
+							<input class="form__input" th:value="${temp.get1().getId()}" type="hidden" th:name="'thymeLeafId'+${iterStat.count}"/>
+						</td>
 						<td th:if="${refSprache}" th:text="${temp.get2().get2()}"></td>
-						<td><input class="form__input" th:value="${temp.get2().get1()}" type="text" id="username" name="username" autofocus="autofocus"/></td>
-					</tr>
-					<tr>
-						<td>Neues Template</td>
-						<td><a th:href="@{/newTemplate}">erstellen</a></td>
-						<td></td>
+						<td><input class="form__input" th:value="${temp.get2().get1()}" type="text" th:name="'Value'+${iterStat.count}" autofocus="autofocus"/></td>
 					</tr>
 				</table>
+				<input type="hidden" th:value="${changeSprache}" name="changeSprache"/>
+				<input type="submit" class="button" value="Speichern"/>
 			</form>
 			
 		</div>

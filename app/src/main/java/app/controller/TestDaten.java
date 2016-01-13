@@ -239,11 +239,11 @@ public class TestDaten implements DataInitializer {
 		Language lanDE = lanRes.findByKennung("de");
 		Language lanAR = lanRes.findByKennung("ar");
 				
-		Module mod1 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_link_text");
-		Module mod2 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_error_text");
-		Module mod3 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_nutzername_text");
-		Module mod4 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_passwort_text");
-		Module mod5 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_button_text");
+		Module mod1 = modRes.findByTemplateNameAndThymeLeafName("login", "login_link_text");
+		Module mod2 = modRes.findByTemplateNameAndThymeLeafName("login", "login_error_text");
+		Module mod3 = modRes.findByTemplateNameAndThymeLeafName("login", "login_nutzername_text");
+		Module mod4 = modRes.findByTemplateNameAndThymeLeafName("login", "login_passwort_text");
+		Module mod5 = modRes.findByTemplateNameAndThymeLeafName("login", "login_button_text");
 
 		InterfacePart in0 = new InterfacePart("Noch nicht Registriert?", lanDE.getId(), mod1.getId());
 		InterfacePart in1 = new InterfacePart("Der Nutzername oder das Passwort sind falsch!", lanDE.getId(), mod2.getId());
