@@ -21,9 +21,11 @@ public interface ModuleRepository extends CrudRepository<Module, Long> {
 	 * 
 	 * @param templateName
 	 *            the Template name
-	 * @param tyhmeLeafName
+	 * @param thymeLeafName
 	 *            the specific name in the Template
 	 * @return
 	 */
-	Module findByTemplateNameAndTyhmeLeafName(String templateName, String tyhmeLeafName);
+	Module findByTemplateNameAndThymeLeafName(String templateName, String thymeLeafName);
+	
+	Module findById(long id);
 }

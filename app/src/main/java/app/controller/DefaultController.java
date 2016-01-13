@@ -68,7 +68,6 @@ public class DefaultController {
 	 */
 	@RequestMapping({ "/", "/index" })
 	String index(HttpServletRequest request, Model modelMap) {
-
 		modelMap.addAttribute("resultGoods", goodsRepository.findAll());
 		modelMap.addAttribute("resultActivities", activitiesRepository.findAll());
 		modelMap.addAttribute("languages", languageRepository.findAll());
@@ -89,9 +88,9 @@ public class DefaultController {
 
 			for (InterfacePart iP : inPLan) {
 				if (moduleRepository.findOne(iP.getModuleId()) != null) {
-					modelMap.addAttribute(moduleRepository.findOne(iP.getModuleId()).getTyhmeLeafName(), iP);
+					modelMap.addAttribute(moduleRepository.findOne(iP.getModuleId()).getThymeLeafName(), iP);
 					System.out.println(
-							moduleRepository.findOne(iP.getModuleId()).getTyhmeLeafName() + ", " + iP.getText());
+							moduleRepository.findOne(iP.getModuleId()).getThymeLeafName() + ", " + iP.getText());
 				}
 			}
 		}
