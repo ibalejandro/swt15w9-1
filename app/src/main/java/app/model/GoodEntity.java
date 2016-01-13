@@ -85,18 +85,23 @@ public class GoodEntity implements Serializable {
 	 *            The user who is offering the good
 	 */
 
-	public GoodEntity(String name, String description, TagEntity tag, Part pic, User user) {
-		this.name = name;
-		this.description = description;
-		this.tag = tag;
-
-		this.picture = createPicture(pic);
-
-		this.user = user;
-	}
+	 
+	 public GoodEntity(String name, String description, TagEntity tag, 
+	                   Part pic, User user) {
+    this.name = name;
+    this.description = description;
+    this.tag = tag;
+    
+    this.picture = createPicture(pic);
+		
+	this.user = user;
+  }
 
 	public static byte[] createPicture(Part picture) {
 		/* Ferdinand's code */
+		if(picture==null){
+			return null;
+		}
 		if (picture.getSize() == 0L) {
 			return null;
 		}

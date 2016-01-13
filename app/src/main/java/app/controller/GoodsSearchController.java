@@ -1,14 +1,28 @@
 package app.controller;
 
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
+
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import app.model.ActivityEntity;
 import app.model.GoodEntity;
 import app.model.TagEntity;
+import app.model.User;
+import app.model.UserRepository;
 import app.repository.ActivitiesRepository;
 import app.repository.GoodsRepository;
 import app.repository.TagsRepository;
@@ -26,6 +40,9 @@ public class GoodsSearchController {
 	private final GoodsRepository goodsRepository;
 	private final ActivitiesRepository activitiesRepository;
 	private final TagsRepository tagsRepository;
+	private final UserRepository userRepository;
+	@Autowired 
+	DistanceFunctions distanceFunctions;
 
 	/**
    * Autowire.
@@ -36,10 +53,12 @@ public class GoodsSearchController {
 	@Autowired
 	public GoodsSearchController(GoodsRepository goodsRepository,
 	                             ActivitiesRepository activitiesRepository,
-								               TagsRepository tagsRepository){
+								               TagsRepository tagsRepository,
+								               UserRepository userRepository){
 		this.goodsRepository = goodsRepository;
 		this.activitiesRepository = activitiesRepository;
 		this.tagsRepository = tagsRepository;
+		this.userRepository=userRepository;
 	}
 	/////////////////////////////////////////////////////////end
 
@@ -52,6 +71,7 @@ public class GoodsSearchController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
   public String populateTagsDropdown(Model model) {
     model.addAttribute("navTags", tagsRepository.findAllByOrderByNameAsc());
+    System.out.println(model);
     return "search";
   }
 
@@ -64,10 +84,15 @@ public class GoodsSearchController {
    * @return String The name of the view to be shown after processing
    */
 	@RequestMapping(value = "/searchResultsByTag", method = RequestMethod.POST)
-  public String searchGoodOrActivityByTag(HttpServletRequest request, 
+  public String searchGoodOrActivityByTag(@RequestParam("tagId") final String TagId,@RequestParam("distance") final String Distance,  @LoggedIn Optional<UserAccount> userAccount,
                                           Model model) {
+		if(!userAccount.isPresent())return "noUser";
+		User searchingUser=userRepository.findByUserAccount(userAccount.get());
+		
 		String parameterType = "tag";
-		long tagId = Long.parseLong(request.getParameter("tagId"));
+		
+		long tagId = Long.parseLong(TagId);
+		int distance= Integer.parseInt(Distance);
 
 		/*
      * The type of parameter and the parameter itself for the search are
@@ -78,17 +103,29 @@ public class GoodsSearchController {
 		if (tagId != -1L) {
 		  TagEntity tag = tagsRepository.findOne(tagId);
 		  model.addAttribute("resultParameter", tag.getName());
-		  goodsFound = goodsRepository.findByTag(tag);
-		  activitiesFound = activitiesRepository.findByTag(tag);
+		  if(distance==-1){
+			  goodsFound = goodsRepository.findByTag(tag);
+			  activitiesFound = activitiesRepository.findByTag(tag);
+		  }else{
+			  Set<User> userByDistance=distanceFunctions.getUserByDistance(distance, searchingUser);
+			  goodsFound = distanceFunctions.collectGoodsByDistance(tag, userByDistance);
+			  activitiesFound = distanceFunctions.collectActivitiesByDistance(tag, userByDistance);
+		  }
 		}
 		/*
      * If the tagId is -1L that means that the user doesn't want to filter by
      * any search criteria.
      */
 		else {
-		  model.addAttribute("resultParameter", "All");
-		  goodsFound = goodsRepository.findAll();
-		  activitiesFound = activitiesRepository.findAll();
+			if(distance==-1){
+				model.addAttribute("resultParameter", "All");
+				goodsFound = goodsRepository.findAll();
+				activitiesFound = activitiesRepository.findAll();
+			}else{
+				Set<User> userByDistance=distanceFunctions.getUserByDistance(distance, searchingUser);
+				goodsFound = distanceFunctions.collectGoodsByDistance(userByDistance);
+				activitiesFound = distanceFunctions.collectActivitiesByDistance(userByDistance);
+			}
 		}
 		
 		model.addAttribute("resultGoods", goodsFound);

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.model.ActivityEntity;
+import app.model.Address;
 import app.model.GoodEntity;
 import app.model.Language;
 import app.model.TagEntity;
@@ -177,6 +178,12 @@ public class AdminController {
 			user_xyz.getUserAccount().setFirstname(Firstname.get());
 		System.out.println(user_xyz.getUserAccount().getFirstname());
 
+		Address lastAddress=new Address(user_xyz.getLocation().getStreet(),
+				user_xyz.getLocation().getHousenr(),
+				user_xyz.getLocation().getFlh_name(),
+				user_xyz.getLocation().getCityPart(),
+				user_xyz.getLocation().getZipCode(),
+				user_xyz.getLocation().getCity());
 		if (Adresstyp.equals("refugee")) {
 			System.out.println("refugee");
 			user_xyz.getLocation().setStreet("");
@@ -216,6 +223,11 @@ public class AdminController {
 				user_xyz.getLocation().setFlh_name("");
 				user_xyz.getLocation().setCityPart("");
 			}
+		}
+		userRepository.save(user_xyz);
+		if(!user_xyz.isOldLocation(lastAddress)){
+			user_xyz.setCoordinates(user_xyz.createCoordinates());
+			userRepository.save(user_xyz);
 		}
 		if (!Nativelanguage.isEmpty()) {
 			System.out.println("modify language");
