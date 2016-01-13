@@ -119,6 +119,11 @@ public class DialogController {
 
 		User loggedInUser = userRepo.findByUserAccount(loggedInUserAccount.get());
 		User participantUser = retrieveUser(userAccountManager.findByUsername(participant));
+		
+		if (loggedInUser.getId() == participantUser.getId()) {
+			System.err.println("DialogPartner can not be DialogOwner");
+			return "redirect:/dialogList";
+		}
 
 		Dialog d = new Dialog(title, loggedInUser, participantUser);
 		dialogRepo.save(d);
