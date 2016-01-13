@@ -97,7 +97,8 @@ public class DialogController {
 		for (Dialog dialog : dialogRepo.findByUserB(loggedInUser)) {
 			userDialogs.add(dialog);
 		}
-
+		
+		model.addAttribute("loggedInUser", loggedInUser);
 		model.addAttribute("dialogList", userDialogs);
 		return "dialogList";
 	}
