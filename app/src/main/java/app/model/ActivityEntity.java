@@ -230,6 +230,11 @@ public class ActivityEntity implements Serializable {
     return "activity" + id;
   }
   
+	public String getItemLink(){
+		return "activity/"+id;
+	}
+	
+  
   public String getItemPictureLink(){
 	  return id+"/activityimage";
   }
@@ -240,11 +245,11 @@ public String getDateAsString(){
 			 && this.startDate.getYear() == this.endDate.getYear() 
 			 && this.startDate.getMonth() == this.endDate.getMonth() )
 	 {
-		 return startDate.getDate()+"."+this.startDate.getMonth()+"."+(this.startDate.getYear()+1900);
+		 return startDate.getDate()+"."+(this.startDate.getMonth()+1)+"."+(this.startDate.getYear()+1900);
 	 }
 	 
-	 return startDate.getDate()+"."+this.startDate.getMonth()+"."+(this.startDate.getYear()+1900) +" - "
-			 +endDate.getDate()+"."+this.endDate.getMonth()+"."+(this.endDate.getYear()+1900);
+	 return startDate.getDate()+"."+(this.startDate.getMonth()+1)+"."+(this.startDate.getYear()+1900) +" - "
+			 +endDate.getDate()+"."+(this.endDate.getMonth()+1)+"."+(this.endDate.getYear()+1900);
   }
   
   /**

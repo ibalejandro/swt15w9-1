@@ -161,7 +161,11 @@ public class GoodEntity implements Serializable {
 	public String getItemTypeAndId() {
 		return "good" + id;
 	}
-
+	
+	public String getItemLink(){
+		return "good/"+id;
+	}
+	
 	public String getItemPictureLink() {
 		return id + "/image";
 	}

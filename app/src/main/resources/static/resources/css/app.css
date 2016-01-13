@@ -103,10 +103,14 @@
 }
 .itemN__link{
 	color: black;
+	
 }
 .itemN__link:hover{
 	background-color:yellow;
-	color: black;
+	color: darkblue;
+	outline-style: solid;
+	outline-width: 2px; 
+	outline-color: blue;
 }
 
 /********************************************

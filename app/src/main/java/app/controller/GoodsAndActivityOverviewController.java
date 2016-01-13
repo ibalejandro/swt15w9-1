@@ -75,9 +75,10 @@ public class GoodsAndActivityOverviewController {
 				return "redirect:/";
 			}
 			System.out.println(goodEntity.getItemTypeAndId() + ": " + goodEntity.getName());
+			
 			modelMap.addAttribute("result", goodEntity);
-
-			return "itemN--large";
+			modelMap.addAttribute("good", true);
+			return "itemNContainer--large";
 		}
 		if (typ.equals("activity")) {
 			long idLong = Long.parseLong(id);
@@ -87,9 +88,10 @@ public class GoodsAndActivityOverviewController {
 				return "redirect:/";
 			}
 			System.out.println(activitiesEntity.getItemTypeAndId() + ": " + activitiesEntity.getName());
+			
 			modelMap.addAttribute("result", activitiesEntity);
-
-			return "itemN--large";
+			modelMap.addAttribute("good", false);
+			return "itemNContainer--large";
 		}
 		return "redirect:/";
 

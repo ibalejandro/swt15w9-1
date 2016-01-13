@@ -13,14 +13,14 @@
 	<body>
 		<th:block th:fragment="item">
 			<div class="row">
-				<div class="item-single">
+				<div class="umrandung">
 					<div class="small-12 columns">
 						<h1 th:text="${result.name}" class="headline"></h1>
 					</div>
 					
 					<th:block th:fragment="content">
 						<div class="small-12 medium-4 columns">
-							<img th:src="${result.getItemPictureLink()}"/>
+							<img th:src="'redirect:/'+${result.getItemPictureLink()}"/>
 						</div>
 						
 						<div class="small-12 medium-8 columns">

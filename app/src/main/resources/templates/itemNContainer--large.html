@@ -11,12 +11,12 @@
 	</head>
 	
 	<body>
+		<th:block th:include="navigation :: navigation"></th:block>
+	
 		<th:block th:fragment="show_items">
-			<div class="umrandung">
-				<th:block th:if="${itsAGood}" th:include="itemN--large--good--buttons :: item"></th:block>
-				
-				<th:block th:if="${!itsAGood}" th:include="itemN--large--activity--buttons :: item"></th:block>
-			</div>
+			<th:block th:if="${good}" th:include="itemN--large--good--buttons :: item"></th:block>
+			
+			<th:block th:if="!${good}" th:include="itemN--large--activity--buttons :: item"></th:block>
 		</th:block>
 		
 		<th:block th:include="imports :: script"></th:block>
