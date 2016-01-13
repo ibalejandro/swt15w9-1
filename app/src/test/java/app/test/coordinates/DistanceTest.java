@@ -25,6 +25,7 @@ import app.repository.GoodsRepository;
 import app.repository.LanguageRepository;
 import app.repository.TagsRepository;
 
+@Ignore("Sparen von immer gleichen API-Anfragen, verhindern von !OVER QUERY LIMIT!")
 public class DistanceTest extends AbstractWebIntegrationTests {
 
 	@Autowired

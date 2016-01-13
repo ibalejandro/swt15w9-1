@@ -37,7 +37,7 @@ import app.repository.LanguageRepository;
 import app.repository.TagsRepository;
 import app.test.*;
 
-//@Ignore("Sparen von immer gleichen API-Anfragen")
+@Ignore("Sparen von immer gleichen API-Anfragen, verhindern von !OVER QUERY LIMIT!")
 public class GeoCodingTest extends AbstractWebIntegrationTests {
 
 	@Autowired
