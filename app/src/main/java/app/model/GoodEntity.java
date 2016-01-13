@@ -87,11 +87,14 @@ public class GoodEntity implements Serializable {
     
     this.picture = createPicture(pic);
 		
-		this.user = user;
+	this.user = user;
   }
 	 
 	public static byte[] createPicture(Part picture) {
 	  /* Ferdinand's code */
+	if(picture==null){
+		return null;
+	}
 	if(picture.getSize()==0L){
 		return null;
 	}

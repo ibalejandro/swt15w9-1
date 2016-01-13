@@ -77,9 +77,11 @@ public class User implements Serializable {
 	private Set<Language> languages;
 
 	// Bidirektional:
-	@OneToMany(targetEntity = GoodEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = GoodEntity.class, mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
+		CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private Set<GoodEntity> goods;
-	@OneToMany(targetEntity = ActivityEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = ActivityEntity.class,mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
+		CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private Set<ActivityEntity> activities;
 
 	@SuppressWarnings("unused")
@@ -110,6 +112,19 @@ public class User implements Serializable {
 		languages = new HashSet<>();
 	}
 
+	@Override
+	public boolean equals(Object other){
+		if (other == null) return false;
+		if (other == this) return true;
+		if (!(other instanceof User))return false;
+		User otherUser = (User)other;
+		if(id==otherUser.getId()){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	/**
 	 * Adds a GoodEntity to the Set goods or updates a GoodEntity if it was
 	 * already saved.
@@ -481,6 +496,9 @@ public class User implements Serializable {
 
 	public void setAddresstyp(AddresstypEnum adresstyp) {
 		this.adresstyp = adresstyp;
+	}
+	public String toString(){
+		return userAccount.getUsername();
 	}
 
 }
