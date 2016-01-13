@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import app.model.ActivityEntity;
 import app.model.Dialog;
 import app.model.GoodEntity;
 import app.model.User;
 import app.model.UserRepository;
+import app.repository.ActivitiesRepository;
 import app.repository.DialogRepository;
 import app.repository.GoodsRepository;
 import app.repository.TextBlockRepository;
@@ -36,15 +38,18 @@ public class DialogController {
 	private final DialogRepository dialogRepo;
 	private final TextBlockRepository textBlockRepo;
 	private final GoodsRepository goodsRepo;
+	private final ActivitiesRepository activitiesRepo;
 
 	@Autowired
 	public DialogController(DialogRepository dialogList, UserRepository userRepository,
-			UserAccountManager userAccountManager, TextBlockRepository textBlockRepo, GoodsRepository goodsRepo) {
+			UserAccountManager userAccountManager, TextBlockRepository textBlockRepo, GoodsRepository goodsRepo,
+			ActivitiesRepository activityRepo) {
 		this.dialogRepo = dialogList;
 		this.userRepo = userRepository;
 		this.userAccountManager = userAccountManager;
 		this.textBlockRepo = textBlockRepo;
 		this.goodsRepo = goodsRepo;
+		this.activitiesRepo = activityRepo;
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.GET)
@@ -126,8 +131,23 @@ public class DialogController {
 
 	@RequestMapping(value = "/dialogByOffer", method = RequestMethod.POST)
 	public String dialogByOffer(HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
-		//TODO: Test for good and activity
-		GoodEntity g = goodsRepo.findOne(Long.parseLong(req.getParameter("goodId")));
+		Long id = Long.parseLong(req.getParameter("goodId"));
+		GoodEntity g = goodsRepo.findOne(id);
+		ActivityEntity a = activitiesRepo.findOne(id);
+		String title;
+		User participant;
+		
+		if (g == null && a == null) {
+			throw new NullPointerException("No activity or good found for given id!");
+		}
+		
+		if (g != null) {
+			title = g.getName();
+			participant = g.getUser();
+		} else {
+			title = a.getName();
+			participant = a.getUser();
+		}
 
 		User owner;
 		if (!loggedInUA.isPresent()) {
@@ -136,7 +156,7 @@ public class DialogController {
 			owner = userRepo.findByUserAccount(loggedInUA.get());
 		}
 
-		Dialog d = dialogRepo.save(new Dialog(g.getName(), owner, g.getUser()));
+		Dialog d = dialogRepo.save(new Dialog(title, owner, participant));
 
 		return "redirect:/dialog?id=" + d.getId();
 	}
