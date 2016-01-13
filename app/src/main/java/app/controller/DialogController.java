@@ -125,8 +125,7 @@ public class DialogController {
 			return "redirect:/dialogList";
 		}
 
-		Dialog d = new Dialog(title, loggedInUser, participantUser);
-		dialogRepo.save(d);
+		dialogRepo.save(new Dialog(title, loggedInUser, participantUser));
 
 		return "redirect:/dialogList";
 	}
