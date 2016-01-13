@@ -410,11 +410,11 @@ public class TestDaten implements DataInitializer {
 		Language lanDE = lanRes.findByKennung("de");
 		Language lanAR = lanRes.findByKennung("ar");
 				
-		Module mod1 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_link_text");
-		Module mod2 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_error_text");
-		Module mod3 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_nutzername_text");
-		Module mod4 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_passwort_text");
-		Module mod5 = modRes.findByTemplateNameAndTyhmeLeafName("login", "login_button_text");
+		Module mod1 = modRes.findByTemplateNameAndThymeLeafName("login", "login_link_text");
+		Module mod2 = modRes.findByTemplateNameAndThymeLeafName("login", "login_error_text");
+		Module mod3 = modRes.findByTemplateNameAndThymeLeafName("login", "login_nutzername_text");
+		Module mod4 = modRes.findByTemplateNameAndThymeLeafName("login", "login_passwort_text");
+		Module mod5 = modRes.findByTemplateNameAndThymeLeafName("login", "login_button_text");
 
 		InterfacePart in0 = new InterfacePart("Noch nicht Registriert?", lanDE.getId(), mod1.getId());
 		InterfacePart in1 = new InterfacePart("Der Nutzername oder das Passwort sind falsch!", lanDE.getId(), mod2.getId());
@@ -428,11 +428,11 @@ public class TestDaten implements DataInitializer {
 		InterfacePart in8 = new InterfacePart("Password:", lanEN.getId(), mod4.getId());
 		InterfacePart in9 = new InterfacePart("Login", lanEN.getId(), mod5.getId());
 		
-		InterfacePart in10 = new InterfacePart("Noch nicht Registriert?-Auf Arabisch", lanAR.getId(), mod1.getId());
-		InterfacePart in11 = new InterfacePart("Der Nutzername oder das Passwort sind falsch!-Auf Arabisch", lanAR.getId(), mod2.getId());
-		InterfacePart in12 = new InterfacePart("Nutzername-Auf Arabisch:", lanAR.getId(), mod3.getId());
-		InterfacePart in13 = new InterfacePart("Passwort-Auf Arabisch:", lanAR.getId(), mod4.getId());
-		InterfacePart in14 = new InterfacePart("Login-Auf Arabisch", lanAR.getId(), mod5.getId());
+		InterfacePart in10 = new InterfacePart("Noch nicht Registriert? -- Auf Arabisch", lanAR.getId(), mod1.getId());
+		InterfacePart in11 = new InterfacePart("Der Nutzername oder das Passwort sind falsch! -- Auf Arabisch", lanAR.getId(), mod2.getId());
+		InterfacePart in12 = new InterfacePart("Nutzername -- Auf Arabisch:", lanAR.getId(), mod3.getId());
+		InterfacePart in13 = new InterfacePart("Passwort -- Auf Arabisch:", lanAR.getId(), mod4.getId());
+		InterfacePart in14 = new InterfacePart("Login -- Auf Arabisch", lanAR.getId(), mod5.getId());
 		
 		res.add(in0);
 		res.add(in1);

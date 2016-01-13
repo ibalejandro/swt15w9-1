@@ -152,17 +152,22 @@ public class GoodEntity implements Serializable {
 	 * @return int The size of the given Iterable Object
 	 */
 	public static int getIterableSize(Iterable<?> it) {
-		if (it instanceof Collection)
+		if (it instanceof Collection) {
 			return ((Collection<?>) it).size();
+		}
 		else {
 			int i = 0;
-			for (@SuppressWarnings("unused")
-			Object obj : it)
+			for (@SuppressWarnings("unused") Object obj : it) {
 				i++;
+			}
 			return i;
 		}
 	}
 
+	/**
+   * This method returns the type 'good' and its respective id for a given item.
+   * @return String The information of an item in the format good{id}
+   */
 	public String getItemTypeAndId() {
 		return "good" + id;
 	}
