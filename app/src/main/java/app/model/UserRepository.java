@@ -17,4 +17,11 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	   * @return User The one User the given UserAccount is assigned to.
 	   */
 	User findByUserAccount(UserAccount userAccount);
+	
+	/**
+	   * This method finds the User to a certain Id.
+	   * @param lond Id 
+	   * @return User The one User the given Id
+	   */
+	User findById(long Id);
 }

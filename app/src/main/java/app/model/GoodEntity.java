@@ -85,18 +85,23 @@ public class GoodEntity implements Serializable {
 	 *            The user who is offering the good
 	 */
 
-	public GoodEntity(String name, String description, TagEntity tag, Part pic, User user) {
-		this.name = name;
-		this.description = description;
-		this.tag = tag;
-
-		this.picture = createPicture(pic);
-
-		this.user = user;
-	}
+	 
+	 public GoodEntity(String name, String description, TagEntity tag, 
+	                   Part pic, User user) {
+    this.name = name;
+    this.description = description;
+    this.tag = tag;
+    
+    this.picture = createPicture(pic);
+		
+	this.user = user;
+  }
 
 	public static byte[] createPicture(Part picture) {
 		/* Ferdinand's code */
+		if(picture==null){
+			return null;
+		}
 		if (picture.getSize() == 0L) {
 			return null;
 		}
@@ -147,17 +152,22 @@ public class GoodEntity implements Serializable {
 	 * @return int The size of the given Iterable Object
 	 */
 	public static int getIterableSize(Iterable<?> it) {
-		if (it instanceof Collection)
+		if (it instanceof Collection) {
 			return ((Collection<?>) it).size();
+		}
 		else {
 			int i = 0;
-			for (@SuppressWarnings("unused")
-			Object obj : it)
+			for (@SuppressWarnings("unused") Object obj : it) {
 				i++;
+			}
 			return i;
 		}
 	}
 
+	/**
+   * This method returns the type 'good' and its respective id for a given item.
+   * @return String The information of an item in the format good{id}
+   */
 	public String getItemTypeAndId() {
 		return "good" + id;
 	}

@@ -226,6 +226,11 @@ public class ActivityEntity implements Serializable {
     return dateWithoutTime;
   }
   
+  /**
+   * This method returns the type 'activity' and its respective id for a given 
+   * item.
+   * @return String The information of an item in the format activity{id}
+   */
   public String getItemTypeAndId() {
     return "activity" + id;
   }

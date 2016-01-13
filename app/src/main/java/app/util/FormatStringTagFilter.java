@@ -3,7 +3,6 @@ package app.util;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import app.textblocks.FormatTag;
 import app.textblocks.TextFormatTagValue;
@@ -12,7 +11,7 @@ public class FormatStringTagFilter {
 	private final String formatString;
 
 	public FormatStringTagFilter(String formatString) {
-		if (formatString.isEmpty() || !isValidFormatString(formatString))
+		if (formatString.isEmpty())
 			throw new IllegalArgumentException();
 
 		this.formatString = formatString;
@@ -37,9 +36,5 @@ public class FormatStringTagFilter {
 		}
 
 		return l;
-	}
-
-	public static boolean isValidFormatString(String s) {
-		return (Pattern.compile("[[ ]?[.\\p{Punct}]*[ ]?\\$\\{[\\w]+\\}[.]?]+").matcher(s).matches());
 	}
 }

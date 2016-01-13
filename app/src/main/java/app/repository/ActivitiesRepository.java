@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
+
 import app.model.ActivityEntity;
+import app.model.GoodEntity;
 import app.model.TagEntity;
 import app.model.User;
 
@@ -32,6 +34,14 @@ public interface ActivitiesRepository extends CrudRepository<ActivityEntity,
    * @return Iterable<ActivityEntity> A list with all matches for the given user
    */
 	Iterable<ActivityEntity> findByUser(User user);
+	
+	/**
+	   * This method finds an activity by a given user and tag.
+	   * @param tag The given tag
+	   * @param user The given user
+	   * @return Iterable<ActivityEntity> A list with all matches for the given user
+	   */
+	Iterable<ActivityEntity> findByTagAndUser(TagEntity tag, User user);
 	
 	/**
    * This method deletes an activity by a given activitiy's id.
