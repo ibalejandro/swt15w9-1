@@ -7,8 +7,8 @@ TODO:
 
 Templates
 - offeredGood							Einbindung von der Good anzeige überarbeiten. bezüglich N
-- itemNContainer--small--multi--1		Einbindung von der Good anzeige überarbeiten. bezüglich N
-- itemNContainer--small--multi--2		Einbindung von der Good anzeige überarbeiten. bezüglich N
+- itemNContainer--small--1		Einbindung von der Good anzeige überarbeiten. bezüglich N
+- itemNContainer--small--2		Einbindung von der Good anzeige überarbeiten. bezüglich N
 - home									Einbindung der Container überarbeiten. bezüglich N
 - index									Einbindung der Container überarbeiten. bezüglich N
 									Activities
@@ -109,5 +109,4 @@ itemN--*--activity						//fast fertig
 
 
 ZULÖSCHEN ?!:
-reCAPTCHA
 admin

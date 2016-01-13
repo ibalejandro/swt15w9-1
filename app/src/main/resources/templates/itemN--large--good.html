@@ -12,25 +12,28 @@
 	
 	<body>
 		<th:block th:fragment="item">
-				<div class="row">
-					<div class="item-single">
-						<div class="small-12 columns">
-							<h1 th:text="${result.name}" class="headline">Lorem ipsum</h1>
-						</div>
-						
+			<div class="row">
+				<div class="item-single">
+				
+					<div class="small-12 columns">
+						<h1 th:text="${result.name}" class="headline"></h1>
+					</div>
+					
+					<th:block th:fragment = "content">
 						<div class="small-12 medium-4 columns">
 							<img th:src="${result.getItemPictureLink()}"/>
 						</div>
 						
 						<div class="small-12 medium-8 columns">
-							<p th:text="${result.description}" class="">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+							<p th:text="${result.description}" class=""></p>
 						</div>
 						
 						<div class="small-12 medium-8 columns">
-							<p th:text="${result.tag.name}" class="">Lorem</p>
+							<p th:text="${result.tag.name}" class=""/p>
 						</div>
-					</div>
+					</th:block>
 				</div>
+			</div>
 		</th:block>
 		
 		<th:block th:include="imports :: script"></th:block>

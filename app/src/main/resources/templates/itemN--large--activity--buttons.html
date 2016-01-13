@@ -14,17 +14,13 @@
 		<th:block th:fragment="item">
 			<div class="row">
 				<div class="item-single">
-					<div class="small-12 columns">
+					<div class="small-12 medium-6 large-3 columns">
 						<h1 th:text="${result.name}" class="headline"></h1>
 					</div>
 					
-					<div class="small-12 columns">
-						<p th:text="${result.description}" class=""></p>
-					</div>
+					<th:block th:include="itemN--large--good--buttons :: button"></th:block>
 					
-					<div class="small-12 columns">
-						<p th:text="${result.tag.name}" class=""></p>
-					</div>
+					<th:block th:include="itemN--large--activity :: content"></th:block>
 				</div>
 			</div>
 		</th:block>
