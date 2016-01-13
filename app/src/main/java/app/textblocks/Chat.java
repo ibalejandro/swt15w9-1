@@ -7,8 +7,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import app.model.User;
+import lombok.Getter;
 import lombok.NonNull;
 
 /**
@@ -24,6 +27,9 @@ public class Chat {
 	private Long id;
 
 	private Date date;
+	
+	@ManyToOne
+	private User author;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<TextBlockValue> blocks;
@@ -32,9 +38,10 @@ public class Chat {
 
 	}
 
-	public Chat(@NonNull List<TextBlockValue> blocks) {
+	public Chat(@NonNull List<TextBlockValue> blocks, @NonNull User author) {
 		this.blocks = blocks;
 		this.date = new Date();
+		this.author = author;
 	}
 
 	/**
@@ -48,7 +55,8 @@ public class Chat {
 		// You may use this function to surround each text block value with a
 		// html wrapper,
 		// like some <div> elements
-		s).reduce(String::concat).get();
+		"<blockquote class = \"entrytext\">" + s + "</blockquote>"
+		).reduce(String::concat).get();
 	}
 
 	public List<TextBlockValue> getBlocks() {
@@ -71,6 +79,10 @@ public class Chat {
 	 */
 	public Date getDate() {
 		return date;
+	}
+	
+	public User getAuthor() {
+		return author;
 	}
 
 	/**
