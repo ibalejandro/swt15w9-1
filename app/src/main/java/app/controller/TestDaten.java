@@ -220,9 +220,9 @@ public class TestDaten implements DataInitializer {
 		
 		//Sprachen:
 		Language language1= new Language("Deutsch", "de");
-		Language language2= new Language("Englisch", "en");
-		Language language3= new Language("Arabisch", "ar");
-		Language language4= new Language("Spanisch", "es");
+		Language language2= new Language("English", "en");
+		Language language3= new Language("العربية", "ar");
+		Language language4= new Language("español", "es");
 		languageRepository.save(language1);
 		languageRepository.save(language2);
 		languageRepository.save(language3);

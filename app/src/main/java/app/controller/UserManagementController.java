@@ -1,6 +1,8 @@
 package app.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -160,8 +162,10 @@ public class UserManagementController {
 		}
 
 		@RequestMapping("/modifyUserAccount/{user}")
-		public String modifyUserAccount(Model model,  @LoggedIn Optional<UserAccount> userAccount){
-			if(userAccount.isPresent())model.addAttribute("userAccount",userAccount.get());
+		public String modifyUserAccount(ModelMap model,  @LoggedIn Optional<UserAccount> userAccount){
+			if(userAccount.isPresent()){
+				model.addAttribute("userAccount",userAccount.get());
+			}
 			return "modifyUserAccount";
 		}
 		
@@ -220,7 +224,12 @@ public class UserManagementController {
 		
 		@RequestMapping("/modifyAddress")
 		public String modifyAddress(Model model,  @LoggedIn Optional<UserAccount> userAccount){
-			if(userAccount.isPresent())model.addAttribute("userAccount",userAccount.get());
+			if(userAccount.isPresent()){
+				model.addAttribute("user",userRepository.findByUserAccount(userAccount.get()));
+				if(userRepository.findByUserAccount(userAccount.get()).getAddresstypString().equals("Refugees_home")){
+					model.addAttribute("isRefugee", "refugee");
+				}
+			}
 			return "modifyAddress";
 		}
 		
@@ -271,43 +280,77 @@ public class UserManagementController {
 			}
 			userRepository.save(user_xyz);
 			userRepository.save(user_xyz);
-			//if(!user_xyz.isOldLocation(lastAddress)){
+			if(!user_xyz.isOldLocation(lastAddress)){
 				user_xyz.setCoordinates(user_xyz.createCoordinates());
 				userRepository.save(user_xyz);
-			//}
+			}
 			return "redirect:/data";
 		}
 		
 		@RequestMapping("/modifyLanguages")
 		public String modifyLanguages(ModelMap model,  @LoggedIn Optional<UserAccount> userAccount){
-			if(userAccount.isPresent())model.addAttribute("user",userRepository.findByUserAccount(userAccount.get()));
+			User user_xyz;
+			if(userAccount.isPresent()){
+				user_xyz=userRepository.findByUserAccount(userAccount.get());
+				model.addAttribute("user",user_xyz);
+			}else{
+				return "noUser";
+			}
 			model.addAttribute("languages", languageRepository.findAll());
+			List<String> otherLanguages= new ArrayList<>();
+			for(Language language: user_xyz.getLanguages()){
+				otherLanguages.add(language.getkennung());
+			}
+			otherLanguages.remove(user_xyz.getPrefLanguage().getkennung());
+			if(!otherLanguages.isEmpty()){
+				model.addAttribute("language2",otherLanguages.get(0));
+				otherLanguages.remove(0);
+				if(!otherLanguages.isEmpty()){
+					model.addAttribute("language3",otherLanguages.get(0));
+					otherLanguages.remove(0);
+				}
+			}
 			return "modifyLanguages";
 		}
 		
 		@RequestMapping(value="/modifyLanguages_submit", method = RequestMethod.POST)
-		public String modify( @LoggedIn Optional<UserAccount> userAccount, @RequestParam(value="secondLanguage", required=false)final String SecondLanguage,@RequestParam(value="thirdLanguage", required=false)final String ThirdLanguage){
+		public String modify( @LoggedIn Optional<UserAccount> userAccount, @RequestParam(value="nativelanguage", required=false)final String Nativelanguage,@RequestParam(value="otherlanguages", required=false)final String OtherLanguages){
 			if(!userAccount.isPresent())return "noUser";
 			User user_xyz=userRepository.findByUserAccount(userAccount.get());
 			
 			
-			if(SecondLanguage!=null && !(SecondLanguage.isEmpty()) &&!(SecondLanguage.equals("-1"))){
-				user_xyz.removeAllLanguages();
-				Language l2;
-				if(SecondLanguage.length()==2)l2=languageRepository.findByKennung(SecondLanguage);
-				else  l2=languageRepository.findByName(SecondLanguage);
-				System.out.println("1.1- "+l2.toString());
-				if(l2!=null)user_xyz.setLanguage(l2);
-				System.out.println("1.2- "+ user_xyz.getLanguages().toString());
+			if (!Nativelanguage.isEmpty()) {
+				System.out.println("modify language");
+				user_xyz.removeLanguage(user_xyz.getPrefLanguage());
+				Language PreferredLanguage = languageRepository.findByKennung(Nativelanguage);
+				user_xyz.setPrefLanguage(PreferredLanguage);
 			}
-			if(ThirdLanguage!=null && !(ThirdLanguage.isEmpty())&&!(ThirdLanguage.equals("-1"))){
-				Language l3;
-				if(ThirdLanguage.length()==2)l3=languageRepository.findByKennung(ThirdLanguage);
-				else  l3=languageRepository.findByName(ThirdLanguage);
-				
-				System.out.println("2.1- "+l3.toString());
-				if(l3!=null)user_xyz.setLanguage(l3);
-				System.out.println("2.2- "+ user_xyz.getLanguages().toString());
+			if (!OtherLanguages.isEmpty() && !OtherLanguages.toString().equals("-1")) {
+				System.out.println("modify languages");
+				System.out.println(OtherLanguages);
+				System.out.println(OtherLanguages.toString());
+				Boolean nichtleer = false;
+				for (String test : OtherLanguages.split(",")) {
+					if (!test.equals("-1")) {
+						nichtleer = true;
+					}
+				}
+				if (nichtleer) {
+					user_xyz.removeAllLanguages();
+				}
+				if (OtherLanguages != null && !OtherLanguages.isEmpty()) {
+					for (String languageName : OtherLanguages.split(",")) {
+						System.out.println(languageName);
+						if (languageRepository.findByKennung(languageName) != null) {
+							// user_xyz.setLanguage(languageRepository.findByName(languageName));
+							Language l1 = languageRepository.findByKennung(languageName);
+							System.out.println(l1.toString());
+							user_xyz.setLanguage(l1);
+							userRepository.save(user_xyz);
+						}
+						System.out.println(user_xyz.getLanguages());
+					}
+				}
 			}
 			System.out.println("3.0");
 			userRepository.save(user_xyz);

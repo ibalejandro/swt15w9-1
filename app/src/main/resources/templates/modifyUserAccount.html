@@ -15,11 +15,11 @@
 			
 				<form th:action="@{/modifyUserAccount_submit/} + ${userAccount.getUsername()}" method="post">
 					
-					<label th:text="@{Lastname:&nbsp;}" class="form__label" for="f1">Nachname:</label>
-					<input th:value="${userAccount.getLastname()}" name="lastname" type="text" id="f1"/>
-					
 					<label th:text="@{Firstname:&nbsp;}" class="form__label" for="f2">Vorname:</label>
 					<input th:value="${userAccount.getFirstname()}" name="firstname" type="text" id="f2"/>
+					
+					<label th:text="@{Lastname:&nbsp;}" class="form__label" for="f1">Nachname:</label>
+					<input th:value="${userAccount.getLastname()}" name="lastname" type="text" id="f1"/>
 					
 					<label th:text="@{Email:&nbsp;}" class="form__label" for="f3">Email</label>
 					<input th:value="${userAccount.getEmail()}" name="email" type="text" id="f3"/>
