@@ -126,6 +126,7 @@ public class DialogController {
 
 	@RequestMapping(value = "/dialogByOffer", method = RequestMethod.POST)
 	public String dialogByOffer(HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
+		//TODO: Test for good and activity
 		GoodEntity g = goodsRepo.findOne(Long.parseLong(req.getParameter("goodId")));
 
 		User owner;

@@ -48,7 +48,8 @@ public class Chat {
 		// You may use this function to surround each text block value with a
 		// html wrapper,
 		// like some <div> elements
-		s).reduce(String::concat).get();
+		"<blockquote class = \"entrytext\">" + s + "</blockquote>"
+		).reduce(String::concat).get();
 	}
 
 	public List<TextBlockValue> getBlocks() {
