@@ -11,18 +11,14 @@
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="row">
-			<div class="small-12 colums">
-				<div class="gooditem-single">
-	
-					<div class="gooditem__head-single">
-						<h2 class="gooditem__title-single"> You just deleted this activity: </h2>
-					</div>
-					
-					<div th:include="itemN--large--activity--nopic :: item"></div>
-		
-				</div>
+			<div class="small-12 columns">
+				<h1 class="headline"> You just deleted this activity: </h2>
 			</div>
-		</div>
+		</div>	
+		
+		<div th:include="itemN--large--activity--nopic :: item"></div>
+		
+			
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 	

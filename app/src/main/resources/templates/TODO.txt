@@ -106,8 +106,11 @@ textBlockList
 update*
 userDetails
 itemN--*--activity						//fast fertig
-serce result
-allTags button grün
+serce result anzahl
 
 ZULÖSCHEN ?!:
 admin
+
+
+ISSUES:
+	ITEM Seite Bild anzeige Fehler

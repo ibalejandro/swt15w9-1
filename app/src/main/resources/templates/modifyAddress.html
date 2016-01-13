@@ -10,7 +10,7 @@
 	
 		<div class="row">
 			<div class="small-12 columns">
-				<h1 th:text="@{Your address: &nbsp; } + ${userAccount.getUsername()}" class="headline"> UserAccount</h1>
+				<h1 th:text="@{Your address: &nbsp; } + ${user.getUserAccount().getUsername()}" class="headline"> UserAccount</h1>
 			</div>
 			<form th:action="@{/modifyAddress_submit/}" method="post">
 
@@ -21,7 +21,7 @@
 				<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked=""/>
 				<label class="form__label" for="hh">Wohnung</label>
 				
-				<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee"/>
+				<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee" th:checked="${isRefugee}"/>
 				<label class="form__label" for="fh">Flüchtlingsheim</label>
 				
 
@@ -30,28 +30,28 @@
 						<label class="form__label">Stra&szlig;e:</label>
 					</div>
 					<div class="large-9 small-12 columns">
-						<input name="street" type="text"/>
+						<input name="street" type="text" th:value="${user.getLocation().getStreet()}"/>
 					</div>
 					
 					<div class="large-3 small-12 columns">
 						<label class="form__label">Hausnummer:</label>
 					</div>
 					<div class="large-9 small-12 columns">
-						<input name="housenr" type="text"/>
+						<input name="housenr" type="text" th:value="${user.getLocation().getHousenr()}"/>
 					</div>
 					
 					<div class="large-3 small-12 columns">
 						<label class="form__label">Postleitzahl:</label>
 					</div>
 					<div class="large-9 small-12 columns">
-						<input name="postcode_H" type="text"/>
+						<input name="postcode_H" type="text" th:value="${user.getLocation().getZipCode()}"/>
 					</div>
 				
 					<div class="large-3 small-12 columns">
 						<label class="form__label">Stadt:</label>
 					</div>
 					<div class="large-9 small-12 columns">
-						<input name="city_H" type="text"/>
+						<input name="city_H" type="text" th:value="${user.getLocation().getCity()}"/>
 					</div>
 				</div>
 				
@@ -60,33 +60,33 @@
 						<label class="form__label-paddingOFF">Fl&uuml;chtlingsheim Name:</label>
 					</div>
 					<div class="large-9 small-12 columns">
-						<input name="flh_name" type="text"/>
+						<input name="flh_name" type="text" th:value="${user.getLocation().getFlh_name()}"/>
 					</div>
 				
 					<div class="large-3 small-12 columns">
 						<label class="form__label">Postleitzahl:</label>
 					</div>
 					<div class="large-9 small-12 columns">
-						<input name="postcode_R" type="text"/>
+						<input name="postcode_R" type="text" th:value="${user.getLocation().getZipCode()}"/>
 					</div>
 				
 					<div class="large-3 small-12 columns">
 						<label class="form__label">Stadt:</label>
 					</div>
 					<div class="large-9 small-12 columns">
-						<input name="city_R" type="text"/>
+						<input name="city_R" type="text" th:value="${user.getLocation().getCity()}"/>
 					</div>
 				
 					<div class="large-3 small-12 columns">
 						<label class="form__label">Stadtteil:</label>
 					</div>
 					<div class="large-9 small-12 columns">
-						<input name="citypart" type="text"/>
+						<input name="citypart" type="text" th:value="${user.getLocation().getCityPart()}"/>
 					</div>
 				</div>
 				
 				<div class="small-12 columns">
-					<input type="submit" class="button" value="Next"/>
+					<input type="submit" class="button" value="OK"/>
 				</div>
 			</form>
 		</div>

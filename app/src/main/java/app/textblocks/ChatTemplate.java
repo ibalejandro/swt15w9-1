@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import app.model.User;
 import lombok.NonNull;
 
 /**
@@ -39,12 +40,12 @@ public class ChatTemplate {
      * @param requestValues map of http response data
      * @return new Chat
      */
-    public Chat fromForm(@NonNull Map<String, String> requestValues) {
+    public Chat fromForm(@NonNull Map<String, String> requestValues, @NonNull User author) {
         return new Chat(
                 blocks.stream().filter(
                         t -> t.wasSelected(requestValues)
                 ).map(
                         t -> t.fromForm(requestValues)
-                ).collect(Collectors.toList()));
+                ).collect(Collectors.toList()), author);
     }
 }

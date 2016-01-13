@@ -1,0 +1,58 @@
+NAMENS KONVENTION				|	BISLANG							|	Fertig
+
+activationmail-sended			|	activationmail_gesendet			|f
+activationmail-local			|	activationmail_local			|f
+addnew-Tag			?			|	addNewTag						|f
+addednew-Tag		?			|	addedNewTag						|f
+changePassword					|	changePassword					|f
+data							|	data							|
+data-refugee					|	data_refugee					|
+dialog							|	dialog							|
+dialog-list						|	dialogList						|
+dialog-start					|	startDialog						|
+deleted-Tag						|	deletedTag						|f
+deleted-Good					|	deletedGood						|g
+deleted-Activity				|	deletedActivity					|f
+error-notYour-Activtie			|	notYourActivity					|f
+error-noUser					|	noUser							|f
+error							|	error							|f
+error-noSuch-Activity			|	noSuchActivity					|f
+error-Page0Empty				|	errorPage0_empty				|f
+error-noSuch-Good				|	noSuchGood						|f
+error-notYour-Good				|	notYourGood						|f
+error-noSuch-Tag				|	noSuchTag						|f
+error-empty						|	errorpage_empty					|f
+home							|	home							|f
+index							|	index							|f
+language-add		?			|	addLanguage						|f
+login							|	login							|f
+modify-UserAccount				|	modifyUserAccount				|f
+modify-Address					|	modifyAddress					|f
+modify-Languages				|	modifyLanguages					|f
+modify							|	modify							|
+myOffered-Goods					|	myOfferedGoods					|f
+myOffered-Activities			|	myOfferedActivities				|f
+offer-Good						|	offer							|f
+offered-Good					|	offeredGood						|f
+offered-GoodsAndActivities		|	offeredGoodsAndActivities		|
+offer-Activity					|	offerActivity					|f
+offered-Activity				|	offeredActivity					|f
+reCAPTCHA						|	reCAPTCHA						|
+textBlockList					|	textBlockList					|
+textBlockList-new				|	newTextBlock					|
+search							|	search							|f
+searchResults					|	searchResults					|f
+template-manager				|	template_translation_manager	|
+template-change					|	change_template					|
+tags-available					|	availableTags					|f
+updated-Tag						|	updatedTag						|f
+user-deaktivate					|	deaktivateUser					|f
+user-aktivate					|	aktivateUser					|f
+user-new 						|	new_user						|f
+updated-Good					|	updatedGood						|f
+update-Good-Admin				|	updateGoodByAdmin				|f
+update-Activity-Admin			|	updateActivityByAdmin			|f
+updated-Activity				|	updatedActivity					|f
+update-Activity					|	updateActivity					|f
+validation-success				|	validation_success				|f
+itemNContainer--large			|									|f
