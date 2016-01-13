@@ -70,10 +70,11 @@ public class DialogController {
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
-	public String dialog(@RequestParam("id") Long id, @RequestParam Map<String, String> allRequestParams) {
+	public String dialog(@RequestParam("id") Long id, @RequestParam Map<String, String> allRequestParams,
+			@LoggedIn Optional<UserAccount> loggedInUserAccount) {
 		ChatTemplate ct = new ChatTemplate(getAllTextBlocks());
 		Dialog d = dialogRepo.findOne(id);
-		d.addMessageElement(ct.fromForm(allRequestParams));
+		d.addMessageElement(ct.fromForm(allRequestParams, retrieveUser(loggedInUserAccount)));
 		dialogRepo.save(d);
 		return "redirect:/dialog?id=" + id;
 	}
@@ -116,12 +117,7 @@ public class DialogController {
 		}
 
 		User loggedInUser = userRepo.findByUserAccount(loggedInUserAccount.get());
-		Optional<UserAccount> participantAccount = userAccountManager.findByUsername(participant);
-		if (!participantAccount.isPresent()) {
-			System.err.println("Couldn't find participant: " + participant);
-			return "error";
-		}
-		User participantUser = userRepo.findByUserAccount(participantAccount.get());
+		User participantUser = retrieveUser(userAccountManager.findByUsername(participant));
 
 		Dialog d = new Dialog(title, loggedInUser, participantUser);
 		dialogRepo.save(d);
@@ -136,11 +132,11 @@ public class DialogController {
 		ActivityEntity a = activitiesRepo.findOne(id);
 		String title;
 		User participant;
-		
+
 		if (g == null && a == null) {
 			throw new NullPointerException("No activity or good found for given id!");
 		}
-		
+
 		if (g != null) {
 			title = g.getName();
 			participant = g.getUser();
@@ -149,12 +145,10 @@ public class DialogController {
 			participant = a.getUser();
 		}
 
-		User owner;
 		if (!loggedInUA.isPresent()) {
 			return "noUser";
-		} else {
-			owner = userRepo.findByUserAccount(loggedInUA.get());
 		}
+		User owner = retrieveUser(loggedInUA);
 
 		Dialog d = dialogRepo.save(new Dialog(title, owner, participant));
 
@@ -165,5 +159,12 @@ public class DialogController {
 		List<TextBlock> l = new LinkedList<>();
 		textBlockRepo.findAll().forEach((TextBlock t) -> l.add(t));
 		return l;
+	}
+
+	private User retrieveUser(Optional<UserAccount> ua) {
+		if (!ua.isPresent()) {
+			throw new IllegalArgumentException("UserAccount not present");
+		}
+		return userRepo.findByUserAccount(ua.get());
 	}
 }
