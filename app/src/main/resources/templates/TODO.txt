@@ -95,7 +95,7 @@ data_refugee
 deletedActivity
 deletedGood
 deletedTagdialog
-dialogList
+dialog*
 modify
 newTextBlock
 offeredActivity
@@ -106,7 +106,8 @@ textBlockList
 update*
 userDetails
 itemN--*--activity						//fast fertig
-
+serce result
+allTags button grün
 
 ZULÖSCHEN ?!:
 admin
