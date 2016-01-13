@@ -234,7 +234,8 @@ public class ActivityEntity implements Serializable {
 	  return id+"/activityimage";
   }
   
-  public String getDateAsString(){
+  @SuppressWarnings("deprecation")
+public String getDateAsString(){
 	 if(this.startDate.getDate() == this.endDate.getDate() 
 			 && this.startDate.getYear() == this.endDate.getYear() 
 			 && this.startDate.getMonth() == this.endDate.getMonth() )
