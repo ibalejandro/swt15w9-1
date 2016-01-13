@@ -25,7 +25,12 @@ import javax.persistence.OneToOne;
 
 
 
+
+
 import org.salespointframework.useraccount.UserAccount;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import app.repository.LanguageRepository;
 
 import com.google.code.geocoder.Geocoder;
 import com.google.code.geocoder.GeocoderRequestBuilder;
@@ -45,7 +50,7 @@ import com.google.code.geocoder.model.GeocoderResult;
 @SuppressWarnings("serial")
 @Entity
 public class User implements Serializable {
-
+	
 	public enum AddresstypEnum {
 		Wohnung, Refugees_home, empty
 	}
@@ -377,6 +382,9 @@ public class User implements Serializable {
 	}
 
 	public Language getPrefLanguage() {
+		if(PrefLanguage==null){
+			return new Language("default","default");
+		}
 		return PrefLanguage;
 	}
 
@@ -393,6 +401,9 @@ public class User implements Serializable {
 		String languageNames = "";
 		for (Language l : languages) {
 			languageNames = languageNames + l.toString() + ", ";
+		}
+		if(languageNames.isEmpty()){
+			return languageNames;
 		}
 		return languageNames.substring(0, languageNames.length() - 2);
 	}
