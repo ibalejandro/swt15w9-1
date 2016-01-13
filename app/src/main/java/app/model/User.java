@@ -61,9 +61,11 @@ public class User implements Serializable {
 	private Set<Language> languages;
 
 	// Bidirektional:
-	@OneToMany(targetEntity = GoodEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = GoodEntity.class, mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
+		CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private Set<GoodEntity> goods;
-	@OneToMany(targetEntity = ActivityEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = ActivityEntity.class, mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
+		CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private Set<ActivityEntity> activities;
 
 	@SuppressWarnings("unused")
