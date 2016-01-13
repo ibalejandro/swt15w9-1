@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lombok.NonNull;
+
 /**
  * This class is a conversion step, before it has taken place. It consists of multiple text blocks which can be
  * rendered into a form.
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 public class ChatTemplate {
     private List<TextBlock> blocks;
 
-    public ChatTemplate(List<TextBlock> blocks) {
+    public ChatTemplate(@NonNull List<TextBlock> blocks) {
         this.blocks = blocks;
     }
 
@@ -37,7 +39,7 @@ public class ChatTemplate {
      * @param requestValues map of http response data
      * @return new Chat
      */
-    public Chat fromForm(Map<String, String> requestValues) {
+    public Chat fromForm(@NonNull Map<String, String> requestValues) {
         return new Chat(
                 blocks.stream().filter(
                         t -> t.wasSelected(requestValues)

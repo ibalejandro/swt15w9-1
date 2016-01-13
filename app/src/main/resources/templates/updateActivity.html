@@ -43,12 +43,12 @@
 						
 						<div>
 							<label class="create__label"> Start date </label>
-							<input type="date" name="startDate" th:value="*{startDate}"/> 
+							<input type="date" name="startDate"  th:value="${activity.getStringFromDateForInput(activity.startDate)}"/> 
 						</div>
 						
 						<div>
 							<label class="create__label"> End date </label>
-							<input type="date" name="endDate" th:value="*{endDate}"/> 
+							<input type="date" name="endDate" th:value="${activity.getStringFromDateForInput(activity.endDate)}"/> 
 						</div>
 						
 						<input type="hidden" name="id" th:value="${activity.id}"/>

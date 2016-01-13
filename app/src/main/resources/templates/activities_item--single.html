@@ -15,27 +15,27 @@
 				<th:block th:fragment="nopic">
 					<div class="12-small columns">
 						<p class="text"> Name </p>
-						<p th:text="${result.name}" class="text--super">Lorem ipsum</p>
+						<p th:text="${result.name}" class="text-super"/p>
 					</div>
 					
 					<div class="12-small columns">
 						<p class="text"> Description </p>
-						<p th:text="${result.description}" class="text--super">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+						<p th:text="${result.description}" class="text-super"></p>
 					</div>
 					
 					<div class="12-small columns">
 						<p class="text"> Tag </p>
-						<p th:text="${result.tag.name}" class="text--super">Lorem</p>
+						<p th:text="${result.tag.name}" class="text-super"/p>
 					</div>
 					
 					<div class="12-small columns">
 						<p class="text"> Start date </p>
-						<p th:text="${result.getStringFromDate(result.startDate)}" class="text--super">Lorem</p>
+						<p th:text="${result.getStringFromDate(result.startDate)}" class="text-super"/p>
 					</div>
 					
 					<div class="12-small columns">
 						<p class="text"> End date </p>
-						<p th:text="${result.getStringFromDate(result.endDate)}" class="text--super">Lorem</p>
+						<p th:text="${result.getStringFromDate(result.endDate)}" class="text-super"/p>
 					</div>
 				</th:block>
 			</div>

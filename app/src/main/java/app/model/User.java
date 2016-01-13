@@ -80,7 +80,7 @@ public class User implements Serializable {
 	@OneToMany(targetEntity = GoodEntity.class, mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 		CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private Set<GoodEntity> goods;
-	@OneToMany(targetEntity = ActivityEntity.class,mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
+	@OneToMany(targetEntity = ActivityEntity.class, mappedBy="user", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 		CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private Set<ActivityEntity> activities;
 

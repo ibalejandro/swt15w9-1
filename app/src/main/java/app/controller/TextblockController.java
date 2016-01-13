@@ -55,9 +55,6 @@ public class TextblockController {
 		String formatString = request.getParameter("formatString");
 		List<FormatTag> tags = new FormatStringTagFilter(formatString).getTags();
 		
-		//TODO: delete in final release!
-		//System.out.println(formatString);
-		
 		textBlockRepository.save(new TextBlock(formatString, tags));
 		
 		return "newTextBlock";

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-	<!-- by Lennart Schmidt -->
+	<!--/* by Lennart Schmidt */-->
 	<!--/*
 		TODO:
 			- 
@@ -22,31 +22,24 @@
 			</div>
 			
 			<form th:action="@{/offeredGood}" th:object="${good}" method="post" enctype="multipart/form-data">
-				<div class="large-1 medium-2 small-12 columns">
-					<label for="name" class="form__label">Name</label> 
-				</div>
-				<div class="large-5 medium-10 small-12 columns">
+				<div class="large-6 small-12 columns">
+					<label for="name" class="form__label">Name</label>
 					<input type="text" id="name" name="name"/>
 				</div>
 				
-				<div class="large-1 medium-2 small-12 columns">
+				<div class="large-6 small-12 columns">
 					<label for="description" class="form__label">Description</label>
-				</div>
-				<div class="large-5 medium-10 small-12 columns">
 					<input type="text" id="description" name="description"/>
 				</div>
 				
-				<div class="large-1 medium-2 small-12 columns">
-					<label for="picture" class="form__label">Picture</label>
-				</div>
-				<div class="large-5 medium-10 small-12 columns">
+				<div class="large-6 small-12 columns">
+					<label for="pict" class="form__label">Picture</label>
 					<input type="file" id="pict" name="pict"/> 
 				</div>
 				
-				<div class="large-1 medium-2 small-12 columns">
+				<div class="large-6 small-12 columns">
 					<label for="tagId" class="form__label">Tags</label>
-				</div>
-				<div class="large-5 medium-10 small-12 columns">
+					
 					<select id="tagId" name="tagId">
 						<option value="-1">---- Select ----</option>
 						<option th:each="tag : ${tags}"

@@ -25,7 +25,6 @@ import app.model.UserRepository;
 import app.repository.DialogRepository;
 import app.repository.GoodsRepository;
 import app.repository.TextBlockRepository;
-import app.textblocks.Chat;
 import app.textblocks.ChatTemplate;
 import app.textblocks.TextBlock;
 
@@ -56,7 +55,7 @@ public class DialogController {
 		model.addAttribute("title", d.getTitle());
 		model.addAttribute("owner", d.getUserA());
 		model.addAttribute("participant", d.getUserB());
-		model.addAttribute("messages", d.getMessageHistory());
+		model.addAttribute("chats", d.getMessageHistory());
 
 		ChatTemplate ct = new ChatTemplate(getAllTextBlocks());
 
@@ -67,17 +66,10 @@ public class DialogController {
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
 	public String dialog(@RequestParam("id") Long id, @RequestParam Map<String, String> allRequestParams) {
-		Iterable<TextBlock> i = textBlockRepo.findAll();
-		List<TextBlock> tbl = new LinkedList<>();
-		i.forEach((TextBlock t) -> tbl.add(t));
-
-		ChatTemplate ct = new ChatTemplate(tbl);
-		Chat chat = ct.fromForm(allRequestParams);
-		chat.getBlocks().forEach(b -> System.out.println(b));
-		
-		//System.out.println(ct.fromForm(allRequestParams));
-		dialogRepo.findOne(id).addMessageElement(ct.fromForm(allRequestParams));
-
+		ChatTemplate ct = new ChatTemplate(getAllTextBlocks());
+		Dialog d = dialogRepo.findOne(id);
+		d.addMessageElement(ct.fromForm(allRequestParams));
+		dialogRepo.save(d);
 		return "redirect:/dialog?id=" + id;
 	}
 
