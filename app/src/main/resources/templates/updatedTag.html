@@ -11,14 +11,10 @@
 		
 		<div class="row">
 			<div class="small-12 colums">
-				<div class="gooditem-single">
-					<div class="gooditem__head-single">
-						<h2 class="gooditem__title-single"> You just updated the tag with this information: </h2>
-					</div>
-					
-					<div th:include="tags_item-single :: item"></div>
-				</div>
+				<h1 class="headline"> You just updated the tag with this information: </h1>
 			</div>
+			
+			<th:block th:include="tags_item--single :: item"></th:block>
 		</div>
 		<th:block th:include="imports :: script"></th:block>
 	</body>
