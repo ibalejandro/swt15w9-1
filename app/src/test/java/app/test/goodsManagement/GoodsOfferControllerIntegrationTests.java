@@ -79,10 +79,10 @@ AbstractWebIntegrationTests {
     (model().attribute("result",
                        Matchers.hasProperty("description", Matchers.equalTo
                                             (good1.getDescription()))))
-    .andExpect
+    /*.andExpect
     (model().attribute("result",
                        Matchers.hasProperty("tag", Matchers.equalTo
-                                            (good1.getTag()))))
+                                            (good1.getTag()))))*/
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("user", Matchers.equalTo
@@ -102,10 +102,10 @@ AbstractWebIntegrationTests {
     (model().attribute("result",
                        Matchers.hasProperty("description", Matchers.equalTo
                                             (good2.getDescription()))))
-    .andExpect
+    /*.andExpect
     (model().attribute("result",
                        Matchers.hasProperty("tag", Matchers.equalTo
-                                            (good2.getTag()))))
+                                            (good2.getTag()))))*/
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("user", Matchers.equalTo
