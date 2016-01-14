@@ -2,11 +2,14 @@ package app.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,9 +112,31 @@ public class AdminController {
 
 	@RequestMapping("/modify/user/{user}")
 	public String modify(@PathVariable final String user, Model model) {
-
-		model.addAttribute("user", userRepository.findByUserAccount(userAccountManager.findByUsername(user).get()));
+		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+		model.addAttribute("user", user_xyz);
 		model.addAttribute("languages", languageRepository.findAll());
+		
+		List<String> otherLanguages= new ArrayList<>();
+		for(Language language: user_xyz.getLanguages()){
+			otherLanguages.add(language.getkennung());
+		}
+		otherLanguages.remove(user_xyz.getPrefLanguage().getkennung());
+		if(!otherLanguages.isEmpty()){
+			model.addAttribute("language2",otherLanguages.get(0));
+			otherLanguages.remove(0);
+			if(!otherLanguages.isEmpty()){
+				model.addAttribute("language3",otherLanguages.get(0));
+				otherLanguages.remove(0);
+			}
+		}
+		ListCountry a = new ListCountry();
+		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
+		model.addAttribute("countrys", L);
+		
+		if(user_xyz.getAddresstypString().equals("Refugees_home")){
+			model.addAttribute("isRefugee", "refugee");
+		}
+		
 		System.out.println(model.toString());
 		return "modify";
 	}
