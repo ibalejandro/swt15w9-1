@@ -6,49 +6,49 @@
 	</head>
 	
 	<body>
-        <div th:include="navigation :: navigation"></div>
+        <th:block th:include="navigation :: navigation"></th:block>
 		
-		<div class = "row">
-			<div class = "small-12 columns">
-				<div class="create">
-					<h1 class="create__title"> Good </h1>
-					
-					<form th:action="@{/updatedGood}" th:object="${good}" method="post" enctype="multipart/form-data">
-						<div>
-							<label class="create__label"> Name </label>
-							<input type="text" name="name" th:value="*{name}"/>
-						</div>
-
-						<div>
-							<label class="create__label"> Description </label>
-							<input type="text" name="description" th:value="*{description}"/> 
-						</div>
-						
-						<div>
-							<label class="create__label"> Picture </label>
-							<input type="file" name="pict"/> 
-						</div>
-
-						<div>
-							<label class="create__label"> Tag </label>
-							<select name="tagId">
-				    			<option th:value="${good.tag.id}" th:text="${good.tag.name}"></option>
-				    			<option th:each="tag : ${tags}"
-				            			th:value="${tag.id}"
-				            			th:text="${tag.name}">
-				    			</option>
-							</select>  
-						</div>
-						
-						<input type="hidden" name="id" th:value="${good.id}"/>
-						
-						<div>
-							<input class="button" type="submit" value="Update"/>
-						</div>
-					</form>
+		<th:block th:fragment="update">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1 class="headline"> Good </h1>
 				</div>
-			</div>	
-		</div>
+				
+				<form th:action="@{/updatedGood}" th:object="${good}" method="post" enctype="multipart/form-data">
+					<div class="small-12 medium-6 columns">
+						<label class="create__label"> Name </label>
+						<input type="text" name="name" th:value="*{name}"/>
+					</div>
+
+					<div class="small-12 medium-6 columns">
+						<label class="create__label"> Description </label>
+						<input type="text" name="description" th:value="*{description}"/> 
+					</div>
+					
+					<div class="small-12 medium-6 columns">
+						<label class="create__label"> Picture </label>
+						<input type="file" name="pict"/> 
+					</div>
+
+					<div class="small-12 medium-6 columns">
+						<label class="create__label"> Tag </label>
+						<select name="tagId">
+							<option th:value="${good.tag.id}" th:text="${good.tag.name}"></option>
+							<option th:each="tag : ${tags}"
+									th:value="${tag.id}"
+									th:text="${tag.name}">
+							</option>
+						</select>  
+					</div>
+					
+					<input type="hidden" name="id" th:value="${good.id}"/>
+					
+					<div class="small-12 columns">
+						<input class="button" type="submit" value="Update"/>
+					</div>
+				</form>	
+			</div>
+		</th:block>
 		
 		<th:block th:include="imports :: script"></th:block>
     </body>

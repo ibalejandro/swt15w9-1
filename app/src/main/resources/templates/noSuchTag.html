@@ -5,6 +5,8 @@
 	</head>
 
 	<body>
+		<th:block th:include="navigation :: navigation"></th:block>
+	
 		<div class="row">
 			<div class="12-small columns">
 				<h1 class="headline" th:text="'The tag you want to '+${wantedAction}+' doesn\' t exist.'"></h1>

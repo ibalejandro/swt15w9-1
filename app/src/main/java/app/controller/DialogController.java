@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import app.model.ActivityEntity;
 import app.model.Dialog;
 import app.model.GoodEntity;
 import app.model.User;
 import app.model.UserRepository;
+import app.repository.ActivitiesRepository;
 import app.repository.DialogRepository;
 import app.repository.GoodsRepository;
 import app.repository.TextBlockRepository;
@@ -36,15 +38,18 @@ public class DialogController {
 	private final DialogRepository dialogRepo;
 	private final TextBlockRepository textBlockRepo;
 	private final GoodsRepository goodsRepo;
+	private final ActivitiesRepository activitiesRepo;
 
 	@Autowired
 	public DialogController(DialogRepository dialogList, UserRepository userRepository,
-			UserAccountManager userAccountManager, TextBlockRepository textBlockRepo, GoodsRepository goodsRepo) {
+			UserAccountManager userAccountManager, TextBlockRepository textBlockRepo, GoodsRepository goodsRepo,
+			ActivitiesRepository activityRepo) {
 		this.dialogRepo = dialogList;
 		this.userRepo = userRepository;
 		this.userAccountManager = userAccountManager;
 		this.textBlockRepo = textBlockRepo;
 		this.goodsRepo = goodsRepo;
+		this.activitiesRepo = activityRepo;
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.GET)
@@ -65,10 +70,11 @@ public class DialogController {
 	}
 
 	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
-	public String dialog(@RequestParam("id") Long id, @RequestParam Map<String, String> allRequestParams) {
+	public String dialog(@RequestParam("id") Long id, @RequestParam Map<String, String> allRequestParams,
+			@LoggedIn Optional<UserAccount> loggedInUserAccount) {
 		ChatTemplate ct = new ChatTemplate(getAllTextBlocks());
 		Dialog d = dialogRepo.findOne(id);
-		d.addMessageElement(ct.fromForm(allRequestParams));
+		d.addMessageElement(ct.fromForm(allRequestParams, retrieveUser(loggedInUserAccount)));
 		dialogRepo.save(d);
 		return "redirect:/dialog?id=" + id;
 	}
@@ -91,7 +97,8 @@ public class DialogController {
 		for (Dialog dialog : dialogRepo.findByUserB(loggedInUser)) {
 			userDialogs.add(dialog);
 		}
-
+		
+		model.addAttribute("loggedInUser", loggedInUser);
 		model.addAttribute("dialogList", userDialogs);
 		return "dialogList";
 	}
@@ -111,31 +118,44 @@ public class DialogController {
 		}
 
 		User loggedInUser = userRepo.findByUserAccount(loggedInUserAccount.get());
-		Optional<UserAccount> participantAccount = userAccountManager.findByUsername(participant);
-		if (!participantAccount.isPresent()) {
-			System.err.println("Couldn't find participant: " + participant);
-			return "error";
+		User participantUser = retrieveUser(userAccountManager.findByUsername(participant));
+		
+		if (loggedInUser.getId() == participantUser.getId()) {
+			System.err.println("DialogPartner can not be DialogOwner");
+			return "redirect:/dialogList";
 		}
-		User participantUser = userRepo.findByUserAccount(participantAccount.get());
 
-		Dialog d = new Dialog(title, loggedInUser, participantUser);
-		dialogRepo.save(d);
+		dialogRepo.save(new Dialog(title, loggedInUser, participantUser));
 
 		return "redirect:/dialogList";
 	}
 
 	@RequestMapping(value = "/dialogByOffer", method = RequestMethod.POST)
 	public String dialogByOffer(HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
-		GoodEntity g = goodsRepo.findOne(Long.parseLong(req.getParameter("goodId")));
+		Long id = Long.parseLong(req.getParameter("goodId"));
+		GoodEntity g = goodsRepo.findOne(id);
+		ActivityEntity a = activitiesRepo.findOne(id);
+		String title;
+		User participant;
 
-		User owner;
-		if (!loggedInUA.isPresent()) {
-			return "noUser";
-		} else {
-			owner = userRepo.findByUserAccount(loggedInUA.get());
+		if (g == null && a == null) {
+			throw new NullPointerException("No activity or good found for given id!");
 		}
 
-		Dialog d = dialogRepo.save(new Dialog(g.getName(), owner, g.getUser()));
+		if (g != null) {
+			title = g.getName();
+			participant = g.getUser();
+		} else {
+			title = a.getName();
+			participant = a.getUser();
+		}
+
+		if (!loggedInUA.isPresent()) {
+			return "noUser";
+		}
+		User owner = retrieveUser(loggedInUA);
+
+		Dialog d = dialogRepo.save(new Dialog(title, owner, participant));
 
 		return "redirect:/dialog?id=" + d.getId();
 	}
@@ -144,5 +164,12 @@ public class DialogController {
 		List<TextBlock> l = new LinkedList<>();
 		textBlockRepo.findAll().forEach((TextBlock t) -> l.add(t));
 		return l;
+	}
+
+	private User retrieveUser(Optional<UserAccount> ua) {
+		if (!ua.isPresent()) {
+			throw new IllegalArgumentException("UserAccount not present");
+		}
+		return userRepo.findByUserAccount(ua.get());
 	}
 }

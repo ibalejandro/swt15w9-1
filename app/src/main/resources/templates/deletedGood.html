@@ -15,14 +15,12 @@
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="row">
-			<div class="small-12 colums">
-				<h2 class="headline"> You just deleted this good: </h2>
-			</div>
-			
-			<div class="small-12 colums umrandung">
-				<div th:include="itemN--large--good :: item"></div>
+			<div class="small-12 columns">
+				<h1 class="headline"> You just deleted this good: </h1>
 			</div>
 		</div>
+		
+		<div th:include="itemN--large--good--nopic :: item"></div>
 		
 		<th:block th:include="imports :: script"></th:block>
 	</body>

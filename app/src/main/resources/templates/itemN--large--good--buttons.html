@@ -13,37 +13,53 @@
 	<body>
 	
 		<th:block th:fragment="item">
-			<div class="row">
-				<div class="large-3 medium-6 small-12 columns">
-					<h1 th:text="${result.name}" class="headline"></h1>
+			<div class="row ">
+				<div class="umrandung">
+					<div class="large-3 medium-6 small-12 columns">
+						<h1 th:text="${result.name}" class="headline"></h1>
+					</div>
+					
+					<th:block th:fragment="buttons">
+						<div class="large-3 medium-6 small-12 columns">
+							<form action="@{/deletedGood}" method="post">
+								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
+								<input class="button" type="submit" value="Delete"/>
+							</form>
+						</div>
+
+						<div class="large-3 medium-6 small-12 columns">
+							<form action="@{/update}" method="post">
+								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
+								<input class="button" type="submit" value="Update"/>
+							</form>
+						</div>
+
+						<div class="large-3 medium-6 small-12 columns">
+							<form action="/dialogByOffer" method="post">
+								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
+								<input class="button" type="submit" value="Ask for this good"/>
+							</form>
+						</div>
+						
+						<div class="large-3 medium-6 small-12 columns">
+							<form action="@{/deletedGoodByAdmin}" method="post"> <!--/* zuändern */-->
+								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
+								<input class="button" type="submit" value="Delete"/> <!--/* zuändern */-->
+							</form>
+						</div>
+						
+						<div class="large-3 medium-6 small-12 columns">
+							<form action="@{/updateGoodByAdmin}" method="post"> <!--/* zuändern */-->
+								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
+								<input class="button" type="submit" value="Update"/> <!--/* zuändern */-->
+							</form>
+						</div>
+						
+						<div class="small-12 columns divider-1rem"></div>
+					</th:block>
+					
+					<th:block th:include="itemN--large--good :: content"></th:block>
 				</div>
-				
-				<th:block th:fragment="buttons">
-					<div class="large-3 medium-6 small-12 columns">
-						<form action="/dialogByOffer" method="post">
-							<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
-							<input class="button" type="submit" value="Ask for this good"/>
-						</form>
-					</div>
-					
-					<div class="large-3 medium-6 small-12 columns">
-						<form action="/dialogByOffer" method="post"> <!--/* zuändern */-->
-							<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
-							<input class="button" type="submit" value="Ask for this good"/> <!--/* zuändern */-->
-						</form>
-					</div>
-					
-					<div class="large-3 medium-6 small-12 columns">
-						<form action="/dialogByOffer" method="post"> <!--/* zuändern */-->
-							<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
-							<input class="button" type="submit" value="Ask for this good"/> <!--/* zuändern */-->
-						</form>
-					</div>
-					
-					<div class="hide-for-small-only divider"></div>
-				</th:block>
-				
-				<th:block include="itemN--large--good--buttons :: content"></th:block>
 			</div>
 		</th:block>
 		
