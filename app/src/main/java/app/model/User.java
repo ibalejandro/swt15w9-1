@@ -222,9 +222,12 @@ public class User implements Serializable {
 		return location;
 	}
 	
-	public Boolean isOldLocation(Address location){
-		System.out.println("isOldLocation check");
-		System.out.println(location+"<>"+this.location);
+	/**
+	   * Determines if the given Address has the same attributes as the one saved by this User.
+	   * 
+	   * @return boolean True if the given Address is the Address saved by this User.
+	   */
+	public boolean isOldLocation(Address location){
 		if(adresstyp.toString().equals("Wohnung")){
 			if((!this.location.getStreet().equals(location.getStreet())) ||
 					(!this.location.getHousenr().equals(location.getHousenr()))){
@@ -240,10 +243,13 @@ public class User implements Serializable {
 					(!this.location.getZipCode().equals(location.getZipCode()))){
 				return false;
 			}
-		System.out.println("isOldLocation check: True");
 		return true;
 	}
-	
+	/**
+	   * Creates Coordinates for the saved Address (location) by contacting the google geocoder.
+	   * 
+	   * @return Coordinates The new Coordinates or (0.00 ,0.00) if there was an error.
+	   */
 	//Suchen Koordinaten
 	public Coordinates createCoordinates(){
 		System.out.println("create Coordinates!!");
@@ -251,7 +257,6 @@ public class User implements Serializable {
 			return new Coordinates(0.00,0.00);
 		}
 		
-		//String url = "http://maps.googleapis.com/maps/api/geocode/json?address="+ URLEncoder.encode(location.toString(), "UTF-8")+"+" +"&sensor=false";
 		final Geocoder geocoder = new Geocoder();
 		GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location.toString()).setLanguage("en").getGeocoderRequest();
 		GeocodeResponse geocoderResponse;
@@ -263,10 +268,8 @@ public class User implements Serializable {
 				 return new Coordinates(0.00,0.00);
 			}
 			GeocoderResult geoCode= geocoderResponse.getResults().get(0);
-			System.out.println(geoCode);
 		    float latitude = geoCode.getGeometry().getLocation().getLat().floatValue();
 		    float longitude = geoCode.getGeometry().getLocation().getLng().floatValue();
-		    System.out.println(latitude+", "+longitude);
 	         
 			Coordinates newCoordinates= new Coordinates(latitude,longitude);
 			return newCoordinates;	
@@ -375,6 +378,13 @@ public class User implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Remove all but the preferred language.
+	 *
+	 * @param Language
+	 *            The language that should be removed.
+	 * @return Nothing
+	 */
 	public void removeAllLanguages() {
 		Set<Language> PL = new HashSet<>();
 		PL.add(PrefLanguage);
@@ -388,15 +398,25 @@ public class User implements Serializable {
 		return PrefLanguage;
 	}
 
+	/**
+	 * Set the preferred language and add to languages.
+	 *
+	 * @param Language
+	 *            The language that should be the new PrefLanguage.
+	 * @return Nothing
+	 */
 	public void setPrefLanguage(Language language) {
 		// PrefLanguage in Set Languages enthalten
 		if (!languages.contains(language)) {
-			languages.add(language);
-			System.out.println("already here");
-		}
+			languages.add(language);		}
 		this.PrefLanguage = language;
 	}
 
+	/**
+	 * Creates string of language names separated by ", "
+	 *
+	 * @return String All language names as String
+	 */
 	public String showLanguages() {
 		String languageNames = "";
 		for (Language l : languages) {
