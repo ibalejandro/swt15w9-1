@@ -28,7 +28,7 @@
 						</select>  
 				</div>
 				<div class="small-12 columns">
-						<label for="otherlanguages" class="form__label">2.Sprache:</label>
+					<label for="otherlanguages" class="form__label">2.Sprache:</label>
 				</div>
 				<div class="small-12 columns less_space">
 					<select id="otherlanguages" name="otherlanguages">
@@ -45,10 +45,10 @@
 					</select>  
 				</div>
 				<div class="small-12 columns">
-					<label for="otherlanguages" class="form__label">3.Sprache:</label>
+					<label for="otherlanguages2" class="form__label">3.Sprache:</label>
 				</div>
 				<div class="small-12 columns less_space">
-					<select id="otherlanguages" name="otherlanguages">
+					<select id="otherlanguages2" name="otherlanguages">
 						<option value="-1">---- Select ----</option>
 						<option th:each="language : ${languages}"
 							th:if="${language.getkennung()} == ${language3}" selected="selected"		

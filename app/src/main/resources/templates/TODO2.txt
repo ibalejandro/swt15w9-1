@@ -42,7 +42,7 @@ textBlockList					|	textBlockList					|
 textBlockList-new				|	newTextBlock					|
 search							|	search							|f
 searchResults					|	searchResults					|f
-template-manager				|	template_translation_manager	|
+template-manager				|	template_translation_manager	|f
 template-change					|	change_template					|
 tags-available					|	availableTags					|f
 updated-Tag						|	updatedTag						|f

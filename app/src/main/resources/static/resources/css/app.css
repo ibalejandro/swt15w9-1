@@ -330,6 +330,14 @@ p{
 	outline-color: lightgray;
 	overflow: auto;
 }
+.umrandung-less{
+	margin: 0.5rem;
+	padding: 0.5rem;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+	overflow: auto;
+}
 .umrandung-nomargin{
 	margin: 0;
 	padding: 0.5rem 1rem 0 1rem;
