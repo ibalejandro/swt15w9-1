@@ -64,6 +64,15 @@ public class GoodsAndActivityOverviewController {
 		return "redirect:/item/activity/1";
 	}
 
+	/**
+	 * This method is the answer for the request to '/item/{typ}/{id}'.
+	 * 
+	 * @param Typ
+	 * 
+	 * @param Id
+	 * 
+	 * @return String The name of the view to be shown after processing
+	 */
 	@RequestMapping(value = "/item/{typ}/{id}", method = RequestMethod.GET)
 	public String showGoodAndActivity(@PathVariable String typ, @PathVariable String id, Model modelMap) {
 
@@ -75,7 +84,7 @@ public class GoodsAndActivityOverviewController {
 				return "redirect:/";
 			}
 			System.out.println(goodEntity.getItemTypeAndId() + ": " + goodEntity.getName());
-			
+
 			modelMap.addAttribute("result", goodEntity);
 			modelMap.addAttribute("good", true);
 			return "itemNContainer--large";
@@ -88,7 +97,7 @@ public class GoodsAndActivityOverviewController {
 				return "redirect:/";
 			}
 			System.out.println(activitiesEntity.getItemTypeAndId() + ": " + activitiesEntity.getName());
-			
+
 			modelMap.addAttribute("result", activitiesEntity);
 			modelMap.addAttribute("good", false);
 			return "itemNContainer--large";
