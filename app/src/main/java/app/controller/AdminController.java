@@ -76,12 +76,7 @@ public class AdminController {
 	private final InterfaceRepository interfaceRepository;
 	private final ModuleRepository moduleRepository;
 
-	/**
-	 * Autowire.
-	 * 
-	 * @param userRepository
-	 *            The repository for the users
-	 */
+
 	@Autowired
 	public AdminController(UserRepository userRepository, 
 	                       UserAccountManager userAccountManager,
@@ -115,6 +110,16 @@ public class AdminController {
 		return "userDetails";
 	}
 
+	/**
+	 * This method is the answer for the request to '/modify/user/{user}'. 
+	 * It adds the user, it's 2. and 3.language and the languages in the LanguageRepository to the model.
+	 * The List of Countries is add to the model.
+	 * 
+	 * @param Model
+	 *            The model to add the necessary attributes
+	 *
+	 * @return String The name of the view to be shown after processing
+	 */
 	@RequestMapping("/modify/user/{user}")
 	public String modify(@PathVariable final String user, Model model) {
 		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
@@ -141,11 +146,21 @@ public class AdminController {
 		if(user_xyz.getAddresstypString().equals("Refugees_home")){
 			model.addAttribute("isRefugee", "refugee");
 		}
-		
-		System.out.println(model.toString());
 		return "modify";
 	}
 
+	/**
+	 * This method is the answer for the request to '/searchUser'. 
+	 * It finds and shows the User to the given Username.
+	 * 
+	 * @param Model
+	 *            The model to add the necessary attributes
+	 *
+	 *@param Optional<String> 
+	 *            The username  
+	 *            
+	 * @return String The name of the view to be shown after processing
+	 */
 	@RequestMapping(value = "/searchUser", method = RequestMethod.POST)
 	public String searchUser(@RequestParam(value = "userNameIN") final Optional<String> userNameOPT, Model model) {
 		String userName = HelpFunctions.getOptionalString(userNameOPT);
@@ -160,6 +175,19 @@ public class AdminController {
 		}
 		return "data_refugee";
 	}
+
+	/**
+	 * This method is the answer for the request to '/viewUser'. 
+	 * It shows the User to the given Username.
+	 * 
+	 * @param Model
+	 *            The model to add the necessary attributes
+	 *
+	 *@param Optional<String> 
+	 *            The username  
+	 *            
+	 * @return String The name of the view to be shown after processing
+	 */
 
 	@RequestMapping(value = "/viewUser", method = RequestMethod.GET)
 	public String viewUser(@RequestParam(value = "userNameIN") final Optional<String> userNameOPT, Model model) {
@@ -177,6 +205,7 @@ public class AdminController {
 
 	}
 
+	
 	@RequestMapping(value = "/addLanguage")
 	public String addLanguage_submit() {
 		return "addLanguage";
@@ -192,6 +221,17 @@ public class AdminController {
 		return "index";
 
 	}
+
+	/**
+	 * This method is the answer for the request to '/modify_submit/user/{user}'. 
+	 * It modifies the User information.
+	 * 
+	 * @param Model
+	 *            The model to add the necessary attributes
+	 *
+	 *            
+	 * @return String The name of the view to be shown after processing
+	 */
 
 	@RequestMapping(value = "/modify_submit/user/{user}", method = RequestMethod.POST) // user/{user}
 	public String modify_submit(@PathVariable final String user,
@@ -228,7 +268,6 @@ public class AdminController {
 				user_xyz.getLocation().getZipCode(),
 				user_xyz.getLocation().getCity());
 		if (Adresstyp.equals("refugee")) {
-			System.out.println("refugee");
 			user_xyz.getLocation().setStreet("");
 			user_xyz.getLocation().setHousenr("");
 			user_xyz.setAddresstyp(AddresstypEnum.Refugees_home);
@@ -245,7 +284,6 @@ public class AdminController {
 				user_xyz.getLocation().setCityPart(Citypart_OPT.get());
 			}
 		} else {
-			System.out.println("helper");
 			if (Street_OPT.isPresent() && !Street_OPT.get().isEmpty()) {
 				user_xyz.getLocation().setStreet(Street_OPT.get());
 				user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
@@ -273,15 +311,11 @@ public class AdminController {
 			userRepository.save(user_xyz);
 		}
 		if (!Nativelanguage.isEmpty()) {
-			System.out.println("modify language");
 			user_xyz.removeLanguage(user_xyz.getPrefLanguage());
 			Language PreferredLanguage = languageRepository.findByKennung(Nativelanguage);
 			user_xyz.setPrefLanguage(PreferredLanguage);
 		}
 		if (!OtherLanguages.isEmpty() && !OtherLanguages.toString().equals("-1")) {
-			System.out.println("modify languages");
-			System.out.println(OtherLanguages);
-			System.out.println(OtherLanguages.toString());
 			Boolean nichtleer = false;
 			for (String test : OtherLanguages.split(",")) {
 				if (!test.equals("-1")) {
@@ -293,7 +327,6 @@ public class AdminController {
 			}
 			if (OtherLanguages != null && !OtherLanguages.isEmpty()) {
 				for (String languageName : OtherLanguages.split(",")) {
-					System.out.println(languageName);
 					if (languageRepository.findByKennung(languageName) != null) {
 						// user_xyz.setLanguage(languageRepository.findByName(languageName));
 						Language l1 = languageRepository.findByKennung(languageName);
@@ -305,11 +338,9 @@ public class AdminController {
 				}
 			}
 		}
-		System.out.println("origin?");
 		if (Origin.isPresent())
 			user_xyz.setOrigin(Origin.get());
 		userRepository.save(user_xyz);
-		System.out.println("saved");
 		return "redirect:/userDetails";
 
 	}
