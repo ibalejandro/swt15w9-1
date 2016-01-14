@@ -235,6 +235,14 @@ public class ActivityEntity implements Serializable {
     return "activity" + id;
   }
   
+  /**
+   * This method returns the id for a given construct activity{id}.
+   * @return String The activity's id for the given construct activity{id}
+   */
+  public static String getIdFromConstruct(String construct) {
+    return construct.substring(8);
+  }
+  
 	public String getItemLink(){
 		return "activity/"+id;
 	}
