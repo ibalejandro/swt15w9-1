@@ -373,8 +373,12 @@ public class User implements Serializable {
 	 * @return Nothing
 	 */
 	public Language removeLanguage(Language language) {
-		if (languages.remove(language))
-			return language;
+		for(Language l:languages){
+			if (l.getkennung().equals(language.getkennung())){
+				languages.remove(l);
+				return l;
+			}
+		}
 		return null;
 	}
 

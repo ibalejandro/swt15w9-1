@@ -66,6 +66,12 @@ public class userBasisfunctionsTests extends AbstractWebIntegrationTests{
 		Language l3=languageRepository.findOne(3L);
 		
 		user1.setPrefLanguage(l1);
+		user1.removeAllLanguages();
+		for(Language language:user1.getLanguages())	{
+			assertTrue(language.getkennung().equals(l1.getkennung()));
+			assertTrue(language.getName().equals(l1.getName()));
+		}	
+		
 		user1.setLanguage(l2);
 		user1.setLanguage(l3);
 		userRepository.save(user1);
@@ -83,6 +89,7 @@ public class userBasisfunctionsTests extends AbstractWebIntegrationTests{
 		}
 		user1.removeLanguage(l3);
 		userRepository.save(user1);
+		languageRepository.save(l3);
 		user1 = userRepository.findByUserAccount(userAccountManager
 				.findByUsername("testUser1").get());
 		
@@ -90,12 +97,6 @@ public class userBasisfunctionsTests extends AbstractWebIntegrationTests{
 			assertFalse(language.getkennung().equals(l3.getkennung()));
 			assertFalse(language.getName().equals(l3.getName()));
 		}
-		
-		user1.removeAllLanguages();
-		for(Language language:user1.getLanguages())	{
-			assertTrue(language.getkennung().equals(l1.getkennung()));
-			assertTrue(language.getName().equals(l1.getName()));
-		}	
 	}
 	
 	
