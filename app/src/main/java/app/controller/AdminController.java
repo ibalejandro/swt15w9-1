@@ -78,9 +78,14 @@ public class AdminController {
 
 
 	@Autowired
-	public AdminController(UserRepository userRepository, UserAccountManager userAccountManager,
-			LanguageRepository languageRepository, TagsRepository tagsRepository, GoodsRepository goodsRepository,
-			ActivitiesRepository activitiesRepository, InterfaceRepository interfaceRepository, ModuleRepository moduleRepository) {
+	public AdminController(UserRepository userRepository, 
+	                       UserAccountManager userAccountManager,
+	                       LanguageRepository languageRepository, 
+	                       TagsRepository tagsRepository, 
+	                       GoodsRepository goodsRepository,
+	                       ActivitiesRepository activitiesRepository, 
+	                       InterfaceRepository interfaceRepository, 
+	                       ModuleRepository moduleRepository) {
 		this.userRepository = userRepository;
 		this.userAccountManager = userAccountManager;
 		this.languageRepository = languageRepository;
@@ -351,7 +356,8 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/availableTags", method = RequestMethod.GET)
-	public String listAllAvailableTags(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	public String listAllAvailableTags
+	(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		/*
 		 * If there wasn't a log in instance for the admin, then he is
 		 * redirected to an error page.
@@ -362,7 +368,8 @@ public class AdminController {
 		TagEntity defaultTag = tagsRepository.findByName(TagEntity.OTHERS);
 		long defTagId = defaultTag.getId();
 
-		model.addAttribute("result", tagsRepository.findByIdNotOrderByNameAsc(defTagId));
+		model.addAttribute("result", 
+		                   tagsRepository.findByIdNotOrderByNameAsc(defTagId));
 		return "availableTags";
 	}
 
@@ -381,9 +388,11 @@ public class AdminController {
 	 *            tags
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/updateTag", method = { RequestMethod.GET, RequestMethod.POST })
-	public String showTagToUpdate(HttpServletRequest request, Model model, @ModelAttribute("tag") TagEntity tag,
-			@LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/updateTag", 
+	                method = { RequestMethod.GET, RequestMethod.POST })
+	public String showTagToUpdate(HttpServletRequest request, Model model, 
+	                              @ModelAttribute("tag") TagEntity tag,
+	                              @LoggedIn Optional<UserAccount> userAccount) {
 		long id;
 		String error = null;
 		/*
@@ -438,9 +447,11 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/updatedTag", method = RequestMethod.POST)
-	public String updateTag(HttpServletRequest request, Model model, @ModelAttribute("tag") TagEntity tag,
-			BindingResult bindingResult, RedirectAttributes redirectAttributes,
-			@LoggedIn Optional<UserAccount> userAccount) {
+	public String updateTag(HttpServletRequest request, Model model, 
+	                        @ModelAttribute("tag") TagEntity tag,
+	                        BindingResult bindingResult, 
+	                        RedirectAttributes redirectAttributes,
+	                        @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
 
@@ -458,7 +469,8 @@ public class AdminController {
 		 * admin is redirected to the tag-update form again.
 		 */
 		if (bindingResult.hasErrors()) {
-			System.out.println("Invalid tag: " + bindingResult.getAllErrors().toString());
+			System.out.println("Invalid tag: " 
+			                   + bindingResult.getAllErrors().toString());
 			redirectAttributes.addFlashAttribute("id", id);
 			return "redirect:updateTag";
 		}
@@ -499,7 +511,8 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/deletedTag", method = RequestMethod.POST)
-	public String deleteTag(HttpServletRequest request, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	public String deleteTag(HttpServletRequest request, Model model, 
+	                        @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 
 		if (!userAccount.isPresent())
@@ -537,8 +550,9 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/addNewTag", method = RequestMethod.GET)
-	public String showFormToAddNewTag(Model model, @ModelAttribute("tag") TagEntity tag,
-			@LoggedIn Optional<UserAccount> userAccount) {
+	public String showFormToAddNewTag
+	(Model model, @ModelAttribute("tag") TagEntity tag,
+	 @LoggedIn Optional<UserAccount> userAccount) {
 		if (!userAccount.isPresent()) return "noUser";
 
 		/*
@@ -590,7 +604,8 @@ public class AdminController {
 		 * redirected to the tag form again.
 		 */
 		if (bindingResult.hasErrors()) {
-			System.out.println("Invalid tag: " + bindingResult.getAllErrors().toString());
+			System.out.println("Invalid tag: " 
+			                   + bindingResult.getAllErrors().toString());
 			return "redirect:addNewTag";
 		}
 		
@@ -624,8 +639,10 @@ public class AdminController {
 	 *            activities
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/offeredGoodsAndActivities", method = RequestMethod.GET)
-	public String listAllOfferedGoodsAndActivities(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/offeredGoodsAndActivities", 
+	                method = RequestMethod.GET)
+	public String listAllOfferedGoodsAndActivities
+	(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		/*
 		 * If there wasn't a log in instance, then the admin is redirected to an
 		 * error page.
@@ -653,9 +670,11 @@ public class AdminController {
 	 *            goods
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/updateGoodByAdmin", method = { RequestMethod.GET, RequestMethod.POST })
-	public String showGoodToUpdate(HttpServletRequest request, Model model, @ModelAttribute("good") GoodEntity good,
-			@LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/updateGoodByAdmin", 
+	                method = { RequestMethod.GET, RequestMethod.POST })
+	public String showGoodToUpdate(HttpServletRequest request, Model model, 
+	                               @ModelAttribute("good") GoodEntity good,
+	                               @LoggedIn Optional<UserAccount> userAccount) {
 		long id;
 
 		/*
@@ -689,7 +708,8 @@ public class AdminController {
 		 * whereas the other tags are there, so that the admin can change the
 		 * existing one.
 		 */
-		model.addAttribute("tags", tagsRepository.findByIdNotOrderByNameAsc(goodToUpdate.getTag().getId()));
+		model.addAttribute("tags", tagsRepository.findByIdNotOrderByNameAsc
+		                   (goodToUpdate.getTag().getId()));
 		return "updateGoodByAdmin";
 	}
 
@@ -714,9 +734,12 @@ public class AdminController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/updatedGoodByAdmin", method = RequestMethod.POST)
-	public String updateGood(HttpServletRequest request, Model model, @ModelAttribute("good") GoodEntity good,
-			BindingResult bindingResult, RedirectAttributes redirectAttributes,
-			@LoggedIn Optional<UserAccount> userAccount) throws IOException, ServletException {
+	public String updateGood(HttpServletRequest request, Model model, 
+	                         @ModelAttribute("good") GoodEntity good,
+	                         BindingResult bindingResult, 
+	                         RedirectAttributes redirectAttributes,
+	                         @LoggedIn Optional<UserAccount> userAccount) 
+	                         throws IOException, ServletException {
 		long id = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
@@ -743,7 +766,8 @@ public class AdminController {
 		 * admin is redirected to the good-update form again.
 		 */
 		if (bindingResult.hasErrors()) {
-			System.out.println("Invalid good: " + bindingResult.getAllErrors().toString());
+			System.out.println("Invalid good: " 
+			                   + bindingResult.getAllErrors().toString());
 			redirectAttributes.addFlashAttribute("id", id);
 			return "redirect:updateGoodByAdmin";
 		}
@@ -774,7 +798,8 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/deletedGoodByAdmin", method = RequestMethod.POST)
-	public String deleteGood(HttpServletRequest request, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	public String deleteGood(HttpServletRequest request, Model model, 
+	                         @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 
 		if (!userAccount.isPresent())
@@ -816,9 +841,13 @@ public class AdminController {
 	 *            activities
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/updateActivityByAdmin", method = { RequestMethod.GET, RequestMethod.POST })
-	public String showActivityToUpdate(HttpServletRequest request, Model model,
-			@ModelAttribute("activity") ActivityEntity activity, @LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/updateActivityByAdmin", 
+	                method = { RequestMethod.GET, RequestMethod.POST })
+	public String showActivityToUpdate
+	(HttpServletRequest request, Model model,
+	 @ModelAttribute("activity") ActivityEntity activity,
+	 @LoggedIn Optional<UserAccount> userAccount) {
+	  
 		long id;
 
 		/*
@@ -852,7 +881,8 @@ public class AdminController {
 		 * whereas the other tags are there, so that the admin can change the
 		 * existing one.
 		 */
-		model.addAttribute("tags", tagsRepository.findByIdNotOrderByNameAsc(activityToUpdate.getTag().getId()));
+		model.addAttribute("tags", tagsRepository.findByIdNotOrderByNameAsc
+		                   (activityToUpdate.getTag().getId()));
 		return "updateActivityByAdmin";
 	}
 
@@ -874,10 +904,14 @@ public class AdminController {
 	 *            activities
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/updatedActivityByAdmin", method = RequestMethod.POST)
-	public String updateActivity(HttpServletRequest request, Model model,
-			@ModelAttribute("activity") ActivityEntity activity, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes, @LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/updatedActivityByAdmin", 
+	                method = RequestMethod.POST)
+	public String updateActivity
+	(HttpServletRequest request, Model model, 
+	 @ModelAttribute("activity") ActivityEntity activity, 
+	 BindingResult bindingResult, RedirectAttributes redirectAttributes, 
+	 @LoggedIn Optional<UserAccount> userAccount) {
+	  
 		long id = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
@@ -912,7 +946,8 @@ public class AdminController {
 		 * the admin is redirected to the activity-update form again.
 		 */
 		if (bindingResult.hasErrors()) {
-			System.out.println("Invalid activity: " + bindingResult.getAllErrors().toString());
+			System.out.println("Invalid activity: " 
+			                   + bindingResult.getAllErrors().toString());
 			redirectAttributes.addFlashAttribute("id", id);
 			return "redirect:updateActivityByAdmin";
 		}
@@ -924,7 +959,8 @@ public class AdminController {
 		 * Calling save() on an object with predefined id will update the
 		 * corresponding database record rather than insert a new one.
 		 */
-		model.addAttribute("result", activitiesRepository.save(activityToBeUpdated));
+		model.addAttribute("result", 
+		                   activitiesRepository.save(activityToBeUpdated));
 		return "updatedActivity";
 	}
 
@@ -942,8 +978,10 @@ public class AdminController {
 	 *            activities
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/deletedActivityByAdmin", method = RequestMethod.POST)
-	public String deleteActivity(HttpServletRequest request, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/deletedActivityByAdmin", 
+	                method = RequestMethod.POST)
+	public String deleteActivity(HttpServletRequest request, Model model, 
+	                             @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 
 		if (!userAccount.isPresent())
