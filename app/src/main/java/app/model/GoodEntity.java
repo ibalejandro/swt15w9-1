@@ -107,7 +107,8 @@ public class GoodEntity implements Serializable {
 		try {
 			InputStream is;
 			if (picture == null) {
-				is = ClassLoader.getSystemResourceAsStream("static/resources/AltBild.png");
+				return null;
+				//is = ClassLoader.getSystemResourceAsStream("static/resources/AltBild.png");
 			} else {
 				is = picture.getInputStream();
 			}
