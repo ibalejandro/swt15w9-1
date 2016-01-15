@@ -8,24 +8,7 @@ QUERVERWEISE:
 		imports :: head
 		navigation :: navigation
 		imports :: script
-		
--	activities_item--multi
-		imports :: head
-		imports :: script
-		
--	activities_item--multi_no_numeration
-		imports :: head
-		imports :: script
-		
->-	activities_item--single
-		imports :: head
-		imports :: script
-	
--	activities_item--single_for_deletion
-		imports :: head
-		activities_item--single :: nopic
-		imports :: script
-	
+
 +f	addedNewTag
 		imports :: head
 		navigation :: navigation
@@ -38,11 +21,6 @@ QUERVERWEISE:
 		imports :: script
 	
 +f	addNewTag
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
--	admin
 		imports :: head
 		navigation :: navigation
 		imports :: script
@@ -126,20 +104,6 @@ QUERVERWEISE:
 +f	errorpage_empty
 		imports :: head
 		navigation :: navigation
-		imports :: script
-	
--	errorpage_user_not_activated
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
--	error_empty_captcha
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
--	goods_item--multi_no_numeration
-		imports :: head
 		imports :: script
 	
 +f	home
@@ -274,10 +238,12 @@ QUERVERWEISE:
 	
 +f	noSuchActivity
 		imports :: head
+		navigation :: navigation
 		imports :: script
 	
 +f	noSuchGood
 		imports :: head
+		navigation :: navigation
 		imports :: script
 	
 +f	noSuchTag
@@ -287,10 +253,12 @@ QUERVERWEISE:
 	
 +f	notYourActivity
 		imports :: head
+		navigation :: navigation
 		imports :: script
 	
 +f	notYourGood
 		imports :: head
+		navigation :: navigation
 		imports :: script
 
 +f	noUser
