@@ -101,11 +101,14 @@ public class GoodEntity implements Serializable {
 	public static byte[] createPicture(Part picture) {
 		/* Ferdinand's code */
 		try {
+			InputStream is;
 			if(picture==null || picture.getSize() == 0L){
 				System.out.println("Kein Bild");
-				return null;
+				is = ClassLoader.getSystemResourceAsStream("static/resources/AltBild.png");
+			} else {
+				is = picture.getInputStream();
 			}
-			InputStream is = picture.getInputStream();
+			
 			BufferedImage img = ImageIO.read(is);
 
 			double scaling;
