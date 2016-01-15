@@ -1,4 +1,4 @@
-package app.test.tagsManagement;
+package app.test.activitiesManagement;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import app.Application;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public abstract class AbstractWebIntegrationTests {
+public class AbstractWebIntegrationTests {
 
 	@Autowired
 	WebApplicationContext context;

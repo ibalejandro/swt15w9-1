@@ -13,9 +13,6 @@ import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
-import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -76,16 +73,11 @@ public class AdminController {
 	private final InterfaceRepository interfaceRepository;
 	private final ModuleRepository moduleRepository;
 
-
 	@Autowired
-	public AdminController(UserRepository userRepository, 
-	                       UserAccountManager userAccountManager,
-	                       LanguageRepository languageRepository, 
-	                       TagsRepository tagsRepository, 
-	                       GoodsRepository goodsRepository,
-	                       ActivitiesRepository activitiesRepository, 
-	                       InterfaceRepository interfaceRepository, 
-	                       ModuleRepository moduleRepository) {
+	public AdminController(UserRepository userRepository, UserAccountManager userAccountManager,
+			LanguageRepository languageRepository, TagsRepository tagsRepository, GoodsRepository goodsRepository,
+			ActivitiesRepository activitiesRepository, InterfaceRepository interfaceRepository,
+			ModuleRepository moduleRepository) {
 		this.userRepository = userRepository;
 		this.userAccountManager = userAccountManager;
 		this.languageRepository = languageRepository;
@@ -111,9 +103,10 @@ public class AdminController {
 	}
 
 	/**
-	 * This method is the answer for the request to '/modify/user/{user}'. 
-	 * It adds the user, it's 2. and 3.language and the languages in the LanguageRepository to the model.
-	 * The List of Countries is add to the model.
+	 * This method is the answer for the request to '/modify/user/{user}'. It
+	 * adds the user, it's 2. and 3.language and the languages in the
+	 * LanguageRepository to the model. The List of Countries is add to the
+	 * model.
 	 * 
 	 * @param Model
 	 *            The model to add the necessary attributes
@@ -122,43 +115,43 @@ public class AdminController {
 	 */
 	@RequestMapping("/modify/user/{user}")
 	public String modify(@PathVariable final String user, Model model) {
-		User user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
+		User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 		model.addAttribute("user", user_xyz);
 		model.addAttribute("languages", languageRepository.findAll());
-		
-		List<String> otherLanguages= new ArrayList<>();
-		for(Language language: user_xyz.getLanguages()){
+
+		List<String> otherLanguages = new ArrayList<>();
+		for (Language language : user_xyz.getLanguages()) {
 			otherLanguages.add(language.getkennung());
 		}
 		otherLanguages.remove(user_xyz.getPrefLanguage().getkennung());
-		if(!otherLanguages.isEmpty()){
-			model.addAttribute("language2",otherLanguages.get(0));
+		if (!otherLanguages.isEmpty()) {
+			model.addAttribute("language2", otherLanguages.get(0));
 			otherLanguages.remove(0);
-			if(!otherLanguages.isEmpty()){
-				model.addAttribute("language3",otherLanguages.get(0));
+			if (!otherLanguages.isEmpty()) {
+				model.addAttribute("language3", otherLanguages.get(0));
 				otherLanguages.remove(0);
 			}
 		}
 		ListCountry a = new ListCountry();
 		LinkedList<String> L = a.getCountryList(Locale.ENGLISH);
 		model.addAttribute("countrys", L);
-		
-		if(user_xyz.getAddresstypString().equals("Refugees_home")){
+
+		if (user_xyz.getAddresstypString().equals("Refugees_home")) {
 			model.addAttribute("isRefugee", "refugee");
 		}
 		return "modify";
 	}
 
 	/**
-	 * This method is the answer for the request to '/searchUser'. 
-	 * It finds and shows the User to the given Username.
+	 * This method is the answer for the request to '/searchUser'. It finds and
+	 * shows the User to the given Username.
 	 * 
 	 * @param Model
 	 *            The model to add the necessary attributes
 	 *
-	 *@param Optional<String> 
-	 *            The username  
-	 *            
+	 * @param Optional<String>
+	 *            The username
+	 * 
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/searchUser", method = RequestMethod.POST)
@@ -177,15 +170,15 @@ public class AdminController {
 	}
 
 	/**
-	 * This method is the answer for the request to '/viewUser'. 
-	 * It shows the User to the given Username.
+	 * This method is the answer for the request to '/viewUser'. It shows the
+	 * User to the given Username.
 	 * 
 	 * @param Model
 	 *            The model to add the necessary attributes
 	 *
-	 *@param Optional<String> 
-	 *            The username  
-	 *            
+	 * @param Optional<String>
+	 *            The username
+	 * 
 	 * @return String The name of the view to be shown after processing
 	 */
 
@@ -205,7 +198,6 @@ public class AdminController {
 
 	}
 
-	
 	@RequestMapping(value = "/addLanguage")
 	public String addLanguage_submit() {
 		return "addLanguage";
@@ -223,13 +215,13 @@ public class AdminController {
 	}
 
 	/**
-	 * This method is the answer for the request to '/modify_submit/user/{user}'. 
-	 * It modifies the User information.
+	 * This method is the answer for the request to
+	 * '/modify_submit/user/{user}'. It modifies the User information.
 	 * 
 	 * @param Model
 	 *            The model to add the necessary attributes
 	 *
-	 *            
+	 * 
 	 * @return String The name of the view to be shown after processing
 	 */
 
@@ -261,12 +253,9 @@ public class AdminController {
 			user_xyz.getUserAccount().setFirstname(Firstname.get());
 		System.out.println(user_xyz.getUserAccount().getFirstname());
 
-		Address lastAddress=new Address(user_xyz.getLocation().getStreet(),
-				user_xyz.getLocation().getHousenr(),
-				user_xyz.getLocation().getFlh_name(),
-				user_xyz.getLocation().getCityPart(),
-				user_xyz.getLocation().getZipCode(),
-				user_xyz.getLocation().getCity());
+		Address lastAddress = new Address(user_xyz.getLocation().getStreet(), user_xyz.getLocation().getHousenr(),
+				user_xyz.getLocation().getFlh_name(), user_xyz.getLocation().getCityPart(),
+				user_xyz.getLocation().getZipCode(), user_xyz.getLocation().getCity());
 		if (Adresstyp.equals("refugee")) {
 			user_xyz.getLocation().setStreet("");
 			user_xyz.getLocation().setHousenr("");
@@ -306,7 +295,7 @@ public class AdminController {
 			}
 		}
 		userRepository.save(user_xyz);
-		if(!user_xyz.isOldLocation(lastAddress)){
+		if (!user_xyz.isOldLocation(lastAddress)) {
 			user_xyz.setCoordinates(user_xyz.createCoordinates());
 			userRepository.save(user_xyz);
 		}
@@ -356,8 +345,7 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/availableTags", method = RequestMethod.GET)
-	public String listAllAvailableTags
-	(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	public String listAllAvailableTags(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		/*
 		 * If there wasn't a log in instance for the admin, then he is
 		 * redirected to an error page.
@@ -368,8 +356,7 @@ public class AdminController {
 		TagEntity defaultTag = tagsRepository.findByName(TagEntity.OTHERS);
 		long defTagId = defaultTag.getId();
 
-		model.addAttribute("result", 
-		                   tagsRepository.findByIdNotOrderByNameAsc(defTagId));
+		model.addAttribute("result", tagsRepository.findByIdNotOrderByNameAsc(defTagId));
 		return "availableTags";
 	}
 
@@ -388,11 +375,9 @@ public class AdminController {
 	 *            tags
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/updateTag", 
-	                method = { RequestMethod.GET, RequestMethod.POST })
-	public String showTagToUpdate(HttpServletRequest request, Model model, 
-	                              @ModelAttribute("tag") TagEntity tag,
-	                              @LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/updateTag", method = { RequestMethod.GET, RequestMethod.POST })
+	public String showTagToUpdate(HttpServletRequest request, Model model, @ModelAttribute("tag") TagEntity tag,
+			@LoggedIn Optional<UserAccount> userAccount) {
 		long id;
 		String error = null;
 		/*
@@ -401,8 +386,7 @@ public class AdminController {
 		 */
 		if (request.getMethod().equals("POST")) {
 			id = Long.parseLong(request.getParameter("id"));
-		} 
-		else {
+		} else {
 			id = (Long) model.asMap().get("id");
 			error = (String) model.asMap().get("error");
 		}
@@ -421,9 +405,9 @@ public class AdminController {
 
 		model.addAttribute("tag", tagToUpdate);
 		/*
-     * If the tag that the admin wanted to create already exists, an error
-     * message is returned to inform the admin about the situation.
-     */
+		 * If the tag that the admin wanted to create already exists, an error
+		 * message is returned to inform the admin about the situation.
+		 */
 		model.addAttribute("error", error);
 
 		return "updateTag";
@@ -447,11 +431,9 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/updatedTag", method = RequestMethod.POST)
-	public String updateTag(HttpServletRequest request, Model model, 
-	                        @ModelAttribute("tag") TagEntity tag,
-	                        BindingResult bindingResult, 
-	                        RedirectAttributes redirectAttributes,
-	                        @LoggedIn Optional<UserAccount> userAccount) {
+	public String updateTag(HttpServletRequest request, Model model, @ModelAttribute("tag") TagEntity tag,
+			BindingResult bindingResult, RedirectAttributes redirectAttributes,
+			@LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
 
@@ -469,22 +451,20 @@ public class AdminController {
 		 * admin is redirected to the tag-update form again.
 		 */
 		if (bindingResult.hasErrors()) {
-			System.out.println("Invalid tag: " 
-			                   + bindingResult.getAllErrors().toString());
+			System.out.println("Invalid tag: " + bindingResult.getAllErrors().toString());
 			redirectAttributes.addFlashAttribute("id", id);
 			return "redirect:updateTag";
 		}
-		
+
 		/*
-     * If the tag to be updated has the same name as an already existing tag, 
-     * the admin is redirected to the tag-update form again.
-     */
-		TagEntity possibleExistingTag = tagsRepository.findByNameIgnoreCase
-		                                (tagToBeUpdated.getName().trim());
+		 * If the tag to be updated has the same name as an already existing
+		 * tag, the admin is redirected to the tag-update form again.
+		 */
+		TagEntity possibleExistingTag = tagsRepository.findByNameIgnoreCase(tagToBeUpdated.getName().trim());
 		if (possibleExistingTag != null) {
-		  redirectAttributes.addFlashAttribute("id", id);
-		  redirectAttributes.addFlashAttribute("error", "This tag already exists");
-		  return "redirect:updateTag";
+			redirectAttributes.addFlashAttribute("id", id);
+			redirectAttributes.addFlashAttribute("error", "This tag already exists");
+			return "redirect:updateTag";
 		}
 
 		/*
@@ -511,8 +491,7 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/deletedTag", method = RequestMethod.POST)
-	public String deleteTag(HttpServletRequest request, Model model, 
-	                        @LoggedIn Optional<UserAccount> userAccount) {
+	public String deleteTag(HttpServletRequest request, Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 
 		if (!userAccount.isPresent())
@@ -550,25 +529,25 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/addNewTag", method = RequestMethod.GET)
-	public String showFormToAddNewTag
-	(Model model, @ModelAttribute("tag") TagEntity tag,
-	 @LoggedIn Optional<UserAccount> userAccount) {
-		if (!userAccount.isPresent()) return "noUser";
+	public String showFormToAddNewTag(Model model, @ModelAttribute("tag") TagEntity tag,
+			@LoggedIn Optional<UserAccount> userAccount) {
+		if (!userAccount.isPresent())
+			return "noUser";
 
 		/*
-     * If the tag that the admin wanted to create already exists, the name of
-     * the tag and an error message are returned to inform the admin about the
-     * situation.
-     */
+		 * If the tag that the admin wanted to create already exists, the name
+		 * of the tag and an error message are returned to inform the admin
+		 * about the situation.
+		 */
 		String name = (String) model.asMap().get("name");
 		String error = (String) model.asMap().get("error");
-		
+
 		model.addAttribute("name", name);
 		model.addAttribute("error", error);
 		return "addNewTag";
 	}
 
-  /**
+	/**
 	 * This method is the answer for the request to '/addedNewTag'. It saves and
 	 * retrieves the tag that the admin wants to add for the tags table.
 	 * 
@@ -585,11 +564,9 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/addedNewTag", method = RequestMethod.POST)
-	public String addNewTag(HttpServletRequest request, Model model, 
-	                        @ModelAttribute("tag") TagEntity tag,
-			                    BindingResult bindingResult, 
-			                    RedirectAttributes redirectAttributes,
-			                    @LoggedIn Optional<UserAccount> userAccount) {
+	public String addNewTag(HttpServletRequest request, Model model, @ModelAttribute("tag") TagEntity tag,
+			BindingResult bindingResult, RedirectAttributes redirectAttributes,
+			@LoggedIn Optional<UserAccount> userAccount) {
 		String name = request.getParameter("name");
 
 		if (!userAccount.isPresent())
@@ -604,55 +581,25 @@ public class AdminController {
 		 * redirected to the tag form again.
 		 */
 		if (bindingResult.hasErrors()) {
-			System.out.println("Invalid tag: " 
-			                   + bindingResult.getAllErrors().toString());
+			System.out.println("Invalid tag: " + bindingResult.getAllErrors().toString());
 			return "redirect:addNewTag";
 		}
-		
+
 		/*
-     * If the tag to be created has the same name as an already existing tag, 
-     * the admin is redirected to the tag-add-new form again.
-     */
-    TagEntity possibleExistingTag = tagsRepository.findByNameIgnoreCase
-                                    (tagToSave.getName().trim());
-    if (possibleExistingTag != null) {
-      redirectAttributes.addFlashAttribute("name", tagToSave.getName());
-      redirectAttributes.addFlashAttribute("error", "This tag already exists");
-      return "redirect:addNewTag";
-    }
+		 * If the tag to be created has the same name as an already existing
+		 * tag, the admin is redirected to the tag-add-new form again.
+		 */
+		TagEntity possibleExistingTag = tagsRepository.findByNameIgnoreCase(tagToSave.getName().trim());
+		if (possibleExistingTag != null) {
+			redirectAttributes.addFlashAttribute("name", tagToSave.getName());
+			redirectAttributes.addFlashAttribute("error", "This tag already exists");
+			return "redirect:addNewTag";
+		}
 
 		TagEntity savedTag = tagsRepository.save(tagToSave);
 
 		model.addAttribute("result", savedTag);
 		return "addedNewTag";
-	}
-
-	/**
-	 * This method is the answer for the request to
-	 * '/offeredGoodsAndActivities'. It finds and retrieves all the offered
-	 * goods and activities.
-	 * 
-	 * @param Model
-	 *            The model to add response's attributes
-	 * @param Optional<UserAccount>
-	 *            The admin's account who wants to see all offered goods and
-	 *            activities
-	 * @return String The name of the view to be shown after processing
-	 */
-	@RequestMapping(value = "/offeredGoodsAndActivities", 
-	                method = RequestMethod.GET)
-	public String listAllOfferedGoodsAndActivities
-	(Model model, @LoggedIn Optional<UserAccount> userAccount) {
-		/*
-		 * If there wasn't a log in instance, then the admin is redirected to an
-		 * error page.
-		 */
-		if (!userAccount.isPresent())
-			return "noUser";
-
-		model.addAttribute("resultGoods", goodsRepository.findAll());
-		model.addAttribute("resultActivities", activitiesRepository.findAll());
-		return "offeredGoodsAndActivities";
 	}
 
 	/**
@@ -670,11 +617,9 @@ public class AdminController {
 	 *            goods
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/updateGoodByAdmin", 
-	                method = { RequestMethod.GET, RequestMethod.POST })
-	public String showGoodToUpdate(HttpServletRequest request, Model model, 
-	                               @ModelAttribute("good") GoodEntity good,
-	                               @LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/updateGoodByAdmin", method = { RequestMethod.GET, RequestMethod.POST })
+	public String showGoodToUpdate(HttpServletRequest request, Model model, @ModelAttribute("good") GoodEntity good,
+			@LoggedIn Optional<UserAccount> userAccount) {
 		long id;
 
 		/*
@@ -708,8 +653,7 @@ public class AdminController {
 		 * whereas the other tags are there, so that the admin can change the
 		 * existing one.
 		 */
-		model.addAttribute("tags", tagsRepository.findByIdNotOrderByNameAsc
-		                   (goodToUpdate.getTag().getId()));
+		model.addAttribute("tags", tagsRepository.findByIdNotOrderByNameAsc(goodToUpdate.getTag().getId()));
 		return "updateGoodByAdmin";
 	}
 
@@ -734,12 +678,9 @@ public class AdminController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/updatedGoodByAdmin", method = RequestMethod.POST)
-	public String updateGood(HttpServletRequest request, Model model, 
-	                         @ModelAttribute("good") GoodEntity good,
-	                         BindingResult bindingResult, 
-	                         RedirectAttributes redirectAttributes,
-	                         @LoggedIn Optional<UserAccount> userAccount) 
-	                         throws IOException, ServletException {
+	public String updateGood(HttpServletRequest request, Model model, @ModelAttribute("good") GoodEntity good,
+			BindingResult bindingResult, RedirectAttributes redirectAttributes,
+			@LoggedIn Optional<UserAccount> userAccount) throws IOException, ServletException {
 		long id = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
@@ -766,8 +707,7 @@ public class AdminController {
 		 * admin is redirected to the good-update form again.
 		 */
 		if (bindingResult.hasErrors()) {
-			System.out.println("Invalid good: " 
-			                   + bindingResult.getAllErrors().toString());
+			System.out.println("Invalid good: " + bindingResult.getAllErrors().toString());
 			redirectAttributes.addFlashAttribute("id", id);
 			return "redirect:updateGoodByAdmin";
 		}
@@ -798,8 +738,7 @@ public class AdminController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/deletedGoodByAdmin", method = RequestMethod.POST)
-	public String deleteGood(HttpServletRequest request, Model model, 
-	                         @LoggedIn Optional<UserAccount> userAccount) {
+	public String deleteGood(HttpServletRequest request, Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 
 		if (!userAccount.isPresent())
@@ -841,13 +780,10 @@ public class AdminController {
 	 *            activities
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/updateActivityByAdmin", 
-	                method = { RequestMethod.GET, RequestMethod.POST })
-	public String showActivityToUpdate
-	(HttpServletRequest request, Model model,
-	 @ModelAttribute("activity") ActivityEntity activity,
-	 @LoggedIn Optional<UserAccount> userAccount) {
-	  
+	@RequestMapping(value = "/updateActivityByAdmin", method = { RequestMethod.GET, RequestMethod.POST })
+	public String showActivityToUpdate(HttpServletRequest request, Model model,
+			@ModelAttribute("activity") ActivityEntity activity, @LoggedIn Optional<UserAccount> userAccount) {
+
 		long id;
 
 		/*
@@ -881,8 +817,7 @@ public class AdminController {
 		 * whereas the other tags are there, so that the admin can change the
 		 * existing one.
 		 */
-		model.addAttribute("tags", tagsRepository.findByIdNotOrderByNameAsc
-		                   (activityToUpdate.getTag().getId()));
+		model.addAttribute("tags", tagsRepository.findByIdNotOrderByNameAsc(activityToUpdate.getTag().getId()));
 		return "updateActivityByAdmin";
 	}
 
@@ -903,14 +838,15 @@ public class AdminController {
 	 *            The admin's account who wants to update one of the offered
 	 *            activities
 	 * @return String The name of the view to be shown after processing
-	 * @throws ServletException 
-	 * @throws IOException 
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 
 	@RequestMapping(value = "/updatedActivityByAdmin", method = RequestMethod.POST)
 	public String updateActivity(HttpServletRequest request, Model model,
 			@ModelAttribute("activity") ActivityEntity activity, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes, @LoggedIn Optional<UserAccount> userAccount) throws IOException, ServletException {
+			RedirectAttributes redirectAttributes, @LoggedIn Optional<UserAccount> userAccount)
+					throws IOException, ServletException {
 		long id = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
@@ -933,9 +869,9 @@ public class AdminController {
 		activityToBeUpdated.setName(name);
 		activityToBeUpdated.setDescription(description);
 		activityToBeUpdated.setTag(tag);
-	  	if (picture!=null && picture.getSize()!=0L){
-	  		activityToBeUpdated.setPicture(ActivityEntity.createPicture(picture));
-	  	}
+		if (picture != null && picture.getSize() != 0L) {
+			activityToBeUpdated.setPicture(ActivityEntity.createPicture(picture));
+		}
 		activityToBeUpdated.setStartDate(startDate);
 		activityToBeUpdated.setEndDate(endDate);
 		activityToBeUpdated.setUser(activitysUser);
@@ -947,8 +883,7 @@ public class AdminController {
 		 * the admin is redirected to the activity-update form again.
 		 */
 		if (bindingResult.hasErrors()) {
-			System.out.println("Invalid activity: " 
-			                   + bindingResult.getAllErrors().toString());
+			System.out.println("Invalid activity: " + bindingResult.getAllErrors().toString());
 			redirectAttributes.addFlashAttribute("id", id);
 			return "redirect:updateActivityByAdmin";
 		}
@@ -960,8 +895,7 @@ public class AdminController {
 		 * Calling save() on an object with predefined id will update the
 		 * corresponding database record rather than insert a new one.
 		 */
-		model.addAttribute("result", 
-		                   activitiesRepository.save(activityToBeUpdated));
+		model.addAttribute("result", activitiesRepository.save(activityToBeUpdated));
 		return "updatedActivity";
 	}
 
@@ -979,10 +913,8 @@ public class AdminController {
 	 *            activities
 	 * @return String The name of the view to be shown after processing
 	 */
-	@RequestMapping(value = "/deletedActivityByAdmin", 
-	                method = RequestMethod.POST)
-	public String deleteActivity(HttpServletRequest request, Model model, 
-	                             @LoggedIn Optional<UserAccount> userAccount) {
+	@RequestMapping(value = "/deletedActivityByAdmin", method = RequestMethod.POST)
+	public String deleteActivity(HttpServletRequest request, Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		long id = Long.parseLong(request.getParameter("id"));
 
 		if (!userAccount.isPresent())
@@ -1007,9 +939,9 @@ public class AdminController {
 		model.addAttribute("result", activity);
 		return "deletedActivity";
 	}
-	
+
 	// Interface-Übersetzung
-	
+
 	@RequestMapping("/interface")
 	String interfaceMaping(HttpServletRequest request, Model model) {
 
@@ -1037,7 +969,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/changeTemplate/", method = RequestMethod.POST)
 	public String changeTemplate(HttpServletRequest request, Model model) {
-		String templatename= request.getParameter("temp");
+		String templatename = request.getParameter("temp");
 		String refSprache = request.getParameter("refSprache");
 		String changeSprache = request.getParameter("changeSprache");
 		List<Module> mods = moduleRepository.findByTemplateName(templatename);
@@ -1078,39 +1010,35 @@ public class AdminController {
 	}
 
 	/*
-	 * TODO:	- änderrungen einlesen <- fertig
-	 * 			- zuändernde Sprachen einlesen <- fertig
-	 * 			- komplett sprachen ändern (wenn noch Zeit ist)
-	 * 			- templates und alle verweise löschen  <- fertig
-	 * 				(Erst die InterfaceParts an der mittels ModuleID 
-	 * 				finden und löschen Daraufhin das Module löschen) 
-	 * 			- templates neu erstellen <- fertig
-	 * 				(Module erstellen und dann auf change Template verweisen) 
-	 * 			- sprachen neu erstellen <- fertig
-	 * 				(neue Sprachen ins LanguageRepository eintragen und neue 
-	 * 				InterfaceParts erstellen) 
-	 * 			- Daten für Bisherige Templates erstellen und Templates anpassen
+	 * TODO: - änderrungen einlesen <- fertig - zuändernde Sprachen einlesen <-
+	 * fertig - komplett sprachen ändern (wenn noch Zeit ist) - templates und
+	 * alle verweise löschen <- fertig (Erst die InterfaceParts an der mittels
+	 * ModuleID finden und löschen Daraufhin das Module löschen) - templates neu
+	 * erstellen <- fertig (Module erstellen und dann auf change Template
+	 * verweisen) - sprachen neu erstellen <- fertig (neue Sprachen ins
+	 * LanguageRepository eintragen und neue InterfaceParts erstellen) - Daten
+	 * für Bisherige Templates erstellen und Templates anpassen
 	 */
 	@RequestMapping(value = "/change_template_submit/{template}", method = RequestMethod.POST)
 	public String changeTemplateSubmit(HttpServletRequest request, Model model,
 			@PathVariable("template") String templatename) {
-		//String temp = request.getParameter("temp");
+		// String temp = request.getParameter("temp");
 		String changeSprache = request.getParameter("changeSprache");
 		ArrayList<String> textValue = new ArrayList<String>();
 		ArrayList<String> thymeLeafValue = new ArrayList<String>();
 		ArrayList<String> thymeLeafId = new ArrayList<String>();
-		for(int i=1; i<1000; i++){
-			if(request.getParameter("Value"+i)==null){
+		for (int i = 1; i < 1000; i++) {
+			if (request.getParameter("Value" + i) == null) {
 				break;
 			}
-			textValue.add(request.getParameter("Value"+i));
+			textValue.add(request.getParameter("Value" + i));
 		}
-		for(int i=1; i<1000; i++){
-			if(request.getParameter("thymeLeafValue"+i)==null){
+		for (int i = 1; i < 1000; i++) {
+			if (request.getParameter("thymeLeafValue" + i) == null) {
 				break;
 			}
-			thymeLeafValue.add(request.getParameter("thymeLeafValue"+i));
-			thymeLeafId.add(request.getParameter("thymeLeafId"+i));
+			thymeLeafValue.add(request.getParameter("thymeLeafValue" + i));
+			thymeLeafId.add(request.getParameter("thymeLeafId" + i));
 		}
 		System.out.println(changeSprache);
 		String[] texte = new String[textValue.size()];
@@ -1119,58 +1047,61 @@ public class AdminController {
 		thymeLeaf = thymeLeafValue.toArray(thymeLeaf);
 		String[] tLId = new String[thymeLeafId.size()];
 		tLId = thymeLeafId.toArray(tLId);
-		if(texte.length==thymeLeaf.length){
-			for(int i=0;i<texte.length;i++){
-				System.out.println(i+". textValue: "+texte[i]);
-				System.out.println(i+". thymeLeafId: "+tLId[i]);
-				System.out.println(i+". thymeLeafValue: "+thymeLeaf[i]);
-				Module updatedMod = moduleRepository.findByTemplateNameAndThymeLeafName(moduleRepository.findById(Long.parseLong(tLId[i])).getTemplateName(), moduleRepository.findById(Long.parseLong(tLId[i])).getThymeLeafName());
+		if (texte.length == thymeLeaf.length) {
+			for (int i = 0; i < texte.length; i++) {
+				System.out.println(i + ". textValue: " + texte[i]);
+				System.out.println(i + ". thymeLeafId: " + tLId[i]);
+				System.out.println(i + ". thymeLeafValue: " + thymeLeaf[i]);
+				Module updatedMod = moduleRepository.findByTemplateNameAndThymeLeafName(
+						moduleRepository.findById(Long.parseLong(tLId[i])).getTemplateName(),
+						moduleRepository.findById(Long.parseLong(tLId[i])).getThymeLeafName());
 				updatedMod.setThymeLeafName(thymeLeaf[i]);
-				InterfacePart updatedInt = interfaceRepository.findByLanguageIdAndModuleId(languageRepository.findByName(changeSprache).getId(), updatedMod.getId());
+				InterfacePart updatedInt = interfaceRepository.findByLanguageIdAndModuleId(
+						languageRepository.findByName(changeSprache).getId(), updatedMod.getId());
 				updatedInt.setText(texte[i]);
 				interfaceRepository.save(updatedInt);
 				moduleRepository.save(updatedMod);
 			}
-				
+
 		}
 		return interfaceMaping(request, model);
 	}
-	
+
 	@RequestMapping(value = "/deleteTemplate/", method = RequestMethod.POST)
 	public String deleteTemplate(HttpServletRequest request, Model model) {
-		
+
 		String temp = request.getParameter("temp");
 		List<Module> modules = moduleRepository.findByTemplateName(temp);
 		ArrayList<String> mods = new ArrayList<String>();
-		for (Module mod : modules){
+		for (Module mod : modules) {
 			mods.add(mod.getThymeLeafName());
 		}
 		model.addAttribute("temp", temp);
 		model.addAttribute("mods", mods);
 		return "delete_template";
 	}
-	
+
 	@RequestMapping(value = "/delete_template_submit/", method = RequestMethod.POST)
 	public String deleteTemplateSubmit(HttpServletRequest request, Model model) {
-		
+
 		String temp = request.getParameter("temp");
 		String module = request.getParameter("module");
-		
+
 		Module deletedMod = moduleRepository.findByTemplateNameAndThymeLeafName(temp, module);
-		for(InterfacePart deletedinterface : interfaceRepository.findByModuleId(deletedMod.getId())){
+		for (InterfacePart deletedinterface : interfaceRepository.findByModuleId(deletedMod.getId())) {
 			interfaceRepository.delete(deletedinterface);
 		}
 		moduleRepository.delete(deletedMod);
-		
+
 		List<Module> modules = moduleRepository.findByTemplateName(temp);
 		ArrayList<String> mods = new ArrayList<String>();
-		for (Module mod : modules){
+		for (Module mod : modules) {
 			mods.add(mod.getThymeLeafName());
 		}
-		
+
 		model.addAttribute("temp", temp);
 		model.addAttribute("mods", mods);
-		
+
 		return "delete_template";
 	}
 
@@ -1185,16 +1116,14 @@ public class AdminController {
 		
 		Module newmod = new Module(templ, name);
 		moduleRepository.save(newmod);
-		
-		for(Language lang : languageRepository.findAll()){
+
+		for (Language lang : languageRepository.findAll()) {
 			interfaceRepository.save(new InterfacePart("---", lang.getId(), newmod.getId()));
 		}
-		
-		
-		
+
 		return interfaceMaping(request, model);
 	}
-	
+
 	@RequestMapping(value = "/newTemplate/", method = RequestMethod.POST)
 	public String newTemplateSubmit(HttpServletRequest request, Model model) {
 		String templ = request.getParameter("templ");
@@ -1204,16 +1133,16 @@ public class AdminController {
 			return interfaceMaping(request, model);
 		}
 		moduleRepository.save(newmod);
-		for(Language lang : languageRepository.findAll()){
+		for (Language lang : languageRepository.findAll()) {
 			interfaceRepository.save(new InterfacePart("---", lang.getId(), newmod.getId()));
 		}
-		
+
 		return interfaceMaping(request, model);
 	}
-	
+
 	@RequestMapping(value = "/newLanguage/", method = RequestMethod.POST)
 	public String newLanguageSubmit(HttpServletRequest request, Model model) {
-		
+
 		String newLang = request.getParameter("newLang");
 		String newLangShort = request.getParameter("newLangShort");
 		
@@ -1223,13 +1152,15 @@ public class AdminController {
 		
 		Language nLang = new Language(newLang, newLangShort);
 		languageRepository.save(nLang);
-		
-		
-		for(Module module : moduleRepository.findAll()){
-			interfaceRepository.save(new InterfacePart(interfaceRepository.findByLanguageIdAndModuleId(1L, module.getId()).getText()+" -- Auf "+nLang.getName(),languageRepository.findByName(newLang).getId(), module.getId())); 
+
+		for (Module module : moduleRepository.findAll()) {
+			interfaceRepository.save(new InterfacePart(
+					interfaceRepository.findByLanguageIdAndModuleId(1L, module.getId()).getText() + " -- Auf "
+							+ nLang.getName(),
+					languageRepository.findByName(newLang).getId(), module.getId()));
 		}
-		
+
 		return interfaceMaping(request, model);
 	}
-	
+
 }

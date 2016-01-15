@@ -22,12 +22,13 @@
 						<div class="small-12 medium-5 columns">
 							<img th:src="@{'/'+${result.getItemPictureLink()}}"/>
 						</div>
-						
 						<div class="small-12 medium-7 columns">
 							<p th:text="${result.description}" class="text"></p>
 						</div>
 						
-						<div class="itemN-bottom">
+						<div class="small-12 columns space-1rem"></div>
+						<div class="small-12 columns divider-b"></div>
+						<div class="small-12 columns">
 							<p th:text="${result.tag.name}" class="text right"></p>
 						</div>
 					</th:block>
