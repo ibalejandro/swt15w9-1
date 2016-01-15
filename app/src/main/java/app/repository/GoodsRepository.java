@@ -44,6 +44,7 @@ public interface GoodsRepository extends CrudRepository<GoodEntity, Long> {
    * @param id The given good's id
    * @return Nothing
    */
+	@Override
 	void delete(Long id);
 	
 	/**

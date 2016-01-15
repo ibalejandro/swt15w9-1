@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import app.model.InterfacePart;
 import app.model.Language;
-import app.model.Module;
 import app.model.TagEntity;
 import app.repository.InterfaceRepository;
 import app.repository.LanguageRepository;

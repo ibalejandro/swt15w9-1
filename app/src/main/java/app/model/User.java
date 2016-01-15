@@ -2,7 +2,6 @@ package app.model;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,10 +27,6 @@ import javax.persistence.OneToOne;
 
 
 import org.salespointframework.useraccount.UserAccount;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import app.repository.LanguageRepository;
-
 import com.google.code.geocoder.Geocoder;
 import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
@@ -532,6 +527,7 @@ public class User implements Serializable {
 	public void setAddresstyp(AddresstypEnum adresstyp) {
 		this.adresstyp = adresstyp;
 	}
+	@Override
 	public String toString(){
 		return userAccount.getUsername();
 	}

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import app.model.Address;
-import app.model.Coordinates;
 import app.model.GoodEntity;
 import app.model.InterfacePart;
 import app.model.Language;

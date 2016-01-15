@@ -15,10 +15,6 @@ import javax.servlet.http.Part;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-// Imports für die Bildeinbindung.
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,12 +22,10 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import java.net.URL;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.ImageObserver;
-import java.awt.geom.AffineTransform;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
@@ -138,7 +132,7 @@ public class ActivityEntity implements Serializable {
                                              BufferedImage.TYPE_INT_RGB);
 			img2.createGraphics().drawImage(img, 0, 0, Color.WHITE, observer);
 			
-			BufferedImage imgOut = new BufferedImage((int)(scaling*((double)img.getWidth())),(int)(scaling*((double)img.getHeight())),img.TYPE_INT_RGB);
+			BufferedImage imgOut = new BufferedImage((int)(scaling*(img.getWidth())),(int)(scaling*(img.getHeight())),BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = imgOut.createGraphics();
 			AffineTransform transform = AffineTransform.getScaleInstance(scaling, 
                                                                    scaling);

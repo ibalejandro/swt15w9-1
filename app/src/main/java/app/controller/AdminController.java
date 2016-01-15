@@ -13,9 +13,6 @@ import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
-import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;

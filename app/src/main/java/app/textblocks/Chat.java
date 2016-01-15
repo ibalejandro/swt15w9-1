@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import app.model.User;
-import lombok.Getter;
 import lombok.NonNull;
 
 /**

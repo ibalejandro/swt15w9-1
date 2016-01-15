@@ -2,30 +2,17 @@ package app.test.coordinates;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.hibernate.validator.constraints.Email;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.*;
 import app.model.Address;
 import app.model.Coordinates;
 import app.model.User;
@@ -35,7 +22,6 @@ import app.repository.ActivitiesRepository;
 import app.repository.GoodsRepository;
 import app.repository.LanguageRepository;
 import app.repository.TagsRepository;
-import app.test.*;
 
 @Ignore("Sparen von immer gleichen API-Anfragen, verhindern von !OVER QUERY LIMIT!")
 public class GeoCodingTest extends AbstractWebIntegrationTests {

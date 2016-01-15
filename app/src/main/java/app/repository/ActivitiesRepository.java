@@ -6,7 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import app.model.ActivityEntity;
-import app.model.GoodEntity;
 import app.model.TagEntity;
 import app.model.User;
 
@@ -48,6 +47,7 @@ public interface ActivitiesRepository extends CrudRepository<ActivityEntity,
    * @param id The given activity's id
    * @return Nothing
    */
+	@Override
 	void delete(Long id);
 	
 	/**

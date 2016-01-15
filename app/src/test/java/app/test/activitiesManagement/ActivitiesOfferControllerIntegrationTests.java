@@ -1,7 +1,6 @@
 package app.test.activitiesManagement;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -16,18 +15,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
-
-import app.controller.ActivitiesOfferController;
 import app.controller.GoodsOfferController;
 import app.model.ActivityEntity;
-import app.model.GoodEntity;
 import app.model.TagEntity;
 import app.model.User;
 import app.model.UserRepository;
 import app.repository.ActivitiesRepository;
-import app.repository.GoodsRepository;
 import app.repository.TagsRepository;
 
 public class ActivitiesOfferControllerIntegrationTests extends 
