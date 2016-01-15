@@ -12,63 +12,95 @@
 	
 	<body>
 		<th:block th:include="navigation :: navigation"></th:block>
+		<div class="space-1rem"></div>
 		
-		<div class="row">
-			<h1 class="headline">Interface-Übersetzung bearbeiten: </h1>
-			<form th:action="@{/changeTemplate/}" method="post">
-				<h3 class="headline--sub">Templates bearbeiten</h3>
-				<p>Zu ändernde Sprache</p>
-				<select id="changeSprache" name="changeSprache">
-					<option th:each="lang : ${language}" th:value="${lang}" th:text="${lang}"></option>
-				</select>
-				<p>Referenzsprache</p>
-				<select id="refSprache" name="refSprache">
-					<option value="-1">---</option>
-					<option th:each="lang : ${language}" th:value="${lang}" th:text="${lang}"></option>
-				</select>
-				<p>Template</p>
-				<select id="temp" name="temp">
-					<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
-				</select>
-				<input class="button" type="submit" value="Ändern"/>
-			</form>
-			<form th:action="@{/newLanguage/}" method="post">
-				<h3 class="headline--sub">Neue Sprache erstellen</h3>
-				<p>Name der Sprache (deutsch)</p>
-				<input type="text" name="newLang"/>
-				<p>Sprachkürzel</p>
-				<input type="text" name="newLangShort"/>
-				<input class="button" type="submit" value="Erstellen"/>
-			</form>
+		<div class="row collapse">
+			<div class="small-12 columns">
+				<h1 class="headline">Interface-Translation-Manager</h1>
+			</div>
 			
-			<form th:action="@{/newTemplate/}" method="post">
-				<h3 class="headline--sub">Module+Template erstellen</h3>
-				<p>Modul-Name</p>
-				<input type="text" name="modl"/>
-				<p>Template-Name</p>
-				<input type="text" name="templ"/>
-				<input class="button" type="submit" value="Erstellen"/>
-			</form>
+			<div class="small-12 columns divider"></div>
 			
-			<form th:action="@{/newModule/}" method="post">
-				<h3 class="headline--sub">Modul erstellen</h3>
-				<p>Modul-Name</p>
-				<input type="text" name="module"/>
-				<p>Template-Name</p>
-				<select id="templ" name="templ">
-					<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
-				</select>
-				<input class="button" type="submit" value="Erstellen"/>
-			</form>
+			<div class="small-12 medium-6 columns">
+				<div class="umrandung">
+					<form th:action="@{/changeTemplate/}" method="post">
+						<h3 class="headline-sub">Templates bearbeiten</h3>
+						<p>Zu ändernde Sprache</p>
+						<select id="changeSprache" name="changeSprache">
+							<option th:each="lang : ${language}" th:value="${lang}" th:text="${lang}"></option>
+						</select>
+						<p>Referenzsprache</p>
+						<select id="refSprache" name="refSprache">
+							<option value="-1">---</option>
+							<option th:each="lang : ${language}" th:value="${lang}" th:text="${lang}"></option>
+						</select>
+						<p>Template</p>
+						<select id="temp" name="temp">
+							<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
+						</select>
+						<input class="button" type="submit" value="Ändern"/>
+					</form>
+				</div>
+			</div>
 			
-			<form th:action="@{/deleteTemplate/}" method="post">
-				<h3 class="headline--sub">Module löschen</h3>
-				<p>Template</p>
-				<select id="temp" name="temp">
-					<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
-				</select>
-				<input class="button" type="submit" value="Weiter"/>
-			</form>
+			<div class="small-12 medium-6 columns">
+				<div class="umrandung">
+					<form th:action="@{/newLanguage/}" method="post">
+						<h3 class="headline-sub">Neue Sprache erstellen</h3>
+						<p>Name der Sprache (deutsch)</p>
+						<input type="text" name="newLang"/>
+						<p>Sprachkürzel</p>
+						<input type="text" name="newLangShort"/>
+						<input class="button" type="submit" value="Erstellen"/>
+					</form>
+				</div>
+			</div>
+			
+			<div class="small-12 columns"></div>
+			
+			<div class="small-12 medium-6 columns">
+				<div class="umrandung">
+					<form th:action="@{/newTemplate/}" method="post">
+						<h3 class="headline-sub">Module+Template erstellen</h3>
+						<p>Modul-Name</p>
+						<input type="text" name="modl"/>
+						<p>Template-Name</p>
+						<input type="text" name="templ"/>
+						<input class="button" type="submit" value="Erstellen"/>
+					</form>
+				</div>
+			</div>
+			
+			<div class="small-12 medium-6 columns">
+				<div class="umrandung">
+					<form th:action="@{/newModule/}" method="post">
+						<h3 class="headline-sub">Modul erstellen</h3>
+						<p>Modul-Name</p>
+						<input type="text" name="module"/>
+						<p>Template-Name</p>
+						<select id="templ" name="templ">
+							<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
+						</select>
+						<input class="button" type="submit" value="Erstellen"/>
+					</form>
+				</div>
+			</div>
+			
+			<div class="small-12 columns"></div>
+			
+			<div class="small-12 medium-6 columns end">
+				<div class="umrandung">
+					<form th:action="@{/deleteTemplate/}" method="post">
+						
+						<h3 class="headline-sub">Module löschen</h3>
+						<p>Template</p>
+						<select id="temp" name="temp">
+							<option th:each="temp : ${template}" th:value="${temp}" th:text="${temp}"></option>
+						</select>
+						<input class="button" type="submit" value="Weiter"/>
+					</form>
+				</div>
+			</div>
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>

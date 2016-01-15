@@ -1,0 +1,19 @@
+﻿= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von: Kilian Heret **
+
+**Gruppe: 09**
+
+== Was habe ich gelernt?
+* Umgang mit APIs wie ReCaptcha. 
+
+= Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* TODO
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* TODO
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* Mehr Recherche im Vorfeld des Praktikums zu Lizenzbedingungen von externen APIs. Google Übersetzer war nicht nutzbar, Koordinatenermittlung  erlaubt nur 11 Anfragen/ sec.
+
+== Sonstiges und Anmerkungen
