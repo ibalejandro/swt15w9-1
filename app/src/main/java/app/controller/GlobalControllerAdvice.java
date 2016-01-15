@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import app.model.InterfacePart;
 import app.model.Language;
+import app.model.Module;
 import app.model.TagEntity;
 import app.repository.InterfaceRepository;
 import app.repository.LanguageRepository;
@@ -71,8 +72,8 @@ public class GlobalControllerAdvice {
 			for (InterfacePart iP : inPLan) {
 				if (moduleRepository.findOne(iP.getModuleId()) != null) {
 					model.addAttribute(moduleRepository.findOne(iP.getModuleId()).getThymeLeafName(), iP);
-					System.out.println(
-							moduleRepository.findOne(iP.getModuleId()).getThymeLeafName() + ", " + iP.getText());
+//					System.out.println(
+//							moduleRepository.findOne(iP.getModuleId()).getThymeLeafName() + ", " + iP.getText());
 				}
 			}
 		}

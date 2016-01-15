@@ -13,7 +13,6 @@
 	
 	<body>
 		<th:block th:include="navigation :: navigation"></th:block>
-	
 		<div class="row">
 			<th:block th:include="data :: kopf"></th:block>
 			
@@ -21,22 +20,22 @@
 				<th:block th:include="data :: userName"></th:block>
 				
 				<tr sec:authorize="hasRole('ROLE_NORMAL')">	
-					<td colspan="2"><a th:href="@{/modifyAddress}" href="modifyAddress.html">Adresse bearbeiten</a></td>
+					<td colspan="2"><a th:href="@{/modifyAddress}" href="modifyAddress.html" th:text="${user_changeadd_text.text}">Adresse bearbeiten</a></td>
 				</tr>
 				<tr>
-					<td class="text-super">Addresstyp</td>
+					<td class="text-super" th:text="${user_addtype_text.text}">Addresstyp</td>
 					<td th:text="${user.getAddresstypString()}" class="text">Addresstyp</td>
 				</tr>
 				<tr>
-					<td class="text-super">Refugee home</td>
+					<td class="text-super" th:text="${user_refugeehome_text.text}">Refugee home</td>
 					<td th:text="${user.location.getFlh_name()}" class="text">Flh_name</td>
 				</tr>
 				<tr>
-					<td class="text-super">CityPart</td>
+					<td class="text-super" th:text="${user_citypart_text.text}">CityPart</td>
 					<td th:text="${user.location.getCityPart()}" class="text">CityPart</td>
 				</tr>	
 				<tr>
-					<td class="text-super">City, zip code</td>
+					<td class="text-super" th:text="${user_cityzip_text.text}">City, zip code</td>
 					<td th:text="${user.location.getCity()} +@{&nbsp;}+ ${user.location.getZipCode()}" class="text">City, zip code</td>
 				</tr>
 				

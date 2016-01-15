@@ -903,20 +903,19 @@ public class AdminController {
 	 *            The admin's account who wants to update one of the offered
 	 *            activities
 	 * @return String The name of the view to be shown after processing
+	 * @throws ServletException 
+	 * @throws IOException 
 	 */
-	@RequestMapping(value = "/updatedActivityByAdmin", 
-	                method = RequestMethod.POST)
-	public String updateActivity
-	(HttpServletRequest request, Model model, 
-	 @ModelAttribute("activity") ActivityEntity activity, 
-	 BindingResult bindingResult, RedirectAttributes redirectAttributes, 
-	 @LoggedIn Optional<UserAccount> userAccount) {
-	  
+
+	@RequestMapping(value = "/updatedActivityByAdmin", method = RequestMethod.POST)
+	public String updateActivity(HttpServletRequest request, Model model,
+			@ModelAttribute("activity") ActivityEntity activity, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes, @LoggedIn Optional<UserAccount> userAccount) throws IOException, ServletException {
 		long id = Long.parseLong(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		long tagId = Long.parseLong(request.getParameter("tagId"));
-		String picture = request.getParameter("picture");
+		Part picture = request.getPart("pict");
 		String startDateInString = request.getParameter("startDate");
 		String endDateInString = request.getParameter("endDate");
 
@@ -934,7 +933,9 @@ public class AdminController {
 		activityToBeUpdated.setName(name);
 		activityToBeUpdated.setDescription(description);
 		activityToBeUpdated.setTag(tag);
-		activityToBeUpdated.setPicture(ActivityEntity.createPicture(picture));
+	  	if (picture!=null && picture.getSize()!=0L){
+	  		activityToBeUpdated.setPicture(ActivityEntity.createPicture(picture));
+	  	}
 		activityToBeUpdated.setStartDate(startDate);
 		activityToBeUpdated.setEndDate(endDate);
 		activityToBeUpdated.setUser(activitysUser);

@@ -172,6 +172,14 @@ public class GoodEntity implements Serializable {
 		return "good" + id;
 	}
 	
+	/**
+   * This method returns the id for a given construct good{id}.
+   * @return String The good's id for the given construct good{id}
+   */
+  public static String getIdFromConstruct(String construct) {
+    return construct.substring(4);
+  }
+	
 	public String getItemLink(){
 		return "good/"+id;
 	}

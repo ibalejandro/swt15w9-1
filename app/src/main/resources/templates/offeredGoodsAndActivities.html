@@ -10,7 +10,7 @@
     <div th:include="navigation :: navigation"></div>
     
     <div>
-      <h2> Goods </h2>
+      <h2 th:text="${item_general_goods_text.text}"> Goods </h2>
     </div>
     
     <div class="row">
@@ -23,12 +23,12 @@
             
             <div>
               <div>
-                <h4> Description </h4>
+                <h4 th:text="${item_general_description_text.text}"> Description </h4>
                 <p th:text="${good.description}"></p>
               </div>
               
               <div>
-                <h4> Tag </h4>
+                <h4 th:text="${item_general_tag_text.text}"> Tag </h4>
                 <p th:text="${good.tag.name}"></p>
               </div>
               
@@ -36,14 +36,14 @@
                 <div class="small-12 medium-6 colums">
                   <form th:action="@{/deletedGoodByAdmin}" method="post">
                     <input type="hidden" name="id" th:value="${good.id}"/>
-                    <input class="button" type="submit" value="Delete"/>
+                    <input class="button" type="submit" value="Delete" th:text="${user_delete_text.text}"/>
                   </form>
                 </div>
                 
                 <div class="small-12 medium-6 colums">
                   <form th:action="@{/updateGoodByAdmin}" method="post">
                     <input type="hidden" name="id" th:value="${good.id}"/>
-                    <input class="button" type="submit" value="Update"/>
+                    <input class="button" type="submit" value="Update" th:text="${item_general_update_text.text}"/>
                   </form>
                 </div>
               </div>
@@ -54,7 +54,7 @@
     </div>
 
     <div>
-      <h2> Activities </h2>
+      <h2 th:text="${item_general_acts_text.text}"> Activities </h2>
     </div>
     
     <div class="row">
@@ -67,22 +67,22 @@
             
             <div>
               <div>
-                <h4> Description </h4>
+                <h4 th:text="${item_general_description_text.text}"> Description </h4>
                 <p th:text="${activity.description}"></p>
               </div>
               
               <div>
-                <h4> Tag </h4>
+                <h4 th:text="${item_general_tag_text.text}"> Tag </h4>
                 <p th:text="${activity.tag.name}"></p>
               </div>
               
               <div>
-                <h4> Start date </h4>
+                <h4 th:text="${item_general_startdate_text.text}"> Start date </h4>
                 <p th:text="${activity.getStringFromDate(activity.startDate)}"></p>
               </div>
               
               <div>
-                <h4> End date </h4>
+                <h4 th:text="${item_general_enddate_text.text}"> End date </h4>
                 <p th:text="${activity.getStringFromDate(activity.endDate)}"></p>
               </div>
               
@@ -90,14 +90,14 @@
                 <div class="small-12 medium-6 colums">
                   <form th:action="@{/deletedActivityByAdmin}" method="post">
                     <input type="hidden" name="id" th:value="${activity.id}"/>
-                    <input class="button" type="submit" value="Delete"/>
+                    <input class="button" type="submit" value="Delete" th:text="${user_delete_text.text}"/>
                   </form>
                 </div>
                 
                 <div class="small-12 medium-6 colums">
                   <form th:action="@{/updateActivityByAdmin}" method="post">
                     <input type="hidden" name="id" th:value="${activity.id}"/>
-                    <input class="button" type="submit" value="Update"/>
+                    <input class="button" type="submit" value="Update" th:text="${item_general_update_text.text}"/>
                   </form>
                 </div>
               </div>

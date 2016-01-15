@@ -15,7 +15,7 @@
 		
 		<div class="row">
 			<div class="small-12 colums">
-				<h1 class="headline"> You just added this tag: </h1>
+				<h1 class="headline" th:text="${tag_addednewtag_text.text}"> You just added this tag: </h1>
 			</div>
 				
 			<div th:include="tags_item--single :: item"></div>

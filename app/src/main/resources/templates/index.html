@@ -21,13 +21,13 @@
 			
 			<div class="row">
 				<div class="small-12 medium-6 columns umrandung-nomargin">
-					<a th:href="@{/home}" class="headline black"> All Goods </a>
+					<a th:href="@{/home}" class="headline black" th:text="${item_general_allgoods_text.text}"> All Goods </a>
 					<div class="divider-1rem"></div>
 					<th:block th:include="itemNContainer--small--goods--1 :: show_items"></th:block>
 				</div>
 				
 				<div class="small-12 medium-6 columns umrandung-nomargin">
-					<a class="headline black"> All Activities </a>
+					<a class="headline black" th:text="${item_general_allacts_text.text}"> All Activities </a>
 					<div class="divider-1rem"></div>
 					<th:block th:include="itemNContainer--small--activities--1 :: show_items"></th:block>
 				</div>

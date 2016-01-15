@@ -101,13 +101,13 @@ public class GoodsManagementController {
 	  long id;
 	  
 	  /*
-	   * This condition is made because the way parameters are read is different 
-	   * for get and post requests.
-	   */
-	  if (request.getMethod().equals(POST)) {
-	    id = Long.parseLong(request.getParameter("id"));
-	  }
-	  else id = (Long) model.asMap().get("id");
+     * This condition is made because the way parameters are read is different 
+     * for get and post requests.
+     */
+    if (request.getMethod().equals(POST)) {
+      id = Long.parseLong(request.getParameter("id"));
+    }
+    else id = (Long) model.asMap().get("id");
 	  
 	  if (!userAccount.isPresent()) return "noUser";
 	  User loggedUser = userRepository.findByUserAccount(userAccount.get());
@@ -138,6 +138,7 @@ public class GoodsManagementController {
 		model.addAttribute("tags", 
 		                   tagsRepository.findByIdNotOrderByNameAsc
 		                   (goodToUpdate.getTag().getId()));
+		System.out.println("Voy pa update luego de procesar");
 		return "update";
   }
 
@@ -178,7 +179,7 @@ public class GoodsManagementController {
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
   	goodToBeUpdated.setTag(tag);
-  	if (picture!=null){
+  	if (picture!=null && picture.getSize()!=0L){
   	goodToBeUpdated.setPicture(GoodEntity.createPicture(picture));
   	}
 		goodToBeUpdated.setUser(loggedUser);

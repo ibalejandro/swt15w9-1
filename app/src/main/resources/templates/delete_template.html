@@ -10,7 +10,7 @@
 		<th:block th:include="navigation :: navigation"></th:block>
 		<div class="row">
 			<div class="small-12 columns">
-				<h1 class="headline">Template löschen: </h1>
+				<h1 class="headline" th:text="${template_deletetemphead_text.text}">Template löschen: </h1>
 			</div>
 			
 			<form th:action="@{/delete_template_submit/}" method="post">
@@ -19,7 +19,7 @@
 					<option th:each="modu : ${mods}" th:value="${modu}" th:text="${modu}"></option>
 				</select>
 				<input type="hidden" name="temp" th:value="${temp}"/>
-				<input type="submit" class="button" value="Löschen"/>
+				<input type="submit" class="button" value="Löschen" th:value="${user_delete_text.text}"/>
 			</form>
 			
 		</div>
