@@ -129,7 +129,7 @@ public class UserManagementController {
 			if(userAccount.get().hasRole(new Role("ROLE_ADMIN")))user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 			else user_xyz=userRepository.findByUserAccount(userAccount.get());
 			
-			if(ActualPassword!=null /*&& authenticationManager.matches(user_xyz.getUserAccount().getPassword(), new Password(ActualPassword))*/){
+			if(ActualPassword!=null && authenticationManager.matches(new Password(ActualPassword), user_xyz.getUserAccount().getPassword())){
 				if(NewPassword1.equals(NewPassword2) && (HelpFunctions.checkPasswordStrength(NewPassword1)!=0)){
 					userAccountManager.changePassword(user_xyz.getUserAccount(), NewPassword1);;
 				}else{
@@ -143,7 +143,7 @@ public class UserManagementController {
 			userRepository.save(user_xyz);
 			userAccountManager.save(user_xyz.getUserAccount());
 			
-			System.out.println("Passwort geändert");
+			System.out.println("Passwort geÃ¤ndert");
 
 			if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 				return "redirect:/userDetails";
