@@ -29,6 +29,7 @@ import app.repository.GoodsRepository;
 import app.repository.TextBlockRepository;
 import app.textblocks.ChatTemplate;
 import app.textblocks.TextBlock;
+import lombok.NonNull;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
@@ -97,7 +98,7 @@ public class DialogController {
 		for (Dialog dialog : dialogRepo.findByUserB(loggedInUser)) {
 			userDialogs.add(dialog);
 		}
-		
+
 		model.addAttribute("loggedInUser", loggedInUser);
 		model.addAttribute("dialogList", userDialogs);
 		return "dialogList";
@@ -119,7 +120,7 @@ public class DialogController {
 
 		User loggedInUser = userRepo.findByUserAccount(loggedInUserAccount.get());
 		User participantUser = retrieveUser(userAccountManager.findByUsername(participant));
-		
+
 		if (loggedInUser.getId() == participantUser.getId()) {
 			System.err.println("DialogPartner can not be DialogOwner");
 			return "redirect:/dialogList";
@@ -131,28 +132,27 @@ public class DialogController {
 	}
 
 	@RequestMapping(value = "/dialogByOffer", method = RequestMethod.POST)
-	public String dialogByOffer(HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
-		Long id = Long.parseLong(req.getParameter("goodId"));
-		GoodEntity g = goodsRepo.findOne(id);
-		ActivityEntity a = activitiesRepo.findOne(id);
+	public String dialogByOffer(@NonNull HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
+		String goodId = req.getParameter("id");
 		String title;
 		User participant;
-
-		if (g == null && a == null) {
-			throw new NullPointerException("No activity or good found for given id!");
-		}
-
-		if (g != null) {
+		
+		if (goodId.contains("good")) {
+			GoodEntity g = goodsRepo.findOne(Long.parseLong(GoodEntity.getIdFromConstruct(goodId)));
 			title = g.getName();
 			participant = g.getUser();
-		} else {
+		} else if (goodId.contains("activity")) {
+			ActivityEntity a = activitiesRepo.findOne(Long.parseLong(ActivityEntity.getIdFromConstruct(goodId)));
 			title = a.getName();
 			participant = a.getUser();
+		} else {
+			throw new IllegalStateException("goodId unrecognizeable: " + goodId);
 		}
 
 		if (!loggedInUA.isPresent()) {
 			return "noUser";
 		}
+		
 		User owner = retrieveUser(loggedInUA);
 
 		Dialog d = dialogRepo.save(new Dialog(title, owner, participant));
