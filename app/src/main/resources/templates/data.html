@@ -15,64 +15,64 @@
 		<th:block th:include="navigation :: navigation"></th:block>
 	
 		<header>
-			<h1 th:text="@{Kundendaten: &nbsp; }+${user.getUserAccount().getUsername()} ">Kundendaten: UserAccount</h1>
+			<h1  th:text="${user_userdata_text.text}+${user.getUserAccount().getUsername()} ">Kundendaten: UserAccount</h1>
 		</header>
 		
 		<div>				
-			<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html">Password ändern</a></div>
-			<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/deaktivateUser}" href="deaktivateUser.html">Nutzerkonto deaktivieren</a></div>
+			<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html" th:text="${user_changepw_text.text}">Password ändern</a></div>
+			<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/deaktivateUser}" href="deaktivateUser.html"  th:text="${user_deactivateuser_text.text}">Nutzerkonto deaktivieren</a></div>
 			<table>			
 				<tr>
-					<td>Firstname</td>
+					<td th:text="${user_firstname_text.text}">Firstname</td>
 					<td th:text="${user.userAccount.getFirstname()}">Firstname</td>
 				</tr>	
 				<tr>
-					<td>Lastname</td>
+					<td th:text="${user_lastname_text.text}">Lastname</td>
 					<td th:text="${user.userAccount.lastname}">Lastname</td>
 				</tr>	
 				<tr>
-					<td>Email</td>
+					<td th:text="${user_email_text.text}">Email</td>
 					<td th:text="${user.userAccount.email}">Email</td>
 				</tr>	
 				<tr sec:authorize="hasRole('ROLE_ADMIN')">
-					<td>ActivationState</td>
+					<td  th:text="${user_activationstatus_text.text}">ActivationState</td>
 					<td th:text="${user.getActivationState()}">active</td>
 				</tr>	
 				<tr sec:authorize="hasRole('ROLE_NORMAL')">
-					<td colspan="2"><a th:href="@{/modifyUserAccount/{path}(path=${user.getUserAccount().getUsername()})}" href="modifyUserAccount.html">Nutzerdaten bearbeiten</a></td>
+					<td colspan="2"><a th:href="@{/modifyUserAccount/{path}(path=${user.getUserAccount().getUsername()})}" href="modifyUserAccount.html" th:text="${user_changedata_text.text}">Nutzerdaten bearbeiten</a></td>
 				</tr>
 				<tr>
-					<td>Addresstyp</td>
+					<td th:text="${user_addtype_text.text}">Addresstyp</td>
 					<td th:text="${user.getAddresstypString()}">Addresstyp</td>
 				</tr>
 				<tr>
-					<td>Street, house number</td>
+					<td th:text="${user_streethnr_text.text}">Street, house number</td>
 					<td th:text="${user.location.getStreetAndNo()}">Street, house number</td>
 				</tr>	
 				<tr>
-					<td>City, zip code</td>
+					<td th:text="${user_cityzip_text.text}">City, zip code</td>
 					<td th:text="${user.location.getCity()} +@{&nbsp;}+ ${user.location.getZipCode()}">City, zip code</td>
 				</tr>
 				<tr sec:authorize="hasRole('ROLE_NORMAL')">	
-					<td colspan="2"><a th:href="@{/modifyAddress}" href="modifyAddress.html">Adresse bearbeiten</a></td>
+					<td colspan="2"><a th:href="@{/modifyAddress}" href="modifyAddress.html" th:text="${user_changeadd_text.text}">Adresse bearbeiten</a></td>
 				</tr>
 				<tr>
-					<td>Origin</td>
+					<td  th:text="${user_origin_text.text}">Origin</td>
 					<td th:text="${user.origin}">Origin</td>
 				</tr>	
 				<tr>
-					<td>Preferred Language</td>
+					<td  th:text="${user_preflang_text.text}">Preferred Language</td>
 					<td th:text="${user.getPrefLanguage().toString()}">Muttersprache</td>
 				</tr>	
 				<tr>
-					<td>Other Languages</td>
+					<td  th:text="${user_otherlangs_text.text}">Other Languages</td>
 					<td th:text="${user.showLanguages()}">weitere Sprachen</td>
 				</tr>
 				<tr sec:authorize="hasRole('ROLE_NORMAL')">
-					<td colspan="2"><a th:href="@{/modifyLanguages}" href="modifyLanguages.html">Sprachen bearbeiten</a></td>
+					<td colspan="2"><a th:href="@{/modifyLanguages}" href="modifyLanguages.html"  th:text="${user_changelang_text.text}">Sprachen bearbeiten</a></td>
 				</tr>	
 			</table>
-			<div sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}">Modify User</a></div>
+			<div sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}"  th:text="${admin_changeuser_text.text}">Modify User</a></div>
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>

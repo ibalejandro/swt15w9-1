@@ -17,7 +17,7 @@
 			<div class="small-12 colums">
 				<div class="gooditem-single">
 					<div class="gooditem__head-single">
-						<h2 class="gooditem__title-single"> You just updated the good with this information: </h2>
+						<h2 class="gooditem__title-single" th:text="${item_general_updatedgood_text.text}"> You just updated the good with this information: </h2>
 					</div>
 					
 					<div th:include="itemN--large--good :: item"></div>

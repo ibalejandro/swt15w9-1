@@ -1,8 +1,13 @@
 package app.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,17 +87,19 @@ public class ActivitiesOfferController {
    * @param Optional<UserAccount> The user's account who wants to offer the 
    *                              activity
    * @return String The name of the view to be shown after processing
+	 * @throws ServletException 
+	 * @throws IOException 
    */
 	@RequestMapping(value = "/offeredActivity", method = RequestMethod.POST)
   public String saveActivity(HttpServletRequest request, Model model, 
                              @ModelAttribute("activity") 
                              ActivityEntity activity,
                              BindingResult bindingResult, 
-                             @LoggedIn Optional<UserAccount> userAccount) {
+                             @LoggedIn Optional<UserAccount> userAccount) throws IOException, ServletException {
 	  String name = request.getParameter("name");
 	  String description = request.getParameter("description");
   	long tagId = Long.parseLong(request.getParameter("tagId"));
-  	String picture = request.getParameter("picture");
+  	Part picture = request.getPart("pict");
   	String startDateInString = request.getParameter("startDate");
   	String endDateInString = request.getParameter("endDate");
 

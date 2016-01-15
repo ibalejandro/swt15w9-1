@@ -10,13 +10,13 @@
 		<div class="row">
 			<form action="/" method="post">
 				<div class="12-small columns">
-					<p class="text"> Validation von Recaptcha erfolgreich</p>
+					<p class="text" th:text="${user_valisucc_text.text}"> Validation von Recaptcha erfolgreich</p>
 				</div>
 				<div class="6-small columns">
-					<p class="text">Mail senden:</p>
+					<p class="text" th:text="${user_valisend_text.text}">Mail senden:</p>
 				</div>
 				<div class="6-small columns">
-					<input class="button" type="submit" value="Submit"/>
+					<input class="button" type="submit" value="Submit" th:value="${admin_submit_text.text}"/>
 				</div>
 			</form>
 		</div>

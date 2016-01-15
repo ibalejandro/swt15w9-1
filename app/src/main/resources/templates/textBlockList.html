@@ -10,18 +10,18 @@
 
 	<div class="row">
 		<div class="small-12 columns">
-			<h1 class="headline" >TextBlockList</h1>
+			<h1 class="headline" th:text="${nav_tblocklist.text}">TextBlockList</h1>
 		</div>
 
 		<div class="small-12 columns">
-			<h2 class="headline-sub">Raw FormatStrings</h2>
+			<h2 class="headline-sub" th:text="${nav_rfs_text.text}">Raw FormatStrings</h2>
 			<div th:each="textBlockFormatString : ${textBlocks}">
 				<p th:text="${textBlockFormatString}" class="text"></p>
 			</div>
 		</div>
 
 		<div class="small-12 columns">
-			<h2 class="headline-sub">Textblocks as Form</h2>
+			<h2 class="headline-sub" th:text="${nav_tbaf_text.text}">Textblocks as Form</h2>
 			<div th:each="textBlockHtmlInputString : ${textBlocksHtmlInput}">
 				<p th:utext="${textBlockHtmlInputString}" class="text"></p>
 			</div>

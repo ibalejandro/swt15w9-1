@@ -9,7 +9,7 @@
 		
 		<div th:fragment="item">
 			<div class="small-12 columns">
-				<p class="text"> Name </p>
+				<p class="text" th:text="${user_name_text.text}"> Name </p>
 				<p th:text="${result.name}" class="text-super"></p>
 			</div>
 		</div>

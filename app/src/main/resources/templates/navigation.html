@@ -20,11 +20,11 @@
 			<nav class="top-bar" data-topbar="" role="navigation">
 				<ul class="title-area">
 					<li class="name">
-						<h1><a th:href="@{/}">Refugee-App</a></h1>
+						<h1><a th:href="@{/}" th:text="${nav_refugeeapp_text.text}">Refugee-App</a></h1>
 					</li>
 					<!--/* Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone */-->
 					<li class="toggle-topbar menu-icon">
-						<a><span>Menu</span></a>
+						<a th:text="${nav_menu_text.text}"><span>Menu</span></a>
 					</li>
 				</ul>
 			
@@ -35,11 +35,11 @@
 							
 						<th:block sec:authorize="!isAuthenticated()">
 							<li>
-								<a class="center" th:href="@{/new_user}"> Registrieren</a>
+								<a class="center" th:href="@{/new_user}" th:text="${nav_register_text.text}"> Registrieren</a>
 							</li>
 							
 							<li>
-								<a class="center" th:href="@{/}" >Login</a>
+								<a class="center" th:href="@{/}" th:text="${nav_login_text.text}">Login</a>
 							</li>
 						</th:block>
 
@@ -50,13 +50,13 @@
 							</li>
 							
 							<li sec:authorize="hasRole('ROLE_NORMAL')" class="has-dropdown">
-								<a> Offer </a>
+								<a th:text="${nav_offer_text.text}"> Offer </a>
 								<ul class="dropdown">
 									<li>
-										<a th:href="@{/offer}">goods</a>
+										<a th:href="@{/offer}" th:text="${nav_good_text.text}">goods</a>
 									</li>
 									<li>
-										<a th:href="@{/offerActivity}">activities</a>
+										<a th:href="@{/offerActivity}" th:text="${nav_activity_text.text}">activities</a>
 									</li>
 								</ul>
 							</li>
@@ -66,19 +66,19 @@
 								
 								<ul class="dropdown">
 									<li>
-										<a class="center" th:href="@{/availableTags}">All Tags</a>
+										<a class="center" th:href="@{/availableTags}" th:text="${nav_alltags_text.text}">All Tags</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/newTextBlock}">New TextBlock</a>
+										<a class="center" th:href="@{/newTextBlock}" th:text="${nav_newtblock_text.text}">New TextBlock</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/textBlockList}" >TextBlock List</a>
+										<a class="center" th:href="@{/textBlockList}" th:text="${nav_tblocklist_text.text}">TextBlock List</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/userDetails}" >Kundenliste</a>
+										<a class="center" th:href="@{/userDetails}" th:text="${nav_userdetails_text.text}">Kundenliste</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/logout}">Logout</a>
+										<a class="center" th:href="@{/logout}" th:text="${nav_logout_text.text}">Logout</a>
 									</li>
 								</ul>
 							</li>
@@ -90,22 +90,22 @@
 								
 								<ul class="dropdown">
 									<li>
-										<a class="center" th:href="@{/data}" > Eigene Daten</a>
+										<a class="center" th:href="@{/data}" th:text="${nav_data_text.text}"> Eigene Daten</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/myOfferedGoods}"> My Offered Goods</a>
+										<a class="center" th:href="@{/myOfferedGoods}" th:text="${nav_myofferedg_text.text}"> My Offered Goods</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/myOfferedActivities}"> My Offered Activities</a>
+										<a class="center" th:href="@{/myOfferedActivities}" th:text="${nav_myoffereda_text.text}"> My Offered Activities</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/dialogList}" > Eigene Dialoge</a>
+										<a class="center" th:href="@{/dialogList}" th:text="${nav_dialoglist_text.text}"> Eigene Dialoge</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/startDialog}" > Neuer Dialog</a>
+										<a class="center" th:href="@{/startDialog}" th:text="${nav_startdialog_text.text}"> Neuer Dialog</a>
 									</li>
 									<li>
-										<a class="center" th:href="@{/logout}">Logout</a>
+										<a class="center" th:href="@{/logout}" th:text="${nav_logout_text.text}">Logout</a>
 									</li>
 								</ul>
 							</li>

@@ -23,35 +23,35 @@
 						<div class="large-3 medium-6 small-12 columns">
 							<form action="@{/deletedGood}" method="post">
 								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
-								<input class="button" type="submit" value="Delete"/>
+								<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/>
 							</form>
 						</div>
 
 						<div class="large-3 medium-6 small-12 columns">
 							<form action="@{/update}" method="post">
 								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
-								<input class="button" type="submit" value="Update"/>
+								<input class="button" type="submit" value="Update" th:value="${item_general_update_text.text}"/>
 							</form>
 						</div>
 
 						<div class="large-3 medium-6 small-12 columns">
 							<form action="/dialogByOffer" method="post">
 								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
-								<input class="button" type="submit" value="Ask for this good"/>
+								<input class="button" type="submit" value="Ask for this good" th:value="${item_general_goodbutton_text.text}"/>
 							</form>
 						</div>
 						
 						<div class="large-3 medium-6 small-12 columns">
 							<form action="@{/deletedGoodByAdmin}" method="post"> <!--/* zuändern */-->
 								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
-								<input class="button" type="submit" value="Delete"/> <!--/* zuändern */-->
+								<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/> <!--/* zuändern */-->
 							</form>
 						</div>
 						
 						<div class="large-3 medium-6 small-12 columns">
 							<form action="@{/updateGoodByAdmin}" method="post"> <!--/* zuändern */-->
 								<input type="hidden" name="goodId" th:value="${result.getItemTypeAndId()}"/>
-								<input class="button" type="submit" value="Update"/> <!--/* zuändern */-->
+								<input class="button" type="submit" value="Update" th:value="${item_general_update_text.text}"/> <!--/* zuändern */-->
 							</form>
 						</div>
 						

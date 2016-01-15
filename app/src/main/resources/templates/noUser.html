@@ -15,9 +15,9 @@
 		
 		<div class="row">
 			<div class="12-small columns">
-				<h1 class="headline"> Please, login first. </h1>
+				<h1 class="headline" th:text="${error_loggedout_text.text}"> Please, login first. </h1>
 				
-				<a th:href="@{/}">Go to Login</a>
+				<a th:href="@{/}" th:text="${error_back_text.text}">Go to Login</a>
 			</div>
 		</div>
 		

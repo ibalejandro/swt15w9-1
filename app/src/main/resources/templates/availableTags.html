@@ -15,12 +15,12 @@
 			<div class="small-12 columns space-1rem"></div>
 			
 			<div class="small-12 medium-6 columns">
-				<h1 class="headline"> Tags </h1>
+				<h1 class="headline" th:text="${tag_tags_text.text}"> Tags </h1>
 			</div>
 			
 			<div class="small-12 medium-6 columns">
 				<form th:action="@{/addNewTag}" method="get">
-					<input class="button" type="submit" value="Add new Tag"/>
+					<input class="button" type="submit" value="Add new Tag" th:value="${tag_newtag_text.text}"/>
 				</form>
 			</div>
 		
@@ -36,13 +36,13 @@
 							<div class="small-6 columns">
 								<form th:action="@{/deletedTag}" method="post">
 									<input type="hidden" name="id" th:value="${tag.id}"/>
-									<input class="button" type="submit" value="Delete"/>
+									<input class="button" type="submit" value="Delete" th:value="${tag_delete_text.text}"/>
 								</form>
 							</div>
 							<div class="small-6 columns">
 								<form th:action="@{/updateTag}" method="post">
 									<input type="hidden" name="id" th:value="${tag.id}"/>
-									<input class="button" type="submit" value="Update"/>
+									<input class="button" type="submit" value="Update" th:value="${tag_update_text.text}"/>
 								</form>
 							</div>
 						</div>

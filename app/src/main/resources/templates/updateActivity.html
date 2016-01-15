@@ -11,27 +11,27 @@
 		<th:block th:fragment="update">
 			<div class="row">
 				<div class="small-12 columns">
-					<h1 class="headline"> Activity </h1>
+					<h1 class="headline" th:text="${nav_activity_text.text}"> Activity </h1>
 				</div>
 				
-				<form th:action="@{/updatedActivity}" th:object="${activity}" method="post">
+				<form th:action="@{/updatedActivity}" th:object="${activity}" method="post" enctype="multipart/form-data">
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Name </label>
+						<label class="create__label" th:text="${item_general_name_text.text}"> Name </label>
 						<input type="text" name="name" th:value="*{name}"/>
 					</div>
 
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Description </label>
+						<label class="create__label" th:text="${item_general_description_text.text}"> Description </label>
 						<input type="text" name="description" th:value="*{description}"/> 
 					</div>
 					
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Picture </label>
-						<input type="text" name="picture" th:value="*{picture}"/> 
+						<label class="create__label" th:text="${item_general_picture_text.text}"> Picture </label>
+						<input type="file" id="pict" name="pict"/> 
 					</div>
 
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Tag </label>
+						<label class="create__label" th:text="${item_general_tag_text.text}"> Tag </label>
 						<select name="tagId">
 							<option th:value="${activity.tag.id}" th:text="${activity.tag.name}"></option>
 							<option th:each="tag : ${tags}"
@@ -42,19 +42,19 @@
 					</div>
 					
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Start date </label>
+						<label class="create__label" th:text="${item_general_startdate_text.text}"> Start date </label>
 						<input type="date" name="startDate"  th:value="${activity.getStringFromDateForInput(activity.startDate)}"/> 
 					</div>
 					
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> End date </label>
+						<label class="create__label" th:text="${item_general_enddate_text.text}"> End date </label>
 						<input type="date" name="endDate" th:value="${activity.getStringFromDateForInput(activity.endDate)}"/> 
 					</div>
 					
 					<input type="hidden" name="id" th:value="${activity.id}"/>
 					
 					<div class="small-12 columns">
-						<input class="button" type="submit" value="Update"/>
+						<input class="button" type="submit" value="Update" th:text="${admin_submit_text.text}"/>
 					</div>
 				</form>
 		</div>

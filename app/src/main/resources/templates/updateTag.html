@@ -12,11 +12,11 @@
 		<div class = "row">
 			<div class = "small-12 columns">
 				<div class="create">
-					<h1 class="create__title"> Tag </h1>
+					<h1 class="create__title" th:text="${item_general_tag_text.text}"> Tag </h1>
 					
 					<form th:action="@{/updatedTag}" th:object="${tag}" method="post">
 						<div>
-							<label class="create__label"> Name </label>
+							<label class="create__label" th:text="${item_general_name_text.text}"> Name </label>
 							<input type="text" name="name" th:value="*{name}"/>
 							<label th:text="${error}" class="error center space--1rem--topbottom"></label>
 						</div>
@@ -24,7 +24,7 @@
 						<input type="hidden" name="id" th:value="${tag.id}"/>
 						
 						<div>
-							<input class="button" type="submit" value="Update"/>
+							<input class="button" type="submit" value="Update" th:text="${admin_submit_text.text}"/>
 						</div>
 					</form>
 				</div>

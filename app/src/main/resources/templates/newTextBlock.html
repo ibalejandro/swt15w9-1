@@ -9,13 +9,13 @@
 		<div th:include="navigation :: navigation"></div>
 	
 		<div class="row">
-			<h2> Neuer TextBlock </h2>
+			<h2 th:text="${nav_newtblock_text.text}"> Neuer TextBlock </h2>
 		</div>
 		
 		<div>
 			<form class ="row" th:action="@{/newTextBlock}" method="post">
 				<input type="text" id="formatString" name="formatString" />
-				<input class="button" type="submit" value="Submit" /> 
+				<input class="button" type="submit" value="Submit" th:text="${admin_submit_text.text}"/> 
 			</form>
 		</div>		
 

@@ -18,12 +18,12 @@
 			<div class="small-12 columns space"></div>
 			
 			<div class="small-12 columns">
-				<h1 class="headline">Add new Tag</h1>
+				<h1 class="headline" th:text="${tag_newtag_text.text}">Add new Tag</h1>
 			</div>
 			
 			<form th:action="@{/addedNewTag}" th:object="${tag}" method="post">
 				<div class="large-1 medium-2 small-12 columns">
-					<label for="name" class="form__label">Name</label> 
+					<label for="name" class="form__label" th:text="${item_general_name.text}">Name</label> 
 				</div>
 				<div class="large-5 medium-10 small-12 columns">
 					<input type="text" id="name" name="name" th:value="${name}"/>

@@ -12,10 +12,10 @@
 	
 		<div class="row">
 			<div class="large-12 colums">
-				<h1 th:text="@{&Uuml;ber den User: &nbsp; }+${user.getUserAccount().getUsername()} "> UserAccount</h1>
+				<h1 th:text="${user_about_text.text}+${user.getUserAccount().getUsername()} "> UserAccount</h1>
 			
 						<div>
-							<a th:href="@{/changePassword/{path}(path=${user.getUserAccount().getUsername()})}" href="changePassword.html">Password ändern</a>
+							<a th:text="${user_changepw_text.text}" th:href="@{/changePassword/{path}(path=${user.getUserAccount().getUsername()})}" href="changePassword.html">Password ändern</a>
 						</div>	
 						<div>	
 							<a th:href="@{/modifyActivationStateByAdmin/{user}/{action}(user=${user.getUserAccount().getUsername()}, action=${user.getActivationStateOpposite()})}" th:text="${user.getActivationStateOpposite()}">activate/deactivate</a>
@@ -26,27 +26,27 @@
 							<div class="medium-6 small-12 columns">
 								<div class="row">
 									<div class="large-3 small-12 columns">
-										<label class="form__label" for="firstnameIN">Vorname:</label>
+										<label th:text="${user_firstname_text.text}" class="form__label" for="firstnameIN">Vorname:</label>
 									</div>
 									<div class="large-9 small-12 columns">
 										<input name="firstnameIN" type="text" th:value="${user.getUserAccount().getFirstname()}"/>
 									</div>
 									
 									<div class="large-3 small-12 columns">
-										<label class="form__label" for="nameIN">Nachname:</label>
+										<label th:text="${user_lastname_text.text}" class="form__label" for="nameIN">Nachname:</label>
 									</div>
 									<div class="large-9 small-12 columns">
 										<input name="nameIN" type="text" th:value="${user.getUserAccount().getLastname()}"/>
 									</div>
 									
 									<div class="large-3 small-12 columns">
-										<label class="form__label" for="mailIN">E-Mail:</label>
+										<label th:text="${user_email_text.text}" class="form__label" for="mailIN">E-Mail:</label>
 									</div>
 									<div class="large-9 small-12 columns">
 										<input name="mailIN" type="email" th:value="${user.getUserAccount().getEmail()}"/>
 									</div>
 									<div class="large-3 small-12 columns">
-										<label for="nativelanguage" class="form__label">Muttersprache:</label>
+										<label th:text="${user_preflang_text.text}" for="nativelanguage" class="form__label">Muttersprache:</label>
 									</div>
 									<div class="large-9 small-12 columns">
 										<select id="nativelanguage" name="nativelanguage">
@@ -61,7 +61,7 @@
 										</select>  
 									</div>
 									<div class="large-3 small-12 columns">
-										<label for="otherlanguages" class="form__label">2.Sprache:</label>
+										<label th:text="${user_otherlang_text.text}" for="otherlanguages" class="form__label">2.Sprache:</label>
 									</div>
 									<div class="large-9 small-12 columns">
 										<select id="otherlanguages" name="otherlanguages">
@@ -73,7 +73,7 @@
 										</select>  
 									</div>
 									<div class="large-3 small-12 columns">
-										<label for="otherlanguages" class="form__label">3.Sprache:</label>
+										<label th:text="${user_otherlang_text.text}" for="otherlanguages" class="form__label">3.Sprache:</label>
 									</div>
 									<div class="large-9 small-12 columns">
 										<select id="otherlanguages" name="otherlanguages">
@@ -86,7 +86,7 @@
 									</div>
 									
 									<div class="large-3 small-12 columns">
-										<label class="form__label">Herkunftsland:</label>
+										<label th:text="${user_origin_text.text}" class="form__label">Herkunftsland:</label>
 									</div>
 									<div class="large-9 small-12 columns">
 										<input name="origin" type="text" th:value="${user.getOrigin()}"/>
@@ -97,39 +97,39 @@
 							<div class="medium-6 small-12 columns">
 								<div class="row">
 									<div class="small-12 columns">
-										<label class="headline-sub">Wohnungstyp:</label>
+										<label class="headline-sub" th:text="${user_hometype_text.text}">Wohnungstyp:</label>
 									</div>
 									
 									<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked=""/>
-									<label class="form__label" for="hh">Wohnung</label>
+									<label class="form__label" for="hh" th:text="${user_flat_text.text}">Wohnung</label>
 									
 									<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee"/>
-									<label class="form__label" for="fh">Flüchtlingsheim</label>
+									<label class="form__label" for="fh" th:text="${user_refugeehome_text.text}">Flüchtlingsheim</label>
 									<div class="small-12 columns"></div>
 									<div class="new__user__helper">
 										<div class="large-3 small-12 columns">
-											<label class="form__label">Stra&szlig;e:</label>
+											<label class="form__label" th:text="${user_street_text.text}">Stra&szlig;e:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="street" type="text"/>
 										</div>
 										
 										<div class="large-3 small-12 columns">
-											<label class="form__label">Hausnummer:</label>
+											<label class="form__label" th:text="${user_housenr_text.text}">Hausnummer:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="housenr" type="text"/>
 										</div>
 										
 										<div class="large-3 small-12 columns">
-											<label class="form__label">Postleitzahl:</label>
+											<label class="form__label" th:text="${user_zip_text.text}">Postleitzahl:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="postcode_H" type="text"/>
 										</div>
 									
 										<div class="large-3 small-12 columns">
-											<label class="form__label">Stadt:</label>
+											<label class="form__label" th:text="${user_city_text.text}">Stadt:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="city_H" type="text"/>
@@ -138,28 +138,28 @@
 									
 									<div class="new__user__refugee">
 										<div class="large-3 small-12 columns">
-											<label class="form__label-paddingOFF">Fl&uuml;chtlingsheim Name:</label>
+											<label class="form__label-paddingOFF" th:text="${user_rhomename_text.text}">Fl&uuml;chtlingsheim Name:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="flh_name" type="text"/>
 										</div>
 									
 										<div class="large-3 small-12 columns">
-											<label class="form__label">Postleitzahl:</label>
+											<label class="form__label" th:text="${user_zip_text.text}">Postleitzahl:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="postcode_R" type="text"/>
 										</div>
 									
 										<div class="large-3 small-12 columns">
-											<label class="form__label">Stadt:</label>
+											<label class="form__label" th:text="${user_city_text.text}">Stadt:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="city_R" type="text"/>
 										</div>
 									
 										<div class="large-3 small-12 columns">
-											<label class="form__label">Stadtteil:</label>
+											<label class="form__label" th:text="${user_citypart_text.text}">Stadtteil:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="citypart" type="text"/>
@@ -170,7 +170,7 @@
 						
 							<div class="medium-5 small-12 columns">
 								<div class="button-right">
-									<input class="button" type="submit" value="Modify User" />
+									<input class="button" type="submit" value="Modify User" th:value="${admin_submit_text.text}"/>
 								</div>
 							</div>
 						

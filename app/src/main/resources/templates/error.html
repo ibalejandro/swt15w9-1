@@ -10,12 +10,12 @@
 		
 		<div class="row">
 			<div class="small-12 columns">
-				<h1 class="headline">ERROR</h1>
+				<h1 class="headline" th:text="${error_error_text.text}">ERROR</h1>
 			</div>
 			
 			<div class="small-12 columns">
-				<p class="text-super">Es ist leider ein unbekannter Fehler aufgetreten.</p>
-				<a class="text" th:href="@{/}"> Zur Startseite</a>
+				<p class="text-super" th:text="${error_unknownerror_text.text}">Es ist leider ein unbekannter Fehler aufgetreten.</p>
+				<a class="text" th:href="@{/}" th:text="${error_back_text.text}"> Zur Startseite</a>
 			</div>
 		</div>
 		

@@ -11,15 +11,15 @@
 
 	<div class="row">
 		<!--/* replace by actual internalization string */-->
-		<h1>My Dialogs</h1>
+		<h1 th:text="${dialog_mydialog_text.text}">My Dialogs</h1>
 
 		<div class="small-12 columns">
 			<table sec:authorize="hasRole('ROLE_NORMAL')">
 				<thead>
 					<tr>
-						<th>Title</th>
-						<th>Dialog Partner</th>
-						<th>Link</th>
+						<th th:text="${dialog_title_text.text}">Title</th>
+						<th th:text="${dialog_partner_text.text}">Dialog Partner</th>
+						<th th:text="${dialog_link_text.text}">Link</th>
 					</tr>
 				</thead>
 
@@ -33,7 +33,7 @@
 							th:unless="${dialog.userB.userAccount.firstname.equals(loggedInUser.userAccount.firstname)}">
 						</td>
 						<td><a href="/dialogList"
-							th:href="@{/dialog(id=${dialog.id})}"> Go to </a></td>
+							th:href="@{/dialog(id=${dialog.id})}" th:text="${dialog_goto_text.text}"> Go to </a></td>
 					</tr>
 				</tbody>
 			</table>

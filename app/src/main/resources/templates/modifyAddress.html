@@ -10,45 +10,45 @@
 	
 		<div class="row">
 			<div class="small-12 columns">
-				<h1 th:text="@{Your address: &nbsp; } + ${user.getUserAccount().getUsername()}" class="headline"> UserAccount</h1>
+				<h1 th:text="${user_yourhome_text.text} + ${user.getUserAccount().getUsername()}" class="headline"> UserAccount</h1>
 			</div>
 			<form th:action="@{/modifyAddress_submit/}" method="post">
 
 				<div class="small-12 columns">
-					<h2 class="headline-sub">Wohnungstyp:</h2>
+					<h2 class="headline-sub" th:text="${user_hometype_text.text}">Wohnungstyp:</h2>
 				</div>
 				
 				<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked=""/>
-				<label class="form__label" for="hh">Wohnung</label>
+				<label class="form__label" th:text="${user_flat_text.text}" for="hh">Wohnung</label>
 				
 				<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee" th:checked="${isRefugee}"/>
-				<label class="form__label" for="fh">Flüchtlingsheim</label>
+				<label class="form__label" th:text="${user_refugeehome_text.text}" for="fh">Flüchtlingsheim</label>
 				
 
 				<div class="new__user__helper">
 					<div class="large-3 small-12 columns">
-						<label class="form__label">Stra&szlig;e:</label>
+						<label class="form__label" th:text="${user_street_text.text}">Stra&szlig;e:</label>
 					</div>
 					<div class="large-9 small-12 columns">
 						<input name="street" type="text" th:value="${user.getLocation().getStreet()}"/>
 					</div>
 					
 					<div class="large-3 small-12 columns">
-						<label class="form__label">Hausnummer:</label>
+						<label class="form__label" th:text="${user_housenr_text.text}">Hausnummer:</label>
 					</div>
 					<div class="large-9 small-12 columns">
 						<input name="housenr" type="text" th:value="${user.getLocation().getHousenr()}"/>
 					</div>
 					
 					<div class="large-3 small-12 columns">
-						<label class="form__label">Postleitzahl:</label>
+						<label class="form__label" th:text="${user_zip_text.text}">Postleitzahl:</label>
 					</div>
 					<div class="large-9 small-12 columns">
 						<input name="postcode_H" type="text" th:value="${user.getLocation().getZipCode()}"/>
 					</div>
 				
 					<div class="large-3 small-12 columns">
-						<label class="form__label">Stadt:</label>
+						<label class="form__label" th:text="${user_city_text.text}">Stadt:</label>
 					</div>
 					<div class="large-9 small-12 columns">
 						<input name="city_H" type="text" th:value="${user.getLocation().getCity()}"/>
@@ -57,28 +57,28 @@
 				
 				<div class="new__user__refugee">
 					<div class="large-3 small-12 columns">
-						<label class="form__label-paddingOFF">Fl&uuml;chtlingsheim Name:</label>
+						<label class="form__label-paddingOFF" th:text="${user_rhomename_text.text}">Fl&uuml;chtlingsheim Name:</label>
 					</div>
 					<div class="large-9 small-12 columns">
 						<input name="flh_name" type="text" th:value="${user.getLocation().getFlh_name()}"/>
 					</div>
 				
 					<div class="large-3 small-12 columns">
-						<label class="form__label">Postleitzahl:</label>
+						<label class="form__label" th:text="${user_zip_text.text}">Postleitzahl:</label>
 					</div>
 					<div class="large-9 small-12 columns">
 						<input name="postcode_R" type="text" th:value="${user.getLocation().getZipCode()}"/>
 					</div>
 				
 					<div class="large-3 small-12 columns">
-						<label class="form__label">Stadt:</label>
+						<label class="form__label" th:text="${user_city_text.text}">Stadt:</label>
 					</div>
 					<div class="large-9 small-12 columns">
 						<input name="city_R" type="text" th:value="${user.getLocation().getCity()}"/>
 					</div>
 				
 					<div class="large-3 small-12 columns">
-						<label class="form__label">Stadtteil:</label>
+						<label class="form__label" th:text="${user_citypart_text.text}">Stadtteil:</label>
 					</div>
 					<div class="large-9 small-12 columns">
 						<input name="citypart" type="text" th:value="${user.getLocation().getCityPart()}"/>
@@ -86,7 +86,7 @@
 				</div>
 				
 				<div class="small-12 columns">
-					<input type="submit" class="button" value="OK"/>
+					<input type="submit" class="button" value="OK" th:value="${admin_submit_text.text}"/>
 				</div>
 			</form>
 		</div>

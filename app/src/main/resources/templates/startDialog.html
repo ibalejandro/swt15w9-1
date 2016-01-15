@@ -16,21 +16,21 @@
 		<div class="row">
 			<div class = "small-12 columns">
 				<div class="dialog">
-					<h1 class="headline">New Dialog</h1>
+					<h1 class="headline" th:text="${dialog_new_text.text}">New Dialog</h1>
 					
 					<form th:action="@{/startDialog}" method="post">
 						<div>
-							<label class="form__label" for="title">Title:</label>
+							<label class="form__label" for="title" th:text="${dialog_title_text.text}">Title:</label>
 							<input type="text" name="title"/>
 						</div>
 						
 						<div>
-							<label class="form__label" for="participant">Participant:</label>
+							<label class="form__label" for="participant" th:text="${dialog_partner_text.text}">Participant:</label>
 							<input type="text" name="participant"/>
 						</div>
 						
 						<div>
-							<input class="button" type="submit" value="Begin"/>
+							<input class="button" type="submit" value="Begin" th:text="${admin_submit_text.text}"/>
 						</div>
 					</form>
 				</div>

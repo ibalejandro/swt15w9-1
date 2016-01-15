@@ -14,15 +14,15 @@
 		<th:block th:include="navigation :: navigation"></th:block>
 		<div class="row">
 			<div class="small-12 columns">
-				<h1 class="headline">Template bearbeiten: </h1>
+				<h1 class="headline" th:text="${template_edithead_text.text}">Template bearbeiten: </h1>
 			</div>
 			
 			<form th:action="@{/change_template_submit/}+${template}" method="post">
 				<table>
 					<tr> <!-- List all attributes here! -->
-						<th>ThymeLeaf-Einbindung</th>
-						<th th:if="${refSprache}">Referenzsprachen Text</th>
-						<th>zuändernde Sprache</th>
+						<th th:text="${template_thymeleafname_text.text}">ThymeLeaf-Einbindung</th>
+						<th th:if="${refSprache}" th:text="${template_reflang_text.text}">Referenzsprachen Text</th>
+						<th th:text="${template_changelang_text.text}">zuändernde Sprache</th>
 					</tr>
 					<tr th:each="temp, iterStat : ${result}">
 						<td>
@@ -34,7 +34,7 @@
 					</tr>
 				</table>
 				<input type="hidden" th:value="${changeSprache}" name="changeSprache"/>
-				<input type="submit" class="button" value="Speichern"/>
+				<input type="submit" class="button" th:value="${template_editsave_text.text}" value="Speichern"/>
 			</form>
 			
 		</div>

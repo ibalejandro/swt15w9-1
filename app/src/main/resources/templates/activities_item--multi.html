@@ -26,22 +26,22 @@
 						
 						<div class="gooditem__body-multi">
 							<div>
-								<label class="gooditem__label-multi"> Picture </label>
+								<label class="gooditem__label-multi" th:text="${item_general_picture_text.text}"> Picture </label>
 								<img th:src="${activity.id+'/activityimage'}" class="gooditem__text-multi"/>
 							</div>		
 
 							<div>
-								<label class="gooditem__label-multi"> Description </label>
+								<label class="gooditem__label-multi" th:text="${item_general_description_text.text}"> Description </label>
 								<p th:text="${activity.description}" class="gooditem__text-multi"></p>
 							</div>
 							
 							<div>
-								<label class="gooditem__label-multi"> Tag </label>
+								<label class="gooditem__label-multi" th:text="${item_general_tag_text.text}"> Tag </label>
 								<p th:text="${activity.tag.name}" class="gooditem__text-multi"></p>
 							</div>
 							
 							<div>
-								<label class="gooditem__label-multi"> User-ID </label>
+								<label class="gooditem__label-multi" th:text="${item_general_userid_text.text}"> User-ID </label>
 								<p th:text="${activity.user.id}" class="gooditem__text-multi"></p>
 							</div>
 						</div>

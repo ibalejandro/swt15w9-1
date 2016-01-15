@@ -18,27 +18,27 @@
 			<div class="small-12 columns space"></div>
 			
 			<div class="small-12 columns">
-				<h1 class="headline">Offer Good</h1>
+				<h1 class="headline" th:text="${item_general_offergood_text.text}">Offer Good</h1>
 			</div>
 			
 			<form th:action="@{/offeredGood}" th:object="${good}" method="post" enctype="multipart/form-data">
 				<div class="large-6 small-12 columns">
-					<label for="name" class="form__label">Name</label>
+					<label for="name" class="form__label" th:text="${item_general_name_text.text}">Name</label>
 					<input type="text" id="name" name="name"/>
 				</div>
 				
 				<div class="large-6 small-12 columns">
-					<label for="description" class="form__label">Description</label>
+					<label for="description" class="form__label" th:text="${item_general_description_text.text}">Description</label>
 					<input type="text" id="description" name="description"/>
 				</div>
 				
 				<div class="large-6 small-12 columns">
-					<label for="pict" class="form__label">Picture</label>
+					<label for="pict" class="form__label" th:text="${item_general_picture_text.text}">Picture</label>
 					<input type="file" id="pict" name="pict"/> 
 				</div>
 				
 				<div class="large-6 small-12 columns">
-					<label for="tagId" class="form__label">Tags</label>
+					<label for="tagId" class="form__label" th:text="${item_general_tag_text.text}">Tags</label>
 					
 					<select id="tagId" name="tagId">
 						<option value="-1">---- Select ----</option>
@@ -50,7 +50,7 @@
 				</div>
 				
 				<div class="small-12 columns">
-					<input class="button" type="submit" value="Offer"/>
+					<input class="button" type="submit" value="Offer" th:value="${admin_submit_text.text}"/>
 				</div>
 			</form>		
 			

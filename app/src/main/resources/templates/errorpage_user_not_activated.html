@@ -10,12 +10,12 @@
 		
 		<div class="row">
 			<div class="small-12 columns">
-				<h1 class="headline">ERROR</h1>
+				<h1 class="headline" th:text="${error_error_text.text}">ERROR</h1>
 			</div>
 		
 			<div class="small-12 columns">
-				<p class="text">You have to click your activationlink first!</p>
-				<a th:href="@{/}">Back</a>
+				<p class="text" th:text="${error_notactivated_text.text}">You have to click your activationlink first!</p>
+				<a th:href="@{/}" th:text="${error_back_text.text}">Back</a>
 			</div>
 		</div>
 		

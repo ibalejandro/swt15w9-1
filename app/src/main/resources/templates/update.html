@@ -11,27 +11,27 @@
 		<th:block th:fragment="update">
 			<div class="row">
 				<div class="small-12 columns">
-					<h1 class="headline"> Good </h1>
+					<h1 class="headline" th:text="${nav_good_text.text}"> Good </h1>
 				</div>
 				
 				<form th:action="@{/updatedGood}" th:object="${good}" method="post" enctype="multipart/form-data">
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Name </label>
+						<label class="create__label" th:text="${item_general_name_text.text}"> Name </label>
 						<input type="text" name="name" th:value="*{name}"/>
 					</div>
 
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Description </label>
+						<label class="create__label" th:text="${item_general_description_text.text}"> Description </label>
 						<input type="text" name="description" th:value="*{description}"/> 
 					</div>
 					
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Picture </label>
+						<label class="create__label" th:text="${item_general_picture_text.text}"> Picture </label>
 						<input type="file" name="pict"/> 
 					</div>
 
 					<div class="small-12 medium-6 columns">
-						<label class="create__label"> Tag </label>
+						<label class="create__label" th:text="${item_general_tag_text.text}"> Tag </label>
 						<select name="tagId">
 							<option th:value="${good.tag.id}" th:text="${good.tag.name}"></option>
 							<option th:each="tag : ${tags}"
@@ -44,7 +44,7 @@
 					<input type="hidden" name="id" th:value="${good.id}"/>
 					
 					<div class="small-12 columns">
-						<input class="button" type="submit" value="Update"/>
+						<input class="button" type="submit" value="Update" th:value="${admin_submit_text.text}"/>
 					</div>
 				</form>	
 			</div>

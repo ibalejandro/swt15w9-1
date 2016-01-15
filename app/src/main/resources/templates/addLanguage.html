@@ -13,12 +13,12 @@
 			
 			<form th:action="@{/addLanguage_submit}" method="post">
 				<div class="small-12 medium-6 colums">
-					<label th:text="@{New Language: &nbsp; }" class="form__label" for="name">Language:</label>
+					<label th:text="@{language_language_text.text}" class="form__label" for="name">Language:</label>
 					<input name="languageName" type="text" id="name"/>
 				</div>
 				
 				<div class="small-12 medium-6 colums">
-					<label th:text="@{ISO code: &nbsp; }" class="form__label" for="kennung">Language:</label>
+					<label th:text="@{language_iso_text.text}" class="form__label" for="kennung">Language:</label>
 					<input name="kennung" type="text" id="kennung"/>
 				</div>
 				

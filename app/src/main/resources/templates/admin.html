@@ -18,17 +18,17 @@
 			<div class ="small-12 colums large-6 columns">
 				<div class="admin">
 				
-					<h1 class="admin__title">User List:</h1>
+					<h1 class="admin__title" th:text="${admin_userlist_text.text}">User List:</h1>
 					
 					<table class="admin__table">
 						<tr class="admin__table__row"> <!--/* List all attributes here! */-->
-							<th>First name</th>
-							<th>Last name</th>
-							<th>email</th>
-							<th>origin</th>
-							<th>username</th>
-							<th>date of registration</th>
-							<th>user activated</th>
+							<th th:text="${user_firstname_text.text}">First name</th>
+							<th th:text="${user_lastname_text.text}">Last name</th>
+							<th th:text="${user_email_text.text}">email</th>
+							<th th:text="${user_origin_text.text}">origin</th>
+							<th th:text="${user_username_text.text}">username</th>
+							<th th:text="${user_registrationdate_text.text}">date of registration</th>
+							<th th:text="${user_activationstatus_text.text}">user activated</th>
 						</tr>
 						
 						<tr th:each="user : ${users}" class="admin__table__row">
@@ -51,14 +51,14 @@
 					
 					<table class="admin__table">
 						<tr class="admin__table__row"> <!--/* List all attributes here! */-->
-							<th>Name</th>
-							<th>Description</th>
-							<th>Offered by</th>
+							<th th:text="${item_general_name_text.text}">Name</th>
+							<th th:text="${item_general_description_text.text>Description</th>
+							<th th:text="${item_general_offeredby_text.text>Offered by</th>
 						</tr>
 						
 						<tr th:each="offer : ${offers}" class="admin__table__row">
 							<td th:text="${offer.name}">Title</td>
-							<td th:text="${offer.description}"/td>
+							<td th:text="${offer.description}">Description</td>
 							<td th:text="${offer.user}">Max Mustermann</td>
 						</tr>
 					</table>
