@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="small-12 colums">
 				<div class="gooditem__head-single">
-					<h1 class="headline">You just updated the activity with this information:</h1>
+					<h1 class="headline" th:text="${item_general_updatedact_text.text}">You just updated the activity with this information:</h1>
 				</div>
 				
 				<div th:include="itemN--large--activity :: item"></div>

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.servlet.http.Part;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -31,6 +33,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.ImageObserver;
 import java.awt.geom.AffineTransform;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
 * <h1>ActivityEntity</h1>
@@ -97,7 +100,7 @@ public class ActivityEntity implements Serializable {
 	 */
 	 
 	 public ActivityEntity(String name, String description, TagEntity tag, 
-	                       String picture, User user, Date startDate,
+	                       Part picture, User user, Date startDate,
 	                       Date endDate) {
     this.name = name;
     this.description = description;
@@ -111,11 +114,17 @@ public class ActivityEntity implements Serializable {
 		this.endDate = endDate;
   }
 	 
-	public static byte[] createPicture(String pictureLink) {
+	public static byte[] createPicture(Part picture) {
 	  /* Ferdinand's code */
+		if(picture==null){
+			return null;
+		}
+		if (picture.getSize() == 0L) {
+			return null;
+		}
     try{
-      URL srcPic = new URL(pictureLink);
-      BufferedImage img = ImageIO.read(srcPic);
+    	InputStream is = picture.getInputStream();
+		BufferedImage img = ImageIO.read(is);
 
 			double scaling;
 			if (img.getWidth() != 512) {
@@ -151,7 +160,7 @@ public class ActivityEntity implements Serializable {
 	 * @return ActivityEntity An empty and invalid activity
 	 */
 	public static ActivityEntity createEmptyActivity() {
-	  return new ActivityEntity("", "", null, "", null, null, null);
+	  return new ActivityEntity("", "", null, null, null, null, null);
 	}
 	
 	/**

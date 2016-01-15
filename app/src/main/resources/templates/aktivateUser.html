@@ -13,15 +13,15 @@
 		<div class="row">
 			<form th:action="@{/submit_aktivateUser/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
 				<div class="small-12 columns">
-					<h1 class="headline">Nutzerkonto aktivieren</h1>
+					<h1 class="headline" th:text="${admin_activateuser_text.text}">Nutzerkonto aktivieren</h1>
 					
-					<p  class="text-super" th:text= "@{Do you really want to &nbsp;}+${user.getActivationStateOpposite()}+@{&nbsp; the User &nbsp;}+${user.userAccount.getUsername()}+@{ ?}"><font color="red"></font></p>
+					<p  class="text-super" th:text= "${admin_toconfirm_text.text}+${user.getActivationStateOpposite()}+@{&nbsp; the User &nbsp;}+${user.userAccount.getUsername()}+@{ ?}"><font color="red"></font></p>
 					
-					<label class="form__label" for="check2">
+					<label class="form__label" for="check2" th:text="${admin_activateuser_text.text}">
 						<input type="checkbox" name="aktivate" value="yes" id="check2"/>Nutzerkonto aktivieren 
 					</label>
 					
-					<input class="button" type="submit" value="Submit"/>
+					<input class="button" type="submit" th:value="${admin_submit_text.text}"/>
 				</div>
 			</form>
 		</div>

@@ -30,7 +30,7 @@ public class ChatTemplate {
                 (String f) ->
                         // You may use this function to surround each of the text block bits with a wrapper,
                         // some <div> elements for example.
-                        "<div class=\"umrandung--nomargin\">" + f + "</div>"
+                        "<div class=\"umrandung-textblock\">" + f + "</div>"
         ).reduce(String::concat).get();
     }
 

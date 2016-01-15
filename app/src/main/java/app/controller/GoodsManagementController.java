@@ -179,7 +179,7 @@ public class GoodsManagementController {
   	goodToBeUpdated.setName(name);
   	goodToBeUpdated.setDescription(description);
   	goodToBeUpdated.setTag(tag);
-  	if (picture!=null){
+  	if (picture!=null && picture.getSize()!=0L){
   	goodToBeUpdated.setPicture(GoodEntity.createPicture(picture));
   	}
 		goodToBeUpdated.setUser(loggedUser);

@@ -6,9 +6,17 @@
 	</head>
 	
 	<body>
-        <div th:include="navigation :: navigation"></div>
+        <th:block th:include="navigation :: navigation"></th:block>
 		
-		<th:block th:include="updateActivity :: update"></th:block>
+		<div class="row">
+			<div class="small-12 columns">
+				<h1 class="headline" th:text="${nav_activity_text.text}"> Activity </h1>
+			</div>
+				
+			<form th:action="@{/updatedActivity}" th:object="${activity}" method="post" enctype="multipart/form-data">
+				<th:block th:include="updateActivity :: update"></th:block>
+			</form>
+		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
     </body>

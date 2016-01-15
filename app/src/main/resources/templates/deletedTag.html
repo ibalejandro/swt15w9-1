@@ -16,7 +16,7 @@
 		
 		<div class="row">
 			<div class="small-12 colums">
-				<h1 class="gooditem__title-single"> You just deleted this tag: </h1>
+				<h1 class="gooditem__title-single" th:text="${tag_deletedtag_text.text}"> You just deleted this tag: </h1>
 				<div th:include="tags_item--single :: item"></div>
 			</div>
 		</div>

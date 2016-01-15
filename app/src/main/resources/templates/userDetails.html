@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="large-12 colums">
 				<div class="userdetail">
-					<h1 class="userdetail__headline">Kundenliste</h1>
+					<h1 class="userdetail__headline" th:text="${nav_userdetails_text.text}">Kundenliste</h1>
 					
 					<div class="userdetail__content">
 					
@@ -25,7 +25,7 @@
 								<div>
 									<div class="row">
 										<div class="large-3 small-12 columns">
-											<label class="form__label" for="userNameIN">Username:</label>
+											<label class="form__label" for="userNameIN" th:text="${user_username_text.text}">Username:</label>
 										</div>
 										<div class="large-9 small-12 columns">
 											<input name="userNameIN" type="text"/>
@@ -34,24 +34,32 @@
 								</div>
 								<div class="medium-5 small-12 columns">
 									<div class="button-right">
-										<input class="button" type="submit" value="Search user" />
+										<input class="button" type="submit" value="Search user" th:value="${admin_submit_text.text}"/>
 									</div>
 								</div>
 							</form>
 						</div>
 					
 						<div class="error_field" sec:authorize="!hasRole('ROLE_ADMIN')">
-							<p class="error__msg">Keine Berechtigung!</p>
+							<p class="error__msg" th:text="${error_norights_text.text}">Keine Berechtigung!</p>
 							
 							<div class="button">
-								<a th:href="@{/login}" class="button__link">zum Login</a>
+								<a th:href="@{/}" class="button__link" th:text="${error_back_text.text}">zum Login</a>
 							</div>
 						</div>
 						
 						<table sec:authorize="hasRole('ROLE_ADMIN')">			
 							<thead>
 								<tr>
-									<th>User</th><th>Vorname</th><th>Nachname</th><th>E-Mail</th><th>Adresse</th><th>Herkunft</th><th>Sprache</th><th>Registrierungsdatum</th><th>Aktivierung</th>
+									<th th:text="${item_general_name_text.text}">User</th>
+									<th th:text="${user_firstname_text.text}">Vorname</th>
+									<th th:text="${user_lastname_text.text}">Nachname</th>
+									<th th:text="${user_email_text.text}">E-Mail</th>
+									<th th:text="${user_address_text.text}">Adresse</th>
+									<th th:text="${user_origin_text.text}">Herkunft</th>
+									<th th:text="${language_language_text.text}">Sprache</th>
+									<th th:text="${user_registrationdate_text.text}">Registrierungsdatum</th>
+									<th th:text="${user_activationstatus_text.text}">Aktivierung</th>
 								</tr>
 							</thead>
 							
@@ -66,7 +74,7 @@
 									<td th:text="${user.getPrefLanguage()}">Sprache</td>
 									<td th:text="${user.getRegistrationdate()}">rdate</td>
 									<td th:text="${user.isActivated()}">activation_state</td>
-									<td><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}">Bearbeiten</a></td>
+									<td><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}" th:text="${item_general_update_text.text}">Bearbeiten</a></td>
 									<td><a th:href="@{/modifyActivationStateByAdmin/{user}/{action}(user=${user.getUserAccount().getUsername()}, action=${user.getActivationStateOpposite()})}" th:text="${user.getActivationStateOpposite()}"></a></td>
 								</tr>
 							</tbody>

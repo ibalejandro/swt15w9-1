@@ -10,7 +10,7 @@
 	
 		<div class="row">
 			<div class="small-12 columns">
-				<h1 th:text="@{Your Languages: &nbsp; }" class="headline"> UserAccount</h1>
+				<h1 th:text="${user_yourlangs_text.text}" class="headline"> UserAccount</h1>
 			</div>
 			
 			<form th:action="@{/modifyLanguages_submit/}" method="post">				
@@ -28,7 +28,7 @@
 						</select>  
 				</div>
 				<div class="small-12 columns">
-					<label for="otherlanguages" class="form__label">2.Sprache:</label>
+					<label for="otherlanguages" class="form__label" th:text="${user_otherlang_text.text}">2.Sprache:</label>
 				</div>
 				<div class="small-12 columns less_space">
 					<select id="otherlanguages" name="otherlanguages">
@@ -45,7 +45,7 @@
 					</select>  
 				</div>
 				<div class="small-12 columns">
-					<label for="otherlanguages2" class="form__label">3.Sprache:</label>
+					<label for="otherlanguages2" class="form__label" th:text="${user_otherlang_text.text}">3.Sprache:</label>
 				</div>
 				<div class="small-12 columns less_space">
 					<select id="otherlanguages2" name="otherlanguages">
@@ -62,7 +62,7 @@
 					</select>  
 				</div>
 
-				<input type="submit" class="button" value="OK"/>
+				<input type="submit" class="button" value="OK" th:value="${admin_submit_text.text}"/>
 			</form>
 			
 		</div>

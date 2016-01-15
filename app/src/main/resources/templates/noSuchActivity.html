@@ -11,13 +11,13 @@
 				<input class="button" type="submit" value="Go to My offered activities" />
 			</div>
 		</form>	-->
-		
+		<th:block th:include="navigation :: navigation"></th:block>
 		
 		<div class="row">
 			<div class="12-small columns">
-				<h1 class="headline" th:text="'The activity you want to '+${wantedAction}+' doesn\' t exist.'"></h1>
+				<h1 class="headline" th:text="${error_nonexistact_text.text}+${wantedAction}+${error_nonexist_text.text}"></h1>
 				
-				<a th:href="@{/myOfferedActivities}">Go to My offered activities</a>
+				<a th:href="@{/}" th:text="${error_back_text.text}">Go to My offered activities</a>
 			</div>
 		</div>
 		

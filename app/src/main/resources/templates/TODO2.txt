@@ -54,5 +54,6 @@ update-Good-Admin				|	updateGoodByAdmin				|f
 update-Activity-Admin			|	updateActivityByAdmin			|f
 updated-Activity				|	updatedActivity					|f
 update-Activity					|	updateActivity					|f
-validation-success				|	validation_success				|f
+validation-success				|	validation_success				|f a
 itemNContainer--large			|									|f
+

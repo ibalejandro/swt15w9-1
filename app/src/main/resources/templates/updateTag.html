@@ -11,24 +11,24 @@
 		
 		<div class = "row">
 			<div class = "small-12 columns">
-				<div class="create">
-					<h1 class="create__title"> Tag </h1>
-					
-					<form th:action="@{/updatedTag}" th:object="${tag}" method="post">
-						<div>
-							<label class="create__label"> Name </label>
-							<input type="text" name="name" th:value="*{name}"/>
-							<label th:text="${error}" class="error center space--1rem--topbottom"></label>
-						</div>
-						
-						<input type="hidden" name="id" th:value="${tag.id}"/>
-						
-						<div>
-							<input class="button" type="submit" value="Update"/>
-						</div>
-					</form>
-				</div>
+				<h1 class="headline" th:text="${item_general_tag_text.text}"> Tag </h1>
 			</div>
+			
+			<form th:action="@{/updatedTag}" th:object="${tag}" method="post">
+				<div class="small-12 medium-8 columns">
+					<label th:text="${item_general_name_text.text}" class="form__label" for="name"> Name </label>
+					<input th:value="*{name}" type="text" name="name" id="name"/>
+					<label th:text="${error}" class="error center space-1rem-topbottom" for="name"></label>
+				</div>
+				
+				<input type="hidden" name="id" th:value="${tag.id}"/>
+				
+				<div class="small-12 medium-4 columns">
+					<input class="button" type="submit" value="Update" th:text="${admin_submit_text.text}"/>
+				</div>
+			</form>
+				
+			
 		</div>
 		<th:block th:include="imports :: script"></th:block>
     </body>

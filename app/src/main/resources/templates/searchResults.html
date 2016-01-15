@@ -16,17 +16,17 @@
 		
 		<div class="row">
 			<div class="small-12 columns">
-				<h1 class="headline" th:text="'Results found by '+${resultParameterType}+': '+${resultParameter}"></h1>
+				<h1 class="headline" th:text="${user_searchby_text.text}+${resultParameterType}+': '+${resultParameter}"></h1>
 			</div>
 			
 			<div class="small-12 medium-6 columns umrandung-nomargin">
-				<p th:href="@{/home}" class="headline black"> All Goods </p>
+				<p th:href="@{/home}" class="headline black" th:text="${item_general_allgoods_text.text}"> All Goods </p>
 				<div class="divider-1rem"></div>
 				<th:block th:include="itemNContainer--small--goods--1 :: show_items"></th:block>
 			</div>
 			
 			<div class="small-12 medium-6 columns umrandung-nomargin">
-				<p class="headline black"> All Activities </p>
+				<p class="headline black" th:text="${item_general_allacts_text.text}"> All Activities </p>
 				<div class="divider-1rem"></div>
 				<th:block th:include="itemNContainer--small--activities--1 :: show_items"></th:block>
 			</div>
