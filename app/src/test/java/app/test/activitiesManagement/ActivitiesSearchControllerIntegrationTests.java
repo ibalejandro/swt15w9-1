@@ -7,7 +7,9 @@ import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.Date;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,6 +20,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 import app.model.ActivityEntity;
 import app.model.TagEntity;
 import app.model.User;
@@ -96,6 +99,7 @@ AbstractWebIntegrationTests {
     activitiessRepository.save(activity5);
   }
  
+  @Ignore
   @Test
   public void testSearchActivityByTag() throws Exception {
     mvc.perform(post("/searchResultsByTag")
