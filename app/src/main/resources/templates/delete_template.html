@@ -14,12 +14,15 @@
 			</div>
 			
 			<form th:action="@{/delete_template_submit/}" method="post">
-				
-				<select id="module" name="module">
-					<option th:each="modu : ${mods}" th:value="${modu}" th:text="${modu}"></option>
-				</select>
+				<div class="small-12 medium-9 columns">
+					<select id="module" name="module">
+						<option th:each="modu : ${mods}" th:value="${modu}" th:text="${modu}"></option>
+					</select>
+				</div>
 				<input type="hidden" name="temp" th:value="${temp}"/>
-				<input type="submit" class="button" value="Löschen" th:value="${user_delete_text.text}"/>
+				<div class="small-12 medium-3 columns">
+					<input type="submit" class="button" value="Löschen" th:value="${user_delete_text.text}"/>
+				</div>
 			</form>
 			
 		</div>
