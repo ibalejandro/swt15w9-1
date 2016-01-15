@@ -1,0 +1,24 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von: Lennart Schmidt**
+
+**Gruppe: 9**
+
+== Was habe ich gelernt?
+* besserer Umgang mit git
+* Teamarbeits Verbesserungen
+* Wie man am besten ein Seitendesign erstellt
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* Dass die Aufgabenteilung auch besser gegangen wäre
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* Aussagekräftiges Javadoc ist grundlegend für nachhaltige Wiederverwendung
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* Die Gruppen Aufteilung ist nicht optimal. Es wäre vorallem für Personen die in den Prüfungen schlechter waren
+	hilfreich wenn zumindest eine Person in der Gruppe ist die über Kentnisse verfügt. So ist der Lerneffekt bei
+	den schlechteren höher. Die von der Leistung her gute Person würde dann wahrscheinlich als SCRUM-Master eingesetzt
+	und kann dadurch noch wichtige Softskills erlangen und Projektmanagement Erfahrungen sammeln.
+
+== Sonstiges und Anmerkungen
