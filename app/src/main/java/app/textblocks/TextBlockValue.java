@@ -66,6 +66,7 @@ public class TextBlockValue {
 	 *
 	 * @return message
 	 */
+	@Override
 	public String toString() {
 		return new StrSubstitutor(makeValueMap()).replace(textBlock.getFormatString());
 	}

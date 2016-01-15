@@ -8,44 +8,41 @@ import app.model.User;
 import lombok.NonNull;
 
 /**
- * This class is a conversion step, before it has taken place. It consists of multiple text blocks which can be
- * rendered into a form.
+ * This class is a conversion step, before it has taken place. It consists of
+ * multiple text blocks which can be rendered into a form.
  * <p>
  * Created by justusadam on 05/12/15.
  */
 public class ChatTemplate {
-    private List<TextBlock> blocks;
+	private List<TextBlock> blocks;
 
-    public ChatTemplate(@NonNull List<TextBlock> blocks) {
-        this.blocks = blocks;
-    }
+	public ChatTemplate(@NonNull List<TextBlock> blocks) {
+		this.blocks = blocks;
+	}
 
-    /**
-     * Turn all text blocks into a single combined form (without a head)
-     *
-     * @return headless html form
-     */
-    public String createForm() {
-        return blocks.stream().map(TextBlock::asForm).map(
-                (String f) ->
-                        // You may use this function to surround each of the text block bits with a wrapper,
-                        // some <div> elements for example.
-                        "<div class=\"umrandung-textblock\">" + f + "</div>"
-        ).reduce(String::concat).get();
-    }
+	/**
+	 * Turn all text blocks into a single combined form (without a head)
+	 *
+	 * @return headless html form
+	 */
+	public String createForm() {
+		return blocks.stream().map(TextBlock::asForm).map((String f) ->
+		// You may use this function to surround each of the text block bits
+		// with a wrapper,
+		// some <div> elements for example.
+		"<div class=\"umrandung-textblock\">" + f + "</div>").reduce(String::concat).get();
+	}
 
-    /**
-     * Takes in the response values of the request and constructs the {@link Chat}
-     *
-     * @param requestValues map of http response data
-     * @return new Chat
-     */
-    public Chat fromForm(@NonNull Map<String, String> requestValues, @NonNull User author) {
-        return new Chat(
-                blocks.stream().filter(
-                        t -> t.wasSelected(requestValues)
-                ).map(
-                        t -> t.fromForm(requestValues)
-                ).collect(Collectors.toList()), author);
-    }
+	/**
+	 * Takes in the response values of the request and constructs the
+	 * {@link Chat}
+	 *
+	 * @param requestValues
+	 *            map of http response data
+	 * @return new Chat
+	 */
+	public Chat fromForm(@NonNull Map<String, String> requestValues, @NonNull User author) {
+		return new Chat(blocks.stream().filter(t -> t.wasSelected(requestValues)).map(t -> t.fromForm(requestValues))
+				.collect(Collectors.toList()), author);
+	}
 }

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import app.model.User;
-import lombok.Getter;
 import lombok.NonNull;
 
 /**
@@ -27,7 +26,7 @@ public class Chat {
 	private Long id;
 
 	private Date date;
-	
+
 	@ManyToOne
 	private User author;
 
@@ -55,8 +54,7 @@ public class Chat {
 		// You may use this function to surround each text block value with a
 		// html wrapper,
 		// like some <div> elements
-		"<blockquote class = \"entrytext\">" + s + "</blockquote>"
-		).reduce(String::concat).get();
+		"<blockquote class = \"entrytext\">" + s + "</blockquote>").reduce(String::concat).get();
 	}
 
 	public List<TextBlockValue> getBlocks() {
@@ -80,7 +78,7 @@ public class Chat {
 	public Date getDate() {
 		return date;
 	}
-	
+
 	public User getAuthor() {
 		return author;
 	}

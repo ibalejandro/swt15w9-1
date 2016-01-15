@@ -12,7 +12,7 @@ public class InterfacePart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	//Maybe Persistence Problems
+	// Maybe Persistence Problems
 	private long languageId, moduleId;
 
 	private String text;
@@ -65,8 +65,8 @@ public class InterfacePart {
 	public String getText() {
 		return text;
 	}
-	
-	public void setText(String text){
-		this.text=text;
+
+	public void setText(String text) {
+		this.text = text;
 	}
 }

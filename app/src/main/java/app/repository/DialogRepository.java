@@ -31,5 +31,6 @@ public interface DialogRepository extends CrudRepository<Dialog, Long> {
 	 */
 	Iterable<Dialog> findByUserB(User user);
 
+	@Override
 	void delete(Long id);
 }
