@@ -60,13 +60,12 @@ public class Module {
 	public String getTemplateName() {
 		return templateName;
 	}
-	
-	
-	public void setThymeLeafName(String thymeLeafName){
-		this.thymeLeafName=thymeLeafName;
+
+	public void setThymeLeafName(String thymeLeafName) {
+		this.thymeLeafName = thymeLeafName;
 	}
-	
-	public void setTemplateName(String templateName){
-		this.templateName=templateName;
+
+	public void setTemplateName(String templateName) {
+		this.templateName = templateName;
 	}
 }
