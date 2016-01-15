@@ -100,13 +100,11 @@ public class modifyUserTests extends AbstractWebIntegrationTests {
 				.with(user("testUser7").roles("NORMAL"))).andExpect(view().name("redirect:/data"));
 
 		user1 = userRepository.findByUserAccount(userAccountManager.findByUsername("testUser7").get());
-		/*
-		 * mvc.perform( post("/changePassword_submit/{user}",
-		 * user1.getUserAccount().getUsername()) .param("actualPassword", "pw")
-		 * .param("newPassword1", "Test08.12") .param("newPassword2",
-		 * "Test08.12") .with(user("testUser7").roles("NORMAL"))).
-		 * andExpect(view().name("redirect:/"));
-		 */
+		 
+		mvc.perform( post("/changePassword_submit/{user}",user1.getUserAccount().getUsername()) .param("actualPassword", "pw")
+				.param("newPassword1", "Test08.12") .param("newPassword2","Test08.12") .with(user("testUser7").roles("NORMAL")))
+				.andExpect(view().name("redirect:/changePassword/{user}"));
+		 
 		mvc.perform(post("/changePassword_submit/{user}", user1.getUserAccount().getUsername())
 				.param("actualPassword", "Test08.12").param("newPassword1", "Test0812")
 				.param("newPassword2", "Test0812").with(user("testUser7").roles("NORMAL")))

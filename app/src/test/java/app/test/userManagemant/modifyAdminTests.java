@@ -43,7 +43,6 @@ public class modifyAdminTests extends AbstractWebIntegrationTests {
 	@Autowired
 	AuthenticationManager authenticationManager;
 
-	@Ignore
 	@Test
 	public void modifyAllTest() throws Exception {
 		User user1 = userRepository.findByUserAccount(userAccountManager.findByUsername("testUser1").get());
