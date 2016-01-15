@@ -280,13 +280,33 @@ public class ActivityEntity implements Serializable {
 
 		if (this.startDate.getDate() == this.endDate.getDate() && this.startDate.getYear() == this.endDate.getYear()
 				&& this.startDate.getMonth() == this.endDate.getMonth()) {
-			return startDate.getDate() + "." + (this.startDate.getMonth() + 1) + "."
-					+ (this.startDate.getYear() + 1900);
+			
+			String ret1 = "" + startDate.getDate(),
+					ret2 = "" + (this.startDate.getMonth() + 1),
+					ret3 = ""+(this.startDate.getYear() + 1900);
+			if(ret1.length() <= 1)
+				ret1 = "0"+ret1;
+			if(ret2.length() <= 1)
+				ret2 = "0"+ret2;
+			return ret1+"."+ret2+"."+ret3;
 		}
-
-		return startDate.getDate() + "." + (this.startDate.getMonth() + 1) + "." + (this.startDate.getYear() + 1900)
-				+ " - " + endDate.getDate() + "." + (this.endDate.getMonth() + 1) + "."
-				+ (this.endDate.getYear() + 1900);
+		String ret1 = "" + this.startDate.getDate(),
+				ret2 = "" + (this.startDate.getMonth() + 1),
+				ret3 = ""+(this.startDate.getYear() + 1900),
+				ret4 = "" + this.endDate.getDate(),
+				ret5 = "" + (this.endDate.getMonth() + 1),
+				ret6 = ""+(this.endDate.getYear() + 1900);
+		
+		if(ret1.length() <= 1)
+			ret1 = "0"+ret1;
+		if(ret2.length() <= 1)
+			ret2 = "0"+ret2;
+		
+		if(ret4.length() <= 1)
+			ret4 = "0"+ret4;
+		if(ret5.length() <= 1)
+			ret5 = "0"+ret5;
+		return ret1+"."+ret2+"."+ret3+" - "+ret4+"."+ret5+"."+ret6;
 	}
 
 	/**
