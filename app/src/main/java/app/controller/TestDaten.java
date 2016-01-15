@@ -244,8 +244,6 @@ public class TestDaten implements DataInitializer {
 		user2.addDialog(savedDialog);
 		*/
 		
-		ArrayList<TagEntity> tags = createTags();
-		for (TagEntity tag: tags) tagsRepository.save(tag);
 		
 		List<Module> mods = createModule();
 		for(Module mod : mods){
