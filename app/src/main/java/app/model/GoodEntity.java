@@ -84,29 +84,27 @@ public class GoodEntity implements Serializable {
 	 *            The user who is offering the good
 	 */
 
-	 
-	 public GoodEntity(String name, String description, TagEntity tag, 
-	                   Part pic, User user) {
-    this.name = name;
-    this.description = description;
-    this.tag = tag;
-    
-    this.picture = createPicture(pic);
-		
-	this.user = user;
-  }
+	public GoodEntity(String name, String description, TagEntity tag, Part pic, User user) {
+		this.name = name;
+		this.description = description;
+		this.tag = tag;
+
+		this.picture = createPicture(pic);
+
+		this.user = user;
+	}
 
 	public static byte[] createPicture(Part picture) {
 		/* Ferdinand's code */
 		try {
 			InputStream is;
-			if(picture==null || picture.getSize() == 0L){
+			if (picture == null || picture.getSize() == 0L) {
 				System.out.println("Kein Bild");
 				is = ClassLoader.getSystemResourceAsStream("static/resources/AltBild.png");
 			} else {
 				is = picture.getInputStream();
 			}
-			
+
 			BufferedImage img = ImageIO.read(is);
 
 			double scaling;
@@ -154,10 +152,10 @@ public class GoodEntity implements Serializable {
 	public static int getIterableSize(Iterable<?> it) {
 		if (it instanceof Collection) {
 			return ((Collection<?>) it).size();
-		}
-		else {
+		} else {
 			int i = 0;
-			for (@SuppressWarnings("unused") Object obj : it) {
+			for (@SuppressWarnings("unused")
+			Object obj : it) {
 				i++;
 			}
 			return i;
@@ -165,25 +163,28 @@ public class GoodEntity implements Serializable {
 	}
 
 	/**
-   * This method returns the type 'good' and its respective id for a given item.
-   * @return String The information of an item in the format good{id}
-   */
+	 * This method returns the type 'good' and its respective id for a given
+	 * item.
+	 * 
+	 * @return String The information of an item in the format good{id}
+	 */
 	public String getItemTypeAndId() {
 		return "good" + id;
 	}
-	
+
 	/**
-   * This method returns the id for a given construct good{id}.
-   * @return String The good's id for the given construct good{id}
-   */
-  public static String getIdFromConstruct(String construct) {
-    return construct.substring(4);
-  }
-	
-	public String getItemLink(){
-		return "good/"+id;
+	 * This method returns the id for a given construct good{id}.
+	 * 
+	 * @return String The good's id for the given construct good{id}
+	 */
+	public static String getIdFromConstruct(String construct) {
+		return construct.substring(4);
 	}
-	
+
+	public String getItemLink() {
+		return "good/" + id;
+	}
+
 	public String getItemPictureLink() {
 		return id + "/image";
 	}

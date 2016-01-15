@@ -54,17 +54,12 @@ public final class FormatTag {
 	 * @return html input tag
 	 */
 	public String asInput(String identifier) {
-        String myIdentifier = asIdentifier(identifier);
-        Tuple<String, String> delims = value.inputDelims();
+		String myIdentifier = asIdentifier(identifier);
+		Tuple<String, String> delims = value.inputDelims();
 
-        return delims.get1() + "name=\"" +
-                myIdentifier +
-                "\" " +
-                "class=\"" +
-                value.getInputClasses().stream().reduce(String::concat).orElse("") +
-                "\" " +
-                delims.get2();
-    }
+		return delims.get1() + "name=\"" + myIdentifier + "\" " + "class=\""
+				+ value.getInputClasses().stream().reduce(String::concat).orElse("") + "\" " + delims.get2();
+	}
 
 	/**
 	 * Create an identifier for this tag using a base identifier from a
