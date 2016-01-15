@@ -1,11 +1,10 @@
 package app.test.activitiesManagement;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import java.util.Date;
-
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +14,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.Model;
 import app.controller.GoodsOfferController;
 import app.model.ActivityEntity;
 import app.model.TagEntity;
@@ -27,6 +28,7 @@ public class ActivitiesOfferControllerIntegrationTests extends
 AbstractWebIntegrationTests {
 
   private ActivityEntity activity1, activity2;
+  private User user;
   private static int iterableSize = 2;
   private static int activitiesInTestDaten = 0;
   private static int userOfferedActivitiesInTestDaten = 0;
@@ -47,7 +49,7 @@ AbstractWebIntegrationTests {
   }
   
   @Before
-  public void createGoodEntities() {
+  public void createActivityEntities() {
     String name1 = "Trip to Leipzig";
     String description1 = "This is a wonderful opportunity to visit Leipzig"
                           + " for free!.";
@@ -58,8 +60,8 @@ AbstractWebIntegrationTests {
     
     Date date = new Date();
     
-    User user = userRepository.findByUserAccount(userAccountManager
-                                                 .findByUsername("Lisa").get());
+    user = userRepository.findByUserAccount(userAccountManager
+                                            .findByUsername("Lisa").get());
     
     login(user.getUserAccount().getUsername(), "pw");
     
@@ -70,7 +72,7 @@ AbstractWebIntegrationTests {
   }
   
   @Test
-  public void testSaveGood() throws Exception {
+  public void testSaveActivity() throws Exception {
     mvc.perform(post("/offeredActivity").param("name", activity1.getName())
                 .param("description", activity1.getDescription())
                 .param("tagId", String.valueOf(activity1.getTag().getId()))
@@ -90,7 +92,20 @@ AbstractWebIntegrationTests {
     /*.andExpect
     (model().attribute("result",
                        Matchers.hasProperty("tag", Matchers.equalTo
-                                            (good1.getTag()))))*/
+                                            (activity1.getTag()))))*/
+    
+    .andExpect
+    (model().attribute("result", Matchers.hasProperty
+                       ("startDate", Matchers.equalTo
+                        (ActivityEntity.getZeroTimeDate
+                         (activity1.getStartDate())))))
+    
+    .andExpect
+    (model().attribute("result", Matchers.hasProperty
+                       ("startDate", Matchers.equalTo
+                        (ActivityEntity.getZeroTimeDate
+                         (activity1.getStartDate())))))
+    
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("user", Matchers.equalTo
@@ -116,14 +131,33 @@ AbstractWebIntegrationTests {
     /*.andExpect
     (model().attribute("result",
                        Matchers.hasProperty("tag", Matchers.equalTo
-                                            (good2.getTag()))))*/
+                                            (activity2.getTag()))))*/
+    .andExpect
+    (model().attribute("result", Matchers.hasProperty
+                       ("startDate", Matchers.equalTo
+                        (ActivityEntity.getZeroTimeDate
+                         (activity2.getStartDate())))))
+    
+    .andExpect
+    (model().attribute("result", Matchers.hasProperty
+                       ("endDate", Matchers.equalTo
+                        (ActivityEntity.getZeroTimeDate
+                         (activity2.getEndDate())))))
+    
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("user", Matchers.equalTo
                                             (activity2.getUser()))));
+    
+    mvc.perform(get("/myOfferedActivities"))
+    .andExpect(status().isOk())
+    .andExpect(model().attribute("resultActivities", is(not(emptyIterable()))))
+    .andExpect
+    (model().attribute
+     ("resultActivities", 
+      is(iterableWithSize(iterableSize - userOfferedActivitiesInTestDaten))));
   }
   
-  /*
   @Test
   @SuppressWarnings("unchecked")
   public void testListAllActivities() {
@@ -135,19 +169,9 @@ AbstractWebIntegrationTests {
 
     Iterable<Object> object = (Iterable<Object>) 
                               model.asMap().get("resultActivities");
-    assertThat(object, is(iterableWithSize(iterableSize + activitiesInTestDaten)));
+    assertThat(object, 
+               is(iterableWithSize(iterableSize + activitiesInTestDaten)));
   }
-  
-  @Test
-  public void testUserOfferedActivities() {
-    User user = userRepository.findByUserAccount
-                (userAccountManager.findByUsername("Lisa").get());
-    int userOfferedActivities = ActivityEntity.getIterableSize(activitiesRepository.findByUser(user));
-    System.out.println("Activities: " + userOfferedActivities);
-    assertThat(userOfferedActivities, 
-               is(iterableSize + userOfferedActivitiesInTestDaten));
-  }
-  */
   
   public String getRequiredStringFromDate(Date date) {
     return ActivityEntity.getStringFromDateForInput

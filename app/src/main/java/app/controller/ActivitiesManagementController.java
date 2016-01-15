@@ -82,6 +82,7 @@ public class ActivitiesManagementController {
 		
 		//model.addAttribute("resultGoods", loggedUser.getActivities());
 		model.addAttribute("resultActivities", activitiesRepository.findByUser(loggedUser));
+		
 		return "myOfferedActivities";
 	}
 

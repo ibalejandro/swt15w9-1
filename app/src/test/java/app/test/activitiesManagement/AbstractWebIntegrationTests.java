@@ -14,7 +14,7 @@ import app.Application;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class AbstractWebIntegrationTests {
+public abstract class AbstractWebIntegrationTests {
   
   @Autowired WebApplicationContext context;
 
