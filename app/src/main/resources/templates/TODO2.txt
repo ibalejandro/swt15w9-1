@@ -34,7 +34,6 @@ myOffered-Goods					|	myOfferedGoods					|f
 myOffered-Activities			|	myOfferedActivities				|f
 offer-Good						|	offer							|f
 offered-Good					|	offeredGood						|f
-offered-GoodsAndActivities		|	offeredGoodsAndActivities		|
 offer-Activity					|	offerActivity					|f
 offered-Activity				|	offeredActivity					|f
 textBlock-List					|	textBlockList					|f

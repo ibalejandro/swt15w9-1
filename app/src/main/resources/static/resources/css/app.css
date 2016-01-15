@@ -14,11 +14,6 @@
 *	Um Formulare in der Navigation korrekt	*
 *	anzuzeigen								*
 ********************************************/
-.has-form {
-	top: 0;
-	left: 6rem;
-	min-width: 14rem; 
-}
 @media only screen and (max-width: 40em){
 	.has-form {
 		min-width: 10rem;
@@ -27,6 +22,30 @@
 	.has-form .button {
 		height: 1.85rem; 
 	} 
+}
+@media only screen and (min-width: 40.06em){
+	.has-form {
+		top: 0;
+		left: 6rem;
+		min-width: 14rem; 
+		max-width: 20rem;
+	}
+}
+@media only screen and (min-width: 43em){
+	.has-form {
+		top: 0;
+		left: 6rem;
+		min-width: 14rem; 
+		max-width: 23rem;
+	}
+}
+@media only screen and (min-width: 45.63em){
+	.has-form {
+		top: 0;
+		left: 6rem;
+		min-width: 14rem; 
+		max-width: 30rem;
+	}
 }
 
 /********************************************

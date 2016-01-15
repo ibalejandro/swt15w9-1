@@ -15,7 +15,7 @@
 			<li sec:authorize="isAuthenticated()" class="has-form">
 				<form th:action="@{/searchResultsByTag}" method="post">
 					<div class="row collapse">
-						<div class="large-4 small-12 columns">
+						<div class="large-4 medium-4 small-12 columns end">
 							<select name="tagId">
 								<option value="-1">All</option>
 								
@@ -26,25 +26,27 @@
 							</select>
 						</div>
 						
-						<div class="large-4 small-12 columns">
-							<select name="distance">
-								<option value="-1">km</option>
-								<option value="5">5km</option>
-								<option value="10">10km</option>
-								<option value="20">20km</option>
-								<option value="30">30km</option>
-								<option value="50">50km</option>
-								<option value="100">100km</option>
-							</select>
-						</div>
-						<tr th:each="message : ${messages}">
-							<td th:text="${message.id}">1</td>
-							<td><a href="#" th:text="${message.name}">Title ...</a></td>
-						</tr>
+							<div class="large-4 medium-4 small-12 columns end">
+								<select name="distance">
+									<option value="-1">km</option>
+									<option value="5">5km</option>
+									<option value="10">10km</option>
+									<option value="20">20km</option>
+									<option value="30">30km</option>
+									<option value="50">50km</option>
+									<option value="100">100km</option>
+								</select>
+							</div>
+							
+							<tr th:each="message : ${messages}">
+								<td th:text="${message.id}">1</td>
+								<td><a href="#" th:text="${message.name}">Title ...</a></td>
+							</tr>
+							
+							<div class="large-4 medium-4 small-12 columns">
+								<input class="alert button expand" type="submit" value="Search"/>
+							</div>
 						
-						<div class="large-4 small-12 columns">
-							<input class="alert button expand" type="submit" value="Search"/>
-						</div>
 					</div>
 					
 				</form>
