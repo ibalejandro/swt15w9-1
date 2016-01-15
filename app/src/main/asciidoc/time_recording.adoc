@@ -22,5 +22,5 @@ Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen
 |11.01 |15.01 |12h        |           |           	|15h        |           |20h 35min  |
 |18.01 |22.01 |           |           |           	|           |           |           |
 |      |SUMME |191h       |	          |	        		|172h	      |	    	    |184h 35min |
-|      |MWert |15,916h    |	          |			        |14,33h	    |	    	    |15,375h    |
+|      |MWert |15h 54min  |	          |			        |14,33h	    |	    	    |15,375h    |
 |===
