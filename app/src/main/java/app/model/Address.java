@@ -217,30 +217,31 @@ public class Address implements Serializable { // <> Flüchtlingsunterkunft
 		}
 		return (street + " " + housenr + ", " + zipCode + " " + city);
 	}
-
-	@Override
-	public String toString() {
-		String str = "";
-		if (!street.isEmpty()) {
-			str += street;
-
-			if (!housenr.isEmpty()) {
-				str = str + " " + housenr;
+	
+	public String toString(){
+		String str="";
+			if(!street.isEmpty()){
+				str+=street;
+					
+				if(!housenr.isEmpty()){
+					str=str+" "+housenr;
+				}
+			}	
+			else{
+				if(!cityPart.isEmpty()){
+					str+=cityPart;
+				}
 			}
-		} else {
-			if (!cityPart.isEmpty()) {
-				str += cityPart;
+			if(!str.isEmpty()){
+				str+=", ";
 			}
+			if(!zipCode.isEmpty()){
+				str=str+zipCode+" ";
+			}
+			str+=city;
+			str=str+", "+"Germany";
+			return str;
 		}
-		if (!str.isEmpty()) {
-			str += ", ";
-		}
-		if (!zipCode.isEmpty()) {
-			str = str + zipCode + " ";
-		}
-		str += city;
-		str = str + ", " + "Germany";
-		return str;
-	}
+	
 
 }

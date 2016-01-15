@@ -8,8 +8,7 @@ import app.textblocks.FormatTag;
 import app.textblocks.TextFormatTagValue;
 
 /**
- * The FormatStringTagFilter parses a formatString and retrieves all
- * {@link FormatTag}s as a list.
+ * The FormatStringTagFilter parses a formatString and retrieves all {@link FormatTag}s as a list. 
  *
  * @author Mario Henze
  */
@@ -35,7 +34,7 @@ public class FormatStringTagFilter {
 		String delim = "[ ]";
 		String[] tokens = formatString.split(delim);
 		List<String> tl = Arrays.asList(tokens);
-
+		
 		for (String st : tl) {
 			if (st.startsWith("$")) {
 				String s;

@@ -59,7 +59,7 @@ public class Dialog implements Serializable {
 		if (userA.getId() == userB.getId()) {
 			throw new IllegalArgumentException("userA is the same as userB");
 		}
-
+		
 		this.title = title;
 		this.userA = userA;
 		this.userB = userB;

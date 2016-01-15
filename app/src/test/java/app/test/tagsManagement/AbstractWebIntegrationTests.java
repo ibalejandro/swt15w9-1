@@ -15,17 +15,18 @@ import app.Application;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 public abstract class AbstractWebIntegrationTests {
+  
+  @Autowired WebApplicationContext context;
 
-	@Autowired
-	WebApplicationContext context;
+  protected MockMvc mvc;
 
-	protected MockMvc mvc;
+  @Before
+  public void setUp() {
 
-	@Before
-	public void setUp() {
+    context.getServletContext()
+    .setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE,
+                  context);
 
-		context.getServletContext().setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, context);
-
-		mvc = MockMvcBuilders.webAppContextSetup(context).build();
-	}
+    mvc = MockMvcBuilders.webAppContextSetup(context).build();
+  }
 }

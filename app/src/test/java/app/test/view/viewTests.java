@@ -43,28 +43,39 @@ public class viewTests extends AbstractWebIntegrationTests {
 
 	@Test
 	public void viewTestAdmin() throws Exception {
-		User user1 = userRepository.findByUserAccount(userAccountManager.findByUsername("testUser1").get());
-		Authentication authentication = new UsernamePasswordAuthenticationToken("admin", "123");
-		SecurityContextHolder.getContext().setAuthentication(authenticationManager.authenticate(authentication));
+		User user1 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser1").get());
+		Authentication authentication = new UsernamePasswordAuthenticationToken(
+				"admin", "123");
+		SecurityContextHolder.getContext().setAuthentication(
+				authenticationManager.authenticate(authentication));
 
 		mvc.perform(get("/userDetails").with(user("admin").roles("ADMIN"))).//
 				andExpect(status().isOk()).//
 				andExpect(view().name("userDetails")).//
 				andExpect(model().attributeExists("userDetails"));
 
-		mvc.perform(post("/searchUser").param("userNameIN", "tester").with(user("admin").roles("ADMIN")))
-				.andExpect(view().name("redirect:/userDetails"));
+		mvc.perform(
+				post("/searchUser").param("userNameIN", "tester").with(
+						user("admin").roles("ADMIN"))).andExpect(
+				view().name("redirect:/userDetails"));
 
-		User user4 = userRepository.findByUserAccount(userAccountManager.findByUsername("Peter").get());
+		User user4 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("Peter").get());
 		user4.setAddresstyp(AddresstypEnum.Refugees_home);
 		userRepository.save(user4);
-		mvc.perform(post("/searchUser").param("userNameIN", "Peter").with(user("admin").roles("ADMIN")))
-				.andExpect(view().name("data_refugee"));
+		mvc.perform(
+				post("/searchUser").param("userNameIN", "Peter").with(
+						user("admin").roles("ADMIN"))).andExpect(
+				view().name("data_refugee"));
 
-		user4 = userRepository.findByUserAccount(userAccountManager.findByUsername("Peter").get());
+		user4 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("Peter").get());
 		user4.setAddresstyp(AddresstypEnum.Wohnung);
 		userRepository.save(user4);
-		mvc.perform(post("/searchUser").param("userNameIN", "Peter").with(user("admin").roles("ADMIN")))
-				.andExpect(view().name("data"));
+		mvc.perform(
+				post("/searchUser").param("userNameIN", "Peter").with(
+						user("admin").roles("ADMIN"))).andExpect(
+				view().name("data"));
 	}
 }

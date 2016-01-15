@@ -42,7 +42,6 @@ public class TextBlock {
 	private List<FormatTag> tags;
 
 	public TextBlock() {
-		// Empty default constructor for JPA.
 	}
 
 	public TextBlock(@NonNull String formatString, @NonNull List<FormatTag> tags) {

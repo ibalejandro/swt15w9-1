@@ -118,6 +118,7 @@ public class GoodsOfferControllerIntegrationTests extends AbstractWebIntegration
 		User user = userRepository.findByUserAccount(userAccountManager.findByUsername("Lisa").get());
 		int userOfferedGoods = GoodEntity.getIterableSize(user.getGoods());
 		assertThat(userOfferedGoods, is(iterableSize + userOfferedGoodsInTestDaten));
+		;
 	}
 
 }

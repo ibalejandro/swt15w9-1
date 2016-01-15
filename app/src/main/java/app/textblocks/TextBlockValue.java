@@ -41,7 +41,7 @@ public class TextBlockValue {
 	private List<FormatTagValue> values;
 
 	public TextBlockValue() {
-		// Empty default constructor for JPA
+
 	}
 
 	public TextBlockValue(@NonNull TextBlock textBlock, @NonNull List<FormatTagValue> values) {
@@ -66,7 +66,6 @@ public class TextBlockValue {
 	 *
 	 * @return message
 	 */
-	@Override
 	public String toString() {
 		return new StrSubstitutor(makeValueMap()).replace(textBlock.getFormatString());
 	}

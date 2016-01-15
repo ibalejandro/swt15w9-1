@@ -26,6 +26,6 @@ public interface ModuleRepository extends CrudRepository<Module, Long> {
 	 * @return
 	 */
 	Module findByTemplateNameAndThymeLeafName(String templateName, String thymeLeafName);
-
+	
 	Module findById(long id);
 }

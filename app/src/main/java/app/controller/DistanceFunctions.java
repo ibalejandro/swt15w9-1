@@ -37,8 +37,10 @@ public class DistanceFunctions {
 	private final ActivitiesRepository activitiesRepository;
 
 	@Autowired
-	public DistanceFunctions(UserRepository userRepository, UserAccountManager userAccountManager,
-			LanguageRepository languageRepository, TagsRepository tagsRepository, GoodsRepository goodsRepository,
+	public DistanceFunctions(UserRepository userRepository,
+			UserAccountManager userAccountManager,
+			LanguageRepository languageRepository,
+			TagsRepository tagsRepository, GoodsRepository goodsRepository,
 			ActivitiesRepository activitiesRepository) {
 		this.userRepository = userRepository;
 		this.userAccountManager = userAccountManager;
@@ -61,10 +63,13 @@ public class DistanceFunctions {
 		int radius = 6370;
 
 		double lat = Math.toRadians(user2.getLatitude() - user1.getLatitude());
-		double lon = Math.toRadians(user2.getLongitude() - user1.getLongitude());
+		double lon = Math
+				.toRadians(user2.getLongitude() - user1.getLongitude());
 
-		double a = Math.sin(lat / 2) * Math.sin(lat / 2) + Math.cos(Math.toRadians(user1.getLatitude()))
-				* Math.cos(Math.toRadians(user2.getLatitude())) * Math.sin(lon / 2) * Math.sin(lon / 2);
+		double a = Math.sin(lat / 2) * Math.sin(lat / 2)
+				+ Math.cos(Math.toRadians(user1.getLatitude()))
+				* Math.cos(Math.toRadians(user2.getLatitude()))
+				* Math.sin(lon / 2) * Math.sin(lon / 2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		double d = radius * c;
 
@@ -74,8 +79,7 @@ public class DistanceFunctions {
 	/**
 	 * This method finds and returns all user in the given distance.
 	 * 
-	 * @param int
-	 *            Distance in km
+	 * @param int Distance in km
 	 * @param user
 	 *            The searching user
 	 * @return Set<User> The Users found
@@ -83,7 +87,8 @@ public class DistanceFunctions {
 	public Set<User> getUserByDistance(int distance, User searchingUser) {
 		Set<User> userByDistance = new HashSet<>();
 		for (User user : userRepository.findAll()) {
-			if ((distanceInKm(searchingUser, user) <= distance) && !(user.getId() == searchingUser.getId())) {
+			if ((distanceInKm(searchingUser, user) <= distance)
+					&& !(user.getId() == searchingUser.getId())) {
 				userByDistance.add(user);
 			}
 		}
@@ -121,7 +126,8 @@ public class DistanceFunctions {
 	 *            The Tag
 	 * @return Iterable<GoodEntity> The goods found
 	 */
-	public Iterable<GoodEntity> collectGoodsByDistance(TagEntity tag, Set<User> userByDistance) {
+	public Iterable<GoodEntity> collectGoodsByDistance(TagEntity tag,
+			Set<User> userByDistance) {
 		Set<GoodEntity> goodsByDistance = new HashSet<>();
 		for (User user : userByDistance) {
 			for (GoodEntity good : goodsRepository.findByTagAndUser(tag, user)) {
@@ -139,7 +145,8 @@ public class DistanceFunctions {
 	 * 
 	 * @return Iterable<ActivityEntity> The activities found
 	 */
-	public Iterable<ActivityEntity> collectActivitiesByDistance(Set<User> userByDistance) {
+	public Iterable<ActivityEntity> collectActivitiesByDistance(
+			Set<User> userByDistance) {
 		Set<ActivityEntity> activitiesByDistance = new HashSet<>();
 		for (User user : userByDistance) {
 			for (ActivityEntity activity : user.getActivities()) {
@@ -160,10 +167,12 @@ public class DistanceFunctions {
 	 *
 	 * @return Iterable<ActivityEntity> The activities found
 	 */
-	public Iterable<ActivityEntity> collectActivitiesByDistance(TagEntity tag, Set<User> userByDistance) {
+	public Iterable<ActivityEntity> collectActivitiesByDistance(TagEntity tag,
+			Set<User> userByDistance) {
 		Set<ActivityEntity> activitiesByDistance = new HashSet<>();
 		for (User user : userByDistance) {
-			for (ActivityEntity activity : activitiesRepository.findByTagAndUser(tag, user)) {
+			for (ActivityEntity activity : activitiesRepository
+					.findByTagAndUser(tag, user)) {
 				activitiesByDistance.add(activity);
 			}
 		}
