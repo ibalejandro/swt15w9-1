@@ -7,6 +7,11 @@ import java.util.List;
 import app.textblocks.FormatTag;
 import app.textblocks.TextFormatTagValue;
 
+/**
+ * The FormatStringTagFilter parses a formatString and retrieves all {@link FormatTag}s as a list. 
+ *
+ * @author Mario Henze
+ */
 public class FormatStringTagFilter {
 	private final String formatString;
 
@@ -17,6 +22,11 @@ public class FormatStringTagFilter {
 		this.formatString = formatString;
 	}
 
+	/**
+	 * Returns all found {@link FormatTag}s in the supplied formatString.
+	 * 
+	 * @return list of all {@link FormatTag}s
+	 */
 	public List<FormatTag> getTags() {
 		List<FormatTag> l = new LinkedList<>();
 

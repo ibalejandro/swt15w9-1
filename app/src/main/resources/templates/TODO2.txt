@@ -5,10 +5,10 @@ activationmail-local			|	activationmail_local			|f
 addnew-Tag			?			|	addNewTag						|f
 addednew-Tag		?			|	addedNewTag						|f
 changePassword					|	changePassword					|f
-data							|	data							|ansich
-data-refugee					|	data_refugee					|ansich
-dialog							|	dialog							|h
-dialog-list						|	dialogList						|h
+data							|	data							|f
+data-refugee					|	data_refugee					|f
+dialog							|	dialog							|f
+dialog-list						|	dialogList						|f
 dialog-start					|	startDialog						|f
 deleted-Tag						|	deletedTag						|f
 deleted-Good					|	deletedGood						|f
@@ -34,10 +34,8 @@ myOffered-Goods					|	myOfferedGoods					|f
 myOffered-Activities			|	myOfferedActivities				|f
 offer-Good						|	offer							|f
 offered-Good					|	offeredGood						|f
-offered-GoodsAndActivities		|	offeredGoodsAndActivities		|
 offer-Activity					|	offerActivity					|f
 offered-Activity				|	offeredActivity					|f
-reCAPTCHA						|	reCAPTCHA						|
 textBlock-List					|	textBlockList					|f
 textBlock-new					|	newTextBlock					|f
 search							|	search							|f

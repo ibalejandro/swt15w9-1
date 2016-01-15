@@ -34,7 +34,7 @@
 								</div>
 								<div class="medium-5 small-12 columns">
 									<div class="button-right">
-										<input class="button" type="submit" value="Search user" th:text="${admin_submit_text.text}"/>
+										<input class="button" type="submit" value="Search user" th:value="${admin_submit_text.text}"/>
 									</div>
 								</div>
 							</form>
@@ -51,7 +51,15 @@
 						<table sec:authorize="hasRole('ROLE_ADMIN')">			
 							<thead>
 								<tr>
-									<th th:text="${item_general_name_text.text}">User</th><thth:text="${user_firstname_text.text}">Vorname</th><thth:text="${user_lastname_text.text}">Nachname</th><th th:text="${user_email_text.text}">E-Mail</th><th th:text="${user_address_text.text}">Adresse</th><th th:text="${user_origin_text.text}">Herkunft</th><th th:text="${language_language_text.text}">Sprache</th><th th:text="${user_registrationdate_text.text}">Registrierungsdatum</th><th th:text="${activationstatus_text.text}">Aktivierung</th>
+									<th th:text="${item_general_name_text.text}">User</th>
+									<th th:text="${user_firstname_text.text}">Vorname</th>
+									<th th:text="${user_lastname_text.text}">Nachname</th>
+									<th th:text="${user_email_text.text}">E-Mail</th>
+									<th th:text="${user_address_text.text}">Adresse</th>
+									<th th:text="${user_origin_text.text}">Herkunft</th>
+									<th th:text="${language_language_text.text}">Sprache</th>
+									<th th:text="${user_registrationdate_text.text}">Registrierungsdatum</th>
+									<th th:text="${user_activationstatus_text.text}">Aktivierung</th>
 								</tr>
 							</thead>
 							

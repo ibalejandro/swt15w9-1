@@ -20,17 +20,17 @@
 			
 			<form th:action="@{/startDialog}" method="post">
 				<div class="small-12 medium-6 columns">
-					<label class="form__label" for="title">Title:</label>
+					<label class="form__label" for="title" th:text="${dialog_title_text.text}">Title:</label>
 					<input type="text" name="title"/>
 				</div>
 				
 				<div class="small-12 medium-6 columns">
-					<label class="form__label" for="participant">Participant:</label>
+					<label class="form__label" for="participant" th:text="${dialog_partner_text.text}">Participant:</label>
 					<input type="text" name="participant"/>
 				</div>
 				
 				<div class="small-12 columns">
-					<input class="button" type="submit" value="Begin"/>
+					<input class="button" type="submit" value="Begin" th:value="${admin_submit_text.text}"/>
 				</div>
 			</form>
 		</div>

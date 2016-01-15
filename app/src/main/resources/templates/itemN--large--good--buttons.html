@@ -15,44 +15,62 @@
 		<th:block th:fragment="item">
 			<div class="row">
 				<div class="umrandung-less">
-					<div class="large-3 medium-6 small-12 columns">
+					<div class="medium-6 small-12 columns">
 						<h1 th:text="${result.name}" class="headline"></h1>
 					</div>
 					
 					<th:block th:fragment="buttons">
+						
+						<th:block th:if="${loggedIn.equals(result.getUser().getUserAccount())}">
+							<div sec:authorize="hasRole('ROLE_NORMAL')" class="medium-3 small-6 columns">
+								<form action="/deletedGood" method="post">
+									<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
+									<div class="button-right hide-for-small-only">
+										<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/>
+									</div>
+									<div class="button-left show-for-small-only">
+										<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/>
+									</div>
+								</form>
+							</div>
+						</th:block>
+						
+						<th:block th:if="${loggedIn.equals(result.getUser().getUserAccount())}">
+							<div sec:authorize="hasRole('ROLE_NORMAL')" class="medium-3 small-6 columns">
+								<form action="/update" method="post">
+									<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
+									<div class="button-right">
+										<input class="button" type="submit" value="Update" th:value="${item_general_update_text.text}"/>
+									</div>
+								</form>
+							</div>
+						</th:block>
 
-						<div sec:authorize="hasRole('ROLE_NORMAL')" class="large-3 medium-6 small-12 columns">
-							<form action="/deletedGood" method="post">
+						<th:block th:if="!${loggedIn.equals(result.getUser().getUserAccount())}">
+							<div sec:authorize="hasRole('ROLE_NORMAL')" class="medium-6 small-7 small-centered medium-uncentered columns">
+								<form action="/dialogByOffer" method="post">
+									<input type="hidden" name="id" th:value="${result.getItemTypeAndId()}"/>
+									<div class="button-right hide-for-small-only">
+										<input class="button" type="submit" value="Ask for this good" th:value="${item_general_goodbutton_text.text}"/>
+									</div>
+									<div class="show-for-small-only">
+										<input class="button" type="submit" value="Ask for this good" th:value="${item_general_goodbutton_text.text}"/>
+									</div>
+								</form>
+							</div>
+						</th:block>
+						
+						<div sec:authorize="hasRole('ROLE_ADMIN')" class="large-3 medium-3 small-12 columns">
+							<form action="/deletedGoodByAdmin" method="post">
 								<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
 								<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/>
 							</form>
 						</div>
 
-						<div sec:authorize="hasRole('ROLE_NORMAL')" class="large-3 medium-6 small-12 columns">
-							<form action="/update" method="post">
+						<div sec:authorize="hasRole('ROLE_ADMIN')" class="large-3 medium-3 small-12 columns">
+							<form action="/updateGoodByAdmin" method="post">
 								<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
 								<input class="button" type="submit" value="Update" th:value="${item_general_update_text.text}"/>
-							</form>
-						</div>
-
-						<div sec:authorize="hasRole('ROLE_NORMAL')" class="large-3 medium-6 small-12 columns">
-							<form action="/dialogByOffer" method="post">
-								<input type="hidden" name="id" th:value="${result.getItemTypeAndId()}"/>
-								<input class="button" type="submit" value="Ask for this good" th:value="${item_general_goodbutton_text.text}"/>
-							</form>
-						</div>
-
-						<div sec:authorize="hasRole('ROLE_ADMIN')" class="large-3 medium-6 small-12 columns">
-							<form action="/deletedGoodByAdmin" method="post"> <!--/* zuändern */-->
-								<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
-								<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/> <!--/* zuändern */-->
-							</form>
-						</div>
-
-						<div sec:authorize="hasRole('ROLE_ADMIN')" class="large-3 medium-6 small-12 columns">
-							<form action="/updateGoodByAdmin" method="post"> <!--/* zuändern */-->
-								<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
-								<input class="button" type="submit" value="Update" th:value="${item_general_update_text.text}"/> <!--/* zuändern */-->
 							</form>
 						</div>
 						

@@ -14,11 +14,6 @@
 *	Um Formulare in der Navigation korrekt	*
 *	anzuzeigen								*
 ********************************************/
-.has-form {
-	top: 0;
-	left: 6rem;
-	min-width: 14rem; 
-}
 @media only screen and (max-width: 40em){
 	.has-form {
 		min-width: 10rem;
@@ -27,6 +22,30 @@
 	.has-form .button {
 		height: 1.85rem; 
 	} 
+}
+@media only screen and (min-width: 40.06em){
+	.has-form {
+		top: 0;
+		left: 6rem;
+		min-width: 14rem; 
+		max-width: 20rem;
+	}
+}
+@media only screen and (min-width: 43em){
+	.has-form {
+		top: 0;
+		left: 6rem;
+		min-width: 14rem; 
+		max-width: 23rem;
+	}
+}
+@media only screen and (min-width: 45.63em){
+	.has-form {
+		top: 0;
+		left: 6rem;
+		min-width: 14rem; 
+		max-width: 30rem;
+	}
 }
 
 /********************************************
@@ -38,6 +57,14 @@
 		outline-style: solid;
 		outline-width: 1px; 
 		outline-color: lightgray;
+		overflow: hidden;
+		height: 19rem;
+	}
+	.itemN:hover{
+		background-color: white;
+		outline-style: solid;
+		outline-width: 2px; 
+		outline-color: blue;
 		overflow: hidden;
 		height: 19rem;
 	}
@@ -59,6 +86,14 @@
 		outline-style: solid;
 		outline-width: 1px; 
 		outline-color: lightgray;
+		overflow: hidden;
+		height: 16rem;
+	}
+	.itemN:hover{
+		background-color: white;
+		outline-style: solid;
+		outline-width: 2px; 
+		outline-color: blue;
 		overflow: hidden;
 		height: 16rem;
 	}
@@ -84,13 +119,16 @@
 .itemN-right{
 	float:right;
 }
-.itemN-bottom{
+.itemN-color{
 	background-color: white;
-	padding:0 1rem 0 1rem;
-	height: 1.9rem;
 	width: 94%;
-	position: absolute;
+	padding:0 1rem 0 1rem;
 	overflow: hidden;
+	
+}
+.itemN-bottom{
+	height: 1.9rem;
+	position: absolute;
 	bottom: 0.1rem;
 }
 .itemN__link{
@@ -98,11 +136,7 @@
 	
 }
 .itemN__link:hover{
-	background-color:yellow;
-	color: darkblue;
-	outline-style: solid;
-	outline-width: 2px; 
-	outline-color: blue;
+	color: black;
 }
 
 /********************************************
@@ -340,7 +374,9 @@ p{
 }
 .umrandung-textblock{
 	margin: 0;
-	padding: 0.1rem;
+	margin-bottom: 0.5rem;
+	padding: 1rem 1rem 0rem 1rem;
+	background-color: #f2f2f2;
 	outline-style: solid;
 	outline-width: 1px; 
 	outline-color: lightgray;

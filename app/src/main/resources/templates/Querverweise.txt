@@ -8,24 +8,7 @@ QUERVERWEISE:
 		imports :: head
 		navigation :: navigation
 		imports :: script
-		
--	activities_item--multi
-		imports :: head
-		imports :: script
-		
--	activities_item--multi_no_numeration
-		imports :: head
-		imports :: script
-		
->-	activities_item--single
-		imports :: head
-		imports :: script
-	
--	activities_item--single_for_deletion
-		imports :: head
-		activities_item--single :: nopic
-		imports :: script
-	
+
 +f	addedNewTag
 		imports :: head
 		navigation :: navigation
@@ -42,27 +25,18 @@ QUERVERWEISE:
 		navigation :: navigation
 		imports :: script
 	
--	admin
++f	aktivateUser
 		imports :: head
 		navigation :: navigation
 		imports :: script
 	
-+	aktivateUser
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
--	availableTags
-		imports :: head
-		navigation :: navigation
-		imports :: script
 	
 +f	changePassword
 		imports :: head
 		navigation :: navigation
 		imports :: script
 	
-+	change_template
++f	change_template
 		imports :: head
 		navigation :: navigation
 		imports :: script
@@ -80,18 +54,18 @@ QUERVERWEISE:
 		data :: userName
 		data :: language
 	
-+	deaktivateUser
++f	deaktivateUser
 		imports :: head
 		navigation :: navigation
 		imports :: script
 	
-+	deletedActivity
++f	deletedActivity
 		imports :: head
 		navigation :: navigation
 		imports :: script
 		itemN--large--activity--nopic :: item
 	
-+	deletedGood
++f	deletedGood
 		imports :: head
 		navigation :: navigation
 		imports :: script
@@ -126,20 +100,6 @@ QUERVERWEISE:
 +f	errorpage_empty
 		imports :: head
 		navigation :: navigation
-		imports :: script
-	
--	errorpage_user_not_activated
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
--	error_empty_captcha
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
--	goods_item--multi_no_numeration
-		imports :: head
 		imports :: script
 	
 +f	home
@@ -258,11 +218,6 @@ QUERVERWEISE:
 		search :: searchByTag
 		imports :: script
 	
--	New
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
 +f	newTextBlock
 		imports :: head
 		navigation :: navigation
@@ -274,10 +229,12 @@ QUERVERWEISE:
 	
 +f	noSuchActivity
 		imports :: head
+		navigation :: navigation
 		imports :: script
 	
 +f	noSuchGood
 		imports :: head
+		navigation :: navigation
 		imports :: script
 	
 +f	noSuchTag
@@ -287,10 +244,12 @@ QUERVERWEISE:
 	
 +f	notYourActivity
 		imports :: head
+		navigation :: navigation
 		imports :: script
 	
 +f	notYourGood
 		imports :: head
+		navigation :: navigation
 		imports :: script
 
 +f	noUser
@@ -319,11 +278,6 @@ QUERVERWEISE:
 		navigation :: navigation
 		imports :: script
 		itemN--large--good :: item
-	
-+f	offeredGoodsAndActivities
-		imports :: head
-		navigation :: navigation
-		imports :: script
 	
 +N	restorePassword
 		imports :: head
@@ -432,7 +386,6 @@ Folgende Dateien scheinen Ungenutzt zu sein:
 	goods_item--multi_no_numeration
 	error_empty_captcha
 	errorpage_user_not_activated
-	availableTags
 	admin
 	activities_item--single_for_deletion
 	activities_item--single

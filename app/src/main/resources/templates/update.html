@@ -8,13 +8,13 @@
 	<body>
         <th:block th:include="navigation :: navigation"></th:block>
 		
-		<th:block th:fragment="update">
-			<div class="row">
-				<div class="small-12 columns">
-					<h1 class="headline" th:text="${nav_good_text.text}"> Good </h1>
-				</div>
-				
-				<form th:action="@{/updatedGood}" th:object="${good}" method="post" enctype="multipart/form-data">
+		<div class="row">
+			<div class="small-12 columns">
+				<h1 class="headline" th:text="${nav_good_text.text}"> Good </h1>
+			</div>
+			
+			<form th:action="@{/updatedGood}" th:object="${good}" method="post" enctype="multipart/form-data">
+				<th:block th:fragment="update">
 					<div class="small-12 medium-6 columns">
 						<label class="create__label" th:text="${item_general_name_text.text}"> Name </label>
 						<input type="text" name="name" th:value="*{name}"/>
@@ -46,9 +46,10 @@
 					<div class="small-12 columns">
 						<input class="button" type="submit" value="Update" th:value="${admin_submit_text.text}"/>
 					</div>
-				</form>	
-			</div>
-		</th:block>
+				</th:block>
+			</form>	
+		</div>
+		
 		
 		<th:block th:include="imports :: script"></th:block>
     </body>

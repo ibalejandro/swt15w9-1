@@ -29,7 +29,14 @@ import app.repository.GoodsRepository;
 import app.repository.TextBlockRepository;
 import app.textblocks.ChatTemplate;
 import app.textblocks.TextBlock;
+import lombok.NonNull;
 
+/**
+ * <h1>DialogController</h1> The DialogController handles all actions around
+ * {@link Dialog} management.
+ *
+ * @author Mario Henze
+ */
 @Controller
 @PreAuthorize("isAuthenticated()")
 public class DialogController {
@@ -52,6 +59,14 @@ public class DialogController {
 		this.activitiesRepo = activityRepo;
 	}
 
+	/**
+	 * Method for displaying a dialog.
+	 * 
+	 * @param id
+	 *            of the dialog in the repository
+	 * @param model
+	 * @return template name
+	 */
 	@RequestMapping(value = "/dialog", method = RequestMethod.GET)
 	public String dialog(@RequestParam("id") Long id, Model model) {
 		Dialog d = dialogRepo.findOne(id);
@@ -69,6 +84,16 @@ public class DialogController {
 		return "dialog";
 	}
 
+	/**
+	 * Method for posting a new {@link Chat} element to the dialog.
+	 * 
+	 * @param id
+	 *            of the dialog in the repository
+	 * @param allRequestParams
+	 *            as map
+	 * @param loggedInUserAccount
+	 * @return template name
+	 */
 	@RequestMapping(value = "/dialog", method = RequestMethod.POST)
 	public String dialog(@RequestParam("id") Long id, @RequestParam Map<String, String> allRequestParams,
 			@LoggedIn Optional<UserAccount> loggedInUserAccount) {
@@ -79,6 +104,13 @@ public class DialogController {
 		return "redirect:/dialog?id=" + id;
 	}
 
+	/**
+	 * Method for displaying all dialogs in which the user is involved.
+	 * 
+	 * @param model
+	 * @param loggedInUserAccount
+	 * @return template name
+	 */
 	@RequestMapping(value = "/dialogList", method = RequestMethod.GET)
 	public String dialogList(Model model, @LoggedIn Optional<UserAccount> loggedInUserAccount) {
 		if (!loggedInUserAccount.isPresent()) {
@@ -97,29 +129,43 @@ public class DialogController {
 		for (Dialog dialog : dialogRepo.findByUserB(loggedInUser)) {
 			userDialogs.add(dialog);
 		}
-		
+
 		model.addAttribute("loggedInUser", loggedInUser);
 		model.addAttribute("dialogList", userDialogs);
 		return "dialogList";
 	}
 
+	/**
+	 * Method for displaying the template used to create a new {@link Dialog}.
+	 * 
+	 * @return template name
+	 */
 	@RequestMapping(value = "/startDialog", method = RequestMethod.GET)
 	public String newDialog() {
 		return "startDialog";
 	}
 
+	/**
+	 * Method for creating a new Dialog
+	 * 
+	 * @param req
+	 *            HTTP-Request
+	 * @param loggedInUA
+	 *            currently logged in {@link UserAccount}
+	 * @return template name
+	 */
 	@RequestMapping(value = "/startDialog", method = RequestMethod.POST)
-	public String postNewDialog(HttpServletRequest request, @LoggedIn Optional<UserAccount> loggedInUserAccount) {
-		String title = request.getParameter("title");
-		String participant = request.getParameter("participant");
+	public String postNewDialog(HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
+		String title = req.getParameter("title");
+		String participant = req.getParameter("participant");
 
-		if (!loggedInUserAccount.isPresent()) {
+		if (!loggedInUA.isPresent()) {
 			return "noUser";
 		}
 
-		User loggedInUser = userRepo.findByUserAccount(loggedInUserAccount.get());
+		User loggedInUser = userRepo.findByUserAccount(loggedInUA.get());
 		User participantUser = retrieveUser(userAccountManager.findByUsername(participant));
-		
+
 		if (loggedInUser.getId() == participantUser.getId()) {
 			System.err.println("DialogPartner can not be DialogOwner");
 			return "redirect:/dialogList";
@@ -130,29 +176,36 @@ public class DialogController {
 		return "redirect:/dialogList";
 	}
 
+	/**
+	 * Method for creating a new dialog via offer.
+	 * 
+	 * @param req
+	 *            HTTP-Request
+	 * @param loggedInUA
+	 * @return template name
+	 */
 	@RequestMapping(value = "/dialogByOffer", method = RequestMethod.POST)
-	public String dialogByOffer(HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
-		Long id = Long.parseLong(req.getParameter("goodId"));
-		GoodEntity g = goodsRepo.findOne(id);
-		ActivityEntity a = activitiesRepo.findOne(id);
+	public String dialogByOffer(@NonNull HttpServletRequest req, @LoggedIn Optional<UserAccount> loggedInUA) {
+		String goodId = req.getParameter("id");
 		String title;
 		User participant;
 
-		if (g == null && a == null) {
-			throw new NullPointerException("No activity or good found for given id!");
-		}
-
-		if (g != null) {
+		if (goodId.contains("good")) {
+			GoodEntity g = goodsRepo.findOne(Long.parseLong(GoodEntity.getIdFromConstruct(goodId)));
 			title = g.getName();
 			participant = g.getUser();
-		} else {
+		} else if (goodId.contains("activity")) {
+			ActivityEntity a = activitiesRepo.findOne(Long.parseLong(ActivityEntity.getIdFromConstruct(goodId)));
 			title = a.getName();
 			participant = a.getUser();
+		} else {
+			throw new IllegalStateException("goodId unrecognizeable: " + goodId);
 		}
 
 		if (!loggedInUA.isPresent()) {
 			return "noUser";
 		}
+
 		User owner = retrieveUser(loggedInUA);
 
 		Dialog d = dialogRepo.save(new Dialog(title, owner, participant));
@@ -160,12 +213,26 @@ public class DialogController {
 		return "redirect:/dialog?id=" + d.getId();
 	}
 
+	/**
+	 * Helper method for retrieving all {@link TextBlock}s in the
+	 * {@link TextBlockRepository}.
+	 * 
+	 * @return all textblocks
+	 */
 	private List<TextBlock> getAllTextBlocks() {
 		List<TextBlock> l = new LinkedList<>();
 		textBlockRepo.findAll().forEach((TextBlock t) -> l.add(t));
 		return l;
 	}
 
+	/**
+	 * Helper method for checking, if the {@link UserAccount} is present and
+	 * retrieving it.
+	 * 
+	 * @param ua
+	 *            UserAccount
+	 * @return the User linked with the UserAccount
+	 */
 	private User retrieveUser(Optional<UserAccount> ua) {
 		if (!ua.isPresent()) {
 			throw new IllegalArgumentException("UserAccount not present");
