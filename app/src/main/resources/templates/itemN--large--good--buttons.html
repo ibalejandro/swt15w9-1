@@ -43,16 +43,16 @@
 						</div>
 
 						<div sec:authorize="hasRole('ROLE_ADMIN')" class="large-3 medium-6 small-12 columns">
-							<form action="/deletedGoodByAdmin" method="post"> <!--/* zuändern */-->
+							<form action="/deletedGoodByAdmin" method="post">
 								<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
-								<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/> <!--/* zuändern */-->
+								<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/>
 							</form>
 						</div>
 
 						<div sec:authorize="hasRole('ROLE_ADMIN')" class="large-3 medium-6 small-12 columns">
-							<form action="/updateGoodByAdmin" method="post"> <!--/* zuändern */-->
+							<form action="/updateGoodByAdmin" method="post">
 								<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
-								<input class="button" type="submit" value="Update" th:value="${item_general_update_text.text}"/> <!--/* zuändern */-->
+								<input class="button" type="submit" value="Update" th:value="${item_general_update_text.text}"/>
 							</form>
 						</div>
 						

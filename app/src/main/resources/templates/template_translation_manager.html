@@ -61,7 +61,7 @@
 				<div class="umrandung">
 					<form th:action="@{/newTemplate/}" method="post">
 						<h3 class="headline-sub" th:text="${template_newtemp_text.text}">Module+Template erstellen</h3>
-						<p "${template_modname_text.text}">Modul-Name</p>
+						<p th:text="${template_modname_text.text}">Modul-Name</p>
 						<input type="text" name="modl"/>
 						<p th:text="${template_tempname_text.text}">Template-Name</p>
 						<input type="text" name="templ"/>
@@ -74,7 +74,7 @@
 				<div class="umrandung">
 					<form th:action="@{/newModule/}" method="post">
 						<h3 class="headline-sub">Modul erstellen</h3>
-						<p "${template_modname_text.text}">Modul-Name</p>
+						<p th:text="${template_modname_text.text}">Modul-Name</p>
 						<input type="text" name="module"/>
 						<p th:text="${template_tempname_text.text}">Template-Name</p>
 						<select id="templ" name="templ">

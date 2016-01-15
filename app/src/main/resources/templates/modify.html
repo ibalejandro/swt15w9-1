@@ -8,200 +8,197 @@
 	
 	<body>
 		
-		<div th:include="navigation :: navigation"></div>	
+		<th:block th:include="navigation :: navigation"></th:block>	
 	
 		<div class="row">
 			<div class="large-12 colums">
 				<h1 th:text="${user_about_text.text}+${user.getUserAccount().getUsername()} "> UserAccount</h1>
 			
-						<div>
-							<a th:text="${user_changepw_text.text}" th:href="@{/changePassword/{path}(path=${user.getUserAccount().getUsername()})}" href="changePassword.html">Password ändern</a>
-						</div>	
-						<div>	
-							<a th:href="@{/modifyActivationStateByAdmin/{user}/{action}(user=${user.getUserAccount().getUsername()}, action=${user.getActivationStateOpposite()})}" th:text="${user.getActivationStateOpposite()}">activate/deactivate</a>
-						</div>
-						
-						<form th:action="@{/modify_submit/user/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
-						
-							<div class="medium-6 small-12 columns">
-								<div class="row">
-									<div class="large-3 small-12 columns">
-										<label th:text="${user_firstname_text.text}" class="form__label" for="firstnameIN">Vorname:</label>
-									</div>
-									<div class="large-9 small-12 columns">
-										<input name="firstnameIN" type="text" th:value="${user.getUserAccount().getFirstname()}"/>
-									</div>
-									
-									<div class="large-3 small-12 columns">
-										<label th:text="${user_lastname_text.text}" class="form__label" for="nameIN">Nachname:</label>
-									</div>
-									<div class="large-9 small-12 columns">
-										<input name="nameIN" type="text" th:value="${user.getUserAccount().getLastname()}"/>
-									</div>
-									
-									<div class="large-3 small-12 columns">
-										<label th:text="${user_email_text.text}" class="form__label" for="mailIN">E-Mail:</label>
-									</div>
-									<div class="large-9 small-12 columns">
-										<input name="mailIN" type="email" th:value="${user.getUserAccount().getEmail()}"/>
-									</div>
-									<div class="large-3 small-12 columns">
-										<label th:text="${user_preflang_text.text}" for="nativelanguage" class="form__label">Muttersprache:</label>
-									</div>
-									<div class="small-12 columns less_space">
-											<select id="nativelanguage" name="nativelanguage">
-												<option th:each="language : ${languages}"
-													th:if="${language.getkennung()} == ${user.getPrefLanguage().getkennung()}" selected="selected"		
-													th:value="${language.getkennung()}"
-													th:text="${language.name}">
-												</option>
-												<option th:each="language : ${languages}"
-													th:value="${language.getkennung()}"
-													th:text="${language.name}">
-												</option>
-											</select>  
-									</div>
-									<div class="small-12 columns">
-										<label for="otherlanguages" class="form__label" th:text="${user_otherlang_text.text}">2.Sprache:</label>
-									</div>
-									<div class="small-12 columns less_space">
-										<select id="otherlanguages" name="otherlanguages">
-											<option value="-1">---- Select ----</option>
-											<option th:each="language : ${languages}"
-												th:if="${language.getkennung()} == ${language2}" selected="selected"		
-												th:value="${language.getkennung()}"
-												th:text="${language.name}">
-											</option>
-											<option th:each="language : ${languages}"
-												th:value="${language.getkennung()}"
-												th:text="${language.name}">
-											</option>
-										</select>  
-									</div>
-									<div class="small-12 columns">
-										<label for="otherlanguages" class="form__label" th:text="${user_otherlang_text.text}">3.Sprache:</label>
-									</div>
-									<div class="small-12 columns less_space">
-										<select id="otherlanguages" name="otherlanguages">
-											<option value="-1">---- Select ----</option>
-											<option th:each="language : ${languages}"
-												th:if="${language.getkennung()} == ${language3}" selected="selected"		
-												th:value="${language.getkennung()}"
-												th:text="${language.name}">
-											</option>
-											<option th:each="language : ${languages}"
-												th:value="${language.getkennung()}"
-												th:text="${language.name}">
-											</option>
-										</select>  
-									</div>				
-									<div class="small-12 columns">
-										<label class="form__label" th:text="${user_origin_text.text}">Herkunftsland:</label>
-									</div>
-									<div class="small-12 columns less_space">
-										<select name="origin" >
-											<option th:each="country : ${countrys}"
-												th:if="${country} == ${user.getOrigin()}" selected="selected" 
-												th:text="${country}">
-											</option>
-											<option th:each="country : ${countrys}"
-												th:text="${country}">
-											</option>                     
-										</select>
-									</div>
-								</div>
+				<div>
+					<a th:text="${user_changepw_text.text}" th:href="@{/changePassword/{path}(path=${user.getUserAccount().getUsername()})}" href="changePassword.html">Password ändern</a>
+				</div>	
+				
+				<div>	
+					<a th:href="@{/modifyActivationStateByAdmin/{user}/{action}(user=${user.getUserAccount().getUsername()}, action=${user.getActivationStateOpposite()})}" th:text="${user.getActivationStateOpposite()}">activate/deactivate</a>
+				</div>
+				
+				<form th:action="@{/modify_submit/user/{path}(path=${user.getUserAccount().getUsername()})}" method="post">
+				
+					<div class="medium-6 small-12 columns">
+						<div class="row">
+							<div class="large-3 small-12 columns">
+								<label th:text="${user_firstname_text.text}" class="form__label" for="firstnameIN">Vorname:</label>
 							</div>
-							<div class="medium-6 small-12 columns">
-								<div class="row">
-									<div class="small-12 columns">
-										<label class="headline-sub" th:text="${user_hometype_text.text}">Wohnungstyp:</label>
-									</div>
-								
-									<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked=""/>
-									<label class="form__label" for="hh" th:text="${user_flat_text.text}">Wohnung</label>
-									
-									<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee" th:checked="${isRefugee}"/>
-									<label class="form__label" for="fh" th:text="${user_refugeehome_text.text}">Flüchtlingsheim</label>
+							<div class="large-9 small-12 columns">
+								<input name="firstnameIN" type="text" th:value="${user.getUserAccount().getFirstname()}"/>
+							</div>
 							
-									<div class="small-12 columns">
-									</div>
-									
-									<div class="new__user__helper">
-										<div class="large-3 small-12 columns">
-											<label class="form__label" th:text="${user_street_text.text}">Stra&szlig;e:</label>
-										</div>
-										<div class="large-9 small-12 columns">
-											<input name="street" type="text" th:value="${user.getLocation().getStreet()}"/>
-										</div>
-										
-										<div class="large-3 small-12 columns">
-											<label class="form__label" th:text="${user_housenr_text.text}">Hausnummer:</label>
-										</div>
-										<div class="large-9 small-12 columns">
-											<input name="housenr" type="text" th:value="${user.getLocation().getHousenr()}"/>
-										</div>
-										
-										<div class="large-3 small-12 columns">
-											<label class="form__label" th:text="${user_zip_text.text}">Postleitzahl:</label>
-										</div>
-										<div class="large-9 small-12 columns">
-											<input name="postcode_H" type="text" th:value="${user.getLocation().getZipCode()}"/>
-										</div>
-									
-										<div class="large-3 small-12 columns">
-											<label class="form__label" th:text="${user_city_text.text}">Stadt:</label>
-										</div>
-										<div class="large-9 small-12 columns">
-											<input name="city_H" type="text" th:value="${user.getLocation().getCity()}"/>
-										</div>
-									</div>
-									
-									<div class="new__user__refugee">
-										<div class="large-3 small-12 columns">
-											<label class="form__label-paddingOFF" th:text="${user_rhomename_text.text}">Fl&uuml;chtlingsheim Name:</label>
-										</div>
-										<div class="large-9 small-12 columns">
-											<input name="flh_name" type="text" th:value="${user.getLocation().getFlh_name()}"/>
-										</div>
-									
-										<div class="large-3 small-12 columns">
-											<label class="form__label" th:text="${user_zip_text.text}">Postleitzahl:</label>
-										</div>
-										<div class="large-9 small-12 columns">
-											<input name="postcode_R" type="text" th:value="${user.getLocation().getZipCode()}"/>
-										</div>
-									
-										<div class="large-3 small-12 columns">
-											<label class="form__label" th:text="${user_city_text.text}">Stadt:</label>
-										</div>
-										<div class="large-9 small-12 columns">
-											<input name="city_R" type="text" th:value="${user.getLocation().getCity()}"/>
-										</div>
-									
-										<div class="large-3 small-12 columns">
-											<label class="form__label" th:text="${user_citypart_text.text}">Stadtteil:</label>
-										</div>
-										<div class="large-9 small-12 columns">
-											<input name="citypart" type="text" th:value="${user.getLocation().getCityPart()}"/>
-										</div>
-									</div>
-								</div>
+							<div class="large-3 small-12 columns">
+								<label th:text="${user_lastname_text.text}" class="form__label" for="nameIN">Nachname:</label>
+							</div>
+							<div class="large-9 small-12 columns">
+								<input name="nameIN" type="text" th:value="${user.getUserAccount().getLastname()}"/>
+							</div>
+							
+							<div class="large-3 small-12 columns">
+								<label th:text="${user_email_text.text}" class="form__label" for="mailIN">E-Mail:</label>
+							</div>
+							<div class="large-9 small-12 columns">
+								<input name="mailIN" type="email" th:value="${user.getUserAccount().getEmail()}"/>
+							</div>
+							<div class="large-3 small-12 columns">
+								<label th:text="${user_preflang_text.text}" for="nativelanguage" class="form__label">Muttersprache:</label>
+							</div>
+							<div class="small-12 columns less_space">
+									<select id="nativelanguage" name="nativelanguage">
+										<option th:each="language : ${languages}"
+											th:if="${language.getkennung()} == ${user.getPrefLanguage().getkennung()}" selected="selected"		
+											th:value="${language.getkennung()}"
+											th:text="${language.name}">
+										</option>
+										<option th:each="language : ${languages}"
+											th:value="${language.getkennung()}"
+											th:text="${language.name}">
+										</option>
+									</select>  
+							</div>
+							<div class="small-12 columns">
+								<label for="otherlanguages" class="form__label" th:text="${user_otherlang_text.text}">2.Sprache:</label>
+							</div>
+							<div class="small-12 columns less_space">
+								<select id="otherlanguages" name="otherlanguages">
+									<option value="-1">---- Select ----</option>
+									<option th:each="language : ${languages}"
+										th:if="${language.getkennung()} == ${language2}" selected="selected"		
+										th:value="${language.getkennung()}"
+										th:text="${language.name}">
+									</option>
+									<option th:each="language : ${languages}"
+										th:value="${language.getkennung()}"
+										th:text="${language.name}">
+									</option>
+								</select>  
+							</div>
+							<div class="small-12 columns">
+								<label for="otherlanguages" class="form__label" th:text="${user_otherlang_text.text}">3.Sprache:</label>
+							</div>
+							<div class="small-12 columns less_space">
+								<select id="otherlanguages" name="otherlanguages">
+									<option value="-1">---- Select ----</option>
+									<option th:each="language : ${languages}"
+										th:if="${language.getkennung()} == ${language3}" selected="selected"		
+										th:value="${language.getkennung()}"
+										th:text="${language.name}">
+									</option>
+									<option th:each="language : ${languages}"
+										th:value="${language.getkennung()}"
+										th:text="${language.name}">
+									</option>
+								</select>  
+							</div>				
+							<div class="small-12 columns">
+								<label class="form__label" th:text="${user_origin_text.text}">Herkunftsland:</label>
+							</div>
+							<div class="small-12 columns less_space">
+								<select name="origin" >
+									<option th:each="country : ${countrys}"
+										th:if="${country} == ${user.getOrigin()}" selected="selected" 
+										th:text="${country}">
+									</option>
+									<option th:each="country : ${countrys}"
+										th:text="${country}">
+									</option>                     
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="medium-6 small-12 columns">
+						<div class="row">
+							<div class="small-12 columns">
+								<label class="headline-sub" th:text="${user_hometype_text.text}">Wohnungstyp:</label>
 							</div>
 						
-							<div class="medium-5 small-12 columns">
-								<div class="button-right">
-									<input class="button" type="submit" value="Modify User" th:value="${admin_submit_text.text}"/>
-								</div>
-							</div>
-						
-						</form>
-						
-			</div>
+							<input class="form__input" id="hh" type="radio" name="wohnen" value="helper" checked=""/>
+							<label class="form__label" for="hh" th:text="${user_flat_text.text}">Wohnung</label>
+							
+							<input class="form__input" type="radio" id="fh" name="wohnen" value="refugee" th:checked="${isRefugee}"/>
+							<label class="form__label" for="fh" th:text="${user_refugeehome_text.text}">Flüchtlingsheim</label>
 					
+							<div class="small-12 columns">
+							</div>
+							
+							<div class="new__user__helper">
+								<div class="large-3 small-12 columns">
+									<label class="form__label" th:text="${user_street_text.text}">Stra&szlig;e:</label>
+								</div>
+								<div class="large-9 small-12 columns">
+									<input name="street" type="text" th:value="${user.getLocation().getStreet()}"/>
+								</div>
+								
+								<div class="large-3 small-12 columns">
+									<label class="form__label" th:text="${user_housenr_text.text}">Hausnummer:</label>
+								</div>
+								<div class="large-9 small-12 columns">
+									<input name="housenr" type="text" th:value="${user.getLocation().getHousenr()}"/>
+								</div>
+								
+								<div class="large-3 small-12 columns">
+									<label class="form__label" th:text="${user_zip_text.text}">Postleitzahl:</label>
+								</div>
+								<div class="large-9 small-12 columns">
+									<input name="postcode_H" type="text" th:value="${user.getLocation().getZipCode()}"/>
+								</div>
+							
+								<div class="large-3 small-12 columns">
+									<label class="form__label" th:text="${user_city_text.text}">Stadt:</label>
+								</div>
+								<div class="large-9 small-12 columns">
+									<input name="city_H" type="text" th:value="${user.getLocation().getCity()}"/>
+								</div>
+							</div>
+							
+							<div class="new__user__refugee">
+								<div class="large-3 small-12 columns">
+									<label class="form__label-paddingOFF" th:text="${user_rhomename_text.text}">Fl&uuml;chtlingsheim Name:</label>
+								</div>
+								<div class="large-9 small-12 columns">
+									<input name="flh_name" type="text" th:value="${user.getLocation().getFlh_name()}"/>
+								</div>
+							
+								<div class="large-3 small-12 columns">
+									<label class="form__label" th:text="${user_zip_text.text}">Postleitzahl:</label>
+								</div>
+								<div class="large-9 small-12 columns">
+									<input name="postcode_R" type="text" th:value="${user.getLocation().getZipCode()}"/>
+								</div>
+							
+								<div class="large-3 small-12 columns">
+									<label class="form__label" th:text="${user_city_text.text}">Stadt:</label>
+								</div>
+								<div class="large-9 small-12 columns">
+									<input name="city_R" type="text" th:value="${user.getLocation().getCity()}"/>
+								</div>
+							
+								<div class="large-3 small-12 columns">
+									<label class="form__label" th:text="${user_citypart_text.text}">Stadtteil:</label>
+								</div>
+								<div class="large-9 small-12 columns">
+									<input name="citypart" type="text" th:value="${user.getLocation().getCityPart()}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="medium-5 small-12 columns">
+						<div class="button-right">
+							<input class="button" type="submit" value="Modify User" th:value="${admin_submit_text.text}"/>
+						</div>
+					</div>
+				
+				</form>	
+			</div>			
 		</div>
 		
-		
 		<th:block th:include="imports :: script"></th:block>
-		
 	</body>
 </html>
