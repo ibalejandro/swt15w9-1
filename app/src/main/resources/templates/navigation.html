@@ -45,9 +45,9 @@
 
 						<th:block sec:authorize="isAuthenticated()">
 						
-							<li sec:authorize="isAuthenticated()" class="has-form">
+							
 								<th:block th:include="search :: searchByTag"></th:block>
-							</li>
+							
 							
 							<li sec:authorize="hasRole('ROLE_NORMAL')" class="has-dropdown">
 								<a th:text="${nav_offer_text.text}"> Offer </a>
