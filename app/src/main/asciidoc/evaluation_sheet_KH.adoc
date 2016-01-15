@@ -8,10 +8,10 @@
 * Umgang mit APIs wie ReCaptcha. 
 
 = Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
-* TODO
+* Lief gut. 
 
 == Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
-* TODO
+* Teilweise schlechte Dokumentation, was genau im Hintergrund passiert
 
 == Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
 * Mehr Recherche im Vorfeld des Praktikums zu Lizenzbedingungen von externen APIs. Google Übersetzer war nicht nutzbar, Koordinatenermittlung  erlaubt nur 11 Anfragen/ sec.

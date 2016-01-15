@@ -1,6 +1,10 @@
 package app.controller;
 
+import java.util.Optional;
+
+import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,8 +78,8 @@ public class GoodsAndActivityOverviewController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/item/{typ}/{id}", method = RequestMethod.GET)
-	public String showGoodAndActivity(@PathVariable String typ, @PathVariable String id, Model modelMap) {
-
+	public String showGoodAndActivity(@PathVariable String typ, @PathVariable String id, @LoggedIn Optional<UserAccount> loggedInUserAccount, Model modelMap) {
+		modelMap.addAttribute("loggedIn", loggedInUserAccount.get());
 		if (typ.equals("good")) {
 			long idLong = Long.parseLong(id);
 			GoodEntity goodEntity = goodsRepository.findOne(idLong);

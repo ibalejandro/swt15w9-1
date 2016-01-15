@@ -222,11 +222,6 @@ QUERVERWEISE:
 		search :: searchByTag
 		imports :: script
 	
--	New
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
 +f	newTextBlock
 		imports :: head
 		navigation :: navigation

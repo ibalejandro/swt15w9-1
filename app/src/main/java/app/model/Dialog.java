@@ -119,10 +119,4 @@ public class Dialog implements Serializable {
 	public Iterable<Chat> getMessageHistory() {
 		return this.messageHistory;
 	}
-	
-	public Iterable<String> getMessagesAsStrings() {
-		List<String> l = new LinkedList<>();
-		this.messageHistory.forEach((Chat c) -> l.add(c.toString()));
-		return l;
-	}
 }
