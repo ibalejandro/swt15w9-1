@@ -1,9 +1,12 @@
-package app.test.goodsManagement;
+package app.test.activitiesManagement;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.Date;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,24 +18,28 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
+
+import app.controller.ActivitiesOfferController;
 import app.controller.GoodsOfferController;
+import app.model.ActivityEntity;
 import app.model.GoodEntity;
 import app.model.TagEntity;
 import app.model.User;
 import app.model.UserRepository;
+import app.repository.ActivitiesRepository;
 import app.repository.GoodsRepository;
 import app.repository.TagsRepository;
 
-public class GoodsOfferControllerIntegrationTests extends 
+public class ActivitiesOfferControllerIntegrationTests extends 
 AbstractWebIntegrationTests {
 
-  private GoodEntity good1, good2;
+  private ActivityEntity activity1, activity2;
   private static int iterableSize = 2;
-  private static int goodsInTestDaten = 5;
-  private static int userOfferedGoodsInTestDaten = 1;
+  private static int activitiesInTestDaten = 0;
+  private static int userOfferedActivitiesInTestDaten = 0;
   
   @Autowired GoodsOfferController controller;
-  @Autowired GoodsRepository goodsRepository;
+  @Autowired ActivitiesRepository activitiesRepository;
   @Autowired TagsRepository tagsRepository;
   @Autowired UserRepository userRepository;
   @Autowired UserAccountManager userAccountManager;
@@ -48,37 +55,45 @@ AbstractWebIntegrationTests {
   
   @Before
   public void createGoodEntities() {
-    String name1 = "Jacket";
-    String description1 = "The jacket is for men. It's black with a gray hood.";
-    TagEntity tag1 = tagsRepository.findByName("Clothes, Shoes and Accesories");
-    String name2 = "Beautiful Bear";
-    String description2 = "A beautiful little bear for beautiful little girls";
-    TagEntity tag2 = tagsRepository.findByName("Dolls & Bears");
+    String name1 = "Trip to Leipzig";
+    String description1 = "This is a wonderful opportunity to visit Leipzig"
+                          + " for free!.";
+    TagEntity tag1 = tagsRepository.findByName("Tickets & Experiences");
+    String name2 = "Soccer game";
+    String description2 = "Come and join us for the funniest soccer game";
+    TagEntity tag2 = tagsRepository.findByName("Sporting Goods");
+    
+    Date date = new Date();
     
     User user = userRepository.findByUserAccount(userAccountManager
                                                  .findByUsername("Lisa").get());
     
     login(user.getUserAccount().getUsername(), "pw");
     
-    good1 = new GoodEntity(name1, description1, tag1, null, user);
-    good2 = new GoodEntity(name2, description2, tag2, null, user);
+    activity1 = new ActivityEntity(name1, description1, tag1, null, user, date, 
+                                   date);
+    activity2 = new ActivityEntity(name2, description2, tag2, null, user, date, 
+                                   date);
   }
   
   @Test
   public void testSaveGood() throws Exception {
-    mvc.perform(post("/offeredGood").param("name", good1.getName())
-                .param("description", good1.getDescription())
-                .param("tagId", String.valueOf(good1.getTag().getId())))
+    mvc.perform(post("/offeredActivity").param("name", activity1.getName())
+                .param("description", activity1.getDescription())
+                .param("tagId", String.valueOf(activity1.getTag().getId()))
+                .param("startDate", 
+                       getRequiredStringFromDate(activity1.getStartDate()))
+                .param("endDate", 
+                       getRequiredStringFromDate(activity1.getEndDate())))
    .andExpect(status().isOk())
    .andExpect(model().attribute("result", is(not(emptyIterable()))))
    .andExpect
-   (model().attribute("result",
-                      Matchers.hasProperty("name", 
-                                           Matchers.equalTo(good1.getName()))))
+   (model().attribute("result", Matchers.hasProperty
+                      ("name", Matchers.equalTo(activity1.getName()))))
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("description", Matchers.equalTo
-                                            (good1.getDescription()))))
+                                            (activity1.getDescription()))))
     /*.andExpect
     (model().attribute("result",
                        Matchers.hasProperty("tag", Matchers.equalTo
@@ -86,22 +101,25 @@ AbstractWebIntegrationTests {
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("user", Matchers.equalTo
-                                            (good1.getUser()))));
+                                            (activity1.getUser()))));
     
     
-    mvc.perform(post("/offeredGood").param("name", good2.getName())
-                .param("description", good2.getDescription())
-                .param("tagId", String.valueOf(good2.getTag().getId())))
+    mvc.perform(post("/offeredActivity").param("name", activity2.getName())
+                .param("description", activity2.getDescription())
+                .param("tagId", String.valueOf(activity2.getTag().getId()))
+                .param("startDate", 
+                       getRequiredStringFromDate(activity2.getStartDate()))
+                .param("endDate", 
+                       getRequiredStringFromDate(activity2.getEndDate())))
     .andExpect(status().isOk())
     .andExpect(model().attribute("result", is(not(emptyIterable()))))
     .andExpect
-    (model().attribute("result",
-                       Matchers.hasProperty("name", 
-                                            Matchers.equalTo(good2.getName()))))
+    (model().attribute("result", Matchers.hasProperty
+                       ("name", Matchers.equalTo(activity2.getName()))))
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("description", Matchers.equalTo
-                                            (good2.getDescription()))))
+                                            (activity2.getDescription()))))
     /*.andExpect
     (model().attribute("result",
                        Matchers.hasProperty("tag", Matchers.equalTo
@@ -109,12 +127,13 @@ AbstractWebIntegrationTests {
     .andExpect
     (model().attribute("result",
                        Matchers.hasProperty("user", Matchers.equalTo
-                                            (good2.getUser()))));
+                                            (activity2.getUser()))));
   }
   
+  /*
   @Test
   @SuppressWarnings("unchecked")
-  public void testListAllGoods() {
+  public void testListAllActivities() {
     Model model = new ExtendedModelMap();
 
     String returnedView = controller.listAllGoodsAndActivities(model);
@@ -122,17 +141,24 @@ AbstractWebIntegrationTests {
     assertThat(returnedView, is("home"));
 
     Iterable<Object> object = (Iterable<Object>) 
-                              model.asMap().get("resultGoods");
-    assertThat(object, is(iterableWithSize(iterableSize + goodsInTestDaten)));
+                              model.asMap().get("resultActivities");
+    assertThat(object, is(iterableWithSize(iterableSize + activitiesInTestDaten)));
   }
   
   @Test
-  public void testUserOfferedGoods() {
+  public void testUserOfferedActivities() {
     User user = userRepository.findByUserAccount
                 (userAccountManager.findByUsername("Lisa").get());
-    int userOfferedGoods = GoodEntity.getIterableSize(user.getGoods());
-    assertThat(userOfferedGoods, 
-               is(iterableSize + userOfferedGoodsInTestDaten));
+    int userOfferedActivities = ActivityEntity.getIterableSize(activitiesRepository.findByUser(user));
+    System.out.println("Activities: " + userOfferedActivities);
+    assertThat(userOfferedActivities, 
+               is(iterableSize + userOfferedActivitiesInTestDaten));
+  }
+  */
+  
+  public String getRequiredStringFromDate(Date date) {
+    return ActivityEntity.getStringFromDateForInput
+           (ActivityEntity.getZeroTimeDate(date));
   }
   
 }

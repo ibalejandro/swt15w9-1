@@ -628,34 +628,6 @@ public class AdminController {
 	}
 
 	/**
-	 * This method is the answer for the request to
-	 * '/offeredGoodsAndActivities'. It finds and retrieves all the offered
-	 * goods and activities.
-	 * 
-	 * @param Model
-	 *            The model to add response's attributes
-	 * @param Optional<UserAccount>
-	 *            The admin's account who wants to see all offered goods and
-	 *            activities
-	 * @return String The name of the view to be shown after processing
-	 */
-	@RequestMapping(value = "/offeredGoodsAndActivities", 
-	                method = RequestMethod.GET)
-	public String listAllOfferedGoodsAndActivities
-	(Model model, @LoggedIn Optional<UserAccount> userAccount) {
-		/*
-		 * If there wasn't a log in instance, then the admin is redirected to an
-		 * error page.
-		 */
-		if (!userAccount.isPresent())
-			return "noUser";
-
-		model.addAttribute("resultGoods", goodsRepository.findAll());
-		model.addAttribute("resultActivities", activitiesRepository.findAll());
-		return "offeredGoodsAndActivities";
-	}
-
-	/**
 	 * This method is the answer for the request to '/updateGoodByAdmin'. It
 	 * finds and retrieves the particular good that the admin wants to update.
 	 * 

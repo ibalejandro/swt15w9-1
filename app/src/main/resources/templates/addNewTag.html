@@ -23,7 +23,7 @@
 			
 			<form th:action="@{/addedNewTag}" th:object="${tag}" method="post">
 				<div class="large-1 medium-2 small-12 columns">
-					<label for="name" class="form__label" th:text="${item_general_name.text}">Name</label> 
+					<label for="name" class="form__label" th:text="${item_general_name_text.text}">Name</label> 
 				</div>
 				<div class="large-5 medium-10 small-12 columns">
 					<input type="text" id="name" name="name" th:value="${name}"/>

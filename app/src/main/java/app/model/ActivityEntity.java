@@ -262,10 +262,13 @@ public class ActivityEntity implements Serializable {
   }
   
   @SuppressWarnings("deprecation")
-public String getDateAsString(){
-	 if(this.startDate.getDate() == this.endDate.getDate() 
+  public String getDateAsString(){
+   
+   if (this.startDate == null || this.endDate == null) return null; 
+    
+	 if (this.startDate.getDate() == this.endDate.getDate() 
 			 && this.startDate.getYear() == this.endDate.getYear() 
-			 && this.startDate.getMonth() == this.endDate.getMonth() )
+			 && this.startDate.getMonth() == this.endDate.getMonth())
 	 {
 		 return startDate.getDate()+"."+(this.startDate.getMonth()+1)+"."+(this.startDate.getYear()+1900);
 	 }
