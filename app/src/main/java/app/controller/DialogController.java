@@ -33,7 +33,7 @@ import lombok.NonNull;
 
 /**
  * <h1>DialogController</h1> The DialogController handles all actions around
- * dialog management.
+ * {@link Dialog} management.
  *
  * @author Mario Henze
  */
@@ -136,7 +136,7 @@ public class DialogController {
 	}
 
 	/**
-	 * Method for displaying the template used to create a new dialog.
+	 * Method for displaying the template used to create a new {@link Dialog}.
 	 * 
 	 * @return template name
 	 */
