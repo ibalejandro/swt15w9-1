@@ -20,8 +20,8 @@ http://refugee-app.tk/swt15w10/search		| - | Seite wird ohne Bilder angezeigt		|
 
 == Sonstiges
 * Optik der Anwendung: Sehr Übersichtlich
-* Fehlende Features: Keinerlei Übersetzung. Weder bei Angabe einer Sprache != Deutsch bei der Registrierung, noch bei Umstellung der Browsersprache. 
+* Fehlende Features: -
 * Interaktion mit der Anwendung (Usability): Gut
 
 == Verbesserungsvorschläge
-* Was kann noch weiter verbessert werden?: Übersetzung, Mehr Dialogbausteine
+* Was kann noch weiter verbessert werden?: Mehr Dialogbausteine
