@@ -18,7 +18,7 @@
 		<div class="row">
 			<th:block th:fragment="kopf">
 				<div class="small-12 columns">
-					<h1 th:text="th:text="${user_userdata_text.text}+@{ &nbsp; }+${user.getUserAccount().getUsername()} ">Kundendaten: UserAccount</h1>
+					<h1 th:text="${user_userdata_text.text}+@{ &nbsp; }+${user.getUserAccount().getUsername()}">Kundendaten: UserAccount</h1>
 				</div>
 			
 				<div class="small-12 columns divider"></div>
@@ -42,15 +42,18 @@
 			<table class="small-12 columns">
 				<th:block th:fragment="userName">
 					<tr sec:authorize="hasRole('ROLE_NORMAL')">
-						<td colspan="2" class="text-super center"><a th:href="@{/modifyUserAccount/{path}(path=${user.getUserAccount().getUsername()})}" href="modifyUserAccount.html" th:text="${user_changedata_text.text}">Nutzerdaten bearbeiten</a></td>
+						<td colspan="2" class="text-super center">
+							<a th:href="@{/modifyUserAccount/{path}(path=${user.getUserAccount().getUsername()})}" href="modifyUserAccount.html" 
+							th:text="${user_changedata_text.text}">Nutzerdaten bearbeiten</a>
+						</td>
 					</tr>			
 					<tr>
 						<td class="text-super">Firstname</td>
-						<td th:text="${user.userAccount.getFirstname()}" class="text" th:text="${user_firstname_text.text}">Firstname</td>
+						<td th:text="${user.userAccount.getFirstname()}+' '+${user_firstname_text.text}" class="text">Firstname</td>
 					</tr>	
 					<tr>
 						<td class="text-super">Lastname</td>
-						<td th:text="${user.userAccount.lastname}" class="text" th:text="${user_lastname_text.text}">Lastname</td>
+						<td th:text="${user.userAccount.lastname}+' '+${user_lastname_text.text}" class="text">Lastname</td>
 					</tr>	
 					<tr>
 						<td class="text-super" th:text="${user_email_text.text}">Email</td>
