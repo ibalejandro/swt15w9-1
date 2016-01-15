@@ -1179,6 +1179,10 @@ public class AdminController {
 		String name = request.getParameter("module");
 		String templ = request.getParameter("templ");
 		
+		if(moduleRepository.findByTemplateNameAndThymeLeafName(templ, name)!=null ){
+			return interfaceMaping(request, model);
+		}
+		
 		Module newmod = new Module(templ, name);
 		moduleRepository.save(newmod);
 		
@@ -1196,6 +1200,9 @@ public class AdminController {
 		String templ = request.getParameter("templ");
 		String modl = request.getParameter("modl");
 		Module newmod = new Module(templ,modl);
+		if(moduleRepository.findByTemplateNameAndThymeLeafName(templ, modl)!=null ){
+			return interfaceMaping(request, model);
+		}
 		moduleRepository.save(newmod);
 		for(Language lang : languageRepository.findAll()){
 			interfaceRepository.save(new InterfacePart("---", lang.getId(), newmod.getId()));
@@ -1209,6 +1216,10 @@ public class AdminController {
 		
 		String newLang = request.getParameter("newLang");
 		String newLangShort = request.getParameter("newLangShort");
+		
+		if(languageRepository.findByKennung(newLangShort)!=null){
+			return interfaceMaping(request, model);
+		}
 		
 		Language nLang = new Language(newLang, newLangShort);
 		languageRepository.save(nLang);

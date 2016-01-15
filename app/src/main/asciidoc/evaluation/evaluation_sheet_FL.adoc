@@ -1,0 +1,21 @@
+﻿= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von: Ferdinand Lehmann **
+
+**Gruppe: 09**
+
+== Was habe ich gelernt?
+* Spring Grundlagen
+* Implementation und Bearbeitung von Bildern in Java
+* Arbeiten mit (Crud)Repositories
+
+= Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* Nichts Erwähnenswertes.
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* (Noch auszufüllen)
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* (Noch auszufüllen)
+
+== Sonstiges und Anmerkungen

@@ -5,6 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * <h1>Module</h1> A Module represents a piece of displayable text that has to be translatable.
+ * The translations are given by corresponding {@link InterfacePart}s
+ * 
+ * @author Lennart Schmidt
+ *
+ */
+
 @Entity
 public class Module {
 	@Id
