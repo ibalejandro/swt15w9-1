@@ -62,14 +62,14 @@
 						<div sec:authorize="hasRole('ROLE_ADMIN')" class="large-3 medium-6 small-12 columns">
 							<form action="/deletedActivityByAdmin" method="post"> <!--/* zuändern */-->
 								<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
-								<input class="button" type="submit" value="Delete"/> <!--/* zuändern */-->
+								<input class="button" type="submit" value="Delete" th:value="${user_delete_text.text}"/> <!--/* zuändern */-->
 							</form>
 						</div>
 						
 						<div sec:authorize="hasRole('ROLE_ADMIN')" class="large-3 medium-6 small-12 columns">
 							<form action="/updateActivityByAdmin" method="post"> <!--/* zuändern */-->
 								<input type="hidden" name="id" th:value="${result.getIdFromConstruct(result.getItemTypeAndId())}"/>
-								<input class="button" type="submit" value="Update"/> <!--/* zuändern */-->
+								<input class="button" type="submit" value="Update" th:value="${item_general_update_text.text}"/> <!--/* zuändern */-->
 							</form>
 						</div>
 						

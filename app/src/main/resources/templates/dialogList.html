@@ -41,9 +41,9 @@
 		<table sec:authorize="hasRole('ROLE_NORMAL')" class="small-12 columns">
 			<thead>
 				<tr>
-					<th class="text-super">Title</th>
-					<th class="text-super">Dialog Partner</th>
-					<th class="text-super">Link</th>
+					<th class="text-super" th:text="${dialog_title_text.text}">Title</th>
+					<th class="text-super" th:text="${dialog_partner_text.text}">Dialog Partner</th>
+					<th class="text-super" th:text="${dialog_link_text.text}">Link</th>
 				</tr>
 			</thead>
 
@@ -57,7 +57,7 @@
 						th:unless="${dialog.userB.userAccount.firstname.equals(loggedInUser.userAccount.firstname)}" class="text">
 					</td>
 					<td><a href="/dialogList"
-						th:href="@{/dialog(id=${dialog.id})}"> Go to </a></td>
+						th:href="@{/dialog(id=${dialog.id})}" th:text="${dialog_goto_text.text}"> Go to </a></td>
 				</tr>
 			</tbody>
 		</table>

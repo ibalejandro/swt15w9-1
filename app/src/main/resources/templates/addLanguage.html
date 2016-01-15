@@ -8,22 +8,22 @@
 	
 		<div class="row">
 			<div class="small-12 colums">
-				<h1 th:text="@{Your Languages: &nbsp; }" class="headline"> UserAccount</h1>
+				<h1 th:text="${user_yourlangs_text.text}" class="headline"> UserAccount</h1>
 			</div>
 			
 			<form th:action="@{/addLanguage_submit}" method="post">
 				<div class="small-12 medium-6 colums">
-					<label th:text="@{language_language_text.text}" class="form__label" for="name">Language:</label>
+					<label th:text="${language_language_text.text}" class="form__label" for="name">Language:</label>
 					<input name="languageName" type="text" id="name"/>
 				</div>
 				
 				<div class="small-12 medium-6 colums">
-					<label th:text="@{language_iso_text.text}" class="form__label" for="kennung">Language:</label>
+					<label th:text="${language_iso_text.text}" class="form__label" for="kennung">Language:</label>
 					<input name="kennung" type="text" id="kennung"/>
 				</div>
 				
 				<div class="small-12 colums">
-					<input type="submit" class="button" value="Next"/>
+					<input type="submit" class="button" value="Next" th:value="${admin_submit_text.text}"/>
 				</div>
 			</form>
 		</div>
