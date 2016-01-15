@@ -105,34 +105,45 @@ public class GoodEntity implements Serializable {
 	public static byte[] createPicture(Part picture) {
 		/* Ferdinand's code */
 		try {
-			InputStream is;
-			if (picture == null) {
-				return null;
-				//is = ClassLoader.getSystemResourceAsStream("static/resources/AltBild.png");
-			} else {
-				is = picture.getInputStream();
+			if(picture!=null) {
+				if(picture.getSize()!=0){
+					InputStream is = picture.getInputStream();
+
+					BufferedImage img = ImageIO.read(is);
+
+					double scaling;
+					if (img.getWidth() != 512) {
+						scaling = 512.0 / img.getWidth();
+					} else {
+						scaling = 1.0;
+					}
+
+					BufferedImage img2 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+					img2.createGraphics().drawImage(img, 0, 0, Color.WHITE, observer);
+
+					BufferedImage imgOut = new BufferedImage((int) (scaling * (img.getWidth())),
+						(int) (scaling * (img.getHeight())), BufferedImage.TYPE_INT_RGB);
+					Graphics2D g = imgOut.createGraphics();
+					AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
+					g.drawImage(img2, transform, observer);
+
+					ByteArrayOutputStream imgoutput = new ByteArrayOutputStream();
+					ImageIO.write(imgOut, "jpg", imgoutput);
+					return imgoutput.toByteArray();
+				}
 			}
-
-			BufferedImage img = ImageIO.read(is);
-
-			double scaling;
-			if (img.getWidth() != 512) {
-				scaling = 512.0 / img.getWidth();
-			} else {
-				scaling = 1.0;
-			}
-
-			BufferedImage img2 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-			img2.createGraphics().drawImage(img, 0, 0, Color.WHITE, observer);
-
-			BufferedImage imgOut = new BufferedImage((int) (scaling * (img.getWidth())),
-					(int) (scaling * (img.getHeight())), BufferedImage.TYPE_INT_RGB);
-			Graphics2D g = imgOut.createGraphics();
-			AffineTransform transform = AffineTransform.getScaleInstance(scaling, scaling);
-			g.drawImage(img2, transform, observer);
-
+			BufferedImage img = new BufferedImage(512,300, BufferedImage.TYPE_INT_RGB);
+			Graphics2D g = img.createGraphics();
+			g.setColor(Color.WHITE);
+			g.fillRect(0, 0, 511, 299);
+			g.setColor(Color.GRAY);
+			g.drawRect(0, 0, 511, 299);
+			g.drawLine(0,0, 511, 299);
+			g.drawLine(511,0,0,299);
+			g.drawImage(img, 0,0,Color.WHITE, observer);
+			
 			ByteArrayOutputStream imgoutput = new ByteArrayOutputStream();
-			ImageIO.write(imgOut, "jpg", imgoutput);
+			ImageIO.write(img, "jpg", imgoutput);
 			return imgoutput.toByteArray();
 
 		} catch (Exception e) {
