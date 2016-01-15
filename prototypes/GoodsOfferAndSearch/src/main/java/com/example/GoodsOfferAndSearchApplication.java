@@ -71,12 +71,12 @@ public class GoodsOfferAndSearchApplication {
 			Good good6 = new Good("Jacket", "Nobody wants to be frozen", tags6);
 			
 			// Save a the goods.
-			repository.save(good1.createGoodEntity(1L));
-			repository.save(good2.createGoodEntity(2L));
-			repository.save(good3.createGoodEntity(3L));
-			repository.save(good4.createGoodEntity(4L));
-			repository.save(good5.createGoodEntity(5L));
-			repository.save(good6.createGoodEntity(6L));
+			repository.save(good1.createGoodEntity(1));
+			repository.save(good2.createGoodEntity(2));
+			repository.save(good3.createGoodEntity(3));
+			repository.save(good4.createGoodEntity(4));
+			repository.save(good5.createGoodEntity(5));
+			repository.save(good6.createGoodEntity(6));
 
 			// Fetch all goods.
 			log.info("");
@@ -89,7 +89,7 @@ public class GoodsOfferAndSearchApplication {
             log.info("");
 
 			// Fetch founded goods by a name.
-			log.info("Goods found with findByName('biC'):");
+			log.info("Goods found with findByName('Bicycle'):");
 			log.info("-------------------------------");
 			for (GoodEntity good :
 				 repository.findByNameStartingWithIgnoreCase("biC")) {
