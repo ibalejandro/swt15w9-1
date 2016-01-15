@@ -73,16 +73,14 @@ public class TestDaten implements DataInitializer {
 	@Override
 	public void initialize() {
 
-		initializeUsers(userAccountManager, userRepository, dialogRepository, languageRepository, moduleRepository,
-				interfaceRepository);
+		initializeUsers(userAccountManager, userRepository, languageRepository, moduleRepository, interfaceRepository);
 		initializeTags(tagsRepository);
-		initializeGoodsAndActivities(userAccountManager, userRepository, dialogRepository, languageRepository,
-				tagsRepository, moduleRepository, interfaceRepository);
+		initializeGoodsAndActivities(userAccountManager, userRepository, tagsRepository);
 		initializeTextBlocks();
 	}
 
 	private void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository,
-			DialogRepository dialogRepository, LanguageRepository languageRepository, ModuleRepository moduleRepository,
+			LanguageRepository languageRepository, ModuleRepository moduleRepository,
 			InterfaceRepository interfaceRepository) {
 
 		if (userAccountManager.findByUsername("boss").isPresent()) {
@@ -318,8 +316,7 @@ public class TestDaten implements DataInitializer {
 	}
 
 	private void initializeGoodsAndActivities(UserAccountManager userAccountManager, UserRepository userRepository,
-			DialogRepository dialogRepository, LanguageRepository languageRepository, TagsRepository tagsRepository,
-			ModuleRepository moduleRepository, InterfaceRepository interfaceRepository) {
+			TagsRepository tagsRepository) {
 
 		User user2 = userRepository.findByUserAccount(userAccountManager.findByUsername("testUser2").get());
 		User user3 = userRepository.findByUserAccount(userAccountManager.findByUsername("Lisa").get());
