@@ -1126,7 +1126,7 @@ public class TestDaten implements DataInitializer {
 		InterfacePart in234 = new InterfacePart ("My offered activities",lanEN.getId(),mod110.getId());
 		InterfacePart in235 = new InterfacePart ("Eigene Dialoge",lanDE.getId(),mod111.getId());
 		InterfacePart in236 = new InterfacePart ("My dialogues",lanEN.getId(),mod111.getId());
-		InterfacePart in237 = new InterfacePart ("Neuer dialog",lanDE.getId(),mod112.getId());
+		InterfacePart in237 = new InterfacePart ("Neuer Dialog",lanDE.getId(),mod112.getId());
 		InterfacePart in238 = new InterfacePart ("New dialogue",lanEN.getId(),mod112.getId());
 		InterfacePart in239 = new InterfacePart ("Benutzerkonto erstellen",lanDE.getId(),mod113.getId());
 		InterfacePart in240 = new InterfacePart ("Create user account",lanEN.getId(),mod113.getId());
