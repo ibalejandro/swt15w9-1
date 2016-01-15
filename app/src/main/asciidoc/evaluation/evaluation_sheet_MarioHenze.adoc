@@ -1,0 +1,28 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von: Mario Henze**
+
+**Gruppe: 09**
+
+== Was habe ich gelernt?
+* rudimentäre Grundlagen von JPA
+* Umgang mit Spring WebMVC
+* effizienter Umgang mit git
+* Aufgabenverteilung im Team
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* Herausforderungen in der Position als Teamleiter bzw. SCRUM-Master
+* Verlief ohne besondere Vorkommnisse
+* Aufgabenverteilung hätte im Nachhinein noch verbessert werden können; war aber
+  am Anfang schlecht abzusehen
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* Aussagekräftiges Javadoc ist grundlegend für nachhaltige Wiederverwendung
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* Die Vorlesungen von Oliver Gierke waren sehr hilfreich. Möglicherweise
+  könnte man noch mehr Termine in den Hörsaalübungen dafür veranschlagen um
+  den vermittelten Stoff ein bisschen detailierter darbieten zu können.
+* Umgang mit JPA sollte tiefgreifender erklärt werden
+
+== Sonstiges und Anmerkungen
