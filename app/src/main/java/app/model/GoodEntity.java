@@ -94,6 +94,14 @@ public class GoodEntity implements Serializable {
 		this.user = user;
 	}
 
+	 /**
+	  * Converts the given Part into a byte array, after resizing it if it's wider than 512px.
+	  * If it's null, a placeholder image is returned instead.
+	  * 
+	  * @param picture Part from a multipart request representing a picture
+	  * 
+	  */
+	
 	public static byte[] createPicture(Part picture) {
 		/* Ferdinand's code */
 		try {
