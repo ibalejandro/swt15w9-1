@@ -25,6 +25,7 @@ import app.model.UserRepository;
 import app.repository.GoodsRepository;
 import app.repository.TagsRepository;
 
+@Ignore
 public class GoodsManagementControllerIntegrationTests extends 
 AbstractWebIntegrationTests {
   
