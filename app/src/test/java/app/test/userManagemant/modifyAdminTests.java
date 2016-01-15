@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Optional;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class modifyAdminTests extends AbstractWebIntegrationTests {
 	@Autowired
 	AuthenticationManager authenticationManager;
 
+	@Ignore
 	@Test
 	public void modifyAllTest() throws Exception {
 		User user1 = userRepository.findByUserAccount(userAccountManager
