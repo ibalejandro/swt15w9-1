@@ -318,8 +318,16 @@ public class TestDaten implements DataInitializer {
 	private final void initializeTextBlocks() {
 		List<String> tbformatStrings = new LinkedList<>();
 		
-		tbformatStrings.add("Hallo ${name}");
-		tbformatStrings.add("Das ist neuwertig ${offer}");
+		tbformatStrings.add("Hallo");
+		tbformatStrings.add("Ich würde gern den Artikel ${article} besichtigen.");
+		tbformatStrings.add("OK");
+		tbformatStrings.add("Ich würde gern den Artikel ${article} abholen.");
+		tbformatStrings.add("Ich würde gern an der Aktivität ${activity} teilnehmen.");
+		tbformatStrings.add("Der Artikel ${article} ist leider schon weg.");
+		tbformatStrings.add("Sie können den Artikel am $(day) um ${time} Uhr in ${place} abholen.");
+		tbformatStrings.add("Können sie dieses Gut an meine Anschrift schicken?");
+		tbformatStrings.add("Ja, kein Problem.");
+		tbformatStrings.add("Nein, diese Möglichkeit habe ich nicht.");
 		
 		List<TextBlock> tbl = new LinkedList<>();
 		tbformatStrings.forEach((String s) -> tbl.add(new TextBlock(s, new FormatStringTagFilter(s).getTags())));
