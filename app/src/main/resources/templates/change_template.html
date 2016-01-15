@@ -17,26 +17,27 @@
 				<h1 class="headline" th:text="${template_edithead_text.text}">Template bearbeiten: </h1>
 			</div>
 			
-			<form th:action="@{/change_template_submit/}+${template}" method="post">
-				<table>
-					<tr> <!-- List all attributes here! -->
-						<th th:text="${template_thymeleafname_text.text}">ThymeLeaf-Einbindung</th>
-						<th th:if="${refSprache}" th:text="${template_reflang_text.text}">Referenzsprachen Text</th>
-						<th th:text="${template_changelang_text.text}">zuändernde Sprache</th>
-					</tr>
-					<tr th:each="temp, iterStat : ${result}">
-						<td>
-							<input class="form__input" th:value="${temp.get1().getThymeLeafName()}" type="text" th:name="'thymeLeafValue'+${iterStat.count}" autofocus="autofocus"/>
-							<input class="form__input" th:value="${temp.get1().getId()}" type="hidden" th:name="'thymeLeafId'+${iterStat.count}"/>
-						</td>
-						<td th:if="${refSprache}" th:text="${temp.get2().get2()}"></td>
-						<td><input class="form__input" th:value="${temp.get2().get1()}" type="text" th:name="'Value'+${iterStat.count}" autofocus="autofocus"/></td>
-					</tr>
-				</table>
-				<input type="hidden" th:value="${changeSprache}" name="changeSprache"/>
-				<input type="submit" class="button" th:value="${template_editsave_text.text}" value="Speichern"/>
-			</form>
-			
+			<div>
+				<form th:action="@{/change_template_submit/}+${template}" method="post">
+					<table class="small-12 columns">
+						<tr> <!-- List all attributes here! -->
+							<th th:text="${template_thymeleafname_text.text}">ThymeLeaf-Einbindung</th>
+							<th th:if="${refSprache}" th:text="${template_reflang_text.text}">Referenzsprachen Text</th>
+							<th th:text="${template_changelang_text.text}">zuändernde Sprache</th>
+						</tr>
+						<tr th:each="temp, iterStat : ${result}">
+							<td class="less_space">
+								<input class="form__input" th:value="${temp.get1().getThymeLeafName()}" type="text" th:name="'thymeLeafValue'+${iterStat.count}" autofocus="autofocus"/>
+									<input class="form__input" th:value="${temp.get1().getId()}" type="hidden" th:name="'thymeLeafId'+${iterStat.count}"/>
+							</td>
+							<td th:if="${refSprache}" th:text="${temp.get2().get2()}" class="less_space"></td>
+							<td class="less_space"><input class="form__input" th:value="${temp.get2().get1()}" type="text" th:name="'Value'+${iterStat.count}" autofocus="autofocus"/></td>
+						</tr>
+					</table>
+					<input type="hidden" th:value="${changeSprache}" name="changeSprache"/>
+					<input type="submit" class="button" th:value="${template_editsave_text.text}" value="Speichern"/>
+				</form>
+			</div>
 		</div>
 		
 		

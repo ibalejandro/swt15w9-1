@@ -6,19 +6,24 @@
 	</head>
 	
 	<body>
-		<div th:include="navigation :: navigation"></div>
+		<th:block th:include="navigation :: navigation"></th:block>
 	
 		<div class="row">
-			<h2 th:text="${nav_newtblock_text.text}"> Neuer TextBlock </h2>
+			<div class="small-12 columns">
+				<h1 class="headline" th:text="${nav_newtblock_text.text}"> Neuer TextBlock </h1>
+			</div>
+			
+			
+				<form class ="row" th:action="@{/newTextBlock}" method="post">
+					<div class="medium-8 small-12 columns">
+						<input type="text" id="formatString" name="formatString" />
+					</div>
+					<div class="medium-4 small-12 columns">
+						<input class="button" type="submit" value="Submit" th:value="${admin_submit_text.text}"/> 
+					</div>
+				</form>
+					
 		</div>
-		
-		<div>
-			<form class ="row" th:action="@{/newTextBlock}" method="post">
-				<input type="text" id="formatString" name="formatString" />
-				<input class="button" type="submit" value="Submit" th:text="${admin_submit_text.text}"/> 
-			</form>
-		</div>		
-
 		<th:block th:include="imports :: script"></th:block>
 	</body>
 </html>

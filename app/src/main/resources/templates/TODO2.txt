@@ -5,13 +5,13 @@ activationmail-local			|	activationmail_local			|f
 addnew-Tag			?			|	addNewTag						|f
 addednew-Tag		?			|	addedNewTag						|f
 changePassword					|	changePassword					|f
-data							|	data							|
-data-refugee					|	data_refugee					|
-dialog							|	dialog							|
-dialog-list						|	dialogList						|
-dialog-start					|	startDialog						|
+data							|	data							|ansich
+data-refugee					|	data_refugee					|ansich
+dialog							|	dialog							|h
+dialog-list						|	dialogList						|h
+dialog-start					|	startDialog						|f
 deleted-Tag						|	deletedTag						|f
-deleted-Good					|	deletedGood						|g
+deleted-Good					|	deletedGood						|f
 deleted-Activity				|	deletedActivity					|f
 error-notYour-Activtie			|	notYourActivity					|f
 error-noUser					|	noUser							|f
@@ -38,12 +38,12 @@ offered-GoodsAndActivities		|	offeredGoodsAndActivities		|
 offer-Activity					|	offerActivity					|f
 offered-Activity				|	offeredActivity					|f
 reCAPTCHA						|	reCAPTCHA						|
-textBlockList					|	textBlockList					|
-textBlockList-new				|	newTextBlock					|
+textBlock-List					|	textBlockList					|f
+textBlock-new					|	newTextBlock					|f
 search							|	search							|f
 searchResults					|	searchResults					|f
-template-manager				|	template_translation_manager	|
-template-change					|	change_template					|
+template-manager				|	template_translation_manager	|f
+template-change					|	change_template					|f
 tags-available					|	availableTags					|f
 updated-Tag						|	updatedTag						|f
 user-deaktivate					|	deaktivateUser					|f

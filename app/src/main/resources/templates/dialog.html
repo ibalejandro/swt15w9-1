@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-<th:block th:include="imports :: head"></th:block>
-<title>Dialog</title>
-</head>
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+		<title>Dialog</title>
+	</head>
 
-<body>
-	<div th:include="navigation :: navigation"></div>
+	<body>
+		<div th:include="navigation :: navigation"></div>
 
-	<div class="row">
-		<!--	replace by actual internalization string
-					change layout to two columns		
-			-->
-		<h1 th:text="${title}">dialog_title</h1>
-
-		<div class="messages">
-			<div th:each="msg : ${chats}">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div th:utext="${msg}">msg</div>
-						<footer class="date"
-							th:text="${msg.author.userAccount.firstname + ' | ' + #dates.format(msg.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
+		<div class="row">
+			<!--	replace by actual internalization string
+						change layout to two columns		
+				-->
+			<div class="small-12 columns">
+				<h1 th:text="${title}" class="headline">dialog_title</h1>
+			</div>
+			<div class="small-12 columns divider"></div>
+			
+			<div class="small-12 columns">
+				<div th:each="msg : ${chats}">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div th:utext="${msg}" class="text-super">msg</div>
+							<footer class="date"
+								th:text="${msg.author.userAccount.firstname + ' | ' + #dates.format(msg.date, 'dd. MMMM yyyy - HH:mm')}">
+							Datum</footer>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="small-12 columns">
+				<form action="/dialog" th:action="@{/dialog(id=${dialog.id})}"
+					method="post">
+					<div th:utext="${textblockForm}"></div>
+					<input class="button" type="submit" value="Submit" th:value="${admin_submit_text.text}" />
+				</form>
+			</div>
 		</div>
-
-		<form action="/dialog" th:action="@{/dialog(id=${dialog.id})}"
-			method="post">
-			<div th:utext="${textblockForm}"></div>
-			<input type="submit" value="Submit"  th:value="${admin_submit_text.text}" />
-		</form>
-	</div>
-
-	<th:block th:include="imports :: script"></th:block>
-</body>
+		<th:block th:include="imports :: script"></th:block>
+	</body>
 </html>

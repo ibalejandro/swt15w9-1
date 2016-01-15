@@ -79,8 +79,9 @@ public class TestDaten implements DataInitializer {
 	@Override
 	public void initialize() {
 
-		initializeUsers(userAccountManager, userRepository, dialogRepository, languageRepository,
-		                tagsRepository, moduleRepository, interfaceRepository);
+		initializeUsers(userAccountManager, userRepository, dialogRepository, 
+		                languageRepository, moduleRepository, interfaceRepository);
+		initializeTags(tagsRepository);
 		initializeGoodsAndActivities(userAccountManager, userRepository, dialogRepository, languageRepository,
                 tagsRepository, moduleRepository, interfaceRepository);
 		initializeTextBlocks();
@@ -90,9 +91,8 @@ public class TestDaten implements DataInitializer {
 	                             UserRepository userRepository, 
 	                             DialogRepository dialogRepository, 
 	                             LanguageRepository languageRepository,
-	                             TagsRepository tagsRepository,
 	                             ModuleRepository moduleRepository,
-	        	                 InterfaceRepository interfaceRepository) {
+	                             InterfaceRepository interfaceRepository) {
 
 		if (userAccountManager.findByUsername("boss").isPresent()) {
 			return;
@@ -243,7 +243,6 @@ public class TestDaten implements DataInitializer {
 		user1.addDialog(savedDialog);
 		user2.addDialog(savedDialog);
 		*/
-
 		
 		ArrayList<TagEntity> tags = createTags();
 		for (TagEntity tag: tags) tagsRepository.save(tag);
@@ -253,23 +252,15 @@ public class TestDaten implements DataInitializer {
 			moduleRepository.save(mod);
 		}
 		
-		
-		
 		List<InterfacePart> inPs = createInterfacePart(moduleRepository, languageRepository);
 		for(InterfacePart inP : inPs){
 			interfaceRepository.save(inP);
 		}
 	}
 	
-	private final void initializeTextBlocks() {
-		List<String> tbformatStrings = new LinkedList<>();
-		
-		tbformatStrings.add("Hallo ${name}");
-		tbformatStrings.add("Das ist neuwertig ${offer}");
-		
-		List<TextBlock> tbl = new LinkedList<>();
-		tbformatStrings.forEach((String s) -> tbl.add(new TextBlock(s, new FormatStringTagFilter(s).getTags())));
-		textBlockRepository.save(tbl);
+	private final void initializeTags(TagsRepository tagsRepository) {
+	  ArrayList<TagEntity> tags = createTags();
+    for (TagEntity tag : tags) tagsRepository.save(tag);
 	}
 	
 	/**
@@ -277,10 +268,10 @@ public class TestDaten implements DataInitializer {
    * they can be accessible and the user can select one of them for his offers.
    * @return ArrayList<TagEntity> A list with all available tags
    */
-	public ArrayList<TagEntity> createTags() {
-	  ArrayList<TagEntity> tags = new ArrayList<>();
-	  
-	  TagEntity tag1 = new TagEntity("Baby");
+  public ArrayList<TagEntity> createTags() {
+    ArrayList<TagEntity> tags = new ArrayList<>();
+    
+    TagEntity tag1 = new TagEntity("Baby");
     TagEntity tag2 = new TagEntity("Books");
     TagEntity tag3 = new TagEntity("Cameras & Photo");
     TagEntity tag4 = new TagEntity("Cell Phones & Accesories");
@@ -325,6 +316,17 @@ public class TestDaten implements DataInitializer {
     tags.add(tag21);
     
     return tags;
+  }
+	
+	private final void initializeTextBlocks() {
+		List<String> tbformatStrings = new LinkedList<>();
+		
+		tbformatStrings.add("Hallo ${name}");
+		tbformatStrings.add("Das ist neuwertig ${offer}");
+		
+		List<TextBlock> tbl = new LinkedList<>();
+		tbformatStrings.forEach((String s) -> tbl.add(new TextBlock(s, new FormatStringTagFilter(s).getTags())));
+		textBlockRepository.save(tbl);
 	}
 	
 	private void initializeGoodsAndActivities(UserAccountManager userAccountManager, 

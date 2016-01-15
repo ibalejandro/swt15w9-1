@@ -1,0 +1,27 @@
+﻿= Cross-Testing Feedback
+
+__Durchführende Gruppe:__ 9
+__Anwendung von Gruppe:__ 10
+
+== Getestetes System
+Welche Aufgabe/Problemstellung löst die Anwendung.
+
+Austausch von Helfern und Flüchtlingen, sowie anbieten von Gütern und Aktivitäten.
+
+== Fehler-Report
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+http://refugee-app.tk/swt15w10/searchbytags 	| - | Suche als nicht eingeloggter User 	| Whitelabel Errorpage oder keine Antwort
+http://refugee-app.tk/swt15w10/search		| - | Seite wird ohne Bilder angezeigt		| 
+| … | … | … | … |
+|===
+
+== Sonstiges
+* Optik der Anwendung: Sehr Übersichtlich
+* Fehlende Features: Keinerlei Übersetzung. Weder bei Angabe einer Sprache != Deutsch bei der Registrierung, noch bei Umstellung der Browsersprache. 
+* Interaktion mit der Anwendung (Usability): Gut
+
+== Verbesserungsvorschläge
+* Was kann noch weiter verbessert werden?: Übersetzung, Mehr Dialogbausteine

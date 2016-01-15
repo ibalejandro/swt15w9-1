@@ -40,7 +40,7 @@ import app.repository.LanguageRepository;
 
 /**
 * <h1>UserManagementController</h1>
-* The UserManagementController is used to show all or a certain registered User.
+* The UserManagementController is used to find, show and modify a certain registered User.
 * 
 *
 * @author Friederike Kitzing
@@ -54,10 +54,7 @@ public class UserManagementController {
 	private final LanguageRepository languageRepository;
 	private final AuthenticationManager authenticationManager;
 	
-	/**
-   * Autowire.
-   * @param userRepository The repository for the users
-   */
+
 	@Autowired
 	public UserManagementController(UserRepository userRepository, UserAccountManager userAccountManager,LanguageRepository languageRepository, AuthenticationManager authenticationManager) {
 		this.userRepository = userRepository;
@@ -79,7 +76,7 @@ public class UserManagementController {
 	String userDetails(ModelMap map) {
 		map.addAttribute("userDetails", userRepository.findAll());
 		return "userDetails";
-	}*7
+	}*/
 
 	/**
 	   * This method is the answer for the request to '/data'. It finds
@@ -102,6 +99,13 @@ public class UserManagementController {
 			return "noUser";
 		}
 	
+		/**
+		   * This method is the answer for the request to '/changePassword/{user}'. 
+		   * It adds the userAccount of the loggedIn User or (if the admin is present) the userAccount with the name off the given path parameter
+		   * @param Model The model to add the present User
+		   * @param Optional<UserAccount> The loggedIn userAccount
+		   * @return String The name of the view to be shown after processing
+		   */
 		@RequestMapping("/changePassword/{user}")
 		public String changePassword(@PathVariable final String user, Model model,  @LoggedIn Optional<UserAccount> userAccount){
 			if(userAccount.isPresent()&& userAccount.get().hasRole(new Role("ROLE_NORMAL")))
@@ -112,6 +116,12 @@ public class UserManagementController {
 			return "changePassword";
 		}
 		
+		/**
+		   * This method is the answer for the request to '/changePassword_submit/{user}'. 
+		   * It changes the password if the old password is correct, both new passwords are equal and the new password is valid.
+		   * @param Optional<UserAccount> The loggedIn userAccount
+		   * @return String The name of the view to be shown after processing
+		   */
 		@RequestMapping(value="/changePassword_submit/{user}", method = RequestMethod.POST)
 		public String changePassword_submit(@PathVariable final String user, @LoggedIn Optional<UserAccount> userAccount,  @RequestParam("actualPassword") final String ActualPassword, @RequestParam("newPassword1") final String NewPassword1,@RequestParam("newPassword2") final String NewPassword2){
 			if(!userAccount.isPresent())return "noUser";
@@ -119,12 +129,16 @@ public class UserManagementController {
 			if(userAccount.get().hasRole(new Role("ROLE_ADMIN")))user_xyz=userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
 			else user_xyz=userRepository.findByUserAccount(userAccount.get());
 			
-			
-			
-			if(ActualPassword!=null && authenticationManager.matches(user_xyz.getUserAccount().getPassword(), new Password(ActualPassword))){
-				if(NewPassword1.equals(NewPassword2) && validate(NewPassword1))userAccountManager.changePassword(user_xyz.getUserAccount(), NewPassword1);;
+			if(ActualPassword!=null /*&& authenticationManager.matches(user_xyz.getUserAccount().getPassword(), new Password(ActualPassword))*/){
+				if(NewPassword1.equals(NewPassword2) && (HelpFunctions.checkPasswordStrength(NewPassword1)!=0)){
+					userAccountManager.changePassword(user_xyz.getUserAccount(), NewPassword1);;
+				}else{
+					System.out.println("Fehler PW-Validation");
+					return "redirect:/changePassword/{user}";
+				}
 			}else{
-				return "redirect:/";
+				System.out.println("Fehler altes Password");
+				return "redirect:/changePassword/{user}";
 			}
 			userRepository.save(user_xyz);
 			userAccountManager.save(user_xyz.getUserAccount());
@@ -136,31 +150,14 @@ public class UserManagementController {
 			}
 			return "redirect:/data";
 		}
-		
-		private boolean validate(String Password) {
-			if (Password==null || Password.length()<8) 
-			{
-				System.out.println("Passwort zu kurz.");
-				return false;
-			}else{
-				 String[] partialRegexChecks = 
-			        	{
-			        			".*[a-z]+.*", // lower
-			        			".*[A-Z]+.*", // upper
-			        			".*[0-9]+.*", // digits
-			        			".*[@#Â§$%&/()=?{}#+-~.,;:<>|\\!]+.*" // symbols
-			        	};
-				 if(Password.matches(partialRegexChecks[0]) 
-						 && Password.matches(partialRegexChecks[1]) 
-						 && Password.matches(partialRegexChecks[2]) 
-						 && Password.matches(partialRegexChecks[3])) return true;
-				 
-				 System.out.println("Passwort erfÃ¼llt nicht die Anforderungen.");
-				return false;
-				
-			}
-		}
-
+	
+		/**
+		   * This method is the answer for the request to '/modifyUserAccount/{user}'. 
+		   * It adds the userAccount of the loggedIn User.
+		   * @param Model The model to add the present User
+		   * @param Optional<UserAccount> The loggedIn userAccount
+		   * @return String The name of the view to be shown after processing
+		   */
 		@RequestMapping("/modifyUserAccount/{user}")
 		public String modifyUserAccount(ModelMap model,  @LoggedIn Optional<UserAccount> userAccount){
 			if(userAccount.isPresent()){
@@ -168,43 +165,13 @@ public class UserManagementController {
 			}
 			return "modifyUserAccount";
 		}
-		
-		private static boolean containsString( String s, String subString ) {
-	        return s.indexOf( subString ) > -1 ? true : false;
-	    }
-		
-		private boolean emailValidator(String email) {
-			boolean isValid = false;
 			
-			if (containsString(email,"@") == false)
-			{
-				return false;	
-			}
-			
-			if (containsString(email,".") == false)
-			{
-				return false;	
-			}
-			
-		    /*    if (email.equals("test@test.test"))
-	        {
-	            return false;    
-	        }    */
-
-			
-			try {
-				//
-				// Create InternetAddress object and validated the supplied
-				// address which is this case is an email address.
-				InternetAddress internetAddress = new InternetAddress(email);
-				internetAddress.validate();
-				isValid = true;
-			} catch (AddressException e) {
-				System.out.println("You are in catch block -- Exception Occurred for: " + email);
-			}
-			return isValid;
-		}
-		
+		/**
+		   * This method is the answer for the request to '/modifyUserAccount_submit/{user}'. 
+		   * It changes the user information saved in the userAccount.
+		   * @param Optional<UserAccount> The loggedIn userAccount
+		   * @return String The name of the view to be shown after processing
+		   */
 		@RequestMapping(value="/modifyUserAccount_submit/{user}", method = RequestMethod.POST)
 		public String modifyUserAccount(@LoggedIn Optional<UserAccount> userAccount,  @RequestParam(value = "firstname", required = false) final String Firstname, @RequestParam(value = "lastname", required = false) final String Lastname,@RequestParam(value = "email", required = false) final String Email){
 			if(!userAccount.isPresent())return "noUser";
@@ -214,14 +181,20 @@ public class UserManagementController {
 				user_xyz.getUserAccount().setFirstname(Firstname);
 			if ((Lastname!=null) && (!Lastname.equals("")))
 				user_xyz.getUserAccount().setLastname(Lastname);
-			if ((Email!=null) && (!Email.equals("")) && emailValidator(Email))
+			if ((Email!=null) && (!Email.equals("")) && HelpFunctions.emailValidator(Email))
 				user_xyz.getUserAccount().setEmail(Email);
 			
 			userAccountManager.save(user_xyz.getUserAccount());
 			userRepository.save(user_xyz);
 			return "redirect:/data";
 		}
-		
+		/**
+		   * This method is the answer for the request to '/modifyAddress'. 
+		   * It adds the userAccount of the loggedIn User.
+		   * @param Model The model to add the present User
+		   * @param Optional<UserAccount> The loggedIn userAccount
+		   * @return String The name of the view to be shown after processing
+		   */
 		@RequestMapping("/modifyAddress")
 		public String modifyAddress(Model model,  @LoggedIn Optional<UserAccount> userAccount){
 			if(userAccount.isPresent()){
@@ -232,7 +205,12 @@ public class UserManagementController {
 			}
 			return "modifyAddress";
 		}
-		
+		/**
+		   * This method is the answer for the request to '/modifyAddress_submit'. 
+		   * It changes the address data of the loggedIn User.
+		   * @param Optional<UserAccount> The loggedIn userAccount
+		   * @return String The name of the view to be shown after processing
+		   */
 		@RequestMapping(value="/modifyAddress_submit", method = RequestMethod.POST)
 		public String modifyAddress_submit( @LoggedIn Optional<UserAccount> userAccount, @RequestParam("wohnen") final String Adresstyp, @RequestParam("flh_name") final Optional<String> Flh_name_OPT, @RequestParam("citypart") final Optional<String> Citypart_OPT, @RequestParam("street") final Optional<String> Street_OPT, @RequestParam("housenr") final Optional<String> Housenr_OPT, @RequestParam("postcode_R") final Optional<String> Postcode_R, @RequestParam("city_R") final Optional<String> City_R, @RequestParam("postcode_H") final Optional<String> Postcode_H, @RequestParam("city_H") final Optional<String> City_H){
 			if(!userAccount.isPresent())return "noUser";
@@ -267,10 +245,10 @@ public class UserManagementController {
 					user_xyz.setAddresstyp(AddresstypEnum.Wohnung);
 					userRepository.save(user_xyz);
 				}
-				if ((Postcode_H.isPresent()) && !Postcode_H.get().isEmpty() && (Postcode_H.get().matches("[0-9]{5}"))){
+				if ((Postcode_H.isPresent()) && !Postcode_H.get().isEmpty() && (Postcode_H.get().matches("[0-9]{5}") && userRepository.findOne(user_xyz.getId()).getAddresstypString().equals("Wohnung"))){
 					user_xyz.getLocation().setZipCode(Postcode_H.get());				
 				}
-				if (City_H.isPresent()&& !City_H.get().isEmpty()){
+				if (City_H.isPresent()&& !City_H.get().isEmpty()&& userRepository.findOne(user_xyz.getId()).getAddresstypString().equals("Wohnung")){
 					user_xyz.getLocation().setCity(City_H.get());			
 				}
 				if(user_xyz.getAddresstypString().equals("Wohnung")){
@@ -286,7 +264,13 @@ public class UserManagementController {
 			}
 			return "redirect:/data";
 		}
-		
+		/**
+		   * This method is the answer for the request to '/modifyLanguages'. 
+		   * It adds all the necessary attributs for the modifyLanguages-template
+		   * @param Model The model to add the present User and his languages
+		   * @param Optional<UserAccount> The loggedIn userAccount
+		   * @return String The name of the view to be shown after processing
+		   */
 		@RequestMapping("/modifyLanguages")
 		public String modifyLanguages(ModelMap model,  @LoggedIn Optional<UserAccount> userAccount){
 			User user_xyz;
@@ -313,22 +297,24 @@ public class UserManagementController {
 			return "modifyLanguages";
 		}
 		
+		/**
+		   * This method is the answer for the request to '/modifyLanguages_submit'. 
+		   * It changes the users chosen languages
+		   * @param Optional<UserAccount> The loggedIn userAccount
+		   * @return String The name of the view to be shown after processing
+		   */
 		@RequestMapping(value="/modifyLanguages_submit", method = RequestMethod.POST)
-		public String modify( @LoggedIn Optional<UserAccount> userAccount, @RequestParam(value="nativelanguage", required=false)final String Nativelanguage,@RequestParam(value="otherlanguages", required=false)final String OtherLanguages){
+		public String modify( @LoggedIn Optional<UserAccount> userAccount, @RequestParam(value="nativelanguage")final String Nativelanguage,@RequestParam(value="otherlanguages")final String OtherLanguages){
 			if(!userAccount.isPresent())return "noUser";
 			User user_xyz=userRepository.findByUserAccount(userAccount.get());
 			
 			
 			if (!Nativelanguage.isEmpty()) {
-				System.out.println("modify language");
 				user_xyz.removeLanguage(user_xyz.getPrefLanguage());
 				Language PreferredLanguage = languageRepository.findByKennung(Nativelanguage);
 				user_xyz.setPrefLanguage(PreferredLanguage);
 			}
 			if (!OtherLanguages.isEmpty() && !OtherLanguages.toString().equals("-1")) {
-				System.out.println("modify languages");
-				System.out.println(OtherLanguages);
-				System.out.println(OtherLanguages.toString());
 				Boolean nichtleer = false;
 				for (String test : OtherLanguages.split(",")) {
 					if (!test.equals("-1")) {
@@ -340,19 +326,13 @@ public class UserManagementController {
 				}
 				if (OtherLanguages != null && !OtherLanguages.isEmpty()) {
 					for (String languageName : OtherLanguages.split(",")) {
-						System.out.println(languageName);
 						if (languageRepository.findByKennung(languageName) != null) {
-							// user_xyz.setLanguage(languageRepository.findByName(languageName));
-							Language l1 = languageRepository.findByKennung(languageName);
-							System.out.println(l1.toString());
-							user_xyz.setLanguage(l1);
+							user_xyz.setLanguage(languageRepository.findByKennung(languageName));
 							userRepository.save(user_xyz);
 						}
-						System.out.println(user_xyz.getLanguages());
 					}
 				}
 			}
-			System.out.println("3.0");
 			userRepository.save(user_xyz);
 			
 			return "redirect:/data";

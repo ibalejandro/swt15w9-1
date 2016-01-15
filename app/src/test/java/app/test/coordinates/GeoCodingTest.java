@@ -55,8 +55,104 @@ public class GeoCodingTest extends AbstractWebIntegrationTests {
 	@Autowired
 	AuthenticationManager authenticationManager;
 
+	public void prepaire() {
+
+		User user1 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser1").get());
+		User user2 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser2").get());
+		User user3 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("Lisa").get());
+		User user4 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("Peter").get());
+		User user5 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser5").get());
+		User user6 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser6").get());
+		User user7 = userRepository.findByUserAccount(userAccountManager
+				.findByUsername("testUser7").get());
+
+		Address testAddressWohnung1 = new Address("Nöthnitzer Str.", "46",
+				"01187", "Dresden");
+		// 2.44km
+		Address testAddressWohnung2 = new Address("Prager Str.", "10", "01069",
+				"Dresden");
+		// 158.49km
+		Address testAddressWohnung3 = new Address("Scharnweberstr.", "22 A",
+				"12587", "Berlin");
+		// 45km
+		Address testAddressWohnung4 = new Address("Merzdorfer Str.", "21 - 25",
+				"01591", "Riesa");
+		// 100.27
+		Address testAddressWohnung5 = new Address("Martin-Luther-Ring", "4-6",
+				"04109", "Leipzig");
+		// 10.83km
+		Address testAddressWohnung6 = new Address("Wittgensdorfer Str.", "20",
+				"01731", "Kreischa");
+		// 60km
+		Address testAddressWohnung7 = new Address("Reichenhainer Straße", "41",
+				"09126", "Chemnitz");
+
+		if (!user1.isOldLocation(testAddressWohnung1)) {
+			user1.setLocation(testAddressWohnung1);
+			user1.setAddresstyp(AddresstypEnum.Wohnung);
+			userRepository.save(user1);
+			user1.setCoordinates(user1.createCoordinates());
+			userRepository.save(user1);
+		}
+
+		if (!user2.isOldLocation(testAddressWohnung2)) {
+			user2.setLocation(testAddressWohnung2);
+			user2.setAddresstyp(AddresstypEnum.Wohnung);
+			userRepository.save(user2);
+			user2.setCoordinates(user2.createCoordinates());
+			userRepository.save(user2);
+		}
+
+		if (!user3.isOldLocation(testAddressWohnung3)) {
+			user3.setLocation(testAddressWohnung3);
+			user3.setAddresstyp(AddresstypEnum.Wohnung);
+			userRepository.save(user3);
+			user3.setCoordinates(user3.createCoordinates());
+			userRepository.save(user3);
+		}
+
+		if (!user4.isOldLocation(testAddressWohnung4)) {
+			user4.setLocation(testAddressWohnung4);
+			user4.setAddresstyp(AddresstypEnum.Wohnung);
+			userRepository.save(user4);
+			user4.setCoordinates(user4.createCoordinates());
+			userRepository.save(user4);
+		}
+
+		if (!user5.isOldLocation(testAddressWohnung5)) {
+			user5.setLocation(testAddressWohnung5);
+			user5.setAddresstyp(AddresstypEnum.Wohnung);
+			userRepository.save(user5);
+			user5.setCoordinates(user5.createCoordinates());
+			userRepository.save(user5);
+		}
+
+		if (!user6.isOldLocation(testAddressWohnung6)) {
+			user6.setLocation(testAddressWohnung6);
+			user6.setAddresstyp(AddresstypEnum.Wohnung);
+			userRepository.save(user6);
+			user6.setCoordinates(user6.createCoordinates());
+			userRepository.save(user6);
+		}
+
+		if (!user7.isOldLocation(testAddressWohnung7)) {
+			user7.setLocation(testAddressWohnung7);
+			user7.setAddresstyp(AddresstypEnum.Wohnung);
+			userRepository.save(user7);
+			user7.setCoordinates(user7.createCoordinates());
+			userRepository.save(user7);
+		}
+	}
+
 	@Test
 	public void createCoordinatesTest() {
+		prepaire();
 		User user1 = userRepository.findByUserAccount(userAccountManager
 				.findByUsername("testUser1").get());
 		User user2 = userRepository.findByUserAccount(userAccountManager
@@ -230,27 +326,4 @@ public class GeoCodingTest extends AbstractWebIntegrationTests {
 		assertEquals(51.045846, user1.getLatitude(), delta);
 		assertEquals(13.736928, user1.getLongitude(), delta);
 	}
-	/*
-	 * @Test public void registerAddressHelper() throws Exception{ User user1=
-	 * userRepository
-	 * .findByUserAccount(userAccountManager.findByUsername("testUser1").get());
-	 * String user="testUser1"; double delta=0.00001;
-	 * 
-	 * mvc.perform(post("/create_new_user") .param("mailIN", "test@test.test")
-	 * .param("usernameIN", "Test") .param("passwordIN", "Test08.12")
-	 * .param("repasswordIN", "Test08.12") .param("nameIN", "Abc")
-	 * .param("firstnameIN", "Def") .param("wohnen", "helper") .param("street",
-	 * "Prager Str.") .param("housenr", "10") .param("postcode_H", "01069")
-	 * .param("city_H", "Dresden") .param("nativelanguage", "de")
-	 * .param("otherlanguages", "en") .param("origin", "Deutschland")
-	 * .param("g-recaptcha-response", "en")
-	 * .with(user("testUser1").roles("NORMAL"))).//
-	 * andExpect(view().name("redirect:/userDetails"));
-	 * 
-	 * user1=
-	 * userRepository.findByUserAccount(userAccountManager.findByUsername(
-	 * "Test").get()); assertEquals(51.045846, user1.getLatitude(), delta);
-	 * assertEquals(13.736928, user1.getLongitude(),delta); }
-	 */
-
 }

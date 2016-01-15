@@ -38,6 +38,29 @@
 				</tbody>
 			</table>
 		</div>
+		<table sec:authorize="hasRole('ROLE_NORMAL')" class="small-12 columns">
+			<thead>
+				<tr>
+					<th class="text-super">Title</th>
+					<th class="text-super">Dialog Partner</th>
+					<th class="text-super">Link</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="dialog : ${dialogList}">
+					<td th:text="${dialog.title}" class="text">Title</td>
+					<td th:text="${dialog.userA.userAccount.firstname}"
+						th:if="${dialog.userB.userAccount.firstname.equals(loggedInUser.userAccount.firstname)}" class="text">
+					</td>
+					<td th:text="${dialog.userB.userAccount.firstname}"
+						th:unless="${dialog.userB.userAccount.firstname.equals(loggedInUser.userAccount.firstname)}" class="text">
+					</td>
+					<td><a href="/dialogList"
+						th:href="@{/dialog(id=${dialog.id})}"> Go to </a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<th:block th:include="imports :: script"></th:block>

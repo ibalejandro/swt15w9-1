@@ -14,27 +14,25 @@
 		<div th:include="navigation :: navigation"></div>
 		
 		<div class="row">
-			<div class = "small-12 columns">
-				<div class="dialog">
-					<h1 class="headline" th:text="${dialog_new_text.text}">New Dialog</h1>
-					
-					<form th:action="@{/startDialog}" method="post">
-						<div>
-							<label class="form__label" for="title" th:text="${dialog_title_text.text}">Title:</label>
-							<input type="text" name="title"/>
-						</div>
-						
-						<div>
-							<label class="form__label" for="participant" th:text="${dialog_partner_text.text}">Participant:</label>
-							<input type="text" name="participant"/>
-						</div>
-						
-						<div>
-							<input class="button" type="submit" value="Begin" th:text="${admin_submit_text.text}"/>
-						</div>
-					</form>
-				</div>
+			<div class="small-12 columns">	
+				<h1 class="headline" th:text="${dialog_new_text.text}">New Dialog</h1>
 			</div>
+			
+			<form th:action="@{/startDialog}" method="post">
+				<div class="small-12 medium-6 columns">
+					<label class="form__label" for="title">Title:</label>
+					<input type="text" name="title"/>
+				</div>
+				
+				<div class="small-12 medium-6 columns">
+					<label class="form__label" for="participant">Participant:</label>
+					<input type="text" name="participant"/>
+				</div>
+				
+				<div class="small-12 columns">
+					<input class="button" type="submit" value="Begin"/>
+				</div>
+			</form>
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>

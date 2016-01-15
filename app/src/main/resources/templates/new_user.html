@@ -72,7 +72,7 @@
 									class="has-tip form__label" for="passwordIN" th:text="${login_passwort_text.text}">Passwort:</label>
 								</div>
 
-								<div class="small-12 columns less_spaces">
+								<div class="small-12 columns less_space">
 									<input name="passwordIN" type="password" required="required" minlength="8" maxlength="64"/>
 									<label th:if="${param.EmptyError_password}" class="error center space-1rem-topbottom" for="passwordIN" th:text="${error_empty_text.text}">Password must not be empty!</label>
 									<label th:if="${param.ShortError_password}" class="error center space-1rem-topbottom" for="passwordIN" th:text="${error_short_text.text}">Password to short! Min 8 chars.</label>

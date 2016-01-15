@@ -13,66 +13,89 @@
 	
 	<body>
 		<th:block th:include="navigation :: navigation"></th:block>
-	
-		<header>
-			<h1  th:text="${user_userdata_text.text}+${user.getUserAccount().getUsername()} ">Kundendaten: UserAccount</h1>
-		</header>
+		<div class="small-12 columns space-1rem"></div>
 		
-		<div>				
-			<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html" th:text="${user_changepw_text.text}">Password ändern</a></div>
-			<div sec:authorize="hasRole('ROLE_NORMAL')"><a th:href="@{/deaktivateUser}" href="deaktivateUser.html"  th:text="${user_deactivateuser_text.text}">Nutzerkonto deaktivieren</a></div>
-			<table>			
-				<tr>
-					<td th:text="${user_firstname_text.text}">Firstname</td>
-					<td th:text="${user.userAccount.getFirstname()}">Firstname</td>
-				</tr>	
-				<tr>
-					<td th:text="${user_lastname_text.text}">Lastname</td>
-					<td th:text="${user.userAccount.lastname}">Lastname</td>
-				</tr>	
-				<tr>
-					<td th:text="${user_email_text.text}">Email</td>
-					<td th:text="${user.userAccount.email}">Email</td>
-				</tr>	
-				<tr sec:authorize="hasRole('ROLE_ADMIN')">
-					<td  th:text="${user_activationstatus_text.text}">ActivationState</td>
-					<td th:text="${user.getActivationState()}">active</td>
-				</tr>	
-				<tr sec:authorize="hasRole('ROLE_NORMAL')">
-					<td colspan="2"><a th:href="@{/modifyUserAccount/{path}(path=${user.getUserAccount().getUsername()})}" href="modifyUserAccount.html" th:text="${user_changedata_text.text}">Nutzerdaten bearbeiten</a></td>
-				</tr>
-				<tr>
-					<td th:text="${user_addtype_text.text}">Addresstyp</td>
-					<td th:text="${user.getAddresstypString()}">Addresstyp</td>
-				</tr>
-				<tr>
-					<td th:text="${user_streethnr_text.text}">Street, house number</td>
-					<td th:text="${user.location.getStreetAndNo()}">Street, house number</td>
-				</tr>	
-				<tr>
-					<td th:text="${user_cityzip_text.text}">City, zip code</td>
-					<td th:text="${user.location.getCity()} +@{&nbsp;}+ ${user.location.getZipCode()}">City, zip code</td>
-				</tr>
+		<div class="row">
+			<th:block th:fragment="kopf">
+				<div class="small-12 columns">
+					<h1 th:text="th:text="${user_userdata_text.text}+@{ &nbsp; }+${user.getUserAccount().getUsername()} ">Kundendaten: UserAccount</h1>
+				</div>
+			
+				<div class="small-12 columns divider"></div>
+	
+			
+				<div class="small-12 medium-6 columns">				
+					<div sec:authorize="hasRole('ROLE_NORMAL')" class="text-super"><a th:href="@{/changePassword/} + ${user.userAccount.getUsername()}" href="changePassword.html" th:text="${user_changepw_text.text}">Password ändern</a></div>
+				</div>
+				<div class="small-12 medium-6 columns">	
+					<div sec:authorize="hasRole('ROLE_NORMAL')" class="text-super"><a th:href="@{/deaktivateUser}" href="deaktivateUser.html" th:text="${user_deactivateuser_text.text}">Nutzerkonto deaktivieren</a></div>
+				</div>
+				<div class="small-12 columns">	
+					<div sec:authorize="hasRole('ROLE_ADMIN')" class="text-super"><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}" th:text="${admin_changeuser_text.text}">Modify User</a></div>
+				</div>
+				
+				<div class="small-12 columns divider"></div>
+			</th:block>
+			
+			<div class="small-12 columns space-1rem"></div>
+			
+			<table class="small-12 columns">
+				<th:block th:fragment="userName">
+					<tr sec:authorize="hasRole('ROLE_NORMAL')">
+						<td colspan="2" class="text-super center"><a th:href="@{/modifyUserAccount/{path}(path=${user.getUserAccount().getUsername()})}" href="modifyUserAccount.html" th:text="${user_changedata_text.text}">Nutzerdaten bearbeiten</a></td>
+					</tr>			
+					<tr>
+						<td class="text-super">Firstname</td>
+						<td th:text="${user.userAccount.getFirstname()}" class="text" th:text="${user_firstname_text.text}">Firstname</td>
+					</tr>	
+					<tr>
+						<td class="text-super">Lastname</td>
+						<td th:text="${user.userAccount.lastname}" class="text" th:text="${user_lastname_text.text}">Lastname</td>
+					</tr>	
+					<tr>
+						<td class="text-super" th:text="${user_email_text.text}">Email</td>
+						<td th:text="${user.userAccount.email}" class="text">Email</td>
+					</tr>	
+					<tr sec:authorize="hasRole('ROLE_ADMIN')">
+						<td class="text-super" th:text="${user_activationstatus_text.text}">ActivationState</td>
+						<td th:text="${user.getActivationState()}" class="text">active</td>
+					</tr>	
+				</th:block>
+				
 				<tr sec:authorize="hasRole('ROLE_NORMAL')">	
-					<td colspan="2"><a th:href="@{/modifyAddress}" href="modifyAddress.html" th:text="${user_changeadd_text.text}">Adresse bearbeiten</a></td>
+					<td colspan="2" class="text-super center"><a th:href="@{/modifyAddress}" href="modifyAddress.html" th:text="${user_changeadd_text.text}">Adresse bearbeiten</a></td>
 				</tr>
 				<tr>
-					<td  th:text="${user_origin_text.text}">Origin</td>
-					<td th:text="${user.origin}">Origin</td>
-				</tr>	
-				<tr>
-					<td  th:text="${user_preflang_text.text}">Preferred Language</td>
-					<td th:text="${user.getPrefLanguage().toString()}">Muttersprache</td>
-				</tr>	
-				<tr>
-					<td  th:text="${user_otherlangs_text.text}">Other Languages</td>
-					<td th:text="${user.showLanguages()}">weitere Sprachen</td>
+					<td class="text-super" th:text="${user_addtype_text.text}">Addresstyp</td>
+					<td th:text="${user.getAddresstypString()}" class="text" >Addresstyp</td>
 				</tr>
-				<tr sec:authorize="hasRole('ROLE_NORMAL')">
-					<td colspan="2"><a th:href="@{/modifyLanguages}" href="modifyLanguages.html"  th:text="${user_changelang_text.text}">Sprachen bearbeiten</a></td>
+				<tr>
+					<td class="text-super" th:text="${user_streethnr_text.text}">Street, house number</td>
+					<td th:text="${user.location.getStreetAndNo()}" class="text">Street, house number</td>
 				</tr>	
+				<tr>
+					<td class="text-super" th:text="${user_cityzip_text.text}">City, zip code</td>
+					<td th:text="${user.location.getCity()} +@{&nbsp;}+ ${user.location.getZipCode()}" class="text" >City, zip code</td>
+				</tr>
+				
+				<th:block th:fragment="language">
+					<tr sec:authorize="hasRole('ROLE_NORMAL')">
+						<td colspan="2" class="text-super center"><a th:href="@{/modifyLanguages}" href="modifyLanguages.html" th:text="${user_changelang_text.text}">Sprachen bearbeiten</a></td>
+					</tr>	
+					<tr>
+						<td class="text-super" th:text="${user_origin_text.text}">Origin</td>
+						<td th:text="${user.origin}" class="text">Origin</td>
+					</tr>	
+					<tr>
+						<td class="text-super" th:text="${user_preflang_text.text}">Preferred Language</td>
+						<td th:text="${user.getPrefLanguage().toString()}" class="text" >Muttersprache</td>
+					</tr>	
+					<tr>
+						<td class="text-super" th:text="${user_otherlangs_text.text}">Other Languages</td>
+						<td th:text="${user.showLanguages()}" class="text">weitere Sprachen</td>
+					</tr>
+				</th:block>
 			</table>
-			<div sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/modify/user/{path}(path=${user.getUserAccount().getUsername()})}"  th:text="${admin_changeuser_text.text}">Modify User</a></div>
 		</div>
 		
 		<th:block th:include="imports :: script"></th:block>
