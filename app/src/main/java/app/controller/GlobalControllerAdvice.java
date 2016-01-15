@@ -72,8 +72,8 @@ public class GlobalControllerAdvice {
 			for (InterfacePart iP : inPLan) {
 				if (moduleRepository.findOne(iP.getModuleId()) != null) {
 					model.addAttribute(moduleRepository.findOne(iP.getModuleId()).getThymeLeafName(), iP);
-					System.out.println(
-							moduleRepository.findOne(iP.getModuleId()).getThymeLeafName() + ", " + iP.getText());
+//					System.out.println(
+//							moduleRepository.findOne(iP.getModuleId()).getThymeLeafName() + ", " + iP.getText());
 				}
 			}
 		}
