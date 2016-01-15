@@ -13,8 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import app.controller.HelpFunctions;
 import app.model.User;
 import app.model.UserRepository;
+import app.test.coordinates.AbstractWebIntegrationTests;
 
-public class MailsendenTest {
+public class MailsendenTest extends AbstractWebIntegrationTests {
 
 	@Autowired
 	UserRepository userRepository;
@@ -23,6 +24,7 @@ public class MailsendenTest {
 
 	@Test
 	public void createMailSendenTest() {
+
 		User user1 = userRepository.findByUserAccount(userAccountManager.findByUsername("testUser1").get());
 
 		String mailadresse = user1.getUserAccount().getEmail();
