@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+	<!--/* by Lennart Schmidt */-->
+	<!--/*
+		TODO:
+			- 
+	*/-->
+	
+	<head>
+		<th:block th:include="imports :: head"></th:block>
+	</head>
+	
+	<body>
+		<th:block th:include="navigation :: navigation"></th:block>
+		
+		<div class="space"></div>
+
+		<th:block th:include="itemNContainer--small--activities--2 :: show_items"></th:block>
+
+		<th:block th:include="imports :: script"></th:block>
+	</body>
+	
+</html>

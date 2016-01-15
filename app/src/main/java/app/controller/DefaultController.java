@@ -51,7 +51,7 @@ public class DefaultController {
 	 * redirects to the main page (index template).
 	 */
 	@RequestMapping({ "/", "/index" })
-	String index(HttpServletRequest request, Model modelMap) {
+	String index(Model modelMap) {
 		modelMap.addAttribute("resultGoods", goodsRepository.findAll());
 		modelMap.addAttribute("resultActivities", activitiesRepository.findAll());
 		modelMap.addAttribute("languages", languageRepository.findAll());
@@ -62,5 +62,11 @@ public class DefaultController {
 		modelMap.addAttribute("countrys", L);
 
 		return "index";
+	}
+	
+	@RequestMapping("/homeActi")
+	String Acti(Model modelMap) {
+		modelMap.addAttribute("resultActivities", activitiesRepository.findAll());
+		return "home2";
 	}
 }
