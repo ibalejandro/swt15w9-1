@@ -7,8 +7,6 @@ import java.util.Set;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

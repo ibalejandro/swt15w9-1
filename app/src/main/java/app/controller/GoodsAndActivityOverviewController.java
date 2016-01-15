@@ -78,7 +78,8 @@ public class GoodsAndActivityOverviewController {
 	 * @return String The name of the view to be shown after processing
 	 */
 	@RequestMapping(value = "/item/{typ}/{id}", method = RequestMethod.GET)
-	public String showGoodAndActivity(@PathVariable String typ, @PathVariable String id, @LoggedIn Optional<UserAccount> loggedInUserAccount, Model modelMap) {
+	public String showGoodAndActivity(@PathVariable String typ, @PathVariable String id,
+			@LoggedIn Optional<UserAccount> loggedInUserAccount, Model modelMap) {
 		modelMap.addAttribute("loggedIn", loggedInUserAccount.get());
 		if (typ.equals("good")) {
 			long idLong = Long.parseLong(id);
