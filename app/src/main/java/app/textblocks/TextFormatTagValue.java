@@ -22,6 +22,7 @@ public class TextFormatTagValue extends FormatTagValue {
 	private String value;
 
 	public TextFormatTagValue() {
+		// Empty default constructor for JPA
 	}
 
 	public TextFormatTagValue(@NonNull FormatTag tag, @NonNull String value) {

@@ -24,12 +24,13 @@ public class MessageFormatTagValue extends FormatTagValue {
 	private static final List<String> inputClasses = mkInputClasses();
 	private String value;
 
+	public MessageFormatTagValue() {
+		// Empty default constructor for JPA
+	}
+
 	public MessageFormatTagValue(@NonNull FormatTag tag, @NonNull String value) {
 		super(tag);
 		this.value = value;
-	}
-
-	public MessageFormatTagValue() {
 	}
 
 	/**

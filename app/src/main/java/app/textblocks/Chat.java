@@ -34,7 +34,7 @@ public class Chat {
 	private List<TextBlockValue> blocks;
 
 	public Chat() {
-
+		// Empty default constructor for JPA
 	}
 
 	public Chat(@NonNull List<TextBlockValue> blocks, @NonNull User author) {

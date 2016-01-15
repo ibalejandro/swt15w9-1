@@ -20,7 +20,7 @@ public final class FormatTag {
 	private String name;
 
 	public FormatTag() {
-
+		// Empty default constructor for JPA
 	}
 
 	public FormatTag(@NonNull FormatTagValue value, @NonNull String name) {
