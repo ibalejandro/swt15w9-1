@@ -67,7 +67,7 @@
 								
 								<div class="small-12 columns">
 									<!--/* Mindestens 8 Zeichen, min 1 Kleinbuchstabe, min 1 Gro&szlig;bruchstabe, min 1 Zahl, min 1 Sonderzeichen Es wird ein Passwort mit 12 oder mehr Zeichen empfohlen. */-->
-									<label data-tooltip="" aria-haspopup="true" 
+									<label data-tooltip="" aria-haspopup="true" th:title="${user_passwordreqs_text.text}" 
 									title="Mindestens 8 Zeichen, min ein Kleinbuchstaben, min ein Gro&szlig;buchstaben, min eine Zahl und min ein Sonderzeichen."  
 									class="has-tip form__label" for="passwordIN" th:text="${login_passwort_text.text}">Passwort:</label>
 								</div>

@@ -12,7 +12,7 @@
 	
 		<div class="row">
 			<div class="large-12 colums">
-				<h1 th:text="${user_about_text.text}+${user.getUserAccount().getUsername()} "> UserAccount</h1>
+				<h1 th:text="${user_aboutyou_text.text}+${user.getUserAccount().getUsername()} "> UserAccount</h1>
 			
 				<div>
 					<a th:text="${user_changepw_text.text}" th:href="@{/changePassword/{path}(path=${user.getUserAccount().getUsername()})}" href="changePassword.html">Password ändern</a>

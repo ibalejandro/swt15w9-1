@@ -25,22 +25,18 @@ QUERVERWEISE:
 		navigation :: navigation
 		imports :: script
 	
-+	aktivateUser
++f	aktivateUser
 		imports :: head
 		navigation :: navigation
 		imports :: script
 	
--	availableTags
-		imports :: head
-		navigation :: navigation
-		imports :: script
 	
 +f	changePassword
 		imports :: head
 		navigation :: navigation
 		imports :: script
 	
-+	change_template
++f	change_template
 		imports :: head
 		navigation :: navigation
 		imports :: script
@@ -58,18 +54,18 @@ QUERVERWEISE:
 		data :: userName
 		data :: language
 	
-+	deaktivateUser
++f	deaktivateUser
 		imports :: head
 		navigation :: navigation
 		imports :: script
 	
-+	deletedActivity
++f	deletedActivity
 		imports :: head
 		navigation :: navigation
 		imports :: script
 		itemN--large--activity--nopic :: item
 	
-+	deletedGood
++f	deletedGood
 		imports :: head
 		navigation :: navigation
 		imports :: script
@@ -283,11 +279,6 @@ QUERVERWEISE:
 		imports :: script
 		itemN--large--good :: item
 	
-+f	offeredGoodsAndActivities
-		imports :: head
-		navigation :: navigation
-		imports :: script
-	
 +N	restorePassword
 		imports :: head
 		navigation :: navigation
@@ -395,7 +386,6 @@ Folgende Dateien scheinen Ungenutzt zu sein:
 	goods_item--multi_no_numeration
 	error_empty_captcha
 	errorpage_user_not_activated
-	availableTags
 	admin
 	activities_item--single_for_deletion
 	activities_item--single

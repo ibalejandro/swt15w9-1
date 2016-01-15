@@ -318,8 +318,16 @@ public class TestDaten implements DataInitializer {
 	private final void initializeTextBlocks() {
 		List<String> tbformatStrings = new LinkedList<>();
 		
-		tbformatStrings.add("Hallo ${name}");
-		tbformatStrings.add("Das ist neuwertig ${offer}");
+		tbformatStrings.add("Hallo");
+		tbformatStrings.add("Ich würde gern den Artikel ${article} besichtigen.");
+		tbformatStrings.add("OK");
+		tbformatStrings.add("Ich würde gern den Artikel ${article} abholen.");
+		tbformatStrings.add("Ich würde gern an der Aktivität ${activity} teilnehmen.");
+		tbformatStrings.add("Der Artikel ${article} ist leider schon weg.");
+		tbformatStrings.add("Sie können den Artikel am ${day} um ${time} Uhr in ${place} abholen.");
+		tbformatStrings.add("Können sie dieses Gut an meine Anschrift schicken?");
+		tbformatStrings.add("Ja, kein Problem.");
+		tbformatStrings.add("Nein, diese Möglichkeit habe ich nicht.");
 		
 		List<TextBlock> tbl = new LinkedList<>();
 		tbformatStrings.forEach((String s) -> tbl.add(new TextBlock(s, new FormatStringTagFilter(s).getTags())));
@@ -528,7 +536,7 @@ public class TestDaten implements DataInitializer {
 		Module mod149 = new Module("user","user_address_text");
 		Module mod150 = new Module("user","user_valisucc_text");
 		Module mod151 = new Module("user","user_valisend_text");
-		
+		Module mod152 = new Module("user","user_passwordreqs_text");
 		
 		res.add(mod1);
 		res.add(mod2);
@@ -681,6 +689,7 @@ public class TestDaten implements DataInitializer {
 		res.add(mod149);
 		res.add(mod150);
 		res.add(mod151);
+		res.add(mod152);
 		
 		return res;
 	}
@@ -853,6 +862,7 @@ public class TestDaten implements DataInitializer {
 		Module mod149 = modRes.findByTemplateNameAndThymeLeafName("user","user_address_text");
 		Module mod150 = modRes.findByTemplateNameAndThymeLeafName("user","user_valisucc_text");
 		Module mod151 = modRes.findByTemplateNameAndThymeLeafName("user","user_valisend_text");
+		Module mod152 = modRes.findByTemplateNameAndThymeLeafName("user","user_passwordreqs_text");
 		
 		InterfacePart in0 = new InterfacePart ("Noch nicht Registriert?", lanDE.getId(), mod1.getId());
 		InterfacePart in1 = new InterfacePart ("Der Nutzername oder das Passwort sind falsch!", lanDE.getId(), mod2.getId());
@@ -1068,9 +1078,9 @@ public class TestDaten implements DataInitializer {
 		InterfacePart in190 = new InterfacePart ("City",lanEN.getId(),mod88.getId());
 		InterfacePart in191 = new InterfacePart ("Name des Flüchtlingsheims",lanDE.getId(),mod89.getId());
 		InterfacePart in192 = new InterfacePart ("Name of the refugee home",lanEN.getId(),mod89.getId());
-		InterfacePart in193 = new InterfacePart ("Deine Behausung: ",lanDE.getId(),mod90.getId());
+		InterfacePart in193 = new InterfacePart ("Ihre Behausung: ",lanDE.getId(),mod90.getId());
 		InterfacePart in194 = new InterfacePart ("Your home: ",lanEN.getId(),mod90.getId());
-		InterfacePart in195 = new InterfacePart ("Deine Sprachen: ",lanDE.getId(),mod91.getId());
+		InterfacePart in195 = new InterfacePart ("Ihre Sprachen: ",lanDE.getId(),mod91.getId());
 		InterfacePart in196 = new InterfacePart ("Your languages: ",lanEN.getId(),mod91.getId());
 		
 		InterfacePart in197 = new InterfacePart ("Ungültig!",lanDE.getId(),mod92.getId());
@@ -1150,9 +1160,9 @@ public class TestDaten implements DataInitializer {
 		InterfacePart in268 = new InterfacePart ("Offer activity",lanEN.getId(),mod127.getId());
 		InterfacePart in269 = new InterfacePart ("Gut anbieten",lanDE.getId(),mod128.getId());
 		InterfacePart in270 = new InterfacePart ("Offer good",lanEN.getId(),mod128.getId());
-		InterfacePart in271 = new InterfacePart ("Sie haben soeben das folgende Gut angeboten",lanDE.getId(),mod129.getId());
+		InterfacePart in271 = new InterfacePart ("Sie haben soeben die folgende Aktivität angeboten",lanDE.getId(),mod129.getId());
 		InterfacePart in272 = new InterfacePart ("You just offered this good",lanEN.getId(),mod129.getId());
-		InterfacePart in273 = new InterfacePart ("Sie haben soeben die folgende Aktivität angeboten",lanDE.getId(),mod130.getId());
+		InterfacePart in273 = new InterfacePart ("Sie haben soeben das folgende Gut angeboten",lanDE.getId(),mod130.getId());
 		InterfacePart in274 = new InterfacePart ("You just offered this activity",lanEN.getId(),mod130.getId());
 		InterfacePart in275 = new InterfacePart ("Passwort zurücksetzen",lanDE.getId(),mod131.getId());
 		InterfacePart in276 = new InterfacePart ("Reset password",lanEN.getId(),mod131.getId());
@@ -1197,6 +1207,8 @@ public class TestDaten implements DataInitializer {
 		InterfacePart in314 = new InterfacePart ("Validation successful!",lanEN.getId(),mod150.getId());
 		InterfacePart in315 = new InterfacePart ("Mail senden",lanDE.getId(),mod151.getId());
 		InterfacePart in316 = new InterfacePart ("Send Mail",lanEN.getId(),mod151.getId());
+		InterfacePart in317 = new InterfacePart ("Mindestens 8 Zeichen, min ein Kleinbuchstaben, min ein Gro&szlig;buchstaben, min eine Zahl und min ein Sonderzeichen.",lanDE.getId(),mod152.getId());
+		InterfacePart in318 = new InterfacePart ("At least 8 characters, at least one lower case letter, at least one upper case letter, at least one number and at least one special character.",lanEN.getId(),mod152.getId());
 		
 		res.add(in0);
 		res.add(in1);
@@ -1507,6 +1519,8 @@ public class TestDaten implements DataInitializer {
 		res.add(in314);
 		res.add(in315);
 		res.add(in316);
+		res.add(in317);
+		res.add(in318);
 
 		
 		return res;

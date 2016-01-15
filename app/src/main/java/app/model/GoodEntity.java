@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.net.URL;
+import java.nio.file.Files;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -99,14 +100,15 @@ public class GoodEntity implements Serializable {
 
 	public static byte[] createPicture(Part picture) {
 		/* Ferdinand's code */
-		if(picture==null){
-			return null;
-		}
-		if (picture.getSize() == 0L) {
-			return null;
-		}
 		try {
-			InputStream is = picture.getInputStream();
+			InputStream is;
+			if(picture==null || picture.getSize() == 0L){
+				System.out.println("Kein Bild");
+				is = ClassLoader.getSystemResourceAsStream("static/resources/AltBild.png");
+			} else {
+				is = picture.getInputStream();
+			}
+			
 			BufferedImage img = ImageIO.read(is);
 
 			double scaling;

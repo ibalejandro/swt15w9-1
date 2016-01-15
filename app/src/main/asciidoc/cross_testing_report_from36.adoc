@@ -1,0 +1,100 @@
+= Cross-Testing Feedback
+
+__Durchführende Gruppe swt15w36:__
+__Anwendung von Gruppe swt15w9:__
+
+Bearbeitet auf Version vom 22.12.
+
+== Getestetes System
+Welche Aufgabe/Problemstellung löst die Anwendung.
+
+* [ ] Nutzermanagement
+** [x] Erstellen (nur über anonymousUser)!
+** [ ] Löschen
+** [x] Modifizieren (Edit auf Version vom 22.12)
+** [ ] Rollen
+* [x] Kategorien
+** [x] Tagging der Güter & Activities
+** [x] Vordefinierte Liste an Kategorien
+* [ ] Goods und Activities (User eigene und Admin alle)
+** [x] Erstellen (nur "Offer")
+** [x] Löschen (Edit auf Version vom 22.12)
+** [ ] Bearbeiten
+* [ ] Diagloge
+** [ ] Tracking des Fortschritt
+** [ ] Dialogbausteine
+** [ ] Prioritiesierung
+** [ ] Dynamische Verknüpfung der Bausteine
+** [ ] Modifikationsmöglichkeiten
+* [ ] Struktur
+** [ ] Übersicht
+** [x] Suche über Kategorien
+** [ ] Distanzabhängikeit
+** [x] Bilder hochladen (über absolute http URL)
+** [ ] Vordefinierte Attributliste
+** [ ] Mehrsprachiges Interface
+** [ ] Validations
+** [ ] Fehlerseiten (z.B von Eingaben)
+** [x] ReCaptcha
+
+== Fehler-Report
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| /create_new_user | theoretisch alles valide Eingaben (liegt eventuell am Captcha) |sollte neuen User registrieren | ERROR Es ist leider ein Fehler aufgetreten
+| /submit_captcha_restorePW | Nutzername (Lisa) | sollte PW zurücksetzen? | ERROR Es ist leider ein Fehler aufgetreten.
+| /userDetails | (ein user war registriert) | Userliste? | ERROR Es ist leider ein Fehler aufgetreten.
+| /submit_deaktivateUser | Checkbox, Captcha | sollte User löschen | ERROR Es ist leider ein Fehler aufgetreten
+| /update | - | sollte Offer bearbeiten? | ERROR Es ist leider ein Fehler aufgetreten
+|===
+== Sonstiges
+Optik der Anwendung::
+Erster Eindruck war eher nüchtern. Man wusste nicht, was die Seite macht und man wurde auch nicht angesprochen etwas zu machen.
+Interaktion mit der Anwendung (Usability) ::
+Sehr sehr hackelig. Registrieren war nur über Umwege möglich, der Admin konnte sogut wie nichts machen.
+Da man allgemein nicht viel auf der Seite tun konnte, war die Übersichtlichkeit etwas gegeben.
+Was mir gefallen hat, war die Suchleiste der Kategorien.
+
+Fehlende Muss Kriterien::
+Siehe oben, was nicht angekreuzt ist.
+Auf der Webseite fehlt sehr viel.
+
+*7 Qualitätskriterien für Websites* http://www.akademie.de/wissen/7-qualitaetskriterien-fuer-websites[link]::
+* Inhalt(Grund für Seitenbesuch):
+** Kein Kommentar, da einfach zu wenig Inhalt verfügbar war.
+
+* Gestaltung(Seitengestaltung):
+** Startseite zu schlicht
+** Kein Hinweis was die Seite macht
+** auf der "Hauptseite" wusste man nicht, was man alles tun kann. Es gab nur eine Navigation.
+
+* Navigation(Orientierung auf Seite):
+** Da nur eine Navigation als Weiterleitung funktionert, war die Orientierung sehr eingeschränkt.
+
+* Die Performance(Geschwindigkeit):
+** Validations in die Seite mit einbinden und nicht extra auf eine Errorseite.
+
+* Zugänglichkeit:
+** Registrierung war sehr kompliziert, alles weiter ergab sich aber.
+** Seite funktioniert soweit auch ohne JavaSribt (zumindest auf den ersten Blick)
+** Handyoptimierung ist auch vorhanden
+
+* Seitenquelltext
+** Sehr unübersichtlich, zu vieler freier Raum
+** TODO-Kommentare später entfernen
+** Validieren mit z.B type="email", sprich Clientseitig funktioniert nicht so einfach, da diese einfach abgestellt werden kann. Serverseitig muss dies auch passieren.
+
+* Interaktion mit Besucher
+** gab meines Erachtens keine.
+
+== Verbesserungsvorschläge
+Was kann noch weiter verbessert werden?::
+Das wichtigste ist doch die Registrierung, warum gab es da zwei Wege?
+Und nur über einen konnte man sich wirklich registrieren.
+Die Validation ist auch wichtig, wenn man etwas falsches eingegeben hat, möchte ich davon auch in Kenntnis gesetzt werden und nicht einfach auf eine Errorseite weitergeleitet werden.
+Die Grundlegenden Sachen fehlen auf der Webseite.
+Macht auch eure Seite ansprechender, die Startseite sollte nicht nur aus der Navigation bestehen.
+
+Kann-Kriterien?::
+Keine vorhanden.
