@@ -119,8 +119,8 @@ public class GoodsSearchController {
 		 * by any search criteria.
 		 */
 		else {
+		  model.addAttribute("resultParameter", "All");
 			if (distance == -1) {
-				model.addAttribute("resultParameter", "All");
 				goodsFound = goodsRepository.findAll();
 				activitiesFound = activitiesRepository.findAll();
 			} else {
