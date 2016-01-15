@@ -157,17 +157,6 @@ public class CreateNewUser {
 
 	}
 
-	@RequestMapping(value = "/submit_captcha")
-	public String redirect_reCAPTCHA() {
-		return "redirect:/reCAPTCHA-TEST";
-	}
-
-	@RequestMapping(value = "/reCAPTCHA-TEST")
-	public String show_reCAPTCHA() {
-		return "/reCAPTCHA";
-
-	}
-
 	@RequestMapping({ "/activationmail_gesendet" })
 	public String activationmail_gesendet() {
 		return "/activationmail_gesendet";
@@ -176,25 +165,6 @@ public class CreateNewUser {
 	@RequestMapping({ "/activationmail_local" })
 	public String activationmail_local() {
 		return "/activationmail_local";
-	}
-
-	@RequestMapping(value = "/submit_captcha", method = RequestMethod.POST)
-	public String recieve_reCAPTCHA(@RequestParam("g-recaptcha-response") String CaptchaResponse) {
-
-		System.out.println("## CaptchaResponse:");
-		System.out.println(CaptchaResponse);
-
-		if (CaptchaResponse.isEmpty()) {
-			return "redirect:/reCAPTCHA-TEST";
-		} else {
-			// http://localhost:8080/create_new_user_temp?mail=aa&username=a&password=a&repassword=a
-
-			if (HelpFunctions.checkCaptcha(CaptchaResponse)) {
-				return "/validation_success";
-			} else {
-				return "redirect:/reCAPTCHA-TEST";
-			}
-		}
 	}
 
 	@RequestMapping(value = "/activation/user/{user_temp}/{textactivationkey_temp}", method = RequestMethod.GET)
@@ -361,8 +331,8 @@ public class CreateNewUser {
 
 		System.out.println(Mail);
 		System.out.println(Username);
-		//System.out.println(Password);
-		//System.out.println(RePassword);
+		// System.out.println(Password);
+		// System.out.println(RePassword);
 		System.out.println("---");
 
 		if (Mail.isEmpty() || Username.isEmpty() || Password.isEmpty() || RePassword.isEmpty()) {
@@ -418,7 +388,7 @@ public class CreateNewUser {
 				}
 			}
 		}
-		if(Mail.equals("test@test.test")){
+		if (Mail.equals("test@test.test")) {
 			equalMail = false;
 		}
 
@@ -525,9 +495,8 @@ public class CreateNewUser {
 				}
 			}
 
-
 			address = new Address("", "", Flh_name, Citypart, Postcode_N, City_N);
-			
+
 		}
 
 		if (Adresstyp.equals("helper")) // Wohnung
