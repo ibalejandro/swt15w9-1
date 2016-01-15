@@ -1,132 +1,440 @@
 QUERVERWEISE:
-/*
-	noSuchActivity
-	noSuchGood
-	noSuchTag
-	notYourActivity
-	notYourGood
-	noUser
-	*/
-	Alle:
-		-> imports :: head
-		-> imports :: sctipt
-		
-	activationmail_gesendet
-	activationmail_local
-	addLanguage
-	addNewTag
-	admin
-	aktivateUser
-	availableTags
-	changePassword
-	change_template
-	data
-	data_refugee
-	deaktivateUser
-	dialog
-	dialogList
-	error
-	errorpage_empty
-	errorpage_user_not_activated
-	error_empty_captcha
-	modify
-	modifyAddress
-	modifyLanguages
-	modifyUserAccount
-	myOfferedActivities
-	myOfferedGoods
-	New
-	newTextBlock
-	noUser
-	offer
-	offerActivity
-	offeredGoodsAndActivities
-	restorePassword
-	startDialog
-	template_translation_manager
-	textBlockList
-	update
-	updateActivity
-	updateActivityByAdmin
-	updateGoodByAdmin
-	updateTag
-	userDetails
-	validation_success
-		-> navigation :: navigation
-	
-	activities_item--single_for_deletion
-		-> activities_item--single :: nopic
-	
-	addedNewTag
-	deletedTag
-	updatedTag
-		-> navigation :: navigation
-		-> tags_item-single :: item
-		
-	
-	ItemN--large--activity--buttons
-		-> itemN--large--good--buttons :: button
-		-> itemN--large--activity :: content
-	
-	deletedActivity
-		-> itemN--large--activity--nopic :: item
-		-> navigation :: navigation
-		
-	deletedGood
-		-> navigation :: navigation
-		-> itemN--large--good :: item
-		
-	startsite
-		-> login :: login
-		-> new_user :: reg
-	
-	navigation
-		-> search :: searchByTag
-	
-	itemNContainer--small--goods--1
-	itemNContainer--small--goods--2
-		-> itemN--small--good :: item
-		
-	itemNContainer--small--activities--1
-	itemNContainer--small--activities--2
-		-> itemN--small--activity  :: item
-	
-	itemNContainer--large
-		-> itemN--large--good--buttons :: item
-		-> itemN--large--activity--buttons :: item
-		
-	itemN--large--good--buttons
-		->itemN--large--good--buttons :: content
-	
-	updatedGood
++	activationmail_gesendet
+		imports :: head
 		navigation :: navigation
-		goods_item-single :: item
+		imports :: script
+		
++	activationmail_local
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		
+-	activities_item--multi
+		imports :: head
+		imports :: script
+		
+-	activities_item--multi_no_numeration
+		imports :: head
+		imports :: script
+		
+>-	activities_item--single
+		imports :: head
+		imports :: script
 	
-	updatedActivity
-		-> navigation :: navigation
-		-> activities_item-single :: item
+-	activities_item--single_for_deletion
+		imports :: head
+		activities_item--single :: nopic
+		imports :: script
 	
-	searchResults
-		-> navigation :: navigation
-		-> itemNContainer--small--goods--1 :: show_items
-		-> itemNContainer--small--activities--1 :: show_items
++	addedNewTag
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		tags_item--single :: item
 	
-	offeredGood
-		-> navigation :: navigation
-		-> itemN--large--good :: item
++	addLanguage
+		imports :: head
+		navigation :: navigation
+		imports :: script
 	
-	offeredActivity
-		-> navigation :: navigation
-		-> itemN--large--activity :: item
++	addNewTag
+		imports :: head
+		navigation :: navigation
+		imports :: script
 	
-	itemN--large--activity--buttons
-		-> itemN--large--good--buttons :: button
-		-> itemN--large--activity :: content
-	home
-		-> navigation :: navigation
-		-> itemNContainer--small--goods--2 :: show_items
-	index
-		-> navigation :: navigation
-		-> itemNContainer--small--goods--1 :: show_items
-		-> itemNContainer--small--activities--1 :: show_items
-		-> startsite :: start
+-	admin
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	aktivateUser
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
+-	availableTags
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	changePassword
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	change_template
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	data
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	data_refugee
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		data :: kopf
+		data :: userName
+		data :: language
+	
++	deaktivateUser
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	deletedActivity
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemN--large--activity--nopic :: item
+	
++	deletedGood
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemN--large--good--nopic :: item
+	
++	deletedTag
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		tags_item--single :: item
+	
++	delete_template
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	dialog
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	dialogList
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	error
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	errorpage_empty
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
+-	errorpage_user_not_activated
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
+-	error_empty_captcha
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
+-	goods_item--multi_no_numeration
+		imports :: head
+		imports :: script
+	
++	home
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemNContainer--small--goods--2 :: show_items
+	
++	index
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemNContainer--small--goods--1 :: show_items
+		itemNContainer--small--activities--1 :: show_items
+		startsite :: start
+		
+>+	itemN--large--activity--buttons
+		imports :: head
+		itemN--large--activity :: content
+		imports :: script
+	
+>+	itemN--large--activity--nopic
+		imports :: head
+		imports :: script
+	
+>+	itemN--large--activity
+		imports :: head
+		imports :: script
+	
+>+	itemN--large--good--buttons
+		imports :: head
+		itemN--large--good :: content
+		imports :: script
+	
+>+	itemN--large--good--nopic
+		imports :: head
+		imports :: script
+	
+>+	itemN--large--good
+		imports :: head
+		imports :: script
+	
+>>+	itemN--small--activity
+		imports :: head
+		imports :: script
+	
+>>+	itemN--small--good
+		imports :: head
+		imports :: script
+	
++	itemNContainer--large
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemN--large--good--buttons :: item
+		itemN--large--activity--buttons :: item
+	
+>+	itemNContainer--small--activities--1
+		imports :: head
+		imports :: script
+		itemN--small--activity :: item
+	
+>+	itemNContainer--small--activities--2
+		imports :: head
+		imports :: script
+		itemN--small--activity :: item
+	
+>+	itemNContainer--small--goods--1
+		imports :: head
+		imports :: script
+		itemN--small--good :: item
+	
+>+	itemNContainer--small--goods--2
+		imports :: head
+		imports :: script
+		itemN--small--good :: item
+	
+/+	login
+		imports :: head
+		imports :: script
+	
++	modify
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	modifyAddress
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	modifyLanguages
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	modifyUserAccount
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	myOfferedActivities
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemNContainer--small--activities--2 :: show_items
+	
++	myOfferedGoods
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemNContainer--small--goods--2 :: show_items
+	
+>+	navigation
+		imports :: head
+		search :: searchByTag
+		imports :: script
+	
+-	New
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	newTextBlock
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	new_user
+		imports :: head
+		imports :: script
+	
++	noSuchActivity
+		imports :: head
+		imports :: script
+	
++	noSuchGood
+		imports :: head
+		imports :: script
+	
++	noSuchTag
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	notYourActivity
+		imports :: head
+		imports :: script
+	
++	notYourGood
+		imports :: head
+		imports :: script
+
++	noUser
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	offer
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	offerActivity
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	offeredActivity
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemN--large--activity :: item
+	
++	offeredGood
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemN--large--good :: item
+	
++	offeredGoodsAndActivities
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	restorePassword
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	search
+		imports :: head
+		imports :: script
+	
++	searchResults
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemNContainer--small--goods--1 :: show_items
+		itemNContainer--small--activities--1 :: show_items
+	
++	startDialog
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
+>+	startsite
+		imports :: head
+		imports :: script
+		login :: login
+		new_user :: reg
+	
+>+	tags_item--single
+		imports :: head
+		imports :: script
+	
++	template_translation_manager
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	textBlockList
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	update
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	updateActivity
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	updateActivityByAdmin
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		updateActivity :: update
+	
++	updatedActivity
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemN--large--activity :: item
+	
++	updatedGood
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		itemN--large--good :: item
+		
++	updatedTag
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		tags_item--single :: item
+	
++	updateGoodByAdmin
+		imports :: head
+		navigation :: navigation
+		imports :: script
+!		update :: update
+	
++	updateTag
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	userDetails
+		imports :: head
+		navigation :: navigation
+		imports :: script
+	
++	validation_success
+		imports :: head
+		navigation :: navigation
+		imports :: script
+		
+		
+	
+	
+FEHLT:	reCAPTCHA
+		errorpage0_empty
+		
+Folgende Dateien scheinen Ungenutzt zu sein:
+	New
+	goods_item--multi_no_numeration
+	error_empty_captcha
+	errorpage_user_not_activated
+	availableTags
+	admin
+	activities_item--single_for_deletion
+	activities_item--single
+	activities_item--multi_no_numeration
+	activities_item--multi
