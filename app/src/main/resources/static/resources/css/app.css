@@ -338,6 +338,14 @@ p{
 	outline-color: lightgray;
 	overflow: auto;
 }
+.umrandung-textblock{
+	margin: 0;
+	padding: 0.1rem;
+	outline-style: solid;
+	outline-width: 1px; 
+	outline-color: lightgray;
+	overflow: auto;
+}
 
 /********************************************
 *	Registrierung und Login:				*
