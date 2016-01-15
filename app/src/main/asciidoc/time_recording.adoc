@@ -11,16 +11,16 @@ Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen
 |19.10 |25.10 |6h         |           |7h          	|6h         |6h         |6h 10min   |2h
 |26.10 |01.11 |20h 30min  |           |25h 30 min  	|22h        |24h  25min |23h 20min  |10h 25min
 |02.11 |08.11 |10h 30min  |           |10h         	|12h        |25h  30min |11h 45min  |2h 5min
-|09.11 |15.11 |30h        |           |16h 30min   	|15h        |           |16h 45min  |4h 35min
-|16.11 |22.11 |25h 30min  |           |13h 15min   	|13h        |           |15h 20min  |1h 35min
-|23.11 |29.11 |18h        |           |11h 40min   	|18h        |           |17h 10min  |2h 10min
-|30.11 |06.12 |8h         |           |15h 10min 	|16h        |           |15h 50min  |1h 10min
-|07.12 |13.12 |13h 30min  |           |14h 10min    |12h        |           |8h 50min   |1h 20min
-|14.12 |20.12 |10h        |           |15h 30min   	|9h         |           |16h 45min  |2h
-|21.12 |03.01 |15h        |           |12h         	|6h         |           |10h 25min  |0h
-|04.01 |10.01 |19h        |           |22h          |25h        |           |18h 40min  |3h
-|11.01 |15.01 |12h        |           |21h 50min    |15h        |           |20h 35min  |
-|18.01 |22.01 |           |           |           	|           |           |           |
-|      |SUMME |191h       |	          |187h 35min	|172h	    |	    	|184h 35min |
-|      |MWert |15h 54min  |	          |15.63h	    |14,33h	    |	    	|15,375h    |
+|09.11 |15.11 |30h        |           |16h 30min   	|15h        |17h 15min  |16h 45min  |4h 35min
+|16.11 |22.11 |25h 30min  |           |13h 15min   	|13h        |20h 30min  |15h 20min  |1h 35min
+|23.11 |29.11 |18h        |           |11h 40min   	|18h        |15h 40min  |17h 10min  |2h 10min
+|30.11 |06.12 |8h         |           |15h 10min 	|16h        |13h        |15h 50min  |1h 10min
+|07.12 |13.12 |13h 30min  |           |14h 10min    |12h        |9h         |8h 50min   |1h 20min
+|14.12 |20.12 |10h        |           |15h 30min   	|9h         |16h 40min  |16h 45min  |2h
+|21.12 |03.01 |15h        |           |12h         	|6h         |10h        |10h 25min  |0h
+|04.01 |10.01 |19h        |           |22h          |25h        |19h         |18h 40min  |3h
+|11.01 |15.01 |12h        |           |21h 50min    |15h        |35h        |20h 35min  |
+|18.01 |22.01 |           |           |           	|           |	        |           |
+|      |SUMME |191h       |	          |187h 35min	|172h	    |215h    	|184h 35min |
+|      |MWert |15h 54min  |	          |15.63h	    |14,33h	    |16,538h   	|15,375h    |
 |===
