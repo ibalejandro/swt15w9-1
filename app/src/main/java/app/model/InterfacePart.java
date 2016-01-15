@@ -5,6 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+	/**
+	 * <h1>InterfacePart</h1> The InterfacePart connects the corresponding {@link Module} to one of its translations.
+	 * 
+	 * @author Lennart Schmidt
+	 *
+	 */
+
 @Entity
 public class InterfacePart {
 
@@ -12,7 +19,7 @@ public class InterfacePart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	//Maybe Persistence Problems
+	// Maybe Persistence Problems
 	private long languageId, moduleId;
 
 	private String text;
@@ -65,8 +72,14 @@ public class InterfacePart {
 	public String getText() {
 		return text;
 	}
-	
-	public void setText(String text){
-		this.text=text;
+
+	 /**
+	  * setter for the Text
+	  * 
+	  * @param text
+	  */
+	 
+	public void setText(String text) {
+		this.text = text;
 	}
 }

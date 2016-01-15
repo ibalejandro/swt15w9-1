@@ -17,8 +17,16 @@
 			<div class="small-12 columns">
 				<h1 class="headline" th:text="${item_general_offeredgood_text.text}"> You just offered this good: </h1>
 			</div>
-			<div class="small-12 columns">
-				<div th:include="itemN--large--good :: item"></div>
+			<div class="umrandung">
+				<div class="small-12 columns">
+					<h1 th:text="${result.name}" class="headline"></h1>
+				</div>
+				<div class="small-12 columns">
+					<div class="divider-b"></div>
+				</div>
+				<div class="small-12 columns">
+					<div th:include="itemN--large--good :: content"></div>
+				</div>
 			</div>
 		</div>
 		

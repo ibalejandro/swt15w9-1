@@ -21,7 +21,7 @@ public class FormatStringTagFilterTest {
 	 * {@link app.util.FormatStringTagFilter#FormatStringTagFilter(java.lang.String)}
 	 * .
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testFormatStringTagFilter() {
 		new FormatStringTagFilter("");
 	}
@@ -31,11 +31,12 @@ public class FormatStringTagFilterTest {
 	 */
 	@Test
 	public void testGetTags() {
-		FormatStringTagFilter f = new FormatStringTagFilter("The ${animal} jumped over the ${target}. Now that's ${adj}.");
-		String[] ct = {"animal", "target", "adj"};
+		FormatStringTagFilter f = new FormatStringTagFilter(
+				"The ${animal} jumped over the ${target}. Now that's ${adj}.");
+		String[] ct = { "animal", "target", "adj" };
 		List<String> checkTags = Arrays.asList(ct);
 		List<FormatTag> l = f.getTags();
-		
+
 		for (FormatTag formatTag : l) {
 			checkTags.contains(formatTag);
 		}

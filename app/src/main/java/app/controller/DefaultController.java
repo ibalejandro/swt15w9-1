@@ -1,9 +1,7 @@
 package app.controller;
 
-
 import java.util.List;
 import java.util.Locale;
-
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,15 +32,11 @@ public class DefaultController {
 	private final InterfaceRepository interfaceRepository;
 	private final LanguageRepository languageRepository;
 	private final ActivitiesRepository activitiesRepository;
-	
+
 	@Autowired
-	public DefaultController(UserRepository userRepository,
-			GoodsRepository goodsRepository,
-			TagsRepository tagsRepository, 
-			ModuleRepository moduleRepository, 
-			InterfaceRepository interfaceRepository,
-			LanguageRepository languageRepository,
-	        ActivitiesRepository activitiesRepository) {
+	public DefaultController(UserRepository userRepository, GoodsRepository goodsRepository,
+			TagsRepository tagsRepository, ModuleRepository moduleRepository, InterfaceRepository interfaceRepository,
+			LanguageRepository languageRepository, ActivitiesRepository activitiesRepository) {
 		this.userRepository = userRepository;
 		this.goodsRepository = goodsRepository;
 		this.tagsRepository = tagsRepository;
@@ -57,16 +51,22 @@ public class DefaultController {
 	 * redirects to the main page (index template).
 	 */
 	@RequestMapping({ "/", "/index" })
-	String index(HttpServletRequest request, Model modelMap) {
+	String index(Model modelMap) {
 		modelMap.addAttribute("resultGoods", goodsRepository.findAll());
 		modelMap.addAttribute("resultActivities", activitiesRepository.findAll());
 		modelMap.addAttribute("languages", languageRepository.findAll());
-		
+
 		ListCountry a = new ListCountry();
 		List<String> L = a.getCountryList(Locale.ENGLISH);
-		
+
 		modelMap.addAttribute("countrys", L);
-		
+
 		return "index";
+	}
+	
+	@RequestMapping("/homeActi")
+	String Acti(Model modelMap) {
+		modelMap.addAttribute("resultActivities", activitiesRepository.findAll());
+		return "home2";
 	}
 }

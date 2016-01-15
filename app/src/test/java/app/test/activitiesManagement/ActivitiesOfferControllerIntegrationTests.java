@@ -24,54 +24,52 @@ import app.model.UserRepository;
 import app.repository.ActivitiesRepository;
 import app.repository.TagsRepository;
 
-public class ActivitiesOfferControllerIntegrationTests extends 
-AbstractWebIntegrationTests {
+public class ActivitiesOfferControllerIntegrationTests extends AbstractWebIntegrationTests {
 
-  private ActivityEntity activity1, activity2;
-  private User user;
-  private static int iterableSize = 2;
-  private static int activitiesInTestDaten = 0;
-  private static int userOfferedActivitiesInTestDaten = 0;
-  
-  @Autowired GoodsOfferController controller;
-  @Autowired ActivitiesRepository activitiesRepository;
-  @Autowired TagsRepository tagsRepository;
-  @Autowired UserRepository userRepository;
-  @Autowired UserAccountManager userAccountManager;
-  
-  @Autowired AuthenticationManager authenticationManager;
-  
-  protected void login(String userName, String password) {
-    Authentication authentication = new UsernamePasswordAuthenticationToken
-                                    (userName, password);
-    SecurityContextHolder.getContext()
-    .setAuthentication(authenticationManager.authenticate(authentication));
-  }
-  
-  @Before
-  public void createActivityEntities() {
-    String name1 = "Trip to Leipzig";
-    String description1 = "This is a wonderful opportunity to visit Leipzig"
-                          + " for free!.";
-    TagEntity tag1 = tagsRepository.findByName("Tickets & Experiences");
-    String name2 = "Soccer game";
-    String description2 = "Come and join us for the funniest soccer game";
-    TagEntity tag2 = tagsRepository.findByName("Sporting Goods");
-    
-    Date date = new Date();
-    
-    user = userRepository.findByUserAccount(userAccountManager
-                                            .findByUsername("Lisa").get());
-    
-    login(user.getUserAccount().getUsername(), "pw");
-    
-    activity1 = new ActivityEntity(name1, description1, tag1, null, user, date, 
-                                   date);
-    activity2 = new ActivityEntity(name2, description2, tag2, null, user, date, 
-                                   date);
-  }
-  
-  @Test
+	private ActivityEntity activity1, activity2;
+	private static int iterableSize = 2;
+	private static int activitiesInTestDaten = 0;
+	private static int userOfferedActivitiesInTestDaten = 0;
+
+	@Autowired
+	GoodsOfferController controller;
+	@Autowired
+	ActivitiesRepository activitiesRepository;
+	@Autowired
+	TagsRepository tagsRepository;
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	UserAccountManager userAccountManager;
+
+	@Autowired
+	AuthenticationManager authenticationManager;
+
+	protected void login(String userName, String password) {
+		Authentication authentication = new UsernamePasswordAuthenticationToken(userName, password);
+		SecurityContextHolder.getContext().setAuthentication(authenticationManager.authenticate(authentication));
+	}
+
+	@Before
+	public void createGoodEntities() {
+		String name1 = "Trip to Leipzig";
+		String description1 = "This is a wonderful opportunity to visit Leipzig" + " for free!.";
+		TagEntity tag1 = tagsRepository.findByName("Tickets & Experiences");
+		String name2 = "Soccer game";
+		String description2 = "Come and join us for the funniest soccer game";
+		TagEntity tag2 = tagsRepository.findByName("Sporting Goods");
+
+		Date date = new Date();
+
+		User user = userRepository.findByUserAccount(userAccountManager.findByUsername("Lisa").get());
+
+		login(user.getUserAccount().getUsername(), "pw");
+
+		activity1 = new ActivityEntity(name1, description1, tag1, null, user, date, date);
+		activity2 = new ActivityEntity(name2, description2, tag2, null, user, date, date);
+	}
+
+ @Test
   public void testSaveActivity() throws Exception {
     mvc.perform(post("/offeredActivity").param("name", activity1.getName())
                 .param("description", activity1.getDescription())
@@ -157,8 +155,8 @@ AbstractWebIntegrationTests {
      ("resultActivities", 
       is(iterableWithSize(iterableSize - userOfferedActivitiesInTestDaten))));
   }
-  
-  @Test
+
+   @Test
   @SuppressWarnings("unchecked")
   public void testListAllActivities() {
     Model model = new ExtendedModelMap();
@@ -172,10 +170,26 @@ AbstractWebIntegrationTests {
     assertThat(object, 
                is(iterableWithSize(iterableSize + activitiesInTestDaten)));
   }
-  
-  public String getRequiredStringFromDate(Date date) {
-    return ActivityEntity.getStringFromDateForInput
-           (ActivityEntity.getZeroTimeDate(date));
+
+	/*
+	@Test
+  @SuppressWarnings("unchecked")
+  public void testListAllActivities() {
+    Model model = new ExtendedModelMap();
+
+    String returnedView = controller.listAllGoodsAndActivities(model);
+
+    assertThat(returnedView, is("home"));
+
+    Iterable<Object> object = (Iterable<Object>) 
+                              model.asMap().get("resultActivities");
+    assertThat(object, 
+               is(iterableWithSize(iterableSize + activitiesInTestDaten)));
   }
-  
+	*/
+
+	public String getRequiredStringFromDate(Date date) {
+		return ActivityEntity.getStringFromDateForInput(ActivityEntity.getZeroTimeDate(date));
+	}
+
 }

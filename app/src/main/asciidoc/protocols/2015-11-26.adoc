@@ -1,0 +1,52 @@
+= Protokoll Gruppe 09
+__Treffen am 26.11.2015__
+
+__Schriftführer:__ Lennart Schmidt
+
+__Nächstes Treffen:__ 10.12.2015
+
+__Teilnehmer:__
+* Alejandro Sánchez Aristizábal
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* Besprechung des Fortschritts der Woche
+* Bild speicher Probleme mit Lösungs vorschlägen
+* Besprechung der Goods mit Tags, mit Lösungs vorschlägen
+* Google-Doc. für erste Testdaten der Übersetzung 
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe 									|Status 		|Bemerkung
+|#6    |Basisfunktionalität							|geschlossen	|N/A
+|#7    |Verteilung Zuständigkeiten					|geschlossen	|N/A
+|#23   |Zusammenführung von UserManagment und Goods	|geschlossen	|N/A
+|===
+
+
+== Aktueller Stand
+* Weg bereitung für weitere Funktionen der App
+
+== Planung des nächsten Sprints
+* Weitere Funktionalität Implementieren
+
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel 					|Beschreibung |Verantwortlicher |Status
+|#30   |Entfernungs bestimmung  |N/A          |N/A              |offen
+|#31   |Aktivitäten		        |N/A          |N/A              |offen
+|#32   |Eigene Daten ändern     |N/A          |N/A              |offen
+|#34   |Sprachen		        |N/A          |N/A              |offen
+|===

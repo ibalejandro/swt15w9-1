@@ -41,7 +41,7 @@ public class TextBlockValue {
 	private List<FormatTagValue> values;
 
 	public TextBlockValue() {
-
+		// Empty default constructor for JPA
 	}
 
 	public TextBlockValue(@NonNull TextBlock textBlock, @NonNull List<FormatTagValue> values) {

@@ -212,43 +212,36 @@ public class HelpFunctions {
 		String mailport = "";
 		String mailusername = "";
 		String mailpassword = "";
-/*
-		try {
-			Properties prop = new Properties();
-			String propFileName = "application.properties";
-			// D:\\Repo\\swt15w9\\app\\target\\classes\\app
-
-			inputStream = new FileInputStream(".." + File.separator + propFileName);
-
-			if (inputStream != null) {
-				prop.load(inputStream);
-			} else {
-				throw new FileNotFoundException("E: property file '" + propFileName + "' not found in the classpath");
-			}
-
-			Date time = new Date(System.currentTimeMillis());
-
-			// get the property value and print it out
-			mailhost = prop.getProperty("spring.mail.host");
-			mailport = prop.getProperty("spring.mail.port");
-			mailusername = prop.getProperty("spring.mail.username");
-			mailpassword = prop.getProperty("spring.mail.password");
-
-			inputStream.close();
-		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("Exception: " + e);
-		} finally {
-			inputStream = null;
-		}
-*/
-		mailhost = "smtp.gmail.com"; //Aus application.properties auslesen.
-		mailusername = "refugeesapp@gmail.com"; //Aus application.properties auslesen.
-		mailpassword = "refugeesapp#"; //Aus application.properties auslesen.
-		mailport= "587"; //Aus application.properties auslesen.
+		/*
+		 * try { Properties prop = new Properties(); String propFileName =
+		 * "application.properties"; //
+		 * D:\\Repo\\swt15w9\\app\\target\\classes\\app
+		 * 
+		 * inputStream = new FileInputStream(".." + File.separator +
+		 * propFileName);
+		 * 
+		 * if (inputStream != null) { prop.load(inputStream); } else { throw new
+		 * FileNotFoundException("E: property file '" + propFileName +
+		 * "' not found in the classpath"); }
+		 * 
+		 * Date time = new Date(System.currentTimeMillis());
+		 * 
+		 * // get the property value and print it out mailhost =
+		 * prop.getProperty("spring.mail.host"); mailport =
+		 * prop.getProperty("spring.mail.port"); mailusername =
+		 * prop.getProperty("spring.mail.username"); mailpassword =
+		 * prop.getProperty("spring.mail.password");
+		 * 
+		 * inputStream.close(); } catch (FileNotFoundException ex) {
+		 * ex.printStackTrace(); } catch (IOException ex) {
+		 * ex.printStackTrace(); } catch (Exception e) { System.out.println(
+		 * "Exception: " + e); } finally { inputStream = null; }
+		 */
+		mailhost = "smtp.gmail.com"; // Aus application.properties auslesen.
+		mailusername = "refugeesapp@gmail.com"; // Aus application.properties
+												// auslesen.
+		mailpassword = "refugeesapp#"; // Aus application.properties auslesen.
+		mailport = "587"; // Aus application.properties auslesen.
 		String recipient = SendTo;
 
 		Properties props = new Properties();

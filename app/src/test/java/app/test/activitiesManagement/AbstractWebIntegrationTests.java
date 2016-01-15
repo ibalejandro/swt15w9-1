@@ -14,19 +14,19 @@ import app.Application;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
+
 public abstract class AbstractWebIntegrationTests {
-  
-  @Autowired WebApplicationContext context;
 
-  protected MockMvc mvc;
+	@Autowired
+	WebApplicationContext context;
 
-  @Before
-  public void setUp() {
+	protected MockMvc mvc;
 
-    context.getServletContext()
-    .setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE,
-                  context);
+	@Before
+	public void setUp() {
 
-    mvc = MockMvcBuilders.webAppContextSetup(context).build();
-  }
+		context.getServletContext().setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, context);
+
+		mvc = MockMvcBuilders.webAppContextSetup(context).build();
+	}
 }
