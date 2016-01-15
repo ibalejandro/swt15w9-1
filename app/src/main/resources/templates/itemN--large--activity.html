@@ -18,21 +18,24 @@
 						<h1 th:text="${result.name}" class="headline"></h1>
 					</div>
 					
-					<th:block th:fragment="content">
-						<div class="small-12 medium-4 columns">
+					<th:block th:fragment="content">						
+						<div class="small-12 columns">
+							<p th:text="${result.getDateAsString()}" class="text center"></p>
+						</div>
+						<div class="small-12 columns divider-b"></div>
+						
+						<div class="small-12 medium-5 columns">
 							<img th:src="@{'/'+${result.getItemPictureLink()}}"/>
 						</div>
 						
-						<div class="small-12 medium-8 columns">
-							<p th:text="${result.getDateAsString()}" class=""></p>
-						</div>
-						
-						<div class="small-12 medium-8 columns">
+						<div class="small-12 medium-7 columns">
 							<p th:text="${result.description}" class=""></p>
 						</div>
 						
-						<div class="small-12 medium-8 columns">
-							<p th:text="${result.tag.name}" class=""></p>
+						<div class="small-12 columns space-1rem"></div>
+						<div class="small-12 columns divider-b"></div>
+						<div class="small-12 columns">
+							<p th:text="${result.tag.name}" class="text right"></p>
 						</div>
 					</th:block>
 				</div>
