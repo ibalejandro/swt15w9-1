@@ -5,13 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * <h1>Module</h1> A Module represents a piece of displayable text that has to be translatable.
- * The translations are given by corresponding {@link InterfacePart}s
- * 
- * @author Lennart Schmidt
- *
- */
+	/**
+	 * <h1>Module</h1> A Module represents a piece of displayable text that has to be translatable.
+	 * The translations are given by corresponding {@link InterfacePart}s
+	 * 
+	 * @author Lennart Schmidt
+	 *
+	 */
 
 @Entity
 public class Module {
@@ -68,13 +68,12 @@ public class Module {
 	public String getTemplateName() {
 		return templateName;
 	}
-	
-	
-	public void setThymeLeafName(String thymeLeafName){
-		this.thymeLeafName=thymeLeafName;
+
+	public void setThymeLeafName(String thymeLeafName) {
+		this.thymeLeafName = thymeLeafName;
 	}
-	
-	public void setTemplateName(String templateName){
-		this.templateName=templateName;
+
+	public void setTemplateName(String templateName) {
+		this.templateName = templateName;
 	}
 }

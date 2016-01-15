@@ -18,8 +18,7 @@
 					<div class="medium-6 small-12 columns">
 						<h1 th:text="${result.name}" class="headline"></h1>
 					</div>
-					
-					<th:block th:fragment="buttons">
+					<th:block th:fragment="buttons">					
 						<th:block th:if="${loggedIn.equals(result.getUser().getUserAccount())}">
 							<div sec:authorize="hasRole('ROLE_NORMAL')" class="medium-3 small-6 columns less_space">
 								<form action="/deletedGood" method="post">

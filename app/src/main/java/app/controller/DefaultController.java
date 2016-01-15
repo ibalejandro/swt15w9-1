@@ -1,25 +1,14 @@
 package app.controller;
 
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.LinkedList;
 import java.util.Locale;
-
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-
-import app.model.InterfacePart;
-import app.model.Language;
-import app.model.Module;
 import app.model.UserRepository;
 import app.repository.ActivitiesRepository;
 import app.repository.GoodsRepository;
@@ -27,7 +16,6 @@ import app.repository.InterfaceRepository;
 import app.repository.LanguageRepository;
 import app.repository.ModuleRepository;
 import app.repository.TagsRepository;
-import app.util.Tuple;
 
 @Controller
 public class DefaultController {
@@ -44,15 +32,11 @@ public class DefaultController {
 	private final InterfaceRepository interfaceRepository;
 	private final LanguageRepository languageRepository;
 	private final ActivitiesRepository activitiesRepository;
-	
+
 	@Autowired
-	public DefaultController(UserRepository userRepository,
-			GoodsRepository goodsRepository,
-			TagsRepository tagsRepository, 
-			ModuleRepository moduleRepository, 
-			InterfaceRepository interfaceRepository,
-			LanguageRepository languageRepository,
-	        ActivitiesRepository activitiesRepository) {
+	public DefaultController(UserRepository userRepository, GoodsRepository goodsRepository,
+			TagsRepository tagsRepository, ModuleRepository moduleRepository, InterfaceRepository interfaceRepository,
+			LanguageRepository languageRepository, ActivitiesRepository activitiesRepository) {
 		this.userRepository = userRepository;
 		this.goodsRepository = goodsRepository;
 		this.tagsRepository = tagsRepository;
@@ -71,12 +55,12 @@ public class DefaultController {
 		modelMap.addAttribute("resultGoods", goodsRepository.findAll());
 		modelMap.addAttribute("resultActivities", activitiesRepository.findAll());
 		modelMap.addAttribute("languages", languageRepository.findAll());
-		
+
 		ListCountry a = new ListCountry();
 		List<String> L = a.getCountryList(Locale.ENGLISH);
-		
+
 		modelMap.addAttribute("countrys", L);
-		
+
 		return "index";
 	}
 }
