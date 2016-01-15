@@ -11,32 +11,8 @@
 
 	<div class="row">
 		<!--/* replace by actual internalization string */-->
-		<h1 th:text="${dialog_mydialog_text.text}">My Dialogs</h1>
-
 		<div class="small-12 columns">
-			<table sec:authorize="hasRole('ROLE_NORMAL')">
-				<thead>
-					<tr>
-						<th th:text="${dialog_title_text.text}">Title</th>
-						<th th:text="${dialog_partner_text.text}">Dialog Partner</th>
-						<th th:text="${dialog_link_text.text}">Link</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr th:each="dialog : ${dialogList}">
-						<td th:text="${dialog.title}">Title</td>
-						<td th:text="${dialog.userA.userAccount.firstname}"
-							th:if="${dialog.userB.userAccount.firstname.equals(loggedInUser.userAccount.firstname)}">
-						</td>
-						<td th:text="${dialog.userB.userAccount.firstname}"
-							th:unless="${dialog.userB.userAccount.firstname.equals(loggedInUser.userAccount.firstname)}">
-						</td>
-						<td><a href="/dialogList"
-							th:href="@{/dialog(id=${dialog.id})}" th:text="${dialog_goto_text.text}"> Go to </a></td>
-					</tr>
-				</tbody>
-			</table>
+			<h1 th:text="${dialog_mydialog_text.text}" class="headline">My Dialogs</h1>
 		</div>
 		<table sec:authorize="hasRole('ROLE_NORMAL')" class="small-12 columns">
 			<thead>

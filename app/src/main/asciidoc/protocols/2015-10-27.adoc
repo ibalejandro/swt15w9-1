@@ -1,0 +1,45 @@
+= Protokoll Gruppe 09
+__Treffen am 27.10.2015__
+
+__Schriftführer:__ Lennart Schmidt
+
+__Nächstes Treffen:__ 28.10.2015
+
+__Teilnehmer:__
+* Alejandro Sánchez Aristizábal
+* Kilian Heret
+* Friederike Kitzing
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+
+== Bemerkungen
+* CRC-Karten erstellung
+* Disskusion ob man gesonderte Klassen für Flüchtlinge und Unterstützer haben sollte
+* Aufgekommene Frage: Google Translate Lizens kosten?
+* Aufgekommene Frage: Datenschutz und AGBs?
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|N/A   |N/A     |N/A    |N/A
+|===
+
+
+== Aktueller Stand
+Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
+Dokumenten.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|N/A   |N/A   |N/A          |N/A              |N/A
+|===

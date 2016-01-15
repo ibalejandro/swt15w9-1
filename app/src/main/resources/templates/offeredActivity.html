@@ -8,12 +8,22 @@
 	<body>
 		<div th:include="navigation :: navigation"></div>
 		
+		<div class="small-12 columns space-05rem"></div>
+		
 		<div class="row">
 			<div class="small-12 columns">
 				<h1 class="headline" th:text="${item_general_offeredact_text.text}"> You just offered this activity: </h1>
 			</div>
-			<div class="small-12 columns">
-				<div th:include="itemN--large--activity :: item"></div>
+			<div class="umrandung">
+				<div class="small-12 columns">
+					<h1 th:text="${result.name}" class="headline"></h1>
+				</div>
+				<div class="small-12 columns">
+					<div class="divider-b"></div>
+				</div>
+				<div class="small-12 columns">
+					<div th:include="itemN--large--activity :: content"></div>
+				</div>
 			</div>
 		</div>
 		
