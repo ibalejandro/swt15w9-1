@@ -1,4 +1,4 @@
-package app.test.goodsManagement;
+package app.test.tagsManagement;
 
 import static org.hamcrest.Matchers.emptyIterable;
 import static org.hamcrest.Matchers.is;
@@ -73,6 +73,7 @@ AbstractWebIntegrationTests {
                  (userAccountManager.findByUsername("Peter").get());
     
     login(user1.getUserAccount().getUsername(), "pw");
+    login(user2.getUserAccount().getUsername(), "pw");
     
     good1 = new GoodEntity(name1, description1, tag1, null, user1);
     good2 = new GoodEntity(name2, description2, tag2, null, user2);
