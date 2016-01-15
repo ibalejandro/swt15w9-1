@@ -324,7 +324,7 @@ public class TestDaten implements DataInitializer {
 		tbformatStrings.add("Ich würde gern den Artikel ${article} abholen.");
 		tbformatStrings.add("Ich würde gern an der Aktivität ${activity} teilnehmen.");
 		tbformatStrings.add("Der Artikel ${article} ist leider schon weg.");
-		tbformatStrings.add("Sie können den Artikel am $(day) um ${time} Uhr in ${place} abholen.");
+		tbformatStrings.add("Sie können den Artikel am ${day} um ${time} Uhr in ${place} abholen.");
 		tbformatStrings.add("Können sie dieses Gut an meine Anschrift schicken?");
 		tbformatStrings.add("Ja, kein Problem.");
 		tbformatStrings.add("Nein, diese Möglichkeit habe ich nicht.");
