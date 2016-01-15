@@ -19,6 +19,21 @@ public class Good {
 	public GoodEntity createGoodEntity(long userId) {
 		return new GoodEntity(name, description, tags, userId);
 	}
+	
+	/*
+     * This method returns all the tags in a String, in which they are
+     * separated by commas. The initial and closing square brackets are
+     * eliminated.
+     */
+	 public String getTagsAsString() {
+		 String tagsAsString = "";
+		 if (!tags.isEmpty()) {
+			 tagsAsString = tags.toString();
+			 tagsAsString = tagsAsString.substring(1, tagsAsString.length()-1);
+		 }
+		 
+		 return tagsAsString;
+	 }
 
 	public String getName() {
 		return name;
