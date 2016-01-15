@@ -236,7 +236,6 @@ public class TestDaten implements DataInitializer {
 		userRepository.save(user1);
 		userRepository.save(user2);
 
-		
 		/*
 		Dialog d = new Dialog("My Dialog", user1, user2);
 		Dialog savedDialog = dialogRepository.save(d);
