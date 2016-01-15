@@ -22,7 +22,7 @@ public class MailsendenTest {
 	UserAccountManager userAccountManager;
 
 	@Test
-	public void createCoordinatesTest() {
+	public void createMailSendenTest() {
 		User user1 = userRepository.findByUserAccount(userAccountManager.findByUsername("testUser1").get());
 
 		String mailadresse = user1.getUserAccount().getEmail();
