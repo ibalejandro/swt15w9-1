@@ -333,6 +333,14 @@ p{
 	height: 0;
 	overflow: auto;
 }
+.divider-b{
+	border-bottom: 1px solid;
+	border-color: black;
+	margin: 0;
+	margin: 0.25rem 0;
+	height: 0;
+	overflow: auto;
+}
 .divider-1rem{
 	border-bottom: 1px solid;
 	border-color: black;
