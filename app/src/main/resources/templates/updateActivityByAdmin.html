@@ -13,7 +13,7 @@
 				<h1 class="headline" th:text="${nav_activity_text.text}"> Activity </h1>
 			</div>
 				
-			<form th:action="@{/updatedActivity}" th:object="${activity}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/updatedActivityByAdmin}" th:object="${activity}" method="post" enctype="multipart/form-data">
 				<th:block th:include="updateActivity :: update"></th:block>
 			</form>
 		</div>
