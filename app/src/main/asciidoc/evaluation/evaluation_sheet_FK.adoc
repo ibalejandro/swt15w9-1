@@ -1,0 +1,26 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von:Friederike Kitzing**
+
+**Gruppe:09**
+
+== Was habe ich gelernt?
+* Verwenden von Spring, SalesPoint
+* Umgang mit größeren Softwareaufgaben
+* Einbinden von externen APIs
+* effektiver Umgang mit GitHub
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* Verteilung von Zuständigkeiten hilfreich
+* Kommunikation wichtig
+* Nutzen von Vorwissen/Fachwissen anderer hilfreich
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* Einarbeitung dauert seine Zeit
+* zum Teil etwas undurchsichtig
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* Einführung in Datenbanken vor Praktikumsbeginn wäre sinnvoll
+* Erweiterte Beispiele für Testmöglichkeiten in Beispielprojekten (Videoshop), etwa zur Möglichkeit Nutzer einzuloggen, Übergeben von Request-/Pathparameter...
+
+== Sonstiges und Anmerkungen
