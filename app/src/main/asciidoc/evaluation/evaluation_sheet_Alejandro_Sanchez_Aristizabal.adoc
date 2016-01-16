@@ -1,0 +1,30 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von: Alejandro Sánchez Aristizábal**
+
+**Gruppe: 09**
+
+== Was habe ich gelernt?
+* Grundlagen von JPA
+* Webentwicklung mit Spring WebMVC
+* effizienter Umgang mit git (branches, issues)
+* Aufgabenverteilung und Konfliktmanagement im Team
+* funktionelle Prototypentwicklung
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* Kommunikationsfähigkeit und Effizienz aufgrund der Aufgabenverteilung
+* Einigkeit macht stark
+* Kritikfähigkeit, Verantwortungsbewußtsein, Interkulturelle Kompetenz
+* "Coming together is a beginning. Keeping together is progress.
+  Working together is success"
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* Eine tatsächliche Wiederverwendung des Codes soll immer im Vordergrund stehen
+* Mehr lesen, weniger coden
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* Mehrere Vorlesungen über wichtigen Themen würden sehr hilfreich für eine
+  bessere und leichtere Entwicklung des Projekts sein
+* Umgang mit JPA sollte tiefgreifender erklärt werden
+
+== Sonstiges und Anmerkungen
