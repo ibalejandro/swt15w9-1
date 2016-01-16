@@ -1,0 +1,63 @@
+= Protokoll Gruppe 09
+__Treffen am 06.11.2015__
+
+__Schriftführer:__ Ferdinand Lehmann
+
+__Nächstes Treffen:__ 12.11.2015
+
+.__Teilnehmer:__
+
+* Kilian Heret
+* Alejandro Sánchez Aristizábal
+* Ferdinand Lehmann
+* Lennart Schmidt
+* Mario Henze
+* Friederike Kitzing
+
+== Bemerkungen
+* Retrospektive der Arbeit der letzten Tage
+* Lennart stellt seinen Mockupfortschritt vor.
+
+
+
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel          |Beschreibung                   |Verantwortlicher |Status
+|#10    |Großer Prototyp   |zusammenführen der kleinen Prototypen |N/A              |offen
+|#11    |Verfeinerte UML-Modelle|Angleichen der Modelle an Prototypen |N/A   |offen
+|#12    |Entwurfsenscheidungen treffen|  |N/A |offen
+|#13	|Anpassung an Salespointframework |Einfügen der Salespoint Elemente in UML-Diagramme |N/A |offen
+|#14	|Entwicklerdokumentation |   |N/A |offen
+|#15	|Testplan				|Akzeptanztestfälle erweitern |N/A |offen
+
+|===
+
+
+== Aktueller Stand
+* Fertige Mockups: Login, Nutzererstellung, Startseite, Adminseite und Userliste
+* Unfertige Mockups: Accountbearbeitung, Angebot erstellung und Dialog
+
+== Planung des nächsten Sprints
+* Die restlichen Mockups fertigstellen
+* Ansonsten wie beim letzten Treffen
+
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel          |Beschreibung                   |Verantwortlicher |Status
+|#10    |Großer Prototyp   |zusammenführen der kleinen Prototypen |N/A              |offen
+|#11    |Verfeinerte UML-Modelle|Angleichen der Modelle an Prototypen |N/A   |offen
+|#12    |Entwurfsenscheidungen treffen|  |N/A |offen
+|#13	|Anpassung an Salespointframework |Einfügen der Salespoint Elemente in UML-Diagramme |N/A |offen
+|#14	|Entwicklerdokumentation |   |N/A |offen
+|#15	|Testplan				|Akzeptanztestfälle erweitern |N/A |offen
+
+
+|===

@@ -1,0 +1,18 @@
+= Protokoll Gruppe 09
+
+__Treffen am 22.10.2015__
+
+__Schriftführer: Ferdinand Lehmann__
+
+__Nächstes Treffen:__ 27.10.2015
+
+__Teilnehmer: Mario Henze, Kilian Heret, Friederike Kitzing, Ferdinand Lehmann, Lennart Schmidt, Alejandro Sánchez Aristizábal
+__
+
+== Organisatorisches
+* Besprechung des Fortschritts der Woche
+
+
+
+== Aktueller Stand
+* Issues wurden erfolgreich den Meilensteinen hinzugefügt.

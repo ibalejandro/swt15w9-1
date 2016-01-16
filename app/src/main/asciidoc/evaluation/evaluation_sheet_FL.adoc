@@ -13,9 +13,11 @@
 * Nichts Erwähnenswertes.
 
 == Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
-* (Noch auszufüllen)
+* Man lernt gute Dokumentation zu schätzen.
 
 == Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
-* (Noch auszufüllen)
+* Der Einstieg in die Materie könnte einfacherer gestaltet werden. 
+	Die Einführungsveranstaltungen waren ok in der Hinsicht,
+	aber mehr hätte nicht geschadet.
 
 == Sonstiges und Anmerkungen
