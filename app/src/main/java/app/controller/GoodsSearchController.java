@@ -3,6 +3,7 @@ package app.controller;
 import java.util.Optional;
 import java.util.Set;
 
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,8 +90,8 @@ public class GoodsSearchController {
 			@RequestParam("distance") final String Distance, @LoggedIn Optional<UserAccount> userAccount, Model model) {
 		if (!userAccount.isPresent())
 			return "noUser";
+		
 		User searchingUser = userRepository.findByUserAccount(userAccount.get());
-
 		String parameterType = "tag";
 
 		long tagId = Long.parseLong(TagId);
@@ -105,7 +106,7 @@ public class GoodsSearchController {
 		if (tagId != -1L) {
 			TagEntity tag = tagsRepository.findOne(tagId);
 			model.addAttribute("resultParameter", tag.getName());
-			if (distance == -1) {
+			if (distance == -1 || userAccount.get().hasRole(new Role ("ROLE_ADMIN"))) {
 				goodsFound = goodsRepository.findByTag(tag);
 				activitiesFound = activitiesRepository.findByTag(tag);
 			} else {
@@ -120,7 +121,7 @@ public class GoodsSearchController {
 		 */
 		else {
 		  model.addAttribute("resultParameter", "All");
-			if (distance == -1) {
+			if (distance == -1 || userAccount.get().hasRole(new Role ("ROLE_ADMIN"))) {
 				goodsFound = goodsRepository.findAll();
 				activitiesFound = activitiesRepository.findAll();
 			} else {
