@@ -170,7 +170,7 @@ public class DeaktivateUser {
 						}
 						return "data_refugee";
 					}
-					return "redirect:/login";
+					return "redirect:/logout";
 
 				}
 				return "redirect:/";
@@ -184,7 +184,7 @@ public class DeaktivateUser {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping({ "/submit_aktivateUser/{user}" })
 	public String submit_aktivateUser(@PathVariable final String user,
-			@RequestParam("aktivate") String checkbox_deaktivate, @LoggedIn Optional<UserAccount> userAccount,
+			@RequestParam("aktivate") Optional<String> checkbox_deaktivate, @LoggedIn Optional<UserAccount> userAccount,
 			Model model) {
 
 		User user_xyz = userRepository.findByUserAccount(userAccountManager.findByUsername(user).get());
