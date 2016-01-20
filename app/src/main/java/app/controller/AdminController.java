@@ -1009,16 +1009,6 @@ public class AdminController {
 		return "change_template";
 	}
 
-	/*
-	 * TODO: - änderrungen einlesen <- fertig - zuändernde Sprachen einlesen <-
-	 * fertig - komplett sprachen ändern (wenn noch Zeit ist) - templates und
-	 * alle verweise löschen <- fertig (Erst die InterfaceParts an der mittels
-	 * ModuleID finden und löschen Daraufhin das Module löschen) - templates neu
-	 * erstellen <- fertig (Module erstellen und dann auf change Template
-	 * verweisen) - sprachen neu erstellen <- fertig (neue Sprachen ins
-	 * LanguageRepository eintragen und neue InterfaceParts erstellen) - Daten
-	 * für Bisherige Templates erstellen und Templates anpassen
-	 */
 	@RequestMapping(value = "/change_template_submit/{template}", method = RequestMethod.POST)
 	public String changeTemplateSubmit(HttpServletRequest request, Model model,
 			@PathVariable("template") String templatename) {

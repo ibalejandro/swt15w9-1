@@ -231,6 +231,14 @@ public class TestDaten implements DataInitializer {
 		for (InterfacePart inP : inPs) {
 			interfaceRepository.save(inP);
 		}
+		for(Language langi : languageRepository.findAll()){
+			for(Module modi : moduleRepository.findAll()){
+				if(interfaceRepository.findByLanguageIdAndModuleId(langi.getId(), modi.getId())==null){
+					interfaceRepository.save(new InterfacePart(interfaceRepository.findByLanguageIdAndModuleId(1L, modi.getId()).getText() + " -- "+ langi.getName(),langi.getId(),modi.getId()));
+				}
+			}
+		}
+		
 	}
 
 	private final void initializeTags(TagsRepository tagsRepository) {
