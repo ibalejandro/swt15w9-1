@@ -234,7 +234,7 @@ public class TestDaten implements DataInitializer {
 		for(Language langi : languageRepository.findAll()){
 			for(Module modi : moduleRepository.findAll()){
 				if(interfaceRepository.findByLanguageIdAndModuleId(langi.getId(), modi.getId())==null){
-					interfaceRepository.save(new InterfacePart(interfaceRepository.findByLanguageIdAndModuleId(1L, modi.getId()).getText() + " -- "+ langi.getName(),langi.getId(),modi.getId()));
+					interfaceRepository.save(new InterfacePart(interfaceRepository.findByLanguageIdAndModuleId(1L, modi.getId()).getText() + " -- "+ langi.getkennung(),langi.getId(),modi.getId()));
 				}
 			}
 		}
@@ -862,14 +862,14 @@ public class TestDaten implements DataInitializer {
 		InterfacePart in12 = new InterfacePart("Forgot Password?", lanEN.getId(), mod6.getId());
 		InterfacePart in13 = new InterfacePart("Login", lanEN.getId(), mod7.getId());
 
-		InterfacePart in14 = new InterfacePart("Noch nicht Registriert? -- Auf Arabisch", lanAR.getId(), mod1.getId());
+		/*InterfacePart in14 = new InterfacePart("Noch nicht Registriert? -- Auf Arabisch", lanAR.getId(), mod1.getId());
 		InterfacePart in15 = new InterfacePart("Der Nutzername oder das Passwort sind falsch! -- Auf Arabisch",
 				lanAR.getId(), mod2.getId());
 		InterfacePart in16 = new InterfacePart("Nutzername -- Auf Arabisch", lanAR.getId(), mod3.getId());
 		InterfacePart in17 = new InterfacePart("Passwort -- Auf Arabisch", lanAR.getId(), mod4.getId());
 		InterfacePart in18 = new InterfacePart("Login -- Auf Arabisch", lanAR.getId(), mod5.getId());
 		InterfacePart in19 = new InterfacePart("Passwort vergessen? -- Auf Arabisch", lanAR.getId(), mod6.getId());
-		InterfacePart in20 = new InterfacePart("Login -- Auf Arabisch", lanAR.getId(), mod7.getId());
+		InterfacePart in20 = new InterfacePart("Login -- Auf Arabisch", lanAR.getId(), mod7.getId());*/
 
 		InterfacePart in21 = new InterfacePart(
 				"Die Aktivierungsmail wurde an ihre Mailadresse gesendet. Bitte klicken sie den Link darin, um ihren Account zu aktivieren.",
@@ -1238,13 +1238,13 @@ public class TestDaten implements DataInitializer {
 		res.add(in11);
 		res.add(in12);
 		res.add(in13);
-		res.add(in14);
+		/*res.add(in14);
 		res.add(in15);
 		res.add(in16);
 		res.add(in17);
 		res.add(in18);
 		res.add(in19);
-		res.add(in20);
+		res.add(in20);*/
 		res.add(in21);
 		res.add(in22);
 		res.add(in23);

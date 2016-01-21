@@ -952,8 +952,8 @@ public class AdminController {
 		Iterable<Module> allModules = moduleRepository.findAll();
 
 		for (Language lang : allLang) {
-			if (!sprachen.contains(lang.getName())) {
-				sprachen.add(lang.getName());
+			if (!sprachen.contains(lang.getkennung())) {
+				sprachen.add(lang.getkennung());
 			}
 		}
 
@@ -977,17 +977,17 @@ public class AdminController {
 
 		long changeLangID = -1, refLangID = -1;
 		boolean refSpracheBool = true;
-		if (refSprache == null || languageRepository.findByName(refSprache) == null) {
+		if (refSprache == null || languageRepository.findByKennung(refSprache) == null) {
 			refSprache = "";
 			refSpracheBool = false;
 		} else {
-			refLangID = languageRepository.findByName(refSprache).getId();
+			refLangID = languageRepository.findByKennung(refSprache).getId();
 		}
 
-		if (changeSprache == null || languageRepository.findByName(changeSprache) == null) {
-			changeSprache = "Deutsch";
+		if (changeSprache == null || languageRepository.findByKennung(changeSprache) == null) {
+			changeSprache = "de";
 		}
-		changeLangID = languageRepository.findByName(changeSprache).getId();
+		changeLangID = languageRepository.findByKennung(changeSprache).getId();
 
 		for (Module mod : mods) {
 			Tuple<Module, Tuple<String, String>> t;
@@ -1047,7 +1047,7 @@ public class AdminController {
 						moduleRepository.findById(Long.parseLong(tLId[i])).getThymeLeafName());
 				updatedMod.setThymeLeafName(thymeLeaf[i]);
 				InterfacePart updatedInt = interfaceRepository.findByLanguageIdAndModuleId(
-						languageRepository.findByName(changeSprache).getId(), updatedMod.getId());
+						languageRepository.findByKennung(changeSprache).getId(), updatedMod.getId());
 				updatedInt.setText(texte[i]);
 				interfaceRepository.save(updatedInt);
 				moduleRepository.save(updatedMod);
@@ -1147,9 +1147,9 @@ public class AdminController {
 
 		for (Module module : moduleRepository.findAll()) {
 			interfaceRepository.save(new InterfacePart(
-					interfaceRepository.findByLanguageIdAndModuleId(1L, module.getId()).getText() + " -- Auf "
-							+ nLang.getName(),
-					languageRepository.findByName(newLang).getId(), module.getId()));
+					interfaceRepository.findByLanguageIdAndModuleId(1L, module.getId()).getText() + " -- "
+							+ nLang.getkennung(),
+					languageRepository.findByKennung(newLangShort).getId(), module.getId()));
 		}
 
 		return interfaceMaping(request, model);
